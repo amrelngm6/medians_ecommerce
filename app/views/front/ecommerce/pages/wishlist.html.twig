@@ -1,0 +1,65 @@
+{% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
+
+
+<div class="container mx-auto flex pt-6 pb-2">
+    <div class="w-full">
+        <h1 class="text-xl">{{lang.translate('Wishlist')}}</h1>
+    </div>
+    <div class="flex-end">
+        <div class="flex w-full flex-nowrap">
+            <span class="flex-none">{{lang.translate('Home')}}</span>            
+            <span class="flex-none px-2"> / </span>
+            <span class="flex-none">{{lang.translate('Wishlist')}}</span>
+        </div>
+    </div>
+</div>
+<div class="container mx-auto bg-red-600 py-1 mb-2"></div>
+
+<div class="container mx-auto ">
+    <section class="shopping-cart p-30 radius-4 bg-white mt-3 wow fadeInUp mb-3" style="visibility: visible; animation-name: fadeInUp;">
+        <h6 class="fsz-18 fw-bold text-uppercase mb-4"> {{lang.translate('wishlist')}} </h6>
+        <form class="action ajax-form w-full shopping-table table-responsive" action="{{app.CONF.url}}Wishlist/update" method="POST" id="Wishlist-form">
+
+            <input type="hidden" value="Wishlist.update" name="type" />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col">{{lang.translate('Product Name')}}</th>
+                        <th scope="col">{{lang.translate('price')}}</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for wishlist in items %}
+
+                    <tr>
+                        <td>
+                            <div class="prod_img">
+                                <img src="/app/image.php?w=100&src={{wishlist.item.picture}}" alt="" class="">
+                            </div>
+                        </td>
+                        <td> <a href="{{compare.item.lang_content.prefix}}">{{compare.item.lang_content.title}}</a> </td>
+                        <td>{{app.currency.symbol}}{{app.currency_amount(page.price)}}</td>
+                        <td class="text-end"> <a href="/front_api/create?type=Wishlist.delete&params[item_id]={{wishlist.wishlist_id}}" class="ajax-link dlt-btn"><i class="fa fa-times"></i></a> </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="btns text-end mt-4">
+                <a href="#"  class="butn bg-222 text-white radius-4 fw-500 fsz-12 text-uppercase text-center py-3"> <span> {{lang.translate('remove all')}} </span> </a>
+            </div>
+        </form>
+        
+    </section>
+          
+
+</div>
+    
+<!-- Footer -->
+<!-- Footer -->
+{% include 'views/front/' ~ template ~ '/includes/footer.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/footer_assets.html.twig' %}
+</body>
+</html>

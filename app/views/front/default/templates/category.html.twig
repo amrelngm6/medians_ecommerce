@@ -1,0 +1,93 @@
+
+<div class="container mx-auto flex pt-6 pb-2">
+    <div class="w-full">
+        <h1 class="text-xl">{{page.lang_content.title}}</h1>
+    </div>
+    <div class="flex-end">
+        <div class="flex w-full flex-nowrap">
+            <span class="flex-none"><a href="/">{{lang.translate('Home')}}</a></span>
+            <span class="flex-none">/</span>
+            <span class="flex-none">{{page.lang_content.title}}</span>
+
+        </div>
+    </div>
+</div>
+<div class="container mx-auto bg-red-600 py-1 mb-2"></div>
+
+
+
+<div class="container mx-auto flex gap-10">
+    <div class="w-[25%]">
+        <div class="py-6">
+            <div class="relative text-md">
+                <div class="w-48 h-8 ">
+                    <div class="w-48 h-8 ">
+                        <div class=" text-zinc-400 text-sm font-medium ">{{lang.translate('Filter')}}</div>
+                        <div class="w-3 h-0.5 left-[188px] top-[9px]  bg-zinc-400"></div>
+                        <div class="w-48 h-px left-0 top-[31px]  bg-gray-200"></div>
+                    </div>
+                </div>
+                
+                <div class="w-full">
+                    <form class="action" action="{{app.CONF.url}}front_api" method="POST" id="filter-form">
+                        <input type="hidden" value="load_products" name="type" />
+                        <input  data-element="data-content" data-form="filter-form" id="best_sort_filter_form" type="radio" value="best" name="params[sort_by]" class="hidden" />
+                        <input data-element="data-content" data-form="filter-form" id="new_sort_filter_form" type="radio" value="new" name="params[sort_by]" class="hidden" />
+
+                    {% for cat in categories %}
+                    <div x-data="{ maincat{{cat.category_id}} : true, cat{{cat.category_id}} : false }" class="w-full my-4">
+                        <div  class="flex w-full opacity-70 py-1 gap-2">
+                            <span class="text-neutral-900 font-medium w-full">{{cat.lang_content.title}}</span>
+                            {% if cat.childs|length %}
+                            <i x-show="maincat{{cat.category_id}}" x-on:click="maincat{{cat.category_id}} = false" class="fa fa-arrow-up cursor-pointer"></i>
+                            <i x-show="!maincat{{cat.category_id}}" x-on:click="maincat{{cat.category_id}} = true" class="fa fa-arrow-down cursor-pointer"></i>
+                            {% endif %}
+                        </div>
+                        {% if cat.childs|length %}
+                        {% for catChild in cat.childs %}
+                        <template x-if="maincat{{catChild.parent_id}}">
+                            <div x-data="{ cat{{catChild.category_id}}: {{page.category_id}} == {{catChild.category_id}} }" class="opacity-70 text-neutral-900 text-opacity-80 text-xs">
+                                <div class=" font-medium  w-full flex py-2">
+                                    <span class="w-full">{{catChild.lang_content.title}}</span>
+                                    <label class="w-4 h-4 relative block border-1 border-red-600 bg-white  border cursor-pointer">
+                                        <span x-show="cat{{catChild.category_id}}"  class="z-10 absolute top-[3px] botton-[1px] right-[2px] left-[2px] mx-auto block bg-red-600 w-2 h-2  cursor-pointer"></span>
+                                        <input x-on:click="cat{{catChild.category_id}} = cat{{catChild.category_id}} ? false : true"  data-element="data-content" data-form="filter-form" type="checkbox" class="opacity-0  cursor-pointer" {{catChild.category_id == page.category_id ? 'checked="true"' }} value="{{catChild.category_id}}"  name="params[categories_ids][]" />
+                                    </label>
+                                </div>
+                            </div>
+                        </template>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    {% endfor %}
+                    </form>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-full">
+        <div class="py-6">
+            <div class="flex w-full pb-6">
+                <div class="w-full py-2">
+                    <h2 class="text-lg">{{page.lang_content.title}}</h2>
+                    <p class="py-2 text-sm">{{page.lang_content.content}}</p>
+                </div>
+                <div class="flex-end">
+                    <div class="flex flex-nowrap" x-data="{activeTab: '{{lang.translate('New')}}' }">
+                        <label for="best_sort_filter_form" x-on:click="activeTab = '{{lang.translate('Best sales')}}'" href="#" x-bind:class="activeTab == '{{lang.translate('Best sales')}}' ? 'border border-1 border-gray-400 ' : ''" class="rounded-2xl py-2 px-4  flex-none">{{lang.translate('Best sales')}}</label>
+                        <label for="new_sort_filter_form" x-on:click="activeTab = '{{lang.translate('New')}}'" href="#" x-bind:class="activeTab == '{{lang.translate('New')}}' ? 'border border-1 border-gray-400 ' : ''" class="rounded-2xl py-2 px-4  flex-none">{{lang.translate('New')}}</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-3 gap gap-4" id="data-content">
+                {% set products = page.products   %}
+                {% include '/views/front/'~ template ~'/blocks/category_product.html.twig' %}
+                
+            </div>
+
+        </div>
+    </div>
+</div>

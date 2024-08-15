@@ -1,0 +1,41 @@
+                {% if products|length < 1 %}
+                No items available with this filters
+                {% else %}
+                <div class="w-full block">
+                    <div class="w-full py-6">
+                        {% for item in products %}
+                        <div class="w-full flex gap-10 py-2">
+                            <a class="w-64" href="/{{item.lang_content.prefix}}"><img class="rounded-full border-1 border" src="/app/image.php?w=80&h=80&src={{item.picture}}" /></a>
+                            <p class="w-full text-sm pt-4"> 
+                                <a href="/{{item.lang_content.prefix}}">{{item.lang_content.title}}</a>
+                                <div class="w-full flex gap-4 pt-6"> 
+                                    <div class="stars">
+                                    {% set rate = item.rate() %}
+                                        <i class="la la-star {{(rate < 1) ? 'color-999' : ''}}"></i>
+                                        <i class="la la-star {{(rate < 2) ? 'color-999' : ''}}"></i>
+                                        <i class="la la-star {{(rate < 3) ? 'color-999' : ''}}"></i>
+                                        <i class="la la-star {{(rate < 4) ? 'color-999' : ''}}"></i>
+                                        <i class="la la-star {{(rate < 5) ? 'color-999' : ''}}"></i>
+                                    </div>   
+                                    <span class="rate-text ms-2 color-666"> {{item.reviews|length}} {{lang.translate('Reviews')}} </span> 
+                                </div>
+                            </p>
+                            <p class="w-full text-gray-600 pt-4"> {{app.currency.symbol}}{{app.currency_amount(item.price)}} </p>
+                            <div class="w-full text-gray-600 "> 
+                                <div class="product-card flex gap-6 ">
+                                    {% if (item.old_price - item.price) > 0 %}
+                                    <div class="tags px-3 py-2 bg-danger text-white rounded-lg w-20">
+                                        <small class="fsz-10 d-block text-uppercase"> {{lang.translate('save')}} </small>
+                                        <h6 class="fsz-14"> {{app.currency.symbol}}{{(app.currency_amount(item.old_price - item.price))}} </h6>
+                                    </div>
+                                    {% endif %}
+                                    <a  href="/front_api/create?type=Wishlist.create&amp;params[item_id]={{item.product_id}}" data-params="{{item.product_id}}" class="ajax-link fav-btn bg-gray-100 px-2 w-8 h-8 text-center pt-2 rounded-full mt-2"> <i class="las la-heart"></i> </a>
+                                    <a  href="/front_api/create?type=Cart.create&amp;params[item_id]={{item.product_id}}&params[qty]=1" data-params="{{item.product_id}}" class="ajax-link bg-gray-100 fs-4  w-8 h-8 text-center  rounded-full mt-2"> <i class="las la-shopping-cart"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="opacity:0.1" />
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}

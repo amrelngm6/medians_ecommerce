@@ -1,0 +1,261 @@
+{% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
+
+
+<div class="container mx-auto flex pt-6 pb-2">
+    <div class="w-full">
+        <h1 class="text-xl">{{lang.translate('Order page')}}</h1>
+    </div>
+    <div class="flex-end">
+        <div class="flex w-full flex-nowrap">
+            <span class="flex-none">{{lang.translate('Home')}}</span>
+            <span class="flex-none px-2"> / </span>
+            <span class="flex-none">{{lang.translate('Order page')}}</span>
+        </div>
+    </div>
+</div>
+<div class="container mx-auto bg-red-600 py-1 my-2"></div>
+    
+    <div class="container mx-auto mt-6 pt-6">
+        
+        <div class="w-full  lg:flex  pt-6 gap-20"  >
+            <div class="w-full pb-6" >
+                <div class="w-full flex gap-10" >
+
+                    <div class="w-full contact-info-card rounded-2xl p-10 bg-light1">
+                        <small class="fsz-12 color-666 text-uppercase mb-20"> {{lang.translate('Shipping to')}} </small>
+                        <ul class="fsz-16 lh-lg">
+                            <li>
+                                <a href="#"> {{order.field.address}}, {{order.field.city}}, {{order.field.state}}, {{order.field.zip}}, {{order.field.country}} </a>
+                            </li>
+                            <li>
+                                <a href="#"> {{order.field.mobile}} </a>
+                            </li>
+                            <li>
+                                <a href="#" class="color-green2 text-decoration-underline"> {{order.field.email}} </a>
+                            </li>
+                        </ul>
+                    </div>  
+                    <div class="w-full order-head bg-light1 rounded-2xl px-4 py-3">
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <p class="my-2 text-2xl"> <span> {{lang.translate('Order')}}: </span> <strong> #{{order.order_id}} </strong> </p>
+                                <p class="my-2 text-lg"> <span> {{lang.translate('DATE')}}: </span> <span> {{order.date}} </span> </p>
+
+                            </div>
+                            <div class="col-lg-6 text-lg-end mt-4 mt-lg-0 ">
+                                <span class="mx-4 ">{{lang.translate('Status')}}</span>
+                                <span class="text-lg alert alert-danger mb-0 py-2 fw-bold" role="alert"> {{order.status}} </span>
+                            </div>
+                            <div>
+                                {% if order.invoice.status == 'paid' %}
+                                <p class="fw-semibold flex">
+                                    {{lang.translate('Paid through')}} 
+                                    <span class="flex gap-2 px-4 fw-bold">
+                                        <img src="/app/image.php?w=20&h=20&src=/uploads/img/payment_methods/{{order.invoice.transaction.payment_method|lower}}.png" />
+                                        {{order.invoice.transaction.payment_method}}
+                                    </span>
+                                </p>
+                                <a href="/invoice/{{order.invoice.code}}" class=" mt-4 block text-center font-bold px-4 py-3 bg-cyan2 text-white" >{{lang.translate('Show invoice')}}</a>
+                                {% else %}
+                                <a href="/front_api/update?type=Order.update&params[order_id]={{order.order_id}}&params[status]=cancelled" data-confirm="{{lang.translate('are you sure')}}" data-confirm-text="{{lang.translate('Confirm to cancel this order')}}" class="ajax-link my-4 block text-center font-bold px-4 py-3 bg-red-600 text-white" >{{lang.translate('Cancel order')}}</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                
+                <div class="w-full py-6">
+                    {% if order.items|length %}
+                        <div class="w-full flex gap-12 py-6">
+                        <span class="w-96  px-2 text-center">#</span>
+                        <span class="w-full">{{lang.translate('Product')}}</span>
+                        <span class="w-full">{{lang.translate('subtotal')}}</span>
+                        <span class="w-full">{{lang.translate('Quantity')}}</span>
+                        <span class="w-full">{{lang.translate('Tax')}}</span>
+                        <span class="w-full">{{lang.translate('total price')}}</span>
+                        <span class="w-full">{{lang.translate('status')}}</span>
+                        </div>
+                        {% for orderItem in order.items %}
+                        <div class="w-full flex gap-10 py-2">
+                            <img class="rounded-full border-1 border" src="/app/image.php?w=80&h=80&src={{orderItem.item.picture}}" />
+                            <p class="w-full text-sm pt-4"> <a href="/{{orderItem.item.lang_content.prefix}}">{{orderItem.item.lang_content.title}}</a></p>
+                            <p class="w-full text-gray-600 pt-4"> {{app.currency.symbol}}{{app.currency_amount(orderItem.subtotal)}} </p>
+                            <p class="w-full text-gray-600 pt-4"> {{orderItem.quantity}}</p>
+                            <p class="w-full text-gray-600 pt-4"> {{app.currency.symbol}}{{app.currency_amount(orderItem.tax_amount)}}</p>
+                            <p class="w-full text-gray-600 pt-4"> {{app.currency.symbol}}{{app.currency_amount(orderItem.total_amount)}} </p>
+                            <p class="w-full text-gray-600 pt-4"> {{orderItem.status}} </p>
+                        </div>
+                        <hr style="opacity:0.1" />
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                {% if order.invoice.status != 'paid' %}                
+                <h4 class="text-lg py-4"> {{lang.translate('Payment method')}} </h4>
+                <div x-data="{}" class="flex gap gap-10">
+                    <div class="block "  >
+                        <a href="#!" x-on:click="completePayPal()" class=" w-40 my-4  gap gap-2 text-center font-bold px-4 py-3 text-primary border border-2 border-blue-400 rounded-xl" >
+                            <img src="/uploads/img/payment_methods/paypal.png" class="inline w-6 h-6" /> {{lang.translate('PayPal')}}
+                        </a>
+                    </div>
+                    <div class="block ">
+                        <a href="#!" x-on:click="completePaystack()" class=" w-40 my-4 gap gap-2 text-center font-bold px-4 py-3 text-primary border border-2 border-blue-400 rounded-xl" >
+                            <img src="/uploads/img/payment_methods/paystack.png" class="inline w-6 h-6 p-1" /> {{lang.translate('Paystack')}}
+                        </a>
+                    </div>
+                </div>
+                <div id="paypal-button-container"></div>
+                {% endif %}
+            </div>
+                        
+            <div class="w-96 border-1 border border-gray-800 p-6">
+                <h4 class="text-xl">{{lang.translate('Customer info')}}</h4>
+                
+                <div class="w-full py-2 mb-4">
+                    <div class=" w-full flex gap-4">
+                        <img style="max-height:60px" class="mt-2" src="/app/image.php?w=80&h=80&src={{app.customer.picture ?? '/uploads/img/profile.png'}}" />
+                        <div class="w-full ">
+                            <span class="text-lg">{{app.customer.name}}</span>
+                            <p class="alert alert-success mb-0 px-2 py-1 my-1" role="alert"> {{app.customer.email}} </p>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="text-xl">{{lang.translate('Order Summary')}}</h4>
+                <hr class="my-2" />
+                <div class="w-full flex py-2">
+                    <div class="w-full ">{{lang.translate('subtotal')}} </div> <span class="py-1  text-lg">{{app.currency.symbol}}{{app.currency_amount(order.subtotal)}}</span>
+                </div>
+                <div class="w-full flex py-2">
+                    <div class="w-full ">{{lang.translate('Discount')}} </div> <span class="py-1  text-lg">{{app.currency.symbol}}{{app.currency_amount(order.total_discount)}}</span>
+                </div>
+                <div class="w-full flex py-2">
+                    <div class="w-full ">
+                    <p>{{lang.translate('Shipping')}} </p>
+                    </div> <span class="py-1 text-lg flex ">{{app.currency.symbol}}<span >{{app.currency_amount(order.shipping_amount)}}</span></span>
+                </div>
+                <div class="w-full flex py-2">
+                    <div class="w-full ">{{lang.translate('Tax')}} </div> <span class="py-1 text-lg">{{app.currency.symbol}}{{app.currency_amount(order.tax_amount)}}</span>
+                </div>
+                <hr class="my-2" />
+                <div class="w-full flex py-2">
+                    <div class="w-full ">{{lang.translate('Total')}} </div> <span class="py-1 font-bold text-lg flex">{{app.currency.symbol}}<span>{{app.currency_amount(order.total_amount)}}</span> </span>
+                </div>
+                <hr class="my-2" />
+
+            </div>
+        </div>
+
+</div>
+    
+<!-- Footer -->
+{% include 'views/front/' ~ template ~ '/includes/footer.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/footer_assets.html.twig' %}
+{% include 'views/plugins/payment_methods/paystack.js.twig' %}
+<script src="https://www.paypal.com/sdk/js?client-id={{app.setting.paypal_api_key}}"></script>
+
+<script>
+function completePayPal() 
+{
+
+    {# $.ajax({
+        url: '/front_api/create',
+        type: 'POST',
+        dataType: 'JSON',
+        contentType: 'application/json',
+        data:  JSON.stringify({params: data}), // Your data to send
+        processData:false,
+        success: function(data) {
+            // Update your UI with the new data
+                handleResponse(data, null)
+        },
+        error: function(xhr, status, error) {
+            console.error('Error fetching data:', error);
+        }
+    }); #}
+        
+    paypal.Buttons({
+        style: {
+            layout: 'vertical',
+            color:  'blue',
+            shape:  'rect',
+            label:  'paypal'
+        },
+        createOrder: function (data, actions) {
+            // Set up the transaction details
+            return actions.order.create({
+                purchase_units: [
+                    {% for orderItem in order.items %}
+                    {% set itemTotal = orderItem.total_amount - (orderItem.tax_amount ?? 0)   %}
+                    {
+                        reference_id: {{orderItem.order_item_id}},
+                        description: '{{orderItem.item.lang_content.title}}',
+                        custom_id: {{orderItem.order_item_id}},
+                        amount: {
+                            currency_code: 'USD',
+                            value: '{{ app.currency_converter( orderItem.total_amount + (loop.index == 1 ? (order.shipping_amount ?? 0) : 0), 'USD' ) }}', // Set your payment amount here
+                            breakdown: {
+                                item_total: {
+                                    currency_code: "USD",
+                                    value: '{{app.currency_converter( itemTotal, 'USD' )}}'
+                                },
+                                shipping: {
+                                    currency_code: "USD",
+                                    value: '{{loop.index == 1 ? app.currency_converter(order.shipping_amount, 'USD') : 0}}'
+                                },
+                                tax_total: {
+                                    currency_code: "USD",
+                                    value: '{{app.currency_converter(orderItem.tax_amount, 'USD') ?? 0}}'
+                                },
+                            },
+                        },
+                    },
+                    {% endfor %}
+                ],
+            });
+        },
+        onApprove: function (data, actions) {
+            // Capture the payment when the user approves
+            return actions.order.capture().then(function (response) {
+                // Handle the successful payment
+                
+                $.ajaxSetup({
+                    beforeSend: function(xhr, settings) {
+                        var defaultParams = {
+                            type:  'Transaction.verify',
+                            params: {
+                                payment_method: 'PayPal',
+                                order_id: '{{order.order_id}}',
+                                transaction: JSON.stringify(response)
+                            },
+                        };
+                        var formData = $.param($.extend(defaultParams, settings.data));
+                        settings.data = formData;
+                    }
+                });
+
+                let a = $.ajax({
+                    url: '/front_api/create',
+                    type: 'POST',
+                    contentType: 'application/x-www-form-urlencoded',
+                    data:  {}, // Your data to send
+                    processData:false,
+                    success: function(data) {
+                        return data.responseText
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching data:', error);
+                    }
+                }); 
+
+                a.success(e => {
+                    let a = JSON.parse(e);
+                    if (a.result.code)
+                        window.location.href = '/invoice/'+a.result.code;
+                })
+            });
+        },
+    }).render('#paypal-button-container');
+}
+</script>
+</body>
+</html>

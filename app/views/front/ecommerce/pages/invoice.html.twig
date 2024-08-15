@@ -1,0 +1,156 @@
+{% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
+
+
+<div class="container mx-auto flex pt-6 pb-2">
+	<div class="w-full">
+		<h1 class="text-xl">{{lang.translate('Invoice page')}}</h1>
+	</div>
+	<div class="flex-end">
+		<div class="flex w-full flex-nowrap">
+			<span class="flex-none">{{lang.translate('Home')}}</span>
+			<span class="flex-none px-2">
+				/
+			</span>
+			<span class="flex-none">{{lang.translate('Invoice page')}}</span>
+		</div>
+	</div>
+</div>
+<div class="container mx-auto bg-red-600 py-1 my-2"></div>
+
+
+<div class="max-w-3xl mx-auto p-6 bg-white rounded shadow-sm my-6" id="invoice">
+
+	<div class="grid grid-cols-2 items-center">
+		<div>
+			<!--  Company logo  -->
+			<img src="{{app.setting.logo}}" alt="company-logo" height="100" width="100">
+		</div>
+
+		<div class="text-right">
+			<p class="">
+				{{lang.translate('Invoice number')}}:
+				<span class="text-gray-500">{{invoice.code}}</span>
+			</p>
+			<p>
+				{{lang.translate('Invoice date')}}:
+				<span class="text-gray-500">{{invoice.date}}</span>
+			</p>
+		</div>
+	</div>
+
+	<!-- Client info -->
+	<div class="grid grid-cols-2 items-center mt-8">
+		<div>
+			<p class="font-bold text-gray-800">
+				{{lang.translate('Bill to')}}
+				:
+			</p>
+			<p class="text-gray-500">
+				{{app.customer.name}}
+				<br/>
+				{{invoice.order.field.address}},
+				{{invoice.order.field.state}},
+				{{invoice.order.field.city}},
+				{{invoice.order.field.country}}
+			</p>
+			<p class="text-gray-500">
+				{{invoice.order.field.email}}
+			</p>
+		</div>
+
+		<div class="text-right">
+        
+			<p>
+				{{app.setting.sitename}}
+			</p>
+			<p class="text-gray-500 text-sm">
+				{{app.setting.footer_email}}
+			</p>
+			<p class="text-gray-500 text-sm mt-1">
+				{{app.setting.footer_phone}}
+			</p>
+			<p class="text-gray-500 text-sm mt-1">
+				{{app.setting.footer_address}}
+			</p>
+		</div>
+	</div>
+
+	<!-- Invoice Items -->
+	<div class="-mx-4 mt-8 flow-root sm:mx-0">
+		<table class="min-w-full">
+			<colgroup>
+				<col class="w-full sm:w-1/2">
+				<col class="sm:w-1/6">
+				<col class="sm:w-1/6">
+				<col class="sm:w-1/6">
+			</colgroup>
+			<thead class="border-b border-gray-300 text-gray-900">
+				<tr>
+					<th scope="col" class="py-3.5 pl-4 pr-3 text-sm font-semibold text-gray-900 sm:pl-0">{{lang.translate('Product')}}</th>
+					<th scope="col" class="hidden px-3 py-3.5 text-sm font-semibold text-gray-900 sm:table-cell">{{lang.translate('Price')}}</th>
+					<th scope="col" class="hidden px-3 py-3.5 text-sm font-semibold text-gray-900 sm:table-cell">{{lang.translate('Quantity')}}</th>
+					<th scope="col" class="hidden px-3 py-3.5 text-sm font-semibold text-gray-900 sm:table-cell">{{lang.translate('Tax')}}</th>
+					<th scope="col" class="py-3.5 pl-3 pr-4 text-sm font-semibold text-gray-900 sm:pr-0">{{lang.translate('Amount')}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% set currency = app.customCurrency(invoice.currency_code).symbol %}
+				{% for invoiceItem in invoice.items %}
+					<tr class="border-b border-gray-200">
+						<td class="max-w-0 py-4 pl-4 pr-3 text-sm sm:pl-0">
+							<a href="/{{invoiceItem.item.lang_content.prefix}}" class="font-medium text-gray-900">{{invoiceItem.item.lang_content.title}}</a>
+						</td>
+						<td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{currency}}{{invoiceItem.subtotal / invoiceItem.quantity}}</td>
+						<td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{invoiceItem.quantity}}</td>
+						<td class="hidden px-3 py-4 text-sm text-gray-500 sm:table-cell">{{currency}}{{invoiceItem.tax_amount}}</td>
+						<td class="py-4 pl-3 pr-4 text-sm text-gray-500 sm:pr-0">{{currency}}{{invoiceItem.total_amount}}</td>
+					</tr>
+				{% endfor %}
+
+			</tbody>
+			<tfoot>
+				<tr>
+					<th scope="row" colspan="3" class="hidden pl-4 pr-3 pt-6 text-right text-sm font-normal text-gray-500 sm:table-cell sm:pl-0"></th>
+					<th scope="row" colspan="1" class="hidden pl-4 pr-3 pt-6 text-right text-sm font-normal text-gray-500 sm:table-cell sm:pl-0">{{lang.translate('Subtotal')}}</th>
+					<th scope="row" class="pl-6 pr-3 pt-6 text-left text-sm font-normal text-gray-500 sm:hidden">{{lang.translate('Subtotal')}}</th>
+					<td class="pl-3 pr-6 pt-6 text-right text-sm text-gray-500 sm:pr-0">{{currency}}{{invoice.subtotal}}</td>
+				</tr>
+				<tr>
+					<th scope="row" colspan="3" class="hidden pl-4 pr-3 pt-6 text-right text-sm font-normal text-gray-500 sm:table-cell sm:pl-0"></th>
+					<th scope="row" colspan="1" class="hidden pl-4 pr-3 pt-4 text-right text-sm font-normal text-gray-500 sm:table-cell sm:pl-0">{{lang.translate('Tax')}}</th>
+					<th scope="row" class="pl-6 pr-3 pt-4 text-left text-sm font-normal text-gray-500 sm:hidden">{{lang.translate('Tax')}}</th>
+					<td class="pl-3 pr-6 pt-4 text-right text-sm text-gray-500 sm:pr-0">{{currency}}{{invoice.tax_amount}}</td>
+				</tr>
+				<tr>
+					<th scope="row" colspan="3" class="hidden pl-4 pr-3 pt-6 text-right text-sm font-normal text-gray-500 sm:table-cell sm:pl-0"></th>
+					<th scope="row" colspan="1" class="hidden pl-4 pr-3 pt-4 text-right text-sm font-normal text-gray-500 sm:table-cell sm:pl-0">{{lang.translate('Discount')}}</th>
+					<th scope="row" class="pl-6 pr-3 pt-4 text-left text-sm font-normal text-gray-500 sm:hidden">{{lang.translate('Discount')}}</th>
+					<td class="pl-3 pr-6 pt-4 text-right text-sm text-gray-500 sm:pr-0">{{currency}}0</td>
+				</tr>
+				<tr>
+					<th scope="row" colspan="3" class="hidden pl-4 pr-3 pt-6 text-right text-sm font-normal text-gray-500 sm:table-cell sm:pl-0"></th>
+					<th scope="row" colspan="1" class="hidden pl-4 pr-3 pt-4 text-right text-sm font-normal text-gray-500 sm:table-cell sm:pl-0">{{lang.translate('Shipping')}}</th>
+					<th scope="row" class="pl-6 pr-3 pt-4 text-left text-sm font-normal text-gray-500 sm:hidden">{{lang.translate('Shipping')}}</th>
+					<td class="pl-3 pr-6 pt-4 text-right text-sm text-gray-500 sm:pr-0">{{currency}}{{invoice.shipping_amount}}</td>
+				</tr>
+				<tr>
+					<th scope="row" colspan="3" class="hidden pl-4 pr-3 pt-6 text-right text-sm font-normal text-gray-500 sm:table-cell sm:pl-0"></th>
+					<th scope="row" colspan="1" class="hidden pl-4 pr-3 pt-4 text-right text-sm font-semibold text-gray-900 sm:table-cell sm:pl-0">{{lang.translate('Total')}}</th>
+					<th scope="row" class="pl-6 pr-3 pt-4 text-left text-sm font-semibold text-gray-900 sm:hidden">{{lang.translate('Total')}}</th>
+					<td class="pl-3 pr-4 pt-4 text-right text-sm font-semibold text-gray-900 sm:pr-0">{{currency}}{{invoice.total_amount}}</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+
+	<!--  Footer  -->
+	<div class="border-t-2 pt-4 text-xs text-gray-500 text-center mt-16">
+		{{app.setting.invoice_footer}}
+	</div>
+
+</div>
+
+{% include 'views/front/' ~ template ~ '/includes/footer.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/footer_assets.html.twig' %}
+</body></html>

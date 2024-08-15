@@ -1,0 +1,355 @@
+{% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
+{% include 'views/front/' ~ template ~ '/blocks/breadcrumb.html.twig' %}
+
+<div class="profile-pg-1 ">
+    <section class="container mx-auto py-4 tc-profile p-30 radius-4 bg-white mt-3 wow fadeInUp mb-3" style="visibility: visible; animation-name: fadeInUp;">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="tabs-side me-lg-5 mb-4 mb-lg-0">
+                    <div class="main-info">
+                        <div class="img">
+                            <img src="{{app.customer.picture ?? '/uploads/img/profile.png'}}" alt="" class="main-img img-cover">
+                        </div>
+                        <h4 class="text-xl pt-4">
+                            {{app.customer.name}}
+                        </h4>
+                        <ul class="mt-2 color-666 lh-lg">
+                            <li>
+                                <a href="#">
+                                    {{app.customer.email}}
+                                </a>
+                            </li>
+                            <!-- <li> <a href="#"> Los Angeles, CA </a> </li> -->
+                        </ul>
+                    </div>
+                    <ul class="nav nav-pills block py-4" id="pills-tab" role="tablist">
+                        <li class="nav-item " role="presentation">
+                            <button class="w-full flex nav-link active" id="pills-prof1-tab" data-bs-toggle="pill" data-bs-target="#pills-prof1">
+                                <span class="w-full text-start">
+                                    {{(lang.translate('Account info'))}}
+                                </span>
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="w-full flex nav-link" id="pills-orders-tab" data-bs-toggle="pill" data-bs-target="#pills-orders">
+                                <span class="w-full text-start">
+                                    {{lang.translate('My orders')}}
+                                </span>
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="w-full flex nav-link" id="pills-prof3-tab" data-bs-toggle="pill" data-bs-target="#pills-prof3">
+                                <span class="w-full text-start">
+                                    {{lang.translate('My address')}}
+                                </span>
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="w-full flex nav-link" id="pills-prof4-tab" data-bs-toggle="pill" data-bs-target="#pills-prof4">
+                                <span class="w-full text-start">
+                                    {{lang.translate('Change password')}}
+                                </span>
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </li>
+                    </ul>
+                    <hr />
+                    <a href="/logout" class="w-full flex nav-link" id="pills-prof4-tab" >
+                        <span class="w-full text-start">
+                            {{lang.translate('Logout')}}
+                        </span>
+                        <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade active show" id="pills-prof1">
+                        <div class="acount-tab">
+                            <h4 class=" text-capitalize mb-30 text-xl">
+                                {{lang.translate('Account info')}}
+                            </h4>
+                            <div class="content">
+                                <form action="/front_api/update" id="profile-form" class="ajax-form row">
+                                    <input type="hidden" value="Customer.update" name="type" />
+                                    <div class="col-lg-6">
+                                        <div class="form-group mb-4">
+                                            <label for="">
+                                                {{lang.translate('Name')}}
+                                                <span class="color-red1">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control" name="params[name]" placeholder="" value="{{app.customer.name}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group mb-4">
+                                            <label for="">
+                                                {{lang.translate('Email')}}
+                                                <span class="color-red1">
+                                                    *
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control" name="params[email]" placeholder="" value="{{app.customer.email}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group mb-4">
+                                            <label for="">
+                                                {{lang.translate('Mobile')}}
+                                                <span class="color-666">
+                                                    ({{lang.translate('Optional')}})
+                                                </span>
+                                            </label>
+                                            <input type="text" class="form-control" name="params[mobile]" placeholder="" value="{{app.customer.mobile}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="butn bg-cyan2 text-white radius-4 fw-500 fsz-12 text-uppercase text-center mt-20 py-3 px-5">
+                                            <span>
+                                                {{lang.translate('save')}}
+                                            </span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-orders">
+                        <div class="orders-tab">
+                            <h4 class=" text-capitalize mb-30 text-xl">
+                                {{lang.translate('Orders History')}}
+                            </h4>
+                            <div class="orders">
+                                {% for order in orders %}
+                                <div class="order-card">
+                                    <div class="order-head bg-light1">
+                                        <div class="row align-items-center">
+                                            <div class="col-lg-6">
+                                                <p class="my-2">
+                                                    <a href="/order/{{order.order_id}}">
+                                                        {{lang.translate('Order number')}}:
+                                                    </a>
+                                                    <strong>
+                                                        #{{order.order_id}}
+                                                    </strong>
+                                                </p>
+                                                <p class="my-2">
+                                                    <span>
+                                                        {{lang.translate('DATE')}}:
+                                                    </span>
+                                                    <span>
+                                                        {{order.date}}
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-6 text-lg-end mt-4 mt-lg-0">
+                                                <a href="/order/{{order.order_id}}" class="alert alert-success mb-0 py-2" role="alert">
+                                                    {{order.status}}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="products">
+                                        <div class="row gx-3">
+                                            {% for orderItem in order.items %}
+                                            <div class="col-lg-6">
+                                                <div class="product-card">
+                                                    <div class="top-inf">
+                                                        <a href="/{{orderItem.item.lang_content.prefix}}" class="fsz-10 py-1 px-2 radius-2 bg-222 text-white text-uppercase">
+                                                            {{orderItem.status}}
+                                                        </a>
+
+                                                    </div>
+                                                    <a href="/{{orderItem.item.lang_content.prefix}}" class="img">
+                                                        <img src="/app/image.php?w=400&h=400&src={{orderItem.item.picture}}" alt="" class="img-contain main-image">
+                                                    </a>
+                                                    <div class="info">
+                                                        <h6>
+                                                            <a href="/{{orderItem.item.lang_content.prefix}}" class="prod-title text-xl  mt-2 hover-green2">
+                                                                {{orderItem.item.lang_content.title}}
+                                                            </a>
+                                                        </h6>
+                                                        <div class="price mt-15">
+                                                            <h5 class="fsz-18 fw-600">
+                                                                {{app.currency.symbol}}{{app.currency_amount(orderItem.total_amount)}}
+                                                            </h5>
+                                                        </div>
+
+                                                        <div class="meta">
+                                                            <a href="#" class="meta-item color-222">
+                                                                {{app.currency.symbol}}{{app.currency_amount(orderItem.tax_amount)}} {{lang.translate('Tax')}}
+                                                                <span class="bg bg-222"></span>
+                                                            </a>
+                                                        </div>
+                                                        <p class="fsz-12 mt-2">
+                                                            <i class="fas fa-check-circle color-green2 me-1"></i>
+                                                            {{orderItem.status}}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade " id="pills-prof3" >
+
+                        {% set countryIndex, cityIndex, stateIndex = 0,0,0 %}
+                        {% for c in countries %}
+                        {% set countryIndex = (c.name == customer.field.country) ? loop.index - 1 : countryIndex %}
+                        {% for c in countries[countryIndex].states %}
+                        {% set stateIndex = (c.name == customer.field.state) ? loop.index - 1 : stateIndex %}
+                        {% for c in countries[countryIndex].states[stateIndex].cities %}
+                        {% set cityIndex = (c.name == customer.field.city) ? loop.index - 1 : cityIndex %}
+                        {% endfor %}
+                        {% endfor %}
+                        {% endfor %}
+                        <div class="acount-tab"  x-data="{indexCountry:{{countryIndex ?? 0}}, indexCity:{{cityIndex ?? 0}}, indexState:{{stateIndex ?? 0}}, countries: {{countries}}, currentCountry: '{{customer.field.country ?? {} }}', currentState: '{{customer.field.state}}', currentCity:'{{customer.field.city}}'}">
+                            <h4 class=" text-capitalize mb-30">
+                                {{lang.translate('Address')}}
+                            </h4>
+                            <div class="content">
+                                <form action="/front_api/update" id="address-form" class="ajax-form row">
+                                    <input type="hidden" value="Customer.update" name="type" />
+
+                                    <div class="w-full">
+                                        <div class="form-group mb-4">
+                                            <label for="">
+                                                {{lang.translate('Address')}}
+                                            </label>
+                                            <input name="params[field][address]" type="text" class="form-control mb-2" placeholder="House number and street name ..." value="{{customer.field.address}}">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="flex gap-6 w-full">
+                                        <div class="w-full">
+                                            <div class="form-group mb-4">
+                                                <label for="">
+                                                    {{lang.translate('Country')}} 
+                                                    <span class="color-red1">*</span>
+                                                </label>
+                                                <select x-model="currentCountry" name="params[field][country]" @change="indexCountry = Number($event.target.options[$event.target.selectedIndex].index), indexCountry = indexCountry - 1, indexState=0"  id="" class="form-control form-select">
+                                                    <option value="">--{{lang.translate('Choose')}}--</option>
+                                                    {% for country in countries %}
+                                                    <option value="{{country.name}}">{{country.name}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="form-group mb-4">
+                                                <label for="">
+                                                    {{lang.translate('State')}}
+                                                    <span class="color-red1">
+                                                        *
+                                                    </span>
+                                                </label>
+                                                <template x-if="countries[indexCountry].states[indexState]">
+                                                    <select name="params[field][state]" @change=" currentState = countries[indexCountry].states[indexState], indexState = Number($event.target.options[$event.target.selectedIndex].index), indexState = indexState - 1"  id="state" class="form-control form-select">
+                                                        <option value="">--{{lang.translate('Choose')}}--</option>
+                                                        <template x-for="(s, index) in countries[indexCountry].states" :key="s.name">
+                                                            <option :value="s.name" x-text="s.name"  :selected="s.name == countries[indexCountry].states[indexState].name"></option>
+                                                        </template>
+                                                    </select>
+                                                </template>
+                                            </div>
+                                        </div>
+                                        <div class="w-full">
+                                            <div class="form-group mb-4">
+                                                <label for="">
+                                                    {{lang.translate('City')}}
+                                                    <span class="color-red1">
+                                                        *
+                                                    </span>
+                                                </label>
+                                                <template x-if="countries[indexCountry].states[indexState]">
+                                                    <select name="params[field][city]" id="city" class="form-control form-select">
+                                                        <option value="">--{{lang.translate('Choose')}}--</option>
+                                                        <template x-for="city in countries[indexCountry].states[indexState].cities" :key="city.name">
+                                                            <option :value="city.name" x-text="city.name"  :selected="city.name == countries[indexCountry].states[indexState].cities[indexCity].name"></option>
+                                                        </template>
+                                                    </select>
+                                                </template>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group mb-4">
+                                            <label for="">
+                                                {{lang.translate('Zip Code')}} <span class="color-red1">* </span>
+                                            </label>
+                                            <input  name="params[field][zip]" type="text" class="form-control" placeholder="" value="{{customer.field.zip}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="butn bg-cyan2 text-white radius-4 fw-500 fsz-12 text-uppercase text-center mt-20 py-3 px-5">
+                                            <span>
+                                                {{lang.translate('save')}}
+                                            </span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade " id="pills-prof4">
+                        <div class="acount-tab">
+                            <h4 class=" text-capitalize mb-30 text-xl">
+                                {{lang.translate('Change Password')}}
+                            </h4>
+                            <div class="content">
+                                <form action="/front_api/update" id="password-form" class="ajax-form row">
+                                    <input type="hidden" value="Customer.changePassword" name="type" />
+                                    <div class="col-lg-12">
+                                        <div class="form-group mb-4">
+                                            <label for="">
+                                                {{lang.translate('Current password')}}
+                                            </label>
+                                            <input name="params[old_password]" type="password" required class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group mb-4">
+                                            <label for="">
+                                                {{lang.translate('New password')}}
+                                            </label>
+                                            <input name="params[password]" type="password" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group mb-4">
+                                            <label for="">
+                                                {{lang.translate('Confirm password')}}
+                                            </label>
+                                            <input name="params[confirm_password]" type="password" class="form-control" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button type="submit" class="butn bg-cyan2 text-white radius-4 fw-500 fsz-12 text-uppercase text-center mt-20 py-3 px-5">
+                                            <span>
+                                                {{lang.translate('save')}}
+                                            </span>
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<!-- Footer -->
+{% include 'views/front/' ~ template ~ '/includes/footer.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/footer_assets.html.twig' %}</body></html>

@@ -1,0 +1,104 @@
+{% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
+
+
+<div class="container mx-auto flex pt-6 pb-2">
+    <div class="w-full">
+        <h1 class="text-xl">{{lang.translate('Cart')}}</h1>
+    </div>
+    <div class="flex-end">
+        <div class="flex w-full flex-nowrap">
+            <span class="flex-none">{{lang.translate('Home')}}</span>            
+            <span class="flex-none px-2"> / </span>
+            <span class="flex-none">{{lang.translate('Cart')}}</span>
+        </div>
+    </div>
+</div>
+<div class="container mx-auto bg-red-600 py-1 mb-2"></div>
+
+<div class="container mx-auto ">
+    
+    <div class="w-full flex  pt-6 gap-20">
+        <div class="w-full pb-6">
+            <form class="action ajax-form w-full" action="{{app.CONF.url}}cart/update" method="POST" id="cart-form">
+
+                <input type="hidden" value="Cart.update" name="type" />
+                
+                {% for cart in items %}
+
+                <div class="w-full py-2  flex gap gap-4">
+                    <img src="{{cart.item.picture}}" width="200" />
+                    <div class="w-full ">
+                        <h2 class="text-2xl py-2">{{cart.item.lang_content.title}}</h2>
+                        
+                        <div class="w-full flex py-2 gap gap-20">
+                        
+                            <div class="py-4 flex gap gap-4">
+                                <span class="block w-full pb-4">{{lang.translate('Color')}}</span>
+                                <div class="w-full flex gap-6 ">
+                                    {% if cart.color %}
+                                    <label class="relative cursor-pointer">
+                                        <span  class="outline-black outline outline-2 absolute block  w-4 h-4 rounded-full p-2 " style="background:{{cart.color}}"></span>
+                                        <input type="radio" checked="" name="params[cart][{{cart.cart_id}}][color]" value="{{cart.color}}" data-form="cart-form" />
+                                    </label>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div  class="py-4 flex gap gap-4">
+                                <span class="block w-full pb-4">{{lang.translate('Size')}}</span>
+                                {% if cart.size %}
+                                <label class="relative cursor-pointer">
+                                    <span class="outline outline-2 w-4 h-4 px-3 py-1 " >{{cart.size}}</span>
+                                    <input class="opacity-0" checked="" type="radio" name="params[cart][{{cart.cart_id}}][size]" value="{{cart.size}}" data-form="cart-form" />
+                                </label>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="w-full flex gap-6">
+                            <div class="relative">
+                                <span class="minusQty px-2 cursor-pointer text-xl font-bold">-</span>
+                                <input name="params[cart][{{cart.cart_id}}][qty]" value="{{cart.qty}}" min="{{cart.item.product_fields.min_purchase_qty}}" class="text-center bg-gray-200 px-4 py-2 w-20" />
+                                <span class="addQty px-2 cursor-pointer text-xl font-bold">+</span>
+                            </div>
+                            <a href="{{app.CONF.url}}cart/delete"  rel="nofollow" data-params="{{cart.cart_id}}" class="ajax-link font-bold px-4 py-1 text-red-600" >{{lang.translate('Remove')}}</a>
+                        </div>
+                    </div>
+                    <span class="py-4 font-semibold text-lg ">{{app.currency.symbol}}{{app.currency_amount(cart.item.price)}}</span>
+                </div>
+    
+                <hr class="my-4" />
+
+                {% endfor %}
+                <button class="block text-center font-bold px-4 py-3 bg-red-600 text-white" >{{lang.translate('Update')}}</button>
+
+            </form>
+                    
+        </div>
+        <div class="w-96 border-1 border border-gray-800 p-6">
+            <h4 class="text-xl">{{lang.translate('Order Summary')}}</h4>
+            <hr class="my-4" />
+            <div class="w-full flex py-2">
+                <div class="w-full ">{{lang.translate('Price')}} </div> <span class="py-1  text-lg">{{app.currency.symbol}}{{app.currency_amount(price)}}</span>
+            </div>
+            <div class="w-full flex py-2">
+                <div class="w-full ">{{lang.translate('Discount')}} </div> <span class="py-1  text-lg">{{app.currency.symbol}}{{app.currency_amount(discount)}}</span>
+            </div>
+            <div class="w-full flex py-2">
+                <div class="w-full ">{{lang.translate('Shipping')}} </div> <span class="py-1 text-lg">{{app.currency.symbol}}{{app.currency_amount(shipping)}}</span>
+            </div>
+            <hr class="my-2" />
+            <div class="w-full flex py-2">
+                <div class="w-full ">{{lang.translate('Total')}} </div> <span class="py-1 font-bold text-lg">{{app.currency.symbol}}{{app.currency_amount(total)}}</span>
+            </div>
+            <hr class="my-2" />
+            <a href="/checkout" class="block text-center font-bold mx-auto px-4 py-3 bg-red-600 text-white" >{{lang.translate('Proceed to checkout')}}</a>
+
+        </div>
+    </div>
+
+</div>
+    
+<!-- Footer -->
+{% include 'views/front/' ~ template ~ '/includes/footer.html.twig' %}

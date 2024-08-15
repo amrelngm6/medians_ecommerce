@@ -1,0 +1,108 @@
+    <div id="main-header" class="relative pt-2 z-10 " x-data="{showSearch: false, showLanguages: false, showCurrency: false, showCart: false}">
+
+        <form class="ajax-form" action="/front_api" method="POST" id="form-sidecart">
+            <input type="hidden" value="load_side_cart" name="type"/>
+        </form>
+
+        <div class="lg:flex container mx-auto gap-20">
+            <div>
+                <a href="/"><img title="{{app.SystemSetting.sitename}}" src="{{app.CONF.url}}{{app.SystemSetting.logo}}"/></a>
+            </div>
+            <div id="main-nav" class="w-full flex mt-8 border border-1 rounded-2xl py-2 px-6 bg-white">
+                <ul class="flex gap-4 w-full pt-1" x-on:click="showLanguages = 0, showCurrency=0">
+                    {% for menu in app.front_menu('header') %}
+                        <li class="navbar-dropdown">
+                            <a href="/{{menu.page.lang_content.prefix}}">{{menu.page.lang_content.title}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="flex-end flex gap-4 pt-2 relative">
+                    <a href="#" x-on:click="showSearch = true"><img src="/src/front_assets/svg/search.svg"/></a>
+                    <a href="/customer/dashboard"><img src="/src/front_assets/svg/user.svg"/></a>
+                    <a href="#" x-on:click="showCart = true, setTimeout(function() {submitForm('form-sidecart', 'sidecart-items')}, 10)"><img src="/src/front_assets/svg/cart.svg"/></a>
+                    <a href="#" x-on:click="showLanguages = true"><img src="/src/front_assets/svg/lang.svg"/></a>
+                    {# <a href="#" x-on:click="showCurrency = true"><img src="/src/front_assets/svg/currency.svg"/></a> #}
+
+                    <template x-if="showLanguages">
+                        <div @mousedown.outside="showLanguages = 0" class="relaive absolute bg-white px-6 py-6 mx-auto top-12 right-0 left-auto w-64">
+                            {% for lng in app.languages %}
+                                <p>
+                                    <a class="text-right flex gap-2" href="/switch-lang/{{lng.language_code}}?redirect={{page.content_langs[lng.language_code].prefix ?? ''}}"><img class=" rounded-full p-1" width="36" src="{{lng.icon}}"/>
+                                        <span class="pt-1">{{lng.name}}</span>
+                                    </a>
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </template>
+                    <template x-if="showCurrency">
+                        <div @mousedown.outside="showCurrency = 0" class="relaive absolute bg-white px-6 py-6 mx-auto top-12 right-0 left-auto w-64">
+                            {% for cur in app.currencies %}
+                                <p>
+                                    <a class="text-right flex gap-2" href="/switch-currency/{{cur.code}}">
+                                        <span class="pt-1">{{cur.name}}
+                                            ({{cur.symbol}})</span>
+                                    </a>
+                                </p>
+                            {% endfor %}
+                        </div>
+                    </template>
+
+
+                    <template x-if="showCart">
+                        <div>
+                            <div class="fixed w-full h-full bg-gray-600 left-0 top-0 opacity-40"></div>
+
+                            <div @mousedown.outside="showCart = 0" class="overflow-auto shadow-lg relaive fixed h-screen mx-auto top-0 {{lang.translate('dir') == 'ltr' ? 'right-0' : 'left-0'}} bg-white  w-80">
+
+                                <div class="p-4 ">
+                                    <div class="w-48 h-8 ">
+                                        <div class=" text-text-gray-800 text-lg font-medium ">{{lang.translate('Cart')}}</div>
+                                        <div class="w-3 h-0.5 left-[188px] top-[9px]  bg-text-gray-800"></div>
+                                        <div class="w-48 h-px left-0 top-[31px]  bg-gray-200"></div>
+                                    </div>
+                                </div>
+                                
+                                <form class="action ajax-form w-full p-4" action="{{app.CONF.url}}cart/update" method="POST" id="sidecart-form">
+
+                                    <input type="hidden" value="Cart.update" name="type"/>
+                                    <div id="sidecart-items"></div>
+                                    <div class="w-full flex gap-6">
+
+                                        <button class="block text-center font-bold px-4 py-3 bg-red-600 text-white">{{lang.translate('Update')}}</button>
+                                        <a href="/cart" class=" rounded-lg mx-4 block text-center font-bold px-4 py-3 bg-primary text-white">{{lang.translate('View Cart')}}</a>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </template>
+                </div>
+
+            </div>
+
+        </div>
+
+        <template x-if="showSearch" class="w-full">
+            <div>
+                <div class="fixed w-full h-full bg-gray-600 left-0 top-0 opacity-40"></div>
+
+                <form method="POST" action="/front_api" x-ref="searchForm" id="searchForm" @mousedown.outside="showSearch = 0" class="relaive absolute bg-white py-2 px-4 container mx-auto right-0 left-0 top-10">
+                    <input type="hidden" value="quick-search" name="type" />
+                    <div class=" flex gap-6 w-full">
+                        <input required x-ref="searchText" @keyup="submitForm('searchForm', 'search-result')" name="params[title]" class="w-full  rounded-lg py-2 focus:border-gray-200 shadow-lg outline-none px-20"/>
+                        <a href="/search" class="w-40 pt-3">Advanced Search</a>
+                        <i x-on:click="$refs.searchForm.submit() " class="cursor-pointer p-3  fa fa-search"></i>
+                    </div>
+
+
+                    <div class="w-full" id="search-result">
+
+                    </div>
+                </form>
+            </div>
+        </template>
+
+
+    </div>
+

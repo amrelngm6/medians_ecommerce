@@ -1,0 +1,38 @@
+<div class="product-card">
+                                    <div class="top-inf">
+                                        {% if (cart.item.old_price - cart.item.price) > 0 %}
+                                        <div class="dis-card">
+                                            <small class="fsz-10 d-block text-uppercase"> {{lang.translate('save')}} </small>
+                                            <h6 class="fsz-14"> {{app.currency.symbol}}{{(app.currency_amount(cart.item.old_price - cart.item.price))}} </h6>
+                                        </div>
+                                        {% endif %}
+                                        <a href="{{app.CONF.url}}front_api/create?type=Wishlist.create&params[item_id]={{cart.item_id}}" rel="nofollow" class="ajax-link fav-btn"> <i class="las la-heart"></i> </a>
+                                        <a href="{{app.CONF.url}}front_api/delete?type=Cart.delete&params[cart_id]={{cart.cart_id}}" data-confirm="{{lang.translate('Are you sure')}}" data-confirm-text="{{lang.translate('Remove this item from cart')}}" rel="nofollow" class="ajax-link remove-btn"> <i class="las la-trash"></i> </a>
+                                    </div>
+                                    <a  href="{{app.CONF.url}}{{cart.item.lang_content.prefix}}" class="img">
+                                        <img src="/app/image.php?w=600&h=600&src={{cart.item.picture}}"alt="" class="img-contain main-image">
+                                    </a>
+                                    <div class="info">
+                                        <div class="rating">
+                                            {% set rate = cart.item.rate() %}
+                                            <div class="stars">
+                                                <i class="la la-star {{(rate < 1) ? 'color-999' : ''}}"></i>
+                                                <i class="la la-star {{(rate < 2) ? 'color-999' : ''}}"></i>
+                                                <i class="la la-star {{(rate < 3) ? 'color-999' : ''}}"></i>
+                                                <i class="la la-star {{(rate < 4) ? 'color-999' : ''}}"></i>
+                                                <i class="la la-star {{(rate < 5) ? 'color-999' : ''}}"></i>
+                                            </div>
+                                            <span class="num"> ({{cart.item.reviews|length}}) </span>
+                                        </div>
+                                        <h6> <a class="prod-title fsz-14 fw-bold mt-2 hover-green2" href="/{{cart.item.lang_content.prefix}}">{{cart.item.lang_content.title}}</a> </h6>
+                                        <div class="price mt-15">
+                                            <h5 class="fsz-18 color-red1 fw-600"> {{app.currency.symbol}}{{app.currency_amount(cart.item.price)}} {% if cart.item.old_price > 0 %}<span class="old fsz-14 color-666 text-decoration-line-through"> {{app.currency.symbol}}{{app.currency_amount(cart.item.old_price)}} </span> {% endif %} </h5>
+                                        </div>
+                                        <div class="add-more mt-3">
+                                            <span class="cursor-pointer qt-minus"><i class="fas fa-minus"></i></span>
+                                            <input type="number" class="qt border-0" name="params[cart][{{cart.cart_id}}][qty]" value="{{cart.qty}}" min="{{cart.item.product_fields.min_purchase_qty}}">
+                                            <span class="cursor-pointer qt-plus"><i class="fas fa-plus"></i></span>
+                                        </div>
+                                        <p class="fsz-12 mt-2"> <i class="fas fa-check-circle color-green2 me-1"></i> {{lang.translate('In stock')}} </p>
+                                    </div>
+                                </div>

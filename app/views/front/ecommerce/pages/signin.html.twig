@@ -1,0 +1,49 @@
+{% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
+{% include 'views/front/' ~ template ~ '/blocks/breadcrumb.html.twig' %}
+
+
+            <main>
+                <!--  Start login  -->
+                <section class="tc-login p-5 radius-4 bg-white mt-3 mb-3">
+                    <div class="row align-items-center justify-content-around">
+                        <div class="col-lg-4">
+                            <div class="img">
+                                <img src="/uploads/img/login.svg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="login-form">
+                                <div class="title mb-30">
+                                    <h3 class="color-green2 mb-10"> {{lang.translate('Welcome Back')}} </h3>
+                                    <p class="fsz-14 text-uppercase ltspc-2 color-999"> {{lang.translate('login to continue')}} </p>
+                                </div>
+                                <form action="/customer/login" method="POST" id="login-form" class="ajax-form  d-block">
+                                    <div class="form-group mb-4">
+                                        <label for=""> {{lang.translate('Email')}}</label>
+                                        <input type="email" class="form-control" required name="params[email]"  placeholder="Example@gmail.com">
+                                    </div>
+                                    <div class="form-group show_hide_password">
+                                        <label for=""> {{lang.translate('Password')}} </label>
+                                        <input type="password" class="form-control" required min="5" name="params[password]" placeholder="....">
+                                        <i class="show_pass fal fa-eye-slash"></i>
+                                    </div>
+                                    <a href="/customer/reset_password" class="d-block text-decoration-underline mt-2 color-999 fsz-13"> {{lang.translate('Forget Password')}} </a>
+                                    <div class="btns">
+                                        <button type="submit" class="butn bg-cyan2 text-white radius-4 fw-500 fsz-14 text-uppercase text-center mt-40 px-5"> <span> {{lang.translate('login')}} </span> </button>
+                                    </div>
+                                    <a href="/customer/signup" class="text-uppercase color-999 fsz-13 mt-3"> {{lang.translate('create new account')}} <span class="color-green2"> {{lang.translate('Sign Up')}} </span> </a>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--  End login  -->
+            </main>
+            
+
+<!-- Footer -->
+{% include 'views/front/' ~ template ~ '/includes/footer.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/footer_assets.html.twig' %}
+</body>
+</html>

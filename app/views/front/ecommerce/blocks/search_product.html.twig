@@ -1,0 +1,48 @@
+            <div class="row">
+                {% if products|length < 1 %}
+                No items available with this filters
+                {% endif %}
+                {% for item in products %}
+                <div class="col-lg-3">
+                    <div class="product-card">
+                        {% if (item.old_price - item.price) > 0 %}
+                        <div class="tags px-3 py-2 bg-danger text-white rounded-lg">
+                            <small class="fsz-10 d-block text-uppercase"> {{lang.translate('save')}} </small>
+                            <h6 class="fsz-14"> {{app.currency.symbol}}{{(app.currency_amount(item.old_price - item.price))}} </h6>
+                        </div>
+                        {% endif %}
+
+                        <a href="/front_api/create?type=Wishlist.create&params[item_id]={{item.product_id}}" data-params="{{item.product_id}}" class="ajax-link fav-btn"> <i class="la la-heart"></i> </a>
+                        <div class="img">
+                            <img src="/app/image.php?w=600&h=600&src={{item.picture}}" alt="">
+                            <div class="btns">
+                                <a href="/front_api/create?type=Cart.create&params[item_id]={{item.product_id}}&params[qty]=1" class="ajax-link butn bg-darkGreen1 text-white radius-2 fsz-11 text-uppercase m-1 addCart"> <span> <i class="la la-shopping-bag me-1 fsz-14"></i>  {{lang.translate('Add To Cart')}} </span> </a>
+                            </div>
+                        </div>
+                        <div class="info mt-20">
+                            <h6 class="title fsz-14 fw-400"> <a href="{{app.CONF.url}}{{item.lang_content.prefix}}" class="hover-underline"> {{item.lang_content.title}} </a> </h6>
+                            <div class="rate mt-10"> 
+                                <div class="stars">
+                                {% set rate = item.rate() %}
+                                    <i class="la la-star {{(rate < 1) ? 'color-999' : ''}}"></i>
+                                    <i class="la la-star {{(rate < 2) ? 'color-999' : ''}}"></i>
+                                    <i class="la la-star {{(rate < 3) ? 'color-999' : ''}}"></i>
+                                    <i class="la la-star {{(rate < 4) ? 'color-999' : ''}}"></i>
+                                    <i class="la la-star {{(rate < 5) ? 'color-999' : ''}}"></i>
+                                </div>   
+                                <span class="rate-text ms-2 color-666"> {{item.reviews|length}} {{lang.translate('Reviews')}} </span> 
+                            </div>
+                            <h5 class="price fsz-18 mt-15"> {{app.currency.symbol}}{{app.currency_amount(item.price)}} {% if item.old_price > 0 %}<span class="old fsz-14 color-666 text-decoration-line-through"> {{app.currency.symbol}}{{app.currency_amount(item.old_price)}} </span> {% endif %} </h5>
+                        </div>
+                    </div>
+                </div>
+                
+                {% endfor  %}
+
+            </div>
+
+            <template x-if="page < {{count/ (app.setting.category_products_count ?? 4) }}" >
+                <div class="text-center py-2">
+                    <a href="#!" x-on:click="page += 1, submitFilters(true)" class="butn bg-white color-000 radius-3 fsz-13 text-uppercase m-1 fw-600 px-5 border mt-3"> <span> {{lang.translate('Load more')}} ( {{count}} )</span> </a>
+                </div>
+            </template>

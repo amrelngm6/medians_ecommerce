@@ -1,0 +1,93 @@
+
+<header class="topnav two">
+  <div class="container">
+    <div class="header-bar">
+      <a href="{{app.CONF.url}}"><img src="{{app.SystemSetting.dark_logo}}" alt="logo"></a>
+        <nav class="navbar">
+          <ul class="navbar-links">
+          
+            {% for menu in header_menu %}
+            <li class="navbar-dropdown">
+                <a href="/{{menu.page.content.prefix}}">{{menu.page.name}}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </nav>
+        <div class="pickup">
+            <div class="menu-icon cursor-pointer">
+                <span class="text"><span class="word">Menu</span></span>
+                <span class="icon">
+                    <i></i>
+                    <i></i>
+                </span>
+            </div>
+            <a href="javascript:void(0)" class="btn">Start Free Trial</a>
+        </div>
+        
+        <div class="bar-menu">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+    <div class="mobile-nav hmburger-menu" id="mobile-nav" style="display:block; background-image: url(/uploads/img/background.png);">
+      <div class="res-log">
+        <a href="index.html">
+          <img src="assets/img/logo-b.png" alt="Responsive Logo">
+        </a>
+      </div>
+        <ul>
+          {% for menu in header_menu %}
+          <li><a href="/{{menu.page.content.prefix}}">{{menu.page.name}}</a></li>
+          {% endfor %}
+        </ul>
+
+        <div class="menu-sidebar-single-widget">
+            <h5 class="menu-sidebar-title">Contact Info</h5>
+            <div class="header-contact-info">
+              <span><i class="fa-solid fa-location-dot"></i>20, Bordeshi, New York, US</span>
+              <span>
+                <a href="mailto:username@domain.com">
+                  <i class="fa-solid fa-envelope"></i>username@domain.com
+                </a>
+              </span>
+              <span><a href="callto:+123-456-7890"><i class="fa-solid fa-phone"></i>+123-456-7890</a></span>
+            </div>
+            <div class="social-profile">
+              <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+              <a href="#"><i class="fa-brands fa-twitter"></i></a>
+              <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+          </div>
+
+          <a href="JavaScript:void(0)" id="res-cross"><i class="fa-regular fa-circle-xmark"></i></a>
+    </div>
+  </div>
+  <div class="hamenu valign">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 valign">
+                    <div class="cont-info two">
+                        <div class="about-compeny bottom">
+                            <img src="{{app.SystemSetting.about_picture}}" alt="about-immg">
+                            <h4>{{app.SystemSetting.sitename}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 valign">
+                    <div class="cont-info">
+                        <div class="item mb-50">
+                            <h6 class="text-u fw-600 mb-20">{{lang.translate('Location')}}</h6>
+                            <p class="fw-400 fz-18">{{app.SystemSetting.footer_address}}</p>
+                        </div>
+                        <div class="item mb-50">
+                            <h6 class="text-u fw-600 mb-20">{{lang.translate('HOW TO CONNECT')}}</h6>
+                            <p class="fw-400 fz-18"><a href="callto:{{app.SystemSetting.footer_phone}}">{{app.SystemSetting.footer_phone}}</a></p>
+                            <p class="fw-400 fz-18"><a href="mailto:{{app.SystemSetting.footer_email}}">{{app.SystemSetting.footer_email}}</a></p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

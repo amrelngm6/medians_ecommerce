@@ -1,0 +1,96 @@
+{% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
+
+
+<div class="container mx-auto flex pt-6 pb-2">
+    <div class="w-full">
+        <h1 class="text-xl">{{lang.translate('Checkout')}}</h1>
+    </div>
+    <div class="flex-end">
+        <div class="flex w-full flex-nowrap">
+            <span class="flex-none">{{lang.translate('Home')}}</span>
+            <span class="flex-none px-2"> / </span>
+            <span class="flex-none">{{lang.translate('Checkout')}}</span>
+        </div>
+    </div>
+</div>
+<div class="container mx-auto bg-red-600 py-1 my-2"></div>
+
+<div class="container mx-auto mt-6">
+    
+    <div class="w-full flex  pt-6 gap-20">
+        <div class="w-full pb-6">
+            <form class="action ajax-form w-full" action="{{app.CONF.url}}order/create" method="POST" id="checkout-form">
+
+                <input type="hidden" value="Order.create" name="type" />
+
+                <div class="w-full flex gap gap-10">
+                    <label class="w-full ">
+                        <span class="block">{{lang.translate('First name')}}</span>
+                        <input name="params[first_name]" class="my-2 w-full px-4 py-2 border border-1" />    
+                    </label>
+                    <label class="w-full ">
+                        <span class="block ">{{lang.translate('Last name')}}</span>
+                        <input name="params[last_name]" class="my-2 w-full px-4 py-2 border border-1" />    
+                    </label>
+                </div>
+                
+                <div class="w-full flex gap gap-10">
+                    <label class="w-full ">
+                        <span class="block">{{lang.translate('Email')}}</span>
+                        <input name="params[email]" class="my-2 w-full px-4 py-2 border border-1" />    
+                    </label>
+                    <label class="w-full ">
+                        <span class="block ">{{lang.translate('Mobile')}}</span>
+                        <input name="params[mobile]" class="my-2 w-full px-4 py-2 border border-1" />    
+                    </label>
+                </div>
+
+                <div class="w-full flex gap gap-10">
+                    <label class="w-full ">
+                        <span class="block">{{lang.translate('Address')}}</span>
+                        <input name="params[address]" class="my-2 w-full px-4 py-2 border border-1" />    
+                    </label>
+                </div>
+                
+                <div class="w-full flex gap gap-10">
+                    <label class="w-full ">
+                        <span class="block">{{lang.translate('City')}}</span>
+                        <input name="params[city]" class="my-2 w-full px-4 py-2 border border-1" />    
+                    </label>
+                    <label class="w-full ">
+                        <span class="block ">{{lang.translate('State')}}</span>
+                        <input name="params[state]" class="my-2 w-full px-4 py-2 border border-1" />    
+                    </label>
+                </div>
+
+                <button class="my-4 block text-center font-bold px-4 py-3 bg-red-600 text-white" >{{lang.translate('Send order')}}</button>
+
+            </form>
+                    
+        </div>
+        <div class="w-96 border-1 border border-gray-800 p-6">
+            <h4 class="text-xl">{{lang.translate('Order Summary')}}</h4>
+            <hr class="my-2" />
+            <div class="w-full flex py-2">
+                <div class="w-full ">{{lang.translate('Price')}} </div> <span class="py-1  text-lg">{{app.currency.symbol}}{{app.currency_amount(price)}}</span>
+            </div>
+            <div class="w-full flex py-2">
+                <div class="w-full ">{{lang.translate('Discount')}} </div> <span class="py-1  text-lg">{{app.currency.symbol}}{{app.currency_amount(discount)}}</span>
+            </div>
+            <div class="w-full flex py-2">
+                <div class="w-full ">{{lang.translate('Shipping')}} </div> <span class="py-1 text-lg">{{app.currency.symbol}}{{app.currency_amount(shipping)}}</span>
+            </div>
+            <hr class="my-2" />
+            <div class="w-full flex py-2">
+                <div class="w-full ">{{lang.translate('Total')}} </div> <span class="py-1 font-bold text-lg">{{app.currency.symbol}}{{app.currency_amount(total)}}</span>
+            </div>
+            <hr class="my-2" />
+
+        </div>
+    </div>
+
+</div>
+    
+<!-- Footer -->
+{% include 'views/front/' ~ template ~ '/includes/footer.html.twig' %}

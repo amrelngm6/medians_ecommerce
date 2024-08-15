@@ -1,0 +1,34 @@
+{% set header_menu = header_menu %}
+{% set footer_menu1 = footer_menu1 %}
+{% set footer_menu2 = footer_menu2 %}
+{% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
+{% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
+
+
+{% if page %}
+{% if page.class_name and page.class_name == 'Category' %}
+{% include 'views/front/' ~ template ~ '/templates/category.html.twig' %}
+{% elseif page.class_name == 'Product' and page.product_fields.template == 'modern' %}
+{% include 'views/front/' ~ template ~ '/templates/modern_product.html.twig' %}
+{% elseif page.class_name == 'Product' and page.product_fields.template == 'default' %}
+{% include 'views/front/' ~ template ~ '/templates/modern_product.html.twig' %}
+{% else %}
+{{app.renderTemplate(page.lang_content.content ?? '').render( {'lang':lang, 'page': page }  )|raw}}
+{% endif %}
+{% endif %}
+    
+<!-- Footer -->
+{% include 'views/front/' ~ template ~ '/includes/footer.html.twig' %}
+
+
+    <!--  Start to top button  -->
+    <a href="#" class="to_top">
+        <i class="la la-angle-up"></i>
+    </a>
+    <!--  End to top button  -->
+
+{% include 'views/front/' ~ template ~ '/includes/footer_assets.html.twig' %}
+
+</body>
+
+</html>

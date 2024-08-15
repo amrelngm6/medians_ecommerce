@@ -1,0 +1,41 @@
+<div class="w-full py-2  flex gap gap-4">
+                    <img src="{{cart.item.picture}}" width="200" />
+                    <div class="w-full ">
+                        <h2 class="text-2xl py-2"><a href="/{{cart.item.lang_content.prefix}}">{{cart.item.lang_content.title}}</a></h2>
+                        
+                        <div class="w-full flex py-2 gap gap-20">
+                        
+                            <div class="py-4 flex gap gap-4">
+                                {% if cart.color %} 
+                                <span class="block w-full pb-4">{{lang.translate('Color')}}</span>
+                                <div class="w-full flex gap-6 ">
+                                    <label class="relative cursor-pointer">
+                                        <span  class="outline-black outline outline-2 absolute block  w-4 h-4 rounded-full p-2 " style="background:{{cart.color}}"></span>
+                                        <input type="radio" checked="" name="params[cart][{{cart.cart_id}}][color]" value="{{cart.color}}" data-form="cart-form" />
+                                    </label>
+                                </div>
+                                {% endif %}
+                            </div>
+
+                            <div  class="py-4 flex gap gap-4">
+                                {% if cart.size %}
+                                <span class="block w-full pb-4">{{lang.translate('Size')}}</span>
+                                <label class="relative cursor-pointer">
+                                    <span class="outline outline-2  px-3 py-1 " >{{cart.size}}</span>
+                                    <input class="opacity-0" checked="" type="radio" name="params[cart][{{cart.cart_id}}][size]" value="{{cart.size}}" data-form="cart-form" />
+                                </label>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <div class="w-full flex gap-6">
+                            <div class="relative">
+                                <span class="minusQty px-2 cursor-pointer text-xl font-bold">-</span>
+                                <input name="params[cart][{{cart.cart_id}}][qty]" value="{{cart.qty}}" min="{{cart.item.product_fields.min_purchase_qty}}" class="text-center bg-gray-200 px-4 py-2 w-20" />
+                                <span class="addQty px-2 cursor-pointer text-xl font-bold">+</span>
+                            </div>
+                            <a href="{{app.CONF.url}}front_api/delete?type=Cart.delete&params[cart_id]={{cart.cart_id}}" data-confirm="{{lang.translate('Are you sure')}}" data-confirm-text="{{lang.translate('Remove this item from cart')}}" rel="nofollow" class="ajax-link font-bold px-4 py-1 text-red-600" >{{lang.translate('Remove')}}</a>
+                        </div>
+                    </div>
+                    <span class="py-4 font-semibold text-lg ">{{app.currency.symbol}}{{app.currency_amount(cart.item.price)}}</span>
+                </div>

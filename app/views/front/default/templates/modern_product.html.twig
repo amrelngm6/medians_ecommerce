@@ -1,0 +1,120 @@
+
+<div class="container mx-auto flex pt-6 pb-2">
+    <div class="w-full">
+        <h1 class="text-xl">{{page.lang_content.title}}</h1>
+    </div>
+    <div class="flex-end">
+        <div class="flex w-full flex-nowrap">
+            <span class="flex-none"><a href="/">{{lang.translate('Home')}}</a></span>
+            <span class="flex-none">/</span>
+            <span class="flex-none"><a href="/{{page.category.lang_content.prefix}}">{{page.category.lang_content.title}}</a></span>
+            <span class="flex-none">/</span>
+            <span class="flex-none">{{page.lang_content.title}}</span>
+        </div>
+    </div>
+</div>
+<div class="container mx-auto bg-red-600 py-1 mb-2"></div>
+
+<div class="container mx-auto ">
+    
+    <div class="w-full flex  pt-6 gap-20">
+        <div class="w-full pb-6">
+            <div class="w-full py-2">
+                <h2 class="text-4xl">{{page.lang_content.title}}</h2>
+                <div class="w-full flex ">
+                    <span class="w-full py-1 font-bold text-lg">{{app.currency.symbol}}{{app.currency_amount(page.price)}}</span>
+                    <span class="flex gap-1 py-2">
+                        <i class="fa fa-star text-yellow-400 border-yellow-600"></i>
+                        <i class="fa fa-star text-yellow-400 border-yellow-600"></i>
+                        <i class="fa fa-star text-yellow-400 border-yellow-600"></i>
+                        <i class="fa fa-star text-gray-200"></i>
+                        <i class="fa fa-star text-gray-200"></i>
+                    </span>
+                </div>
+            </div>
+            <p class="w-5/6 py-2 text-sm">{{page.lang_content.content}}</p>
+                    
+            <form class="action ajax-form" action="{{app.CONF.url}}front_api/create" method="POST" id="product-form">
+                <input type="hidden" value="Cart.create" name="type" />
+                <input type="hidden" value="{{page.item_id}}" name="params[item_id]" />
+                
+                <div class="w-full flex py-6">
+                
+                    <div  x-data="{color: ''}" class="py-4  w-full">
+                        <span class="block w-full pb-4">{{lang.translate('Color')}}</span>
+                        <div class="w-full flex gap-6 ">
+                            {% for color in page.product_colors %}
+                            {% if color.value %}
+                            <label class="relative cursor-pointer">
+                                <span x-bind:class="color == '{{color.value}}' ? 'outline-black outline outline-2' : ''" class="absolute block  w-6 h-6 rounded-full p-2 " style="background:{{color.value}}"></span>
+                                <input x-on:click="color = '{{color.value}}'" type="radio" name="params[color]" value="{{color.value}}" data-form="product-form" />
+                            </label>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    
+                    <div  x-data="{size: ''}" class="py-4   w-full">
+                        <span class="block w-full pb-4">{{lang.translate('Size')}}</span>
+                        {% for size in page.product_sizes %}
+                        {% if size.value %}
+                        <label class="relative cursor-pointer">
+                            <span x-bind:class="size == '{{size.value}}' ? 'outline outline-2' : ''" class=" w-6 h-6 px-4 py-2 " >{{size.value}}</span>
+                            <input class="opacity-0" x-on:click="size = '{{size.value}}'" type="radio" name="params[size]" value="{{size.value}}" data-form="product-form" />
+                        </label>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+                <div class="py-6 w-full flex gap-6">
+                    <div class="relative">
+                        <span class="minusQty px-2 cursor-pointer text-xl font-bold">-</span>
+                        <input name="params[qty]" value="1" min="{{page.product_fields.min_purchase_qty}}" class="text-center bg-gray-200 px-4 py-2 w-20" />
+                        <span class="addQty px-2 cursor-pointer text-xl font-bold">+</span>
+                    </div>
+                    <button data-form="product-form" class="bg-red-600 px-4 py-1 text-white" >{{lang.translate('Add to cart')}}</button>
+                </div>
+            </form>
+            <p class="py-6 ">Free 3-5 day shipping  •  Tool-free assembly  •  30-day trial</p>
+        </div>
+        
+        <div class="w-full  flex gap-4"  x-data="{img: '{{app.CONF.url}}{{page.picture}}'}">
+            <div class="w-32 px-2"> 
+                <img x-on:click="img = '{{app.CONF.url}}app/image.php?w=600&h=480&src={{page.picture}}'" src="{{app.CONF.url}}app/image.php?w=200&h=140&src={{page.picture}}" class="m-1 " />
+                {% for image in page.images %}
+                <img x-on:click="img = '{{app.CONF.url}}app/image.php?w=600&h=480&src={{image.path}}'" src="{{app.CONF.url}}app/image.php?w=200&src={{image.path}}" class="mt-3 m-1 cursor-pointer" />
+                {% endfor %}
+            </div>
+            <div class="w-full m-1">
+                <img x-bind:src="img" class="w-full" src="{{app.CONF.url}}app/image.php?w=600&h=480&src={{page.picture}}" />
+            </div>
+        </div>
+    </div>
+    <div class="max-w-[80%] mx-auto flex gap-4 ">
+        <div class="rounded-full shadow-xl w-full bg-white flex px-10 py-4 gap-10">
+            <div class="">
+                <span>Comfort</span>
+                <div class="pt-2 flex gap-2"> <img class="lazy" src="/src/front_assets/svg/comfort.svg"><span class="text-gray-600 text-md">Cozy Seating</span></div>
+            </div>
+            <div class=""> 
+                <span>Quality Assurance</span>
+                <div class="pt-2 flex gap-2"> <img class="lazy" src="/src/front_assets/svg/like.svg"><span class="text-gray-600 text-sm">Cozy Seating</span></div>
+            </div>
+            <div class="">
+                <span>Free Shipping</span>
+                <div class="pt-2 flex gap-2"> <img class="lazy" src="/src/front_assets/svg/package.svg"><span class="text-gray-600 text-sm">No-Cost Delivery</span></div>
+            </div>
+            <div class="">
+                <span>Secure Checkout</span>
+                <div class="pt-2 flex gap-2"> <img class="lazy" src="/src/front_assets/svg/secure.svg"><span class="text-gray-600 text-sm">Secure Payments</span></div>
+            </div>
+            <div class=" pt-4">
+                <a href="#" class="border border-1 rounded-full px-6 py-2 border-gray-600">Comfort</a>
+            </div>
+        </div>
+    </div>
+
+</div>

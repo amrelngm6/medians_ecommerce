@@ -1,0 +1,55 @@
+            <div class="row">
+                {% if products|length < 1 %}
+                No items available with this filters
+                {% endif %}
+                {% for item in products %}
+                <div class="col-lg-3 ">
+                    <div class="product-card">
+                        <div class="top-inf">
+                            {% if (item.old_price - item.price) > 0 %}
+                            <div class="dis-card">
+                                <small class="fsz-10 d-block text-uppercase"> {{lang.translate('save')}} </small>
+                                <h6 class="fsz-14"> {{app.currency.symbol}}{{(app.currency_amount(item.old_price - item.price))}} </h6>
+                            </div>
+                            {% endif %}
+                            <a href="/front_api/create?type=Wishlist.create&params[item_id]={{item.product_id}}" data-params="{{item.product_id}}" class="ajax-link fav-btn"> <i class="las la-heart"></i> </a>
+                        </div>
+                        <a href="{{app.CONF.url}}{{item.lang_content.prefix}}" class="img">
+                            <img src="/app/image.php?w=600&h=600&src={{item.picture}}" alt="" class="img-contain main-image">
+                        </a>
+                        <div class="info w-full">
+                            <div class="rating">
+                                {% set rate = item.rate() %}
+                                <div class="stars">
+                                    <i class="la la-star {{(rate < 1) ? 'color-999' : ''}}"></i>
+                                    <i class="la la-star {{(rate < 2) ? 'color-999' : ''}}"></i>
+                                    <i class="la la-star {{(rate < 3) ? 'color-999' : ''}}"></i>
+                                    <i class="la la-star {{(rate < 4) ? 'color-999' : ''}}"></i>
+                                    <i class="la la-star {{(rate < 5) ? 'color-999' : ''}}"></i>
+                                </div>
+                                <span class="num"> ({{item.reviews|length}}) </span>
+                            </div>
+                            <h6> <a href="/{{item.lang_content.prefix}}" class="prod-title text-lg fw-semibold mt-2 hover-green2"> {{item.lang_content.title}} </a> </h6>
+                            <div class="price mt-15">
+                                <h5 class="fsz-18 color-red1 fw-semibold"> {{app.currency.symbol}}{{app.currency_amount(item.price)}} {% if item.old_price > 0 %}<span class="old fsz-14 color-666 text-decoration-line-through"> {{app.currency.symbol}}{{app.currency_amount(item.old_price)}} </span> {% endif %}</h5>
+                            </div>
+                            
+                            <div class="color-img w-full">
+
+                                <div class="flex relative rounded-full flex-end text-center relative">
+                                    <p class="fsz-12 mt-2 text-start w-full"> <i class="fas fa-check-circle color-green2 me-1"></i> {{lang.translate('In stock')}} </p>
+                                    <a href="/front_api/create?type=Cart.create&params[item_id]={{item.product_id}}&params[qty]=1" class="ajax-link mx-2 px-2 bg-gray-100 rounded-full"><img src="{{app.CONF.url}}src/front_assets/svg/cart_icon.svg" class="mx-auto my-2" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor  %}
+
+            </div>
+
+            <template x-if="page < {{count/ (app.setting.category_products_count ?? 4) }}" >
+                <div class="text-center py-2">
+                    <a href="#!" x-on:click="page += 1, submitFilters(true)" class="butn bg-white color-000 radius-3 fsz-13 text-uppercase m-1 fw-600 px-5 border mt-3"> <span> {{lang.translate('Load more')}} ( {{count}} )</span> </a>
+                </div>
+            </template>
