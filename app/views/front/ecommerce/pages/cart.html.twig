@@ -1,52 +1,97 @@
 {% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
 {% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
-{% include 'views/front/' ~ template ~ '/blocks/breadcrumb.html.twig' %}
 
 
-<div class="container mx-auto cart-pg-1">
-    
-    <div class="w-full lg:flex  pt-6 gap-20">
-        <div class="w-full pb-6">
-            <form class="action ajax-form w-full" action="{{app.CONF.url}}cart/update" method="POST" id="cart-form">
+<main>
+	<div class="mb-4 pt-20"></div>
+	<section class="shop-checkout container">
 
-                <input type="hidden" value="Cart.update" name="type" />
-                
-                {% for cart in items %}
+		<h2 class="page-title">{{lang.translate('Cart')}}</h2>
+		<div class="checkout-steps">
+			<a href="{{app.CONF.url}}cart" class="checkout-steps__item active">
+				<span class="checkout-steps__item-number">01</span>
+				<span class="checkout-steps__item-title">
+					<span>{{lang.translate('Shopping Bag')}}</span>
+					<em>{{lang.translate('Manage Your Items List')}}</em>
+				</span>
+			</a>
+			<a href="{{app.CONF.url}}checkout" class="checkout-steps__item">
+				<span class="checkout-steps__item-number">02</span>
+				<span class="checkout-steps__item-title">
+					<span>{{lang.translate('Shipping and Checkout')}}</span>
+					<em>{{lang.translate('Checkout Your Items List')}}</em>
+				</span>
+			</a>
+			<a href="javascript:;" class="checkout-steps__item">
+				<span class="checkout-steps__item-number">03</span>
+				<span class="checkout-steps__item-title">
+					<span>{{lang.translate('Confirmation')}}</span>
+					<em>{{lang.translate('Review And Submit Your Order')}}</em>
+				</span>
+			</a>
+		</div>
+		<div class="shopping-cart">
+			<form class="cart-table__wrapper action ajax-form w-full" action="{{app.CONF.url}}cart/update" method="POST" id="cart-form">
 
-                {% include "views/front/"~ app.setting.template ~"/blocks/gray_cart_block.html.twig" %}
-                {# {% include "views/front/"~ app.setting.template ~"/blocks/cart_block.html.twig" %} #}
-    
-                <hr class="my-4" />
+				<table class="cart-table">
+					<thead>
+						<tr>
+							<th>{{lang.translate('Product')}}</th>
+							<th></th>
+							<th>{{lang.translate('Price')}}</th>
+							<th>{{lang.translate('Qty')}}</th>
+							<th>{{lang.translate('Subtotal')}}</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
 
-                {% endfor %}
-                <button class="block text-center font-bold px-4 py-3 bg-red-600 text-white" >{{lang.translate('Update')}}</button>
+						{% for cart in items %}
 
-            </form>
-                    
-        </div>
-        <div class="w-96 border-1 border border-gray-800 p-6">
-            <h4 class="text-xl">{{lang.translate('Order Summary')}}</h4>
-            <hr class="my-4" />
-            <div class="w-full flex py-2">
-                <div class="w-full ">{{lang.translate('Price')}} </div> <span class="py-1  text-lg">{{app.currency.symbol}}{{app.currency_amount(price)}}</span>
-            </div>
-            <div class="w-full flex py-2">
-                <div class="w-full ">{{lang.translate('Discount')}} </div> <span class="py-1  text-lg">{{app.currency.symbol}}{{app.currency_amount(discount)}}</span>
-            </div>
-            <hr class="my-2" />
-            <div class="w-full flex py-2">
-                <div class="w-full ">{{lang.translate('Total')}} </div> <span class="py-1 font-bold text-lg">{{app.currency.symbol}}{{app.currency_amount(total)}}</span>
-            </div>
-            <hr class="my-2" />
-            <a href="/checkout" class="block text-center font-bold mx-auto px-4 py-3 bg-red-600 text-white" >{{lang.translate('Proceed to checkout')}}</a>
+							{% include "views/front/"~ app.setting.template ~"/blocks/cart_block.html.twig" %}
 
-        </div>
-    </div>
+						{% endfor %}
+					</tbody>
+				</table>
+				<div class="cart-table-footer">
+					<input class="form-control" type="text" name="coupon_code" placeholder="{{lang.translate('Coupon Code')}}">
+					<button class="btn btn-light">{{lang.translate('UPDATE CART')}}</button>
+				</div>
+			</form>
+			<div class="shopping-cart__totals-wrapper">
+				<div class="sticky-content">
+					<div class="shopping-cart__totals">
+						<h3>Cart Totals</h3>
+						<table class="cart-totals">
+							<tbody>
+								<tr>
+									<th>Subtotal</th>
+									<td>{{app.currency.symbol}}{{app.currency_amount(price)}}</td>
+								</tr>
+								<tr>
+									<th>{{lang.translate('Discount')}}</th>
+									<td>{{app.currency.symbol}}{{app.currency_amount(discount)}}</td>
+								</tr>
+								<tr>
+									<th>{{lang.translate ('Total')}}</th>
+									<td>{{app.currency.symbol}}{{app.currency_amount(total)}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="mobile_fixed-btn_wrapper">
+						<div class="button-wrapper container">
+							<button class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
 
-</div>
-    
+
 <!-- Footer -->
 {% include 'views/front/' ~ template ~ '/includes/footer.html.twig' %}
-{% include 'views/front/' ~ template ~ '/includes/footer_assets.html.twig' %}
-</body>
-</html>
+{% include 'views/front/' ~ template ~ '/includes/footer_assets.html.twig' %}</body></html>
+

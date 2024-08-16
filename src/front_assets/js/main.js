@@ -82,13 +82,11 @@ function submitForm(formId, elementId, append = null) {
             handleResponse(res, form)
 
           } catch (error) {
+            
             element.innerHTML = xhr.responseText;
           }
 
         } else {
-            console.log(xhr.status)
-            console.log(element)
-            console.log(elementId)
             if (append)
               element.appendChild(xhr.responseText)
             else 

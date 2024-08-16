@@ -16,7 +16,33 @@
 </div>
 <div class="container mx-auto bg-red-600 py-1 my-2"></div>
 
-<div class="container mx-auto mt-6">
+	<section class="shop-checkout container">
+		<h2 class="page-title">{{lang.translate('Cart')}}</h2>
+		<div class="checkout-steps">
+			<a href="{{app.CONF.url}}cart" class="checkout-steps__item active">
+				<span class="checkout-steps__item-number">01</span>
+				<span class="checkout-steps__item-title">
+					<span>{{lang.translate('Shopping Bag')}}</span>
+					<em>{{lang.translate('Manage Your Items List')}}</em>
+				</span>
+			</a>
+			<a href="{{app.CONF.url}}checkout" class="checkout-steps__item active">
+				<span class="checkout-steps__item-number">02</span>
+				<span class="checkout-steps__item-title">
+					<span>{{lang.translate('Shipping and Checkout')}}</span>
+					<em>{{lang.translate('Checkout Your Items List')}}</em>
+				</span>
+			</a>
+			<a href="javascript:;" class="checkout-steps__item">
+				<span class="checkout-steps__item-number">03</span>
+				<span class="checkout-steps__item-title">
+					<span>{{lang.translate('Confirmation')}}</span>
+					<em>{{lang.translate('Review And Submit Your Order')}}</em>
+				</span>
+			</a>
+		</div>
+    </section>
+    <div class="container mx-auto mt-6">
     
         <div class="w-full pb-6">
             {% set totalTax = 0 %}
@@ -61,43 +87,48 @@
                 <input x-model="shippings[indexShipping].name" type="hidden" value="" name="params[field][shipping_name]" />
                 <input x-model="shippings[indexShipping].price" type="hidden" value="" name="params[shipping_amount]" />
                 <div class="w-full flex gap gap-10">
-                    <label class="w-full ">
-                        <span class="block">{{lang.translate('First name')}}</span>
-                        <input value="{{app.customer.name}}" required name="params[field][first_name]" class="my-2 w-full px-4 py-2 border border-1" />    
-                    </label>
-                    <label class="w-full ">
-                        <span class="block ">{{lang.translate('Last name')}}</span>
-                        <input value="" name="params[field][last_name]" class="my-2 w-full px-4 py-2 border border-1" />    
-                    </label>
+                    <div class="form-floating my-3 w-full">
+                        <input type="text" class="form-control" id="checkout_first_name" placeholder="First Name"  value="{{app.customer.name}}" required name="params[field][first_name]">
+                        <label for="checkout_first_name">First Name</label>
+                    </div>
+                    <div class="form-floating my-3 w-full">
+                        <input type="text" class="form-control" id="checkout_last_name" placeholder="Last Name"  value="{{app.customer.name}}" required name="params[field][last_name]">
+                        <label for="checkout_last_name">Last Name</label>
+                    </div>
                 </div>
                 
                 <div class="w-full flex gap gap-10">
-                    <label class="w-full ">
-                        <span class="block">{{lang.translate('Email')}}</span>
-                        <input value="{{app.customer.email}}" required name="params[field][email]" class="my-2 w-full px-4 py-2 border border-1" />    
-                    </label>
-                    <label class="w-full ">
-                        <span class="block ">{{lang.translate('Mobile')}}</span>
-                        <input value="{{app.customer.mobile}}" required name="params[field][mobile]" class="my-2 w-full px-4 py-2 border border-1" />    
-                    </label>
+                
+                    <div class="form-floating my-3 w-full">
+                        <input  value="{{app.customer.email}}" required name="params[field][email]" type="email" class="form-control" id="checkout_email" placeholder="Your Mail *">
+                        <label for="checkout_email">{{lang.translate('Email')}} *</label>
+                    </div>
+
+                    <div class="form-floating my-3 w-full">
+                        <input  value="{{app.customer.mobile}}" required name="params[field][mobile]" type="phone" class="form-control" id="checkout_Mobile" placeholder="{{lang.translate('Mobile')}} *">
+                        <label for="checkout_Mobile">{{lang.translate('Mobile')}} *</label>
+                    </div>
                 </div>
 
                 <div class="w-full flex gap gap-10">
-                    <label class="w-full ">
-                        <span class="block">{{lang.translate('Address')}}</span>
-                        <input value="{{app.customer.field.address}}" required name="params[field][address]" class="my-2 w-full px-4 py-2 border border-1" />    
-                    </label>
+                
+                    <div class="form-floating my-3 w-full">
+                        <input  value="{{app.customer.address}}" required name="params[field][address]" type="text" class="form-control" id="checkout_email" placeholder="{{lang.translate('Address')}} *">
+                        <label for="checkout_email">{{lang.translate('Address')}} *</label>
+                    </div>
                 </div>
                 
                 <div class="w-full flex gap gap-10">
-                    <label class="w-full ">
-                        <span class="block">{{lang.translate('City')}}</span>
-                        <input value="{{app.customer.field.city}}" required name="params[field][city]" class="my-2 w-full px-4 py-2 border border-1" />    
-                    </label>
-                    <label class="w-full ">
-                        <span class="block ">{{lang.translate('State')}}</span>
-                        <input value="{{app.customer.field.state}}" required name="params[field][state]" class="my-2 w-full px-4 py-2 border border-1" />    
-                    </label>
+                
+                    <div class="form-floating my-3 w-full">
+                        <input  value="{{app.customer.city}}" required name="params[field][city]" type="text" class="form-control" id="checkout_city" placeholder="{{lang.translate('City')}} *">
+                        <label for="checkout_city">{{lang.translate('City')}} *</label>
+                    </div>
+
+                    <div class="form-floating my-3 w-full">
+                        <input  value="{{app.customer.state}}" required name="params[field][state]" type="text" class="form-control" id="checkout_State" placeholder="{{lang.translate('State')}} *">
+                        <label for="checkout_State">{{lang.translate('State')}} *</label>
+                    </div>
                 </div>
 
                 <button class="my-4 block text-center font-bold px-4 py-3 bg-red-600 text-white" >{{lang.translate('Send order')}}</button>

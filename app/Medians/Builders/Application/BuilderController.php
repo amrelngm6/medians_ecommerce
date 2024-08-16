@@ -273,6 +273,28 @@ class BuilderController extends CustomController
 	}
 
 	/**
+	 * Store new block
+	 */ 
+	public function store() 
+	{
+		
+		$request = $this->app->request();
+		try {
+			$params = [
+				'content' => $request->get('content'),
+				'category' => $request->get('category'),
+			];
+
+			$check = $this->repo->store($params);
+
+			echo isset($check->id) ? "Done $check->id" : 'Failed';
+
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+	}
+
+	/**
 	 * Load builder scrab page
 	 */ 
 	public function scrab_get()
@@ -282,6 +304,22 @@ class BuilderController extends CustomController
 			$check = $this->contentRepo->find($request->get('prefix'));
 
 			render('views/admin/builder/templates/scrab.html.twig',['page'=>$check]);
+
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+	}
+
+	/**
+	 * Load builder scrab page
+	 */ 
+	public function module()
+	{
+		try {
+			$request = $this->app->request();
+			// $check = $this->contentRepo->find($request->get('prefix'));
+
+			render('views/admin/builder/templates/app.html.twig',[]);
 
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);

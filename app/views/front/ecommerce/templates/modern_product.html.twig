@@ -1,347 +1,283 @@
+<section class="product-single container pt-20">
+	<div class="row py-10">
+		<div class="col-lg-7">
+			<div class="product-single__media" data-media-type="vertical-thumbnail">
+				<div class="product-single__image">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							{% for image in page.images %}
 
-        <main class="container mx-auto">
+								<div class="swiper-slide product-single__image-item">
+									<img loading="lazy" class="h-auto" src="{{app.CONF.url}}app/image.php?w=200&src={{image.path}}" width="674" height="674" alt="">
+									<a href="{{app.CONF.url}}app/image.php?w=200&src={{image.path}}" data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
+										<svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_zoom"/></svg>
+									</a>
+								</div>
+							{% endfor %}
 
-            <div class="container mx-auto flex pt-6 pb-2">
-                <div class="w-full">
-                    <h1 class="text-xl">{{page.lang_content.title}}</h1>
-                </div>
-                <div class="flex-end">
-                    <div class="flex w-full flex-nowrap">
-                        <span class="flex-none"><a href="/">{{lang.translate('Home')}}</a></span>
-                        <span class="flex-none">/</span>
-                        <span class="flex-none"><a href="/{{page.category.lang_content.prefix}}">{{page.category.lang_content.title}}</a></span>
-                        <span class="flex-none">/</span>
-                        <span class="flex-none">{{page.lang_content.title}}</span>
-                    </div>
-                </div>
-            </div>
+						</div>
+						<div class="swiper-button-prev">
+							<svg width="7" height="11" viewbox="0 0 7 11" xmlns="http://www.w3.org/2000/svg"><use href="#icon_prev_sm"/></svg>
+						</div>
+						<div class="swiper-button-next">
+							<svg width="7" height="11" viewbox="0 0 7 11" xmlns="http://www.w3.org/2000/svg"><use href="#icon_next_sm"/></svg>
+						</div>
+					</div>
+				</div>
+				<div class="product-single__thumbnail">
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							{% for image in page.images %}
+								{# <img x-on:click="img = '{{app.CONF.url}}app/image.php?w=600&h=480&src={{image.path}}'" src="{{app.CONF.url}}app/image.php?w=200&src={{image.path}}" class="mt-3 m-1 cursor-pointer" /> #}
+								<div class="swiper-slide product-single__image-item"><img loading="lazy" class="h-auto" src="{{app.CONF.url}}app/image.php?w=200&src={{image.path}}" width="104" height="104" alt=""></div>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-5">
+			<div class="d-flex justify-content-between mb-4 pb-md-2">
+				<div class="breadcrumb mb-0 d-none d-md-block flex-grow-1">
+					<a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">{{lang.translate('Home')}}</a>
+					<span class="breadcrumb-separator menu-link fw-medium ps-1 pe-1">/</span>
+					<a href="#" class="menu-link menu-link_us-s text-uppercase fw-medium">{{page.lang_content.title}}</a>
+				</div>
+				<!-- /.breadcrumb -->
+
+			<div class="rating flex gap-2">
+				{% set rate = page.rate() %}
+				<div class="stars">
+                    {% for i in [0,1,2,3,4] %}
+					<i class="la la-star {{rate > i ? 'text-yellow-400' : 'opacity-10'}}"></i>
+                    {% endfor %}
+				</div>
+				<span class="num">
+					({{page.reviews|length}})
+				</span>
+			</div>
+			</div>
+			<h1 class="product-single__name">{{page.lang_content.title}}</h1>
+
+			<div class="product-single__price py-2 text-lg ">
+				<span class="current-price">{{app.currency.symbol}}{{app.currency_amount(page.price)}}
+				</span>
+				{% if page.old_price > 0 %}
+					<span class="old text-sm color-666 text-decoration-line-through">
+						{{app.currency.symbol}}{{app.currency_amount(page.old_price)}}
+					</span>
+				{% endif %}
+			</h5>
+
+		</div>
+		<div class="product-single__short-desc">
+			<p>{{page.lang_content.short}}</p>
+		</div>
+		<form class="row action ajax-form" action="{{app.CONF.url}}front_api/create" method="POST" id="product-form">
+			<input type="hidden" value="Cart.create" name="type"/>
+			<input type="hidden" value="{{page.product_id}}" name="params[item_id]"/>
+			<div class="product-single__swatches">
+				<div class="product-swatch text-swatches">
+					<label>Sizes</label>
+					<div class="swatch-list">
+						{% if page.product_sizes|length %}
+							{% for size in page.product_sizes %}
+								{% if size.value %}
+									<input type="radio" name="params[size]" id="swatch-size{{loop.index}}" value="{{size.value}}" class="hidden" data-form="product-form">
+									<label class="swatch js-swatch" for="swatch-size{{loop.index}}" aria-label="{{size.value}}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{size.value}}" style="color: {{size.value}}">
+										{{size.value}}
+									</label>
+								{% endif %}
+							{% endfor %}
+						{% endif %}
+					</div>
+					<a href="#" class="sizeguide-link" data-bs-toggle="modal" data-bs-target="#sizeGuide">Size Guide</a>
+				</div>
+				<div class="product-swatch color-swatches">
+					<label>{{lang.translate('Color')}}</label>
+					<div class="swatch-list">
+
+						{% if page.product_colors|length %}
+							<div x-data="{color: ''}" class="py-4  w-full">
+								<div class="w-full flex gap-6 ">
+									{% for color in page.product_colors %}
+										{% if color.value %}
+											<input type="radio" name="params[color]" id="swatch-color{{loop.index}}" value="{{color.value}}" class="hidden" data-form="product-form">
+											<label class="swatch swatch-color js-swatch" for="swatch-color{{loop.index}}" aria-label="{{color.value}}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{color.value}}" style="color: {{color.value}}"></label>
+										{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+						{% endif %}
 
 
-            <div class="container mx-auto bg-red-600 py-1 mb-2"></div>
-
-
-            <!--  Start main details  -->
-            <section class="product-main-details p-30 radius-4 bg-white mt-3 wow fadeInUp">
-                <form class="row action ajax-form" action="{{app.CONF.url}}front_api/create" method="POST" id="product-form">
-                    <input type="hidden" value="Cart.create" name="type" />
-                    <input type="hidden" value="{{page.product_id}}" name="params[item_id]" />
-                    
-                    <div class="col-lg-5">
-                        <div class="img-slider">
-                            <div class="w-full  flex gap-4"  x-data="{img: '{{app.CONF.url}}{{page.picture}}'}">
-                                <div class="w-32 px-2"> 
-                                    <img x-on:click="img = '{{app.CONF.url}}app/image.php?w=600&h=480&src={{page.picture}}'" src="{{app.CONF.url}}app/image.php?w=200&h=140&src={{page.picture}}" class="m-1 " />
-                                    {% for image in page.images %}
-                                    <img x-on:click="img = '{{app.CONF.url}}app/image.php?w=600&h=480&src={{image.path}}'" src="{{app.CONF.url}}app/image.php?w=200&src={{image.path}}" class="mt-3 m-1 cursor-pointer" />
+					</div>
+				</div>
+			</div>
+			<div class="product-single__addtocart" x-data="{}">
+				<div class="qty-control position-relative">
+					<input type="number" name="params[qty]" value="1" min="1" class="qty-control__number text-center">
+					<div class="qty-control__reduce">-</div>
+					<div class="qty-control__increase">+</div>
+				</div>
+				<!-- .qty-control -->
+				<div class="js-open-aside " data-aside="cartDrawer" x-on:click="submitForm('product-form', null); setTimeout(function() {submitForm('form-sidecart', 'sidecart-items')}, 1000)">
+					<button type="submit" class="text-gray-600 btn btn-primary btn-addtocart ">{{lang.translate('Add to Cart')}}</button>
+				</div>
+			</div>
+		</form>
+		<div class="product-single__addtolinks">
+			<a href="/front_api/create?type=Wishlist.create&params[item_id]={{page.product_id}}" data-params="{{page.product_id}}" class="ajax-link me-4 pe-4 border-end">
+				<svg width="16" height="16" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_heart"/></svg>
+				<span>{{lang.translate('Add to Wishlist')}}</span>
+			</a>
+			<a href="/front_api/create?type=Compare.create&params[item_id]={{page.product_id}}" data-params="{{page.product_id}}" class="ajax-link me-4 pe-4 border-end">
+				<svg width="16" height="19" viewbox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_sharing"/></svg>
+				{{lang.translate('Compare')}}
+			</a>
+		</div>
+		<div class="product-single__meta-info">
+			<div class="meta-item">
+				<label>SKU:</label>
+				<span>{{page.product_fields.sku ?? 'N/A'}}</span>
+			</div>
+			<div class="meta-item">
+				<label>Categories:</label>
+				<span>
+					{% for cat in page.categories %}
+						<a href="{{cat.lang_content.prefix}}">{{ cat.lang_content.title }}</a>
+						&
+					{% endfor %}
+				</span>
+			</div>
+			<div class="meta-item">
+				<label>{{lang.translate('Brand')}}:</label>
+				<span>{{page.brand.name}}</span>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="product-single__details-tab">
+	<ul class="nav nav-tabs" id="myTab1" role="tablist">
+		<li class="nav-item" role="presentation">
+			<a class="nav-link nav-link_underscore active" id="tab-description-tab" data-bs-toggle="tab" href="#tab-description" role="tab" aria-controls="tab-description" aria-selected="true">{{lang.translate('Description')}}</a>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a class="nav-link nav-link_underscore" id="tab-additional-info-tab" data-bs-toggle="tab" href="#tab-additional-info" role="tab" aria-controls="tab-additional-info" aria-selected="false">{{lang.translate('Additional Information')}}</a>
+		</li>
+		<li class="nav-item" role="presentation">
+			<a class="nav-link nav-link_underscore" id="tab-reviews-tab" data-bs-toggle="tab" href="#tab-reviews" role="tab" aria-controls="tab-reviews" aria-selected="false">{{ lang.translate('Reviews')}} ({{page.reviews|length}})</a>
+		</li>
+	</ul>
+    
+	<div class="tab-content">
+		<div class="tab-pane fade show active" id="tab-description" role="tabpanel" aria-labelledby="tab-description-tab">
+			<div class="product-single__description">
+					{{page.lang_content.content}}
+			</div>
+		</div>
+		<div class="tab-pane fade" id="tab-additional-info" role="tabpanel" aria-labelledby="tab-additional-info-tab">
+			<div class="product-single__addtional-info">
+            
+            {% if page.product_fields.weight %}
+				<div class="item">
+					<label class="h6">{{lang.translate('Weight')}}</label>
+					<span>{{page.product_fields.weight}}</span>
+				</div>
+            {% endif %}
+            {% if page.product_fields.dimensions %}
+				<div class="item">
+					<label class="h6">{{lang.translate('Dimensions')}}</label>
+					<span>{{page.product_fields.dimensions}}</span>
+				</div>
+            {% endif %}
+            {% if page.product_fields.unit %}
+				<div class="item">
+					<label class="h6">{{lang.translate('Unit')}}</label>
+					<span>{{page.product_fields.unit}}</span>
+				</div>
+            {% endif %}
+            
+            {% if page.product_fields.refundable %}
+				<div class="item">
+					<label class="h6">{{lang.translate('Refundable')}}</label>
+					<span>{{lang.translate('Yes')}}</span>
+				</div>
+            {% endif %}
+            
+			
+			</div>
+		</div>
+		<div class="tab-pane fade" id="tab-reviews" role="tabpanel" aria-labelledby="tab-reviews-tab">
+			<h2 class="product-single__reviews-title">Reviews</h2>
+			<div class="product-single__reviews-list">
+				{% for review in page.reviews %}
+					<div class="product-single__reviews-item">
+						<div class="customer-avatar">
+							<img loading="lazy" src="{{review.user.picture ?? '/uploads/img/placeholder.png'}}" alt="">
+						</div>
+						<div class="customer-review w-full">
+							<div class="customer-name w-full">
+								<h6>{{review.name}}</h6>
+                                
+                                <div class="stars">
+                                    {% for i in [0,1,2,3,4] %}
+                                    <i class="la la-star {{review.rate > i ? 'text-yellow-400' : 'opacity-10'}}"></i>
                                     {% endfor %}
                                 </div>
-                                <div class="w-full m-1">
-                                    <img x-bind:src="img" class="w-full" src="{{app.CONF.url}}app/image.php?w=600&h=480&src={{page.picture}}" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="info">
-                            <div class="rating flex gap-2">
-                                {% set rate = page.rate() %}
-                                <div class="stars">
-                                    <i class="la la-star {{rate > 0 ? 'active' : 'color-999'}}"></i>
-                                    <i class="la la-star {{rate > 1 ? 'active' : 'color-999'}}"></i>
-                                    <i class="la la-star {{rate > 2 ? 'active' : 'color-999'}}"></i>
-                                    <i class="la la-star {{rate > 3 ? 'active' : 'color-999'}}"></i>
-                                    <i class="la la-star {{rate > 4 ? 'active' : 'color-999'}}"></i>
-                                </div>
-                                <span class="num"> ({{page.reviews|length}}) </span>
-                            </div>
-                            <h4 class="product_title py-2"> 
-                                <a href="#" class="text-2xl"> {{page.lang_content.title}}  </a>   
-                            </h4>
-                            <p>{{page.lang_content.short}}</p>
-                            <div class="meta pb-20">
-                                {% for shipping in page.shipping %}
-                                <a href="#" class="meta-item color-green2"> {{shipping.name}} <span class="bg bg-cyan2"></span> </a> -
-                                {% endfor %}
-                            </div>
-                            
-                            <div class="gift-card mb-20 hidden">
-                                <div class="gift-img">
-                                    <img src="https://ui-themez.smartinnovates.net/items/swoo_html/inner_pages/assets/img/gift.png" alt="">
-                                </div>
-                                <div class="gift-info">
-                                    <ul>
-                                        <li class="fsz-14"> <i class="icon-3 bg-000 me-1"></i> Buy <span class="color-red2 fw-bold"> 02 </span> boxes get a <strong> Snack Tray </strong> </li>
-                                        <li class="fsz-14"> <i class="icon-3 bg-000 me-1"></i> Buy <span class="color-red2 fw-bold"> 04 </span> boxes get a free <strong> Block Toys </strong> </li>
-                                    </ul>
-                                    <p class="fsz-12 color-666 mt-20 fst-italic"> Promotion will expires in: 9h00pm, 25/5/2024 </p>
-                                </div>
-                            </div>
-                            <div class="flex gap-6 w-full">
-                                {% if page.product_colors|length %}
-                                <div  x-data="{color: ''}" class="py-4  w-full">
-                                    <span class="block w-full pb-4 fw-bold">{{lang.translate('Color')}}</span>
-                                    <div class="w-full flex gap-6 ">
-                                        {% for color in page.product_colors %}
-                                        {% if color.value %}
-                                        <label class="relative cursor-pointer">
-                                            <span x-bind:class="color == '{{color.value}}' ? 'outline-black outline outline-2' : ''" class="absolute block  w-6 h-6 rounded-full p-2 " style="background:{{color.value}}"></span>
-                                            <input x-on:click="color = '{{color.value}}'" type="radio" name="params[color]" value="{{color.value}}" data-form="product-form" />
-                                        </label>
-                                        {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                {% endif %}
-                                            
-                                {% if page.product_sizes|length %}
-                                <div  x-data="{size: ''}" class="py-4   w-full">
-                                    <span class="block w-full pb-4 fw-bold">{{lang.translate('Size')}}</span>
-                                    <div class="w-full flex gap-2">
-                                        {% for size in page.product_sizes %}
-                                        {% if size.value %}
-                                        <label class="relative cursor-pointer">
-                                            <span x-bind:class="size == '{{size.value}}' ? 'outline outline-2' : ''" class="  px-4 py-2 " >{{size.value}}</span>
-                                            <input class="opacity-0" x-on:click="size = '{{size.value}}'" type="radio" name="params[size]" value="{{size.value}}" data-form="product-form" />
-                                        </label>
-                                        {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                {% endif %}
-                            </div>
-                            <p class="color-666"> <strong class="color-000 text-uppercase me-1"> {{lang.translate('SKU')}}: </strong> <span> {{page.product_fields.sku}} </span> </p>
-                            <p class="color-666"> <strong class="color-000 text-uppercase me-1"> {{lang.translate('Category')}}: </strong> <span> {% for cat in page.categories %} <a href="{{cat.lang_content.prefix}}">{{ cat.lang_content.title }}</a> & {% endfor %} </span> </p>
-                            <p class="color-666"> <strong class="color-000 text-uppercase me-1"> {{lang.translate('Brand')}}: </strong> <span class="color-green2"> {{page.brand.name}} </span> </p>
-                            <div class="social-icons mt-20 flex flex-wrap gap-2 ">
-                                <a href="#" class="text-center bg-gray-200 rounded-full p-1 w-8 h-8"> <i class="fab fa-twitter"></i> </a>
-                                <a href="#"  class="text-center bg-gray-200 rounded-full p-1 w-8 h-8"> <i class="fab fa-facebook-f"></i> </a>
-                                <a href="#"  class="text-center bg-gray-200 rounded-full p-1 w-8 h-8"> <i class="fab fa-instagram"></i> </a>
-                                <a href="#"  class="text-center bg-gray-200 rounded-full p-1 w-8 h-8"> <i class="fab fa-dribbble"></i> </a>
-                                <a href="#"  class="text-center bg-gray-200 rounded-full p-1 w-8 h-8"> <i class="fab fa-youtube"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="payment-side">
-                            <div class="payment-card">
-                                <small class="fsz-12 color-666 text-uppercase mb-2"> {{lang.translate('Total Price')}}: </small>
-                                <h5 class="fsz-30 fw-bold"> {{app.currency.symbol}}{{app.currency_amount(page.price)}} </h5>
-                                <div class="relative flex gap-4 py-4">
-                                    <p class="fsz-12 mt-1"> <i class="fas fa-check-circle color-green2 me-1"></i> {{lang.translate('In stock')}} </p>
-                                    <span class="minusQty px-2 cursor-pointer text-xl font-bold">-</span>
-                                    <input name="params[qty]" value="1" min="{{page.product_fields.min_purchase_qty}}" class="text-center bg-gray-200 px-4 py-2 w-20" />
-                                    <span class="addQty px-2 cursor-pointer text-xl font-bold">+</span>
-                                </div>
-                                <button data-form="product-form"  class="butn bg-cyan2 text-white radius-4 fw-500 fsz-12 text-uppercase text-center mt-10 w-100 py-3"> <span> {{lang.translate('Add To Cart')}} </span> </button>
-                                <div class="d-flex color-666 fsz-13 py-3 border-bottom">
-                                    <a href="/front_api/create?type=Wishlist.create&params[item_id]={{page.product_id}}" data-params="{{page.product_id}}" class="ajax-link me-4 pe-4 border-end"> <i class="fas fa-heart color-green2 me-1"></i> {{lang.translate('Add to Wishlist')}}</a>
-                                    <a href="/front_api/create?type=Compare.create&params[item_id]={{page.product_id}}" data-params="{{page.product_id}}" class="ajax-link me-4 pe-4 border-end">  <i class="fas fa-redo me-1"></i> {{lang.translate('Compare')}} </a>
-                                </div>
-                                <small class="fsz-12 color-000 mb-2 mt-3"> {{lang.translate('Guaranteed Safe Checkout')}} </small>
-                                <div class="pay-logos mt-1">
-                                    <img src="https://ui-themez.smartinnovates.net/items/swoo_html/inner_pages/assets/img/pay.png" alt="" class="w-100">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </section>
-            <!--  End main details  -->
+							</div>
+							{# <div class="review-date">April 06, 2023</div> #}
+							<div class="review-text">
+								<p>{{review.comment}}</p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
 
+			<div class="product-single__review-form">
 
-            <!--  Start details  -->
-            <section class="product-text-details p-30 radius-4 bg-white mt-3 wow fadeInUp mb-3">
-                <ul class="nav nav-pills mb-50" id="pills-tab" role="tablist" x-data="{tab3Class:'',tab2Class:'', tab1Class: '',activeClass:'text-white bg-red-600'}">
-                    <li class="nav-item" role="presentation" x-init="tab1Class = activeClass">
-                        <button x-on:click="tab1Class = activeClass, tab2Class = '' , tab3Class = ''"  :class="tab1Class" class=" active py-3 px-4 rounded-lg " id="pills-tab1-tab" data-bs-toggle="pill" data-bs-target="#pills-tab1">{{lang.translate("description")}}</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button  x-on:click="tab2Class = activeClass, tab1Class = '' , tab3Class = ''" :class="tab2Class" class="  py-3 px-4 rounded-lg" id="pills-tab3-tab" data-bs-toggle="pill" data-bs-target="#pills-tab3">{{lang.translate('reviews')}} ({{page.reviews|length}})</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button  x-on:click="tab3Class = activeClass, tab1Class = '' , tab2Class = ''" :class="tab3Class" class=" py-3 px-4 rounded-lg" id="pills-tab4-tab" data-bs-toggle="pill" data-bs-target="#pills-tab4">{{lang.translate('additional information')}}</button>
-                    </li>
-                </ul>
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-tab1">
-                        <div class="tab-description">
-                            {{page.lang_content.content}}
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-tab3">
-                        <div class="product-reviews p-4 radius-5 bg-light">
-                            <div class="row gx-5">
-                                <div class="col-lg-7">
-                                    <div class="reviews-content pt-30">
-                                        <h5 class="color-000 mb-40 text-capitalize"> 02 {{lang.translate('reviews')}} </h5>
-                                            {% for review in page.reviews %}
-                                            <div class="comment-replay-cont py-5 px-4 mb-20 bg-white radius-5">
-                                                <div class="d-flex comment-cont">
-                                                    <div class="icon-60 rounded-circle overflow-hidden me-3 flex-shrink-0">
-                                                        <img src="{{review.user.picture ?? '/uploads/img/placeholder.png'}}" alt="" class="img-cover">
-                                                    </div>
-                                                    <div class="inf w-full">
-                                                        <div class="title w-full d-flex justify-content-between">
-                                                            <h6 class="fw-bold">{{review.name}}</h6>
-                                                            <div class="time  text-uppercase d-inline-block">
-                                                                <div class="rate">
-                                                                    <div class="stars">
-                                                                        <i class="fas fa-star {{review.rate > 0 ? 'active' : ''}}"></i>
-                                                                        <i class="fas fa-star {{review.rate > 1 ? 'active' : ''}}"></i>
-                                                                        <i class="fas fa-star {{review.rate > 2 ? 'active' : ''}}"></i>
-                                                                        <i class="fas fa-star {{review.rate > 3 ? 'active' : ''}}"></i>
-                                                                        <i class="fas fa-star {{review.rate > 4 ? 'active' : ''}}"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text color-000  mt-10">
-                                                        {{review.comment}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {% endfor  %}
-                                    </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    <form class="comment-form d-block pt-30 action ajax-form" action="{{app.CONF.url}}front_api/create" method="POST" id="review-form">
-                                        <input type="hidden" value="Review.create" name="type" />
-                                        <input type="hidden" value="{{page.product_id}}" name="params[item_id]" />
+				<form class="comment-form d-block pt-30 action ajax-form" action="{{app.CONF.url}}front_api/create" method="POST" id="review-form">
+					<input type="hidden" value="Review.create" name="type"/>
+					<input type="hidden" value="{{page.product_id}}" name="params[item_id]"/>
+					<p>{{lang.translate('Your email address will not be published. Required fields are marked')}} *</p>
+					<div class="select-star-rating flex gap-6">
+						<label>Your rating *</label>
 
-                                        <h5 class="color-000 mb-40 text-capitalize"> {{lang.translate('Add a review')}} </h5>
-                                        <div class="row">
-                                            <div class="col-lg-12 flex gap-6">
-                                                <label class="text-uppercase mb-1">
-                                                    {{lang.translate("your rating")}}
-                                                </label>
-                                                <div class="rate-stars flex gap-2 pb-4">
-                                                    <label><input type="radio"  name="params[rate]" value="1"> 1</label>
-                                                    <label><input type="radio"  name="params[rate]" value="2"> 2</label>
-                                                    <label><input type="radio"  name="params[rate]" value="3"> 3</label>
-                                                    <label><input type="radio"  name="params[rate]" value="4"> 4</label>
-                                                    <label><input type="radio"  name="params[rate]" value="5"> 5</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <div class="form-group mb-30">
-                                                    <textarea class="form-control" rows="6" name="params[comment]" placeholder="Write your comment here"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group mb-4 mb-lg-0">
-                                                    <input type="text" class="form-control" name="params[name]" placeholder="Your Name *">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="params[email]" placeholder="Your Email *">
-                                                </div>
-                                            </div>
-                                            {% if app.auth != null %} 
-                                            <div class="col-lg-12">
-                                                <div class="form-check mt-20">
-                                                    <input class="form-check-input" type="checkbox" value="" name="params[signup]" id="flexCheckDefault">
-                                                    <label class="form-check-label " for="flexCheckDefault">
-                                                        {{lang.translate('Save my name and email in this browser for next time I comment')}}
-                                                    </label>
-                                                    </div>
-                                            </div>
-                                                {% endif %}
-                                            <div class="col-12">
-                                                <button data-form="review-form" class=" butn bg-cyan2 text-white radius-4 fw-500 fsz-12 text-uppercase text-center mt-30 w-100 py-3"> <span> {{lang.translate("Submit Comment")}} </span> </button>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="pills-tab4">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-5">
-                                <div class="additional-info">
-                                    <h4 class="py-4 ">{{lang.translate('Product Variants')}}</h4>
-                                    <hr />
-                                    <ul class="py-2 ">
-                                        {% for variant in page.variants %}
-                                        <li class="py-2 flex gap-6">
-                                            <strong>{{variant.title}}</strong>
-                                            <span> {{variant.value}} </span>
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!--  End details  -->
+						<span class="star-rating flex gap-2">
+                        {% for i in [1,2,3,4,5] %}
+							<label><input type="radio" name="params[rate]" class="hidden" value="{{i}}">
+								<svg class="star-rating__star-icon" width="16" height="16" fill="#ccc" viewbox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+									<path d="M11.1429 5.04687C11.1429 4.84598 10.9286 4.76562 10.7679 4.73884L7.40625 4.25L5.89955 1.20312C5.83929 1.07589 5.72545 0.928571 5.57143 0.928571C5.41741 0.928571 5.30357 1.07589 5.2433 1.20312L3.73661 4.25L0.375 4.73884C0.207589 4.76562 0 4.84598 0 5.04687C0 5.16741 0.0870536 5.28125 0.167411 5.3683L2.60491 7.73884L2.02902 11.0871C2.02232 11.1339 2.01563 11.1741 2.01563 11.221C2.01563 11.3951 2.10268 11.5558 2.29688 11.5558C2.39063 11.5558 2.47768 11.5223 2.56473 11.4754L5.57143 9.89509L8.57813 11.4754C8.65848 11.5223 8.75223 11.5558 8.84598 11.5558C9.04018 11.5558 9.12054 11.3951 9.12054 11.221C9.12054 11.1741 9.12054 11.1339 9.11384 11.0871L8.53795 7.73884L10.9688 5.3683C11.0558 5.28125 11.1429 5.16741 11.1429 5.04687Z"/>
+								</svg>
+							</label>
+                        {% endfor %}
 
-
-            <!--  Start related  -->
-            <section class="related-products p-30 radius-4 bg-white mt-100 wow fadeInUp mb-3">
-                <h6 class="fsz-18 fw-bold text-uppercase"> {{lang.translate('related products')}} </h6>
-                <div class="products-content">
-                    <div class="products-slider">
-                        <div class="swiper-wrapper gap-4">
-                            {% for relatedItem in page.related() %}
-                            <div class="swiper-slide">
-                                <div class="product-card">
-                                    <div class="top-inf absolute">
-                                        {% if (relatedItem.old_price - relatedItem.price) > 0 %}
-                                        <div class="dis-card">
-                                            <small class="fsz-10 d-block text-uppercase"> save </small>
-                                            <h6 class="fsz-14"> {{app.currency.symbol}}{{(app.currency_amount(relatedItem.old_price - relatedItem.price) )}} </h6>
-                                        </div>
-                                        <a href="/front_api/create?type=Wishlist.create&params[item_id]={{relatedItem.product_id}}" class="ajax-link fav-btn"> <i class="las la-heart"></i> </a>
-                                        {% endif %}
-                                    </div>
-                                    <a href="#0" class="img">
-                                        <img src="{{app.CONF.url}}app/image.php?w=600&h=500&src={{relatedItem.picture}}" alt="" class="img-contain main-image">
-                                    </a>
-                                    <div class="thumbnail-imgs mb-0">
-                                        <span class="color-img icon-40">
-                                            <img src="{{app.CONF.url}}app/image.php?w=400&src={{relatedItem.picture}}" class="thumbnail cursor-pointer" />
-                                        </span>
-                                        {% for image in relatedItem.images %}
-                                        <span class="color-img icon-40">
-                                            <img src="{{app.CONF.url}}app/image.php?w=400&src={{image.path}}" class="thumbnail cursor-pointer" />
-                                        </span>
-                                        {% endfor %}
-                                    </div>
-                                    <div class="info">
-
-                                        <div class="rating">
-                                            <div class="stars">
-                                                <i class="la la-star"></i>
-                                                <i class="la la-star"></i>
-                                                <i class="la la-star"></i>
-                                                <i class="la la-star"></i>
-                                                <i class="la la-star"></i>
-                                            </div>
-                                            <span class="num"> ({{relatedItem.reviews|length}}) </span>
-                                        </div>
-                                        <h6> <a href="/{{relatedItem.lang_content.prefix}}" class="prod-title fsz-14 fw-bold mt-2 hover-green2"> {{relatedItem.lang_content.title}} </a> </h6>
-                                        <div class="price mt-15">
-                                            <h5 class="fsz-18 color-red1 fw-600"> {{app.currency.symbol}}{{app.currency_amount(relatedItem.price)}} 
-                                                {% if relatedItem.old_price > 0 %}<span class="old fsz-14 color-666 text-decoration-line-through"> {{app.currency.symbol}}{{app.currency_amount(relatedItem.old_price)}} </span> {% endif %}</h5>
-                                        </div>
-                                        <p class="fsz-12 mt-2"> <i class="fas fa-check-circle color-green2 me-1"></i> {{lang.translate('In stock')}} </p>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endfor %}
-                            
-                        </div>
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                </div>
-            </section>
-            <!--  End related  -->
-
-
-        </main>
+						</span>
+						<input type="hidden" id="form-input-rating" value="">
+					</div>
+					<div class="mb-4">
+						<textarea id="form-input-review" name="params[comment]" class="form-control form-control_gray" placeholder="Your Review" cols="30" rows="8"></textarea>
+					</div>
+					<div class="form-label-fixed mb-4">
+						<label for="form-input-name" class="form-label">{{lang.translate('Name')}} *</label>
+						<input id="form-input-name" name="params[name]" class="form-control form-control-md form-control_gray">
+					</div>
+					<div class="form-label-fixed mb-4">
+						<label for="form-input-email" class="form-label">{{lang.translate('Email address')}} *</label>
+						<input id="form-input-email" name="params[email]" class="form-control form-control-md form-control_gray">
+					</div>
+					<div class="form-check mb-4">
+						<input class="form-check-input form-check-input_fill" type="checkbox" value="" id="remember_checkbox">
+						<label class="form-check-label" for="remember_checkbox">
+                            {{lang.translate('Save my name and email in this browser for next time I comment')}}
+						</label>
+					</div>
+					<div class="form-action">
+						<button type="submit" class="btn btn-primary text-gray-600">{{lang.translate ('Submit')}}</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div></section>

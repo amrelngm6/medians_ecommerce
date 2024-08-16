@@ -74,6 +74,7 @@ RouteHandler::get('/customer/signup', \Medians\Auth\Application\CustomerAuthServ
 RouteHandler::get('/customer/confirm_account', \Medians\Auth\Application\CustomerAuthService::class.'@otp');
 RouteHandler::get('/customer/dashboard', \Medians\Customers\Application\CustomerController::class.'@dashboard');
 RouteHandler::get('/order/(:all)', \Medians\Orders\Application\OrderController::class.'@orderPage');
+RouteHandler::get('/stores-locations', \Medians\Branches\Application\BranchController::class.'@list');
 
 
 // POST Requests
@@ -136,6 +137,13 @@ if(!empty($app->auth()))
     */
     RouteHandler::get('/admin/users/index', \Medians\Users\Application\UserController::class.'@index');
     RouteHandler::get('/admin/users', \Medians\Users\Application\UserController::class.'@index');
+
+    
+
+    /**
+    * @return Branches
+    */
+    RouteHandler::get('/admin/branches', \Medians\Branches\Application\BranchController::class.'@index');
 
     
 
@@ -302,6 +310,7 @@ if(!empty($app->auth()))
     RouteHandler::get('/admin/editor', \Medians\Pages\Application\PageController::class.'@editor');
     RouteHandler::get('/admin/builder/load', \Medians\Builders\Application\BuilderController::class.'@load'); 
     RouteHandler::get('/admin/builder/meta', \Medians\Builders\Application\BuilderController::class.'@meta'); 
+    RouteHandler::get('/admin/builder/module', \Medians\Builders\Application\BuilderController::class.'@module'); 
     RouteHandler::get('/admin/builder/languages', \Medians\Builders\Application\BuilderController::class.'@languages'); 
     RouteHandler::get('/admin/builder/template_preview', \Medians\Builders\Application\BuilderController::class.'@template_preview'); 
     RouteHandler::get('/admin/builder/new', \Medians\Builders\Application\BuilderController::class.'@new_get'); 
@@ -311,6 +320,7 @@ if(!empty($app->auth()))
     RouteHandler::post('/admin/builder', \Medians\Builders\Application\BuilderController::class.'@submit'); 
     RouteHandler::post('/admin/builder/submit', \Medians\Builders\Application\BuilderController::class.'@submit'); 
     RouteHandler::post('/admin/builder/scrab', \Medians\Builders\Application\BuilderController::class.'@scrab'); 
+    RouteHandler::post('/admin/builder/addContent', \Medians\Builders\Application\BuilderController::class.'@store'); 
     
 }
 

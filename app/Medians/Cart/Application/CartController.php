@@ -183,11 +183,24 @@ class CartController extends CustomController
 		
 		$customer = $this->app->customer_auth() ;
 		$settings = $this->app->SystemSetting();
+
+		$items = isset($customer->customer_id) ? $this->repo->get($customer->customer_id) : $this->repo->guest_items($this->app->guest_auth());
+
 		echo render('/views/front/'.$settings['template'].'/blocks/side_cart_block.html.twig', [
-			'items'=> isset($customer->customer_id) ? $this->repo->get($customer->customer_id) : $this->repo->guest_items($this->app->guest_auth()),
+			'items'=> $items, 
+			'total'=> $this->calcTotal($items)
 		]);
 	}
 	
+	public function calcTotal($items)
+	{
+		$price = 0;
+		foreach ($items as $key => $item) {
+			$price += ($item->item->price * $item->qty);
+		}
+		return number_format($price, 2);
+	}
+
 	/**
 	 * Customers index page
 	 * 

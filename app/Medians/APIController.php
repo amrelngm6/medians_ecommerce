@@ -171,6 +171,10 @@ class APIController extends CustomController
 					$return = (new Templates\Application\WebTemplateController)->store();
 					break;
 					
+				case 'Branch.create':
+					$return = (new Branches\Application\BranchController)->store();
+					break;
+					
 		
 			}
 
@@ -331,6 +335,10 @@ class APIController extends CustomController
 			case 'Order.update':
 				$controller = new Orders\Application\OrderController; 
 				break;
+
+			case 'Branch.update':
+				$controller = new Branches\Application\BranchController; 
+				break;
 			
 		}
 
@@ -433,6 +441,10 @@ class APIController extends CustomController
 			
 				case 'City.delete':
 					return response((new Countries\Application\CityController())->delete());
+					break;
+			
+				case 'Branch.delete':
+					return response((new Branches\Application\BranchController())->delete());
 					break;
 			
 			}
