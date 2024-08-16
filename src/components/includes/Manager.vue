@@ -78,7 +78,9 @@
                                             @click="selectManual('images', m.id)"
                                         >
                                             <div class="grid-item__inner" :style="`background: url('${m.data_url}'); background-repeat: no-repeat; background-size: cover;`"></div>
-                                            <span v-text="m.file_name.split('/').pop()" class="truncate bg-white absolute bottom-0 py-2 px-2 w-full"></span>
+                                            <span v-text="m.file_name.split('/').pop()" class="px-2 w-full">
+                                                <span v-text="m.file_name.split('/').pop()" class="truncate bg-white absolute bottom-0 py-2 px-2 w-full"></span>
+                                            </span>
                                         </div>
                                     </div>
                                     <div class="media-library__manager__content__images__grid__files" v-else-if="type == 'files'">
