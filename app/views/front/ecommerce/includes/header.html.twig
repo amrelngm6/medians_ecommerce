@@ -211,22 +211,25 @@
 
                 <div class="container d-flex align-items-center">
                     <label for="footerSettingsLanguage_mobile" class="me-2 text-secondary">Language</label>
-                    <select id="footerSettingsLanguage_mobile" class="form-select form-select-sm bg-transparent border-0" aria-label="Default select example" name="store-language">
-                        <option class="footer-select__option" selected>United Kingdom | English</option>
-                        <option class="footer-select__option" value="1">United States | English</option>
-                        <option class="footer-select__option" value="2">German</option>
-                        <option class="footer-select__option" value="3">French</option>
-                        <option class="footer-select__option" value="4">Swedish</option>
-                    </select>
+                    {% for lng in app.languages %}
+							<p>
+								<a class="text-right flex gap-2" href="/switch-lang/{{lng.language_code}}?redirect={{page.content_langs[lng.language_code].prefix ?? ''}}"><img class=" rounded-full p-1" width="36" src="{{lng.icon}}"/>
+									<span class="pt-1">{{lng.name}}</span>
+								</a>
+							</p>
+						{% endfor %}
                 </div>
 
                 <div class="container d-flex align-items-center">
                     <label for="footerSettingsCurrency_mobile" class="me-2 text-secondary">Currency</label>
-                    <select id="footerSettingsCurrency_mobile" class="form-select form-select-sm bg-transparent border-0" aria-label="Default select example" name="store-language">
-                        <option selected>$ USD</option>
-                        <option value="1">£ GBP</option>
-                        <option value="2">€ EURO</option>
-                    </select>
+                    {% for cur in app.currencies %}
+                        <p>
+                            <a class="text-right flex gap-2" href="/switch-currency/{{cur.code}}">
+                                <span class="pt-1">{{cur.name}}
+                                    ({{cur.symbol}})</span>
+                            </a>
+                        </p>
+                    {% endfor %}
                 </div>
 
                 <ul class="container social-links list-unstyled d-flex flex-wrap mb-0">
