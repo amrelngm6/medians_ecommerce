@@ -78,6 +78,7 @@
                                             @click="selectManual('images', m.id)"
                                         >
                                             <div class="grid-item__inner" :style="`background: url('${m.data_url}'); background-repeat: no-repeat; background-size: cover;`"></div>
+                                            <span>{{ m }}</span>
                                         </div>
                                     </div>
                                     <div class="media-library__manager__content__images__grid__files" v-else-if="type == 'files'">
