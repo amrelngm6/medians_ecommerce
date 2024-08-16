@@ -386,8 +386,8 @@ class CustomerAuthService
             
             $checkUser = $this->repo->resetChangePassword($params);
 
-			echo ($checkUser == 1) 
-			? json_encode(array('success'=>1, 'result'=>translate('Password updated successfully'), 'redirect'=>$this->app->CONF['url'].'login')) 
+			echo (isset($checkUser->customer_id)) 
+			? json_encode(array('success'=>1, 'result'=>translate('Password updated successfully'), 'redirect'=>$this->app->CONF['url'].'customer/login')) 
 			: json_encode(array('error'=>$checkUser));
 
         } catch (Exception $e) {

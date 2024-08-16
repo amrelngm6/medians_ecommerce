@@ -1,45 +1,58 @@
-            <div class="row">
                 {% if products|length < 1 %}
                 No items available with this filters
                 {% endif %}
                 {% for item in products %}
-                <div class="col-lg-3">
-                    <div class="product-card">
-                        {% if (item.old_price - item.price) > 0 %}
-                        <div class="tags px-3 py-2 bg-danger text-white rounded-lg">
-                            <small class="fsz-10 d-block text-uppercase"> {{lang.translate('save')}} </small>
-                            <h6 class="fsz-14"> {{app.currency.symbol}}{{(app.currency_amount(item.old_price - item.price))}} </h6>
-                        </div>
-                        {% endif %}
-
-                        <a href="/front_api/create?type=Wishlist.create&params[item_id]={{item.product_id}}" data-params="{{item.product_id}}" class="ajax-link fav-btn"> <i class="la la-heart"></i> </a>
-                        <div class="img">
-                            <img src="/app/image.php?w=600&h=600&src={{item.picture}}" alt="">
-                            <div class="btns">
-                                <a href="/front_api/create?type=Cart.create&params[item_id]={{item.product_id}}&params[qty]=1" class="ajax-link butn bg-darkGreen1 text-white radius-2 fsz-11 text-uppercase m-1 addCart"> <span> <i class="la la-shopping-bag me-1 fsz-14"></i>  {{lang.translate('Add To Cart')}} </span> </a>
-                            </div>
-                        </div>
-                        <div class="info mt-20">
-                            <h6 class="title fsz-14 fw-400"> <a href="{{app.CONF.url}}{{item.lang_content.prefix}}" class="hover-underline"> {{item.lang_content.title}} </a> </h6>
-                            <div class="rate mt-10"> 
-                                <div class="stars">
-                                {% set rate = item.rate() %}
-                                    <i class="la la-star {{(rate < 1) ? 'color-999' : ''}}"></i>
-                                    <i class="la la-star {{(rate < 2) ? 'color-999' : ''}}"></i>
-                                    <i class="la la-star {{(rate < 3) ? 'color-999' : ''}}"></i>
-                                    <i class="la la-star {{(rate < 4) ? 'color-999' : ''}}"></i>
-                                    <i class="la la-star {{(rate < 5) ? 'color-999' : ''}}"></i>
-                                </div>   
-                                <span class="rate-text ms-2 color-666"> {{item.reviews|length}} {{lang.translate('Reviews')}} </span> 
-                            </div>
-                            <h5 class="price fsz-18 mt-15"> {{app.currency.symbol}}{{app.currency_amount(item.price)}} {% if item.old_price > 0 %}<span class="old fsz-14 color-666 text-decoration-line-through"> {{app.currency.symbol}}{{app.currency_amount(item.old_price)}} </span> {% endif %} </h5>
-                        </div>
-                    </div>
+                <div class="product-card-wrapper">
+            <div class="product-card mb-3 mb-md-4 mb-xxl-5">
+              <div class="pc__img-wrapper">
+                <div class="swiper-container background-img js-swiper-slider" data-settings='{"resizeObserver": true}'>
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <a href="{{app.CONF.url}}{{item.lang_content.prefix}}"><img loading="lazy" src="/app/image.php?w=600&h=600&src={{item.picture}}" width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img"></a>
+                    </div><!-- /.pc__img-wrapper -->
+                    <div class="swiper-slide">
+                      <a href="{{app.CONF.url}}{{item.lang_content.prefix}}"><img loading="lazy" src="/app/image.php?w=600&h=600&src={{item.picture}}" width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img"></a>
+                    </div><!-- /.pc__img-wrapper -->
+                  </div>
+                  <span class="pc__img-prev"><svg width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg"><use href="#icon_prev_sm" /></svg></span>
+                  <span class="pc__img-next"><svg width="7" height="11" viewBox="0 0 7 11" xmlns="http://www.w3.org/2000/svg"><use href="#icon_next_sm" /></svg></span>
                 </div>
-                
+                <button class="pc__atc btn anim_appear-bottom btn position-absolute border-0 text-uppercase fw-medium js-add-cart js-open-aside" data-aside="cartDrawer" title="Add To Cart">Add To Cart</button>
+              </div>
+
+              <div class="pc__info position-relative">
+              
+                <div class="rating flex gap-2">
+                    {% set rate = page.rate() %}
+                    <div class="stars">
+                        {% for i in [0,1,2,3,4] %}
+                        <i class="la la-star {{rate > i ? 'text-yellow-400' : 'opacity-10'}}"></i>
+                        {% endfor %}
+                    </div>
+                    <span class="num">
+                        ({{page.reviews|length}})
+                    </span>
+                </div>
+                <h6 class="pc__title"><a href="{{app.CONF.url}}{{item.lang_content.prefix}}">{{item.lang_content.title}}</a></h6>
+                <div class="product-card__price d-flex">
+                  <span class="money price price-sale"> {{app.currency.symbol}}{{app.currency_amount(item.price)}}</span>
+                  {% if item.old_price > 0 %}<span class="money price price-old px-2"> {{app.currency.symbol}}{{app.currency_amount(item.old_price)}}</span>{% endif %}
+                </div>
+
+                <a  href="/front_api/create?type=Wishlist.create&params[item_id]={{item.product_id}}" data-params="{{item.product_id}}" class="ajax-link pc__btn-wl position-absolute top-0 end-0 bg-transparent border-0 js-add-wishlist">
+                  <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_heart" /></svg>
+                </a>
+              </div>
+              <div class="pc-labels position-absolute top-0 start-0 w-100 d-flex justify-content-between">
+                <div class="pc-labels__left">
+                  <span class="pc-label pc-label_new d-block bg-white">NEW</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
                 {% endfor  %}
 
-            </div>
 
             <template x-if="page < {{count/ (app.setting.category_products_count ?? 4) }}" >
                 <div class="text-center py-2">

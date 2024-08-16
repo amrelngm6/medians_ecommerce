@@ -171,7 +171,7 @@
 
         <nav class="header-mobile__navigation navigation d-flex flex-column w-100 position-absolute top-100 bg-body overflow-auto">
             <div class="container">
-                <form action="search.html" method="GET" class="search-field position-relative mt-4 mb-3">
+                <form action="/search" method="GET" class="search-field position-relative mt-4 mb-3">
                     <div class="position-relative">
                         <input class="search-field__input w-100 border rounded-1" type="text" name="search-keyword" placeholder="Search products">
                         <button class="btn-icon search-popup__submit pb-0 me-2" type="submit">
@@ -418,17 +418,18 @@
                         </div>
 
                         <div class="search-popup js-hidden-content">
-                            <form action="./search_result.html" method="GET" class="search-field container">
+                            <form method="POST" action="/front_api" x-ref="searchForm" id="searchForm" @mousedown.outside="showSearch = 0" class="bg-white search-field relaive container">
+                                <input type="hidden" value="quick-search" name="type" />
                                 <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
                                 <div class="position-relative">
-                                    <input class="search-field__input search-popup__input w-100 fw-medium" type="text" name="search-keyword" placeholder="Search products">
+                                    <input required x-ref="searchText" @keyup="submitForm('searchForm', 'search-result')" name="params[title]" class="search-field__input search-popup__input w-100 fw-medium" type="text" name="search-keyword" placeholder="Search products">
                                     <button class="btn-icon search-popup__submit" type="submit">
                                         <svg class="d-block" width="20" height="20" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_search"/></svg>
                                     </button>
                                     <button class="btn-icon btn-close-lg search-popup__reset" type="reset"></button>
                                 </div>
 
-                                <div class="search-popup__results">
+                                <div class="search-popup__results w-full" id="search-result">
                                     <div class="sub-menu search-suggestion">
                                         <h6 class="sub-menu__title fs-base">Quicklinks</h6>
                                         <ul class="sub-menu__list list-unstyled">

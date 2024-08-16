@@ -4,6 +4,7 @@ namespace Medians\Customers\Infrastructure;
 
 use Medians\Customers\Domain\Customer;
 use Medians\CustomFields\Domain\CustomField;
+use Medians\Mail\Application\MailService;
 
 class CustomerRepository 
 {
@@ -76,6 +77,36 @@ class CustomerRepository
 		return implode($pass); //turn the array into a string
 	}
 
+
+		/**
+	* Save item to database
+	*/
+	public function resetPassword($data) 
+	{
+
+		$Model = new Customer();
+		
+		$findByEmail = $this->findByEmail($data['email']);
+
+		if (empty($findByEmail))
+			return translate('User not found');
+		
+		$deleteOld = CustomField::where('model_type', Customer::class)->where('model_id', $findByEmail->customer_id)->where('code', 'reset_token')->delete();
+		
+		$fields = [];
+		$fields['model_type'] = Customer::class;	
+		$fields['model_id'] = $findByEmail->customer_id;	
+		$fields['code'] = 'reset_token';	
+		$fields['value'] = $this->randomPassword();
+
+		$Model = CustomField::create($fields);
+		
+		$sendMail = new MailService($findByEmail->email, $findByEmail->parent_name, 'Your token for reset password', "Here is the attached code \n\n ".$fields['value']);
+		$sendMail->sendMail();
+
+		return  1;
+    }
+    	
 
     /**
      * Reset & Update password 

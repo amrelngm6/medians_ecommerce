@@ -40,6 +40,7 @@ RouteHandler::get('/google_login_redirect', \Medians\Auth\Application\AuthServic
 RouteHandler::get('/activate-account/(:all)', \Medians\Auth\Application\AuthService::class.'@activate');
 RouteHandler::get('/reset-password', \Medians\Auth\Application\AuthService::class.'@resetPasswordPage');
 RouteHandler::get('/reset-password-code', \Medians\Auth\Application\AuthService::class.'@resetPasswordCodePage');
+RouteHandler::get('/customer/reset-password-code', \Medians\Auth\Application\CustomerAuthService::class.'@resetPasswordCodePage');
 
 // Login as admin
 RouteHandler::post('/', \Medians\Auth\Application\AuthService::class.'@userLogin');
@@ -72,6 +73,7 @@ RouteHandler::post('/cart/update', \Medians\Cart\Application\CartController::cla
 RouteHandler::get('/customer/login', \Medians\Auth\Application\CustomerAuthService::class.'@loginPage');
 RouteHandler::get('/customer/signup', \Medians\Auth\Application\CustomerAuthService::class.'@signupPage');
 RouteHandler::get('/customer/confirm_account', \Medians\Auth\Application\CustomerAuthService::class.'@otp');
+RouteHandler::get('/customer/reset_password', \Medians\Auth\Application\CustomerAuthService::class.'@resetPasswordPage');
 RouteHandler::get('/customer/dashboard', \Medians\Customers\Application\CustomerController::class.'@dashboard');
 RouteHandler::get('/order/(:all)', \Medians\Orders\Application\OrderController::class.'@orderPage');
 RouteHandler::get('/stores-locations', \Medians\Branches\Application\BranchController::class.'@list');

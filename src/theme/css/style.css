@@ -7075,6 +7075,7 @@ main {
   visibility: visible; }
 
 .content_abs {
+  z-index: 9;
   position: absolute;
   --content-space: 1.875rem; }
 
@@ -13066,6 +13067,7 @@ textarea.form-control-lg {
     .header {
       display: block; } }
   .header.header-transparent-bg:not(.header_sticky-active) {
+    z-index: 99;
     background: transparent; }
   .header.header_dark {
     background-color: #222222; }

@@ -36,6 +36,11 @@ async function completePaystack()
                 data:  {}, // Your data to send
                 processData:false,
                 success: function(data) {
+                    
+                    let a = JSON.parse(data.responseText);
+                    if (a.result.code)
+                        window.location.href = '/invoice/'+a.result.code;
+
                     return data.responseText
                 },
                 error: function(xhr, status, error) {
@@ -43,11 +48,6 @@ async function completePaystack()
                 }
             }); 
 
-            a.success(e => {
-                let a = JSON.parse(e);
-                if (a.result.code)
-                    window.location.href = '/invoice/'+a.result.code;
-            })
         }
     });
     // Open Paystack inline payment form
