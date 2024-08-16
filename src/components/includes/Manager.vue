@@ -48,7 +48,7 @@
                             @click="toggles.upload = !toggles.upload"
                             v-text="translate('Upload')"
                         ></span>
-                        <input class="media-library__manager__nav__search" id="medialibrary-search" type="text" placeholder="Type to search..." v-model="search">
+                        <!-- <input class="media-library__manager__nav__search" id="medialibrary-search" type="text" placeholder="Type to search..." v-model="search"> -->
                     </div>
                 </div>
 
