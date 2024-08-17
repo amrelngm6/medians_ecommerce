@@ -176,7 +176,5 @@
     border-right: transparent !important;
     border-left: transparent !important;
 }
-.v3ti .v3ti-tag .v3ti-tag-content
-{
-font-size: 16px; padding:10px
- }
+.v3ti .v3ti-tag .v3ti-tag-content { font-size: 16px; padding:10px}
+.multiselect-tag-wrapper { font-size: 16px; padding:5px}
