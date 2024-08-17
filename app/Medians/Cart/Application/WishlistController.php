@@ -39,7 +39,7 @@ class WishlistController extends CustomController
 
         try {	
 
-        	$params['user_id'] = $user->customer_id ?? 0;
+        	$params['customer_id'] = $user->customer_id ?? 0;
         	$params['session_id'] = $_SESSION['guest_id'] ?? 0;
 
         	$this->validate($params, $user);
@@ -133,10 +133,12 @@ class WishlistController extends CustomController
 			return $this->app->redirect('/customer/login'); 
 		}
 
+		$items = $this->repo->get($user->customer_id);
+
 		try {
 			return render('views/front/'.$settings['template'].'/pages/wishlist.html.twig', [
 		        'title' => translate('wishlist'),
-		        'items' => $this->repo->get($user->customer_id),
+		        'items' => $items,
 		        'discount' => '0',
 		        'shipping' => '0',
 		        // 'price' => $price,

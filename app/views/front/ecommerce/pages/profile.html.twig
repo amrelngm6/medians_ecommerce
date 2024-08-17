@@ -67,9 +67,6 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade active show" id="pills-prof1">
                         <div class="acount-tab">
-                            <h4 class=" text-capitalize mb-30 text-xl">
-                                {{lang.translate('Account info')}}
-                            </h4>
                             <div class="content">
                                 <form action="/front_api/update" id="profile-form" class="ajax-form row">
                                     <input type="hidden" value="Customer.update" name="type" />
@@ -119,9 +116,6 @@
                     </div>
                     <div class="tab-pane fade" id="pills-orders">
                         <div class="orders-tab">
-                            <h4 class=" text-capitalize mb-30 text-xl">
-                                {{lang.translate('Orders History')}}
-                            </h4>
                             <div class="orders">
                                 {% for order in orders %}
                                 <div class="order-card">
@@ -212,9 +206,6 @@
                         {% endfor %}
                         {% endfor %}
                         <div class="acount-tab"  x-data="{indexCountry:{{countryIndex ?? 0}}, indexCity:{{cityIndex ?? 0}}, indexState:{{stateIndex ?? 0}}, countries: {{countries}}, currentCountry: '{{customer.field.country ?? {} }}', currentState: '{{customer.field.state}}', currentCity:'{{customer.field.city}}'}">
-                            <h4 class=" text-capitalize mb-30">
-                                {{lang.translate('Address')}}
-                            </h4>
                             <div class="content">
                                 <form action="/front_api/update" id="address-form" class="ajax-form row">
                                     <input type="hidden" value="Customer.update" name="type" />
