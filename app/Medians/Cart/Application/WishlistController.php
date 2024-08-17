@@ -33,7 +33,7 @@ class WishlistController extends CustomController
 	public function store() 
 	{
 
-		$user = $this->app->auth();
+		$user = $this->app->customer_auth();
 
 		$params = $this->app->params();
 
@@ -60,7 +60,7 @@ class WishlistController extends CustomController
 	public function update()
 	{
 
-		$user = $this->app->auth();
+		$user = $this->app->customer_auth();
 
 		$params = $this->app->params();
 
@@ -83,7 +83,7 @@ class WishlistController extends CustomController
 	public function delete() 
 	{
 
-		$user = $this->app->auth();
+		$user = $this->app->customer_auth();
 
 		$params = $this->app->params();
 		
