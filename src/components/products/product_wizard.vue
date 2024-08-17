@@ -416,8 +416,8 @@
                                             </div>
                                         </div>
                                         <div class="card-body pt-0" :key="activeItem.images">
-                                            <div class="w-full flex gap-2" v-for="(image, imageKey) in activeItem.images" >
-                                                <vue-medialibrary-field v-if="image" @clear="() => { activeItem.images[imageKey] = null; }" @changed="(val) => { activeItem.images[imageKey] = {path: val}; }" :conf="conf" :filepath="image.path" />
+                                            <div class="w-full flex gap-2 py-2" v-for="(image, imageKey) in activeItem.images" >
+                                                <vue-medialibrary-field class="w-full" v-if="image" @clear="() => { activeItem.images[imageKey] = null; }" @changed="(val) => { activeItem.images[imageKey] = {path: val}; }" :conf="conf" :filepath="image.path" />
                                                 <vue-feather v-if="imageKey > 0" class="w-4" type="delete"></vue-feather>
                                             </div>
                                             <div class="text-muted fs-7 py-2" v-text="translate('Set the product media gallery')"></div>
