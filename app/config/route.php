@@ -75,6 +75,7 @@ RouteHandler::get('/customer/signup', \Medians\Auth\Application\CustomerAuthServ
 RouteHandler::get('/customer/confirm_account', \Medians\Auth\Application\CustomerAuthService::class.'@otp');
 RouteHandler::get('/customer/reset_password', \Medians\Auth\Application\CustomerAuthService::class.'@resetPasswordPage');
 RouteHandler::get('/customer/dashboard', \Medians\Customers\Application\CustomerController::class.'@dashboard');
+RouteHandler::get('/customer/orders', \Medians\Customers\Application\CustomerController::class.'@orders');
 RouteHandler::get('/order/(:all)', \Medians\Orders\Application\OrderController::class.'@orderPage');
 RouteHandler::get('/stores-locations', \Medians\Branches\Application\BranchController::class.'@list');
 

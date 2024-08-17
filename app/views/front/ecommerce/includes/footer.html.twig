@@ -157,19 +157,37 @@
 
   <!-- Customer Login Form -->
   <div class="aside aside_right overflow-hidden customer-forms" id="customerForms">
+        <div class="aside-header d-flex align-items-center">
+            <h3 class="text-uppercase fs-6 mb-0">{{lang.translate('Profile')}}  </h3>
+            <button class="btn-close-lg js-close-aside btn-close-aside ms-auto"></button>
+        </div><!-- /.aside-header -->
     <div class="customer-forms__wrapper d-flex position-relative">
 
         {% if app.customer_auth.customer_id %}
-        <div>
+        
+        
+        <div class="py-2">
 
+            <div class="flex gap-6 main-info">
+                    <div class="img">
+                        <img src="{{app.customer_auth.picture ?? '/uploads/img/profile.png'}}" alt="" class="w-20 h-20 main-img img-cover">
+                    </div>
+                    <div>
+                        <h4 class="text-xl pt-4">{{app.customer_auth.name}}</h4>
+                        <p>{{app.customer_auth.email}}</p>
+                    </div>
+                </div>
+            <ul class="navigation__list list-unstyled position-relative mt-10">
+                <li class="navigation__item py-2"><a href="/customer/dashboard" class="navigation__link">{{lang.translate('Account')}}</a></li>
+                <li class="navigation__item py-2"><a href="/customer/orders" class="navigation__link">{{lang.translate('Orders')}}</a></li>
+                <li class="navigation__item py-2"><a href="/cart" class="navigation__link">{{lang.translate('Cart')}}</a></li>
+                <li class="navigation__item py-2"><a href="/wishlist" class="navigation__link">{{lang.translate('Wishlist')}}</a></li>
+                <li class="navigation__item py-2"><a href="/logout" class="navigation__link">{{lang.translate('logout')}}</a></li>
+            </ul>
         </div>
         {% else  %}
 
         <div class="customer__login">
-            <div class="aside-header d-flex align-items-center">
-            <h3 class="text-uppercase fs-6 mb-0">{{lang.translate('Login')}}</h3>
-            <button class="btn-close-lg js-close-aside ms-auto"></button>
-            </div><!-- /.aside-header -->
 
             <form action="/customer/login" method="POST" id="login-form" class="ajax-form aside-content">
             <div class="form-floating mb-3">
@@ -192,7 +210,7 @@
                 <a href="/customer/reset_password" class="btn-text ms-auto">{{lang.translate('Lost password')}}?</a>
             </div>
 
-            <button class="btn btn-primary w-100 text-uppercase" type="submit">{{lang.translate('Log In')}}</button>
+            <button class="btn btn-primary bg-dark w-100 text-uppercase" type="submit">{{lang.translate('Log In')}}</button>
 
             <div class="customer-option mt-4 text-center">
                 <span class="text-secondary">{{lang.translate('No account yet')}}?</span>

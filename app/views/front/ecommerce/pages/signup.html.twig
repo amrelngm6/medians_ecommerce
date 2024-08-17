@@ -1,51 +1,72 @@
 {% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
 {% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
-{% include 'views/front/' ~ template ~ '/blocks/breadcrumb.html.twig' %}
 
-            <main>
-                <!--  Start login  -->
-                <section class="tc-login p-5 radius-4 bg-white mt-3 mb-3">
-                    <div class="row align-items-center justify-content-around">
-                        <div class="col-lg-4">
-                            <div class="img">
-                                <img src="/uploads/img/login.svg" alt="">
-                            </div>
-                        </div>
-                        <div class="col-lg-5">
-                            <div class="login-form">
-                                <div class="title mb-30">
-                                    <h3 class="color-green2 mb-10"> {{lang.translate('Signup')}} </h3>
-                                    <p class="fsz-14 text-uppercase ltspc-2 color-999"> {{lang.translate('Create new account')}} </p>
-                                </div>
-                                <form action="/customer/signup" method="POST" id="login-form" class="ajax-form  d-block">
-                                    <div class="form-group mb-4">
-                                        <label for=""> {{lang.translate('Name')}}</label>
-                                        <input type="text" class="form-control" required name="params[name]"  placeholder="{{lang.translate('Your full name')}}">
-                                    </div>
-                                    <div class="form-group mb-4">
-                                        <label for=""> {{lang.translate('Email')}}</label>
-                                        <input type="email" class="form-control" required name="params[email]"  placeholder="Example@gmail.com">
-                                    </div>
-                                    <div class="form-group show_hide_password">
-                                        <label for=""> {{lang.translate('Password')}} </label>
-                                        <input type="password" class="form-control" required min="5" name="params[password]" placeholder="******">
-                                        <i class="show_pass fal fa-eye-slash"></i>
-                                    </div>
-                                    <a href="/customer/reset_password" class="d-block text-decoration-underline mt-2 color-999 fsz-13"> {{lang.translate('Forget Password')}} </a>
-                                    <div class="btns">
-                                        <button type="submit" class="butn bg-cyan2 text-white radius-4 fw-500 fsz-14 text-uppercase text-center mt-40 px-5"> <span> {{lang.translate('Sign Up')}} </span> </button>
-                                    </div>
-                                    <a href="/customer/login" class="text-uppercase color-999 fsz-13 mt-3"> {{lang.translate('Sign-in')}} <span class="color-green2"> {{lang.translate('Already have account')}} </span> </a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <!--  End login  -->
-            </main>
-           
+
+<main class="pt-20">
+
+
+	<section class="mt-20 py-20 login-register  mx-auto" style="max-width: 600px">
+		<ul class="nav nav-tabs mb-5" id="login_register" role="tablist">
+			<li class="nav-item" role="presentation">
+				<a class="nav-link nav-link_underscore active" id="login-tab" data-bs-toggle="tab" href="#tab-item-login" role="tab" aria-controls="tab-item-login" aria-selected="true">
+					{{lang.translate('Signup')}}
+				</a>
+			</li>
+		</ul>
+		<div class="tab-content pt-2" id="login_register_tab_content">
+			<div class="tab-pane fade active show" id="tab-item-login" role="tabpanel" aria-labelledby="login-tab">
+				<div class="login-form">
+					<form action="/customer/signup" method="POST" id="signup-form" class="ajax-form  d-block needs-validation" novalidate="">
+						<div class="form-floating mb-3">
+							<input name="params[name]" type="name" class="form-control form-control_gray" id="customerNameInput1" placeholder="{{lang.translate('name')}} *" required="">
+							<label for="customerNameEmailInput1">
+								{{lang.translate('name')}}
+								*</label>
+						</div>
+
+						<div class="form-floating mb-3">
+							<input name="params[email]" type="email" class="form-control form-control_gray" id="customerNameEmailInput1" placeholder="Email address *" required="">
+							<label for="customerNameEmailInput1">
+								{{lang.translate('Email')}}
+								*</label>
+						</div>
+
+						<div class="pb-3"></div>
+
+						<div class="form-floating mb-3">
+							<input name="params[password]" type="password" class="form-control form-control_gray" id="customerPasswodInput" placeholder="Password *" required="">
+							<label for="customerPasswodInput">
+								{{lang.translate('Password')}}
+								*</label>
+						</div>
+
+						<div class="d-flex align-items-center mb-3 pb-2">
+							<div class="form-check mb-0">
+								<input name="remember" class="form-check-input form-check-input_fill" type="checkbox" value="" id="flexCheckDefault1">
+								<label class="form-check-label text-secondary" for="flexCheckDefault1">{{lang.translate('Remember me')}}</label>
+							</div>
+							<a href="/customer/reset_password" class="btn-text ms-auto">{{lang.translate('Forget Password')}}
+							</a>
+						</div>
+
+						<button class="btn btn-primary w-100 text-uppercase bg-red" type="submit">{{lang.translate('Sign Up')}}</button>
+
+						<div class="customer-option mt-4 text-center">
+							<span class="text-secondary">{{lang.translate('Already have account')}}</span>
+							<a href="/customer/login" class="btn-text ">{{lang.translate('Sign in')}}
+							</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!--  End login  -->
+</main>
+
+
 <!-- Footer -->
 {% include 'views/front/' ~ template ~ '/includes/footer.html.twig' %}
-{% include 'views/front/' ~ template ~ '/includes/footer_assets.html.twig' %}
-</body>
-</html>
+{% include 'views/front/' ~ template ~ '/includes/footer_assets.html.twig' %}</body></html>

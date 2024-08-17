@@ -203,4 +203,25 @@ class CustomerController extends CustomController
 	    ]);
 	}
 
+	public function orders()
+	{
+		$settings = $this->app->SystemSetting();
+
+		$customer = $this->app->customer_auth();
+
+		if (!$customer) { return $this->app->redirect('/customer/login'); }
+
+		return render('views/front/'.$settings['template'].'/pages/orders.html.twig', [
+			'customer' =>  $this->repo->find($customer->customer_id),
+			'orders' =>  $this->orderRepo->getCustomerOrders($customer->customer_id),
+			'countries' =>  $this->countryRepo->getActive(),
+	        'title' => translate('Customers'),
+			'columns' =>  $this->columns(),
+			'fillable' =>  $this->fillable(),
+			'object_name' => 'Customer',
+			'object_key' => 'customer_id',
+
+	    ]);
+	}
+
 }
