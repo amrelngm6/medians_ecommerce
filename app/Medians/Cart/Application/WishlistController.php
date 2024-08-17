@@ -124,11 +124,14 @@ class WishlistController extends CustomController
 	 */ 
 	public function wishlist( ) 
 	{
-		$user = $this->app->auth();
+		$user = $this->app->customer_auth();
 		$settings = $this->app->SystemSetting();
 
 
-		// $total = $price;
+		if (empty($user->customer_id))
+		{
+			return $this->app->redirect('/customer/login'); 
+		}
 
 		try {
 			return render('views/front/'.$settings['template'].'/pages/wishlist.html.twig', [
