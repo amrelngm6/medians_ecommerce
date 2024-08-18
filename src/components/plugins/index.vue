@@ -100,12 +100,6 @@
                             </div>
                             <!--end::Card body-->
 
-                            <!--begin::Card footer-->
-                            <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                <button class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                                <button class="btn btn-primary">Save Changes</button>
-                            </div>
-                            <!--end::Card footer-->
                         </div>
                         <!--end::Content-->
                     </div>
