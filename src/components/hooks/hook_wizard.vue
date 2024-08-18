@@ -69,7 +69,7 @@
                                 <div class="d-flex flex-column gap-7 gap-lg-10">
 
                                     <div class="w-full">
-                                        <div class="py-1 w-full pt-4" v-for="column in tab" v-if="tab">
+                                        <div class="py-1 w-full pt-4" v-for="column in content.fillable[activeTab]" v-if="tab">
                                             <span class="block mb-2 form-label text-gray-600 text-lg" v-text="column.title" v-if="column.column_type != 'hidden'"></span>
                                             <form_field @callback="handleField"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
                                             <p v-text="column.help_text" v-if="column.help_text" ></p>
