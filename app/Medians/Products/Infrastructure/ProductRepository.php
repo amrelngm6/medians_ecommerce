@@ -402,12 +402,16 @@ class ProductRepository
 		if ($data) {
 			foreach ($data as $key => $value)
 			{
-				$fields = [];
-				$fields['product_id'] = $Object->product_id;	
-				$fields['path'] = $value->path;
-				$fields['sort'] = $key;
+				if ($value)
+				{
 
-				$Model = ProductImage::create($fields);
+					$fields = [];
+					$fields['product_id'] = $Object->product_id;	
+					$fields['path'] = $value->path;
+					$fields['sort'] = $key;
+					
+					$Model = ProductImage::create($fields);
+				}
 			}
 	
 			return $Model ?? '';		

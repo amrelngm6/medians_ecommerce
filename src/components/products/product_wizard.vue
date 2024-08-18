@@ -401,6 +401,7 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade show active" v-if="activeTab == translate('Images')">
+                                <ckeditor :editor="editor" tag-name="textarea" />
 
                                 <div class="d-flex flex-column gap-7 gap-lg-10">
                                     <div class="card card-flush py-4">
@@ -473,6 +474,12 @@ import Vue3TagsInput from 'vue3-tags-input';
 import color_picker from '@/components/includes/color-picker.vue';
 
 
+
+import { ClassicEditor, Bold, Essentials, Italic, Mention, Paragraph, Undo } from 'ckeditor5';
+import { Ckeditor } from '@ckeditor/ckeditor5-vue';
+
+
+
 export default
     {
         components: {
@@ -481,6 +488,7 @@ export default
             color_picker,
             static_field,
             Vue3TagsInput,
+            Ckeditor,
             SideFormCreate,
             SideFormUpdate,
             close_icon,
@@ -597,8 +605,19 @@ export default
                 return activeItem.value.content_langs[index]
             }
 
+            const editor = ClassicEditor;
+            const editorData = ref('<p>Hello from CKEditor 5 in Vue!</p>');
+            const editorConfig =  ref({
+                plugins: [ Bold, Essentials, Italic, Mention, Paragraph, SlashCommand, Undo ],
+                toolbar: [ 'undo', 'redo', '|', 'bold', 'italic' ],
+                licenseKey: '<YOUR_LICENSE_KEY>',
+                // Other configuration options...
+            });
 
             return {
+                editor,
+                editorData,
+                editorConfig,
                 getLang,
                 taxsTypes,
                 vatsTypes,
