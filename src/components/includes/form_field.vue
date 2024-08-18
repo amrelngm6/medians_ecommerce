@@ -71,6 +71,7 @@ export default
 
     setup(props, {emit}) {
         const defaultModel = ref();
+        defaultModel.value = handleValue(props.column, props.item)
 
         const changed = (model) => 
         {
