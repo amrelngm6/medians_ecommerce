@@ -53,9 +53,10 @@
                                 </div>
                             </div>
                             <div class="card-body pt-0">
-                                <form_field :item="activeItem" @callback="switchStatus(val, key)"
-                                    :column="{ required: true, key: 'status', title: translate('status'), column_type: 'select', text_key: 'title', column_key: 'value', data: [{ 'value': null, 'title': translate('Pending') }, { 'value': 'on', 'title': translate('Active') }] }">
-                                </form_field>
+                                <select :required="column.required" v-model="activeItem.status"  class="form-control form-control-solid"   :placeholder="column.title">
+                                    <option value=""  v-text="translate('Pending')"></option>
+                                    <option value="on"  v-text="translate('Active')"></option>
+                                </select>
                                 <div class="text-muted fs-7" v-text="translate('Set the item status')"></div>
                             </div>
                         </div>
