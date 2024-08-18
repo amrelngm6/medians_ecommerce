@@ -3,6 +3,10 @@
         
         <div  v-if="content " class=" w-full relative">
             
+            <div class=" " v-if="newWizard ">
+                <plugin_picker :currency="currency" :plugins="content.plugins" @callback="()=> {activeItem = null; showWizard = false}" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.id ? activeItem.id : 'new')" :system_setting="system_setting" :setting="setting"  />
+            </div>
+
             <div class=" " v-if="showWizard ">
                 <hook_wizard :currency="currency" :langs="langs" @callback="()=> {activeItem = null; showWizard = false}" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.id ? activeItem.id : 'new')" :system_setting="system_setting" :setting="setting"  />
             </div>
@@ -28,7 +32,7 @@
                             </div>
                         </div>
     
-                        <a href="javascript:;" v-if="!showWizard" class="uppercase p-2 mx-2 text-center text-white w-32 rounded-lg bg-danger" @click="addHookWizard" v-text="translate('add_new')"></a>
+                        <a href="javascript:;" v-if="!showWizard" class="uppercase p-2 mx-2 text-center text-white w-32 rounded-lg bg-danger" @click="newWizard = !newWizard" v-text="translate('add_new')"></a>
 
                     </div>
                     <datatabble 
@@ -111,6 +115,7 @@ export default
         const activeItem = ref({});
         const content = ref({});
         const showWizard =  ref(false);
+        const newWizard =  ref(false);
         const fillable =  ref(['Info', 'Time','Start location','End location','Driver']);
         const searchValue = ref("");
         const searchField = ref("#");
@@ -135,6 +140,7 @@ export default
         {
             activeItem.value = {};
             showWizard.value = true;
+            newWizard.value = true;
         }
         
 
@@ -174,6 +180,7 @@ export default
         const showTip = ref({});
         
         return {
+            newWizard,
             showTip,
             showEditSide,
             url,

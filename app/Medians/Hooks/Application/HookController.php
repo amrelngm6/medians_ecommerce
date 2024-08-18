@@ -4,6 +4,7 @@ namespace Medians\Hooks\Application;
 use Shared\dbaser\CustomController;
 
 use Medians\Hooks\Infrastructure\HookRepository;
+use Medians\Plugins\Infrastructure\PluginRepository;
 
 
 class HookController extends CustomController 
@@ -16,6 +17,8 @@ class HookController extends CustomController
 
 	protected $app;
 
+	protected $pluginRepo;
+
 	
 
 	function __construct()
@@ -23,6 +26,7 @@ class HookController extends CustomController
 
 		$this->app = new \config\APP;
 		$this->repo = new HookRepository;
+		$this->pluginRepo = new PluginRepository;
 	}
 
 
@@ -82,6 +86,7 @@ class HookController extends CustomController
 		        'title' => translate('Hook page'),
 		        'fillable' => $item->hookPlugin()->fillable(),
 		        'item' => $item,
+		        'plugins' => $this->pluginRepo->get(),
 		    ]);
 
 		} catch (\Exception $e) {
