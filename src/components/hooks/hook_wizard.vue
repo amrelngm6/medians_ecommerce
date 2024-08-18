@@ -237,8 +237,13 @@ export default
                     d = (typeof array[k] === 'object' || typeof array[k] === 'array') ? JSON.stringify(array[k]) : array[k]
                     params.append('params[' + k + ']', d)
                 }
+
+                Object.keys(activeItem.value.options).forEach((e, i) => {
+                    console.log(e)
+                    console.log(i)
+
+                })
                 console.log(activeItem.value)
-                console.log(Object.keys(activeItem.value.options))
                 console.log(activeItem.value.options.categories)
                 let type = array.id > 0 ? 'update' : 'create';
                 params.append('params[options]', activeItem.value.options)
