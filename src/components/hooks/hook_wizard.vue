@@ -70,7 +70,7 @@
                                             </div>
                                         </div>
                                         <div class="w-full">
-                                            <div class="card card-flush pb-0 bgi-position-y-center bgi-no-repeat mb-10" style="background-size: auto calc(100% + 10rem); background-position-x: 100%; background-image: url('/metronic8/demo1/assets/media/illustrations/sketchy-1/4.png')">
+                                            <div class="card card-flush pb-0 bgi-position-y-center bgi-no-repeat mb-10" style="background-size: auto calc(100% + 10rem); background-position-x: 100%; background-image: url('/uploads/img/4.png')">
 
                                                 <!--begin::Card header-->
                                                 <div class="card-header pt-10">
