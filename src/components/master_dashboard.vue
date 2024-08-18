@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <BarChart    :data="chart_datasets" :options="chart_options"  />
+        <chart_datasets    :data="chart_datasets" />
 
     </div>
 </template>
@@ -237,20 +237,17 @@ import dashboard_chart from '@/components/includes/dashboard_chart.vue';
 import dashboard_pie_chart from '@/components/includes/dashboard_pie_chart.vue';
 import dashboard_card_white from '@/components/includes/dashboard_card_white.vue';
 import dashboard_center_squares from '@/components/includes/dashboard_center_squares.vue';
+import clean_charts from '@/components/includes/clean_charts.vue';
 import {translate, handleGetRequest} from '@/utils.vue';
 
 import { AgChartsVue } from 'ag-charts-vue3';
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
 
 
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js' 
-import { Bar } from 'vue-chartjs'
-
-
 export default 
 {
     components:{
-        BarChart: Bar,
+        chart_datasets,
         dashboard_center_squares,
         dashboard_card_white,
         dashboard_card,
@@ -280,24 +277,6 @@ export default
             ],
         });
 
-        const chart_options = ref({
-            plugins: {
-                legend: {
-                display: false, // Hide the legend
-                },
-                tooltip: {
-                enabled: false, // Hide tooltips if needed
-                },
-            },
-            scales: {
-                x: {
-                display: false, // Hide x-axis labels
-                },
-                y: {
-                display: false, // Hide y-axis labels
-                },
-            },
-        })
 
         const url =  ref(props.path + '?load=json');
 
