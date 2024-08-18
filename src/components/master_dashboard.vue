@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <!-- <BarChart :chart-data="chart_datasets" :chart-options="chart_options" /> -->
+        <BarChart :chart-data="chart_datasets" :chart-options="chart_options" />
 
     </div>
 </template>
@@ -269,7 +269,7 @@ export default
 
         
 
-        const chart_datasets = {
+        const chart_datasets = ref({
         labels: ['January', 'February', 'March', 'April'],
         datasets: [
             {
@@ -278,9 +278,9 @@ export default
             data: [30, 70, 45, 85],
             },
         ],
-        }
+        });
 
-        const chart_options = {
+        const chart_options = ref({
             plugins: {
                 legend: {
                 display: false, // Hide the legend
@@ -297,7 +297,7 @@ export default
                 display: false, // Hide y-axis labels
                 },
             },
-        }
+        })
 
         const url =  ref(props.path + '?load=json');
 
