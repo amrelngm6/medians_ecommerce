@@ -31,8 +31,7 @@ class ProductCarousel
 		return [
             
 			'basic'=> [	
-	            [ 'key'=> "logo", 'title'=> translate('logo'), 'fillable'=>true, 'column_type'=>'file' ],
-				[ 'key'=> "sitename", 'title'=> translate('sitename'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "sitename", 'title'=> translate('Max number') , 'help_text'=> translate('Max number of loaded products'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "categories", 'title'=> translate('Categories'), 'help_text'=> translate('Select categories to display products from'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'category_id', 'multiple' => true,
 					'data' => $this->categoryRepo->getActive()  
