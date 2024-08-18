@@ -1,6 +1,6 @@
 <template>
     <div class="w-full overflow-auto">
-        <div class="bg-danger border border-dashed border-warning d-flex mb-10 mt-10 mx-4 notice p-6 rounded text-white">
+        <div class="bg-danger border border-dashed border-warning d-flex mb-10 mx-4 notice p-6 rounded text-white">
                 <!--begin::Icon-->
                 <i class="ki-duotone ki-information fs-2tx text-warning me-4"><span class="path1"></span><span
                         class="path2"></span><span class="path3"></span></i> <!--end::Icon-->
@@ -11,8 +11,8 @@
                     <div class=" fw-semibold">
                         <h4 class="text-gray-900 fw-bold" v-text="translate('How to use Hook')"></h4>
 
-                        <div class="fs-6 text-gray-700 ">{{translate('Go to frontend pages and add the code')}} <span v-text='"[plugin_shortcode id="+activeItem.id+" ] "'></span> from <a
-                                class="fw-bold" href="/admin/apges" v-text="translate('Pages')"></a>.
+                        <div class="fs-6 text-gray-700 ">{{translate('Go to frontend pages and add the code')}} <span class="fw-bold" v-text='"[plugin_shortcode id="+activeItem.id+" ] "'></span> from <a
+                                class="fw-bold text-gray-600" href="/admin/apges" v-text="translate('Pages')"></a>.
                         </div>
                     </div>
                     <!--end::Content-->
