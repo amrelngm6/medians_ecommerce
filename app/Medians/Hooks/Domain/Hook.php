@@ -56,7 +56,7 @@ class Hook extends CustomModel
 	}
 	
 	
-	public function plugin_object() 
+	public function plugin() 
 	{
 		return $this->hasOne(Plugin::class , 'class', 'plugin_class');	
 	}

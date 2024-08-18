@@ -15,7 +15,7 @@ class HookRepository
 
 	public function get($limit = 100)
 	{
-		return Hook::limit($limit)->get();
+		return Hook::with('plugin')->limit($limit)->get();
 	}
 
 
