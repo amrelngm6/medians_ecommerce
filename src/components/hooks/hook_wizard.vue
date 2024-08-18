@@ -66,9 +66,9 @@
 
 
                             <div class="tab-pane fade show active" v-if="activeTab != translate('General')" >
-                                <div class="d-flex flex-column gap-7 gap-lg-10" >
+                                <div class="card w-full " >
 
-                                    <div class="w-full">
+                                    <div class="card-body w-full">
                                         <div class="py-1 w-full pt-4" v-for="column in content.fillable[activeTab]" >
                                             <span class="block mb-2 form-label text-gray-600 text-lg" v-text="column.title" v-if="column.column_type != 'hidden'"></span>
                                             <form_field @callback="handleField"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
