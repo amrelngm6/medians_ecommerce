@@ -4,7 +4,7 @@
         <div  v-if="content " class=" w-full relative">
             
             <div class=" " v-if="showWizard ">
-                <product_wizard :langs="langs" @callback="()=> {activeItem = null; showWizard = false}" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.product_id ? activeItem.product_id : 'new')" :system_setting="system_setting" :setting="setting"  />
+                <product_wizard :currency="currency" :langs="langs" @callback="()=> {activeItem = null; showWizard = false}" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.product_id ? activeItem.product_id : 'new')" :system_setting="system_setting" :setting="setting"  />
             </div>
 
             <main class=" flex-1 overflow-x-hidden overflow-y-auto  w-full relative" v-if="content.items && !showWizard">
@@ -195,6 +195,7 @@ export default
         'business_setting',
         'setting',
         'conf',
+        'currency',
         'auth',
     ],
     
