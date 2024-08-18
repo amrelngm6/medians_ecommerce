@@ -13,7 +13,7 @@ class Plugin extends CustomModel
 	protected $table = 'plugins';
 
 	public $fillable = [
-		 'position', 'plugin', 'status', 
+		 'name' ,'description', 'class', 'status', 
 	];
 
 

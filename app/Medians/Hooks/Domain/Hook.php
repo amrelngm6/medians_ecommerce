@@ -18,14 +18,24 @@ class Hook extends CustomModel
 	];
 
 
-	public $appends = ['field'];
-
+	public $appends = ['content_langs', 'lang_content', 'field'];
 
 	public function getFieldAttribute() 
 	{
 		return !empty($this->custom_fields) ? array_column($this->custom_fields->toArray(), 'value', 'code') : [];
 	}
 
+	public function getContentLangsAttribute()
+	{
+		return $this->langs->keyBy('lang');
+	} 
+
+
+	public function getLangContentAttribute()
+	{
+		$lng = curLng();
+		return isset($this->content_langs[$lng]) ? $this->content_langs[$lng] : [];
+	} 
 
 	public function getFields()
 	{
@@ -33,10 +43,10 @@ class Hook extends CustomModel
 	}
 
 	
-	public function lang_content()
+	public function langs() 
 	{
-		return $this->morphOne(Content::class, 'item')->where('lang',$_SESSION['lang']);
+		return $this->morphMany(Content::class , 'item')->groupBy('lang');	
 	}
-
+	
 
 }
