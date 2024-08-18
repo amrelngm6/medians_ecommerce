@@ -16,11 +16,10 @@ class ProductCarousel
     private $categoryRepo;
     private $productRepo;
     private $hookRepo;
-
-    public static $name = "product_carousel";
-    public static $description = "";
-    public static $version = "1.0";
-    public static $shortcode = "";
+    public $name = "Products carousel";
+    public $description = "";
+    public $version = "1.0";
+    public $shortcode = "";
 	
 
 	function __construct()

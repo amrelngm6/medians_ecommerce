@@ -17,7 +17,7 @@ class Plugin extends CustomModel
 	];
 
 
-	public $appends = ['field'];
+	public $appends = ['field', 'plugin'];
 
 
 	public function getFieldAttribute() 
@@ -31,6 +31,11 @@ class Plugin extends CustomModel
 		return $this->fillable;
 	}
 
+	public function getPluginAttribute() 
+	{
+		$object = class_exists("\\".$this->class) ? new $this->class : null;	
+		return $object;	
+	}
 	
 
 

@@ -80,7 +80,7 @@
                                                         <div class="d-flex flex-column">
                                                             <h2 class="mb-1" v-text="activeItem.plugin.name"></h2>
                                                             <div class="text-muted fw-bold">
-                                                                <a href="#">Medians</a> <span class="mx-3">|</span> {{activeItem.plugin.version}} V <span class="mx-3">|</span> {{ translate('status') }} {{activeItem.status}}
+                                                                <a href="#">Medians</a> <span class="mx-3">|</span> {{activeItem.plugin.plugin.version}} V <span class="mx-3">|</span> {{ translate('status') }} {{activeItem.status}}
                                                             </div> 
                                                         </div>
                                                         <!--end::Title-->
