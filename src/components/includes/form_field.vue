@@ -3,7 +3,7 @@
         
         <input v-if="column && column.column_type == 'hidden'" :name="handleName(column)" type="hidden" :value="handleValue(column, item)">
 
-        <input @change="changed(item[column.key])" v-model="defaultModel" :required="column.required" :disabled="column.disabled" v-if="isInput(column.column_type)" autocomplete="off" :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid" :placeholder="column.title" :value="handleValue(column, item)">
+        <input @change="changed(item[column.key])" v-model="item[column.key]" :required="column.required" :disabled="column.disabled" v-if="isInput(column.column_type)" autocomplete="off" :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid" :placeholder="column.title" :value="handleValue(column, item)">
     
         <input :required="column.required" :disabled="column.disabled" v-if="column.column_type == 'password'" autocomplete="off" :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid" :placeholder="column.title">
 
