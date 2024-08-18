@@ -77,10 +77,10 @@
                                                     <div class="d-flex align-items-center">
 
                                                         <!--begin::Title-->
-                                                        <div class="d-flex flex-column">
-                                                            <h2 class="mb-1" v-text="activeItem.plugin.name"></h2>
+                                                        <div class="d-flex flex-column" v-if="activeItem.plugin">
+                                                            <h2 class="mb-1" v-text="activeItem.plugin ? activeItem.plugin.name : ''"></h2>
                                                             <div class="text-muted fw-bold">
-                                                                <a href="#">Medians</a> <span class="mx-3">|</span> {{activeItem.plugin.plugin.version}} V <span class="mx-3">|</span> {{ translate('status') }} {{activeItem.status}}
+                                                                <a href="#">Medians</a> <span class="mx-3">|</span v-if="activeItem.plugin.plugin"> {{activeItem.plugin.plugin.version}} V <span class="mx-3">|</span> {{ translate('status') }} {{activeItem.status}}
                                                             </div> 
                                                         </div>
                                                         <!--end::Title-->

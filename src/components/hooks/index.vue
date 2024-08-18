@@ -4,7 +4,7 @@
         <div  v-if="content " class=" w-full relative">
             
             <div class=" " v-if="newWizard ">
-                <plugin_picker :currency="currency" :plugins="content.plugins" @callback="(val)=> {createHook(val)}" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.id ? activeItem.id : 'new')" :system_setting="system_setting" :setting="setting"  />
+                <plugin_picker :plugins="content.plugins" @callback="(val)=> {createHook(val)}" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.id ? activeItem.id : 'new')" :system_setting="system_setting" :setting="setting"  />
             </div>
 
             <div class=" " v-if="showWizard ">
