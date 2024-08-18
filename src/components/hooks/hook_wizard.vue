@@ -67,7 +67,13 @@
                                 <div class="d-flex flex-column gap-7 gap-lg-10">
 
                                     <div class="w-full">
-
+                                        <div v-for="tab in content.fillable" v-if="content.fillable"> 
+                                            
+                                            <div class="py-1 w-full pt-4" v-for="column in tab" v-if="tab">
+                                                <span class="block mb-2  text-gray-600 text-lg" v-text="column.title" v-if="column.column_type != 'hidden'"></span>
+                                                <form_field :callback="closeSide" :column="column" :model="model"  :item="item" :conf="conf"></form_field>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

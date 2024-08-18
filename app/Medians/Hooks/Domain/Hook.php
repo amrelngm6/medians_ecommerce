@@ -4,6 +4,7 @@ namespace Medians\Hooks\Domain;
 
 use Shared\dbaser\CustomModel;
 use Medians\Content\Domain\Content;
+use Medians\Plugins\Domain\Plugin;
 
 class Hook extends CustomModel
 {
@@ -46,6 +47,17 @@ class Hook extends CustomModel
 	public function langs() 
 	{
 		return $this->morphMany(Content::class , 'item')->groupBy('lang');	
+	}
+	
+	
+	public function plugin_object() 
+	{
+		return $this->hasOne(Plugin::class , 'class', 'plugin');	
+	}
+	
+	public function hookPlugin() 
+	{
+		return class_exists($this->plugin) ? $this->plugin : null;	
 	}
 	
 
