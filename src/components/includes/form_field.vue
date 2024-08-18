@@ -70,12 +70,9 @@ export default
     emits: ['callback'],
 
     setup(props, {emit}) {
-        const defaultModel = ref();
-        defaultModel.value = handleValue(props.column, props.item)
 
         const changed = (model) => 
         {
-            console.log(defaultModel.value)
             model ? emit('callback', model, props.column.key) : '';
         }
 
@@ -90,7 +87,6 @@ export default
 
 
         return {
-            defaultModel,
             file: '',
             multipleValue,
             isInput,
