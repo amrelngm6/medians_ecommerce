@@ -1,9 +1,9 @@
 <template>
     <div class="w-full" v-if="column" >
         
-        <input v-if="column && column.column_type == 'hidden'" :name="handleName(column)" type="hidden" v-model="item[column.key]">
+        <input v-if="column && column.column_type == 'hidden'" :name="handleName(column)" type="hidden" :value="handleValue(column, item)">
 
-        <input @change="changed(item[column.key])"  :required="column.required" :disabled="column.disabled" v-if="isInput(column.column_type)" autocomplete="off" :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid" :placeholder="column.title" v-model="item[column.key]">
+        <input @change="changed(item[column.key])"  :required="column.required" :disabled="column.disabled" v-if="isInput(column.column_type)" autocomplete="off" :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid" :placeholder="column.title" :value="handleValue(column, item)">
     
         <input :required="column.required" :disabled="column.disabled" v-if="column.column_type == 'password'" autocomplete="off" :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid" :placeholder="column.title">
 
@@ -33,7 +33,7 @@
 
         <input v-if="column.multiple && column.data && column.column_type == 'select'" type="hidden" v-for="selected in  item[column.column_key]" :name="'params['+(column.column_key)+'][]'" :value="selected[column.column_key]" />
 
-        <select @change="changed(column.data[column.data.findIndex(e => e[column.key] == item[column.key])])" :required="column.required" :disabled="column.disabled" v-if="!column.multiple && column.data && column.column_type == 'select'" v-model="item[column.key]"  :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid"   :placeholder="column.title">
+        <select @change="changed(column.data[column.data.findIndex(e => e[column.key] == item[column.key])])" :required="column.required" :disabled="column.disabled" v-if="!column.multiple && column.data && column.column_type == 'select'" :value="handleValue(column, item)"  :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid"   :placeholder="column.title">
             <option value="0"  v-if="!column.required" v-text="translate('select') +' '+ column.title"></option>
             <option v-for="option in column.data" :value="option[ column.column_key ? column.column_key : column.key]" v-text="option[column.text_key]"></option>
         </select>
@@ -45,7 +45,7 @@
 <script>
 import close_icon from '@/components/svgs/Close.vue';
 import field from '@/components/includes/Field.vue';
-import { translate, handleGetRequest, handleName, isInput, setActiveStatus, handleRequest, deleteByKey, showAlert } from '@/utils.vue';
+import { translate, handleGetRequest, handleName, handleValue, isInput, setActiveStatus, handleRequest, deleteByKey, showAlert } from '@/utils.vue';
 
 import Multiselect from '@vueform/multiselect'
 import {ref} from 'vue'
@@ -94,6 +94,7 @@ export default
             changed,
             handleName,
             translate,
+            handleValue,
             multiple_changed,
             itemData: props.item,
         }
