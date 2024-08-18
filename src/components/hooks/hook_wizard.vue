@@ -65,8 +65,8 @@
                             </div>
 
 
-                            <div v-for="(tab, key) in content.fillable" class="tab-pane fade show active" >
-                                <div class="d-flex flex-column gap-7 gap-lg-10" v-if="activeTab == key">
+                            <div class="tab-pane fade show active" v-if="activeTab != translate('General')" >
+                                <div class="d-flex flex-column gap-7 gap-lg-10" >
 
                                     <div class="w-full">
                                         <div class="py-1 w-full pt-4" v-for="column in content.fillable[activeTab]" v-if="tab">
@@ -155,7 +155,7 @@ export default
             
             const templates = ref([{title:  translate('Default'), value:'default'}, {title:  translate('Modern'), value:'modern'}]);
 
-            const tabs = ref([translate('General'), translate('Options')]);
+            const tabs = ref([translate('General')]);
 
             const url =  props.conf.url+props.path+'?load=json';
             
