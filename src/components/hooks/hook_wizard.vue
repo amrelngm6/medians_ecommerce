@@ -238,7 +238,7 @@ export default
                     params.append('params[' + k + ']', d)
                 }
                 let type = array.id > 0 ? 'update' : 'create';
-                params.append('params[options]', array['options'])
+                params.append('params[options]', JSON.stringify(activeItem.value.options))
                 params.append('type', 'Hook.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
                     handleAccess(response)
