@@ -229,7 +229,7 @@
 
     </div>
 </template>
-<script>
+<script setup>
 import {ref} from 'vue';
 import moment from 'moment';
 import dashboard_card from '@/components/includes/dashboard_card.vue';
