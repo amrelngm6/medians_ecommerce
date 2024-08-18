@@ -40,9 +40,10 @@ class HookController extends CustomController
 
 		return [
             [ 'value'=> "id", 'text'=> "#"],
-            [ 'value'=> "plugin.name", 'text'=> translate('title'), 'sortable'=> false ],
+            [ 'value'=> "title", 'text'=> translate('title'), 'sortable'=> false ],
+            [ 'value'=> "plugin.name", 'text'=> translate('Plugin'), 'sortable'=> false ],
             [ 'value'=> "position", 'text'=> translate('position'), 'sortable'=> true ],
-            [ 'value'=> "plugin_class", 'text'=> translate('plugin'), 'sortable'=> true ],
+            [ 'value'=> "plugin_class", 'text'=> translate('plugin class'), 'sortable'=> true ],
             [ 'value'=> "status", 'text'=> translate('status'), 'sortable'=> false ],
 			['value'=>'edit', 'text'=>translate('View')],
 			['value'=>'delete', 'text'=>translate('Delete')],
