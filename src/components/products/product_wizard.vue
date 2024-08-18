@@ -579,9 +579,8 @@
                                             <div class="card-title d-flex flex-column">
                                                 <div class="d-flex align-items-center"><span
                                                         class="fs-4 fw-semibold text-gray-500 me-1 align-self-start">$</span><span
-                                                        class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">4298.949996948242</span>
-                                                </div><span class="text-gray-500 pt-1 fw-semibold fs-6">Total invoices
-                                                    amount</span>
+                                                        class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">{{activeItem.orders_sales_amount}}</span>
+                                                </div><span class="text-gray-500 pt-1 fw-semibold fs-6">{{translate('Total Orders sales')}}</span>
                                             </div>
                                         </div>
                                         <div class="px-4 pt-2 pb-4 d-flex align-items-center">

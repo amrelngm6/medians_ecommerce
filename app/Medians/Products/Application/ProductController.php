@@ -7,6 +7,7 @@ use Medians\Products\Infrastructure\ProductRepository;
 use Medians\Products\Infrastructure\CategoryRepository;
 use Medians\Brands\Infrastructure\BrandRepository;
 use Medians\Shipping\Infrastructure\ShippingRepository;
+use Medians\Orders\Infrastructure\OrderRepository;
 
 class ProductController extends CustomController 
 {
@@ -23,6 +24,8 @@ class ProductController extends CustomController
 	public $categoryRepo;
 
 	public $shippingRepo;
+
+	public $orderRepo;
 	
 
 	function __construct()
@@ -34,6 +37,7 @@ class ProductController extends CustomController
 		$this->categoryRepo = new CategoryRepository();
 		$this->brandRepo = new BrandRepository();
 		$this->shippingRepo = new ShippingRepository();
+		$this->orderRepo = new OrderRepository();
 	}
 
 
@@ -112,6 +116,7 @@ class ProductController extends CustomController
 		        'brands' => $this->brandRepo->get(),
 		        'shipping' => $this->shippingRepo->get(),
 		        'fillable_category' => (new CategoryController())->fillable(),
+		        'orders_sales' => $this->orderRepo->getProductSales(10),
 
 		    ]);
 		} catch (\Exception $e) {

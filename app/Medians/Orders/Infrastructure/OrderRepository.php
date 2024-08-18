@@ -59,6 +59,19 @@ class OrderRepository
 
 
 	/**
+	* Find items by `product` 
+	*/
+	public function getProductSales($itemId) 
+	{
+		return OrderItem::where('item_id', $itemId)
+		->select('SUM(total_amount) as total')
+		->limit(10)
+		->orderBy('order_id', 'DESC')
+		->get();
+	}
+
+
+	/**
 	* Find all items between two days By BranchId
 	*/
 	public function getByDate($params )
@@ -247,7 +260,7 @@ class OrderRepository
 			foreach ($data as $key => $value)
 			{
 				$value = (array) $value;
-				
+
 				$Model = OrderItem::find($value['order_item_id']);
 
 				$update = $Model->update(['status'=> $value['status']]);
