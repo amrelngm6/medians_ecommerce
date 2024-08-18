@@ -254,9 +254,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 export default 
 {
     components:{
-        
-        Chart,
-        Bar,
+        BarChart: Bar,
         dashboard_center_squares,
         dashboard_card_white,
         dashboard_card,
