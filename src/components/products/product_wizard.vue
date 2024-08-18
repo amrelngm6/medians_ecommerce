@@ -717,12 +717,13 @@ export default
                     if (parsedResponse.item) {
                         activeItem.value = parsedResponse.item ?? activeItem.value
                         activeItem.value.product_fields = parsedResponse.item.product_fields ?? {}
+                        
                     }
                     content.value  = parsedResponse 
                     categories.value = content.value.categories 
                     brands.value = content.value.brands
                     shipping.value = content.value.shipping
-                    updateStats()
+                    updateStats(parsedResponse.orders_sales)
                 });
                 
             }
@@ -790,14 +791,14 @@ export default
 
             const Cdatasets = ref();
 
-            const updateStats = () => {
+            const updateStats = (orders_sales) => {
                 Cdatasets.value = {
-                    labels:  arrayColumn(activeItem.value.orders_sales, 'total_amount') ?? [],
+                    labels:  arrayColumn(orders_sales, 'total_amount') ?? [],
                     datasets: [
                         {
                             label: '',
                             backgroundColor: '#42A5F5',
-                            data:  arrayColumn(activeItem.value.orders_sales, 'total_amount') ?? [],
+                            data:  arrayColumn(orders_sales, 'total_amount') ?? [],
                         },
                     ],
                 }
