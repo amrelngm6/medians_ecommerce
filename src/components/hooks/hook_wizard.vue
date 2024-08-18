@@ -11,7 +11,7 @@
                     <div class=" fw-semibold">
                         <h4 class="text-gray-900 fw-bold" v-text="translate('How to use Hook')"></h4>
 
-                        <div class="fs-6 text-gray-700 ">{{translate('Go to')}} <a class="fw-bold text-bg-warning" href="/admin/apges" v-text="translate('Frontend Pages')"></a> {{translate('and add the code')}} <span class="fw-bold" v-text='"[plugin_shortcode id="+activeItem.id+" ] "'></span> {{ translate('at the page builder') }}.
+                        <div class="fs-6 text-gray-700 ">{{translate('Go to')}} <a class="fw-bold text-bg-warning" href="/admin/apges" v-text="translate('Frontend Pages')"></a> {{ translate('open the page builder') }} {{translate('and add this code')}} <span class="fw-bold" v-text='"[plugin_shortcode id="+activeItem.id+" ] "'></span> .
                         </div>
                     </div>
                     <!--end::Content-->
