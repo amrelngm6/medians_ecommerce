@@ -613,8 +613,8 @@ export default
             const editor = ClassicEditor;
             const editorData = ref('<p>Hello from CKEditor 5 in Vue!</p>');
             const editorConfig =  ref({
-                plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo, Heading, Link ],
-                toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'paragraph', 'link', 'heading', 'h1', 'h2', 'h3' ],
+                plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo, Heading, Link,  ],
+                toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'paragraph', 'link', 'heading', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ],
                 // Other configuration options...
             });
 
@@ -681,4 +681,4 @@ textarea {
     padding: 10px;
     border-radius: 4px;
 }
-</style>     
+</style>
