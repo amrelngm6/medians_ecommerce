@@ -271,8 +271,8 @@
                 </div>
             </div>
         </div>
-        <BarChart :chart-data="chartData" :chart-options="chartOptions" />
-
+        
+        <BarChart :chart-data="Cdatasets" :chart-options="Coptions" />
 
     </div>
 </template>
