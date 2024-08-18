@@ -224,6 +224,10 @@ export default
             }
 
             const handleField = (val, index) => {
+                if (activeItem.value.options == null)
+                {
+                    activeItem.value.options = {}
+                }
                 activeItem.value.options[index] = val
             }
 
