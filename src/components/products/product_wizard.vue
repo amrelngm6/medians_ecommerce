@@ -478,6 +478,7 @@ import color_picker from '@/components/includes/color-picker.vue';
 import { ClassicEditor, Bold, Essentials, Italic, Mention, Paragraph, Undo } from 'ckeditor5';
 import { Ckeditor } from '@ckeditor/ckeditor5-vue';
 
+import 'ckeditor5/ckeditor5.css';
 
 
 export default
