@@ -35,7 +35,7 @@
                             </li>
                             <li class="nav-item" v-for="(tab, key) in content.fillable">
                                 <a class="nav-link text-active-primary pb-4 " @click="activeTab = key"
-                                    :class="tab == activeTab ? 'active' : ''" href="javascript:;" v-text="key"></a>
+                                    :class="tab == activeTab ? 'active' : ''" href="javascript:;" v-text="translate(key)"></a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -69,7 +69,7 @@
                                 <div class="d-flex flex-column gap-7 gap-lg-10" >
 
                                     <div class="w-full">
-                                        <div class="py-1 w-full pt-4" v-for="column in content.fillable[activeTab]" v-if="tab">
+                                        <div class="py-1 w-full pt-4" v-for="column in content.fillable[activeTab]" >
                                             <span class="block mb-2 form-label text-gray-600 text-lg" v-text="column.title" v-if="column.column_type != 'hidden'"></span>
                                             <form_field @callback="handleField"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
                                             <p v-text="column.help_text" v-if="column.help_text" ></p>
