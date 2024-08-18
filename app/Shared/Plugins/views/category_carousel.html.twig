@@ -34,42 +34,14 @@
             }
           }'>
           <div class="swiper-wrapper">
+            {% for item in items %}
             <div class="swiper-slide">
-              <img loading="lazy" class="h-auto mb-3 mx-auto d-block" src="../images/home/demo18/category-1.png" width="145" height="145" alt="">
+              <img loading="lazy" class="h-auto mb-3 mx-auto d-block {{ item.field.img_style }}" src="/app/image.php?src={{item.picture}}&w=200&h=200" width="145" height="145" alt="">
               <div class="text-center">
-                <a href="./shop1.html" class="menu-link menu-link_us-s fw-semi-bold fs-15 theme-color text-uppercase">Break System</a>
+                <a href="{{item.lang_content.prefix}}" class="menu-link menu-link_us-s fw-semi-bold fs-15 theme-color text-uppercase">{{item.lang_content.title}}</a>
               </div>
             </div>
-            <div class="swiper-slide">
-              <img loading="lazy" class="h-auto mb-3 mx-auto d-block" src="../images/home/demo18/category-2.png" width="145" height="145" alt="">
-              <div class="text-center">
-                <a href="./shop1.html" class="menu-link menu-link_us-s fw-semi-bold fs-15 theme-color text-uppercase">Damping</a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img loading="lazy" class="h-auto mb-3 mx-auto d-block" src="../images/home/demo18/category-3.png" width="145" height="145" alt="">
-              <div class="text-center">
-                <a href="./shop1.html" class="menu-link menu-link_us-s fw-semi-bold fs-15 theme-color text-uppercase">Body</a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img loading="lazy" class="h-auto mb-3 mx-auto d-block" src="../images/home/demo18/category-4.png" width="145" height="145" alt="">
-              <div class="text-center">
-                <a href="./shop1.html" class="menu-link menu-link_us-s fw-semi-bold fs-15 theme-color text-uppercase">Engine</a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img loading="lazy" class="h-auto mb-3 mx-auto d-block" src="../images/home/demo18/category-5.png" width="145" height="145" alt="">
-              <div class="text-center">
-                <a href="./shop1.html" class="menu-link menu-link_us-s fw-semi-bold fs-15 theme-color text-uppercase">Filters</a>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <img loading="lazy" class="h-auto mb-3 mx-auto d-block" src="../images/home/demo18/category-1.png" width="145" height="145" alt="">
-              <div class="text-center">
-                <a href="./shop1.html" class="menu-link menu-link_us-s fw-semi-bold fs-15 theme-color text-uppercase">Oils</a>
-              </div>
-            </div>
+            {% endfor %}
           </div><!-- /.swiper-wrapper -->
         </div><!-- /.swiper-container js-swiper-slider -->
       </div><!-- /.position-relative -->

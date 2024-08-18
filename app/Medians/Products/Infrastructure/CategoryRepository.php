@@ -51,6 +51,17 @@ class CategoryRepository
 	}
 
 
+	/**
+	 * Get categories by ID
+	 * 
+	 * @param String
+	 */ 
+	public function getByIds($ids)
+	{
+		return Category::whereIn('category_id', $ids)->orderBy('category_id', 'DESC')->get();
+	}
+
+
 
 
 

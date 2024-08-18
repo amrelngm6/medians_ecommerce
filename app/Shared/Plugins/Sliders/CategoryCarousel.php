@@ -40,9 +40,14 @@ class CategoryCarousel
 		return [
             
 			'basic'=> [	
+				[ 'key'=> "img_style", 'title'=> translate('Mobile view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for Mobile view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "categories", 'title'=> translate('Categories'), 'help_text'=> translate('Select categories to display'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'category_id', 'multiple' => true,
 					'data' => $this->categoryRepo->getActive()  
+				],	
+				[ 'key'=> "img_style", 'title'=> translate('Image style'), 'help_text'=> translate('Select style of the category image to display'),
+					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'style', 
+					'data' => [["name"=> "Squared", "style"=>""], ["name"=>"Circle", "style"=> "rounded-full"], ["name"=>"Rounded", "style"=>"rounded-lg"]]  
 				],	
 			],	
             
@@ -111,10 +116,10 @@ class CategoryCarousel
 
 			$params['categories_ids'] = json_decode($hook->field['categories']);
 
-			$items = $this->productRepo->getWithFilter($params);
+			$items = $this->categoryRepo->getByIds($params['categories_ids']);
 
             return render('Shared/Plugins/views/category_carousel.html.twig', [
-		        'items' => $items['items'],
+		        'items' => $items,
 				'hook' => $hook
 		    ],'output');
 
