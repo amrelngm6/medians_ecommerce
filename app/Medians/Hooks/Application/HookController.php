@@ -46,35 +46,6 @@ class HookController extends CustomController
 	}
 
 	
-	/**
-	 * Columns list to view at DataTable 
-	 *  
-	 */ 
-	public function fillable( ) 
-	{
-
-		return [
-            
-			'basic'=> [	
-	            [ 'key'=> "logo", 'title'=> translate('logo'), 'fillable'=>true, 'column_type'=>'file' ],
-				[ 'key'=> "allow_notifications", 'title'=> translate('Allow Notifications'), 'fillable'=> true, 'column_type'=>'checkbox' ],
-				[ 'key'=> "lang", 'title'=> translate('Languange'), 
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 
-					'data' => [['lang'=>'arabic','title'=>translate('Arabic')], ['lang'=>'english','title'=>translate('English')]]  
-				],
-			],
-			
-			'information'=> [	
-				[ 'key'=> "email", 'title'=> translate('Email'), 'help_text'=>translate('This email used for view at your profile, but for notifications we use your login email'), 'fillable'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "address", 'title'=> translate('Address'), 'fillable'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "mobile", 'title'=> translate('mobile'), 'fillable'=> true, 'column_type'=>'number' ],
-				[ 'key'=> "phone", 'title'=> translate('phone'), 'fillable'=> true, 'column_type'=>'number' ],
-			],
-
-			
-        ];
-	}
-
 
 
 	/**
@@ -83,12 +54,10 @@ class HookController extends CustomController
 	 */ 
 	public function index() 
 	{
-		$params = $this->app->request()->query->all();
-
 		return render('hooks', [
 			'load_vue'=> true,
 	        'title' => translate('Hooks list'),
-	        'items' => $this->repo->get($params),
+	        'items' => $this->repo->get(),
 	        'columns' => $this->columns(),
 	    ]);
 	}
@@ -109,8 +78,7 @@ class HookController extends CustomController
 			return render('', [
 		        'load_vue' => true,
 		        'title' => translate('Hook page'),
-		        // 'columns' => $this->columns(),
-		        'fillable' => $this->fillable(),
+		        'fillable' => $item->hookPlugin()->fillable(),
 		        'item' => $item,
 		    ]);
 

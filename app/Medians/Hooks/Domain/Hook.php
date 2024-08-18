@@ -57,7 +57,7 @@ class Hook extends CustomModel
 	
 	public function hookPlugin() 
 	{
-		return class_exists($this->plugin) ? $this->plugin : null;	
+		return class_exists("\\".$this->plugin) ? new $this->plugin : null;	
 	}
 	
 

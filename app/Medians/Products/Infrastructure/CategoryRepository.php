@@ -22,6 +22,11 @@ class CategoryRepository
         return Category::with('parent')->withCount('products')->where('model', Product::class )->limit($limit)->get();
 	}
 
+	public function getActive($limit = 100)
+	{
+        return Category::with('parent')->withCount('products')->where('status', 'on')->where('model', Product::class )->limit($limit)->get();
+	}
+
 	public function list($categoryId = 0)
 	{
         return Category::where('category_id', '!=', $categoryId)->where('model', Product::class )->select('*','category_id as value')->get();
