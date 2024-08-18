@@ -65,6 +65,29 @@ class HookController extends CustomController
 
 
 
+	/**
+	 * Admin hook page
+	 * 
+	 */ 
+	public function hook( $hook_id ) 
+	{
+		try {
+
+			$item = $this->repo->find($hook_id);
+
+			return render('', [
+		        'load_vue' => true,
+		        'title' => translate('Hook page'),
+		        // 'columns' => $this->columns(),
+		        // 'fillable' => $this->fillable(),
+		        'item' => $item,
+
+		    ]);
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+	}
+
 	public function store() 
 	{
 

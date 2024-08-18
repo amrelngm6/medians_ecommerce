@@ -236,6 +236,7 @@ if(!empty($app->auth()))
 
     /** @return Hooks */
     RouteHandler::get('/admin/hooks', \Medians\Hooks\Application\HookController::class.'@index');
+    RouteHandler::get('/admin/hooks/(:all)', \Medians\Hooks\Application\HookController::class.'@hook');
 
 
     /** @return Plugins */

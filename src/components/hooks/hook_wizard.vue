@@ -57,43 +57,7 @@
                                             </ul>
                                         </div>
                                         <div class="w-full">
-                                            <div v-for="language in langs" :key="seoLang">
-                                                <div class="card-body pt-0" v-if="seoLang == language.language_code">
-                                                    
-                                                    <div class="mb-10 fv-row">
-                                                        <label class="required form-label "><span
-                                                                v-text="translate('Name')"></span><strong class="px-4"
-                                                                v-text="language.name"></strong></label>
-                                                        <input type="text" class="form-control mb-2"
-                                                            v-model="activeItem.content_langs[language.language_code].title" />
-                                                        <div class="text-muted fs-7"
-                                                            v-text="translate('Name is required and recommended to be unique')">
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-10 fv-row">
-                                                        <label class="form-label gap-6 flex"><span
-                                                                v-text="translate('Description')"></span><strong
-                                                                class="px-4" v-text="language.name"></strong> </label>
-                                                        <ckeditor
-                                                            v-model="activeItem.content_langs[language.language_code].short"
-                                                            :editor="editor" :config="editorConfig" />
-                                                        <div class="text-muted fs-7"
-                                                            v-text="translate('Set a description to the item for better visibility')">
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-10 fv-row">
-                                                        <label class="form-label gap-6 flex"><span
-                                                                v-text="translate('Page Content')"></span><strong
-                                                                class="px-4" v-text="language.name"></strong> </label>
-                                                        <ckeditor
-                                                            v-model="activeItem.content_langs[language.language_code].content"
-                                                            :editor="editor" :config="editorConfig" />
-                                                        <div class="text-muted fs-7"
-                                                            v-text="translate('Set a description to the item for better visibility')">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
