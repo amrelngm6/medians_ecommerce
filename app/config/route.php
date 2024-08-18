@@ -234,6 +234,9 @@ if(!empty($app->auth()))
     /** @return Currencies */
     RouteHandler::get('/admin/currencies', \Medians\Currencies\Application\CurrencyController::class.'@index');
 
+    /** @return Hooks */
+    RouteHandler::get('/admin/hooks', \Medians\Hooks\Application\HookController::class.'@index');
+
 
     /**
      * Master requests

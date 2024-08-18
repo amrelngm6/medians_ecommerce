@@ -76,6 +76,8 @@ const menus = defineAsyncComponent(() => import('@/components/menus.vue') );
 
 const products = defineAsyncComponent(() => import('@/components/products/index.vue') );
 
+const hooks = defineAsyncComponent(() => import('@/components/hooks/index.vue') );
+
 const categories = defineAsyncComponent(() => import('@/components/categories/index.vue') );
 
 const notifications_events = defineAsyncComponent(() => import('@/components/notifications_events.vue') );
@@ -109,6 +111,7 @@ export default {
         menus,
         email_templates,
         notifications_events,
+        hooks,
         get_started,
         translate,
         'help_messages':HelpMessages,
