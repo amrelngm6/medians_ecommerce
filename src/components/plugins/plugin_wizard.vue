@@ -142,9 +142,7 @@ import { translate, handleGetRequest, handleRequest, deleteByKey, showAlert, han
 const form_field = defineAsyncComponent(() =>
     import('@/components/includes/form_field.vue')
 );
-import Vue3TagsInput from 'vue3-tags-input';
 import color_picker from '@/components/includes/color-picker.vue';
-import clean_charts from '@/components/includes/clean_charts.vue';
 
 
 
@@ -157,12 +155,10 @@ import 'ckeditor5/ckeditor5.css';
 export default
     {
         components: {
-            clean_charts,
             'datatabble': Vue3EasyDataTable,
             'vue-medialibrary-field': field,
             color_picker,
             static_field,
-            Vue3TagsInput,
             Ckeditor,
             close_icon,
             delete_icon,
@@ -174,14 +170,12 @@ export default
 
 
             const showAddCategory = ref(false);
-            const showEditSide = ref(false);
             const activeItem = ref({
                 "plugin": '',
                 "position": '',
                 "status": ''
             });
 
-            const orders_sales_amount = ref(0);
             const activeTab = ref(translate('General'));
             const content = ref({});
             const collapsed = ref(false);
@@ -247,59 +241,20 @@ export default
             }
 
 
-            const handleColors = (val, index) => {
-                activeItem.value.colors[index] = val
-            }
 
             const getLang = (val, index) => {
                 activeItem.value.content_langs[index] = val.content_langs[index] ?? {}
                 return activeItem.value.content_langs[index]
             }
 
-            const editor = ClassicEditor;
-            const editorConfig =  ref({
-                plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo, Heading, Link, List, Image, Font,Table, TableToolbar  ],
-                toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'heading', 'fontSize', 'fontColor' ,'link','insertTable',  'bulletedList', 'numberedList' ],
-            });
-
-            const arrayColumn = (array, column) => {
-                return array.map(item => item[column]);
-            };
-
-            const Cdatasets = ref();
-
-            const updateStats = (orders_sales) => {
-                Cdatasets.value = {
-                    labels:  arrayColumn(orders_sales, 'total_amount') ?? [],
-                    datasets: [
-                        {
-                            label: '',
-                            backgroundColor: '#42A5F5',
-                            data:  arrayColumn(orders_sales, 'total_amount') ?? [],
-                        },
-                    ],
-                }
-            }
 
             return {
-                Cdatasets,
-                orders_sales_amount,
-                editor,
-                editorConfig,
                 getLang,
-                taxsTypes,
-                vatsTypes,
-                handleColors,
                 selectedObject,
-                showAddCategory,
-                showEditSide,
                 closeSide,
                 content,
                 templates,
                 tabs,
-                categories,
-                brands,
-                shipping,
                 activeItem,
                 activeTab,
                 translate,

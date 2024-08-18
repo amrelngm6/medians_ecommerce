@@ -18,12 +18,6 @@ class HookRepository
 		return Hook::limit($limit)->get();
 	}
 
-	public function getByItems($ids)
-	{
-		return Hook::whereHas('items', function($q) use ($ids) {
-			$q->whereIn('product_id', $ids);
-		})->get();
-	}
 
 
 

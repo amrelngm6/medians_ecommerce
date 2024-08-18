@@ -238,6 +238,10 @@ if(!empty($app->auth()))
     RouteHandler::get('/admin/hooks', \Medians\Hooks\Application\HookController::class.'@index');
 
 
+    /** @return Plugins */
+    RouteHandler::get('/admin/plugins', \Medians\Plugins\Application\PluginController::class.'@index');
+
+
     /**
      * Master requests
      * The next reuests available only 

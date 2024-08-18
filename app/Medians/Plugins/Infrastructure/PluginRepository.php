@@ -1,31 +1,22 @@
 <?php
 
-namespace Medians\Hooks\Infrastructure;
+namespace Medians\Plugins\Infrastructure;
 
-use Medians\Hooks\Domain\Hook;
+use Medians\Plugins\Domain\Plugin;
 
 
-class HookRepository 
+class PluginRepository 
 {
 
 	public function find($id)
 	{
-		return Hook::find($id);
+		return Plugin::find($id);
 	}
 
 	public function get($limit = 100)
 	{
-		return Hook::limit($limit)->get();
+		return Plugin::limit($limit)->get();
 	}
-
-	public function getByItems($ids)
-	{
-		return Hook::whereHas('items', function($q) use ($ids) {
-			$q->whereIn('product_id', $ids);
-		})->get();
-	}
-
-
 
 
 	/**
@@ -34,7 +25,7 @@ class HookRepository
 	public function store($data) 
 	{
 
-		$Model = new Hook();
+		$Model = new Plugin();
 		
 		foreach ($data as $key => $value) 
 		{
@@ -46,7 +37,7 @@ class HookRepository
 
 		$dataArray['status'] = isset($dataArray['status']) ? 'on' : null;
 		// Return the Model object with the new data
-    	$Object = Hook::firstOrCreate($dataArray);
+    	$Object = Plugin::firstOrCreate($dataArray);
 
     	return $Object;
     }
@@ -57,7 +48,7 @@ class HookRepository
     public function update($data)
     {
 
-		$Object = Hook::find($data['id']);
+		$Object = Plugin::find($data['id']);
 		
 		// Return the Model object with the new data
     	$Object->update( (array) $data);
@@ -76,7 +67,7 @@ class HookRepository
 	{
 		try {
 			
-			return Hook::find($id)->delete();
+			return Plugin::find($id)->delete();
 
 		} catch (\Exception $e) {
 

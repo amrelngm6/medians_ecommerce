@@ -1,16 +1,16 @@
 <?php
 
-namespace Medians\Hooks\Domain;
+namespace Medians\Plugins\Domain;
 
 use Shared\dbaser\CustomModel;
 
-class Hook extends CustomModel
+class Plugin extends CustomModel
 {
 
 	/*
 	/ @var String
 	*/
-	protected $table = 'hooks';
+	protected $table = 'plugins';
 
 	public $fillable = [
 		 'position', 'plugin', 'status', 
