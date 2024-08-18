@@ -479,7 +479,7 @@ import color_picker from '@/components/includes/color-picker.vue';
 
 
 
-import { ClassicEditor, Bold, Essentials, Italic, Mention, Paragraph, Link, List, Image, Undo, Heading, Font } from 'ckeditor5';
+import { ClassicEditor, Bold, Essentials, Italic, Mention, Paragraph, Link, List, Table, TableToolbar, Image, Undo, Heading, Font } from 'ckeditor5';
 import { Ckeditor } from '@ckeditor/ckeditor5-vue';
 
 import 'ckeditor5/ckeditor5.css';
@@ -613,7 +613,7 @@ export default
             const editor = ClassicEditor;
             const editorData = ref('<p>Hello from CKEditor 5 in Vue!</p>');
             const editorConfig =  ref({
-                plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo, Heading, Link, List, Image, Font  ],
+                plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo, Heading, Link, List, Image, Font,Table, TableToolbar  ],
                 toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'heading', 'fontSize', 'fontColor', 'link', 'insertImage', 'bulletedList', 'numberedList' ],
                 // Other configuration options...
             });
