@@ -11,7 +11,7 @@
                     <div class=" fw-semibold">
                         <h4 class="text-gray-900 fw-bold" v-text="translate('How to use Hook')"></h4>
 
-                        <div class="fs-6 text-gray-700 ">{{translate('Go to frontend pages and add the code')}} <span v-text='"[plugin_shortcode id='"+activeItem.id'></span> from <a
+                        <div class="fs-6 text-gray-700 ">{{translate('Go to frontend pages and add the code')}} <span v-text='"[plugin_shortcode id='"+activeItem.id+"' ] "'></span> from <a
                                 class="fw-bold" href="/admin/apges" v-text="translate('Pages')"></a>.
                         </div>
                     </div>
