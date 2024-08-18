@@ -69,7 +69,6 @@ class ProductCarousel
 			
 			foreach ($data as $key => $value)
 			{
-				$value = (array) $value;
 				$fields = [];
 				$fields['model_id'] = $Object->id;	
 				$fields['model_type'] = Hook::class;	
