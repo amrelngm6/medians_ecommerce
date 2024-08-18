@@ -2,23 +2,6 @@
     <div class="w-full flex overflow-auto">
 
         
-        <div class=" " v-if="content && content.addNew">
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-px text-center pt-15 pb-15">
-                        <h2 class="fs-2x fw-bold mb-0" v-text="content.title"></h2>
-                        <p class="text-gray-400 fs-4 font-semibold py-7"
-                            v-text="translate('Upload your plugin file')"></p>
-                        <a  v-if="!content.no_create" v-text="translate('Upload')" @click="alert('Soon')"
-                            href="javascript:;" class="text-white btn btn-primary er fs-6 px-8 py-4"></a>
-                    </div>
-
-                    <div class="text-center pb-15 px-5">
-                        <img :src="'/uploads/img/start-wizard.png'" alt="" class="mx-auto mw-100 h-200px h-sm-325px">
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div v-if="content" class=" w-full relative">
 
@@ -36,9 +19,6 @@
                     <h1 class="font-bold text-lg w-full" v-text="content.title"></h1>
                     
 
-                    <a href="javascript:;" v-if="content.addNew = !content.addNew"
-                            class="uppercase p-2 mx-2 text-center text-white w-32 rounded-lg bg-danger"
-                            @click="addPluginWizard" v-text="translate('add_new')"></a>
 
                 </div>
                 <div class="w-full ">
