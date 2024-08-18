@@ -184,6 +184,7 @@ export default
                 var params = new URLSearchParams();
                 let array = JSON.parse(JSON.stringify(activeItem.value));
                 let keys = Object.keys(array)
+                console.log(keys)
                 let k, d, value = '';
                 for (let i = 0; i < keys.length; i++) {
                     k = keys[i]
