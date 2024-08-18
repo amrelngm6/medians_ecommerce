@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <BarChart :chart-data="chart_datasets" :chart-options="chart_options" />
+        <!-- <BarChart :chart-data="chart_datasets" :chart-options="chart_options" /> -->
 
     </div>
 </template>
