@@ -238,13 +238,10 @@ export default
                     params.append('params[' + k + ']', d)
                 }
 
-                var options = []
                 Object.keys(activeItem.value.options).forEach((e, i) => {
-                    options[e] =  activeItem.value.options[e]
-                });
-
-                params.append('params[options]', JSON.stringify(options) )
-
+                    params.append('params[options]['+e+']', activeItem.value.options[e])
+                })
+                
                 let type = array.id > 0 ? 'update' : 'create';
                 params.append('type', 'Hook.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
