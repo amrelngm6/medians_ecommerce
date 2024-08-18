@@ -82,7 +82,10 @@ class HookController extends CustomController
 
 			$item = $this->repo->find($hook_id);
 
-			$item->options = $item->field;
+			if ($item->field)
+			{
+				$item->options = $item->field;
+			}				
 
 			return render('', [
 		        'load_vue' => true,
