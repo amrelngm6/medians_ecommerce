@@ -229,7 +229,7 @@
 
     </div>
 </template>
-<script setup>
+<script >
 import {ref} from 'vue';
 import moment from 'moment';
 import dashboard_card from '@/components/includes/dashboard_card.vue';
@@ -247,10 +247,6 @@ import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, Li
 import { Bar } from 'vue-chartjs'
 
 
-// Register Chart.js components
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-
-
 export default 
 {
     components:{
@@ -266,6 +262,10 @@ export default
     name:'categories',
     setup(props) {
 
+
+
+        // Register Chart.js components
+        ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
         
 
