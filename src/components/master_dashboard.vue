@@ -261,10 +261,10 @@ export default
 
 
         const Cdatasets = ref({
-            labels: ['January', 'February', 'March', 'April'],
+            labels:  [30, 70, 45, 85],
             datasets: [
                 {
-                label: 'Sales',
+                label: '',
                 backgroundColor: '#42A5F5',
                 data: [30, 70, 45, 85],
                 },
