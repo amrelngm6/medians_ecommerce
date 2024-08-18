@@ -188,7 +188,10 @@ export default
                 let k, d, value = '';
                 for (let i = 0; i < keys.length; i++) {
                     k = keys[i]
+                    console.log(k)
+                    
                     d = (typeof array[k] === 'object' || typeof array[k] === 'array' )? JSON.stringify(array[k]) : array[k]
+                    console.log(d)
                     params.append('params[' + k + ']', d)
                 }
 
