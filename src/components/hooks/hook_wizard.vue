@@ -180,6 +180,7 @@ export default
             }
 
             const save = () => {
+                console.log(activeItem.value)
                 var params = new URLSearchParams();
                 let array = JSON.parse(JSON.stringify(activeItem.value));
                 let keys = Object.keys(array)
