@@ -33,6 +33,10 @@
                                 <a class="nav-link text-active-primary pb-4 " @click="activeTab = tab"
                                     :class="tab == activeTab ? 'active' : ''" href="javascript:;" v-text="tab"></a>
                             </li>
+                            <li class="nav-item" v-for="tab in content.fillable">
+                                <a class="nav-link text-active-primary pb-4 " @click="activeTab = tab"
+                                    :class="tab == activeTab ? 'active' : ''" href="javascript:;" v-text="tab"></a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane fade show active" v-if="activeTab == translate('General')">
@@ -60,26 +64,15 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade show active" v-if="activeTab == translate('Options')">
+
+                            <div v-for="tab in content.fillable" class="tab-pane fade show active" v-if="activeTab == tab">
                                 <div class="d-flex flex-column gap-7 gap-lg-10">
 
                                     <div class="w-full">
-                                        <ul v-if="content.fillable.length > 1"
-                                            class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2">
-                                            <li class="nav-item" v-for="tab in content.fillable">
-                                                <a class="nav-link text-active-primary pb-4 " @click="activeOptionTab = tab"
-                                                    :class="tab == activeOptionTab ? 'active' : ''" href="javascript:;" v-text="tab"></a>
-                                            </li>
-                                        </ul>
-                                        
-
-                                        <div v-for="tab in content.fillable" v-if="content.fillable"> 
-                                            
-                                            <div class="py-1 w-full pt-4" v-for="column in tab" v-if="tab">
-                                                <span class="block mb-2 form-label text-gray-600 text-lg" v-text="column.title" v-if="column.column_type != 'hidden'"></span>
-                                                <form_field @callback="handleField"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
-                                                <p v-text="column.help_text" v-if="column.help_text" ></p>
-                                            </div>
+                                        <div class="py-1 w-full pt-4" v-for="column in tab" v-if="tab">
+                                            <span class="block mb-2 form-label text-gray-600 text-lg" v-text="column.title" v-if="column.column_type != 'hidden'"></span>
+                                            <form_field @callback="handleField"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
+                                            <p v-text="column.help_text" v-if="column.help_text" ></p>
                                         </div>
                                     </div>
                                 </div>
