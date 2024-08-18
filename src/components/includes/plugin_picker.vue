@@ -8,7 +8,7 @@
                         v-text="translate('Define the required user type to complete information')"></p>
                 </div>
 
-                <div class="text-center pb-15 px-5">
+                <div class="pb-15 px-5">
                     <div class="relative mx-auto max-w-6xl py-4">
                         <div class="w-full row gap-10">
                             <div class="w-full col-3" v-if="auth && plugins" v-for="plugin in plugins" @click="disable_student ? null : setType('student')">
@@ -16,8 +16,8 @@
                                     :checked="activeItem.plugin_class == plugin.class ? true : false"
                                     name="payment_type" />
                                 <label class="gap-6 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10">
-                                    <span class="d-block fw-semibold text-start">
-                                        <span class="w-full flex gap-4"
+                                    <span class="d-flex fw-semibold text-start">
+                                        <span class="w-full flex gap-4">
                                             <vue-feather type="codesandbox"></vue-feather>
                                             <span class="text-gray-900 fw-bold d-block fs-4 mb-2"
                                                 v-text="plugin.name"></span>
