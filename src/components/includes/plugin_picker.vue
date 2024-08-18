@@ -11,7 +11,7 @@
                 <div class="pb-15 px-5">
                     <div class="relative mx-auto max-w-6xl py-4">
                         <div class="w-full row gap-10">
-                            <div class="w-full col-3" v-if="auth && plugins" v-for="plugin in plugins" @click="disable_student ? null : setType('student')">
+                            <div class="w-full col-3" v-if="auth && plugins" v-for="plugin in plugins" @click="setType(plugin.class)">
                                 <input type="radio" class="btn-check" value="plugin_class"
                                     :checked="activeItem.plugin_class == plugin.class ? true : false"
                                     name="payment_type" />
