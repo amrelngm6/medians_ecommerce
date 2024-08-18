@@ -14,7 +14,7 @@
             <input  :value="'on'" :checked="item[column.key] ? true : false"  type="checkbox" class="hidden" :name="handleName(column)" />
         </div>
         
-        <textarea  :required="column.required" :disabled="column.disabled" v-if="column.column_type == 'textarea'"  :name="handleName(column)" type="text" rows="4" class="mt-3 form-control form-control-solid" :placeholder="column.title" v-model="item[column.key]"></textarea>
+        <textarea @change="changed(item[column.key])" :required="column.required" :disabled="column.disabled" v-if="column.column_type == 'textarea'"  :name="handleName(column)" type="text" rows="4" class="mt-3 form-control form-control-solid" :placeholder="column.title" v-model="item[column.key]"></textarea>
 
         <Multiselect
             v-if="column.multiple && column.data && column.column_type == 'select'" 
