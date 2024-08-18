@@ -15,7 +15,7 @@ class Hook extends CustomModel
 	protected $table = 'hooks';
 
 	public $fillable = [
-		 'position', 'plugin', 'status', 
+		 'position', 'plugin_class', 'status', 
 	];
 
 
@@ -52,12 +52,12 @@ class Hook extends CustomModel
 	
 	public function plugin_object() 
 	{
-		return $this->hasOne(Plugin::class , 'class', 'plugin');	
+		return $this->hasOne(Plugin::class , 'class', 'plugin_class');	
 	}
 	
 	public function hookPlugin() 
 	{
-		return class_exists("\\".$this->plugin) ? new $this->plugin : null;	
+		return class_exists("\\".$this->plugin_class) ? new $this->plugin_class : null;	
 	}
 	
 

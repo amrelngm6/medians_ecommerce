@@ -56,6 +56,8 @@ class HookRepository
 		// Return the Model object with the new data
     	$Object->update( (array) $data);
 
+        $Object->hookPlugin()->update($data);
+
     	return $Object;
 
     } 

@@ -3,6 +3,8 @@
 namespace Shared\Plugins\Sliders;
 
 use Medians\Products\Infrastructure\CategoryRepository;
+use Medians\CustomFields\Domain\CustomField;
+use Medians\Hooks\Domain\Hook;
 
 
 class ProductCarousel 
@@ -54,5 +56,39 @@ class ProductCarousel
 	    ]);
 	} 
 
+
+    /**
+     * Update Lead
+     */
+    public function update($data, $Object)
+    {
+		
+		$clear = CustomField::where('model_id', $Object->id)->where('model_type', Hook::class)->delete();
+
+		if ($data) {
+			
+			foreach ($data as $key => $value)
+			{
+				$value = (array) $value;
+				if (isset($value['title'])) {
+					$fields = [];
+					$fields['model_id'] = $Object->product_id;	
+					$fields['model_type'] = Product::class;	
+					$fields['code'] = 'variants';
+					$fields['title'] = $value['title'];
+					$fields['value'] = $value['value'];
+
+					$Model = CustomField::create($fields);
+				}
+			}
+	
+			return $Model ?? '';		
+		}
+
+        $Object->hookPlugin()->update($data);
+
+    	return $Object;
+
+    } 
 
 }

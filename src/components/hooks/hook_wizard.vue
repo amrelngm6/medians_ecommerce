@@ -71,7 +71,7 @@
                                             
                                             <div class="py-1 w-full pt-4" v-for="column in tab" v-if="tab">
                                                 <span class="block mb-2 form-label text-gray-600 text-lg" v-text="column.title" v-if="column.column_type != 'hidden'"></span>
-                                                <form_field @callback="(val) => {activeItem[column.key] = val}"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
+                                                <form_field @callback="(val) => {activeItem.field[column.key] = val}"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
                                                 <p v-text="column.help_text" v-if="column.help_text" ></p>
                                             </div>
                                         </div>
@@ -180,21 +180,17 @@ export default
             }
 
             const save = () => {
-                console.log(activeItem.value)
                 var params = new URLSearchParams();
                 let array = JSON.parse(JSON.stringify(activeItem.value));
                 let keys = Object.keys(array)
-                console.log(array)
-                console.log(keys)
                 let k, d, value = '';
                 for (let i = 0; i < keys.length; i++) {
                     k = keys[i]
-                    console.log(k)
-                    
                     d = (typeof array[k] === 'object' || typeof array[k] === 'array' )? JSON.stringify(array[k]) : array[k]
-                    console.log(d)
                     params.append('params[' + k + ']', d)
                 }
+
+                params.append('params[field]', JSON.stringify(activeItem.value.field))
 
                 let type = array.id > 0 ? 'update' : 'create';
                 params.append('type', 'Hook.' + type)
