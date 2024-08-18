@@ -152,6 +152,17 @@
                                                             v-text="translate('Set a description to the item for better visibility')">
                                                         </div>
                                                     </div>
+                                                    <div>
+                                                        <label class="form-label gap-6 flex"><span v-text="translate('Page Content')"></span><strong class="px-4" v-text="language.name"></strong> </label>
+                                                        <ckeditor
+                                                            v-model="activeItem.content_langs[language.language_code].content"
+                                                            :editor="editor"
+                                                            :config="editorConfig"
+                                                        />
+                                                        <div class="text-muted fs-7"
+                                                            v-text="translate('Set a description to the item for better visibility')">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -402,11 +413,7 @@
                             </div>
                             <div class="tab-pane fade show active" v-if="activeTab == translate('Images')">
 
-                                <ckeditor
-                                    v-model="activeItem.editor"
-                                    :editor="editor"
-                                    :config="editorConfig"
-                                />
+                                
                                 <div class="d-flex flex-column gap-7 gap-lg-10">
                                     <div class="card card-flush py-4">
                                         <div class="card-header flex flex-nowrap">
@@ -611,16 +618,13 @@ export default
             }
 
             const editor = ClassicEditor;
-            const editorData = ref('<p>Hello from CKEditor 5 in Vue!</p>');
             const editorConfig =  ref({
                 plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo, Heading, Link, List, Image, Font,Table, TableToolbar  ],
                 toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'heading', 'fontSize', 'fontColor', 'link', 'insertImage', 'bulletedList', 'numberedList' ],
-                // Other configuration options...
             });
 
             return {
                 editor,
-                editorData,
                 editorConfig,
                 getLang,
                 taxsTypes,
