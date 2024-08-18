@@ -674,16 +674,6 @@ export default
         emits: ['callback'],
         setup(props, { emit }) {
 
-            const Cdatasets = ref({
-                labels:  [30, 70, 45, 85],
-                datasets: [
-                    {
-                    label: '',
-                    backgroundColor: '#42A5F5',
-                    data: [30, 70, 45, 85],
-                    },
-                ],
-            });
 
             const showAddCategory = ref(false);
             const showEditSide = ref(false);
@@ -792,6 +782,18 @@ export default
             const editorConfig =  ref({
                 plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo, Heading, Link, List, Image, Font,Table, TableToolbar  ],
                 toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'heading', 'fontSize', 'fontColor' ,'link','insertTable',  'bulletedList', 'numberedList' ],
+            });
+
+
+            const Cdatasets = ref({
+                labels:  activeItem.value.orders_sales ?? [],
+                datasets: [
+                    {
+                        label: '',
+                        backgroundColor: '#42A5F5',
+                        data: activeItem.value.orders_sales ?? [],
+                    },
+                ],
             });
 
             return {
