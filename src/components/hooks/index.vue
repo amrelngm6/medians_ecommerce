@@ -89,11 +89,13 @@ const form_field = defineAsyncComponent(() =>
 import tooltip from '@/components/includes/tooltip.vue';
 const hook_wizard = defineAsyncComponent(() => import('@/components/hooks/hook_wizard.vue') );
 
+import plugin_picker from '@/components/includes/plugin_picker.vue';
 
 export default 
 {
     components:{
         'datatabble': Vue3EasyDataTable,
+        plugin_picker,
         hook_wizard,
         delete_icon,
         car_icon,
