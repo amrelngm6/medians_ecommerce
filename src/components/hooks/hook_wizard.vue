@@ -75,12 +75,6 @@
                                                 <!--begin::Card header-->
                                                 <div class="card-header pt-10">
                                                     <div class="d-flex align-items-center">
-                                                        <!--begin::Icon-->
-                                                        <div class="symbol symbol-circle me-5">
-                                                            <div class="symbol-label bg-transparent text-primary border border-secondary border-dashed">
-                                                                <i class="ki-duotone ki-abstract-47 fs-2x text-primary"><span class="path1"></span><span class="path2"></span></i>                </div>
-                                                        </div>
-                                                        <!--end::Icon-->
 
                                                         <!--begin::Title-->
                                                         <div class="d-flex flex-column">
@@ -94,32 +88,6 @@
                                                 </div>
                                                 <!--end::Card header-->
 
-                                                <!--begin::Card body-->
-                                                <div class="card-body pb-0">
-                                                    <!--begin::Navs-->
-                                                    <div class="d-flex overflow-auto h-55px">
-                                                        <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-semibold flex-nowrap">
-                                                            <!--begin::Nav item-->
-                                                            <li class="nav-item">
-                                                                <a class="nav-link text-active-primary me-6" href="/metronic8/demo1/apps/file-manager/folders.html">
-                                                                    Files
-                                                                </a>
-                                                            </li>
-                                                            <!--end::Nav item-->
-
-                                                            <!--begin::Nav item-->
-                                                            <li class="nav-item">
-                                                                <a class="nav-link text-active-primary me-6 active" href="/metronic8/demo1/apps/file-manager/settings.html">
-                                                                    Settings
-                                                                </a>
-                                                            </li>
-                                                            <!--end::Nav item-->
-                                                        </ul>
-                                                    </div>
-                                                    <!--begin::Navs-->
-
-                                                </div>
-                                                <!--end::Card body-->
                                             </div>
                                         </div>
                                     </div>

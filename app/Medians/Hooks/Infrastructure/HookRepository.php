@@ -10,7 +10,7 @@ class HookRepository
 
 	public function find($id)
 	{
-		return Hook::find($id);
+		return Hook::with('plugin')->find($id);
 	}
 
 	public function get($limit = 100)
