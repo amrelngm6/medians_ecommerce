@@ -61,12 +61,12 @@
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" v-if="activeTab == translate('General')">
+                            <div class="tab-pane fade show active" v-if="activeTab == translate('Plugin')">
                                 <div class="d-flex flex-column gap-7 gap-lg-10">
                                     <div class="card card-flush py-4">
                                         <div class="card-header flex flex-nowrap">
                                             <div class="card-title w-full">
-                                                <h2 v-text="translate('General')"></h2>
+                                                <h2 v-text="translate('Plugin')"></h2>
                                             </div>
                                         </div>
                                         <div class="w-full">
@@ -95,7 +95,7 @@
                             </div>
 
 
-                            <div class="tab-pane fade show active" v-if="activeTab != translate('General')">
+                            <div class="tab-pane fade show active" v-if="activeTab != translate('Plugin')">
                                 <div class="card w-full ">
 
                                     <div class="card-body w-full">
@@ -179,7 +179,7 @@ export default
                 "status": ''
             });
 
-            const activeTab = ref(translate('General'));
+            const activeTab = ref(translate('Plugin'));
             const activeOptionTab = ref(translate('Basic'));
             const seoLang = ref('english');
             const content = ref({});
@@ -187,7 +187,7 @@ export default
 
             const templates = ref([{ title: translate('Default'), value: 'default' }, { title: translate('Modern'), value: 'modern' }]);
 
-            const tabs = ref([translate('General')]);
+            const tabs = ref([translate('Plugin')]);
 
             const url = props.conf.url + props.path + '?load=json';
 
