@@ -237,6 +237,8 @@ export default
                     d = (typeof array[k] === 'object' || typeof array[k] === 'array') ? JSON.stringify(array[k]) : array[k]
                     params.append('params[' + k + ']', d)
                 }
+                console.log(activeItem.value)
+                console.log(activeItem.value.options)
                 let type = array.id > 0 ? 'update' : 'create';
                 params.append('params[options]', JSON.stringify(activeItem.value.options))
                 params.append('type', 'Hook.' + type)
