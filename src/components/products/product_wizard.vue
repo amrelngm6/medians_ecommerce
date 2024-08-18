@@ -614,7 +614,7 @@ export default
             const editorData = ref('<p>Hello from CKEditor 5 in Vue!</p>');
             const editorConfig =  ref({
                 plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo, Heading, Link, List, Image  ],
-                toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'link', 'ul', 'img', 'heading', 'bulletedList', 'numberedList' ],
+                toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'link', 'insertImage', 'heading', 'bulletedList', 'numberedList' ],
                 // Other configuration options...
             });
 
