@@ -66,7 +66,7 @@
 
 
                             <div v-for="(tab, key) in content.fillable" class="tab-pane fade show active" >
-                                <div class="d-flex flex-column gap-7 gap-lg-10">
+                                <div class="d-flex flex-column gap-7 gap-lg-10" v-if="activeTab == key">
 
                                     <div class="w-full">
                                         <div class="py-1 w-full pt-4" v-for="column in content.fillable[activeTab]" v-if="tab">
