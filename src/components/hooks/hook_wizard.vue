@@ -272,6 +272,7 @@ export default
             }
 
             const handleField = (val, index) => {
+                console.log([...activeItem.value.options])
                 console.log(activeItem.value.options)
                 if (activeItem.value.options == null) {
                     activeItem.value.options = {}
