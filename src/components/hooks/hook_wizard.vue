@@ -1,8 +1,6 @@
 <template>
-    <div class="w-full flex overflow-auto">
-        <div class=" w-full relative">
-            <close_icon class="absolute top-4 right-4 z-10 cursor-pointer" @click="back" />
-            <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed  p-6">
+    <div class="w-full overflow-auto">
+        <div class="bg-danger border border-dashed border-warning d-flex mb-10 mt-10 mx-4 notice p-6 rounded text-white">
                 <!--begin::Icon-->
                 <i class="ki-duotone ki-information fs-2tx text-warning me-4"><span class="path1"></span><span
                         class="path2"></span><span class="path3"></span></i> <!--end::Icon-->
@@ -11,7 +9,7 @@
                 <div class="d-flex flex-stack flex-grow-1 ">
                     <!--begin::Content-->
                     <div class=" fw-semibold">
-                        <h4 class="text-gray-900 fw-bold">We need your attention!</h4>
+                        <h4 class="text-gray-900 fw-bold" v-text="translate('How to use Hook')"></h4>
 
                         <div class="fs-6 text-gray-700 ">Your payment was declined. To start using tools, please <a
                                 class="fw-bold" href="/metronic8/demo1/account/billing.html">Add Payment Method</a>.
@@ -22,6 +20,9 @@
                 </div>
                 <!--end::Wrapper-->
             </div>
+        <div class=" w-full relative">
+            <close_icon class="absolute top-4 right-4 z-10 cursor-pointer" @click="back" />
+
 
             <div id="kt_app_content_container" class="app-container  container-xxl ">
                 <div class="action form d-flex flex-column flex-lg-row">
