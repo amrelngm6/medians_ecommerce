@@ -624,7 +624,7 @@ export default
             const editor = ClassicEditor;
             const editorConfig =  ref({
                 plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo, Heading, Link, List, Image, Font,Table, TableToolbar  ],
-                toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'heading', 'fontSize', 'fontColor', 'link', 'insertImage', 'bulletedList', 'numberedList' ],
+                toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'heading', 'fontSize', 'fontColor' ,'link','insertTable',  'bulletedList', 'numberedList' ],
             });
 
             return {
