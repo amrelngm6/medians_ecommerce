@@ -70,6 +70,17 @@ class OrderRepository
 		->get();
 	}
 
+	/**
+	* Find items by `product` 
+	*/
+	public function getProductSalesAmount($itemId) 
+	{
+		return OrderItem::where('item_id', $itemId)
+		->select('total_amount')
+		->orderBy('order_id', 'DESC')
+		->sum('total_amount');
+	}
+
 
 	/**
 	* Find all items between two days By BranchId

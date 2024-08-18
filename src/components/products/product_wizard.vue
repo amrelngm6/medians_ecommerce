@@ -579,7 +579,7 @@
                                             <div class="card-title d-flex flex-column">
                                                 <div class="d-flex align-items-center"><span
                                                         class="fs-4 fw-semibold text-gray-500 me-1 align-self-start">$</span><span
-                                                        class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">{{activeItem.orders_sales_amount}}</span>
+                                                        class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">{{orders_sales_amount}}</span>
                                                 </div><span class="text-gray-500 pt-1 fw-semibold fs-6">{{translate('Total Orders sales')}}</span>
                                             </div>
                                         </div>
@@ -689,6 +689,7 @@ export default
             const categories = ref([]);
             const brands = ref([]);
             const shipping = ref([]);
+            const orders_sales_amount = ref(0);
             const activeTab = ref(translate('General'));
             const content = ref({});
             const collapsed = ref(false);
@@ -723,6 +724,7 @@ export default
                     categories.value = content.value.categories 
                     brands.value = content.value.brands
                     shipping.value = content.value.shipping
+                    orders_sales_amount.value = content.value.orders_sales_amount
                     updateStats(parsedResponse.orders_sales)
                 });
                 
@@ -806,6 +808,7 @@ export default
 
             return {
                 Cdatasets,
+                orders_sales_amount,
                 editor,
                 editorConfig,
                 getLang,

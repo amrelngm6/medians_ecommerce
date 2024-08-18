@@ -117,6 +117,7 @@ class ProductController extends CustomController
 		        'shipping' => $this->shippingRepo->get(),
 		        'fillable_category' => (new CategoryController())->fillable(),
 		        'orders_sales' => $this->orderRepo->getProductSales($product_id),
+		        'orders_sales_amount' => $this->orderRepo->getProductSalesAmount($product_id),
 
 		    ]);
 		} catch (\Exception $e) {
