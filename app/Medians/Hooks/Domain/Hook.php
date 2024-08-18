@@ -4,6 +4,7 @@ namespace Medians\Hooks\Domain;
 
 use Shared\dbaser\CustomModel;
 use Medians\Content\Domain\Content;
+use Medians\CustomFields\Domain\CustomField;
 use Medians\Plugins\Domain\Plugin;
 
 class Hook extends CustomModel
@@ -44,6 +45,11 @@ class Hook extends CustomModel
 	}
 
 	
+	public function custom_fields()
+	{
+		return $this->morphMany(CustomField::class, 'model');
+	}
+
 	public function langs() 
 	{
 		return $this->morphMany(Content::class , 'item')->groupBy('lang');	
