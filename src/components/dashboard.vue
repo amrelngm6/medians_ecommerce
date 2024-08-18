@@ -271,6 +271,8 @@
                 </div>
             </div>
         </div>
+        <Bar :data="Cdatasets" :options="Coptions" />
+
     </div>
 </template>
 <script>
@@ -285,6 +287,10 @@ import {translate, handleGetRequest} from '@/utils.vue';
 
 import { AgChartsVue } from 'ag-charts-vue3';
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
+
+
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js' import { Bar } from 'vue-chartjs'
+
 
 export default 
 {
@@ -302,6 +308,11 @@ export default
 
         const url =  ref(props.path + '?load=json');
 
+        const Coptions = ref({responsive: true});
+        const Cdatasets = ref({
+            labels: ['January', 'February', 'March'],
+            datasets: [{ data: [40, 20, 12] }]
+        } );
         const pie_options = ref();
         const column_options = ref();
 
@@ -419,6 +430,8 @@ export default
         }
         
         return {
+            Coptions,
+            Cdatasets,
             handleSelectedDate,
             switchDate,
             optionsbar,
