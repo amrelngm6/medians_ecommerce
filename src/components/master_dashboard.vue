@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <BarChart :chart-data="chart_datasets" :chart-options="chart_options" />
+        <BarChart :chart-data="chart_datasets" v-if="chart_datasets.labels" :chart-options="chart_options" />
 
     </div>
 </template>
@@ -270,14 +270,14 @@ export default
         
 
         const chart_datasets = ref({
-        labels: ['January', 'February', 'March', 'April'],
-        datasets: [
-            {
-            label: 'Sales',
-            backgroundColor: '#42A5F5',
-            data: [30, 70, 45, 85],
-            },
-        ],
+            labels: ['January', 'February', 'March', 'April'],
+            datasets: [
+                {
+                label: 'Sales',
+                backgroundColor: '#42A5F5',
+                data: [30, 70, 45, 85],
+                },
+            ],
         });
 
         const chart_options = ref({
