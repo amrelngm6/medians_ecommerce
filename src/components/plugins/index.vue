@@ -36,7 +36,7 @@
                                 <!--begin::Items-->
                                 <div class="py-2">
                                     <!--begin::Item-->
-                                    <div class="d-flex flex-stack">
+                                    <div class="d-flex flex-stack mb-6">
                                         <div class="d-flex">
                                             <img :src="'/metronic8/demo1/assets/media/svg/brand-logos/google-icon.svg'"
                                                 class="w-30px me-6" alt="" />
