@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <chart_datasets    :data="chart_datasets" />
+        <chart_datasets    :data="Cdatasets" />
 
     </div>
 </template>
@@ -266,7 +266,7 @@ export default
 
         
 
-        const chart_datasets = ref({
+        const Cdatasets = ref({
             labels: ['January', 'February', 'March', 'April'],
             datasets: [
                 {
@@ -469,8 +469,7 @@ export default
         }
         
         return {
-            chart_options,
-            chart_datasets,
+            Cdatasets,
             invoicesCharts,
             handleSelectedDate,
             switchDate,
