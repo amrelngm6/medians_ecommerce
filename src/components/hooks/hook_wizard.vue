@@ -190,10 +190,6 @@ export default
                     d = (typeof array[k] === 'object' || typeof array[k] === 'array' )? JSON.stringify(array[k]) : array[k]
                     params.append('params[' + k + ']', d)
                 }
-                console.log(array['options'])
-                console.log(JSON.stringify(array['options']))
-                params.append('params[options]', JSON.stringify(array['options']))
-
                 let type = array.id > 0 ? 'update' : 'create';
                 params.append('type', 'Hook.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
@@ -224,11 +220,11 @@ export default
             }
 
             const handleField = (val, index) => {
-                if (activeItem.value.options == null)
+                if (activeItem.value.field == null)
                 {
-                    activeItem.value.options = {}
+                    activeItem.value.field = {}
                 }
-                activeItem.value.options[index] = val
+                activeItem.value.field[index] = val
             }
 
             return {
