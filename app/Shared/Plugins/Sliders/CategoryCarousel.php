@@ -9,14 +9,14 @@ use Medians\CustomFields\Domain\CustomField;
 use Medians\Hooks\Domain\Hook;
 
 
-class ProductCarousel 
+class CategoryCarousel 
 {
 
 	
     private $categoryRepo;
     private $productRepo;
     private $hookRepo;
-    public $name = "Products carousel";
+    public $name = "Category carousel";
     public $description = "";
     public $version = "1.0";
     public $shortcode = "";
@@ -40,8 +40,7 @@ class ProductCarousel
 		return [
             
 			'basic'=> [	
-				[ 'key'=> "products_limit", 'title'=> translate('Max number') , 'help_text'=> translate('Max number of loaded products'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
-				[ 'key'=> "categories", 'title'=> translate('Categories'), 'help_text'=> translate('Select categories to display products from'),
+				[ 'key'=> "categories", 'title'=> translate('Categories'), 'help_text'=> translate('Select categories to display'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'category_id', 'multiple' => true,
 					'data' => $this->categoryRepo->getActive()  
 				],	
@@ -111,11 +110,10 @@ class ProductCarousel
 			$hook = $this->hookRepo->find($params['id']);
 
 			$params['categories_ids'] = json_decode($hook->field['categories']);
-			$params['limit'] = json_decode($hook->field['products_limit']);
 
 			$items = $this->productRepo->getWithFilter($params);
 
-            return render('Shared/Plugins/views/product_carousel.html.twig', [
+            return render('Shared/Plugins/views/category_carousel.html.twig', [
 		        'items' => $items['items'],
 				'hook' => $hook
 		    ],'output');
