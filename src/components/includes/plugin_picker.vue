@@ -16,10 +16,12 @@
                                     :checked="activeItem.plugin_class == plugin.class ? true : false"
                                     name="payment_type" />
                                 <label class="gap-6 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10">
-                                    <vue-feather type="codesandbox"></vue-feather>
                                     <span class="d-block fw-semibold text-start">
-                                        <span class="text-gray-900 fw-bold d-block fs-4 mb-2"
-                                            v-text="plugin.name"></span>
+                                        <span class="w-full flex gap-4"
+                                            <vue-feather type="codesandbox"></vue-feather>
+                                            <span class="text-gray-900 fw-bold d-block fs-4 mb-2"
+                                                v-text="plugin.name"></span>
+                                        </span>
                                         <span class="text-muted fw-semibold fs-6"
                                             v-text="plugin.description"></span>
                                     </span>

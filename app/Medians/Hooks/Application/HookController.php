@@ -63,6 +63,8 @@ class HookController extends CustomController
 	        'title' => translate('Hooks list'),
 	        'items' => $this->repo->get(),
 	        'columns' => $this->columns(),
+			'plugins' => $this->pluginRepo->get(),
+
 	    ]);
 	}
 
@@ -86,7 +88,6 @@ class HookController extends CustomController
 		        'title' => translate('Hook page'),
 		        'fillable' => $item->hookPlugin()->fillable(),
 		        'item' => $item,
-		        'plugins' => $this->pluginRepo->get(),
 		    ]);
 
 		} catch (\Exception $e) {
