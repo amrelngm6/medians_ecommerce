@@ -22,13 +22,13 @@
                             @click="addPluginWizard" v-text="translate('add_new')"></a>
 
                 </div>
-                <div class="w-full bg-white">
+                <div class="w-full ">
 
                     <!--begin::Connected Accounts-->
                     <div class="card mb-5 mb-xl-10">
 
                         <!--begin::Card body-->
-                        <div class="card-body border-top p-9">
+                        <div class="card-body border-top pt-4 pb-0">
                         
                             <!--begin::Item-->
                             <div class="d-flex flex-stack mb-6">
