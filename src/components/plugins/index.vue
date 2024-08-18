@@ -29,27 +29,32 @@
 
                         <!--begin::Content-->
                         <div id="kt_account_settings_connected_accounts" class="collapse show">
+                            
                             <!--begin::Card body-->
+                            <div class="card-body border-top p-9">
+                            
+                                <!--begin::Item-->
+                                <div class="d-flex flex-stack mb-6">
+                                    <div class="d-flex">
+                                        <img :src="'/metronic8/demo1/assets/media/svg/brand-logos/google-icon.svg'"
+                                            class="w-30px me-6" alt="" />
+
+                                        <div class="d-flex flex-column">
+                                            <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-bold">Title</a>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <span>Status</span>
+                                    </div>
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            
                             <div class="card-body border-top p-9">
 
 
                                 <!--begin::Items-->
                                 <div class="py-2">
-                                    <!--begin::Item-->
-                                    <div class="d-flex flex-stack mb-6">
-                                        <div class="d-flex">
-                                            <img :src="'/metronic8/demo1/assets/media/svg/brand-logos/google-icon.svg'"
-                                                class="w-30px me-6" alt="" />
-
-                                            <div class="d-flex flex-column">
-                                                <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-bold">Title</a>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-end">
-                                            <span>Status</span>
-                                        </div>
-                                    </div>
-                                    <!--end::Item-->
                                     
                                     <!--begin::Item-->
                                     <div class="d-flex flex-stack">
