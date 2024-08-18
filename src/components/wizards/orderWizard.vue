@@ -210,6 +210,9 @@
                                                         <th
                                                             class="min-w-150px"
                                                             v-text="translate('Total')"></th>
+                                                        <th
+                                                            class="min-w-150px"
+                                                            v-text="translate('Status')"></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody class="text-gray-600">

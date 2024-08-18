@@ -127,7 +127,7 @@ class OrderController extends CustomController
         try {
 
            	$returnData =  ($this->repo->update($params))
-           	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1)
+           	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0)
            	: array('error'=>translate('Not allowed'));
 
         } catch (Exception $e) {

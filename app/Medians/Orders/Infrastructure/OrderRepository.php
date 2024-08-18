@@ -148,6 +148,8 @@ class OrderRepository
     	// Store Custom fields
     	!empty($data['field']) ? $this->storeCustomFields( $data['field'], $Object->order_id) : '';
 
+    	!empty($data['items']) ? $this->updateItems( $data['items'], $Object->order_id) : '';
+
     	return $Object;
     } 
 
@@ -230,6 +232,28 @@ class OrderRepository
 			}
 			
 			return $Model;		
+		}
+	}
+
+
+	/**
+	* Update related items to database
+	*/
+	public function updateItems($data) 
+	{
+		if ($data)
+		{
+			
+			foreach ($data as $key => $value)
+			{
+				$value = (array) $value;
+				
+				$Model = OrderItem::find($value['order_item_id']);
+
+				$update = $Model->update(['status'=> $value['status']]);
+			}
+
+			return $update ? $Model : null;		
 		}
 	}
 
