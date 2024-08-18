@@ -35,7 +35,7 @@
                             </li>
                             <li class="nav-item" v-for="(tab, key) in content.fillable">
                                 <a class="nav-link text-active-primary pb-4 " @click="activeTab = key"
-                                    :class="tab == activeTab ? 'active' : ''" href="javascript:;" v-text="translate(key)"></a>
+                                    :class="key == activeTab ? 'active' : ''" href="javascript:;" v-text="translate(key)"></a>
                             </li>
                         </ul>
                         <div class="tab-content">
