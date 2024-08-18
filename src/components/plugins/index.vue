@@ -27,63 +27,61 @@
                     <!--begin::Connected Accounts-->
                     <div class="card mb-5 mb-xl-10">
 
-                        <!--begin::Content-->
-                        <div id="kt_account_settings_connected_accounts" class="collapse show">
-                            
-                            <!--begin::Card body-->
-                            <div class="card-body border-top p-9">
-                            
+                        <!--begin::Card body-->
+                        <div class="card-body border-top p-9">
+                        
+                            <!--begin::Item-->
+                            <div class="d-flex flex-stack mb-6">
+                                <div class="d-flex">
+                                    <img :src="'/metronic8/demo1/assets/media/svg/brand-logos/google-icon.svg'"
+                                        class="w-30px me-6" alt="" />
+
+                                    <div class="d-flex flex-column">
+                                        <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-bold">Title</a>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <span>Status</span>
+                                </div>
+                            </div>
+                            <!--end::Item-->
+                        </div>
+                    </div>
+
+                    <div class="card mb-5 mb-xl-10">
+                        
+                        <div class="card-body border-top p-9">
+
+
+                            <!--begin::Items-->
+                            <div class="py-2">
+                                
                                 <!--begin::Item-->
-                                <div class="d-flex flex-stack mb-6">
+                                <div class="d-flex flex-stack">
                                     <div class="d-flex">
                                         <img :src="'/metronic8/demo1/assets/media/svg/brand-logos/google-icon.svg'"
                                             class="w-30px me-6" alt="" />
 
                                         <div class="d-flex flex-column">
-                                            <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-bold">Title</a>
+                                            <a href="#"
+                                                class="fs-5 text-gray-900 text-hover-primary fw-bold">Google</a>
+                                            <div class="fs-6 fw-semibold text-gray-500">Plan properly your workflow
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-end">
-                                        <span>Status</span>
+                                        <div class="form-check form-check-solid form-check-custom form-switch">
+                                            <input class="form-check-input w-45px h-30px" type="checkbox"
+                                                id="slackswitch" />
+                                            <label class="form-check-label" for="slackswitch"></label>
+                                        </div>
                                     </div>
                                 </div>
                                 <!--end::Item-->
                             </div>
-                            
-                            <div class="card-body border-top p-9">
-
-
-                                <!--begin::Items-->
-                                <div class="py-2">
-                                    
-                                    <!--begin::Item-->
-                                    <div class="d-flex flex-stack">
-                                        <div class="d-flex">
-                                            <img :src="'/metronic8/demo1/assets/media/svg/brand-logos/google-icon.svg'"
-                                                class="w-30px me-6" alt="" />
-
-                                            <div class="d-flex flex-column">
-                                                <a href="#"
-                                                    class="fs-5 text-gray-900 text-hover-primary fw-bold">Google</a>
-                                                <div class="fs-6 fw-semibold text-gray-500">Plan properly your workflow
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-end">
-                                            <div class="form-check form-check-solid form-check-custom form-switch">
-                                                <input class="form-check-input w-45px h-30px" type="checkbox"
-                                                    id="slackswitch" />
-                                                <label class="form-check-label" for="slackswitch"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end::Item-->
-                                </div>
-                                <!--end::Items-->
-                            </div>
-                            <!--end::Card body-->
-
+                            <!--end::Items-->
                         </div>
+                        <!--end::Card body-->
                         <!--end::Content-->
                     </div>
                     <!--end::Connected Accounts-->
