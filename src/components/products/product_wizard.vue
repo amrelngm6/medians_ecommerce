@@ -401,8 +401,12 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade show active" v-if="activeTab == translate('Images')">
-                                <ckeditor :editor="editor" tag-name="textarea" />
 
+                                <ckeditor
+                                    v-model="editorData"
+                                    :editor="editor"
+                                    :config="editorConfig"
+                                />
                                 <div class="d-flex flex-column gap-7 gap-lg-10">
                                     <div class="card card-flush py-4">
                                         <div class="card-header flex flex-nowrap">
