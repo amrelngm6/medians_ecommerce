@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <BarChart :chart-data="Cdatasets" :chart-options="Coptions" />
+        <BarChart :chart-data="chart_datasets" :chart-options="chart_options" />
 
     </div>
 </template>
@@ -269,7 +269,7 @@ export default
 
         
 
-        const Cdatasets = {
+        const chart_datasets = {
         labels: ['January', 'February', 'March', 'April'],
         datasets: [
             {
@@ -280,7 +280,7 @@ export default
         ],
         }
 
-        const Coptions = {
+        const chart_options = {
             plugins: {
                 legend: {
                 display: false, // Hide the legend
@@ -490,8 +490,8 @@ export default
         }
         
         return {
-            Coptions,
-            Cdatasets,
+            chart_options,
+            chart_datasets,
             invoicesCharts,
             handleSelectedDate,
             switchDate,
