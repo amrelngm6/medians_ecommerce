@@ -587,6 +587,7 @@
                                         <div class="px-4 pt-2 pb-4 d-flex align-items-center">
                                             <div class="d-flex flex-center me-5 pt-2"></div>
                                             <div class="d-flex flex-column content-justify-center w-100">
+                                                <clean_charts    :data="Cdatasets" />
                                             </div>
                                         </div>
                                     </div>
@@ -641,6 +642,7 @@ const form_field = defineAsyncComponent(() =>
 );
 import Vue3TagsInput from 'vue3-tags-input';
 import color_picker from '@/components/includes/color-picker.vue';
+import clean_charts from '@/components/includes/clean_charts.vue';
 
 
 
@@ -653,6 +655,7 @@ import 'ckeditor5/ckeditor5.css';
 export default
     {
         components: {
+            clean_charts,
             'datatabble': Vue3EasyDataTable,
             'vue-medialibrary-field': field,
             color_picker,
@@ -671,6 +674,16 @@ export default
         emits: ['callback'],
         setup(props, { emit }) {
 
+            const Cdatasets = ref({
+                labels:  [30, 70, 45, 85],
+                datasets: [
+                    {
+                    label: '',
+                    backgroundColor: '#42A5F5',
+                    data: [30, 70, 45, 85],
+                    },
+                ],
+            });
 
             const showAddCategory = ref(false);
             const showEditSide = ref(false);
@@ -782,6 +795,7 @@ export default
             });
 
             return {
+                Cdatasets,
                 editor,
                 editorConfig,
                 getLang,
