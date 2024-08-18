@@ -238,9 +238,7 @@ export default
                     params.append('params[' + k + ']', d)
                 }
                 console.log(activeItem.value)
-                activeItem.value.options.forEach(element => {
-                    console.log(element)
-                });
+                console.log(Object.keys(activeItem.value.options))
                 console.log(activeItem.value.options.categories)
                 let type = array.id > 0 ? 'update' : 'create';
                 params.append('params[options]', activeItem.value.options)
