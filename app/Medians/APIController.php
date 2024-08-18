@@ -175,6 +175,10 @@ class APIController extends CustomController
 					$return = (new Branches\Application\BranchController)->store();
 					break;
 					
+				case 'Hook.create':
+					$return = (new Hooks\Application\HookController)->store();
+					break;
+					
 		
 			}
 

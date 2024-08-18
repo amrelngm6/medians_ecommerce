@@ -4,7 +4,7 @@
         <div  v-if="content " class=" w-full relative">
             
             <div class=" " v-if="newWizard ">
-                <plugin_picker :currency="currency" :plugins="content.plugins" @callback="()=> {activeItem = null; showWizard = false}" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.id ? activeItem.id : 'new')" :system_setting="system_setting" :setting="setting"  />
+                <plugin_picker :currency="currency" :plugins="content.plugins" @callback="(val)=> {createHook(val)}" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.id ? activeItem.id : 'new')" :system_setting="system_setting" :setting="setting"  />
             </div>
 
             <div class=" " v-if="showWizard ">
@@ -178,8 +178,18 @@ export default
 
 
         const showTip = ref({});
+        const createHook = (val) => {
+
+            var params = new URLSearchParams();
+                params.append('params[plugin_class]', val)
+                params.append('type', 'Hook.create')
+                handleRequest(params, '/api/create').then(response => {
+                    handleAccess(response)
+                })
+        };
         
         return {
+            createHook,
             newWizard,
             showTip,
             showEditSide,
