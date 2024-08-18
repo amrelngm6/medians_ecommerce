@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="card-body pt-0">
-                                <select  v-model="activeItem.status"  class="form-control form-control-solid"   :placeholder="column.title">
+                                <select  v-model="activeItem.status"  class="form-control form-control-solid"   :placeholder="translate('Status')">
                                     <option value=""  v-text="translate('Pending')"></option>
                                     <option value="on"  v-text="translate('Active')"></option>
                                 </select>
