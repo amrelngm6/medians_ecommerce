@@ -71,7 +71,7 @@
                                             
                                             <div class="py-1 w-full pt-4" v-for="column in tab" v-if="tab">
                                                 <span class="block mb-2 form-label text-gray-600 text-lg" v-text="column.title" v-if="column.column_type != 'hidden'"></span>
-                                                <form_field @callback="(val)  {activeItem.options ? (activeItem.options[column.key] = val) : (activeItem.options = [], activeItem.options[column.key] = val)}"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
+                                                <form_field @callback="(val) => {activeItem.value.options[column.key] = val}"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
                                                 <p v-text="column.help_text" v-if="column.help_text" ></p>
                                             </div>
                                         </div>
