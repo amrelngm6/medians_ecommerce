@@ -225,7 +225,7 @@
                 </div>
             </div>
         </div>
-        <chart_datasets    :data="Cdatasets" />
+        <clean_charts    :data="Cdatasets" />
 
     </div>
 </template>
@@ -247,7 +247,7 @@ import VueTailwindDatepicker from "vue-tailwind-datepicker";
 export default 
 {
     components:{
-        chart_datasets,
+        clean_charts,
         dashboard_center_squares,
         dashboard_card_white,
         dashboard_card,
