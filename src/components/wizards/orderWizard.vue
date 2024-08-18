@@ -243,8 +243,10 @@
                                                         </td>
                                                         <td
                                                             v-text="orderItem.quantity"></td>
-                                                        <td
-                                                            v-text="currency.symbol+''+orderItem.total_amount"></td>
+                                                        <td  v-text="currency.symbol+''+orderItem.total_amount"></td>
+                                                        <td  >
+                                                            <form_field  @callback="(val) => {console.log(val), orderItem.status = val.status}" :item="orderItem" :column="{key:'status',title: translate('Item status') , column_type:'select', text_key: 'name', column_key: 'status', data: statusList, withLabel:false}" ></form_field>
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
