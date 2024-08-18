@@ -42,6 +42,22 @@
                                                 class="w-30px me-6" alt="" />
 
                                             <div class="d-flex flex-column">
+                                                <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-bold">Title</a>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <span>Status</span>
+                                        </div>
+                                    </div>
+                                    <!--end::Item-->
+                                    
+                                    <!--begin::Item-->
+                                    <div class="d-flex flex-stack">
+                                        <div class="d-flex">
+                                            <img :src="'/metronic8/demo1/assets/media/svg/brand-logos/google-icon.svg'"
+                                                class="w-30px me-6" alt="" />
+
+                                            <div class="d-flex flex-column">
                                                 <a href="#"
                                                     class="fs-5 text-gray-900 text-hover-primary fw-bold">Google</a>
                                                 <div class="fs-6 fw-semibold text-gray-500">Plan properly your workflow
