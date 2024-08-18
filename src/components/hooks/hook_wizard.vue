@@ -191,7 +191,7 @@ export default
                     params.append('params[' + k + ']', d)
                 }
 
-                params.append('params[options]', JSON.stringify(array['field']))
+                params.append('params[options]', JSON.stringify(array['options']))
 
                 let type = array.id > 0 ? 'update' : 'create';
                 params.append('type', 'Hook.' + type)
