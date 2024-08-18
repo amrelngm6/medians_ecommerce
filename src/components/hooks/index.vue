@@ -178,10 +178,11 @@ export default
 
 
         const showTip = ref({});
-        const createHook = (val) => {
+        const createHook = (plugin) => {
 
             var params = new URLSearchParams();
-                params.append('params[plugin_class]', val)
+                params.append('params[title]', plugin.name)
+                params.append('params[plugin_class]', plugin.class)
                 params.append('type', 'Hook.create')
                 handleRequest(params, '/api/create').then(response => {
                     handleAccess(response)

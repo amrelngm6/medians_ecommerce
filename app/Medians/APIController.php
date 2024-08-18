@@ -455,6 +455,10 @@ class APIController extends CustomController
 					return response((new Branches\Application\BranchController())->delete());
 					break;
 			
+				case 'Hook.delete':
+					return response((new Hooks\Application\HookController())->delete());
+					break;
+			
 			}
 
 		} catch (Exception $e) {
