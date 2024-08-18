@@ -239,9 +239,7 @@ export default
                 }
 
                 Object.keys(activeItem.value.options).forEach((e, i) => {
-                    console.log(e)
-                    console.log(i)
-
+                    console.log(activeItem.value.options[e])
                 })
                 console.log(activeItem.value)
                 console.log(activeItem.value.options.categories)
