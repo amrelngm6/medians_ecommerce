@@ -74,7 +74,7 @@ class ProductCarousel
 					$fields = [];
 					$fields['model_id'] = $Object->product_id;	
 					$fields['model_type'] = Product::class;	
-					$fields['code'] = 'variants';
+					$fields['code'] = $value;
 					$fields['title'] = $value['title'];
 					$fields['value'] = $value['value'];
 

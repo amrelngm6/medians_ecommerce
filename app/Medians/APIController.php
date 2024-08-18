@@ -339,6 +339,10 @@ class APIController extends CustomController
 			case 'Branch.update':
 				$controller = new Branches\Application\BranchController; 
 				break;
+
+			case 'Hook.update':
+				$controller = new Hooks\Application\HookController; 
+				break;
 			
 		}
 

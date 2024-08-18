@@ -38,7 +38,7 @@ class HookController extends CustomController
             [ 'value'=> "id", 'text'=> "#"],
             [ 'value'=> "content.title", 'text'=> translate('title'), 'sortable'=> false ],
             [ 'value'=> "position", 'text'=> translate('position'), 'sortable'=> true ],
-            [ 'value'=> "plugin", 'text'=> translate('plugin'), 'sortable'=> true ],
+            [ 'value'=> "plugin_class", 'text'=> translate('plugin'), 'sortable'=> true ],
             [ 'value'=> "status", 'text'=> translate('status'), 'sortable'=> false ],
 			['value'=>'edit', 'text'=>translate('View')],
 			['value'=>'delete', 'text'=>translate('Delete')],
@@ -121,7 +121,7 @@ class HookController extends CustomController
         	$params['status'] = !empty($params['status']) ? $params['status'] : null;
             if ($this->repo->update($params))
             {
-                return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
+                return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0);
             }
         
 
