@@ -111,7 +111,7 @@
                         </div>
 
                         <div class="d-flex justify-content-end">
-                            <a href="/admin/hooks" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5"
+                            <a href="/admin/plugins" id="kt_ecommerce_add_product_cancel" class="btn btn-light me-5"
                                 v-text="translate('Cancel')"></a>
                             <button @click="save" id="kt_ecommerce_add_product_submit" class="btn btn-primary">
                                 <span class="indicator-label" v-text="translate('Save Changes')"> </span>
@@ -168,7 +168,7 @@ export default
             delete_icon,
             form_field,
         },
-        name: 'Hooks',
+        name: 'Plugins',
         emits: ['callback'],
         setup(props, { emit }) {
 
@@ -225,7 +225,7 @@ export default
                 }
 
                 let type = array.id > 0 ? 'update' : 'create';
-                params.append('type', 'Hook.' + type)
+                params.append('type', 'Plugin.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
                     handleAccess(response)
                 })
