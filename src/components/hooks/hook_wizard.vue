@@ -31,6 +31,20 @@
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
+                                    <h2 v-text="translate('Title')"></h2>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <input type="text" class="form-control mb-2" v-model="activeItem.title" />
+                                <div class="text-muted fs-7" v-text="translate('Set the item title')"></div>
+                            </div>
+                        </div>
+
+
+                        
+                        <div class="card card-flush py-4">
+                            <div class="card-header">
+                                <div class="card-title">
                                     <h2 v-text="translate('Status')"></h2>
                                 </div>
                                 <div class="card-toolbar">
@@ -45,6 +59,7 @@
                                 <div class="text-muted fs-7" v-text="translate('Set the item status')"></div>
                             </div>
                         </div>
+
 
                     </div>
                     <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
