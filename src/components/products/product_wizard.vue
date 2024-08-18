@@ -403,7 +403,7 @@
                             <div class="tab-pane fade show active" v-if="activeTab == translate('Images')">
 
                                 <ckeditor
-                                    v-model="editorData"
+                                    v-model="activeItem.editor"
                                     :editor="editor"
                                     :config="editorConfig"
                                 />
