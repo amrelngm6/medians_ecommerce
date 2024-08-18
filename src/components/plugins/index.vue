@@ -47,8 +47,8 @@
                             <!--end::Item-->
                         </div>
                     </div>
-
-                    <div class="card mb-5 mb-xl-10">
+                    
+                    <div v-for="plugin in content.items" class="card mb-5 mb-xl-10">
                         
                         <div class="card-body border-top p-9">
 
@@ -64,8 +64,8 @@
 
                                         <div class="d-flex flex-column">
                                             <a href="#"
-                                                class="fs-5 text-gray-900 text-hover-primary fw-bold">Google</a>
-                                            <div class="fs-6 fw-semibold text-gray-500">Plan properly your workflow
+                                                class="fs-5 text-gray-900 text-hover-primary fw-bold" v-text="plugin.name"></a>
+                                            <div class="fs-6 fw-semibold text-gray-500" v-text="plugin.description">
                                             </div>
                                         </div>
                                     </div>
@@ -84,6 +84,7 @@
                         <!--end::Card body-->
                         <!--end::Content-->
                     </div>
+
                     <!--end::Connected Accounts-->
 
                 </div>
