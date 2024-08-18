@@ -783,14 +783,17 @@ export default
                 toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'heading', 'fontSize', 'fontColor' ,'link','insertTable',  'bulletedList', 'numberedList' ],
             });
 
+            const arrayColumn = (array, column) => {
+                return array.map(item => item[column]);
+            };
 
             const Cdatasets = ref({
-                labels:  activeItem.value.orders_sales ?? [],
+                labels:  arrayColumn(activeItem.value.orders_sales, 'total_amount') ?? [],
                 datasets: [
                     {
                         label: '',
                         backgroundColor: '#42A5F5',
-                        data: activeItem.value.orders_sales ?? [],
+                        data:  arrayColumn(activeItem.value.orders_sales, 'total_amount') ?? [],
                     },
                 ],
             });

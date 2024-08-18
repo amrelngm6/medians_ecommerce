@@ -116,7 +116,7 @@ class ProductController extends CustomController
 		        'brands' => $this->brandRepo->get(),
 		        'shipping' => $this->shippingRepo->get(),
 		        'fillable_category' => (new CategoryController())->fillable(),
-		        'orders_sales' => $this->orderRepo->getProductSales(10),
+		        'orders_sales' => $this->orderRepo->getProductSales($product_id),
 
 		    ]);
 		} catch (\Exception $e) {
