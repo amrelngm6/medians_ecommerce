@@ -205,10 +205,10 @@
                                                             class="min-w-100px"
                                                             v-text="translate('Options')"></th>
                                                         <th
-                                                            class="min-w-100px"
+                                                            class=""
                                                             v-text="translate('Qty')"></th>
                                                         <th
-                                                            class="min-w-150px"
+                                                            class=""
                                                             v-text="translate('Total')"></th>
                                                         <th
                                                             class="min-w-150px"
