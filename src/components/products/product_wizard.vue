@@ -586,7 +586,7 @@
                                         <div class="px-4 pt-2 pb-4 d-flex align-items-center">
                                             <div class="d-flex flex-center me-5 pt-2"></div>
                                             <div class="d-flex flex-column content-justify-center w-100">
-                                                <clean_charts    :data="Cdatasets" />
+                                                <clean_charts    :data="Cdatasets" :key="Cdatasets" />
                                             </div>
                                         </div>
                                     </div>
@@ -722,6 +722,7 @@ export default
                     categories.value = content.value.categories 
                     brands.value = content.value.brands
                     shipping.value = content.value.shipping
+                    updateStats()
                 });
                 
             }
@@ -787,16 +788,20 @@ export default
                 return array.map(item => item[column]);
             };
 
-            const Cdatasets = ref({
-                labels:  arrayColumn(activeItem.value.orders_sales, 'total_amount') ?? [],
-                datasets: [
-                    {
-                        label: '',
-                        backgroundColor: '#42A5F5',
-                        data:  arrayColumn(activeItem.value.orders_sales, 'total_amount') ?? [],
-                    },
-                ],
-            });
+            const Cdatasets = ref();
+
+            const updateStats = () => {
+                Cdatasets.value = {
+                    labels:  arrayColumn(activeItem.value.orders_sales, 'total_amount') ?? [],
+                    datasets: [
+                        {
+                            label: '',
+                            backgroundColor: '#42A5F5',
+                            data:  arrayColumn(activeItem.value.orders_sales, 'total_amount') ?? [],
+                        },
+                    ],
+                }
+            }
 
             return {
                 Cdatasets,
