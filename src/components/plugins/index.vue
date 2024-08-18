@@ -15,46 +15,17 @@
                 <div class="px-4 mb-6 py-4 rounded-lg shadow-md bg-white dark:bg-gray-700 flex w-full">
 
                     <h1 class="font-bold text-lg w-full" v-text="content.title"></h1>
-                </div>
-                <div class="w-full bg-white">
-                    <div class="card-header align-items-center py-5 gap-2 gap-md-5 w-full flex px-4">
-                        <div class="card-title">
-                            <div class="d-flex align-items-center position-relative my-1">
-                                <input type="text" v-model="searchValue" data-kt-ecommerce-order-filter="search"
-                                    class="form-control form-control-solid w-250px ps-12" placeholder="Search Report">
-                            </div>
-                        </div>
-                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                    
 
-                            <div class="w-150px">
-                                <select v-model="searchField"
-                                    class="form-select form-select-solid select2-hidden-accessible"
-                                    data-control="select2" data-hide-search="true" data-placeholder="Rating"
-                                    data-kt-ecommerce-order-filter="rating" data-select2-id="select2-data-9-zple"
-                                    tabindex="-1" aria-hidden="true" data-kt-initialized="1">
-                                    <option v-for="col in content.columns" v-text="col.text" :value="col.value">
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <a href="javascript:;" v-if="!showWizard"
+                    <a href="javascript:;" v-if="!showWizard"
                             class="uppercase p-2 mx-2 text-center text-white w-32 rounded-lg bg-danger"
                             @click="addPluginWizard" v-text="translate('add_new')"></a>
 
-                    </div>
+                </div>
+                <div class="w-full bg-white">
 
                     <!--begin::Connected Accounts-->
                     <div class="card mb-5 mb-xl-10">
-                        <!--begin::Card header-->
-                        <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
-                            data-bs-target="#kt_account_connected_accounts" aria-expanded="true"
-                            aria-controls="kt_account_connected_accounts">
-                            <div class="card-title m-0">
-                                <h3 class="fw-bold m-0">Connected Accounts</h3>
-                            </div>
-                        </div>
-                        <!--end::Card header-->
 
                         <!--begin::Content-->
                         <div id="kt_account_settings_connected_accounts" class="collapse show">
@@ -98,40 +69,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="d-flex justify-content-end">
-                                            <div class="form-check form-check-solid form-check-custom form-switch">
-                                                <input class="form-check-input w-45px h-30px" type="checkbox"
-                                                    id="googleswitch" checked />
-                                                <label class="form-check-label" for="googleswitch"></label>
-                                            </div>
-                                        </div>
                                     </div>
-                                    <!--end::Item-->
-
-                                    <div class="separator separator-dashed my-5"></div>
-
-                                    <!--begin::Item-->
-                                    <div class="d-flex flex-stack">
-                                        <div class="d-flex">
-                                            <img :src="'/metronic8/demo1/assets/media/svg/brand-logos/github.svg'"
-                                                class="w-30px me-6" alt="" />
-
-                                            <div class="d-flex flex-column">
-                                                <a href="#"
-                                                    class="fs-5 text-gray-900 text-hover-primary fw-bold">Github</a>
-                                                <div class="fs-6 fw-semibold text-gray-500">Keep eye on on your
-                                                    Repositories</div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-end">
-                                            <div class="form-check form-check-solid form-check-custom form-switch">
-                                                <input class="form-check-input w-45px h-30px" type="checkbox"
-                                                    id="githubswitch" checked />
-                                                <label class="form-check-label" for="githubswitch"></label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end::Item-->
 
                                     <div class="separator separator-dashed my-5"></div>
 
