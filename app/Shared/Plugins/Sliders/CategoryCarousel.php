@@ -46,8 +46,8 @@ class CategoryCarousel
 					'data' => $this->categoryRepo->getActive()  
 				],	
 				[ 'key'=> "img_style", 'title'=> translate('Image style'), 'help_text'=> translate('Select style of the category image to display'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'style', 
-					'data' => [["name"=> "Squared", "style"=>""], ["name"=>"Circle", "style"=> "rounded-full"], ["name"=>"Rounded", "style"=>"rounded-lg"]]  
+					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'img_style', 
+					'data' => [["name"=> "Squared", "img_style"=>""], ["name"=>"Circle", "img_style"=> "rounded-full"], ["name"=>"Rounded", "img_style"=>"rounded-lg"]]  
 				],	
 			],	
             
