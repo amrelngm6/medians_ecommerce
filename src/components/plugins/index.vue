@@ -32,27 +32,6 @@
                             <!--begin::Card body-->
                             <div class="card-body border-top p-9">
 
-                                <!--begin::Notice-->
-                                <div
-                                    class="notice d-flex bg-light-primary rounded border-primary border border-dashed mb-9 p-6">
-                                    <!--begin::Icon-->
-                                    <i class="ki-duotone ki-design-1 fs-2tx text-primary me-4"></i> <!--end::Icon-->
-
-                                    <!--begin::Wrapper-->
-                                    <div class="d-flex flex-stack flex-grow-1 ">
-                                        <!--begin::Content-->
-                                        <div class=" fw-semibold">
-
-                                            <div class="fs-6 text-gray-700 ">Two-factor authentication adds an extra
-                                                layer of security to your account. To log in, in you'll need to provide
-                                                a 4 digit amazing code. <a href="#" class="fw-bold">Learn More</a></div>
-                                        </div>
-                                        <!--end::Content-->
-
-                                    </div>
-                                    <!--end::Wrapper-->
-                                </div>
-                                <!--end::Notice-->
 
                                 <!--begin::Items-->
                                 <div class="py-2">
@@ -67,30 +46,6 @@
                                                     class="fs-5 text-gray-900 text-hover-primary fw-bold">Google</a>
                                                 <div class="fs-6 fw-semibold text-gray-500">Plan properly your workflow
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="separator separator-dashed my-5"></div>
-
-                                    <!--begin::Item-->
-                                    <div class="d-flex flex-stack">
-                                        <div class="d-flex">
-                                            <img :src="'/metronic8/demo1/assets/media/svg/brand-logos/slack-icon.svg'"
-                                                class="w-30px me-6" alt="" />
-
-                                            <div class="d-flex flex-column">
-                                                <a href="#"
-                                                    class="fs-5 text-gray-900 text-hover-primary fw-bold">Slack</a>
-                                                <div class="fs-6 fw-semibold text-gray-500">Integrate Projects
-                                                    Discussions</div>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex justify-content-end">
-                                            <div class="form-check form-check-solid form-check-custom form-switch">
-                                                <input class="form-check-input w-45px h-30px" type="checkbox"
-                                                    id="slackswitch" />
-                                                <label class="form-check-label" for="slackswitch"></label>
                                             </div>
                                         </div>
                                     </div>
