@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="card-body pt-0">
-                                <form_field :item="activeItem" @callback="(val) => {activeItem.status = val}"
+                                <form_field :item="activeItem" @callback="switchStatus(val, key)"
                                     :column="{ required: true, key: 'status', title: translate('status'), column_type: 'select', text_key: 'title', column_key: 'value', data: [{ 'value': null, 'title': translate('Pending') }, { 'value': 'on', 'title': translate('Active') }] }">
                                 </form_field>
                                 <div class="text-muted fs-7" v-text="translate('Set the item status')"></div>
@@ -271,8 +271,16 @@ export default
                 }
                 activeItem.value.options[index] = val
             }
+            
+            const switchStatus = (val, index) => {
+                console.log(val)
+                console.log(index)
 
+            }
+                
+                
             return {
+                switchStatus,
                 activeOptionTab,
                 handleField,
                 getLang,

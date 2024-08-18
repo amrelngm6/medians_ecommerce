@@ -95,8 +95,6 @@ class ProductCarousel
 			return $Model ?? '';		
 		}
 
-        $Object->hookPlugin()->update($data);
-
     	return $Object;
 
     } 

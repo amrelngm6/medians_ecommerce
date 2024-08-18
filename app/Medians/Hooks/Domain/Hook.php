@@ -16,7 +16,7 @@ class Hook extends CustomModel
 	protected $table = 'hooks';
 
 	public $fillable = [
-		 'position', 'plugin_class', 'status', 
+		 'title', 'position', 'plugin_class', 'status', 
 	];
 
 
