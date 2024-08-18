@@ -70,16 +70,14 @@ class ProductCarousel
 			foreach ($data as $key => $value)
 			{
 				$value = (array) $value;
-				if (isset($value['title'])) {
-					$fields = [];
-					$fields['model_id'] = $Object->product_id;	
-					$fields['model_type'] = Product::class;	
-					$fields['code'] = $value;
-					$fields['title'] = $value['title'];
-					$fields['value'] = $value['value'];
+				$fields = [];
+				$fields['model_id'] = $Object->id;	
+				$fields['model_type'] = Hook::class;	
+				$fields['code'] = $key;
+				$fields['title'] = '';
+				$fields['value'] = (is_array($value) || is_object($value)) ? json_encode($value) : $value;
 
-					$Model = CustomField::create($fields);
-				}
+				$Model = CustomField::firstOrCreate($fields);
 			}
 	
 			return $Model ?? '';		
