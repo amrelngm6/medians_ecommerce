@@ -269,7 +269,7 @@ export default
 
         
 
-        const Cdatasets = ref({
+        const Cdatasets = {
         labels: ['January', 'February', 'March', 'April'],
         datasets: [
             {
@@ -278,7 +278,7 @@ export default
             data: [30, 70, 45, 85],
             },
         ],
-        })
+        }
 
         const Coptions = {
             plugins: {
