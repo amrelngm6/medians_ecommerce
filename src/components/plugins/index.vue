@@ -17,10 +17,6 @@
                     <h1 class="font-bold text-lg w-full" v-text="content.title"></h1>
                     
 
-                    <a href="javascript:;" v-if="!showWizard"
-                            class="uppercase p-2 mx-2 text-center text-white w-32 rounded-lg bg-danger"
-                            @click="addPluginWizard" v-text="translate('add_new')"></a>
-
                 </div>
                 <div class="w-full ">
 
