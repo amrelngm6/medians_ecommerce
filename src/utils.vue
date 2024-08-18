@@ -300,6 +300,12 @@ export function handleName (column)
     return  (column && column.custom_field) ? 'params[field]['+column.key+']' : 'params['+column.key+']';
 }
 
+export function handleValue (column, item) 
+{
+    let subKeys = column.key.split(".")
+    return  (column && column.custom_field) ?  (item.field ? item.field[column.key] : (item[subKeys[0]][subKeys[1]] ?? '')) : (item[column.key]);
+}
+
 
 export function isInput (val) 
 {
@@ -319,6 +325,7 @@ export function isInput (val)
     }
     return false;
 }
+
 
 export function getProgressWidth  (requiredData = [], activeItem)  
 {
