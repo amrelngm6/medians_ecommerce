@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="card-body pt-0">
-                                <form_field :item="activeItem"
+                                <form_field :item="activeItem" @callback="(val) => {activeItem.status = val}"
                                     :column="{ required: true, key: 'status', title: translate('status'), column_type: 'select', text_key: 'title', column_key: 'value', data: [{ 'value': null, 'title': translate('Pending') }, { 'value': 'on', 'title': translate('Active') }] }">
                                 </form_field>
                                 <div class="text-muted fs-7" v-text="translate('Set the item status')"></div>
