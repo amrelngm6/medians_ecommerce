@@ -33,9 +33,9 @@
                                 <a class="nav-link text-active-primary pb-4 " @click="activeTab = tab"
                                     :class="tab == activeTab ? 'active' : ''" href="javascript:;" v-text="tab"></a>
                             </li>
-                            <li class="nav-item" v-for="tab in content.fillable">
-                                <a class="nav-link text-active-primary pb-4 " @click="activeTab = tab"
-                                    :class="tab == activeTab ? 'active' : ''" href="javascript:;" v-text="tab"></a>
+                            <li class="nav-item" v-for="(tab, key) in content.fillable">
+                                <a class="nav-link text-active-primary pb-4 " @click="activeTab = key"
+                                    :class="tab == activeTab ? 'active' : ''" href="javascript:;" v-text="key"></a>
                             </li>
                         </ul>
                         <div class="tab-content">
