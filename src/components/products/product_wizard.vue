@@ -608,7 +608,7 @@ export default
             const editor = ClassicEditor;
             const editorData = ref('<p>Hello from CKEditor 5 in Vue!</p>');
             const editorConfig =  ref({
-                plugins: [ Bold, Essentials, Italic, Mention, Paragraph, SlashCommand, Undo ],
+                plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo ],
                 toolbar: [ 'undo', 'redo', '|', 'bold', 'italic' ],
                 licenseKey: '<YOUR_LICENSE_KEY>',
                 // Other configuration options...
