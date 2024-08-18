@@ -71,7 +71,7 @@
                                             
                                             <div class="py-1 w-full pt-4" v-for="column in tab" v-if="tab">
                                                 <span class="block mb-2 form-label text-gray-600 text-lg" v-text="column.title" v-if="column.column_type != 'hidden'"></span>
-                                                <form_field @callback="(val) => {activeItem.field[column.key] = val}"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
+                                                <form_field @callback="(val) => {activeItem.options[column.key] = val}"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
                                                 <p v-text="column.help_text" v-if="column.help_text" ></p>
                                             </div>
                                         </div>
@@ -142,6 +142,7 @@ export default
 
             const showAddCategory = ref(false);
             const activeItem = ref({
+                "options" : [],
                 "hook": '',
                 "position": '',
                 "status": ''
@@ -190,7 +191,7 @@ export default
                     params.append('params[' + k + ']', d)
                 }
 
-                params.append('params[options]', JSON.stringify(activeItem.value.field))
+                params.append('params[options]', JSON.stringify(array['field']))
 
                 let type = array.id > 0 ? 'update' : 'create';
                 params.append('type', 'Hook.' + type)
