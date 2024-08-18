@@ -239,7 +239,7 @@ export default
                 }
 
                 Object.keys(activeItem.value.options).forEach((e, i) => {
-                    console.log(activeItem.value.options[e])
+                    console.log(typeof activeItem.value.options[e])
                     params.append('params[options]['+e+']', activeItem.value.options[e])
                 })
                 
