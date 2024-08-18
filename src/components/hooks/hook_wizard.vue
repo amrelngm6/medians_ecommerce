@@ -11,8 +11,8 @@
                     <div class=" fw-semibold">
                         <h4 class="text-gray-900 fw-bold" v-text="translate('How to use Hook')"></h4>
 
-                        <div class="fs-6 text-gray-700 ">Your payment was declined. To start using tools, please <a
-                                class="fw-bold" href="/metronic8/demo1/account/billing.html">Add Payment Method</a>.
+                        <div class="fs-6 text-gray-700 ">{{translate('Go to frontend pages and add the code')}} <span v-text='"[plugin_shortcode id='"+activeItem.id+"' ]"'></span> from <a
+                                class="fw-bold" href="/admin/apges" v-text="translate('Pages')"></a>.
                         </div>
                     </div>
                     <!--end::Content-->
