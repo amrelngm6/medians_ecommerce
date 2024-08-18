@@ -177,6 +177,7 @@ export default
             });
 
             const activeTab = ref(translate('General'));
+            const seoLang = ref('english');
             const content = ref({});
             const collapsed = ref(false);
             
