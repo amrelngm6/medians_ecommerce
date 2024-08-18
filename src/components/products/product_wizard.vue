@@ -611,7 +611,6 @@ export default
             const editorConfig =  ref({
                 plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo ],
                 toolbar: [ 'undo', 'redo', '|', 'bold', 'italic' ],
-                licenseKey: '<YOUR_LICENSE_KEY>',
                 // Other configuration options...
             });
 
