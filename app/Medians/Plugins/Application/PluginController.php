@@ -1,12 +1,12 @@
 <?php
 
-namespace Medians\Hooks\Application;
+namespace Medians\Plugins\Application;
 use Shared\dbaser\CustomController;
 
-use Medians\Hooks\Infrastructure\HookRepository;
+use Medians\Plugins\Infrastructure\PluginRepository;
 
 
-class HookController extends CustomController 
+class PluginController extends CustomController 
 {
 
 	/**
@@ -22,7 +22,7 @@ class HookController extends CustomController
 	{
 
 		$this->app = new \config\APP;
-		$this->repo = new HookRepository;
+		$this->repo = new PluginRepository;
 	}
 
 
@@ -36,10 +36,8 @@ class HookController extends CustomController
 
 		return [
             [ 'value'=> "id", 'text'=> "#"],
-            [ 'value'=> "title", 'text'=> translate('User'), 'sortable'=> false ],
-            [ 'value'=> "position", 'text'=> translate('position'), 'sortable'=> true ],
-            [ 'value'=> "plugin", 'text'=> translate('plugin'), 'sortable'=> true ],
-            [ 'value'=> "order", 'text'=> translate('order'), 'sortable'=> true ],
+            [ 'value'=> "title", 'text'=> translate('title'), 'sortable'=> false ],
+            [ 'value'=> "class", 'text'=> translate('class'), 'sortable'=> true ],
             [ 'value'=> "status", 'text'=> translate('status'), 'sortable'=> false ],
 			['value'=>'edit', 'text'=>translate('View')],
 			['value'=>'delete', 'text'=>translate('Delete')],
@@ -55,9 +53,9 @@ class HookController extends CustomController
 	{
 		$params = $this->app->request()->query->all();
 
-		return render('hooks', [
+		return render('plugins', [
 			'load_vue'=> true,
-	        'title' => translate('Hooks list'),
+	        'title' => translate('Plugins list'),
 	        'items' => $this->repo->get($params),
 	        'columns' => $this->columns(),
 	    ]);

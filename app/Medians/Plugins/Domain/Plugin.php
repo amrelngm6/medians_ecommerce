@@ -3,7 +3,6 @@
 namespace Medians\Hooks\Domain;
 
 use Shared\dbaser\CustomModel;
-use Medians\Content\Domain\Content;
 
 class Hook extends CustomModel
 {
@@ -33,10 +32,6 @@ class Hook extends CustomModel
 	}
 
 	
-	public function lang_content()
-	{
-		return $this->morphOne(Content::class, 'item')->where('lang',$_SESSION['lang']);
-	}
 
 
 }
