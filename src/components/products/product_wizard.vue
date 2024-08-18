@@ -441,6 +441,13 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade show active" v-if="activeTab == translate('Stats')">
+
+                                
+                                <div class="d-flex flex-column gap-7 gap-lg-10">
+                                    <div class="card card-flush h-md-50 mb-5 mb-xl-10 w-full"><div class="card-header pt-5"><div class="card-title d-flex flex-column"><div class="d-flex align-items-center"><span class="fs-4 fw-semibold text-gray-500 me-1 align-self-start">$</span><span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2">4298.949996948242</span></div><span class="text-gray-500 pt-1 fw-semibold fs-6">Total invoices amount</span></div></div><div class="px-4 pt-2 pb-4 d-flex align-items-center"><div class="d-flex flex-center me-5 pt-2"></div><div class="d-flex flex-column content-justify-center w-100"><div class="d-flex gap-4 fs-6 fw-semibold align-items-center"><div class="rounded-2 my-3"><img class="w-10 h-10" src="/uploads/img/payment_methods/paypal.png"></div><div class="text-gray-500 flex-grow-1 me-4">PayPal</div><div class="fw-bolder text-gray-700 text-xxl-end">$665</div></div><div class="d-flex gap-4 fs-6 fw-semibold align-items-center"><div class="rounded-2 my-3"><img class="w-10 h-10" src="/uploads/img/payment_methods/paystack.png"></div><div class="text-gray-500 flex-grow-1 me-4">Paystack</div><div class="fw-bolder text-gray-700 text-xxl-end">$3633.949996948242</div></div></div></div></div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="d-flex justify-content-end">
@@ -550,7 +557,7 @@ export default
 
             const templates = ref([{title:  translate('Default'), value:'default'}, {title:  translate('Modern'), value:'modern'}]);
 
-            const tabs = ref([translate('General'), translate('Pricing'),  translate('Attributes'), translate('Advanced'), translate('Images'), translate('SEO')]);
+            const tabs = ref([translate('General'), translate('Pricing'),  translate('Attributes'), translate('Advanced'), translate('Images'), translate('SEO') ,translate('Stats')]);
 
             const url =  props.conf.url+props.path+'?load=json';
             
