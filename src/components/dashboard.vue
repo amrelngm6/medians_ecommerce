@@ -271,7 +271,8 @@
                 </div>
             </div>
         </div>
-        <Bar :data="Cdatasets" :options="Coptions" />
+        <BarChart :chart-data="chartData" :chart-options="chartOptions" />
+
 
     </div>
 </template>
@@ -293,6 +294,9 @@ import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, Li
 import { Bar } from 'vue-chartjs'
 
 
+// Register Chart.js components
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
 export default 
 {
     components:{
@@ -311,11 +315,37 @@ export default
 
         const url =  ref(props.path + '?load=json');
 
-        const Coptions = ref({responsive: true});
+
         const Cdatasets = ref({
-            labels: ['January', 'February', 'March'],
-            datasets: [{ data: [40, 20, 12] }]
-        } );
+        labels: ['January', 'February', 'March', 'April'],
+        datasets: [
+            {
+            label: 'Sales',
+            backgroundColor: '#42A5F5',
+            data: [30, 70, 45, 85],
+            },
+        ],
+        })
+
+        const Coptions = {
+            plugins: {
+                legend: {
+                display: false, // Hide the legend
+                },
+                tooltip: {
+                enabled: false, // Hide tooltips if needed
+                },
+            },
+            scales: {
+                x: {
+                display: false, // Hide x-axis labels
+                },
+                y: {
+                display: false, // Hide y-axis labels
+                },
+            },
+        }
+
         const pie_options = ref();
         const column_options = ref();
 
