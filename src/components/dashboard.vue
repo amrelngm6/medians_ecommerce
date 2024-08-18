@@ -289,12 +289,15 @@ import { AgChartsVue } from 'ag-charts-vue3';
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
 
 
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js' import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js' 
+import { Bar } from 'vue-chartjs'
 
 
 export default 
 {
     components:{
+        Chart,
+        Bar,
         dashboard_center_squares,
         dashboard_card_white,
         dashboard_card,
