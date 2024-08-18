@@ -182,7 +182,7 @@
                 <li class="navigation__item py-2"><a href="/customer/orders" class="navigation__link">{{lang.translate('Orders')}}</a></li>
                 <li class="navigation__item py-2"><a href="/cart" class="navigation__link">{{lang.translate('Cart')}}</a></li>
                 <li class="navigation__item py-2"><a href="/wishlist" class="navigation__link">{{lang.translate('Wishlist')}}</a></li>
-                <li class="navigation__item py-2"><a href="/logout" class="navigation__link">{{lang.translate('logout')}}</a></li>
+                <li class="navigation__item py-2 js-show-register js-show-login"><a href="/logout" class="navigation__link">{{lang.translate('logout')}}</a></li>
             </ul>
         </div>
         {% else  %}
@@ -210,7 +210,7 @@
                 <a href="/customer/reset_password" class="btn-text ms-auto">{{lang.translate('Lost password')}}?</a>
             </div>
 
-            <button class="btn btn-primary bg-dark w-100 text-uppercase" type="submit">{{lang.translate('Log In')}}</button>
+            <button class="btn btn-primary bg-dark w-100 text-uppercase js-show-login" type="submit">{{lang.translate('Log In')}}</button>
 
             <div class="customer-option mt-4 text-center">
                 <span class="text-secondary">{{lang.translate('No account yet')}}?</span>

@@ -205,12 +205,12 @@ class PageController extends CustomController
 
 		try {
 			
-            return render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
+            return processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
                 'title' => translate('Homepage'),
                 'page' => $page,
                 'app' => $this->app,
 				'categories' => $categoryRepo->getGrouped(),
-            ]);
+            ]));
             
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);
@@ -231,11 +231,11 @@ class PageController extends CustomController
 
 		try {
 						
-            return render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
+            return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
                 'page' => $this->handlePageObject($pageContent),
                 'app' => $this->app,
 				'categories' => $categoryRepo->getGrouped(),
-            ]);
+            ], 'output')));
             
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);

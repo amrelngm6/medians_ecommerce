@@ -49,9 +49,8 @@ function render($template, $data, $responseType = 'html')
  /**
   * Load the main configuration in Array
   */
-  function loadConfig($template, $data)
-  {
-    
+function loadConfig($template, $data)
+{
 
     try {
         
@@ -60,7 +59,6 @@ function render($template, $data, $responseType = 'html')
         $setting = $app->SystemSetting();
         $languages = $app->Languages();  
         
-            
     } catch (\Exception $e) {
         echo ('CHECK DATABASE CONNECTION ');
         die();
@@ -81,7 +79,48 @@ function render($template, $data, $responseType = 'html')
     $data['lang_json'] = (new helper\Lang($_SESSION['lang']))->load();
     $data['lang_key'] = substr($_SESSION['lang'],0,2);
     return $data;
-  }
+}
+
+function processShortcodes($content) {
+    // Use preg_replace_callback to find shortcodes and process them
+    $checkCode = preg_replace_callback('/\[plugin_shortcode(.*?)\]/', 'replaceShortcode', $content);
+    return  $checkCode ?? $content;
+}
+
+function shortcode_parse_atts($text) {
+    $atts = array();
+    $pattern = '/([\w-]+)\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s\'"]+))/';
+    preg_match_all($pattern, $text, $matches, PREG_SET_ORDER);
+
+    foreach ($matches as $match) {
+        if (!empty($match[2])) {
+            $atts[$match[1]] = $match[2];
+        } elseif (!empty($match[3])) {
+            $atts[$match[1]] = $match[3];
+        } elseif (!empty($match[4])) {
+            $atts[$match[1]] = $match[4];
+        }
+    }
+
+    return $atts;
+}
+
+function replaceShortcode($matches) {
+    
+    // Extract attributes from the shortcode
+    $attributes = shortcode_parse_atts($matches[1]);
+
+    // Generate content based on the attributes
+    return $attributes ? generatePluginContent($attributes) : null;
+}
+
+function generatePluginContent($attributes) {
+    // Example attributes handling
+    $id = isset($attributes['id']) ? $attributes['id'] : null;
+    $name = isset($attributes['name']) ? $attributes['name'] : 'default';
+
+    return (new \Medians\Hooks\Application\HookController())->view($attributes);
+}
 
 
 /**

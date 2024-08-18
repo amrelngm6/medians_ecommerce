@@ -75,6 +75,8 @@ class HookController extends CustomController
 
 			$item = $this->repo->find($hook_id);
 
+			$item->options = $item->field;
+
 			return render('', [
 		        'load_vue' => true,
 		        'title' => translate('Hook page'),
@@ -85,6 +87,18 @@ class HookController extends CustomController
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);
 		}
+	}
+
+	
+	/**
+	 * Customers index page
+	 * 
+	 */ 
+	public function view($attributes ) 
+	{
+		$item = $this->repo->find($attributes['id']);
+
+		return $item->hookPlugin()->view($attributes);
 	}
 
 	public function store() 

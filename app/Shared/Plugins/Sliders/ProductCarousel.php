@@ -3,6 +3,8 @@
 namespace Shared\Plugins\Sliders;
 
 use Medians\Products\Infrastructure\CategoryRepository;
+use Medians\Products\Infrastructure\ProductRepository;
+use Medians\Hooks\Infrastructure\HookRepository;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Hooks\Domain\Hook;
 
@@ -12,14 +14,20 @@ class ProductCarousel
 
 	
     private $categoryRepo;
-    public static $name = "";
+    private $productRepo;
+    private $hookRepo;
+
+    public static $name = "product_carousel";
     public static $description = "";
     public static $version = "1.0";
+    public static $shortcode = "";
 	
 
 	function __construct()
 	{
 		$this->categoryRepo = new CategoryRepository;
+		$this->hookRepo = new HookRepository;
+		$this->productRepo = new ProductRepository;
 	}
 
 
@@ -88,4 +96,29 @@ class ProductCarousel
 
     } 
 
+	/**
+	 * Customers index page
+	 * 
+	 */ 
+	public function view($params ) 
+	{
+
+		try {
+			
+			$hook = $this->hookRepo->find($params['id']);
+
+			$params['categories_ids'] = json_decode($hook->field['categories']);
+			$params['limit'] = json_decode($hook->field['products_limit']);
+
+			$items = $this->productRepo->getWithFilter($params);
+
+            return render('Shared/Plugins/views/page.html.twig', [
+		        'items' => $items['items'],
+		    ],'output');
+
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+	}
+	
 }

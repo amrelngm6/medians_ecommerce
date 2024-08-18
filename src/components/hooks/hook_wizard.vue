@@ -25,9 +25,6 @@
                             </div>
                         </div>
 
-
-                        
-
                     </div>
                     <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                         <ul
@@ -67,6 +64,15 @@
                                 <div class="d-flex flex-column gap-7 gap-lg-10">
 
                                     <div class="w-full">
+                                        <ul v-if="content.fillable.length > 1"
+                                            class="nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x border-0 fs-4 fw-semibold mb-n2">
+                                            <li class="nav-item" v-for="tab in content.fillable">
+                                                <a class="nav-link text-active-primary pb-4 " @click="activeOptionTab = tab"
+                                                    :class="tab == activeOptionTab ? 'active' : ''" href="javascript:;" v-text="tab"></a>
+                                            </li>
+                                        </ul>
+                                        
+
                                         <div v-for="tab in content.fillable" v-if="content.fillable"> 
                                             
                                             <div class="py-1 w-full pt-4" v-for="column in tab" v-if="tab">
@@ -149,6 +155,7 @@ export default
             });
 
             const activeTab = ref(translate('General'));
+            const activeOptionTab = ref(translate('Basic'));
             const seoLang = ref('english');
             const content = ref({});
             const collapsed = ref(false);
@@ -220,8 +227,6 @@ export default
             }
 
             const handleField = (val, index) => {
-                console.log(val)
-                console.log(index)
                 if (activeItem.value.options == null)
                 {
                     activeItem.value.options = {}
@@ -230,6 +235,7 @@ export default
             }
 
             return {
+                activeOptionTab,
                 handleField,
                 getLang,
                 selectedObject,

@@ -1,0 +1,96 @@
+<main class="mt-20">
+    <section class="products-carousel container">
+      <h2 class="section-title text-center fw-normal mb-1 mb-md-3 pb-xl-3 mb-xl-4">The Inside Collection</h2>
+
+      <div class="position-relative">
+        <div class="swiper-container js-swiper-slider"
+          data-settings='{
+            "autoplay": {
+              "delay": 5000
+            },
+            "slidesPerView": 3,
+            "slidesPerGroup": 3,
+            "effect": "none",
+            "loop": false,
+            "breakpoints": {
+              "320": {
+                "slidesPerView": 2,
+                "slidesPerGroup": 2,
+                "spaceBetween": 14
+              },
+              "768": {
+                "slidesPerView": 3,
+                "slidesPerGroup": 3,
+                "spaceBetween": 24
+              },
+              "992": {
+                "slidesPerView": 4,
+                "slidesPerGroup": 1,
+                "spaceBetween": 30,
+                "pagination": false
+              }
+            }
+          }'>
+          <div class="swiper-wrapper">
+            {% for item in items %}
+            <div class="swiper-slide product-card">
+              <div class="pc__img-wrapper">
+                <a href="./product1_simple.html">
+                  <img loading="lazy" src="{{item.picture}}" width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img">
+                  <img loading="lazy" src="{{item.images[0].path}}" width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img pc__img-second">
+                </a>
+                <div class="product-label text-uppercase bg-white top-0 left-0 mt-2 mx-2">New</div>
+                <div class="anim_appear-bottom position-absolute w-100 text-center mb-3">
+                  <button class="btn btn-round btn-hover-red border-0 text-uppercase me-1 me-md-2 js-add-cart js-open-aside" data-aside="cartDrawer" title="Add To Cart">
+                    <svg class="d-inline-block" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_cart" /></svg>
+                  </button>
+                  <button class="btn btn-round btn-hover-red border-0 text-uppercase me-1 me-md-2 js-quick-view" data-bs-toggle="modal" data-bs-target="#quickView" title="Quick view">
+                    <svg class="d-inline-block" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><use href="#icon_view" /></svg>
+                  </button>
+                  <button class="btn btn-round btn-hover-red border-0 text-uppercase js-add-wishlist" title="Add To Wishlist">
+                    <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_heart" /></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="pc__info position-relative">
+                
+				<div class="rating flex gap-2">
+					{% set rate = page.rate() %}
+				    <div class="flex gap-2 w-full">
+                        <div class="stars">
+                            {% for i in [0,1,2,3,4] %}
+                                <i class="la la-star {{rate > i ? 'text-yellow-400' : 'opacity-10'}}"></i>
+                            {% endfor %}
+                        </div>
+                        <span class="num">
+                            ({{page.reviews|length}})
+                        </span>
+                            
+                    </div>
+                    <div class="d-flex align-items-center mt-1">
+                        {% for i in item.product_colors %}
+                        <a href="#" class="swatch-color border-b-2 pc__swatch-color" style="color: {{i.value}}"></a>
+                        {% endfor %}
+                    </div>
+				</div>
+                <h6 class="pc__title"><a href="./product1_simple.html">{{item.lang_content.title}}</a></h6>
+                
+				<div class="product-card__price d-flex">
+					<span class="money price price-sale">
+						{{app.currency.symbol}}{{app.currency_amount(item.price)}}</span>
+					{% if item.old_price > 0 %}
+						<span class="money price price-old px-2">
+							{{app.currency.symbol}}{{app.currency_amount(item.old_price)}}</span>
+					{% endif %}
+				</div>
+              </div>
+            </div>
+            {% endfor %}
+          </div><!-- /.swiper-wrapper -->
+        </div><!-- /.swiper-container js-swiper-slider -->
+      </div><!-- /.position-relative -->
+
+    </section><!-- /.products-carousel container -->
+
+</main>
