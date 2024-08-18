@@ -55,7 +55,7 @@
 
 
                         <template #item-short_code="item">
-                            <span>[plugin_shortcode id={{ item.id }}  ]</span>
+                            <span>[plugin_shortcode id='{{ item.id }}'  ]</span>
                         </template>
                         <template #item-path="item">
                             <a v-if="item.lang_content" :href="conf.url+item.lang_content.prefix" target="_blank" class="w-8 h-8 rounded-full" v-text="item.lang_content.prefix" ></a>
