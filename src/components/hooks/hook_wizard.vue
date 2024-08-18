@@ -238,6 +238,7 @@ export default
                     params.append('params[' + k + ']', d)
                 }
                 let type = array.id > 0 ? 'update' : 'create';
+                params.append('params[options]', array['options'])
                 params.append('type', 'Hook.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
                     handleAccess(response)
@@ -267,8 +268,6 @@ export default
             }
 
             const handleField = (val, index) => {
-                console.log(val)
-                console.log(index)
                 if (activeItem.value.options == null) {
                     activeItem.value.options = {}
                 }
