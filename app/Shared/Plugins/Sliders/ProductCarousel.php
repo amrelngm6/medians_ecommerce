@@ -120,6 +120,7 @@ class ProductCarousel
 
             return render('Shared/Plugins/views/page.html.twig', [
 		        'items' => $items['items'],
+				'hook' => $hook
 		    ],'output');
 
 		} catch (\Exception $e) {

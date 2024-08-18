@@ -2,11 +2,32 @@
     <div class="w-full flex overflow-auto">
         <div class=" w-full relative">
             <close_icon class="absolute top-4 right-4 z-10 cursor-pointer" @click="back" />
+            <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed  p-6">
+                <!--begin::Icon-->
+                <i class="ki-duotone ki-information fs-2tx text-warning me-4"><span class="path1"></span><span
+                        class="path2"></span><span class="path3"></span></i> <!--end::Icon-->
+
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-stack flex-grow-1 ">
+                    <!--begin::Content-->
+                    <div class=" fw-semibold">
+                        <h4 class="text-gray-900 fw-bold">We need your attention!</h4>
+
+                        <div class="fs-6 text-gray-700 ">Your payment was declined. To start using tools, please <a
+                                class="fw-bold" href="/metronic8/demo1/account/billing.html">Add Payment Method</a>.
+                        </div>
+                    </div>
+                    <!--end::Content-->
+
+                </div>
+                <!--end::Wrapper-->
+            </div>
+
             <div id="kt_app_content_container" class="app-container  container-xxl ">
                 <div class="action form d-flex flex-column flex-lg-row">
 
                     <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
-                        
+
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title">
@@ -19,7 +40,7 @@
                             </div>
                             <div class="card-body pt-0">
                                 <form_field :item="activeItem"
-                                    :column="{required: true, key:'status',title: translate('status') , column_type:'select', text_key: 'title', column_key: 'value', data:[{'value': null,'title':translate('Pending')} , {'value':'on','title':translate('Active')}]}">
+                                    :column="{ required: true, key: 'status', title: translate('status'), column_type: 'select', text_key: 'title', column_key: 'value', data: [{ 'value': null, 'title': translate('Pending') }, { 'value': 'on', 'title': translate('Active') }] }">
                                 </form_field>
                                 <div class="text-muted fs-7" v-text="translate('Set the item status')"></div>
                             </div>
@@ -35,7 +56,8 @@
                             </li>
                             <li class="nav-item" v-for="(tab, key) in content.fillable">
                                 <a class="nav-link text-active-primary pb-4 " @click="activeTab = key"
-                                    :class="key == activeTab ? 'active' : ''" href="javascript:;" v-text="translate(key)"></a>
+                                    :class="key == activeTab ? 'active' : ''" href="javascript:;"
+                                    v-text="translate(key)"></a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -58,21 +80,23 @@
                                             </ul>
                                         </div>
                                         <div class="w-full">
-                                            
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <div class="tab-pane fade show active" v-if="activeTab != translate('General')" >
-                                <div class="card w-full " >
+                            <div class="tab-pane fade show active" v-if="activeTab != translate('General')">
+                                <div class="card w-full ">
 
                                     <div class="card-body w-full">
-                                        <div class="py-1 w-full pt-4" v-for="column in content.fillable[activeTab]" >
-                                            <span class="block mb-2 form-label text-gray-600 text-lg" v-text="column.title" v-if="column.column_type != 'hidden'"></span>
-                                            <form_field @callback="handleField"  :column="column"  :item="activeItem.field" :conf="conf"></form_field>
-                                            <p v-text="column.help_text" v-if="column.help_text" ></p>
+                                        <div class="py-1 w-full pt-4" v-for="column in content.fillable[activeTab]">
+                                            <span class="block mb-2 form-label text-gray-600 text-lg"
+                                                v-text="column.title" v-if="column.column_type != 'hidden'"></span>
+                                            <form_field @callback="handleField" :column="column"
+                                                :item="activeItem.field" :conf="conf"></form_field>
+                                            <p v-text="column.help_text" v-if="column.help_text"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -141,7 +165,7 @@ export default
 
             const showAddCategory = ref(false);
             const activeItem = ref({
-                "options" : [],
+                "options": [],
                 "hook": '',
                 "position": '',
                 "status": ''
@@ -152,32 +176,31 @@ export default
             const seoLang = ref('english');
             const content = ref({});
             const collapsed = ref(false);
-            
-            const templates = ref([{title:  translate('Default'), value:'default'}, {title:  translate('Modern'), value:'modern'}]);
+
+            const templates = ref([{ title: translate('Default'), value: 'default' }, { title: translate('Modern'), value: 'modern' }]);
 
             const tabs = ref([translate('General')]);
 
-            const url =  props.conf.url+props.path+'?load=json';
-            
-            function load()
-            {
-                handleGetRequest( url ).then(response=> {
-                    var parsedResponse  = JSON.parse(JSON.stringify(response))
+            const url = props.conf.url + props.path + '?load=json';
+
+            function load() {
+                handleGetRequest(url).then(response => {
+                    var parsedResponse = JSON.parse(JSON.stringify(response))
                     if (parsedResponse.item) {
                         activeItem.value = parsedResponse.item ?? activeItem.value
-                        
+
                     }
-                    content.value  = parsedResponse 
+                    content.value = parsedResponse
                 });
-                
+
             }
-            
+
             load();
-            
+
 
             const closeSide = () => {
                 load()
-                showAddCategory.value  = false;
+                showAddCategory.value = false;
             }
 
             const save = () => {
@@ -187,7 +210,7 @@ export default
                 let k, d, value = '';
                 for (let i = 0; i < keys.length; i++) {
                     k = keys[i]
-                    d = (typeof array[k] === 'object' || typeof array[k] === 'array' )? JSON.stringify(array[k]) : array[k]
+                    d = (typeof array[k] === 'object' || typeof array[k] === 'array') ? JSON.stringify(array[k]) : array[k]
                     params.append('params[' + k + ']', d)
                 }
                 let type = array.id > 0 ? 'update' : 'create';
@@ -220,8 +243,7 @@ export default
             }
 
             const handleField = (val, index) => {
-                if (activeItem.value.options == null)
-                {
+                if (activeItem.value.options == null) {
                     activeItem.value.options = {}
                 }
                 activeItem.value.options[index] = val

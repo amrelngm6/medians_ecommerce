@@ -14,17 +14,17 @@
             "loop": false,
             "breakpoints": {
               "320": {
-                "slidesPerView": 2,
-                "slidesPerGroup": 2,
+                "slidesPerView": {{hook.field.mobile_view_limit}},
+                "slidesPerGroup": {{hook.field.mobile_view_limit}},
                 "spaceBetween": 14
               },
               "768": {
-                "slidesPerView": 3,
-                "slidesPerGroup": 3,
+                "slidesPerView": {{hook.field.tablet_view_limit}},
+                "slidesPerGroup": {{hook.field.tablet_view_limit}},
                 "spaceBetween": 24
               },
               "992": {
-                "slidesPerView": 4,
+                "slidesPerView": {{hook.field.desktop_view_limit}},
                 "slidesPerGroup": 1,
                 "spaceBetween": 30,
                 "pagination": false
@@ -39,7 +39,6 @@
                   <img loading="lazy" src="{{item.picture}}" width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img">
                   <img loading="lazy" src="{{item.images[0].path}}" width="330" height="400" alt="Cropped Faux leather Jacket" class="pc__img pc__img-second">
                 </a>
-                <div class="product-label text-uppercase bg-white top-0 left-0 mt-2 mx-2">New</div>
                 <div class="anim_appear-bottom position-absolute w-100 text-center mb-3">
                   <button class="btn btn-round btn-hover-red border-0 text-uppercase me-1 me-md-2 js-add-cart js-open-aside" data-aside="cartDrawer" title="Add To Cart">
                     <svg class="d-inline-block" width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_cart" /></svg>
@@ -56,17 +55,18 @@
               <div class="pc__info position-relative">
                 
 				<div class="rating flex gap-2">
-					{% set rate = page.rate() %}
+					{% set rate = item.rate() %}
 				    <div class="flex gap-2 w-full">
+					{% if item.reviews|length %}
                         <div class="stars">
                             {% for i in [0,1,2,3,4] %}
                                 <i class="la la-star {{rate > i ? 'text-yellow-400' : 'opacity-10'}}"></i>
                             {% endfor %}
                         </div>
                         <span class="num">
-                            ({{page.reviews|length}})
+                            ({{item.reviews|length}})
                         </span>
-                            
+					{% endif %}
                     </div>
                     <div class="d-flex align-items-center mt-1">
                         {% for i in item.product_colors %}
