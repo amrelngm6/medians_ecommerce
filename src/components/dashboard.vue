@@ -294,14 +294,9 @@ import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, Li
 import { Bar } from 'vue-chartjs'
 
 
-// Register Chart.js components
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-
 export default 
 {
     components:{
-        Chart,
-        Bar,
         dashboard_center_squares,
         dashboard_card_white,
         dashboard_card,
