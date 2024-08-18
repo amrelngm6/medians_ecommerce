@@ -260,12 +260,6 @@ export default
     setup(props) {
 
 
-
-        // Register Chart.js components
-        ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-
-        
-
         const Cdatasets = ref({
             labels: ['January', 'February', 'March', 'April'],
             datasets: [
