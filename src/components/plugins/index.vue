@@ -48,6 +48,13 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="d-flex justify-content-end">
+                                            <div class="form-check form-check-solid form-check-custom form-switch">
+                                                <input class="form-check-input w-45px h-30px" type="checkbox"
+                                                    id="slackswitch" />
+                                                <label class="form-check-label" for="slackswitch"></label>
+                                            </div>
+                                        </div>
                                     </div>
                                     <!--end::Item-->
                                 </div>
