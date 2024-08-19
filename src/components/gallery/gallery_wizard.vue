@@ -50,20 +50,6 @@
 
                             </div>
 
-                            <div class="w-full row">
-                                <label class="col-lg-4 col-form-label required fw-semibold fs-6"
-                                    v-text="translate('Field type')"></label>
-                                <select class="form-control form-control-solid"
-                                    :placeholder="translate('Type of the field')" type="number"
-                                    v-model="activeItem.fields[activeSlider].type">
-                                    <option value="text" v-text="translate('Text')"></option>
-                                    <option value="number" v-text="translate('Number')"></option>
-                                    <option value="email" v-text="translate('Email')"></option>
-                                    <option value="phone" v-text="translate('Phone')"></option>
-                                    <option value="textarea" v-text="translate('Textarea')"></option>
-                                </select>
-                            </div>
-
                             <div class="text-center">
                                 <button type="reset" id="kt_modal_adjust_balance_cancel" class="btn btn-light me-3"
                                     v-text="translate('Discard')" @click="showModal = false"></button>
