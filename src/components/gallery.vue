@@ -1,6 +1,6 @@
 <template>
     <div class="w-full flex overflow-auto" >
-        <payment_wizard :item="activeItem" :system_setting="system_setting" :conf="conf" :auth="auth" v-if="showWizard" @callback="showWizard = false" />
+        <gallery_wizard :item="activeItem" :system_setting="system_setting" :conf="conf" :auth="auth" v-if="showWizard" @callback="showWizard = false" />
         <div  v-if="content && !showWizard" class=" w-full relative">
             
             <div class=" " v-if="content.items && !content.items.length ">
@@ -19,16 +19,33 @@
                 </div>
             </div>
 
-            <main class=" flex-1 overflow-x-hidden overflow-y-auto  w-full relative" v-if="content.items">
+            <main class=" flex-1 overflow-x-hidden overflow-y-auto  w-full relative" v-if="content.items && !showWizard">
                 <div class="px-4 mb-6 py-4 rounded-lg shadow-md bg-white dark:bg-gray-700 flex w-full">
                     
                     <h1  class="font-bold text-lg w-full" v-text="content.title"></h1>
-                    <a href="javascript:;" class="uppercase p-2 mx-2 text-center text-white w-32 rounded-lg bg-danger" @click="showAddSide = true, activeItem = {}" v-text="translate('add_new')"></a>
                 </div>
-                <hr class="mt-2" />
                 <div class="w-full bg-white" >
+                    <div class="card-header align-items-center py-5 gap-2 gap-md-5 w-full flex px-4">
+                        <div class="card-title">
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <input type="text"  v-model="searchValue" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Search Report">
+                            </div>
+                        </div>
+                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
 
-                    <datatabble  class="align-middle fs-6 gy-5 table table-row-dashed px-6" :body-text-direction="translate('is_rtl')" fixed-checkbox v-if="content.columns" :headers="content.columns" :items="content.items" >
+                            <div class="w-150px">
+                                <select v-model="searchField" class="form-select form-select-solid select2-hidden-accessible" data-control="select2" data-hide-search="true" data-placeholder="Rating" data-kt-ecommerce-order-filter="rating" data-select2-id="select2-data-9-zple" tabindex="-1" aria-hidden="true" data-kt-initialized="1">
+                                    <option v-for="col in content.columns" v-text="col.text" :value="col.value"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <a href="javascript:;" class="uppercase p-2 mx-2 text-center text-white w-32 rounded-lg bg-danger" @click="showAddSide = true, activeItem = {}" v-text="translate('add_new')"></a>
+
+                    </div>
+                    <datatabble 
+                        :search-field="searchField"
+                        :search-value="searchValue" alternating class="align-middle fs-6 gy-5 table table-row-dashed px-6" :body-text-direction="translate('lang') == 'ar' ? 'right' : 'left'" fixed-checkbox v-if="content.columns" :headers="content.columns" :items="content.items" >
+
 
                         <template #item-picture="item">
                             <img :src="item.picture" class="w-8 h-8 rounded-full" />
@@ -74,7 +91,7 @@ const side_form_create = defineAsyncComponent(() => import('@/components/include
 const side_form_update = defineAsyncComponent(() => import('@/components/includes/side-form-update.vue') );
 
 import tooltip from '@/components/includes/tooltip.vue';
-import payment_wizard from '@/components/wizards/galleryWizard.vue';
+import gallery_wizard from '@/components/wizards/GalleryWizard.vue';
 
 
 
@@ -89,7 +106,7 @@ export default
         route_icon,
         form_field,
         tooltip,
-        payment_wizard
+        gallery_wizard
     },
     name:'Gallery',
     setup(props) {
