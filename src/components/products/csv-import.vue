@@ -42,13 +42,12 @@
                                         <label class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
                                             data-bs-target="#kt_modal_create_campaign" > 
                                             <span v-text="translate('Upload CSV file')"></span>
-                                            <vue-csv-input class="hidden" v-slot="{ file, change }"></vue-csv-input>
+                                            <vue-csv-input  class="hidden" v-slot="{ file, change }"></vue-csv-input>
                                         </label>
                                         <!--end::Action-->
                                         
                                         <!--begin::Action-->
-                                        <a href="/uploads/products-sample.csv" class="btn btn-danger er fs-6 px-8 py-4" data-bs-toggle="modal"
-                                            data-bs-target="#kt_modal_create_campaign" v-text="translate('Download Example')"></a>
+                                        <a target="_blank" href="/uploads/products-sample.csv" class="btn btn-danger er fs-6 px-8 py-4" v-text="translate('Download Example')"></a>
                                         <!--end::Action-->
                                         </div>
                                         
@@ -61,7 +60,9 @@
                                             </vue-csv-toggle-headers>
                                         </div>
                                     </div>
-                                    <vue-csv-table-map autoMatch="true" autoMatchIgnoreCase="true"></vue-csv-table-map>
+                                    <div class="container mx-auto overflow-x-auto" >
+                                        <vue-csv-table-map autoMatch="true" autoMatchIgnoreCase="true"></vue-csv-table-map>
+                                    </div>
                                 </div>
                             </div>
                         </vue-csv-import>
