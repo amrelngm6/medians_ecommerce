@@ -74,12 +74,12 @@ export default
 
         const changed = (model) => 
         {
-            model ? emit('callback', model, props.column.key) : '';
+            emit('callback', model, props.column.key);
         }
 
         const multiple_changed = (model) => 
         {
-            model ? emit('callback', model.map(e => e[props.column.key]), props.column.key ) : '';
+            emit('callback', model.map(e => e[props.column.key]), props.column.key );
         }
 
         const multipleValue = ref([]);
