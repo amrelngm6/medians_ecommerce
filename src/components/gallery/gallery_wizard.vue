@@ -357,7 +357,7 @@ export default
 
             const setPicture = (a) => {
                 console.log(a)
-                activeItem.value.items[activeSlider.value].media = a.value;
+                activeItem.value.items[activeSlider.value].media = a;
             }
             return {
                 setPicture,
