@@ -273,6 +273,7 @@ export default
             }
 
             const handleField = (val, index) => {
+                console.log(val, index)
                 activeItem.value.field[index] = val
             }
             
