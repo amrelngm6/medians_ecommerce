@@ -91,7 +91,7 @@ const side_form_create = defineAsyncComponent(() => import('@/components/include
 const side_form_update = defineAsyncComponent(() => import('@/components/includes/side-form-update.vue') );
 
 import tooltip from '@/components/includes/tooltip.vue';
-import gallery_wizard from '@/components/wizards/GalleryWizard.vue';
+import gallery_wizard from '@/components/wizards/gallery_wizard.vue';
 
 
 
