@@ -265,7 +265,7 @@ class ProductController extends CustomController
 
             if ($this->repo->delete($params['product_id']))
             {
-                return json_encode(array('success'=>1, 'result'=>translate('Deleted'), 'reload'=>1));
+                return json_encode(array('success'=>1, 'result'=>translate('Deleted'), 'reload'=>0));
             }
             
 

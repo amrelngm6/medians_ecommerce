@@ -34,8 +34,7 @@ class GalleryController extends CustomController
 	{
 		return [
             [ 'value'=> "gallery_id", 'text'=> "#"],
-            [ 'value'=> "picture", 'text'=> translate('Logo'), 'sortable'=> true ],
-            [ 'value'=> "status", 'text'=> translate('status'), 'sortable'=> true ],
+            [ 'value'=> "name", 'text'=> translate('name'), 'sortable'=> true ],
             [ 'value'=> "edit", 'text'=> translate('edit')  ],
             [ 'value'=> "delete", 'text'=> translate('delete')  ],
         ];
@@ -52,7 +51,7 @@ class GalleryController extends CustomController
 
 		return [
             [ 'key'=> "gallery_id", 'title'=> "#", 'column_type'=>'hidden'],
-			[ 'key'=> "picture", 'title'=> translate('Logo'), 'required'=>true, 'fillable'=> true, 'column_type'=>'picture' ],
+			[ 'key'=> "name", 'title'=> translate('name'), 'required'=>true, 'fillable'=> true, 'column_type'=>'text' ],
             [ 'key'=> "status", 'title'=> translate('Status'), 'fillable'=>true, 'column_type'=>'checkbox' ],
 
         ];
@@ -90,7 +89,6 @@ class GalleryController extends CustomController
         try {
         	$user = $this->app->auth();
 
-			$params['status'] = (isset($params['status']) && $params['status'] != 'false') ? 'on' : null;
 			$params['created_by'] = $user->id;
             
 			return ($this->repo->store($params))
@@ -119,8 +117,6 @@ class GalleryController extends CustomController
 		$params = $this->app->params();
 
         try {
-
-			$params['status'] = (isset($params['status']) && $params['status'] != 'false') ? 'on' : null;
 
            	$returnData =  ($this->repo->update($params))
            	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>true)

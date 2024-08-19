@@ -48,10 +48,8 @@
                 </div>
             </main>
     
-            <side_form_create ref="activeFormCreate" @callback="closeSide" :auth="auth" :conf="conf" :model="'PaymentMethod.create'" :columns="content.fillable"  class="col-md-3" v-if="showAddSide && !showWizard"  />
+            <side_form_create ref="activeFormCreate" @callback="closeSide" :auth="auth" :conf="conf" :model="'Gallery.create'" :columns="content.fillable"  class="col-md-3" v-if="showAddSide && !showWizard"  />
                 
-            <!-- <side_form_update ref="activeFormUpdate" @callback="closeSide" :key="activeItem" :auth="auth" :conf="conf" :model="'PaymentMethod.update'" :item="activeItem" :model_id="activeItem.payment_method_id" index="payment_method_id"  :columns="content.fillable"  class="col-md-3"  v-if="showWizard && !showAddSide" /> -->
-            
         </div>
     </div>
 </template>
@@ -76,7 +74,7 @@ const side_form_create = defineAsyncComponent(() => import('@/components/include
 const side_form_update = defineAsyncComponent(() => import('@/components/includes/side-form-update.vue') );
 
 import tooltip from '@/components/includes/tooltip.vue';
-import payment_wizard from '@/components/wizards/paymentMethodWizard.vue';
+import payment_wizard from '@/components/wizards/galleryWizard.vue';
 
 
 
@@ -93,7 +91,7 @@ export default
         tooltip,
         payment_wizard
     },
-    name:'PaymentMethods',
+    name:'Gallery',
     setup(props) {
 
         const url =  props.conf.url+props.path+'?load=json';
@@ -135,7 +133,7 @@ export default
                     break;  
 
                 case 'delete':
-                    deleteByKey('payment_method_id', data, 'PaymentMethod.delete');
+                    deleteByKey('gallery_id', data, 'Gallery.delete');
                     break;  
 
                     

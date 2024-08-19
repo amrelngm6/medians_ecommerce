@@ -60,7 +60,7 @@ const app_settings = defineAsyncComponent(() => import('@/components/settings/ap
 
 const profile = defineAsyncComponent(() => import('@/components/profile/profile.vue') );
 
-const payment_methods = defineAsyncComponent(() => import('@/components/payment_methods.vue') );
+const gallery = defineAsyncComponent(() => import('@/components/gallery.vue') );
 
 const transactions = defineAsyncComponent(() => import('@/components/transactions.vue') );
 
@@ -107,7 +107,7 @@ export default {
         pages,
         app_settings,
         profile,
-        payment_methods,
+        gallery,
         transactions,
         invoices,
         orders,

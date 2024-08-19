@@ -200,23 +200,41 @@ class ProductRepository
 		
 		foreach ($list as $data)
 		{
-			print_r($data);
+			
+			$data['product_categories'] = explode(',', str_replace(' ', '', $data['categories'] ?? ''));
+			$data['product_shipping'] = explode(',', str_replace(' ', '', $data['shipping'] ?? ''));
+			$data['product_images'] = explode(',', str_replace(' ', '', $data['images'] ?? ''));
+			$data['product_colors'] = explode(',', str_replace(' ', '', $data['colors'] ?? ''));
+			$data['product_sizes'] = explode(',', str_replace(' ', '', $data['sizes'] ?? ''));
+			$data['product_tags'] = explode(',', str_replace(' ', '', $data['tags'] ?? ''));
+			$data['picture'] = $data['product_images'][0] ?? null;
+			$data['category_id'] = $data['product_categories'][0] ?? null;
+			$data['name'] = $data['english']['title'] ?? null;
 
-				// foreach ($data as $key => $value) 
-				// {
-				// 	if (in_array($key, $Model->getFields()))
-				// 	{
-				// 		$dataArray[str_replace(' ', '_', $key)] = $value;
-				// 	}
-				// }		
-				
-				// Return the  object with the new data
-				// $Object = Product::create($dataArray);
+			foreach ($data as $key => $value) 
+			{
+				if (in_array($key, $Model->getFields()))
+				{
+					$dataArray[str_replace(' ', '_', $key)] = $value;
+				}
+			}		
+
+			// // Return the  object with the new data
+			$Object = Product::firstOrCreate($dataArray);
+
+			$this->storeContent( ['english'=> $data['english'], 'arabic'=> $data['arabic']], $Object);
+			!empty($data['product_shipping']) ? $this->storeShipping(($data['product_shipping']), $Object) : '';
+			!empty($data['product_categories']) ? $this->storeCategories(($data['product_categories']), $Object) : '';
+			!empty($data['field']) ? $this->storeFields(($data['field']), $Object) : '';
+			!empty($data['product_colors']) ? $this->storeColors(($data['product_colors']), $Object) : '';
+			!empty($data['product_sizes']) ? $this->storeSizes(($data['product_sizes']), $Object) : '';
+			!empty($data['product_tags']) ? $this->storeTags(($data['product_tags']), $Object) : '';
+			!empty($data['product_images']) ? $this->storeImages(($data['product_images']), $Object) : '';
+
 		} 
 
+		return $Object;
 
-
-    	return $Object;
     }
     	
     /**
@@ -349,7 +367,7 @@ class ProductRepository
 			$fields['lang'] = $value['language_code'];
 			$fields['item_id'] = $Object->product_id;	
 			$fields['item_type'] = Product::class;	
-			$fields['prefix'] = isset($fields['prefix']) ? Content::generatePrefix($fields['prefix']) : Content::generatePrefix( $fields['title']);	
+			$fields['prefix'] = !empty($fields['prefix']) ? Content::generatePrefix($fields['prefix']) : Content::generatePrefix( $fields['title']);	
 
 			$Model = Content::create($fields);
 		}
@@ -437,7 +455,7 @@ class ProductRepository
 
 					$fields = [];
 					$fields['product_id'] = $Object->product_id;	
-					$fields['path'] = $value->path;
+					$fields['path'] = $value->path ?? $value;
 					$fields['sort'] = $key;
 					
 					$Model = ProductImage::create($fields);

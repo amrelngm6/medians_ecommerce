@@ -18,11 +18,13 @@ class Gallery extends CustomModel
     protected $primaryKey = 'gallery_id';
 
 	protected $fillable = [
-		'picture',
-    	'status',
+		'name',
     	'created_by',
 	];
 
-
+	public function items()
+	{
+		return $this->hasMany(GalleryItem::class, 'gallery_id'); 
+	}
 
 }
