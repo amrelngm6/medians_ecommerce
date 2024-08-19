@@ -125,7 +125,7 @@
                                             <a v-text="translate('add_new')" @click="addField()" href="javascript:;"
                                                 class="text-white btn btn-primary er fs-6 px-4 py-2"></a>
                                         </div>
-                                        <div class="w-full mb-6 " v-if="activeItem.items">
+                                        <div class="w-full my-6 " v-if="activeItem.items">
                                             
                                             <div class="d-flex align-items-sm-center mb-7" v-for="(item, key) in activeItem.items">
                                                 

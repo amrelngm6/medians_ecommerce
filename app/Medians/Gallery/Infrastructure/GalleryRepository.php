@@ -73,7 +73,7 @@ class GalleryRepository
 
     	// Store slides
     	!empty($data['items']) ? $this->storeItems($data['items'], $Object->gallery_id) : '';
-		
+
     	return $Object;
     } 
 
@@ -125,6 +125,7 @@ class GalleryRepository
 					}
 
 				} catch (\Throwable $th) {
+					echo $th->getMessage();
 					error_log($th->getMessage());
 				}
 				
