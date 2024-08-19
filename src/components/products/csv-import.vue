@@ -9,7 +9,7 @@
                     <!--begin::Heading-->
                     <div class="card-px pt-15 pb-15">
                         
-                        <vue-csv-import  @input="onCsvImport" v-model="csv" :fields="content.columns">
+                        <vue-csv-import  @change="onCsvImport" v-model="csv" :fields="content.columns">
                             
 
 
@@ -32,7 +32,7 @@
                                         <label class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
                                             data-bs-target="#kt_modal_create_campaign" > 
                                             <span v-text="translate('Upload CSV file')"></span>
-                                            <vue-csv-input @change="" class="hidden" v-slot="{ file, change }"></vue-csv-input>
+                                            <vue-csv-input @change="onCsvImport" class="hidden" v-slot="{ file, change }"></vue-csv-input>
                                         </label>
                                         <!--end::Action-->
                                         
