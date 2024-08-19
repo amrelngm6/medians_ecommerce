@@ -11,29 +11,9 @@
                         
                         <vue-csv-import v-model="csv" :fields="content.columns">
                             
-                            <p class=" mt-10 container mx-auto">
-                                <div class="w-full flex ">
-                                    <div class="py-5 text-lg w-full" >
-                                        <vue-csv-toggle-headers v-slot="{ hasHeaders, toggle }">
-                                            <checkbox />
-                                            <button @click.prevent="toggle" v-text="translate('File has Headers')"></button>
-                                        </vue-csv-toggle-headers>
-                                    </div>
-                                    <vue-csv-submit @click="handleImport"
-                                        class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger"
-                                        url="/api/create?type=addProductsCSV"
-                                        :config="{ params: {  } }"
-                                        v-slot="{ submit, mappedCsv }">
-                                        <!-- <button @click.prevent="submit" >{{ translate('Next') }}</button> -->
 
-                                        <a href="javascript:;"
-                                            class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger"
-                                            v-text="translate('Next')"></a>
-                                    </vue-csv-submit>
-                                </div>
 
                                 
-                            </p>
                             <div class="card-body pt-0">
                                 <div class="settings-form text-center ">
 
@@ -46,7 +26,7 @@
                                         {{ translate('Click on the below buttons to upload the CSV file') }} <br>{{translate('then assign')}}. </p>
                                     <!--end::Description-->
                                     
-                                    <div class="flex gap-4 ">
+                                    <div class="w-full gap-4 ">
                                         
                                         <!--begin::Action-->
                                         <label class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
@@ -57,10 +37,28 @@
                                         <!--end::Action-->
                                         
                                         <!--begin::Action-->
-                                        <a target="_blank" href="/uploads/products-sample.csv" class="btn btn-danger er fs-6 px-8 py-4" v-text="translate('Download Example')"></a>
+                                        <a target="_blank" href="/uploads/products-sample.csv" class="btn btn-danger er fs-6 px-8 py-4 mx-6" v-text="translate('Download Example')"></a>
                                         <!--end::Action-->
                                     </div>
-                                        
+                                    <div class="w-full flex ">
+                                        <div class="py-5 text-lg w-full" >
+                                            <vue-csv-toggle-headers v-slot="{ hasHeaders, toggle }">
+                                                <checkbox />
+                                                <button @click.prevent="toggle" v-text="translate('File has Headers')"></button>
+                                            </vue-csv-toggle-headers>
+                                        </div>
+                                        <vue-csv-submit @click="handleImport"
+                                            class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger"
+                                            url="/api/create?type=addProductsCSV"
+                                            :config="{ params: {  } }"
+                                            v-slot="{ submit, mappedCsv }">
+                                            <!-- <button @click.prevent="submit" >{{ translate('Next') }}</button> -->
+
+                                            <a href="javascript:;"
+                                                class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger"
+                                                v-text="translate('Next')"></a>
+                                        </vue-csv-submit>
+                                    </div>
                                     <vue-csv-errors></vue-csv-errors>
                                     
                                     <div class="container mx-auto overflow-x-auto" >
