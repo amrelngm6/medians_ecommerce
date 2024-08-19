@@ -97,13 +97,11 @@
                                 <div class="settings-form">
                                     <div class="max-w-xl mb-6 mx-auto row">
 
-                                        <input name="params[payment_method_id]" type="hidden">
-
                                         <label class="col-lg-4 col-form-label required fw-semibold fs-6"
                                             :for="'input' + i" v-text="translate('Name')"></label>
                                         <input :required="true" autocomplete="off" name="params[name]"
                                             class="form-control form-control-solid"
-                                            :placeholder="translate('Payment method name')" v-model="activeItem.name">
+                                            :placeholder="translate('Gallery name')" v-model="activeItem.name">
                                         <hr class="block mt-6 my-2 opacity-10" />
                                         <label class="col-lg-4 col-form-label required fw-semibold fs-6"
                                             :for="'input' + i" v-text="translate('Description')"></label>
@@ -187,19 +185,6 @@
                                     @click="activeTab = 'Picture'" v-text="translate('Next')"></a></p>
                         </div>
 
-                        <div class="" v-if="activeTab == 'Picture'" :key="activeTab">
-
-                            <div class="text-center mb-13">
-                                <h1 class="mb-3" v-text="translate('Change logo')"></h1>
-
-                                <div class="text-gray-400 font-semibold "
-                                    v-text="translate('Set payment method picture')"></div>
-                            </div>
-
-                            <p class="text-center mt-10"><a href="javascript:;"
-                                    class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger"
-                                    @click="activeTab = 'Confirm'" v-text="translate('Next')"></a></p>
-                        </div>
                         <div class="w-full  mx-auto" v-if="activeTab == 'Confirm'" :key="activeTab">
 
                             <div class="max-w-6xl mx-auto">
@@ -261,7 +246,7 @@
                             </div>
                             <p class="text-center mt-10"><a href="javascript:;"
                                     class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger"
-                                    @click="savePaymentMethod" v-text="translate('Submit')"></a></p>
+                                    @click="saveGallery" v-text="translate('Submit')"></a></p>
                         </div>
                     </div>
                 </div>
@@ -308,7 +293,7 @@ export default
             route_icon,
             form_field,
         },
-        name: 'PaymentMethods',
+        name: 'Gallery',
         emits: ['callback'],
         setup(props, { emit }) {
 
@@ -322,7 +307,7 @@ export default
                 activeItem.value = props.item
             }
 
-            const savePaymentMethod = () => {
+            const saveGallery = () => {
                 var params = new URLSearchParams();
                 let array = JSON.parse(JSON.stringify(activeItem.value));
                 let keys = Object.keys(array)
@@ -333,8 +318,8 @@ export default
                     params.append('params[' + k + ']', d)
                 }
 
-                let type = array.payment_method_id > 0 ? 'update' : 'create';
-                params.append('type', 'PaymentMethod.' + type)
+                let type = array.gallery_id > 0 ? 'update' : 'create';
+                params.append('type', 'Gallery.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
                     handleAccess(response)
                 })
@@ -386,7 +371,7 @@ export default
                 activeItem,
                 activeTab,
                 translate,
-                savePaymentMethod,
+                saveGallery,
                 back
             };
         },
