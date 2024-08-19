@@ -3,10 +3,13 @@
 namespace Shared\Plugins\Sliders;
 
 use Medians\Gallery\Infrastructure\GalleryRepository;
+use Medians\Hooks\Infrastructure\HookRepository;
+use Medians\Hooks\Domain\Hook;
 
 class HeroSlider 
 {
 
+    protected $hookRepo;
     protected $galleryRepo;
 
     public $name = "Hero Slider";
@@ -18,6 +21,7 @@ class HeroSlider
 	function __construct()
 	{
 		$this->galleryRepo = new GalleryRepository;
+		$this->hookRepo = new HookRepository;
 	}
 
 	/**
@@ -32,7 +36,7 @@ class HeroSlider
 			'basic'=> [	
 				// [ 'key'=> "products_limit", 'title'=> translate('Max number') , 'help_text'=> translate('Max number of loaded products'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "gallery_id", 'title'=> translate('Gallery'), 'help_text'=> translate('Select gallery to display slides from'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'gallery_id', 
+					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'gallery_id',  'multiple' => true, 'single' => true,
 					'data' => $this->galleryRepo->get()  
 				],	
 			],	
@@ -60,5 +64,31 @@ class HeroSlider
 	    ]);
 	} 
 
+
+	
+	/**
+	 * Customers index page
+	 * 
+	 */ 
+	public function view($params ) 
+	{
+
+		try {
+			
+			$hook = $this->hookRepo->find($params['id']);
+
+			$params['gallery_id'] = json_decode($hook->field['gallery_id']);
+
+
+            return render('Shared/Plugins/views/home_slider_1.html.twig', [
+		        'items' => $items ?? '',
+				'hook' => $hook
+		    ],'output');
+
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+	}
+	
 
 }

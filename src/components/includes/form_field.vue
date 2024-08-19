@@ -83,6 +83,7 @@ export default
         }
 
         const multipleValue = ref([]);
+        
         try {
             if (props.column.multiple)
                 multipleValue.value = props.item[props.column.key] ? props.item[props.column.key].map(e => e[props.column.column_key]) : [];
