@@ -18,7 +18,7 @@
                                 <div class="settings-form text-center ">
 
                                     <!--begin::Title-->
-                                    <h2 class="fs-2x fw-bold mb-0" v-text="translate('Import products')"></h2>
+                                    <h2 class="fs-2x fw-bold mb-0" v-if="!csv" v-text="translate('Import products')"></h2>
                                     <!--end::Title-->
 
                                     <!--begin::Description-->
@@ -32,7 +32,7 @@
                                         <label class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
                                             data-bs-target="#kt_modal_create_campaign" > 
                                             <span v-text="translate('Upload CSV file')"></span>
-                                            <vue-csv-input  class="hidden" v-slot="{ file, change }"></vue-csv-input>
+                                            <vue-csv-input @change="" class="hidden" v-slot="{ file, change }"></vue-csv-input>
                                         </label>
                                         <!--end::Action-->
                                         
