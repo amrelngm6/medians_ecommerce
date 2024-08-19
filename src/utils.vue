@@ -303,7 +303,7 @@ export function handleName (column)
 export function handleValue (column, item) 
 {
     let subKeys = column.key.split(".")
-    return  (column && column.custom_field) ?  (item.field ? item.field[column.key] : (item[subKeys[0]][subKeys[1]] ?? '')) : (item[column.key]);
+    return  (column && column.custom_field) ?  (item.field ? item.field[column.key] : (item[subKeys[0]][subKeys[1]] ?? '')) : (item ? item[column.key] : null);
 }
 
 

@@ -56,7 +56,7 @@ class PluginController extends CustomController
 		return render('plugins', [
 			'load_vue'=> true,
 	        'title' => translate('Plugins list'),
-	        'items' => $this->repo->get($params),
+	        'items' => $this->repo->get(),
 	        'columns' => $this->columns(),
 	    ]);
 	}

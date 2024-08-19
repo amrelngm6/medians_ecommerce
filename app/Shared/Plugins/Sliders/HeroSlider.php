@@ -2,14 +2,23 @@
 
 namespace Shared\Plugins\Sliders;
 
+use Medians\Gallery\Infrastructure\GalleryRepository;
+
 class HeroSlider 
 {
 
-    public static $name = "";
-    public static $description = "";
-    public static $version = "1.0";
+    protected $galleryRepo;
+
+    public $name = "Hero Slider";
+    public $description = "";
+    public $version = "1.0";
+    public $shortcode = "";
 
 
+	function __construct()
+	{
+		$this->galleryRepo = new GalleryRepository;
+	}
 
 	/**
 	 * Columns list to view at DataTable 
@@ -21,13 +30,19 @@ class HeroSlider
 		return [
             
 			'basic'=> [	
-	            [ 'key'=> "logo", 'title'=> translate('logo'), 'fillable'=>true, 'column_type'=>'file' ],
-				[ 'key'=> "sitename", 'title'=> translate('sitename'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "lang", 'title'=> translate('Languange'), 'help_text'=> translate('The default language for new sessions'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'language_code',
-					'data' => $this->languageRepo->getActive()  
+				// [ 'key'=> "products_limit", 'title'=> translate('Max number') , 'help_text'=> translate('Max number of loaded products'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "gallery_id", 'title'=> translate('Gallery'), 'help_text'=> translate('Select gallery to display slides from'),
+					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'gallery_id', 
+					'data' => $this->galleryRepo->get()  
 				],	
 			],	
+            
+			'styles'=> [	
+				[ 'key'=> "mobile_view_limit", 'title'=> translate('Mobile view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for Mobile view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "tablet_view_limit", 'title'=> translate('Tablet view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for Tablet view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "desktop_view_limit", 'title'=> translate('Desktop view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for desktop view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
+			],	
+            
             
 			
         ];
