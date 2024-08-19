@@ -76,6 +76,8 @@ const menus = defineAsyncComponent(() => import('@/components/menus.vue') );
 
 const products = defineAsyncComponent(() => import('@/components/products/index.vue') );
 
+const csv_import = defineAsyncComponent(() => import('@/components/products/csv-import.vue') );
+
 const hooks = defineAsyncComponent(() => import('@/components/hooks/index.vue') );
 
 const plugins = defineAsyncComponent(() => import('@/components/plugins/index.vue') );
@@ -83,6 +85,7 @@ const plugins = defineAsyncComponent(() => import('@/components/plugins/index.vu
 const categories = defineAsyncComponent(() => import('@/components/categories/index.vue') );
 
 const notifications_events = defineAsyncComponent(() => import('@/components/notifications_events.vue') );
+
 
 
 
@@ -115,6 +118,7 @@ export default {
         notifications_events,
         plugins,
         hooks,
+        csv_import,
         get_started,
         translate,
         'help_messages':HelpMessages,

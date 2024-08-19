@@ -5,11 +5,18 @@
 				<div class="product-single__image">
 					<div class="swiper-container">
 						<div class="swiper-wrapper">
+						
+							<div class="swiper-slide product-single__image-item">
+								<img loading="lazy" class="h-auto" src="{{app.CONF.url}}app/image.php?w=600&src={{page.picture}}" width="674" height="674" alt="">
+								<a href="{{app.CONF.url}}app/image.php?w=1000&src={{image.path}}" data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
+									<svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_zoom"/></svg>
+								</a>
+							</div>
 							{% for image in page.images %}
 
 								<div class="swiper-slide product-single__image-item">
-									<img loading="lazy" class="h-auto" src="{{app.CONF.url}}app/image.php?w=200&src={{image.path}}" width="674" height="674" alt="">
-									<a href="{{app.CONF.url}}app/image.php?w=200&src={{image.path}}" data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
+									<img loading="lazy" class="h-auto" src="{{app.CONF.url}}app/image.php?w=600&src={{image.path}}" width="674" height="674" alt="">
+									<a href="{{app.CONF.url}}app/image.php?w=800&src={{image.path}}" data-bs-toggle="tooltip" data-bs-placement="left" title="Zoom">
 										<svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_zoom"/></svg>
 									</a>
 								</div>
@@ -71,7 +78,7 @@
 
 		</div>
 		<div class="product-single__short-desc">
-			<p>{{page.lang_content.short}}</p>
+			{{page.lang_content.short|raw}}
 		</div>
 		<form class="row action ajax-form" action="{{app.CONF.url}}front_api/create" method="POST" id="product-form">
 			<input type="hidden" value="Cart.create" name="type"/>
@@ -173,7 +180,7 @@
 	<div class="tab-content">
 		<div class="tab-pane fade show active" id="tab-description" role="tabpanel" aria-labelledby="tab-description-tab">
 			<div class="product-single__description">
-					{{page.lang_content.content}}
+					{{page.lang_content.content|raw}}
 			</div>
 		</div>
 		<div class="tab-pane fade" id="tab-additional-info" role="tabpanel" aria-labelledby="tab-additional-info-tab">
