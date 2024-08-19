@@ -19,6 +19,7 @@ class Gallery extends CustomModel
 
 	protected $fillable = [
 		'name',
+		'description',
     	'created_by',
 	];
 

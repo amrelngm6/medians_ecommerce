@@ -194,7 +194,6 @@
                                         <div class="w-full">
                                             <div class="card-header border-0 flex gap-4">
                                                 <div class="card-title gap-4">
-                                                    <img class="w-10 h-10 rounded-full" :src="activeItem.picture" />
                                                     <h2 v-text="activeItem.name"></h2>
                                                 </div>
                                             </div>
