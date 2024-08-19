@@ -17,6 +17,15 @@
                         </div>
 
                         <div class="modal-body mx-5 mx-xl-15 my-7" v-if="activeItem.items[activeSlider]">
+                            
+                            <div class="w-full row">
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6"
+                                    v-text="translate('Picture')"></label>
+                                <vue-medialibrary-field class="max-w-xl mx-auto" :key="activeItem" @input="setPicture"
+                                    :filepath="activeItem.items[activeSlider].media ?? '/uploads/image/default_profile.png'"
+                                    :api_url="conf.url"></vue-medialibrary-field>
+                            </div>
+
                             <div class="w-full row">
                                 <label class="col-lg-4 col-form-label required fw-semibold fs-6"
                                     v-text="translate('Title')"></label>
@@ -37,18 +46,25 @@
                                     v-text="translate('Text')"></label>
                                 <input :required="true" autocomplete="off" class="form-control form-control-solid"
                                     :placeholder="translate('Text of the slider')" type="text"
-                                    v-model="activeItem.items[activeSlider].Text">
+                                    v-model="activeItem.items[activeSlider].text">
                             </div>
-
 
                             <div class="w-full row">
                                 <label class="col-lg-4 col-form-label required fw-semibold fs-6"
-                                    v-text="translate('Picture')"></label>
-                                <vue-medialibrary-field class="max-w-xl mx-auto" :key="activeItem" @input="setPicture"
-                                    :filepath="activeItem.items[activeSlider].media ?? '/uploads/image/default_profile.png'"
-                                    :api_url="conf.url"></vue-medialibrary-field>
-
+                                    v-text="translate('Button Text')"></label>
+                                <input :required="true" autocomplete="off" class="form-control form-control-solid"
+                                    :placeholder="translate('Text of the button of slider')" type="text"
+                                    v-model="activeItem.items[activeSlider].button_text">
                             </div>
+                            
+                            <div class="w-full row">
+                                <label class="col-lg-4 col-form-label required fw-semibold fs-6"
+                                    v-text="translate('Link')"></label>
+                                <input :required="true" autocomplete="off" class="form-control form-control-solid"
+                                    :placeholder="translate('Link of the slider')" type="text"
+                                    v-model="activeItem.items[activeSlider].link">
+                            </div>
+
 
                             <div class="text-center">
                                 <button type="reset" id="kt_modal_adjust_balance_cancel" class="btn btn-light me-3"
