@@ -155,8 +155,7 @@
                                                 
                                             </div>
                                                 
-                                            <div class="w-full mb-6 mx-auto flex gap-4"
-                                                >
+                                            <div class="w-full mb-6 mx-auto flex gap-4" >
 
                                                 <div class="d-flex align-items-sm-center mb-7">
                 
@@ -167,7 +166,6 @@
                                                     <div class="d-flex flex-row-fluid flex-wrap align-items-center">                    
                                                         <div class="flex-grow-1 me-2">
                                                             <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="item.title"></a>
-                                                            <span class="text-muted fw-semibold d-block pt-1" v-text="item.description"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -203,18 +201,7 @@
                                                     v-text="activeItem.description"></div>
                                             </div>
                                         </div>
-                                        <div class="mx-auto pt-4">
-
-                                            <label class=" flex gap-2 cursor-pointer">
-                                                <form_field class="flex-end" :item="activeItem"
-                                                    :column="{ key: 'status', title: translate('Status'), column_type: 'checkbox', hide_text: true }">
-                                                </form_field>
-                                                <div class="pt-3">
-                                                    <span class="badge badge-light fw-bold me-auto px-4 py-3"
-                                                        v-text="!activeItem.status ? 'Pending' : 'Active'"></span>
-                                                </div>
-                                            </label>
-                                        </div>
+                                        
                                     </div>
                                 </div>
                                 <div class="max-w-xl mx-auto gap-10">
