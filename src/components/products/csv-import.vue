@@ -15,16 +15,18 @@
 
                                 
                             <div class="card-body pt-0">
-                                <div class="settings-form text-center ">
+                                <div class="settings-form ">
+                                    
+                                    <div class="text-center w-full">
+                                        <!--begin::Title-->
+                                        <h2 class="fs-2x fw-bold mb-0" v-if="!csv" v-text="translate('Import products')"></h2>
+                                        <!--end::Title-->
 
-                                    <!--begin::Title-->
-                                    <h2 class="fs-2x fw-bold mb-0" v-if="!csv" v-text="translate('Import products')"></h2>
-                                    <!--end::Title-->
-
-                                    <!--begin::Description-->
-                                    <p class="text-gray-500 fs-4 fw-semibold py-7">
-                                        {{ translate('Click on the below buttons to upload the CSV file') }} <br>{{translate('then assign')}}. </p>
-                                    <!--end::Description-->
+                                        <!--begin::Description-->
+                                        <p class="text-gray-500 fs-4 fw-semibold py-7">
+                                            {{ translate('Click on the below buttons to upload the CSV file') }} <br>{{translate('then assign')}}. </p>
+                                        <!--end::Description-->
+                                    </div>
                                     
                                     <div class="w-full gap-4 ">
                                         
