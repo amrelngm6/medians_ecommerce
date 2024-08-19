@@ -184,7 +184,7 @@ class ProductRepository
     	isset($data['images']) ? $this->storeImages(($data['images']), $Object) : '';
     	isset($data['media']) ? $this->storeMedia(($data['media']), $Object) : '';
     	isset($data['variants']) ? $this->storeVariants(($data['variants']), $Object) : '';
-    	isset($data['prices']) ? $this->storePrice(($data['prices']), $Object) : '';
+    	// isset($data['prices']) ? $this->storePrice(($data['prices']), $Object) : '';
 
     	return $Object;
     }
@@ -211,9 +211,9 @@ class ProductRepository
     	isset($data['tags']) ? $this->storeTags(($data['tags']), $Object) : '';
     	isset($data['images']) ? $this->storeImages(($data['images']), $Object) : '';
     	isset($data['media']) ? $this->storeMedia(($data['media']), $Object) : '';
-    	isset($data['prices']) ? $this->storePrice(($data['prices']), $Object) : '';
     	isset($data['variants']) ? $this->storeVariants(($data['variants']), $Object) : '';
     	isset($data['shipping']) ? $this->storeShipping(($data['shipping']), $Object) : '';
+    	// isset($data['prices']) ? $this->storePrice(($data['prices']), $Object) : '';
 
     	return $Object;
 

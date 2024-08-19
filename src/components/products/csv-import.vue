@@ -1,12 +1,6 @@
 <template>
     <div class="w-full flex overflow-auto" >
-        <vue-csv-import v-model="csv" :fields="{
-                name: { required: false, label: 'Full_Name' },
-                mobile: { required: false, label: 'Phone_Number' },
-                whatsapp: { required: false, label: 'Whatsapp' },
-                job_title: { required: false, label: 'Job_Title' },
-                email: { required: false, label: 'Email' },
-            }">
+        <vue-csv-import v-model="csv" :fields="content.columns">
             <div class="card-body pt-0">
                 <div class="settings-form">
 
@@ -81,11 +75,10 @@ export default
         const load = () => {
             handleGetRequest( url ).then(response=> {
                 content.value = JSON.parse(JSON.stringify(response))
-                searchField.value = content.value.columns[1].value;
             });
         }
         
-        // load();
+        load();
 
 
         const addProductWizard = () => 

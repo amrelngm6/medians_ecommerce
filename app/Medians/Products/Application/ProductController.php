@@ -74,6 +74,24 @@ class ProductController extends CustomController
 	
 
 	/**
+	 * Columns list to choose for the CSV import 
+	 *  
+	 */ 
+	public function csv_columns( ) 
+	{
+		
+		return [
+            
+			'title'=>  [ 'required'=> true, 'label'=>'english[title]' ],
+			'short'=>  [ 'required'=> true, 'label'=>'english[short]' ],
+			'content'=>  [ 'required'=> true, 'label'=>'english[content]' ],
+
+        ];
+	}
+
+	
+
+	/**
 	 * Admin index items
 	 * 
 	 */ 
@@ -106,9 +124,8 @@ class ProductController extends CustomController
 
 			return render('csv_import', [
 		        'load_vue' => true,
-		        'title' => translate('Products'),
-		        'columns' => $this->columns(),
-		        'fillable' => $this->fillable(),
+		        'title' => translate('Import Products'),
+		        'columns' => $this->csv_columns(),
 		        'items' => $this->repo->get(),
 		        'fillable_category' => (new CategoryController())->fillable(),
 
