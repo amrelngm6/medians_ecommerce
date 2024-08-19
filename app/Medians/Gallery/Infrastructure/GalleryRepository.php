@@ -3,6 +3,7 @@
 namespace Medians\Gallery\Infrastructure;
 
 use Medians\Gallery\Domain\Gallery;
+use Medians\Gallery\Domain\GalleryItem;
 use Medians\Gallery\Domain\GalleryField;
 
 
@@ -50,6 +51,11 @@ class GalleryRepository
 		// Return the Model object with the new data
     	$Object = Gallery::firstOrCreate($dataArray);
 
+		
+    	// Store slides
+    	!empty($data['items']) ? $this->storeItems($data['items'], $Object->gallery_id) : '';
+
+
     	return $Object;
 	}
 
@@ -65,6 +71,9 @@ class GalleryRepository
 		// Return the Model object with the new data
     	$Object->update( (array) $data);
 
+    	// Store slides
+    	!empty($data['items']) ? $this->storeItems($data['items'], $Object->gallery_id) : '';
+		
     	return $Object;
     } 
 
@@ -90,5 +99,38 @@ class GalleryRepository
 
 
 	
+	/**
+	* Save related items to database
+	*/
+	public function storeItems($data, $id) 
+	{
+		$clear = GalleryItem::where('gallery_id', $id)->delete();
+
+		if ($data)
+		{
+			$Model = null;
+			foreach ($data as $value )
+			{
+				
+				try {
+					
+					$item = (array) $value;
+					if (isset($item['title']) && isset($item['media']))
+					{
+						$fields = $item;
+						$fields['gallery_id'] = $id;	
+						$fields['status'] = 'on';	
+						
+						$Model = GalleryItem::firstOrCreate($fields);
+					}
+
+				} catch (\Throwable $th) {
+					error_log($th->getMessage());
+				}
+				
+			}
+			return $Model;		
+		}
+	}
 	
 }

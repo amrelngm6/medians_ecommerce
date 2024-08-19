@@ -93,7 +93,7 @@ class GalleryController extends CustomController
 			$params['created_by'] = $user->id;
             
 			return ($this->repo->store($params))
-            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=> true)
             : array('success'=>0, 'result'=>translate('Error'), 'error'=>1);
 
 
@@ -120,7 +120,7 @@ class GalleryController extends CustomController
         try {
 
            	$returnData =  ($this->repo->update($params))
-           	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>true)
+           	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>false)
            	: array('error'=>'Not allowed');
 
 
