@@ -9,7 +9,7 @@
                     <!--begin::Heading-->
                     <div class="card-px pt-15 pb-15">
                         
-                        <vue-csv-import v-model="csv" :fields="content.columns">
+                        <vue-csv-import  @input="onCsvImport" v-model="csv" :fields="content.columns">
                             
 
 
@@ -61,7 +61,7 @@
                                                 v-text="translate('Next')"></a>
                                         </vue-csv-submit>
                                     </div>
-                                    
+
                                     <div class="container mx-auto overflow-x-auto py-10" >
                                             
                                         <vue-csv-table-map autoMatch="true" autoMatchIgnoreCase="true"></vue-csv-table-map>
@@ -140,10 +140,15 @@ export default
                 showWizard.value = true;
             }
 
+            const onCsvImport = (data) => {
+              console.log('CSV data imported:', data);
+            }
+            
             const handleImport = () => {
             }
 
             return {
+                onCsvImport,
                 handleImport,
                 showEditSide,
                 url,
