@@ -62,6 +62,8 @@ const profile = defineAsyncComponent(() => import('@/components/profile/profile.
 
 const gallery = defineAsyncComponent(() => import('@/components/gallery/index.vue') );
 
+const payment_methods = defineAsyncComponent(() => import('@/components/payment_methods.vue') );
+
 const transactions = defineAsyncComponent(() => import('@/components/transactions.vue') );
 
 const invoices = defineAsyncComponent(() => import('@/components/invoices.vue') );
@@ -118,6 +120,7 @@ export default {
         notifications_events,
         plugins,
         hooks,
+        payment_methods,
         csv_import,
         get_started,
         translate,
