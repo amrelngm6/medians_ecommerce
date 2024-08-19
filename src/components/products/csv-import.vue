@@ -180,3 +180,16 @@ export default
 
     };
 </script>
+<style lang="css">
+
+table thead {
+    text-align: center;
+}
+table td select {
+    padding: 5px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    width: 100%;
+    min-width: max-content;
+}
+</style>
