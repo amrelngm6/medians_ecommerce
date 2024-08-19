@@ -42,7 +42,7 @@
                                     </div>
                                     <vue-csv-errors></vue-csv-errors>
                                     
-                                    <div class="w-full flex ">
+                                    <div class="w-full flex " v-if="canSubmit">
                                         <div class="py-5 text-lg w-full" >
                                             <vue-csv-toggle-headers v-slot="{ hasHeaders, toggle }">
                                                 <checkbox />
@@ -71,7 +71,7 @@
                             </div>
                                     
                             <!--begin::Illustration-->
-                            <div class="text-center pb-15 px-5">
+                            <div class="text-center pb-15 px-5" v-if="!canSubmit">
                                 <img :src="'/uploads/img/2.png'" alt="" class="mw-100 h-200px h-sm-325px">
                             </div>
                             <!--end::Illustration-->
