@@ -1,0 +1,84 @@
+<section class="products-carousel container">
+	<h2 class="section-title text-uppercase fw-bold text-center mb-1 mb-md-3 pb-xl-2 mb-xl-4">{{hook.title}}</h2>
+
+	<ul class="nav nav-tabs mb-3 mb-xl-5 text-uppercase justify-content-center" id="collections-tab" role="tablist">
+        {% for category in categories %}
+		<li class="nav-item" role="presentation">
+			<a class="nav-link nav-link_underscore {{loop.index > 1 ? '' : 'active show'}}" id="collections-tab-{{category.category_id}}-trigger" data-bs-toggle="tab" href="#collections-tab-{{category.category_id}}" role="tab" aria-controls="collections-tab-{{category.category_id}}" aria-selected="true">{{category.name}}</a>
+		</li>
+        {% endfor %}
+	</ul>
+
+	<div class="tab-content pt-2" id="collections-tab-content">
+        {% for category in categories %}
+
+		<div class="tab-pane fade  {{loop.index > 1 ? '' : 'active show'}}" id="collections-tab-{{category.category_id}}" role="tabpanel" aria-labelledby="collections-tab-{{category.category_id}}-trigger">
+			<div class="position-relative">
+				<div class="swiper-container js-swiper-slider" data-settings='{
+						                "autoplay": {
+						                  "delay": 5000
+						                },
+						                "slidesPerView": 2,
+						                "slidesPerGroup": 2,
+						                "effect": "none",
+						                "loop": false,
+						                "pagination": {
+						                  "el": ".products-pagination",
+						                  "type": "bullets",
+						                  "clickable": true
+						                },
+						                "navigation": {
+						                  "nextEl": ".products-carousel__next",
+						                  "prevEl": ".products-carousel__prev"
+						                },
+						                "breakpoints": {
+						                  "320": {
+        					                "slidesPerView": {{hook.field.mobile_view_limit}},
+						                    "slidesPerGroup": 2,
+						                    "spaceBetween": 14
+						                  },
+						                  "768": {
+        					                "slidesPerView": {{hook.field.tablet_view_limit}},
+						                    "slidesPerGroup": 3,
+						                    "spaceBetween": 24
+						                  },
+						                  "992": {
+        					                "slidesPerView": {{hook.field.desktop_view_limit}},
+						                    "slidesPerGroup": 1,
+						                    "spaceBetween": 30,
+						                    "pagination": false
+						                  }
+						                }
+						              }'>
+					<div class="swiper-wrapper">
+                    {% for productGroup in category.products %}
+                        {% for item in productGroup %}
+                            {% include 'Shared/Plugins/views/product.html.twig' %}
+                        {% endfor %}
+                    {% endfor %}
+					</div>
+					<!-- /.swiper-wrapper -->
+				</div>
+				<!-- /.swiper-container js-swiper-slider -->
+
+				<div class="products-carousel__prev position-absolute top-50 d-flex align-items-center justify-content-center">
+					<svg width="25" height="25" viewbox="0 0 25 25" xmlns="http://www.w3.org/2000/svg"><use href="#icon_prev_md"/></svg>
+				</div>
+				<!-- /.products-carousel__prev -->
+				<div class="products-carousel__next position-absolute top-50 d-flex align-items-center justify-content-center">
+					<svg width="25" height="25" viewbox="0 0 25 25" xmlns="http://www.w3.org/2000/svg"><use href="#icon_next_md"/></svg>
+				</div>
+				<!-- /.products-carousel__next -->
+
+				<div class="products-pagination mt-4 mb-5 d-flex align-items-center justify-content-center"></div>
+				<!-- /.products-pagination -->
+			</div>
+			<!-- /.position-relative -->
+		</div>
+
+        {% endfor %}
+
+		<!-- /.tab-pane fade show-->
+    </div>
+</section>
+

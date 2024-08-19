@@ -5,8 +5,8 @@
         "autoplay": {
           "delay": 5000
         },
-        "slidesPerView": 1,
-        "effect": "{{hook.field.animation_effect}}",
+        "slidesPerView": {{hook.field.preview_count ?? 2 }},
+        "effect": "{{hook.field.animation_effect|lower}}",
         "loop": true,
         "pagination": {
           "el": ".slideshow-pagination",
@@ -36,7 +36,7 @@
 
       </div><!-- /.slideshow-wrapper js-swiper-slider -->
       <div class="slideshow-pagination position-left-center type2"></div>
-      <a href="#section-grid-banner" class="slideshow-scroll d-none d-xxl-block position-absolute end-0 bottom-3 text_dash text-uppercase fw-medium">Scroll</a>
+      <a href="#section-grid-banner" class="slideshow-scroll d-none d-xxl-block position-absolute end-0 bottom-3 text_dash text-uppercase fw-medium">{{lang.translate('Scroll')}}</a>
     </section><!-- /.slideshow -->
 
 </main>
