@@ -52,20 +52,14 @@ const form_field = defineAsyncComponent(() =>
   import('@/components/includes/form_field.vue')
 );
 
-import tooltip from '@/components/includes/tooltip.vue';
-const product_wizard = defineAsyncComponent(() => import('@/components/products/product_wizard.vue') );
-
 
 export default 
 {
     components:{
-        'datatabble': Vue3EasyDataTable,
         VueCsvToggleHeaders, VueCsvSubmit, VueCsvMap, VueCsvInput, VueCsvErrors, VueCsvImport, VueCsvTableMap, VueCsvImportPlugin,
-        product_wizard,
         form_field,
-        tooltip
     },
-    name:'Products',
+    name:'Import Products',
     setup(props) {
 
         const url =  props.conf.url+props.path+'?load=json';
@@ -91,7 +85,7 @@ export default
             });
         }
         
-        load();
+        // load();
 
 
         const addProductWizard = () => 
