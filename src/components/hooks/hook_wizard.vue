@@ -239,6 +239,14 @@ export default
                 }
 
                 
+                Object.keys(activeItem.value.field).forEach((e, i) => {
+                    console.log(e)
+                    console.log(i)
+                    console.log(activeItem.value.field[e])
+
+                    params.append('params[options]['+e+']', JSON.stringify(activeItem.value.field[e]))
+                })
+
                 let type = array.id > 0 ? 'update' : 'create';
                 params.append('type', 'Hook.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
@@ -269,19 +277,8 @@ export default
             }
 
             const handleField = (val, index) => {
-                console.log(val) 
-                console.log(index) 
-                console.log(activeItem.value.field)
                 activeItem.value.field[index] = val
                 
-                Object.keys(activeItem.value.field).forEach((e, i) => {
-                    console.log(e)
-                    console.log(i)
-                    console.log(activeItem.value.field[e])
-
-                    params.append('params[options]['+e+']', JSON.stringify(...activeItem.value.field[e]))
-                })
-
             }
             
             const switchStatus = (val, index) => {
