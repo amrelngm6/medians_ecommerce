@@ -1,6 +1,6 @@
 <main class="mt-20">
-	<section class="products-carousel container">
-		<h2 class="section-title text-center fw-normal mb-1 mb-md-3 pb-xl-3 mb-xl-4">The Inside Collection</h2>
+	<section class="products-carousel {{hook.field.container_style}}">
+		<h2 class="section-title text-center fw-normal mb-1 mb-md-3 pb-xl-3 mb-xl-4">{{hook.title}}</h2>
 
 		<div class="position-relative">
 			<div class="swiper-container js-swiper-slider" data-settings='{
@@ -11,6 +11,10 @@
 					            "slidesPerGroup": 3,
 					            "effect": "none",
 					            "loop": false,
+                                "scrollbar": {
+                                    "el": ".products-carousel__scrollbar",
+                                    "draggable": true
+                                },
 					            "breakpoints": {
 					              "320": {
 					                "slidesPerView": {{hook.field.mobile_view_limit}},
@@ -38,7 +42,11 @@
 				<!-- /.swiper-wrapper -->
 			</div>
 			<!-- /.swiper-container js-swiper-slider -->
+            
 		</div>
+        {% if hook.field.show_scrollbar %}
+        <div class="products-carousel__scrollbar swiper-scrollbar"></div>
+        {% endif %}
 		<!-- /.position-relative -->
 
 	</section>

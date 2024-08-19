@@ -1,4 +1,4 @@
-<section class="products-carousel container">
+<section class="products-carousel {{hook.field.container_style}}" x-data="{}">
 	<h2 class="section-title text-uppercase fw-bold text-center mb-1 mb-md-3 pb-xl-2 mb-xl-4">{{hook.title}}</h2>
 
 	<ul class="nav nav-tabs mb-3 mb-xl-5 text-uppercase justify-content-center" id="collections-tab" role="tablist">
@@ -27,6 +27,11 @@
 						                  "type": "bullets",
 						                  "clickable": true
 						                },
+                                        
+                                        "scrollbar": {
+                                            "el": ".products-tabs-carousel__scrollbar",
+                                            "draggable": true
+                                        },
 						                "navigation": {
 						                  "nextEl": ".products-carousel__next",
 						                  "prevEl": ".products-carousel__prev"
@@ -78,7 +83,10 @@
 
         {% endfor %}
 
-		<!-- /.tab-pane fade show-->
+        {% if hook.field.show_scrollbar %}
+        <div class="products-tabs-carousel__scrollbar swiper-scrollbar"></div>
+        {% endif %}
+		<!-- /.position-relative -->
     </div>
 </section>
 

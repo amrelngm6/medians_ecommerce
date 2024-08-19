@@ -1,22 +1,18 @@
 <?php
 
-namespace Shared\Plugins\Sliders;
+namespace Shared\Plugins\Media;
 
-use Medians\Products\Infrastructure\CategoryRepository;
-use Medians\Products\Infrastructure\ProductRepository;
 use Medians\Hooks\Infrastructure\HookRepository;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Hooks\Domain\Hook;
 
 
-class ProductCarousel 
+class PanoramaView 
 {
 
 	
-    private $categoryRepo;
-    private $productRepo;
     private $hookRepo;
-    public $name = "Products carousel";
+    public $name = "Products tabs";
     public $description = "";
     public $version = "1.0";
     public $shortcode = "";
@@ -24,9 +20,7 @@ class ProductCarousel
 
 	function __construct()
 	{
-		$this->categoryRepo = new CategoryRepository;
 		$this->hookRepo = new HookRepository;
-		$this->productRepo = new ProductRepository;
 	}
 
 
@@ -40,11 +34,7 @@ class ProductCarousel
 		return [
             
 			'basic'=> [	
-				[ 'key'=> "products_limit", 'title'=> translate('Max number') , 'help_text'=> translate('Max number of loaded products'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
-				[ 'key'=> "categories", 'title'=> translate('Categories'), 'help_text'=> translate('Select categories to display products from'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'category_id', 'multiple' => true,
-					'data' => $this->categoryRepo->getActive()  
-				],	
+				[ 'key'=> "media", 'title'=> translate('Media file') , 'help_text'=> translate('Panorama Image'), 'fillable'=> true, 'required'=> true, 'column_type'=>'file' ],
 			],	
             
 			'styles'=> [	
@@ -54,7 +44,7 @@ class ProductCarousel
 					'data' => [["name"=> "Boxed", "container_style"=>"container"], ["name"=>"Full width", "container_style"=> "w-full"]]  
 				],
 				[ 'key'=> "show_scrollbar", 'title'=> translate('Show scrollbar') , 'help_text'=> translate('Show Scrollbar at the bottom of the  products'), 'fillable'=> true, 'required'=> true, 'column_type'=>'checkbox' ],
-			],
+			],	
 			'responsive'=> [	
 				[ 'key'=> "mobile_view_limit", 'title'=> translate('Mobile view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for Mobile view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "tablet_view_limit", 'title'=> translate('Tablet view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for Tablet view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
@@ -118,14 +108,11 @@ class ProductCarousel
 			
 			$hook = $this->hookRepo->find($params['id']);
 
-			$params['categories_ids'] = json_decode($hook->field['categories']);
-			$params['limit'] = json_decode($hook->field['products_limit']);
+			// $params['limit'] = json_decode($hook->field['products_limit']);
 
-			$items = $this->productRepo->getWithFilter($params);
-
-            return render('Shared/Plugins/views/product_carousel.html.twig', [
-		        'items' => $items['items'],
-				'hook' => $hook
+			return render('Shared/Plugins/views/panorama_viwe.html.twig', [
+				'hook' => $hook,
+				// 'categories' => $categories
 		    ],'output');
 
 		} catch (\Exception $e) {
