@@ -88,7 +88,11 @@ export default
                 multipleValue.value = props.item[props.column.key] ? props.item[props.column.key].map(e => e[props.column.column_key]) : [];
             
         } catch (error) {
-            multipleValue.value = props.item[props.column.key] ? props.item[props.column.key].map(e => e[props.column.column_key] ?? e) : [];
+            try {
+                multipleValue.value = props.item[props.column.key] ? props.item[props.column.key].map(e => e[props.column.column_key] ?? e) : [];
+            } catch (error) {
+                multipleValue.value = props.item[props.column.key] ? JSON.parse(props.item[props.column.key]).map(e => e[props.column.column_key] ?? e) : [];
+            }
         }
 
 
