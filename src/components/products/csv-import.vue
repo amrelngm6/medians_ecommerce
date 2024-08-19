@@ -112,7 +112,7 @@ export default
 
             const url = props.conf.url + props.path + '?load=json';
 
-            const showEditSide = ref(false);
+            const canSubmit = ref(false);
             const activeItem = ref({});
             const content = ref({});
             const showWizard = ref(false);
@@ -141,7 +141,7 @@ export default
             }
 
             const onCsvImport = (data) => {
-              console.log('CSV data imported:', data);
+                canSubmit.value = true
             }
             
             const handleImport = () => {
@@ -150,7 +150,7 @@ export default
             return {
                 onCsvImport,
                 handleImport,
-                showEditSide,
+                canSubmit,
                 url,
                 content,
                 fillable,
