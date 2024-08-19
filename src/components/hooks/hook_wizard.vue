@@ -274,7 +274,11 @@ export default
             const handleField = (val, index) => {
                 console.log(val) 
                 console.log(index) 
-                console.log(...activeItem.value.field) 
+                console.log(activeItem.value.field)
+                
+                activeItem.value.field[index] = val
+                console.log(activeItem.value.field)
+
                 if (activeItem.value.field == null) {
                     activeItem.value.field = {}
                     activeItem.value.field[index] = val
