@@ -189,6 +189,36 @@ class ProductRepository
     	return $Object;
     }
     	
+
+	/**
+	* Save item to database
+	*/
+	public function csv_store($list) 
+	{
+
+		$Model = new Product();
+		
+		foreach ($list as $data)
+		{
+			print_r($data);
+
+				// foreach ($data as $key => $value) 
+				// {
+				// 	if (in_array($key, $Model->getFields()))
+				// 	{
+				// 		$dataArray[str_replace(' ', '_', $key)] = $value;
+				// 	}
+				// }		
+				
+				// Return the  object with the new data
+				// $Object = Product::create($dataArray);
+		} 
+
+
+
+    	return $Object;
+    }
+    	
     /**
      * Update Lead
      */

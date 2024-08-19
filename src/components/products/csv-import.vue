@@ -21,7 +21,7 @@
             <p class="text-center mt-10">
                 <vue-csv-submit @click="handleImport"
                     class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger"
-                    url="/api/addProductsCSV"
+                    url="/api/create?type=addProductsCSV"
                     :config="{ params: {  } }"
                     v-slot="{ submit, mappedCsv }">
                     <!-- <button @click.prevent="submit" >{{ translate('Next') }}</button> -->

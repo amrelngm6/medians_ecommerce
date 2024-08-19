@@ -82,9 +82,7 @@ class ProductController extends CustomController
 		
 		return [
             
-			'title'=>  [ 'required'=> true, 'label'=>'english[title]' ],
-			'short'=>  [ 'required'=> true, 'label'=>'english[short]' ],
-			'content'=>  [ 'required'=> true, 'label'=>'english[content]' ],
+			'title'=>  [ 'required'=> true, 'label'=>'title' ],
 
         ];
 	}
@@ -348,5 +346,39 @@ class ProductController extends CustomController
 			'products'=> $data['items'],
 			'count'=> $data['count']
 		]);
+	}
+
+
+
+
+	/**
+	 * Store products from CSV
+	 */
+	public function storeProductsCSV() 
+	{
+		
+		$params = $this->app->params();
+
+        try {	
+			
+			$user = $this->app->auth();
+
+			try {
+				
+				$returnData = (!empty($this->repo->csv_store($params))) 
+				? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+				: array('success'=>0, 'result'=>'Error', 'error'=>1);
+	
+			} catch (\Throwable $th) {
+				return array('error'=>$th->getMessage());
+			}
+
+        } catch (Exception $e) {
+        	return array('error'=>$e->getMessage());
+        }
+
+		return $returnData;
+
+
 	}
 }
