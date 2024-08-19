@@ -60,7 +60,7 @@ const app_settings = defineAsyncComponent(() => import('@/components/settings/ap
 
 const profile = defineAsyncComponent(() => import('@/components/profile/profile.vue') );
 
-const gallery = defineAsyncComponent(() => import('@/components/gallery.vue') );
+const gallery = defineAsyncComponent(() => import('@/components/gallery/index.vue') );
 
 const transactions = defineAsyncComponent(() => import('@/components/transactions.vue') );
 
