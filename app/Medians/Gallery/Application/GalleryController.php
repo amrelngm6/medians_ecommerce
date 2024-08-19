@@ -35,6 +35,7 @@ class GalleryController extends CustomController
 		return [
             [ 'value'=> "gallery_id", 'text'=> "#"],
             [ 'value'=> "name", 'text'=> translate('name'), 'sortable'=> true ],
+            [ 'value'=> "description", 'text'=> translate('description'), 'sortable'=> true ],
             [ 'value'=> "edit", 'text'=> translate('edit')  ],
             [ 'value'=> "delete", 'text'=> translate('delete')  ],
         ];
@@ -52,7 +53,7 @@ class GalleryController extends CustomController
 		return [
             [ 'key'=> "gallery_id", 'title'=> "#", 'column_type'=>'hidden'],
 			[ 'key'=> "name", 'title'=> translate('name'), 'required'=>true, 'fillable'=> true, 'column_type'=>'text' ],
-            [ 'key'=> "status", 'title'=> translate('Status'), 'fillable'=>true, 'column_type'=>'checkbox' ],
+			[ 'key'=> "description", 'title'=> translate('description'), 'required'=>true, 'fillable'=> true, 'column_type'=>'textarea' ],
 
         ];
 	}
