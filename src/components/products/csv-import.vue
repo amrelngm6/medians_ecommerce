@@ -31,13 +31,13 @@
                                         <!--begin::Action-->
                                         <label class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
                                             data-bs-target="#kt_modal_create_campaign" > 
-                                            <span v-text="translate('Upload CSV file')"></span>
+                                            <span class="text-white fw-bold" v-text="translate('Upload CSV file')"></span>
                                             <vue-csv-input @change="onCsvImport" class="hidden" v-slot="{ file, change }"></vue-csv-input>
                                         </label>
                                         <!--end::Action-->
                                         
                                         <!--begin::Action-->
-                                        <a target="_blank" href="/uploads/products-sample.csv" class="btn btn-danger er fs-6 px-8 py-4 mx-6" v-text="translate('Download Example')"></a>
+                                        <a target="_blank" href="/uploads/products-sample.csv" class=" text-white fw-bold btn btn-danger er  px-8 py-4 mx-6" v-text="translate('Download Example')"></a>
                                         <!--end::Action-->
                                     </div>
                                     <vue-csv-errors></vue-csv-errors>
@@ -72,7 +72,7 @@
                                     
                             <!--begin::Illustration-->
                             <div class="text-center pb-15 px-5" v-if="!canSubmit">
-                                <img :src="'/uploads/img/2.png'" alt="" class="mw-100 h-200px h-sm-325px">
+                                <img :src="'/uploads/img/2.png'" alt="" class="mx-auto mw-100 h-200px h-sm-325px">
                             </div>
                             <!--end::Illustration-->
                         </vue-csv-import>
