@@ -39,7 +39,7 @@
             <option v-for="option in column.data" :value="option[ column.column_key ? column.column_key : column.key]" v-text="option[column.text_key]"></option>
         </select>
         
-        <vue-medialibrary-field @changed="changed" :key="item" v-if="column.column_type == 'file' || column.column_type == 'picture' "  :name="handleName(column)" :filepath="item[column.key]" :api_url="conf.url"></vue-medialibrary-field>
+        <vue-medialibrary-field @changed="multiple_changed" :key="item" v-if="column.column_type == 'file' || column.column_type == 'picture' "  :name="handleName(column)" :filepath="item[column.key]" :api_url="conf.url"></vue-medialibrary-field>
 
     </div>
 </template>
