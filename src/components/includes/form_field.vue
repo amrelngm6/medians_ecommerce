@@ -19,7 +19,7 @@
         <Multiselect
             v-if="column.multiple && column.data && column.column_type == 'select'" 
             mode="tags"
-            v-model="multipleValue"
+            v-model="item[column.key]"
             :object="false"
             :hideSelected="true"
             :searchable="true"
@@ -86,10 +86,10 @@ export default
         
         try {
             if (props.column.multiple)
-                multipleValue.value = props.item[props.column.key] ? props.item[props.column.key].map(e => e[props.column.column_key]) : [];
+                props.item[props.column.key].value = props.item[props.column.key] ? props.item[props.column.key].map(e => e[props.column.column_key]) : [];
             
         } catch (error) {
-            multipleValue.value = props.item[props.column.key] ? JSON.parse(props.item[props.column.key]).map(e => e[props.column.column_key] ?? e) : [];
+            props.item[props.column.key].value = props.item[props.column.key] ? JSON.parse(props.item[props.column.key]).map(e => e[props.column.column_key] ?? e) : [];
         }
 
 
