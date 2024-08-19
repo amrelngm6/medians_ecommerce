@@ -1,9 +1,9 @@
 <template>
     <div class="w-full" v-if="column" >
         
-        <input v-if="column && column.column_type == 'hidden'" :name="handleName(column)" type="hidden" v-model="item[column.key]">
+        <input v-if="column && column.column_type == 'hidden'" :name="handleName(column)" type="hidden" :value="handleValue(column, item)">
 
-        <input @change="changed(item[column.key])"  :required="column.required" :disabled="column.disabled" v-if="isInput(column.column_type)" autocomplete="off" :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid" :placeholder="column.title" v-model="item[column.key]">
+        <input @change="changed(item[column.key])" v-model="item[column.key]" :required="column.required" :disabled="column.disabled" v-if="isInput(column.column_type)" autocomplete="off" :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid" :placeholder="column.title" :value="handleValue(column, item)">
     
         <input :required="column.required" :disabled="column.disabled" v-if="column.column_type == 'password'" autocomplete="off" :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid" :placeholder="column.title">
 
@@ -14,12 +14,12 @@
             <input  :value="'on'" :checked="item[column.key] ? true : false"  type="checkbox" class="hidden" :name="handleName(column)" />
         </div>
         
-        <textarea  :required="column.required" :disabled="column.disabled" v-if="column.column_type == 'textarea'"  :name="handleName(column)" type="text" rows="4" class="mt-3 form-control form-control-solid" :placeholder="column.title" v-model="item[column.key]"></textarea>
+        <textarea @change="changed(item[column.key])" :required="column.required" :disabled="column.disabled" v-if="column.column_type == 'textarea'"  :name="handleName(column)" type="text" rows="4" class="mt-3 form-control form-control-solid" :placeholder="column.title" v-model="item[column.key]"></textarea>
 
         <Multiselect
             v-if="column.multiple && column.data && column.column_type == 'select'" 
             mode="tags"
-            v-model="multipleValue"
+            v-model="item[column.key]"
             :object="false"
             :hideSelected="true"
             :searchable="true"
@@ -28,12 +28,13 @@
             :trackBy="column.text_key"
             :label="column.text_key"    
             :options="column.data"
+            :max="column.single ? 1 : 100"
             @change="changed" 
         ></Multiselect>
 
         <input v-if="column.multiple && column.data && column.column_type == 'select'" type="hidden" v-for="selected in  item[column.column_key]" :name="'params['+(column.column_key)+'][]'" :value="selected[column.column_key]" />
 
-        <select @change="changed(column.data[column.data.findIndex(e => e[column.key] == item[column.key])])" :required="column.required" :disabled="column.disabled" v-if="!column.multiple && column.data && column.column_type == 'select'" v-model="item[column.key]"  :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid"   :placeholder="column.title">
+        <select v-model="item[column.key]" @change="changed(column.data[column.data.findIndex(e => e[column.key] == item[column.key])])" :required="column.required" :disabled="column.disabled" v-if="!column.multiple && column.data && column.column_type == 'select'" :value="handleValue(column, item)"  :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid"   :placeholder="column.title">
             <option value="0"  v-if="!column.required" v-text="translate('select') +' '+ column.title"></option>
             <option v-for="option in column.data" :value="option[ column.column_key ? column.column_key : column.key]" v-text="option[column.text_key]"></option>
         </select>
@@ -45,7 +46,7 @@
 <script>
 import close_icon from '@/components/svgs/Close.vue';
 import field from '@/components/includes/Field.vue';
-import { translate, handleGetRequest, handleName, isInput, setActiveStatus, handleRequest, deleteByKey, showAlert } from '@/utils.vue';
+import { translate, handleGetRequest, handleName, handleValue, isInput, setActiveStatus, handleRequest, deleteByKey, showAlert } from '@/utils.vue';
 
 import Multiselect from '@vueform/multiselect'
 import {ref} from 'vue'
@@ -73,17 +74,23 @@ export default
 
         const changed = (model) => 
         {
-            model ? emit('callback', model) : '';
+            model ? emit('callback', model, props.column.key) : '';
         }
 
         const multiple_changed = (model) => 
         {
-            model ? emit('callback', model.map(e => e[props.column.key])) : '';
+            model ? emit('callback', model.map(e => e[props.column.key]), props.column.key) : '';
         }
 
         const multipleValue = ref([]);
-        if (props.column.multiple)
-            multipleValue.value = props.item[props.column.key] ? props.item[props.column.key].map(e => e[props.column.column_key]) : [];
+        
+        // try {
+        //     if (props.column.multiple)
+        //         multipleValue.value = props.item[props.column.key] ? props.item[props.column.key].map(e => e[props.column.column_key]) : [];
+            
+        // } catch (error) {
+        //     multipleValue.value = props.item[props.column.key] ? JSON.parse(props.item[props.column.key]).map(e => e[props.column.column_key] ?? e) : [];
+        // }
 
 
         return {
@@ -94,6 +101,7 @@ export default
             changed,
             handleName,
             translate,
+            handleValue,
             multiple_changed,
             itemData: props.item,
         }
