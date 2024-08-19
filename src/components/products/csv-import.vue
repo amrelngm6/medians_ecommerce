@@ -94,49 +94,11 @@ export default
             showWizard.value = true;
         }
         
-
-        /**
-         * Handle actions from datatable buttons
-         * Called From 'dataTableActions' component
-         * 
-         * @param String actionName 
-         * @param Object data
-         */  
-         const handleAction =  (actionName, data) =>  {
-            switch(actionName) 
-            {
-
-                case 'view':
-                    break;
-
-                case 'edit':
-                    activeItem.value = data;
-                    showWizard.value = true
-                    break;  
-
-                case 'delete':
-                    deleteByKey('product_id', data, 'Product.delete');
-                    break;  
-
-                    
-                case 'close':
-                    
-                    showEditSide.value = false;
-                    activeItem.value = {};
-                    break;
-            }
-        }
-
-
-        const showTip = ref({});
-        
-        
         const handleImport = () => {
         }
         
         return {
             handleImport,
-            showTip,
             showEditSide,
             url,
             content,

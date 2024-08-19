@@ -95,6 +95,29 @@ class ProductController extends CustomController
 			
 		}
 	}
+	
+	/**
+	 * Admin index items
+	 * 
+	 */ 
+	public function import_csv( ) 
+	{
+		try {
+
+			return render('csv_import', [
+		        'load_vue' => true,
+		        'title' => translate('Products'),
+		        'columns' => $this->columns(),
+		        'fillable' => $this->fillable(),
+		        'items' => $this->repo->get(),
+		        'fillable_category' => (new CategoryController())->fillable(),
+
+		    ]);
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+			
+		}
+	}
 
 	/**
 	 * Admin product page
