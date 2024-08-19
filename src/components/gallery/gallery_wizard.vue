@@ -2,7 +2,6 @@
     <div class="w-full flex overflow-auto">
         <div class=" w-full relative">
 
-
             <div class="modal fade show" v-if="showModal" :key="showModal" id="kt_modal_adjust_balance" tabindex="-1"
                 aria-modal="true" role="dialog" data-select2-id="select2-data-kt_modal_adjust_balance"
                 style="background: rgba(0,0,0,.5);display: block;z-index: 9999;">
