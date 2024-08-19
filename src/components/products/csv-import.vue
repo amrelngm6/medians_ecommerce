@@ -40,6 +40,12 @@
                                         <a target="_blank" href="/uploads/products-sample.csv" class="btn btn-danger er fs-6 px-8 py-4 mx-6" v-text="translate('Download Example')"></a>
                                         <!--end::Action-->
                                     </div>
+                                    <vue-csv-errors></vue-csv-errors>
+                                    
+                                    <div class="container mx-auto overflow-x-auto" >
+                                        <vue-csv-table-map autoMatch="true" autoMatchIgnoreCase="true"></vue-csv-table-map>
+                                    </div>
+                                    
                                     <div class="w-full flex ">
                                         <div class="py-5 text-lg w-full" >
                                             <vue-csv-toggle-headers v-slot="{ hasHeaders, toggle }">
@@ -59,22 +65,18 @@
                                                 v-text="translate('Next')"></a>
                                         </vue-csv-submit>
                                     </div>
-                                    <vue-csv-errors></vue-csv-errors>
-                                    
-                                    <div class="container mx-auto overflow-x-auto" >
-                                        <vue-csv-table-map autoMatch="true" autoMatchIgnoreCase="true"></vue-csv-table-map>
-                                    </div>
                                 </div>
                             </div>
+                                    
+                            <!--begin::Illustration-->
+                            <div class="text-center pb-15 px-5">
+                                <img :src="'/uploads/img/2.png'" alt="" class="mw-100 h-200px h-sm-325px">
+                            </div>
+                            <!--end::Illustration-->
                         </vue-csv-import>
                     </div>
                     <!--end::Heading-->
 
-                    <!--begin::Illustration-->
-                    <div class="text-center pb-15 px-5">
-                        <img :src="'/uploads/img/2.png'" alt="" class="mw-100 h-200px h-sm-325px">
-                    </div>
-                    <!--end::Illustration-->
                 </div>
                 <!--end::Card body-->
             </div>
