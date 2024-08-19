@@ -166,6 +166,7 @@ if(!empty($app->auth()))
     */
     RouteHandler::get('/admin/products', Medians\Products\Application\ProductController::class.'@index');
     RouteHandler::get('/admin/products/new', Medians\Products\Application\ProductController::class.'@create');
+    RouteHandler::get('/admin/csv_import', Medians\Products\Application\ProductController::class.'@csv_import');
     RouteHandler::get('/admin/products/(:all)', Medians\Products\Application\ProductController::class.'@product');
 
     /**

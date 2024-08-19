@@ -100,7 +100,7 @@ class ProductController extends CustomController
 	 * Admin index items
 	 * 
 	 */ 
-	public function import_csv( ) 
+	public function csv_import( ) 
 	{
 		try {
 

@@ -406,6 +406,7 @@ class APP
 				array('permission'=>'Products.index', 'title'=>translate('Products'),  'icon'=>'user', 'link'=>'admin/products', 'component'=>'products'),
 				array('permission'=>'Categories.index', 'title'=>translate('Categories'),  'icon'=>'user', 'link'=>'admin/product_categories', 'component'=>'categories'),
 				array('permission'=>'Brands.index', 'title'=>translate('Brands'),  'icon'=>'user', 'link'=>'admin/brands', 'component'=>'data_table'),
+				array('permission'=>'CSVImport.index', 'title'=>translate('Import CSV'),  'icon'=>'user', 'link'=>'admin/csv_import', 'component'=>'csv_import'),
 			]
 			),
 
@@ -450,11 +451,15 @@ class APP
 				array('permission'=>'Menus.index', 'title'=>translate('Menus'),  'icon'=>'tool', 'link'=>'admin/menus', 'component'=>'menus'),
 			]
 			),
+			array( 'title'=>translate('Plugins'),  'icon'=>'target', 'link'=>'#plugins', 'superadmin'=> true, 'sub'=>
+			[
+				array('permission'=>'Plugins.index', 'title'=>translate('Plugins'),  'icon'=>'tool', 'link'=>'admin/plugins', 'component'=>'plugins'),
+				array('permission'=>'Hooks.index', 'title'=>translate('Hooks'),  'icon'=>'tool', 'link'=>'admin/hooks', 'component'=>'hooks'),
+			]
+			),
 			array( 'title'=>translate('Management'),  'icon'=>'target', 'link'=>'#management', 'superadmin'=> true, 'sub'=>
 			[
 
-				array('permission'=>'Plugins.index', 'title'=>translate('Plugins'),  'icon'=>'tool', 'link'=>'admin/plugins', 'component'=>'plugins'),
-				array('permission'=>'Hooks.index', 'title'=>translate('Hooks'),  'icon'=>'tool', 'link'=>'admin/hooks', 'component'=>'hooks'),
 				array('permission'=>'Branch.index', 'title'=>translate('Branches'),  'icon'=>'tool', 'link'=>'admin/branches', 'component'=>'data_table'),
 				array('permission'=>'Reviews.index', 'title'=>translate('Reviews'),  'icon'=>'tool', 'link'=>'admin/reviews', 'component'=>'data_table'),
 				array('permission'=>'Currencies.index', 'title'=>translate('Currencies'),  'icon'=>'tool', 'link'=>'admin/currencies', 'component'=>'data_table'),

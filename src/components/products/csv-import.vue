@@ -28,7 +28,7 @@
                 <vue-csv-submit @click="handleImport"
                     class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger"
                     url="/api/addProductsCSV"
-                    :config="{ params: { campaign_id: item.campaign_id } }"
+                    :config="{ params: {  } }"
                     v-slot="{ submit, mappedCsv }">
                     <!-- <button @click.prevent="submit" >{{ translate('Next') }}</button> -->
 
@@ -110,7 +110,6 @@ export default
             showWizard,
             closeSide,
             addProductWizard,
-            handleAction,
         };
     },
 
