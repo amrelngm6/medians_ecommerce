@@ -128,18 +128,35 @@
                                                 class="text-white btn btn-primary er fs-6 px-4 py-2"></a>
                                         </div>
                                         <div class="w-full mb-6 " v-if="activeItem.items">
+                                            
                                             <div class="w-full mb-6 mx-auto flex gap-4"
                                                 v-for="(item, key) in activeItem.items">
+
+                                                <div class="d-flex align-items-sm-center mb-7">
+                
+                                                    <div class="symbol symbol-60px symbol-2by3 me-4">
+                                                        <div class="symbol-label" v-bind:style="{ 'background-image': 'url(' + item.media + ')' }"></div>
+                                                    </div>
+                                                    
+                                                    <div class="d-flex flex-row-fluid flex-wrap align-items-center">                    
+                                                        <div class="flex-grow-1 me-2">
+                                                            <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="item.title"></a>
+                                                            <span class="text-muted fw-semibold d-block pt-1" v-text="item.description"></span>
+                                                        </div>
+                                                        <vue-feather type="edit" class="h-25px w-40px cursor-pointer " @click="switchField(item, key)" />
+                                                        <vue-feather type="delete" class="h-25px w-40px text-danger cursor-pointer "
+                                                            @click="(activeItem.items.splice(key, 1))" />                 
+                                                    </div>
+                                                </div>
+
+                                                
                                                 <label v-if="activeItem.items[key]" @click="switchField(item, key)"
                                                     class="cursor-pointer w-full col-form-label required fw-semibold fs-6">
                                                     <p v-text="item.title" class="fw-bold fs-4"></p>
                                                     <span v-text="item.code"></span>
                                                 </label>
-                                                <vue-feather type="edit" class="h-25px w-40px cursor-pointer "
-                                                    @click="switchField(item, key)" />
-                                                <vue-feather type="delete"
-                                                    class="h-25px w-40px text-danger cursor-pointer "
-                                                    @click="(activeItem.items.splice(key, 1))" />
+                                                
+                                                
                                             </div>
 
                                         </div>
