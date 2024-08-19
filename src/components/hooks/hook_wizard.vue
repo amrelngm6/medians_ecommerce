@@ -119,7 +119,7 @@
                                             <span class="block mb-2 form-label text-gray-600 text-lg"
                                                 v-text="column.title" v-if="column.column_type != 'hidden'"></span>
                                             <form_field @callback="handleField" :column="column"
-                                                :item="activeItem.options" :conf="conf"></form_field>
+                                                :item="activeItem.field" :conf="conf"></form_field>
                                             <p v-text="column.help_text" v-if="column.help_text"></p>
                                         </div>
                                     </div>
@@ -189,7 +189,7 @@ export default
 
             const showAddCategory = ref(false);
             const activeItem = ref({
-                "options": {},
+                "field": {},
                 "hook": '',
                 "position": '',
                 "status": ''
@@ -272,13 +272,12 @@ export default
             }
 
             const handleField = (val, index) => {
-                console.log([...activeItem.value.options])
-                console.log(activeItem.value.options)
-                if (activeItem.value.options == null) {
-                    activeItem.value.options = {}
-                    activeItem.value.options[index] = val
+                if (activeItem.value.field == null) {
+                    activeItem.value.field = {}
+                    activeItem.value.field[index] = val
                 } else {
-                    activeItem.value.options[index] = val
+
+                    activeItem.value.field[index] = val
                 }
             }
             
