@@ -42,10 +42,6 @@
                                     </div>
                                     <vue-csv-errors></vue-csv-errors>
                                     
-                                    <div class="container mx-auto overflow-x-auto" >
-                                        <vue-csv-table-map autoMatch="true" autoMatchIgnoreCase="true"></vue-csv-table-map>
-                                    </div>
-                                    
                                     <div class="w-full flex ">
                                         <div class="py-5 text-lg w-full" >
                                             <vue-csv-toggle-headers v-slot="{ hasHeaders, toggle }">
@@ -65,6 +61,12 @@
                                                 v-text="translate('Next')"></a>
                                         </vue-csv-submit>
                                     </div>
+                                    
+                                    <div class="container mx-auto overflow-x-auto py-10" >
+                                            
+                                        <vue-csv-table-map autoMatch="true" autoMatchIgnoreCase="true"></vue-csv-table-map>
+                                    </div>
+                                    
                                 </div>
                             </div>
                                     
