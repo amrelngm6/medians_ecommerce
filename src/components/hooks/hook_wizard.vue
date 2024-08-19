@@ -238,9 +238,6 @@ export default
                     params.append('params[' + k + ']', d)
                 }
 
-                // Object.keys(activeItem.value.options).forEach((e, i) => {
-                //     params.append('params[options]['+e+']', JSON.stringify(...activeItem.value.options[e]))
-                // })
                 
                 let type = array.id > 0 ? 'update' : 'create';
                 params.append('type', 'Hook.' + type)
@@ -275,18 +272,14 @@ export default
                 console.log(val) 
                 console.log(index) 
                 console.log(activeItem.value.field)
-                
                 activeItem.value.field[index] = val
-                console.log(activeItem.value.field)
+                
+                Object.keys(activeItem.value.field).forEach((e, i) => {
+                    console.log(e)
+                    console.log(i)
 
-                if (activeItem.value.field == null) {
-                    activeItem.value.field = {}
-                    activeItem.value.field[index] = val
-                } else {
-
-                    activeItem.value.field[index] = val
-                }
-                console.log(...activeItem.value.field) 
+                    params.append('params[options]['+e+']', JSON.stringify(...activeItem.value.field[e]))
+                })
 
             }
             
