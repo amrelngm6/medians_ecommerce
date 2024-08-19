@@ -277,6 +277,7 @@ export default
                 Object.keys(activeItem.value.field).forEach((e, i) => {
                     console.log(e)
                     console.log(i)
+                    console.log(activeItem.value.field[e])
 
                     params.append('params[options]['+e+']', JSON.stringify(...activeItem.value.field[e]))
                 })
