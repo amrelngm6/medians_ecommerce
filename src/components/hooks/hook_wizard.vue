@@ -118,8 +118,10 @@
                                         <div class="py-1 w-full pt-4" v-for="column in content.fillable[activeTab]">
                                             <span class="block mb-2 form-label text-gray-600 text-lg"
                                                 v-text="column.title" v-if="column.column_type != 'hidden'"></span>
-                                            <form_field @callback="handleField" :column="column"
+                                            <form_field @callback="handleField" :column="column" v-if="column.type != 'select'"
                                                 :item="activeItem.field" :conf="conf"></form_field>
+                                            <select_field @callback="handleField" :column="column" v-if="column.type == 'select'"
+                                                :item="activeItem.field" :conf="conf"></select_field>
                                             <p v-text="column.help_text" v-if="column.help_text"></p>
                                         </div>
                                     </div>
@@ -150,6 +152,7 @@ import close_icon from '@/components/svgs/Close.vue';
 import delete_icon from '@/components/svgs/trash.vue';
 import field from '@/components/includes/Field.vue';
 import static_field from '@/components/includes/static_form_field.vue';
+import select_field from '@/components/includes/select_field.vue';
 
 import 'vue3-easy-data-table/dist/style.css';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
@@ -177,6 +180,7 @@ export default
             'vue-medialibrary-field': field,
             color_picker,
             static_field,
+            select_field,
             Ckeditor,
             close_icon,
             delete_icon,
