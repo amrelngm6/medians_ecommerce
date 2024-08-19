@@ -240,7 +240,7 @@ export default
 
                 
                 Object.keys(activeItem.value.field).forEach((e, i) => {
-                    params.append('params[options]['+e+']', JSON.stringify(activeItem.value.field[e]))
+                    params.append('params[options]['+e+']', activeItem.value.field[e])
                 })
 
                 let type = array.id > 0 ? 'update' : 'create';
