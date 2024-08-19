@@ -21,7 +21,7 @@
                             <div class="w-full row">
                                 <label class="col-lg-4 col-form-label required fw-semibold fs-6"
                                     v-text="translate('Picture')"></label>
-                                <vue-medialibrary-field class="max-w-xl mx-auto" :key="activeItem" @input="setPicture"
+                                <vue-medialibrary-field class="max-w-xl mx-auto" :key="activeItem" @changed="setPicture"
                                     :filepath="activeItem.items[activeSlider].media ?? '/uploads/image/default_profile.png'"
                                     :api_url="conf.url"></vue-medialibrary-field>
                             </div>
