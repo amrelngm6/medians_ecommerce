@@ -7,7 +7,7 @@
                 <!--begin::Card body-->
                 <div class="card-body">
                     <!--begin::Heading-->
-                    <div class="card-px text-center pt-15 pb-15">
+                    <div class="card-px pt-15 pb-15">
                         
                         <vue-csv-import v-model="csv" :fields="content.columns">
                             
@@ -35,19 +35,19 @@
                                 
                             </p>
                             <div class="card-body pt-0">
-                                <div class="settings-form">
+                                <div class="settings-form text-center ">
 
-                                        <!--begin::Title-->
-                                        <h2 class="fs-2x fw-bold mb-0" v-text="translate('Import products')"></h2>
-                                        <!--end::Title-->
+                                    <!--begin::Title-->
+                                    <h2 class="fs-2x fw-bold mb-0" v-text="translate('Import products')"></h2>
+                                    <!--end::Title-->
 
-                                        <!--begin::Description-->
-                                        <p class="text-gray-500 fs-4 fw-semibold py-7">
-                                            {{ translate('Click on the below buttons to upload the CSV file') }} <br>{{translate('then assign')}}. </p>
-                                        <!--end::Description-->
+                                    <!--begin::Description-->
+                                    <p class="text-gray-500 fs-4 fw-semibold py-7">
+                                        {{ translate('Click on the below buttons to upload the CSV file') }} <br>{{translate('then assign')}}. </p>
+                                    <!--end::Description-->
+                                    
+                                    <div class="flex gap-4 ">
                                         
-                                        <div class="flex gap-4 ">
-                                            
                                         <!--begin::Action-->
                                         <label class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
                                             data-bs-target="#kt_modal_create_campaign" > 
