@@ -39,8 +39,11 @@
                                         <div class="flex gap-4 ">
                                             
                                         <!--begin::Action-->
-                                        <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
-                                            data-bs-target="#kt_modal_create_campaign" v-text="translate('Upload CSV file')"> </a>
+                                        <label class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
+                                            data-bs-target="#kt_modal_create_campaign" > 
+                                            <span v-text="translate('Upload CSV file')"></span>
+                                            <vue-csv-input class="hidden" v-slot="{ file, change }"></vue-csv-input>
+                                        </label>
                                         <!--end::Action-->
                                         
                                         <!--begin::Action-->
@@ -51,7 +54,6 @@
                                         
                                     <vue-csv-errors></vue-csv-errors>
                                     <div class="w-full flex ">
-                                        <vue-csv-input class="w-full" v-slot="{ file, change }"></vue-csv-input>
                                         <div class="py-5 text-lg" >
                                             <vue-csv-toggle-headers v-slot="{ hasHeaders, toggle }">
                                                 <checkbox />
