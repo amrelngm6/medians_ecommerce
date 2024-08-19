@@ -320,7 +320,7 @@ export default
             const showModal = ref(false);
 
             const setPicture = (a) => {
-                activeItem.value.items[activeSlider.value].picture = a.value;
+                activeItem.value.items[activeSlider.value].media = a.value;
             }
             return {
                 setPicture,
