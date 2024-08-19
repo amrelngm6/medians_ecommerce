@@ -143,6 +143,10 @@ class APIController extends CustomController
 					$return = (new Products\Application\ProductController)->store();
 					break;
 		
+				case 'addProductsCSV':
+					$return = (new Products\Application\ProductController)->storeProductsCSV();
+					break;
+		
 				case 'ProductCategory.create':
 					$return = (new Products\Application\CategoryController)->store();
 					break;

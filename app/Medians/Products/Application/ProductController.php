@@ -357,7 +357,10 @@ class ProductController extends CustomController
 	public function storeProductsCSV() 
 	{
 		
-		$params = $this->app->params();
+		
+		$request_body = file_get_contents('php://input');
+		$data = array_values(json_decode($request_body, true));
+		$params = $data[0];
 
         try {	
 			
