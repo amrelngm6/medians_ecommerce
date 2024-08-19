@@ -29,7 +29,7 @@
             :label="column.text_key"    
             :options="column.data"
             :max="column.single ? 1 : 100"
-            @change="changed" 
+            @change="multiple_changed" 
         ></Multiselect>
 
         <input v-if="column.multiple && column.data && column.column_type == 'select'" type="hidden" v-for="selected in  item[column.column_key]" :name="'params['+(column.column_key)+'][]'" :value="selected[column.column_key]" />
@@ -79,7 +79,9 @@ export default
 
         const multiple_changed = (model) => 
         {
-            emit('callback', model.map(e => e[props.column.key]), props.column.key );
+            // emit('callback', model.map(e => e[props.column.key]), props.column.key );
+            emit('callback', model, props.column.key, true);
+
         }
 
         const multipleValue = ref([]);

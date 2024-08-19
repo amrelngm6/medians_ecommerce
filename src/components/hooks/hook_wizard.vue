@@ -278,8 +278,11 @@ export default
                 return activeItem.value.content_langs[index]
             }
 
-            const handleField = (val, index) => {
+            const handleField = (val, index, append) => {
                 console.log(val, index)
+                if (append) {
+                    activeItem.value.field[index] = val
+                }
                 // activeItem.value.field[index] = val
             }
             
