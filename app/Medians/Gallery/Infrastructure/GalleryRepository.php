@@ -20,7 +20,7 @@ class GalleryRepository
 	*/
 	public function find($id) 
 	{
-		return Gallery::find($id);
+		return Gallery::with('items')->find($id);
 	}
 
 	/**
@@ -28,7 +28,7 @@ class GalleryRepository
 	*/
 	public function get($params = null) 
 	{
-		return Gallery::get();
+		return Gallery::with('items')->get();
 	}
 
 
