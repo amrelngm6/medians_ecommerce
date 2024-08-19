@@ -26,22 +26,23 @@
                                         <p class="text-gray-500 fs-4 fw-semibold py-7">
                                             {{ translate('Click on the below buttons to upload the CSV file') }} <br>{{translate('then assign')}}. </p>
                                         <!--end::Description-->
-                                    </div>
-                                    
-                                    <div class="w-full gap-4 ">
                                         
-                                        <!--begin::Action-->
-                                        <label class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
-                                            data-bs-target="#kt_modal_create_campaign" > 
-                                            <span class="text-white fw-bold" v-text="translate('Upload CSV file')"></span>
-                                            <vue-csv-input @change="onCsvImport" class="hidden" v-slot="{ file, change }"></vue-csv-input>
-                                        </label>
-                                        <!--end::Action-->
-                                        
-                                        <!--begin::Action-->
-                                        <a target="_blank" href="/uploads/products-sample.csv" class=" text-white fw-bold btn btn-danger er  px-8 py-4 mx-6" v-text="translate('Download Example')"></a>
-                                        <!--end::Action-->
+                                        <div class="w-full gap-4 ">
+                                            
+                                            <!--begin::Action-->
+                                            <label class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal"
+                                                data-bs-target="#kt_modal_create_campaign" > 
+                                                <span class="text-white fw-bold" v-text="translate('Upload CSV file')"></span>
+                                                <vue-csv-input @change="onCsvImport" class="hidden" v-slot="{ file, change }"></vue-csv-input>
+                                            </label>
+                                            <!--end::Action-->
+                                            
+                                            <!--begin::Action-->
+                                            <a target="_blank" href="/uploads/products-sample.csv" class=" text-white fw-bold btn btn-danger er  px-8 py-4 mx-6" v-text="translate('Download Example')"></a>
+                                            <!--end::Action-->
+                                        </div>
                                     </div>
+
                                     <vue-csv-errors></vue-csv-errors>
                                     
                                     <div class="w-full flex " v-if="canSubmit">
