@@ -111,16 +111,18 @@ export default
       console.log(selectedPages.value)
       console.log(allPages.value)
 
-      const treeData = ref(allPages.value);
+      const treeData = ref(selectedPages.value);
       
-        const addMenu = (page) => {
+      const addMenu = (page) => {
           console.log(page)
           tree.value.add(
             page,
             tree.value.rootChildren[0],
             tree.value.rootChildren[0].children.length
           )
-        }
+
+          selectedPages.value = tree.value
+      }
 
       return {
         tree,
