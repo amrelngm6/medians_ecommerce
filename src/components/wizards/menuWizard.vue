@@ -33,7 +33,7 @@
       <preview-list :list="allPages" />
       <preview-list :list="selectedPages" />
     </div>
-    <Draggable v-model="treeData" />
+    <Draggable ref="tree" v-model="treeData" />
   </div>
 </template>
 <script>
