@@ -339,7 +339,6 @@ export default {
 @import './front_assets/css/tailwind.min.css';
 @import './assets/media-library.css';
 @import './assets/style.bundle.css';
-@import './assets/plugins.bundle.css';
 
 
 /* we will explain what these classes do next! */
