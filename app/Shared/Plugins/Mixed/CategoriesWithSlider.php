@@ -47,9 +47,9 @@ class CategoriesWithSlider
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'category_id', 'multiple' => true,
 					'data' => $this->categoryRepo->getActive()  
 				],	
-				[ 'key'=> "slider", 'title'=> translate('Gallery'), 'help_text'=> translate('Select gallery to display beside the categories list'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'category_id', 
-					'data' => $this->categoryRepo->getActive()  
+				[ 'key'=> "gallery", 'title'=> translate('Gallery'), 'help_text'=> translate('Select gallery to display beside the categories list'),
+					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'gallery_id', 
+					'data' => $this->galleryRepo->get()  
 				],	
 				
 				// [ 'key'=> "show_title", 'title'=> translate('Show title') , 'help_text'=> translate('Show title of the Hook'), 'fillable'=> true, 'column_type'=>'checkbox' ],
@@ -124,11 +124,14 @@ class CategoriesWithSlider
 			$hook = $this->hookRepo->find($params['id']);
 
 			$params['categories_ids'] = json_decode($hook->field['categories']);
+			$params['gallery_id'] = json_decode($hook->field['gallery']);
 
 			$items = $this->categoryRepo->getByIds($params['categories_ids']);
+			$gallery = $this->galleryRepo->find($params['gallery_id']);
 
-            return renderPlugin('Shared/Plugins/views/category_carousel.html.twig', [
+            return renderPlugin('Shared/Plugins/views/mixed_category_carousel.html.twig', [
 		        'items' => $items,
+				'gallery' => $gallery,
 				'hook' => $hook
 		    ],'output');
 

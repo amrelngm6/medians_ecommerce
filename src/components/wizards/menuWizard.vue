@@ -33,7 +33,7 @@
       <preview-list :list="allPages" />
       <preview-list :list="selectedPages" />
     </div>
-
+    <BaseTree v-model="treeData" />
   </div>
 </template>
 <script>
@@ -43,9 +43,16 @@ import { handleAccess, handleRequest, translate } from '@/utils.vue';
 import { ref } from 'vue';
 import { VueDraggable } from 'vue-draggable-plus'
 
+
+import { BaseTree, Draggable } from '@he-tree/vue'
+import '@he-tree/vue/style/default.css'
+
+
+
 export default
   {
     components: {
+      BaseTree ,
       VueDraggable,
       close_icon
     },
@@ -102,7 +109,45 @@ export default
       console.log(selectedPages.value)
       console.log(allPages.value)
 
+      const treeData = ref([
+          {
+            text: 'Projects',
+            children: [
+              {
+                text: 'Frontend',
+                children: [
+                  {
+                    text: 'Vue',
+                    children: [
+                      {
+                        text: 'Nuxt',
+                      },
+                    ],
+                  },
+                  {
+                    text: 'React',
+                    children: [
+                      {
+                        text: 'Next',
+                      },
+                    ],
+                  },
+                  {
+                    text: 'Angular',
+                  },
+                ],
+              },
+              {
+                text: 'Backend',
+              },
+            ],
+          },
+          { text: 'Photos' },
+          { text: 'Videos' },
+        ]);
+
       return {
+        treeData,
         loader,
         allPages,
         selectedPages,
