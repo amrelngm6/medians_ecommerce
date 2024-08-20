@@ -1,17 +1,16 @@
 <template>
   <div class=" w-full relative">
-    <close_icon class="absolute top-4 right-4 z-10 cursor-pointer" @click="back" />
-    
-    <div v-if="loader" :key="loader" class="bg-white fixed w-full h-full top-0 left-0" style="z-index:99999; opacity: .9;">
-        <img class="m-auto w-500px" :src="'/uploads/loader.gif'" />
-    </div>
-    <h2 v-text="item.name"></h2>
-    <p v-text="translate('Drag & Drop your link for menu') + ' ' + item.type"></p>
+      <close_icon class="absolute top-4 right-4 z-10 cursor-pointer" @click="back" />
+      
+      <div v-if="loader" :key="loader" class="bg-white fixed w-full h-full top-0 left-0" style="z-index:99999; opacity: .9;">
+          <img class="m-auto w-500px" :src="'/uploads/loader.gif'" />
+      </div>
+      <h2 v-text="item.name"></h2>
+      <p v-text="translate('Drag & Drop your link for menu') + ' ' + item.type"></p>
 
-    <div class="flex">
-      <div class="w-300px h-300px">
-        <div class="flex text-center">
-          <div class="fv-row fv-plugins-icon-container">
+      <div class="flex">
+        
+        <div class="fv-row fv-plugins-icon-container">
             <div class="row">
                 <div class="col-lg-6">
                     <input type="radio" class="btn-check" name="account_type" value="personal" checked="checked" id="kt_create_account_form_account_type_personal">
@@ -37,10 +36,7 @@
                 </div>
             </div>
         </div>
-        
-          <!-- <span class="w-full px-4 py-2  " :class="allPages == pages ? 'bg-red-600 border border-1 border-danger  fw-bold rounded-xl' : 'cursor-pointer'" @click="allPages = pages" v-text="translate('Pages')"></span> -->
-          <!-- <span class="w-full px-4 py-2 " :class="allPages == categories ? 'bg-red-600 border border-1 border-danger  fw-bold rounded-xl' : 'cursor-pointer'" v-text="translate('Categories')"></span> -->
-        </div>
+        <div>
           <VueDraggable class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto"
           v-model="allPages" animation="150" ghostClass="ghost" group="people" >
               <label v-for="page in allPages" :key="page"  class="align-items-center btn btn-active-light-primary btn-outline btn-outline-dashed d-flex" for="kt_create_account_form_account_type_corporate">
@@ -55,27 +51,25 @@
                   <!--end::Info-->               
               </label>
               
-        </VueDraggable>
-      </div>
-      <div class=" flex-column-fluid  w-300px " >
-        <div class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto" >
-          
-            <Draggable ref="tree" textKey="name" childrenKey="items" maxLevel="2"  v-model="treeData" treeLine @change="change">
-              <template #default="{ node, stat }" >
-                <div class="cursor-move h-30 bg-gray-500/5 rounded p-3 my-1 flex">
-                  <span class="mtl-ml w-full">{{ node.name }}</span>
-                  <vue-feather type="delete" @click="remove(stat)" />
-                </div>
-              </template>
-            </Draggable>
+          </VueDraggable>
         </div>
-        <button @click="saveItem" id="kt_ecommerce_add_product_submit" class="mx-auto btn btn-primary"><span class="indicator-label" v-text="translate('Save Changes')"></span></button>
+        <div class=" flex-column-fluid  w-300px " >
+          <div class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto" >
+            
+              <Draggable ref="tree" textKey="name" childrenKey="items" maxLevel="2"  v-model="treeData" treeLine @change="change">
+                <template #default="{ node, stat }" >
+                  <div class="cursor-move h-30 bg-gray-500/5 rounded p-3 my-1 flex">
+                    <span class="mtl-ml w-full">{{ node.name }}</span>
+                    <vue-feather type="delete" @click="remove(stat)" />
+                  </div>
+                </template>
+              </Draggable>
+          </div>
+          <button @click="saveItem" id="kt_ecommerce_add_product_submit" class="mx-auto btn btn-primary"><span class="indicator-label" v-text="translate('Save Changes')"></span></button>
+        </div>
+
       </div>
-    </div>
-    <div class="flex justify-between">
-      <preview-list :list="allPages" />
-      <preview-list :list="selectedPages" />
-    </div> 
+      
   </div>
 </template>
 <script>
