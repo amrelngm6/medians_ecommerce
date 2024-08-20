@@ -93,13 +93,9 @@ export default
         console.log('add')
       }
       const remove = (stat) => {
-        // saveItem();
-        console.log('remove')
-        
         tree.value.remove(
           stat
         )
-
       }
       const back = () => {
         emit('close');
@@ -107,6 +103,7 @@ export default
 
       
       const saveItem = () => {
+        console.log(selectedPages.value)
           loader.value = true;
           var params = new URLSearchParams();
           params.append('params[type]', props.item.type )
@@ -118,19 +115,13 @@ export default
           })
       }
       
-      console.log(selectedPages.value)
-      console.log(allPages.value)
-
       const treeData = ref(selectedPages.value);
       
       const addMenu = (page) => {
 
-          console.log(page)
           tree.value.add(
-            page,
-            tree.value.length
+            page
           )
-          selectedPages.value = tree.value
       }
 
       return {
