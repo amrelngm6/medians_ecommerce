@@ -33,7 +33,7 @@
       <preview-list :list="allPages" />
       <preview-list :list="selectedPages" />
     </div>
-    <Draggable ref="tree" v-model="treeData" />
+    <Draggable ref="tree" textKey="name" v-model="treeData" />
   </div>
 </template>
 <script>
@@ -116,18 +116,18 @@ export default
             text: 'Projects',
             children: [
               {
-                text: 'Backend',
+                name: 'Backend',
               },
             ],
           },
-          { text: 'Photos' },
-          { text: 'Videos' },
+          { name: 'Photos' },
+          { name: 'Videos' },
         ]);
       
         const addMenu = (page) => {
           console.log(page)
           tree.value.add(
-            { text: 'new node' },
+            page,
             tree.value.rootChildren[0],
             tree.value.rootChildren[0].children.length
           )
