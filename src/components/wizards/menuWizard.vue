@@ -33,7 +33,7 @@
       <preview-list :list="allPages" />
       <preview-list :list="selectedPages" />
     </div> 
-    <Draggable ref="tree" textKey="name" :remove="true" v-model="treeData" />
+    <Draggable ref="tree" textKey="name" :remove="true"  v-model="treeData" />
   </div>
 </template>
 <script>
@@ -88,9 +88,13 @@ export default
         saveItem();
         console.log('add')
       }
-      const remove = () => {
-        saveItem();
+      const remove = (page) => {
+        // saveItem();
         console.log('remove')
+        
+        tree.value.remove(
+          page
+        )
       }
       const back = () => {
         emit('close');
@@ -108,6 +112,7 @@ export default
               handleAccess(response)
           })
       }
+      
       console.log(selectedPages.value)
       console.log(allPages.value)
 
@@ -117,7 +122,7 @@ export default
           console.log(page)
           tree.value.add(
             page,
-            tree.value.rootChildren[0],
+            tree.value.length,
             tree.value.rootChildren[0].children.length
           )
 
