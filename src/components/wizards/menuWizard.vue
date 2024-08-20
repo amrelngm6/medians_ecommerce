@@ -15,33 +15,31 @@
             <div class="row">
                 <div class="col-lg-6">
                     <input type="radio" class="btn-check" name="account_type" value="personal" checked="checked" id="kt_create_account_form_account_type_personal">
-                    <label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
-                        <i class="ki-duotone ki-badge fs-3x me-5"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
+                    <label @click="allPages = pages" class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
+                        <vue-feather type="shopping-bag" />
                         <span class="d-block fw-semibold text-start">                            
-                            <span class="text-gray-900 fw-bold d-block fs-4 mb-2">
-                                Personal Account
-                            </span>
-                            <span class="text-muted fw-semibold fs-6">If you need more info, please check it out</span>
+                            <span class="text-gray-900 fw-bold d-block fs-4 mb-2" v-text="translate('Pages')"></span>
+                            <span class="text-muted fw-semibold fs-6" v-text="translate('List of the front pages')"></span>
                         </span>
                     </label>   
                 <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
                 
                 <div class="col-lg-6">
                     <input type="radio" class="btn-check" name="account_type" value="corporate" id="kt_create_account_form_account_type_corporate">
-                    <label class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center" for="kt_create_account_form_account_type_corporate">
-                        <i class="ki-duotone ki-briefcase fs-3x me-5"><span class="path1"></span><span class="path2"></span></i>
+                    <label @click="allPages = categories" class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center" for="kt_create_account_form_account_type_corporate">
+                        <vue-feather type="shopping-bag" />
                         <!--begin::Info-->
                         <span class="d-block fw-semibold text-start">                              
-                            <span class="text-gray-900 fw-bold d-block fs-4 mb-2">Corporate Account</span>
-                            <span class="text-muted fw-semibold fs-6">Create corporate account to mane users</span>
+                            <span class="text-gray-900 fw-bold d-block fs-4 mb-2" v-text="translate('Categories')"></span>
+                            <span class="text-muted fw-semibold fs-6" v-text="translate('List of the products categories')"></span>
                         </span>           
                     </label>           
                 </div>
             </div>
         </div>
         
-          <span class="w-full px-4 py-2  " :class="allPages == pages ? 'bg-red-600 border border-1 border-danger  fw-bold rounded-xl' : 'cursor-pointer'" @click="allPages = pages" v-text="translate('Pages')"></span>
-          <span class="w-full px-4 py-2 " :class="allPages == categories ? 'bg-red-600 border border-1 border-danger  fw-bold rounded-xl' : 'cursor-pointer'" @click="allPages = categories" v-text="translate('Categories')"></span>
+          <!-- <span class="w-full px-4 py-2  " :class="allPages == pages ? 'bg-red-600 border border-1 border-danger  fw-bold rounded-xl' : 'cursor-pointer'" @click="allPages = pages" v-text="translate('Pages')"></span> -->
+          <!-- <span class="w-full px-4 py-2 " :class="allPages == categories ? 'bg-red-600 border border-1 border-danger  fw-bold rounded-xl' : 'cursor-pointer'" v-text="translate('Categories')"></span> -->
         </div>
           <VueDraggable class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto"
           v-model="allPages" animation="150" ghostClass="ghost" group="people" >
