@@ -32,8 +32,8 @@
     <div class="flex justify-between">
       <preview-list :list="allPages" />
       <preview-list :list="selectedPages" />
-    </div>
-    <Draggable ref="tree" textKey="name" v-model="treeData" />
+    </div> 
+    <Draggable ref="tree" textKey="name" :remove="true" v-model="treeData" />
   </div>
 </template>
 <script>
