@@ -33,6 +33,12 @@ class Menu extends CustomModel
         return $this->hasMany(Menu::class, 'parent_id', 'menu_id');
     }
 
+
+    public function items()
+    {
+        return $this->hasMany(Menu::class, 'parent_id', 'menu_id');
+    }
+
     public function page()
     {
         return $this->morphTo();
