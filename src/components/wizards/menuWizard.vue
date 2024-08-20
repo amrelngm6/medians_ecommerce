@@ -33,7 +33,22 @@
       <preview-list :list="allPages" />
       <preview-list :list="selectedPages" />
     </div> 
-    <Draggable ref="tree" textKey="name" maxLevel="2"  v-model="treeData" />
+    <Draggable ref="tree" textKey="name" maxLevel="2"  v-model="treeData" >
+      <template #default="{ node, stat }">
+        <OpenIcon
+          v-if="stat.children.length"
+          :open="stat.open"
+          class="mtl-mr"
+          @click.native="stat.open = !stat.open"
+        />
+        <input
+          class="mtl-checkbox mtl-mr"
+          type="checkbox"
+          v-model="stat.checked"
+        />
+        <span class="mtl-ml">{{ node.text }}</span>
+      </template>
+    </Draggable>
   </div>
 </template>
 <script>
@@ -119,13 +134,12 @@ export default
       const treeData = ref(selectedPages.value);
       
       const addMenu = (page) => {
+
           console.log(page)
           tree.value.add(
             page,
-            tree.value.length,
-            tree.value.rootChildren[0].children.length
+            tree.value.length
           )
-
           selectedPages.value = tree.value
       }
 
