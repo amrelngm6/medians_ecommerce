@@ -23,7 +23,7 @@
       </div>
       <div class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto" >
         
-          <Draggable ref="tree" textKey="name" maxLevel="2"  v-model="treeData" treeLine @change="change">
+          <Draggable ref="tree" textKey="name" childrenKey="children" maxLevel="2"  v-model="treeData" treeLine @change="change">
             <template #default="{ node, stat }" >
               <div class="cursor-move h-30 bg-gray-500/5 rounded p-3 my-1 flex">
                 <span class="mtl-ml w-full">{{ node.name }}</span>
