@@ -21,7 +21,7 @@
                   <i class="ki-duotone ki-element-8 fs-3x me-5"><span class="path1"></span><span class="path2"></span></i>
                   <!--begin::Info-->
                   <span class="d-block fw-semibold text-start w-100">                              
-                      <span class="d-block fs-4 fw-bold mb-2 text-gray-900"> {{ page.name }}</span>
+                      <span class="d-block fs-4 fw-bold mb-2 text-gray-900 text-left pt-2"> {{ page.name }}</span>
                       
                   </span>
                   <i @click="addMenu(page)"  class="fa fa-plus fs-1 px-2 py-2"></i>           
