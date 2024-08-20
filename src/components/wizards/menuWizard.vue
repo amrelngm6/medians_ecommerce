@@ -21,18 +21,21 @@
           </div>
         </VueDraggable>
       </div>
-      <div class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto" >
-        
-          <Draggable ref="tree" textKey="name" childrenKey="children" maxLevel="2"  v-model="treeData" treeLine @change="change">
-            <template #default="{ node, stat }" >
-              {{ node.children }}
-              <div class="cursor-move h-30 bg-gray-500/5 rounded p-3 my-1 flex">
-                <span class="mtl-ml w-full">{{ node.name }}</span>
-                <vue-feather type="delete" @click="remove(stat)" />
-              </div>
-            </template>
-          </Draggable>
-          <button @click="saveItem" id="kt_ecommerce_add_product_submit" class="btn btn-primary"><span class="indicator-label" v-text="translate('Save Changes')"></span></button>
+      <div class=" " >
+        <div class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto" >
+          
+            <Draggable ref="tree" textKey="name" childrenKey="children" maxLevel="2"  v-model="treeData" treeLine @change="change">
+              <template #default="{ node, stat }" >
+                {{ node.children }}
+                <div class="cursor-move h-30 bg-gray-500/5 rounded p-3 my-1 flex">
+                  <span class="mtl-ml w-full">{{ node.name }}</span>
+                  <vue-feather type="delete" @click="remove(stat)" />
+                </div>
+              </template>
+            </Draggable>
+          </div>
+        </div>
+        <button @click="saveItem" id="kt_ecommerce_add_product_submit" class="btn btn-primary"><span class="indicator-label" v-text="translate('Save Changes')"></span></button>
       </div>
     </div>
     <div class="flex justify-between">
