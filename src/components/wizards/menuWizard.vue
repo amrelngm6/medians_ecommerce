@@ -21,28 +21,22 @@
           </div>
         </VueDraggable>
       </div>
-      <VueDraggable class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto"
-        v-model="selectedPages" animation="150" group="people" ghostClass="ghost" @update="saveItem" @add="saveItem"
-        @remove="saveItem">
-        <div v-for="selectedItem in selectedPages" :key="selectedItem"  class="cursor-move h-30 bg-gray-500/5 rounded p-3 my-1">
-            {{ selectedItem.name }} 
-        </div>
-      </VueDraggable>
+      <div class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto" >
+        
+          <Draggable ref="tree" textKey="name" maxLevel="2"  v-model="treeData" treeLine>
+            <template #default="{ node, stat }" >
+              <div class="cursor-move h-30 bg-gray-500/5 rounded p-3 my-1 flex">
+                <span class="mtl-ml w-full">{{ node.name }}</span>
+                <vue-feather type="delete" @click="remove(stat)" />
+              </div>
+            </template>
+          </Draggable>
+      </div>
     </div>
     <div class="flex justify-between">
       <preview-list :list="allPages" />
       <preview-list :list="selectedPages" />
     </div> 
-    <div class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto">
-      <Draggable ref="tree" textKey="name" maxLevel="2"  v-model="treeData" treeLine>
-        <template #default="{ node, stat }" >
-          <div class="cursor-move h-30 bg-gray-500/5 rounded p-3 my-1 flex">
-            <span class="mtl-ml w-full">{{ node.name }}</span>
-            <vue-feather type="delete" @click="remove(stat)" />
-          </div>
-        </template>
-      </Draggable>
-    </div>
   </div>
 </template>
 <script>
