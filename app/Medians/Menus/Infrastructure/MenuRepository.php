@@ -64,6 +64,24 @@ class MenuRepository
 				$fields['type'] = isset($params['type']) ? $params['type'] : 'header';	
 				$Model = Menu::firstOrCreate($fields);
 
+				if (!empty($item->children))
+				{
+					foreach ($item->children as $subkey => $subitem )
+					{
+						
+						$handleType = $this->handleType($subitem);
+						$value = (array) $subitem;
+						$fields = [];
+						$fields['name'] = $value['name'];	
+						$fields['page_id'] = $handleType['item_id'];	
+						$fields['page_type'] = $handleType['item_type'];	
+						$fields['parent_id'] = $Model->menu_id;	
+						$fields['position'] = $subkey;	
+						$fields['type'] = isset($params['type']) ? $params['type'] : 'header';	
+						$Model = Menu::firstOrCreate($fields);
+					}
+				}
+
 			} catch (\Throwable $th) {
 				throw new \Exception($th->getMessage(), 1);
 			}
