@@ -31,6 +31,7 @@
               </div>
             </template>
           </Draggable>
+          <button @click="saveItem" id="kt_ecommerce_add_product_submit" class="btn btn-primary"><span class="indicator-label" v-text="translate('Save Changes')"></span></button>
       </div>
     </div>
     <div class="flex justify-between">
