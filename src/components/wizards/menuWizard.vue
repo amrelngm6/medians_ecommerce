@@ -40,7 +40,7 @@
           <VueDraggable class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto"
           v-model="allPages" animation="150" ghostClass="ghost" group="people" >
               <label v-for="page in allPages" :key="page"  class="align-items-center btn btn-active-light-primary btn-outline btn-outline-dashed d-flex" for="kt_create_account_form_account_type_corporate">
-                <vue-feather :type="activeTab == 'page' ? 'grid' : 'shopping-bag'"></vue-feather>
+                <vue-feather :type="activeTab == 'pages' ? 'grid' : 'shopping-bag'"></vue-feather>
                   <i class="ki-duotone ki-element-8 fs-3x me-5"><span class="path1"></span><span class="path2"></span></i>
                   <!--begin::Info-->
                   <span class="d-block fw-semibold text-start w-100">                              
