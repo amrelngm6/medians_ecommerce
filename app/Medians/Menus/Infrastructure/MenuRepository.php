@@ -36,7 +36,8 @@ class MenuRepository
 	public function getMenuPages($type)
 	{
 		return Menu::where('type', $type)
-		->with('page')
+		->where('parent_id', 0)
+		->with('page', 'children')
 		->whereHas('page', function($q) {
 			$q->where('status', 'on');
 		})

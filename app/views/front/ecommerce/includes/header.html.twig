@@ -194,6 +194,11 @@
                         {% for menu in app.front_menu('header') %}
                         <li class="navigation__item">
                             <a href="/{{menu.page.lang_content.prefix}}" class="navigation__link">{{menu.page.lang_content.title}}</a>
+                            <ul class="default-menu list-unstyled" >
+                                {% for submenu in menu.items %}
+                                <li class="sub-menu__item"><a href="./blog_single.html" class="menu-link menu-link_us-s">{{subitem.page.lang_content.title}}</a></li>
+                                {% endfor %}
+                            </ul>
                         </li>
                         {% endfor %}
                     </ul>
@@ -276,9 +281,18 @@
 
                 <nav class="navigation">
                     <ul class="navigation__list list-unstyled d-flex">
-                        {% for menu in app.front_menu('header') %}
+                        {% set headerMenu = app.front_menu('header') %}
+                        {% for menu in headerMenu %}
+
                         <li class="navigation__item">
                             <a href="/{{menu.page.lang_content.prefix}}" class="navigation__link">{{menu.page.lang_content.title}}</a>
+                            {% if menu.children|length > 0 %}
+                            <ul class="default-menu list-unstyled" >
+                                {% for submenu in menu.children %}
+                                <li class="sub-menu__item"><a href="./blog_single.html" class="menu-link ">{{submenu.page.lang_content.title}}</a></li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
                         </li>
                         {% endfor %}
                     </ul>

@@ -108,7 +108,13 @@ class HookController extends CustomController
 	{
 		$item = $this->repo->find($attributes['id']);
 
-		return $item->hookPlugin()->view($attributes);
+		try {
+			
+			return $item->hookPlugin()->view($attributes);
+			
+		} catch (\Throwable $th) {
+			return null;
+		}
 	}
 
 	public function store() 
