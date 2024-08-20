@@ -8,11 +8,11 @@
       <h2 v-text="item.name"></h2>
       <p v-text="translate('Drag & Drop your link for menu') + ' ' + item.type"></p>
 
-      <div class="flex">
+      <div class="flex gap-10 w-full">
         
-        <div class="fv-row fv-plugins-icon-container">
-            <div class="row">
-                <div class="col-lg-6">
+        <div class="w-full">
+            <div class="w-full">
+                <div class="w-full">
                     <input type="radio" class="btn-check" name="account_type" value="personal" checked="checked" id="kt_create_account_form_account_type_personal">
                     <label @click="allPages = pages" class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
                         <vue-feather type="shopping-bag" />
@@ -23,7 +23,7 @@
                     </label>   
                 <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div></div>
                 
-                <div class="col-lg-6">
+                <div class="w-full">
                     <input type="radio" class="btn-check" name="account_type" value="corporate" id="kt_create_account_form_account_type_corporate">
                     <label @click="allPages = categories" class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center" for="kt_create_account_form_account_type_corporate">
                         <vue-feather type="shopping-bag" />
