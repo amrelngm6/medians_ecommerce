@@ -2,7 +2,7 @@
     <div id="panorama_view_{{hook.id}}" ></div>   
     <script type="text/javascript">
         // Single image
-        addEventListener("load", (event) => {
+        {# addEventListener("load", (event) => {
             let container;
             if (PANOLENS)
             {
@@ -15,6 +15,21 @@
                 viewer.add( panorama );
             }
 
-        });
+        }); #}
+        setTimeout(function() {
+            
+            let container;
+            if (PANOLENS)
+            {
+                let id = 'panorama_view_{{hook.id}}'
+                jQuery('#'+id).css('min-height', '{{hook.field.height ?? "400"}}px');
+                jQuery('#'+id).css('cursor', 'move');
+                container = document.querySelector( '#'+id );
+                const panorama = new PANOLENS.ImagePanorama( '{{hook.field.media}}');
+                const viewer = new PANOLENS.Viewer({ container: container, controlBar: false } );
+                viewer.add( panorama );
+            }
+
+        }, 1000)
 
     </script>

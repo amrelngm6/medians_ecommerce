@@ -3,8 +3,8 @@ function handleResponse(res, form)
     (res.error ) 
     ? Swal.fire('Error!',res.result ?? res.error, 'error')
     : (Swal.fire(res.title,res.result,  'success'), setTimeout(() => {
-      res.reload ? window.location.reload() : form.reset() , 
-      res.redirect ? (window.location.href = res.redirect) : form.reset()
+      res.reload ? window.location.reload() : (form ? form.reset() : null) , 
+      res.redirect ? (window.location.href = res.redirect) : (form ? form.reset() : null)
     }, 2000) );
 
 }

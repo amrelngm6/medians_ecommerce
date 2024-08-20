@@ -58,7 +58,7 @@
 					<div class="swiper-wrapper">
                     {% for productGroup in category.products %}
                         {% for item in productGroup %}
-                            {% include 'Shared/Plugins/views/product.html.twig' %}
+                            {% include 'Shared/Plugins/views/includes/product.html.twig' %}
                         {% endfor %}
                     {% endfor %}
 					</div>
@@ -82,8 +82,7 @@
 		</div>
 
         {% endfor %}
-
-        {% if hook.field.show_scrollbar %}
+        {% if hook.field.show_scrollbar == 'true' %}
         <div class="products-tabs-carousel__scrollbar swiper-scrollbar"></div>
         {% endif %}
 		<!-- /.position-relative -->

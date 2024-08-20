@@ -1,6 +1,6 @@
 <?php
 
-namespace Shared\Plugins\Sliders;
+namespace Shared\Plugins\Blocks;
 
 use Medians\Products\Infrastructure\CategoryRepository;
 use Medians\Products\Infrastructure\ProductRepository;
@@ -9,14 +9,14 @@ use Medians\CustomFields\Domain\CustomField;
 use Medians\Hooks\Domain\Hook;
 
 
-class CategoryCarousel 
+class ProductsGrid 
 {
 
 	
     private $categoryRepo;
     private $productRepo;
     private $hookRepo;
-    public $name = "Category carousel";
+    public $name = "Products carousel";
     public $description = "";
     public $version = "1.0";
     public $shortcode = "";
@@ -40,23 +40,23 @@ class CategoryCarousel
 		return [
             
 			'basic'=> [	
-				[ 'key'=> "categories", 'title'=> translate('Categories'), 'help_text'=> translate('Select categories to display'),
+				[ 'key'=> "subtitle", 'title'=> translate('Subtitle') , 'help_text'=> translate('This text appear below the Hook title'), 'fillable'=> true,  'column_type'=>'text' ],
+				[ 'key'=> "products_limit", 'title'=> translate('Max number') , 'help_text'=> translate('Max number of loaded products'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "categories", 'title'=> translate('Categories'), 'help_text'=> translate('Select categories to display products from'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'category_id', 'multiple' => true,
 					'data' => $this->categoryRepo->getActive()  
 				],	
-				[ 'key'=> "img_style", 'title'=> translate('Image style'), 'help_text'=> translate('Select style of the category image to display'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'img_style', 
-					'data' => [["name"=> "Squared", "img_style"=>""], ["name"=>"Circle", "img_style"=> "rounded-full"], ["name"=>"Rounded", "img_style"=>"rounded-lg"]]  
-				],	
-				[ 'key'=> "show_title", 'title'=> translate('Show title') , 'help_text'=> translate('Show title of the Hook'), 'fillable'=> true, 'column_type'=>'checkbox' ],
-
 			],	
             
 			'styles'=> [	
+				
 				[ 'key'=> "container_style", 'title'=> translate('Container style'), 'help_text'=> translate('Select style of the Container'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'container_style', 
 					'data' => [["name"=> "Boxed", "container_style"=>"container"], ["name"=>"Full width", "container_style"=> "w-full"]]  
 				],
+				[ 'key'=> "show_scrollbar", 'title'=> translate('Show scrollbar') , 'help_text'=> translate('Show Scrollbar at the bottom of the  products'), 'fillable'=> true, 'required'=> true, 'column_type'=>'checkbox' ],
+			],
+			'responsive'=> [	
 				[ 'key'=> "mobile_view_limit", 'title'=> translate('Mobile view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for Mobile view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "tablet_view_limit", 'title'=> translate('Tablet view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for Tablet view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "desktop_view_limit", 'title'=> translate('Desktop view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for desktop view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
@@ -120,11 +120,12 @@ class CategoryCarousel
 			$hook = $this->hookRepo->find($params['id']);
 
 			$params['categories_ids'] = json_decode($hook->field['categories']);
+			$params['limit'] = json_decode($hook->field['products_limit'] ?? '');
 
-			$items = $this->categoryRepo->getByIds($params['categories_ids']);
+			$items = $this->productRepo->getWithFilter($params);
 
-            return renderPlugin('Shared/Plugins/views/category_carousel.html.twig', [
-		        'items' => $items,
+            return renderPlugin('Shared/Plugins/views/product_grid.html.twig', [
+		        'items' => $items['items'],
 				'hook' => $hook
 		    ],'output');
 

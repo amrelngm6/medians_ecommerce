@@ -38,17 +38,12 @@ class PanoramaView
 			],	
             
 			'styles'=> [	
+				[ 'key'=> "height", 'title'=> translate('Viewport height') , 'help_text'=> translate('Height of the panorama view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
 				
 				[ 'key'=> "container_style", 'title'=> translate('Container style'), 'help_text'=> translate('Select style of the Container'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'container_style', 
 					'data' => [["name"=> "Boxed", "container_style"=>"container"], ["name"=>"Full width", "container_style"=> "w-full"]]  
 				],
-				[ 'key'=> "show_scrollbar", 'title'=> translate('Show scrollbar') , 'help_text'=> translate('Show Scrollbar at the bottom of the  products'), 'fillable'=> true, 'required'=> true, 'column_type'=>'checkbox' ],
-			],	
-			'responsive'=> [	
-				[ 'key'=> "mobile_view_limit", 'title'=> translate('Mobile view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for Mobile view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
-				[ 'key'=> "tablet_view_limit", 'title'=> translate('Tablet view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for Tablet view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
-				[ 'key'=> "desktop_view_limit", 'title'=> translate('Desktop view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for desktop view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
 			],	
             
 			
@@ -108,11 +103,8 @@ class PanoramaView
 			
 			$hook = $this->hookRepo->find($params['id']);
 
-			// $params['limit'] = json_decode($hook->field['products_limit']);
-
 			return render('Shared/Plugins/views/panorama_viwe.html.twig', [
 				'hook' => $hook,
-				// 'categories' => $categories
 		    ],'output');
 
 		} catch (\Exception $e) {

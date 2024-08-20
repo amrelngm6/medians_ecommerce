@@ -46,6 +46,28 @@ function render($template, $data, $responseType = 'html')
  } 
 
 
+/** 
+ * Render Plugin function
+ * @param String twig file path
+ * @param [] List of data
+ */
+function renderPlugin($template, $data)
+{
+
+    global $app;
+
+    /**
+     * Response will be override only
+     * In case the system works In Vue APP
+     */ 
+    
+    // $data = loadConfig($template, $data);
+    $output =  $app->template()->render($template, $data);
+
+    return $output;
+ } 
+
+
  /**
   * Load the main configuration in Array
   */
@@ -63,7 +85,7 @@ function loadConfig($template, $data)
         echo ('CHECK DATABASE CONNECTION ');
         die();
     }
-    $app = new \config\APP;
+
     $data['component'] = $template;
     $data['app'] = $app;
     $data['app']->auth = $app->auth();

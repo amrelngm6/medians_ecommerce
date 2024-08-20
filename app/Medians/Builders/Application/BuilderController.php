@@ -8,6 +8,7 @@ use Medians\Builders\Infrastructure\BuilderRepository;
 use Medians\Templates\Infrastructure\EmailTemplateRepository;
 use Medians\Content\Infrastructure\ContentRepository;
 use Medians\Pages\Infrastructure\PageRepository;
+use Medians\Hooks\Infrastructure\HookRepository;
 
 
 class BuilderController extends CustomController 
@@ -16,6 +17,7 @@ class BuilderController extends CustomController
 	
 	protected $app;
 	protected $repo;
+	protected $hookRepo;
 	public $contentRepo;
 	public $pageRepo;
 	public $emailTemplateRepo;
@@ -29,6 +31,7 @@ class BuilderController extends CustomController
 		$this->contentRepo = new ContentRepository;
 		$this->pageRepo = new PageRepository;
 		$this->emailTemplateRepo = new EmailTemplateRepository;
+		$this->hookRepo = new HookRepository;
 
 		$this->emailController = new EmailBuilderController;
 
@@ -77,7 +80,13 @@ class BuilderController extends CustomController
 			$page = $request->get('page');
 			switch ($page) {
 				case 'blocks':
-					echo json_encode($this->repo->get());
+					$blocks = $this->repo->get();
+					$hooks = $this->hookRepo->get();
+					foreach ($hooks as $key => $value) {
+						$hooks[$key]->html = $value->hookPlugin()->view(['id'=>$value->id]);
+					}
+					$hooksList = ['Hooks'=>$hooks];
+					echo json_encode(array_merge($blocks, $hooksList));
 					break;
 					
 				case 'email_blocks':
@@ -235,6 +244,12 @@ class BuilderController extends CustomController
 				
 				case 'insertContent':
 					echo $this->repo->find($request->get('id'))->content;
+					return true;		
+					break;
+				
+				case 'insertHook':
+					$hook = $this->hookRepo->find($request->get('id'));
+					echo "[plugin_shortcode  $hook->title id='$hook->id']";
 					return true;		
 					break;
 				

@@ -128,7 +128,7 @@ class ProductsTabs
 				$categories[$key]['products'] = $this->productRepo->getWithFilter($params);
 			}
 
-			return render('Shared/Plugins/views/products_tabs.html.twig', [
+			return renderPlugin('Shared/Plugins/views/products_tabs.html.twig', [
 		        // 'items' => $items['items'],
 				'hook' => $hook,
 				'categories' => $categories

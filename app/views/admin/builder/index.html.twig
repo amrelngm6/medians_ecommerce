@@ -1426,7 +1426,7 @@
         <div class="koLeftMenu">
             <div class="koLeftMenuItems">
                 <a href="javascript:void(null)" class="koLeftLogo" onclick="koLeftMenuHide(1);"><img src="/uploads/img/medians-logo.png"></a>
-                <a href="javascript:void(null)" class="koLeftButton" onclick="showNewContents()" id="koMenuItem_content">
+                <a href="javascript:void(null)" class="koLeftButton" onclick="showNewContents(null,'footer');" id="koMenuItem_content">
                     <span class="koLeftButtonHolder">
                         <i class="fas fa-plus-square"></i><span>Plugins</span>
                     </span>
@@ -7586,6 +7586,8 @@ function refreshFManager(){
 
 </script>
 
+<input type="hidden" id="is_hook" />
+
     <script>
         function koMenuUnloading_hide(i, msg) {
 
@@ -7750,6 +7752,7 @@ function refreshFManager(){
 
 						}
 					}
+							k_EditSave();
 
 				}
 
@@ -7924,23 +7927,27 @@ function refreshFManager(){
 
 	}else if(opt > 0){
 
-		// inserting Content Template...
-		jQuery.ajax({
-		 type: "POST",
-		 url: "/admin/builder",
-		 data: "supermode=insertContent&id="+encodeURIComponent(opt)+"&pname="+encodeURIComponent(dopt),
-		 success: function(data){
+		setTimeout(function() {
+			var superNode = document.getElementById('is_hook').value == "true" ? 'insertHook':'insertContent';
 
-         	if(loginFirst(data))return;
+			// inserting Content Template...
+			jQuery.ajax({
+			type: "POST",
+			url: "/admin/builder",
+			data: "supermode="+superNode+"&id="+encodeURIComponent(opt)+"&pname="+encodeURIComponent(dopt),
+			success: function(data){
 
-                    if(opt == 505 || opt == 508/* || opt == 1003*/) var pdata='noedit'; else var pdata='';
-					
-					
-					if(opt==4016.4)pdata='save';
-					updateNewKeditItem(data,pdata,opt);
+				if(loginFirst(data))return;
 
-			}
-		});
+						if(opt == 505 || opt == 508/* || opt == 1003*/) var pdata='noedit'; else var pdata='';
+						
+						
+						if(opt==4016.4)pdata='save';
+						updateNewKeditItem(data,pdata,opt);
+
+				}
+			});
+		}, 500)
 
 	}else {
 

@@ -107,7 +107,6 @@ class HeroSlider
 	 */ 
 	public function view($params ) 
 	{
-
 		try {
 			
 			$hook = $this->hookRepo->find($params['id']);
@@ -117,7 +116,7 @@ class HeroSlider
 			// print_r($params);
 			$gallery = $this->galleryRepo->find($params['gallery_id'][0]);
 			// print_r($gallery);
-            return render('Shared/Plugins/views/home_slider_1.html.twig', [
+            return renderPlugin('Shared/Plugins/views/home_slider_1.html.twig', [
 		        'gallery' => $gallery ?? '',
 				'hook' => $hook
 		    ],'output');

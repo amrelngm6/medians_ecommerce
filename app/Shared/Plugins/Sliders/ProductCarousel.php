@@ -123,7 +123,7 @@ class ProductCarousel
 
 			$items = $this->productRepo->getWithFilter($params);
 
-            return render('Shared/Plugins/views/product_carousel.html.twig', [
+            return renderPlugin('Shared/Plugins/views/product_carousel.html.twig', [
 		        'items' => $items['items'],
 				'hook' => $hook
 		    ],'output');

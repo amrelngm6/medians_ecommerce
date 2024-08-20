@@ -6292,8 +6292,8 @@ function showNewContents(e, a) {
                 l++;
                 i += '" id="tab_c-' + l + '">';
                 if (typeof a == "object") {
-                console.log(a)
-
+                    var mainE = e;
+                    console.log(mainE)
                     var t = 0;
                     $.each(a, function (e) {
                         t = a[e].id;
@@ -6301,7 +6301,8 @@ function showNewContents(e, a) {
                         if (koContentBlocksLimit.length > 0 && koContentBlocksLimit.indexOf(t) >= 0) {
                             return;
                         }
-                        i += '<div class="';
+                        var codeAction = "jQuery('#is_hook').val("+(mainE == "Hooks" ? 'true'  : 'false')+")"
+                        i += '<div onclick="'+codeAction+'" class="';
                         if (t == "4016.1vvv") i += "koContentBlockPreview_live";
                         else i += "koContentBlockPreview";
                         i += '"><a onclick="keditSeparatorAdd(this)" href="javascript:void(null)" data-kid="' + t + '" class="';

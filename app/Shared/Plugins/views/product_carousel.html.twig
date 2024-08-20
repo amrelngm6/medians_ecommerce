@@ -4,39 +4,39 @@
 
 		<div class="position-relative">
 			<div class="swiper-container js-swiper-slider" data-settings='{
-					            "autoplay": {
-					              "delay": 5000
-					            },
-					            "slidesPerView": 3,
-					            "slidesPerGroup": 3,
-					            "effect": "none",
-					            "loop": false,
-                                "scrollbar": {
-                                    "el": ".products-carousel__scrollbar",
-                                    "draggable": true
-                                },
-					            "breakpoints": {
-					              "320": {
-					                "slidesPerView": {{hook.field.mobile_view_limit}},
-					                "slidesPerGroup": {{hook.field.mobile_view_limit}},
-					                "spaceBetween": 14
-					              },
-					              "768": {
-					                "slidesPerView": {{hook.field.tablet_view_limit}},
-					                "slidesPerGroup": {{hook.field.tablet_view_limit}},
-					                "spaceBetween": 24
-					              },
-					              "992": {
-					                "slidesPerView": {{hook.field.desktop_view_limit}},
-					                "slidesPerGroup": 1,
-					                "spaceBetween": 30,
-					                "pagination": false
-					              }
-					            }
-					          }'>
+                "autoplay": {
+                    "delay": 5000
+                },
+                "slidesPerView": 3,
+                "slidesPerGroup": 3,
+                "effect": "none",
+                "loop": false,
+                "scrollbar": {
+                    "el": ".products-carousel__scrollbar",
+                    "draggable": true
+                },
+                "breakpoints": {
+                    "320": {
+                    "slidesPerView": {{hook.field.mobile_view_limit}},
+                    "slidesPerGroup": {{hook.field.mobile_view_limit}},
+                    "spaceBetween": 14
+                    },
+                    "768": {
+                    "slidesPerView": {{hook.field.tablet_view_limit}},
+                    "slidesPerGroup": {{hook.field.tablet_view_limit}},
+                    "spaceBetween": 24
+                    },
+                    "992": {
+                    "slidesPerView": {{hook.field.desktop_view_limit}},
+                    "slidesPerGroup": 1,
+                    "spaceBetween": 30,
+                    "pagination": false
+                    }
+                }
+                }'>
 				<div class="swiper-wrapper">
                     {% for item in items %}
-					    {% include 'Shared/Plugins/views/product.html.twig' %}
+					    {% include 'Shared/Plugins/views/includes/product.html.twig' %}
                     {% endfor %}
 				</div>
 				<!-- /.swiper-wrapper -->

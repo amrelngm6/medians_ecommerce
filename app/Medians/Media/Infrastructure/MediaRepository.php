@@ -74,7 +74,7 @@ class MediaRepository
 	public function fetchMedia($type, $user)
 	{
 		$data = [];
-		$items = MediaUpload::get();
+		$items = MediaUpload::orderBy('created_at', 'DESC')->get();
 		foreach ($items as $key => $value) 
 		{
 			$ext = explode('.', $value->path);

@@ -148,6 +148,9 @@ export default
             }
             
             const handleImport = () => {
+                setTimeout(() => {
+                        window.location = '/admin/products'
+                }, 2000);
             }
 
             return {
