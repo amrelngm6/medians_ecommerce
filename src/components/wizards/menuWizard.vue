@@ -8,7 +8,7 @@
       <h2 v-text="item.name"></h2>
       <p v-text="translate('Drag & Drop your link for menu') + ' ' + item.type"></p>
 
-      <div class="flex gap-10 w-full">
+      <div class="flex gap-10 w-full py-10">
         
         <div class="w-full">
             <div class="w-full">
