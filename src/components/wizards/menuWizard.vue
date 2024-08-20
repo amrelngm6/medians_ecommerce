@@ -111,18 +111,7 @@ export default
       console.log(selectedPages.value)
       console.log(allPages.value)
 
-      const treeData = ref([
-          {
-            text: 'Projects',
-            children: [
-              {
-                name: 'Backend',
-              },
-            ],
-          },
-          { name: 'Photos' },
-          { name: 'Videos' },
-        ]);
+      const treeData = ref(allPages.value);
       
         const addMenu = (page) => {
           console.log(page)
