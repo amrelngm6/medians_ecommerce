@@ -58,6 +58,8 @@ export default
     },
     emits: ['close'],
     setup(props, {emit}) {
+
+      const tree = ref(false);
       const loader = ref(false);
       const allPages = ref([])
       
@@ -124,14 +126,15 @@ export default
       
         const addMenu = (page) => {
           console.log(page)
-          this.$refs.tree.add(
+          tree.value.add(
             { text: 'new node' },
-            this.$refs.tree.rootChildren[0],
-            this.$refs.tree.rootChildren[0].children.length
+            tree.value.rootChildren[0],
+            tree.value.rootChildren[0].children.length
           )
         }
 
       return {
+        tree,
         addMenu,
         treeData,
         loader,
