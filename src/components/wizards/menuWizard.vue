@@ -26,7 +26,6 @@
           
             <Draggable ref="tree" textKey="name" childrenKey="items" maxLevel="2"  v-model="treeData" treeLine @change="change">
               <template #default="{ node, stat }" >
-                {{ node.children }}
                 <div class="cursor-move h-30 bg-gray-500/5 rounded p-3 my-1 flex">
                   <span class="mtl-ml w-full">{{ node.name }}</span>
                   <vue-feather type="delete" @click="remove(stat)" />
@@ -95,8 +94,8 @@ export default
         saveItem();
         console.log('add')
       }
-      const change = (stat) => {
-        console.log(stat)
+      const change = () => {
+        console.log(tree.value.getData())
       }
       const remove = (stat) => {
         tree.value.remove(
@@ -129,6 +128,8 @@ export default
             page
           )
       }
+
+      tree.value.openAll()
 
       return {
         change,
