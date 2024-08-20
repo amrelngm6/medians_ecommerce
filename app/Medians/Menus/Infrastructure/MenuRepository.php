@@ -29,7 +29,7 @@ class MenuRepository
 	*/
 	public function get($params = null) 
 	{
-		return Menu::with('children', 'page')->get();
+		return Menu::where('parent_id', 0)->with('children', 'page')->get();
 	}
 
 
