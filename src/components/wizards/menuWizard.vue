@@ -104,7 +104,6 @@ export default
         tree.value.remove(
           page
         )
-        selectedPages.value = tree.value
 
       }
       const back = () => {
@@ -136,7 +135,7 @@ export default
             page,
             tree.value.length
           )
-          selectedPages.value = tree.value
+          // selectedPages.value = tree.value
       }
 
       return {
