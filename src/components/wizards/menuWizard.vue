@@ -80,6 +80,10 @@ export default
           element.type = array[i].type;
           if (element.type == props.item.type)
           {
+            if (element.items.length > 0)
+            {
+              console.log(element.items[0])
+            }
             selectedPages.value[selectedPages.value.length] = element;
           }
         }
@@ -95,7 +99,7 @@ export default
         console.log('add')
       }
       const change = () => {
-      tree.value.openAll()
+        tree.value.openAll()
 
         console.log(tree.value.getData())
       }
@@ -124,10 +128,11 @@ export default
       
       const treeData = ref(selectedPages.value);
       
-      const addMenu = (page) => {
+      const addMenu = (page, index=0) => {
 
           tree.value.add(
-            page
+            page,
+            index
           )
       }
 

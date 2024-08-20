@@ -36,7 +36,7 @@ class Menu extends CustomModel
 
     public function items()
     {
-        return $this->hasMany(Menu::class, 'parent_id', 'menu_id');
+        return $this->hasMany(Menu::class, 'parent_id', 'menu_id')->with('page');
     }
 
     public function page()

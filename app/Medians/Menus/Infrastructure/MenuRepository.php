@@ -64,9 +64,9 @@ class MenuRepository
 				$fields['type'] = isset($params['type']) ? $params['type'] : 'header';	
 				$Model = Menu::firstOrCreate($fields);
 
-				if (!empty($item->children))
+				if (!empty($item->items))
 				{
-					foreach ($item->children as $subkey => $subitem )
+					foreach ($item->items as $subkey => $subitem )
 					{
 						
 						$handleType = $this->handleType($subitem);
