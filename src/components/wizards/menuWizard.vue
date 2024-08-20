@@ -38,7 +38,7 @@
         <template #default="{ node, stat }" >
           <div class="cursor-move h-30 bg-gray-500/5 rounded p-3 my-1 flex">
             <span class="mtl-ml w-full">{{ node.name }}</span>
-            <vue-feather type="delete" @click="remove" />
+            <vue-feather type="delete" @click="remove(stat)" />
           </div>
         </template>
       </Draggable>
@@ -97,12 +97,12 @@ export default
         saveItem();
         console.log('add')
       }
-      const remove = (page) => {
+      const remove = (stat) => {
         // saveItem();
         console.log('remove')
         
         tree.value.remove(
-          page
+          stat
         )
 
       }
@@ -135,7 +135,7 @@ export default
             page,
             tree.value.length
           )
-          // selectedPages.value = tree.value
+          selectedPages.value = tree.value
       }
 
       return {
