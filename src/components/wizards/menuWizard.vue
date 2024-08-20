@@ -33,7 +33,7 @@
       <preview-list :list="allPages" />
       <preview-list :list="selectedPages" />
     </div>
-    <BaseTree v-model="treeData" />
+    <Draggable v-model="treeData" />
   </div>
 </template>
 <script>
@@ -52,7 +52,7 @@ import '@he-tree/vue/style/default.css'
 export default
   {
     components: {
-      BaseTree ,
+      Draggable  ,
       VueDraggable,
       close_icon
     },
