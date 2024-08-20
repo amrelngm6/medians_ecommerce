@@ -11,7 +11,7 @@
                 <hook_wizard :currency="currency" :langs="langs" @callback="()=> {activeItem = null; showWizard = false}" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.id ? activeItem.id : 'new')" :system_setting="system_setting" :setting="setting"  />
             </div>
 
-            <main class=" flex-1 overflow-x-hidden overflow-y-auto  w-full relative" v-if="content.items && !showWizard">
+            <main class=" flex-1 overflow-x-hidden overflow-y-auto  w-full relative" v-if="content.items && !showWizard && !newWizard">
                 <div class="px-4 mb-6 py-4 rounded-lg shadow-md bg-white dark:bg-gray-700 flex w-full">
                     
                     <h1  class="font-bold text-lg w-full" v-text="content.title"></h1>

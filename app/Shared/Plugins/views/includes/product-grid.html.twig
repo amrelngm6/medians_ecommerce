@@ -86,20 +86,22 @@
                         </span>
                     {% endif %}
                 </div>
-                  <h6 class="pc__title fs-base fw-semi-bold mb-1"><a href="./product1_simple.html">{{item.lang_content.title}}</a></h6>
+                  <h6 class="pc__title fs-base fw-semi-bold mb-1"><a href="{{item.lang_content.prefix}}">{{item.lang_content.title}}</a></h6>
                   <div class="product-card__price d-flex mb-1">
-                    <span class="money price fs-base fw-semi-bold">$62</span>
+                    <span class="money price price-sale">
+                        {{app.currency.symbol}}{{app.currency_amount(item.price)}}</span>
+                    {% if item.old_price > 0 %}
+                        <span class="money price price-old px-2">
+                            {{app.currency.symbol}}{{app.currency_amount(item.old_price)}}</span>
+                    {% endif %}
                   </div>
 
                   <div class="d-flex align-items-center hover__content position-relative mt-3 mt-sm-0">
                     <a  x-on:click="setTimeout(function() {submitForm('form-sidecart', 'sidecart-items')}, 10)" href="/front_api/create?type=Cart.create&params[item_id]={{item.product_id}}&params[qty]=1"  class="ajax-link btn-link btn-link_lg me-auto me-xxl-4 text-uppercase js-add-cart js-open-aside fs-13 fw-semi-bold" data-aside="cartDrawer" title="Add To Cart">Add To Cart</a>
-                    <button class="btn-link btn-link_lg me-3 me-xxl-auto text-uppercase js-quick-view fs-13 fw-semi-bold" data-bs-toggle="modal" data-bs-target="#quickView" title="Quick view">
-                      <span class="d-none d-xxl-block">Quick View</span>
-                      <span class="d-block d-xxl-none"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_view" /></svg></span>
-                    </button>
-                    <button class="pc__btn-wl bg-transparent border-0 js-add-wishlist pt-1" title="Add To Wishlist">
-                      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_heart" /></svg>
-                    </button>
+                    
+                    <a href="/front_api/create?type=Wishlist.create&params[item_id]={{item.product_id}}" data-params="{{item.product_id}}"   class="js-add-wishlist ajax-link pc__btn-wl bg-transparent border-0 js-add-wishlist pt-1" title="Add To Wishlist">
+                        <svg class="d-inline-block" width="14" height="14" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><use href="#icon_heart"/></svg>
+                    </a>
                   </div>
                 </div>
               </div>

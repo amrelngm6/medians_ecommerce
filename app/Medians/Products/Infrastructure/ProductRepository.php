@@ -48,7 +48,7 @@ class ProductRepository
 
 	public function get($limit = 100)
 	{
-		return Product::with('lang_content',  'category')->limit($limit)->get();
+		return Product::with('lang_content',  'category')->orderBy('created_at', 'DESC')->limit($limit)->get();
 	}
 	
 	/**
