@@ -14,10 +14,10 @@
             <div class="w-full">
                 <div class="w-full">
                     <input type="radio" class="btn-check" name="account_type" value="personal" checked="checked" id="kt_create_account_form_account_type_personal">
-                    <label @click="allPages = pages" class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
-                        <vue-feather type="shopping-bag" />
+                    <label @click="allPages = pages" class="gap-6 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
+                        <vue-feather type="grid" />
                         <span class="d-block fw-semibold text-start">                            
-                            <span class="text-gray-900 fw-bold d-block fs-4 mb-2" v-text="translate('Pages')"></span>
+                            <span class="text-gray-900 fw-bold d-block fs-4 mb-2 text-left" v-text="translate('Pages')"></span>
                             <span class="text-muted fw-semibold fs-6" v-text="translate('List of the front pages')"></span>
                         </span>
                     </label>   
@@ -25,11 +25,11 @@
                 
                 <div class="w-full">
                     <input type="radio" class="btn-check" name="account_type" value="corporate" id="kt_create_account_form_account_type_corporate">
-                    <label @click="allPages = categories" class="btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center" for="kt_create_account_form_account_type_corporate">
+                    <label @click="allPages = categories" class="gap-6 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center" for="kt_create_account_form_account_type_corporate">
                         <vue-feather type="shopping-bag" />
                         <!--begin::Info-->
                         <span class="d-block fw-semibold text-start">                              
-                            <span class="text-gray-900 fw-bold d-block fs-4 mb-2" v-text="translate('Categories')"></span>
+                            <span class="text-gray-900 fw-bold d-block fs-4 mb-2 text-left" v-text="translate('Categories')"></span>
                             <span class="text-muted fw-semibold fs-6" v-text="translate('List of the products categories')"></span>
                         </span>           
                     </label>           
