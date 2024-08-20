@@ -21,7 +21,7 @@
           </div>
         </VueDraggable>
       </div>
-      <div class=" " >
+      <div class=" flex-column-fluid  w-300px " >
         <div class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto" >
           
             <Draggable ref="tree" textKey="name" childrenKey="items" maxLevel="2"  v-model="treeData" treeLine @change="change">
@@ -33,7 +33,7 @@
               </template>
             </Draggable>
         </div>
-        <button @click="saveItem" id="kt_ecommerce_add_product_submit" class="btn btn-primary"><span class="indicator-label" v-text="translate('Save Changes')"></span></button>
+        <button @click="saveItem" id="kt_ecommerce_add_product_submit" class="mx-auto btn btn-primary"><span class="indicator-label" v-text="translate('Save Changes')"></span></button>
       </div>
     </div>
     <div class="flex justify-between">
@@ -95,6 +95,8 @@ export default
         console.log('add')
       }
       const change = () => {
+      tree.value.openAll()
+
         console.log(tree.value.getData())
       }
       const remove = (stat) => {
@@ -129,7 +131,6 @@ export default
           )
       }
 
-      tree.value.openAll()
 
       return {
         change,
