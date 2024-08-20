@@ -34,19 +34,9 @@
       <preview-list :list="selectedPages" />
     </div> 
     <Draggable ref="tree" textKey="name" maxLevel="2"  v-model="treeData" treeLine>
-      <template #default="{ node, stat }">
-        <OpenIcon
-          v-if="stat.children.length"
-          :open="stat.open"
-          class="mtl-mr"
-          @click.native="stat.open = !stat.open"
-        />
-        <input
-          class="mtl-checkbox mtl-mr"
-          type="checkbox"
-          v-model="stat.checked"
-        />
-        <span class="mtl-ml">{{ node.text }}</span>
+      <template #default="{ node, stat }" class="cursor-move h-30 bg-gray-500/5 rounded p-3 my-1">
+        <vue-feather type="remove" @click="remove" />
+        <span class="mtl-ml">{{ node.name }}</span>
       </template>
     </Draggable>
   </div>
@@ -110,6 +100,8 @@ export default
         tree.value.remove(
           page
         )
+        selectedPages.value = tree.value
+
       }
       const back = () => {
         emit('close');
