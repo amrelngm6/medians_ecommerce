@@ -14,7 +14,7 @@
             <div class="w-full">
                 <div class="w-full">
                     <input type="radio" class="btn-check" name="account_type" value="personal" checked="checked" id="kt_create_account_form_account_type_personal">
-                    <label @click="allPages = pages" class="gap-6 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
+                    <label @click="allPages = pages, activeTab = 'pages'" class="gap-6 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center mb-10" for="kt_create_account_form_account_type_personal">
                         <vue-feather type="grid" />
                         <span class="d-block fw-semibold text-start">                            
                             <span class="text-gray-900 fw-bold d-block fs-4 mb-2 text-left" v-text="translate('Pages')"></span>
@@ -25,7 +25,7 @@
                 
                 <div class="w-full">
                     <input type="radio" class="btn-check" name="account_type" value="corporate" id="kt_create_account_form_account_type_corporate">
-                    <label @click="allPages = categories" class="gap-6 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center" for="kt_create_account_form_account_type_corporate">
+                    <label @click="allPages = categories, activeTab = 'categories'" class="gap-6 btn btn-outline btn-outline-dashed btn-active-light-primary p-7 d-flex align-items-center" for="kt_create_account_form_account_type_corporate">
                         <vue-feather type="shopping-bag" />
                         <!--begin::Info-->
                         <span class="d-block fw-semibold text-start">                              
@@ -40,7 +40,7 @@
           <VueDraggable class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto"
           v-model="allPages" animation="150" ghostClass="ghost" group="people" >
               <label v-for="page in allPages" :key="page"  class="align-items-center btn btn-active-light-primary btn-outline btn-outline-dashed d-flex" for="kt_create_account_form_account_type_corporate">
-                <vue-feather :type="page.type == 'page' ? 'grid' : 'shopping-bag'"></vue-feather>
+                <vue-feather :type="activeTab == 'page' ? 'grid' : 'shopping-bag'"></vue-feather>
                   <i class="ki-duotone ki-element-8 fs-3x me-5"><span class="path1"></span><span class="path2"></span></i>
                   <!--begin::Info-->
                   <span class="d-block fw-semibold text-start w-100">                              
@@ -95,6 +95,7 @@ export default
     emits: ['close'],
     setup(props, {emit}) {
 
+      const activeTab = ref('pages');
       const tree = ref(false);
       const loader = ref(false);
       const allPages = ref([])
@@ -165,6 +166,7 @@ export default
 
 
       return {
+        activeTab,
         change,
         tree,
         addMenu,
