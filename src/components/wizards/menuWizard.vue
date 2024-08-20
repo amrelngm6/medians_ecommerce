@@ -16,7 +16,7 @@
         </div>
           <VueDraggable class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto"
           v-model="allPages" animation="150" ghostClass="ghost" group="people" >
-          <div v-for="page in allPages" :key="page" class="cursor-move h-30 bg-gray-500/5 rounded p-3">
+          <div v-for="page in allPages" @click="addMenu(page)" :key="page" class="cursor-move h-30 bg-gray-500/5 rounded p-3">
             {{ page.name }}
           </div>
         </VueDraggable>
@@ -114,30 +114,6 @@ export default
             text: 'Projects',
             children: [
               {
-                text: 'Frontend',
-                children: [
-                  {
-                    text: 'Vue',
-                    children: [
-                      {
-                        text: 'Nuxt',
-                      },
-                    ],
-                  },
-                  {
-                    text: 'React',
-                    children: [
-                      {
-                        text: 'Next',
-                      },
-                    ],
-                  },
-                  {
-                    text: 'Angular',
-                  },
-                ],
-              },
-              {
                 text: 'Backend',
               },
             ],
@@ -145,8 +121,18 @@ export default
           { text: 'Photos' },
           { text: 'Videos' },
         ]);
+      
+        const addMenu = (page) => {
+          console.log(page)
+          this.$refs.tree.add(
+            { text: 'new node' },
+            this.$refs.tree.rootChildren[0],
+            this.$refs.tree.rootChildren[0].children.length
+          )
+        }
 
       return {
+        addMenu,
         treeData,
         loader,
         allPages,
