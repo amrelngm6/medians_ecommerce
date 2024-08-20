@@ -78,12 +78,9 @@ export default
         for (let i = 0; i < array.length; i++) {
           const element = array[i].page;
           element.type = array[i].type;
+          element.items = array[i].items;
           if (element.type == props.item.type)
           {
-            if (element.items.length > 0)
-            {
-              console.log(element.items[0])
-            }
             selectedPages.value[selectedPages.value.length] = element;
           }
         }
