@@ -16,9 +16,17 @@
         </div>
           <VueDraggable class="shadow-sm shadow-sm flex flex-col gap-2 p-4 w-300px h-300px m-auto bg-white overflow-auto"
           v-model="allPages" animation="150" ghostClass="ghost" group="people" >
-          <div v-for="page in allPages" @click="addMenu(page)" :key="page" class="cursor-move h-30 bg-gray-500/5 rounded p-3">
-            {{ page.name }}
-          </div>
+              <label v-for="page in allPages" :key="page"  class="align-items-center btn btn-active-light-primary btn-outline btn-outline-dashed d-flex" for="kt_create_account_form_account_type_corporate">
+                  <i class="ki-duotone ki-briefcase fs-3x me-5"><span class="path1"></span><span class="path2"></span></i>
+                  <!--begin::Info-->
+                  <span class="d-block fw-semibold text-start w-100">                              
+                      <span class="d-block fs-4 fw-bold mb-2 text-gray-900"> {{ page.name }}</span>
+                      
+                  </span>
+                  <i @click="addMenu(page)"  class="fa fa-plus fs-1 px-2 py-2"></i>           
+                  <!--end::Info-->               
+              </label>
+              
         </VueDraggable>
       </div>
       <div class=" flex-column-fluid  w-300px " >
