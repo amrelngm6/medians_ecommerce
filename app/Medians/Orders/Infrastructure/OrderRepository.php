@@ -303,7 +303,7 @@ class OrderRepository
 		
 		$update = $Model->update(['stock_updated'=> $data['stock_updated'] ? 1 : '']);
 		
-		return $updateStock;
+		return $update;
     }
 
 	
