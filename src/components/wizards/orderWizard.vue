@@ -211,6 +211,9 @@
                                                             class=""
                                                             v-text="translate('Total')"></th>
                                                         <th
+                                                            class=""
+                                                            v-text="translate('Stock')"></th>
+                                                        <th
                                                             class="min-w-100px"
                                                             v-text="translate('Status')"></th>
                                                     </tr>
@@ -247,6 +250,10 @@
                                                         <td
                                                             v-text="orderItem.quantity"></td>
                                                         <td  v-text="currency.symbol+''+orderItem.total_amount"></td>
+                                                        <td >
+                                                            <span v-if="orderItem.stock_updated" v-text="translate('Approved')"></span>
+                                                            <span class="px-2 bg-danger text-white" v-if="!orderItem.stock_updated" v-text="translate('Confirm')"></span>
+                                                        </td>
                                                         <td  >
                                                             <form_field  @callback="(val) => {console.log(val), orderItem.status = val.status}" :item="orderItem" :column="{key:'status',title: '' , column_type:'select', text_key: 'name', column_key: 'status', data: statusList, withLabel:false}" ></form_field>
                                                         </td>
