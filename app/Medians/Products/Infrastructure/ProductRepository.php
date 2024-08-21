@@ -269,7 +269,6 @@ class ProductRepository
     	// isset($data['prices']) ? $this->storePrice(($data['prices']), $Object) : '';
 
     	return $Object;
-
     }
 
 

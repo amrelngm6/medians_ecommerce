@@ -184,6 +184,10 @@ class APIController extends CustomController
 				case 'Blog.create':
 					$return = (new Blog\Application\BlogController)->store();
 					break;
+
+				case 'ProductStock.create':
+					$return = (new Products\Application\ProductStockController)->store();
+					break;
 					
 		
 			}
@@ -362,6 +366,10 @@ class APIController extends CustomController
 				$controller = new Blog\Application\BlogController; 
 				break;
 			
+			case 'ProductStock.update':
+				$controller = new Products\Application\ProductStockController; 
+				break;
+			
 		}
 
 		return response(isset($controller) ? json_encode($controller->update()) : []);
@@ -475,6 +483,10 @@ class APIController extends CustomController
 			
 				case 'Blog.delete':
 					return response((new Blog\Application\BlogController())->delete());
+					break;
+			
+				case 'ProductStock.delete':
+					return response((new Products\Application\ProductStockController())->delete());
 					break;
 			
 			}

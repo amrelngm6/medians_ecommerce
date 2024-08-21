@@ -32,6 +32,7 @@ class ProductField extends CustomModel
 		'tax_amount',
 		'tax_type',
 		'low_stock_alert',
+		'stock',
 		'template',
 	];
 

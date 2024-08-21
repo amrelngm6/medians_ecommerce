@@ -28,7 +28,7 @@
             :trackBy="column.text_key"
             :label="column.text_key"    
             :options="column.data"
-            :max="column.single ? 1 : 100"
+            :max="column.single ? 1 : (column.max ?? 100 )"
             @change="multiple_changed" 
         ></Multiselect>
 

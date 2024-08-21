@@ -63,7 +63,7 @@ class ProductStockController extends CustomController
             [ 'key'=> "stock_id", 'title'=> "#", 'column_type'=>'hidden'],
 			
 			[ 'key'=> "product_id", 'title'=> translate('Product'), 'help_text'=> translate('Select the Product of this stock'),
-				'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'product_id',
+				'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'product_id', 'multiple'=> true, 'single'=> true, 'max'=> 1,
 				'data' => $this->productRepo->get()  
 			],	
 			[ 'key'=> "type", 'title'=> translate('Type'), 'help_text'=> translate('Select the Product of this stock'),
@@ -92,6 +92,8 @@ class ProductStockController extends CustomController
 		        'fillable' => $this->fillable(),
 		        'items' => $this->repo->get(),
 		        'products' => $this->productRepo->getActive(1000),
+				'object_name'=> 'ProductStock',
+				'object_key'=> 'stock_id',
 		    ]);
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);
@@ -114,7 +116,7 @@ class ProductStockController extends CustomController
         	$params['created_by'] = $user->id;
 
 			$returnData = (!empty($this->repo->store($params))) 
-			? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+			? array('success'=>1, 'result'=>translate('Added'), 'reload'=>0)
 			: array('success'=>0, 'result'=>'Error', 'error'=>1);
 
 

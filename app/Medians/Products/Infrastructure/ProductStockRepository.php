@@ -3,6 +3,7 @@
 namespace Medians\Products\Infrastructure;
 
 use Medians\Products\Domain\ProductStock;
+use Medians\Products\Domain\ProductField;
 use Medians\Products\Domain\Product;
 use Medians\Content\Domain\Content;
 use Medians\Languages\Domain\Language;
@@ -41,7 +42,11 @@ class ProductStockRepository
 		}	
 
 		// Return the Model object with the new data
-    	$Object = ProductStock::firstOrCreate($dataArray);
+    	$Object = ProductStock::create($dataArray);
+
+		$productField = ProductField::where('product_id',$Object->product_id)->first();
+
+		$updateStock = $productField->update(['stock'=> ($data['type'] == 'add') ? ($productField->stock + $data['qty']) : ($productField->stock - $data['qty'])]);
 
     	return $Object;
     }

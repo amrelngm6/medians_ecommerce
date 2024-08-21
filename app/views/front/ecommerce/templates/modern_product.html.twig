@@ -121,9 +121,10 @@
 					</div>
 				</div>
 			</div>
+			{% if page.product_fields.stock > 0 %}
 			<div class="product-single__addtocart" x-data="{}">
 				<div class="qty-control position-relative">
-					<input type="number" name="params[qty]" value="1" min="1" class="qty-control__number text-center">
+					<input type="number" name="params[qty]" value="1" max="{{page.product_fields.stock}}" min="1" class="qty-control__number text-center">
 					<div class="qty-control__reduce">-</div>
 					<div class="qty-control__increase">+</div>
 				</div>
@@ -132,6 +133,11 @@
 					<button type="submit" class="text-gray-600 btn btn-primary btn-addtocart ">{{lang.translate('Add to Cart')}}</button>
 				</div>
 			</div>
+			{% else %}
+			<div class="product-single__addtocart">
+              <a href="#!" class="btn btn-primary btn-addtocart" target="_blank">{{lang.translate('Out of stock')}}</a>
+            </div>
+			{% endif %}
 		</form>
 		<div class="product-single__addtolinks">
 			<a href="/front_api/create?type=Wishlist.create&params[item_id]={{page.product_id}}" data-params="{{page.product_id}}" class="ajax-link me-4 pe-4 border-end">

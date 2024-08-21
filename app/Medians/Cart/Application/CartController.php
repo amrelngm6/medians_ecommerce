@@ -4,6 +4,7 @@ namespace Medians\Cart\Application;
 
 use Medians\Cart\Infrastructure\CartRepository;
 use Medians\Shipping\Infrastructure\ShippingRepository;
+use Medians\Products\Infrastructure\ProductRepository;
 
 use Shared\dbaser\CustomController;
 
@@ -19,6 +20,8 @@ class CartController extends CustomController
 	
 	protected $shippingRepo;
 
+	protected $productRepo;
+
 	
 
 	function __construct()
@@ -28,6 +31,8 @@ class CartController extends CustomController
 		$this->repo = new CartRepository();
 
 		$this->shippingRepo = new ShippingRepository();
+
+		$this->productRepo = new ProductRepository();
 
 	}
 
@@ -134,6 +139,13 @@ class CartController extends CustomController
 		if (empty($params['qty']))
 		{
         	throw new \Exception(translate('Qty is requierd'), 1);
+		} else {
+			$product = $this->productRepo->find($params['item_id']);
+			if ($params['qty'] > $product->product_fields->stock)
+			{
+				throw new \Exception(translate('This quantity Out of stock'), 1);
+			}
+			
 		}
 	}
 
