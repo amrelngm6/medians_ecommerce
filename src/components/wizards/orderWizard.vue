@@ -674,7 +674,6 @@ export default
                 params.append('type', 'OrderItem.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
                     handleAccess(response)
-                    load()
                 })
             }
 
