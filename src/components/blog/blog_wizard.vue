@@ -76,7 +76,7 @@
                                                     </div>
                                                     <div class="mb-10 fv-row">
                                                         <label class="required form-label "><span v-text="translate('Short')"></span><strong class="px-4" v-text="translate(language.language_code)"></strong></label>
-                                                        <textarea v-model="activeItem.content_langs[tabLanguage.language_code].short" class=""></textarea>
+                                                        <textarea v-model="activeItem.content_langs[language.language_code].short" class=""></textarea>
                                                         <div class="text-muted fs-7" v-text="translate('Used for articles list')"> </div>
                                                     </div>
                                                     <div>
