@@ -125,7 +125,7 @@ class BlogController extends CustomController
         	
 			$params['status'] = !empty($params['status']) ? 'on' : 0;
 
-			$params['content'] = ['english'=> $params, 'arabic'=>$params];
+			$params['content_langs'] = ['english'=> $params, 'arabic'=>$params];
         	
             $returnData = (!empty($this->repo->store($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)

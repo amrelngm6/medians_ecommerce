@@ -161,7 +161,7 @@ class BlogRepository
     	$Object->update($dataArray);
 
     	// Store languages content
-    	$this->storeContent($data['content'], $Object->id);
+    	$this->storeContent($data['content_langs'], $Object->id);
 
     	// Store Custom fields
     	isset($data['field']) ? $this->storeCustomFields($data['field'], $Object->id) : '';
@@ -182,7 +182,7 @@ class BlogRepository
     	$Object->update( (array) $data);
 
     	// Store languages content
-    	!empty($data['content']) ? $this->storeContent($data['content'], $data['id']) : '';
+    	!empty($data['content_langs']) ? $this->storeContent(json_decode($data['content_langs'], true), $data['id']) : '';
 
     	// Store Custom fields
     	!empty($data['field']) ? $this->storeCustomFields($data['field'], $data['id']) : '';
@@ -252,7 +252,7 @@ class BlogRepository
 	public function storeCustomFields($data, $id) 
 	{
 		CustomField::where('model_type', Blog::class)->where('model_id', $id)->delete();
-		if ($data)
+		if ($data && $data != '[]')
 		{
 			foreach ($data as $key => $value)
 			{

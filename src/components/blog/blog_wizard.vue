@@ -33,17 +33,6 @@
                             </div>
                         </div>
 
-                        <div class="card card-flush py-4">
-                            <div class="card-header">
-                                <div class="card-title"><h2 v-text="translate('Page Template')"></h2></div>
-                            </div>
-                            <div class="card-body pt-0">
-                                <label  v-text="translate('Select a item template')" class="form-label"></label>
-                                <form_field :item="activeItem" :column="{required: true, key:'template',title: translate('Template') , column_type:'select', text_key: 'title', column_key: 'value', data:templates}" ></form_field>
-                                <div class="text-muted fs-7" v-text="translate('Assign a template from your current theme to define how a single item is displayed')"></div>
-                            </div>
-                        </div>
-
                     </div>
                     <div class="d-flex flex-column flex-row-fluid gap-7 gap-lg-10">
                         <ul
