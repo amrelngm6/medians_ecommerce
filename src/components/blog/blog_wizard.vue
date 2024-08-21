@@ -87,6 +87,10 @@
                                                     </div>
                                                     <div>
                                                         <label class="form-label gap-6 flex"><span v-text="translate('Description')"></span><strong class="px-4" v-text="translate(language.language_code)"></strong> </label>
+                                                        <ckeditor
+                                                            v-model="activeItem.content_langs[language.language_code].content"
+                                                            :editor="editor" :config="editorConfig" />
+                                                        
                                                         <textarea class="form-control" v-model="activeItem.content_langs[language.language_code].content"></textarea>
                                                         <div class="text-muted fs-7"
                                                             v-text="translate('Set a description to the item for better visibility')">
@@ -189,6 +193,11 @@ const form_field = defineAsyncComponent(() =>
 import Vue3TagsInput from 'vue3-tags-input';
 import color_picker from '@/components/includes/color-picker.vue';
 
+import { ClassicEditor, Bold, Essentials, Italic, Mention, Paragraph, Link, List, Table, TableToolbar, Image, Undo, Heading, Font } from 'ckeditor5';
+import { Ckeditor } from '@ckeditor/ckeditor5-vue';
+import 'ckeditor5/ckeditor5.css';
+
+
 
 export default
     {
@@ -198,6 +207,7 @@ export default
             color_picker,
             static_field,
             Vue3TagsInput,
+            Ckeditor,
             SideFormCreate,
             SideFormUpdate,
             close_icon,
@@ -278,6 +288,11 @@ export default
                 return activeItem.value.content_langs[index]
             }
 
+            const editor = ClassicEditor;
+            const editorConfig =  ref({
+                plugins: [ Bold, Essentials, Italic, Mention, Paragraph,  Undo, Heading, Link, List, Image, Font,Table, TableToolbar  ],
+                toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'heading', 'fontSize', 'fontColor' ,'link','insertTable',  'bulletedList', 'numberedList' ],
+            });
 
             return {
                 getLang,
