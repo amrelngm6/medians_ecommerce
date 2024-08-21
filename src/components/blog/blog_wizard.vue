@@ -82,12 +82,12 @@
                                                     </div>
                                                     <div class="mb-10 fv-row">
                                                         <label class="required form-label "><span v-text="translate('Name')"></span><strong class="px-4" v-text="translate(language.language_code)"></strong></label>
-                                                        <input type="text" class="form-control mb-2" v-model="activeItem.content[language.language_code].title" />
+                                                        <input type="text" class="form-control mb-2" v-model="activeItem.content_langs[language.language_code].title" />
                                                         <div class="text-muted fs-7" v-text="translate('Name is required and recommended to be unique')"> </div>
                                                     </div>
                                                     <div>
                                                         <label class="form-label gap-6 flex"><span v-text="translate('Description')"></span><strong class="px-4" v-text="translate(language.language_code)"></strong> </label>
-                                                        <textarea class="form-control" v-model="activeItem.content[language.language_code].content"></textarea>
+                                                        <textarea class="form-control" v-model="activeItem.content_langs[language.language_code].content"></textarea>
                                                         <div class="text-muted fs-7"
                                                             v-text="translate('Set a description to the item for better visibility')">
                                                         </div>
@@ -122,19 +122,19 @@
                                                     <div class="mb-10">
                                                         <label class="form-label" v-text="translate('Meta Tag Title') + ' (' + tabLanguage.name + ')'"></label>
                                                         <input type="text" class="form-control mb-2" name="meta_title"
-                                                            :placeholder="translate('Meta tag name')" v-model="activeItem.content[tabLanguage.language_code].seo_title" />
+                                                            :placeholder="translate('Meta tag name')" v-model="activeItem.content_langs[tabLanguage.language_code].seo_title" />
                                                         <div class="text-muted fs-7" v-text="translate('Set a meta tag title. Recommended to be simple and precise keywords') + ' (' + tabLanguage.name + ')'"></div>
                                                     </div>
 
                                                     <div class="mb-10">
                                                         <label class="form-label" v-text="translate('Meta Tag Description')"></label>
-                                                        <textarea v-model="activeItem.content[tabLanguage.language_code].seo_desc" class=""></textarea>
+                                                        <textarea v-model="activeItem.content_langs[tabLanguage.language_code].seo_desc" class=""></textarea>
                                                         <div class="text-muted fs-7" v-text="translate('Set a meta tag description to the item for increased SEO ranking')"></div>
                                                     </div>
 
                                                     <div>
                                                         <label class="form-label" v-text="translate('Meta Tag Keywords')"></label>
-                                                        <input id="kt_ecommerce_add_item_meta_keywords" class="form-control" v-model="activeItem.content[tabLanguage.language_code].seo_keywords" />
+                                                        <input id="kt_ecommerce_add_item_meta_keywords" class="form-control" v-model="activeItem.content_langs[tabLanguage.language_code].seo_keywords" />
                                                         <div class="text-muted fs-7" v-text="translate('Set a list of keywords that the item is related to. Separate the keywords by adding a comma <code>,</code> between each keyword')"></div>
                                                     </div>
                                                 </div>
@@ -216,7 +216,7 @@ export default
             const activeItem = ref({
                 "id": 0,
                 "picture": '/uploads/img/placeholder.png',
-                "content": {},
+                "content_langs": {},
             });
             const seoLang = ref('english');
             const categories = ref([]);
@@ -274,8 +274,8 @@ export default
 
 
             const getLang = (val, index) => {
-                activeItem.value.content[index] = val.content[index] ?? {}
-                return activeItem.value.content[index]
+                activeItem.value.content_langs[index] = val.content_langs[index] ?? {}
+                return activeItem.value.content_langs[index]
             }
 
 

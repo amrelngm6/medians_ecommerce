@@ -35,7 +35,9 @@ class BlogRepository
 
 	public function find($id)
 	{
-		return Blog::with('content')->withSum('views','times')->find($id);
+		$item = Blog::with('content', 'langs')->withSum('views','times')->find($id);
+		$item->content_langs = $item->langs->keyBy('lang');
+		return $item;
 	}
 
 	public function get($limit = 500, $lang = null)
@@ -106,18 +108,10 @@ class BlogRepository
 		})->orderBy('updated_at', 'DESC')->first();
 	}
 
-	public function filterSearchTitle($title)
-	{
-		$title = str_replace(
-			[ 'اسباب' ,'اسماعيل','افراز','مجهرى','تاخر','اهم','المجهرى','','','','','','','','','','','']
-			, ['أسباب',"إسماعيل",'إفراز','مجهري','تأخر','أهم','المجهري','','','','','','','','','','','']
-			, $title);
-		return str_replace(' ', '%', trim($title));
-	}
 
 	public function search($request, $limit = 20)
 	{
-		$title = $request->get('search') ? $this->filterSearchTitle($request->get('search')) : '';
+		$title = $request->get('search');
 		$return = Blog::whereHas('content', function($q) use ($title){
 			$q->where('title', 'LIKE', '%'.$title.'%');
 		})

@@ -27,7 +27,6 @@ class Blog extends CustomModel
 	public $appends = ['title','photo','field','category_name','date', 'update_date'];
 
 
-
 	public function getTitleAttribute() 
 	{
 		return !empty($this->content->title) ? $this->content->title : '';
@@ -58,7 +57,6 @@ class Blog extends CustomModel
 		return isset($this->content->updated_at) ? date('M, d Y', strtotime($this->content->updated_at)) : '';
 	}
 
-
 	public function photo() : String
 	{
 		return !empty($this->picture) ? $this->picture : '/uploads/images/default_profile.jpg';
@@ -72,11 +70,6 @@ class Blog extends CustomModel
 	public function category()
 	{
 		return $this->hasOne(Category::class, 'category_id', 'category_id')->with('content');
-	}
-
-	public function author()
-	{
-		return $this->hasOne(Doctor::class, 'id', 'created_by');
 	}
 
 	public function custom_fields()
@@ -94,6 +87,11 @@ class Blog extends CustomModel
 		return $this->morphMany(View::class, 'item');
 	}
 
+
+	public function langs() 
+	{
+		return $this->morphMany(Content::class , 'item')->groupBy('lang');	
+	}
 
 	public function thumbnail() 
 	{
