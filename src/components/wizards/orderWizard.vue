@@ -769,8 +769,11 @@ export default
                 let stockType =  (type == 'confirm');
                 customConfirm(msg)
                 .then((e) => {
-                    item.stock_updated = stockType;
-                    saveItemStock(item)
+                    console.log(e)
+                    if (e) {
+                        item.stock_updated = stockType;
+                        saveItemStock(item)
+                    }
                 })
             }
 

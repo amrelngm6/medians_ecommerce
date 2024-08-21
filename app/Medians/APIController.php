@@ -351,7 +351,7 @@ class APIController extends CustomController
 				break;
 
 			case 'OrderItem.update':
-				return (new Orders\Application\OrderController)->updateItemStock(); 
+				return response((new Orders\Application\OrderController)->updateItemStock()); 
 				break;
 
 			case 'Branch.update':

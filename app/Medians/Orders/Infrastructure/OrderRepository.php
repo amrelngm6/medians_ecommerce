@@ -278,7 +278,7 @@ class OrderRepository
 				$value = (array) $value;
 
 				$Model = OrderItem::find($value['order_item_id']);
-				
+
 				$update = $Model->update(['status'=> $value['status']]);
 
 			}
@@ -293,8 +293,11 @@ class OrderRepository
     public function updateItemStock($data)
     {
 		
+		$Model = OrderItem::find($data['order_item_id']);
+		$update = $Model->update(['stock_updated'=> $data['stock_updated'] ? 1 : null]);
+		
 		$productField = ProductField::where('product_id', $data['item_id'])->first();
-		$updateStock = $productField->update(['stock'=> ($data['type'] == 'add') ? ($productField->stock + $data['quantity']) : ($productField->stock - $data['quantity'])]);
+		$updateStock = $productField->update(['stock'=> !($data['stock_updated']) ? ($productField->stock + $data['quantity']) : ($productField->stock - $data['quantity'])]);
 
 		return $updateStock;
     }
