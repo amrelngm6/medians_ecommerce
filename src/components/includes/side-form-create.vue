@@ -21,11 +21,31 @@
                         <input v-if="column.column_type == 'password'" autocomplete="off" :name="'params['+column.key+']'" :type="column.column_type" class="form-control form-control-solid" :placeholder="column.title">
 
                         <textarea  :required="column.required"  v-if="column.column_type == 'textarea'" :name="'params['+column.key+']'" rows="4" class="mt-3 form-control form-control-solid" :placeholder="column.title"></textarea>
+                        <Multiselect
+                            v-if="column.multiple && column.data && column.column_type == 'select'" 
+                            mode="tags"
+                            :object="false"
+                            :hideSelected="true"
+                            :searchable="true"
+                            :allowAbsent="true"
+                            :valueProp="column.column_key ? column.column_key : column.key"
+                            :trackBy="column.text_key"
+                            :label="column.text_key"    
+                            :options="column.data"
+                            :max="column.single ? 1 : (column.max ?? 100 )"
+                        ></Multiselect>
+                        
+                        <input v-if="column.multiple && column.data && column.column_type == 'select'" type="hidden" v-for="selected in  item[column.column_key]" :name="'params['+(column.column_key)+'][]'" :value="selected[column.column_key]" />
 
+                        <select :required="column.required" :disabled="column.disabled" v-if="!column.multiple && column.data && column.column_type == 'select'" :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid"   :placeholder="column.title">
+                            <option value="0"  v-if="!column.required" v-text="translate('select') +' '+ column.title"></option>
+                            <option v-for="option in column.data" :value="option[ column.column_key ? column.column_key : column.key]" v-text="option[column.text_key]"></option>
+                        </select>
+<!--                         
                         <select :required="column.required"  :name="'params['+column.key+']'" :type="column.column_type" class="form-control form-control-solid" v-if="column.data && column.column_type == 'select'"  :placeholder="column.title">
                             <option value="0" v-if="!column.required" v-text="translate('-- Choose') +' '+ column.title"></option>
                             <option v-for="option in column.data" :value="option[column.column_key ? column.column_key : column.key]" v-text="option[column.text_key]"></option>
-                        </select>
+                        </select> -->
 
                         <div v-if="column.column_type == 'checkbox' && !showLoader"  class="flex gap gap-2 cursor-pointer my-2" @click="setActiveStatus(column)">
                             <span :for="column.key" class="block" v-text="column.title"></span>
@@ -52,11 +72,14 @@ import close_icon from '@/components/svgs/Close.vue';
 import field from '@/components/includes/Field.vue';
 import { translate } from '@/utils.vue';
 
+import { translate, handleGetRequest, handleName, isInput, setActiveStatus, handleRequest, deleteByKey, showAlert } from '@/utils.vue';
+import Multiselect from '@vueform/multiselect'
 
 export default 
 {
     components: {
         'vue-medialibrary-field': field,
+        Multiselect, 
         close_icon
     },
     props: [
