@@ -1,7 +1,7 @@
 <template>
-    <div class="sidebar-create-form fixed top-14 left-0 right-0 m-auto" style="z-index:9999"  >
-        <div class="rounded-lg shadow-lg bg-white dark:bg-gray-700 relative h-[90vh]  overflow-y-auto" >
-            <form action="/api/update" method="POST" data-refresh="1" id="add-device-form" class="action p-4   m-auto rounded-lg max-w-xl ">
+    <div class="modal fade show" style="z-index:9999; background: rgba(0, 0, 0, 0.5);display: block;" >
+        <div class="mx-auto mt-10 modal-dialog-centered mw-650px rounded-lg shadow-lg bg-white dark:bg-gray-700 relative  overflow-y-auto" >
+            <form action="/api/update" method="POST" data-refresh="1" id="add-device-form" class="action   m-auto rounded-lg max-w-xl w-full pb-10">
                 <div class="w-full flex">
                     <h1 class="w-full m-auto max-w-xl text-base mb-10 " v-text="translate('update')"></h1>
                     <span class="cursor-pointer py-1 px-2" @click="emitClose"><close_icon /></span>
