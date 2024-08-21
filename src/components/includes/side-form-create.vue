@@ -41,7 +41,7 @@
 
                 </div>
 
-                <button class="mt-4 btn btn-primary hover:bg-red-800 px-6 text-white font-semibold" v-text="translate('save')"></button>
+                <button class="mx-auto mt-4 btn btn-primary hover:bg-red-800 px-6 text-white font-semibold" v-text="translate('save')"></button>
             </form>
         </div>
     </div>
