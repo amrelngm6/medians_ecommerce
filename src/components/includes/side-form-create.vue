@@ -40,8 +40,9 @@
                     </div>
 
                 </div>
-
-                <button class="mx-auto mt-4 btn btn-primary hover:bg-red-800 px-6 text-white font-semibold" v-text="translate('save')"></button>
+                <div class="text-center">
+                    <button class="w-150px mt-4 btn btn-primary hover:bg-red-800 px-6 text-white font-semibold" v-text="translate('save')"></button>
+                </div>
             </form>
         </div>
     </div>
