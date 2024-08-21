@@ -4,7 +4,7 @@
         <div  v-if="content " class=" w-full relative">
             
             <div class=" " v-if="showWizard ">
-                <category_wizard @callback="()=> {activeItem = null; showWizard = false}" :langs="langs" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.category_id ?? 'new')" :system_setting="system_setting" :setting="setting"  />
+                <category_wizard  @callback="()=> {activeItem = null; showWizard = false}" :langs="langs" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.id ?? 'new')" :system_setting="system_setting" :setting="setting"  />
             </div>
 
             <main class=" flex-1 overflow-x-hidden overflow-y-auto  w-full relative" v-if="content.items && !showWizard">

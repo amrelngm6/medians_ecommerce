@@ -44,6 +44,7 @@ const get_started = defineAsyncComponent(() => import('@/components/wizards/get-
 
 // Default data table pages
 const data_table = defineAsyncComponent(() => import('@/components/datatable_pages/data_table_page.vue') );
+
 const email_templates = defineAsyncComponent(() => import('@/components/email_templates.vue') );
 
 const roles = defineAsyncComponent(() => import('@/components/roles.vue') );

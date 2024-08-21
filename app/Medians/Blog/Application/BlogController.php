@@ -89,6 +89,29 @@ class BlogController extends CustomController
 		]);
 	}
 
+	/**
+	 * Admin index items
+	 * 
+	 * @param Silex\Application $app
+	 * @param \Twig\Environment $twig
+	 * 
+	 */
+	public function article($id) 
+	{
+		
+		try {
+
+			return render('blog_wizard', [
+		        'load_vue' => true,
+		        'title' => translate('Blog page'),
+		        'item' => $this->repo->find($id),
+		    ]);
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+			
+		}
+	}
+
 
 
 	public function store() 

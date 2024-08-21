@@ -224,7 +224,7 @@ export default
             const showAddCategory = ref(false);
             const showEditSide = ref(false);
             const activeItem = ref({
-                "category_id": 0,
+                "id": 0,
                 "picture": '/uploads/img/placeholder.png',
                 "content_langs": {},
             });
@@ -270,8 +270,8 @@ export default
                     params.append('params[' + k + ']', d)
                 }
 
-                let type = array.category_id > 0 ? 'update' : 'create';
-                params.append('type', 'ProductCategory.' + type)
+                let type = array.id > 0 ? 'update' : 'create';
+                params.append('type', 'Blog.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
                     handleAccess(response)
                 })

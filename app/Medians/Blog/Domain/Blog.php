@@ -18,7 +18,6 @@ class Blog extends CustomModel
 	protected $table = 'blog';
 
 	public $fillable = [
-		'category_id', 
 		'picture', 
 		'status', 
 		'created_by'
