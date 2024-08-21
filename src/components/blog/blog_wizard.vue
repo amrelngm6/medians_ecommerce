@@ -5,7 +5,7 @@
             <div id="kt_app_content_container" class="app-container  container-xxl " v-if="activeItem" >
                 <div class="action form d-flex flex-column flex-lg-row">
                     
-                    <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+                    <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10" style="min-width: 300px">
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title"><h2 v-text="translate('Main picture')"></h2></div>
