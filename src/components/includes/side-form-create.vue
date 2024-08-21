@@ -1,6 +1,6 @@
 <template>
     <div class="modal fade show" style="z-index:9999; background: rgba(0, 0, 0, 0.5);display: block;" >
-        <div class="mt-10 modal-dialog-centered mw-650px rounded-lg shadow-lg bg-white dark:bg-gray-700 relative  overflow-y-auto" >
+        <div class="mx-auto mt-10 modal-dialog-centered mw-650px rounded-lg shadow-lg bg-white dark:bg-gray-700 relative  overflow-y-auto" >
             <form action="/api/create" method="POST" data-refresh="1" id="add-device-form" class="action   m-auto rounded-lg max-w-xl w-full pb-10">
                 <div class="w-full flex">
                     <h1 class="w-full m-auto max-w-xl text-base mb-2 " v-text="translate('ADD_new')"></h1>
