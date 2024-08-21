@@ -350,6 +350,10 @@ class APIController extends CustomController
 				$controller = new Orders\Application\OrderController; 
 				break;
 
+			case 'OrderItem.update':
+				return (new Orders\Application\OrderController)->updateItemStock(); 
+				break;
+
 			case 'Branch.update':
 				$controller = new Branches\Application\BranchController; 
 				break;

@@ -59,7 +59,7 @@
                         <div class="w-full flex gap-6">
                             <div class="relative">
                                 <span class="minusQty px-2 cursor-pointer text-xl font-bold">-</span>
-                                <input name="params[cart][{{cart.cart_id}}][qty]" value="{{cart.qty}}" min="{{cart.item.product_fields.min_purchase_qty}}" class="text-center bg-gray-200 px-4 py-2 w-20" />
+                                <input name="params[cart][{{cart.cart_id}}][qty]" value="{{cart.qty}}" min="{{cart.item.product_fields.min_purchase_qty}}" max="{{cart.item.product_fields.stock}}" class="text-center bg-gray-200 px-4 py-2 w-20" />
                                 <span class="addQty px-2 cursor-pointer text-xl font-bold">+</span>
                             </div>
                             <a href="{{app.CONF.url}}cart/delete"  rel="nofollow" data-params="{{cart.cart_id}}" class="ajax-link font-bold px-4 py-1 text-red-600" >{{lang.translate('Remove')}}</a>

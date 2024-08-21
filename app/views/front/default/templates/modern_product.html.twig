@@ -72,7 +72,7 @@
                 <div class="py-6 w-full flex gap-6">
                     <div class="relative">
                         <span class="minusQty px-2 cursor-pointer text-xl font-bold">-</span>
-                        <input name="params[qty]" value="1" min="{{page.product_fields.min_purchase_qty}}" class="text-center bg-gray-200 px-4 py-2 w-20" />
+                        <input name="params[qty]" value="1" min="{{page.product_fields.min_purchase_qty}}" max="{{page.product_fields.stock}}" class="text-center bg-gray-200 px-4 py-2 w-20" />
                         <span class="addQty px-2 cursor-pointer text-xl font-bold">+</span>
                     </div>
                     <button data-form="product-form" class="bg-red-600 px-4 py-1 text-white" >{{lang.translate('Add to cart')}}</button>

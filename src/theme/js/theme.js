@@ -138,9 +138,9 @@ function pureFadeOut(e) {
         $reduce.addEventListener('click', function() {
           $number.value = parseInt($number.value) > 1 ? parseInt($number.value) - 1 : parseInt($number.value);
         });
-
         $increase.addEventListener('click', function() {
-          $number.value = parseInt($number.value) + 1;
+          console.log($number)
+          $number.value = parseInt($number.value) < parseInt($number.max) ? parseInt($number.value) + 1 : parseInt($number.value);
         });
       });
     }

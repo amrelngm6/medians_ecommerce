@@ -25,6 +25,13 @@ jQuery(document).on('change', 'input', function(e){
     }, 100);
 });
 
+// jQuery(document).on('mouseup', 'input.price', function(e){
+//     console.log()
+//     setTimeout(() => {
+//         jQuery(e.target).data('target-element') ? submitForm(jQuery(e.target).data('form'), jQuery(e.target).data('target-element'), ) : null;
+//     }, 100);
+// });
+
 jQuery(document).on('submit', '.ajax-form', function(e){
     e.preventDefault();
     submitForm(e.target.id, e.target.attr);

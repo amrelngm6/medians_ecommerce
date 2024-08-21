@@ -63,15 +63,27 @@ class ProductStockRepository
 		}	
 
 		$dataArray['date'] = date('Y-m-d');
-		
+
 		// Return the Model object with the new data
-    	$Object = ProductStock::create($dataArray);
+    	$Object = ProductStock::firstOrCreate($dataArray);
 
-		$productField = ProductField::where('product_id',$Object->product_id)->first();
-
-		$updateStock = $productField->update(['stock'=> ($data['type'] == 'add') ? ($productField->stock + $data['qty']) : ($productField->stock - $data['qty'])]);
+		// Update product stock
+		$data['product_id'] = $Object->product_id;
+		$updateStock = $this->updateItemstock($data);
 
     	return $Object;
+    }
+    	
+    /**
+     * Update Lead
+     */
+    public function updateItemStock($data)
+    {
+		
+		$productField = ProductField::where('product_id', $data['product_id'])->first();
+		$updateStock = $productField->update(['stock'=> ($data['type'] == 'add') ? ($productField->stock + $data['qty']) : ($productField->stock - $data['qty'])]);
+
+    	return $updateStock;
     }
     	
     /**

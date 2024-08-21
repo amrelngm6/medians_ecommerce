@@ -2,22 +2,8 @@
 {% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
 
 
-<div class="container mx-auto flex pt-6 pb-2">
-    <div class="w-full">
-        <h1 class="text-xl">{{lang.translate('Checkout')}}</h1>
-    </div>
-    <div class="flex-end">
-        <div class="flex w-full flex-nowrap">
-            <span class="flex-none">{{lang.translate('Home')}}</span>
-            <span class="flex-none px-2"> / </span>
-            <span class="flex-none">{{lang.translate('Checkout')}}</span>
-        </div>
-    </div>
-</div>
-<div class="container mx-auto bg-red-600 py-1 my-2"></div>
-
 	<section class="shop-checkout container">
-		<h2 class="page-title">{{lang.translate('Cart')}}</h2>
+		<h2 class="page-title">{{lang.translate('Checkout')}}</h2>
 		<div class="checkout-steps">
 			<a href="{{app.CONF.url}}cart" class="checkout-steps__item active">
 				<span class="checkout-steps__item-number">01</span>

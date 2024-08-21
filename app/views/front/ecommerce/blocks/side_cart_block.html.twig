@@ -33,7 +33,7 @@
 
                     <div class=" position-relative relative flex">
                         <i class="la la-minus minusQty qty-control__reduce px-1 line-through pt-1 leading-tight cursor-pointer text-sm pt-2 mt-1 font-bold "></i>
-                        <input name="params[cart][{{cart.cart_id}}][qty]" value="{{cart.qty}}" min="{{cart.item.product_fields.min_purchase_qty}}" class="text-center bg-gray-200 py-2 w-20 qty-control__number border-0 text-center"/>
+                        <input name="params[cart][{{cart.cart_id}}][qty]" value="{{cart.qty}}" min="{{cart.item.product_fields.min_purchase_qty}}" max="{{cart.item.product_fields.stock}}" class="text-center bg-gray-200 py-2 w-20 qty-control__number border-0 text-center"/>
                         <i class="la la-plus addQty qty-control__increase px-4 pt-1 cursor-pointer text-lg "></i>
                     </div>
 

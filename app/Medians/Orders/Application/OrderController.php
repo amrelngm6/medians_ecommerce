@@ -89,13 +89,21 @@ class OrderController extends CustomController
 			$items = isset($customer->customer_id) ? $this->cartRepo->get($customer->customer_id) : $this->cartRepo->guest_items($this->app->guest_auth());
 	
 			$params['items'] = $items;
+			
+			if (!count($params['items'])) {
+				throw new \Exception(translate("No items in the cart"), 1);
+			}
+
+			$validateStock = $this->validateStock($items);
+
+			if ( $validateStock ) 
+			{
+				throw new \Exception($validateStock, 1);
+			}
 
 			$customer = $customer ? $customer : $this->generateCustomer($params);
 			$params['customer_id'] = $customer->customer_id;
 
-			if (!count($params['items']))
-				throw new \Exception(translate("No items in the cart"), 1);
-			
 			if ($customer->wasRecentlyCreated)
 			{
 				$customerAuthService->setSession($customer);
@@ -120,6 +128,24 @@ class OrderController extends CustomController
 	 * 
 	 * @return [] 
 	*/
+	public function validateStock($items) 
+	{
+		foreach ($items as $key => $value) 
+		{
+			if ($value->item->product_fields->stock < $value->qty)
+			{
+				return $value->item->lang_content->title.' '. translate("out of stock");
+			}
+		}
+	}
+	
+
+
+	/**
+	 * Update item to database
+	 * 
+	 * @return [] 
+	*/
 	public function update() 
 	{
 		$params = $this->app->params();
@@ -127,6 +153,30 @@ class OrderController extends CustomController
         try {
 
            	$returnData =  ($this->repo->update($params))
+           	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0)
+           	: array('error'=>translate('Not allowed'));
+
+        } catch (Exception $e) {
+            $returnData = array('error'=>$e->getMessage());
+        }
+
+        return $returnData;
+
+	}
+
+
+	/**
+	 * Update item to database
+	 * 
+	 * @return [] 
+	*/
+	public function updateItemStock() 
+	{
+		$params = $this->app->params();
+
+        try {
+
+           	$returnData =  ($this->repo->updateItemStock($params))
            	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0)
            	: array('error'=>translate('Not allowed'));
 

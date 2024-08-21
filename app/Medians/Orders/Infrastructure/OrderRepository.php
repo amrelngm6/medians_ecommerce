@@ -6,6 +6,7 @@ use Medians\Orders\Domain\Order;
 use Medians\Orders\Domain\OrderItem;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Products\Domain\Product;
+use Medians\Products\Domain\ProductField;
 use Medians\Customers\Domain\Customer;
 
 
@@ -245,6 +246,7 @@ class OrderRepository
 				$fields['tax_amount'] = $totalTaxAmount;
 				$fields['item_id'] = $value->item_id;
 				$fields['item_type'] = $value->item_type;	
+				$fields['item_price'] = $value->item->price;	
 				$fields['color'] = $value->color;	
 				$fields['size'] = $value->size;	
 				$fields['date'] = date('Y-m-d');
@@ -252,13 +254,16 @@ class OrderRepository
 				$fields['code'] = $this->generateCode();
 				$Model = OrderItem::create($fields);
 
-				$value->delete();
+				// Delete from cart
+				$deleteCart = $value->delete();
+
 			}
 			
 			return $Model;		
 		}
 	}
 
+    	
 
 	/**
 	* Update related items to database
@@ -273,15 +278,28 @@ class OrderRepository
 				$value = (array) $value;
 
 				$Model = OrderItem::find($value['order_item_id']);
-
+				
 				$update = $Model->update(['status'=> $value['status']]);
+
 			}
 
 			return $update ? $Model : null;		
 		}
 	}
 
+    /**
+     * Update Lead
+     */
+    public function updateItemStock($data)
+    {
+		
+		$productField = ProductField::where('product_id', $data['item_id'])->first();
+		$updateStock = $productField->update(['stock'=> ($data['type'] == 'add') ? ($productField->stock + $data['quantity']) : ($productField->stock - $data['quantity'])]);
 
+		return $updateStock;
+    }
+
+	
 	/**
 	 * Generate order code
 	 */
