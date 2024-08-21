@@ -40,7 +40,7 @@
                         </template>
 
                         <template #item-path="item">
-                            <a v-if="item.content" :href="conf.url+item.content.prefix" target="_blank" class="w-8 h-8 rounded-full" v-text="item.content.prefix" ></a>
+                            <a v-if="item.lang_content" :href="conf.url+item.lang_content.prefix" target="_blank" class="w-8 h-8 rounded-full" v-text="item.lang_content.prefix" ></a>
                         </template>
 
                         <template #item-edit="item">

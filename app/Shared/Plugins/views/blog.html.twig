@@ -12,22 +12,24 @@
 <section class="blog-page container">
 	<h2 class="d-none">{{lang.translate('The Blog')}}</h2>
 	<div class="blog-list">
+        {% for item in items %}
 		<div class="blog-list__item">
 			<div class="blog-list__item-image">
-				<img loading="lazy" class="h-auto" src="../images/blog/blog-11.jpg" width="680" height="493" alt="">
+				<img loading="lazy" class="h-auto" src="{{item.picture}}" width="680" height="493" alt="">
 			</div>
 			<div class="blog-list__item-detail">
 				<div class="blog-list__item-meta">
-					<span class="blog-list__item-meta__date">Aprial 05, 2023</span>
+					<span class="blog-list__item-meta__date">{{item.created_at|date('Y-m-d')}}</span>
 				</div>
 				<div class="blog-list__item-title">
-					<a href="./blog_single.html">Us yielding Fish sea night night the said him two</a>
+					<a href="{{item.lang_content.prefix}}">{{item.lang_content.title}}</a>
 				</div>
 				<div class="blog-list__item-content">
-					<p>Midst one brought greater also morning green saying had good. Open stars day let over gathered, grass face one every light of under.</p>
-					<a href="./blog_single.html" class="readmore-link">Continue Reading</a>
+					<p>{{item.lang_content.short}}</p>
+					<a href="{{item.lang_content.prefix}}" class="readmore-link">Continue Reading</a>
 				</div>
 			</div>
 		</div>
+        {% endfor %}
 	</adiv>
 </section>
