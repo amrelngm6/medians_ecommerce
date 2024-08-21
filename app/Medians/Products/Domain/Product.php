@@ -100,13 +100,16 @@ class Product extends CustomModel
 		return $this->hasMany(ProductImage::class , 'product_id', 'product_id');	
 	}
 	
-	public function related() 
+	public function related($limit = null) 
 	{
 		return $this->with('product_colors', 'product_sizes', 'images', 'product_categories', 'product_fields', 'product_tags', 'shipping','variants')
 		->whereHas('lang_content', function($q) {
-			$q->where('item_id', '!=', $this->product_id)->where('title', 'LIKE', '%'.str_replace(' ', '%', $this->lang_content->title).'%');
+			$q
+			->where('title', 'LIKE', '%'.str_replace(' ', '%', $this->lang_content->title).'%')
+			->orWhere('content', 'LIKE', '%'.str_replace(' ', '%', $this->lang_content->title).'%');
 		})
 		->where('product_id', '!=' , $this->product_id)
+		->limit($limit ?? 6)
 		->get();	
 	}
 	

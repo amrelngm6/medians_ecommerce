@@ -51,6 +51,11 @@ class ProductRepository
 		return Product::with('lang_content',  'category')->orderBy('created_at', 'DESC')->limit($limit)->get();
 	}
 	
+	public function getActive($limit = 100)
+	{
+		return Product::where('status', 'on')->with('lang_content')->orderBy('created_at', 'DESC')->limit($limit)->get();
+	}
+	
 	/**
 	 * Load  productby prefix
 	 */

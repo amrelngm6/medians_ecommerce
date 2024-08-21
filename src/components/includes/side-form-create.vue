@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar-create-form fixed top-14 left-0 right-0 m-auto" style="z-index:9999" >
+    <div class="modal fade show" style="z-index:9999; background: rgba(0, 0, 0, 0.5);display: block;" >
         <div class="rounded-lg shadow-lg bg-white dark:bg-gray-700 relative h-[90vh]  overflow-y-auto" >
             <form action="/api/create" method="POST" data-refresh="1" id="add-device-form" class="action  p-4  m-auto rounded-lg max-w-xl pb-10">
                 <div class="w-full flex">

@@ -250,7 +250,7 @@ class PageController extends CustomController
 
 			switch (get_class($pageContent->item)) {
 				case Product::class:
-					return (new \Medians\Products\Infrastructure\ProductRepository);
+					return (new \Medians\Products\Infrastructure\ProductRepository)->find($pageContent->item_id);
 					break;
 
 				case Blog::class:

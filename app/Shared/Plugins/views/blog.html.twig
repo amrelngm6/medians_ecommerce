@@ -1,6 +1,6 @@
 <section class="blog-page-title mb-4 mb-xl-5 mt-20">
 	<div class="title-bg">
-		<img loading="lazy" src="https://uomo-html.flexkitux.com/images/blog_title_bg.jpg" width="1780" height="420" alt="">
+		<img loading="lazy" src="/uploads/img/blog_title_bg.jpg" width="1780" height="420" alt="">
 	</div>
 	<div class="container">
 		<h2 class="page-title">{{lang.translate('The Blog')}}</h2>
@@ -11,7 +11,7 @@
 </section>
 <section class="blog-page container">
 	<h2 class="d-none">{{lang.translate('The Blog')}}</h2>
-	<div class="blog-list">
+	<div class="blog-list mw-930">
         {% for item in items %}
 		<div class="blog-list__item">
 			<div class="blog-list__item-image">
@@ -26,7 +26,7 @@
 				</div>
 				<div class="blog-list__item-content">
 					<p>{{item.lang_content.short}}</p>
-					<a href="{{item.lang_content.prefix}}" class="readmore-link">Continue Reading</a>
+					<a href="{{item.lang_content.prefix}}" class="readmore-link">{{lang.translate('Continue Reading')}}</a>
 				</div>
 			</div>
 		</div>

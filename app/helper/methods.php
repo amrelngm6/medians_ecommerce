@@ -63,6 +63,7 @@ function renderPlugin($template, $data)
     
     // $data = loadConfig($template, $data);
     $data['app'] = $app;
+    $data['lang'] = new helper\Lang($_SESSION['lang']);
     // $data = loadConfig($template, $data);
     $output =  $app->template()->render($template, $data);
 

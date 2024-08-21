@@ -9,9 +9,9 @@
 {% if page %}
 {% if page.class_name and page.class_name == 'Category' %}
 {% include 'views/front/' ~ template ~ '/templates/category.html.twig' %}
-{% elseif page.class_name == 'Product'  %}
+{% elseif page.class_name and page.class_name == 'Product'  %}
 {% include 'views/front/' ~ template ~ '/templates/modern_product.html.twig' %}
-{% elseif page.class_name == 'Blog' %}
+{% elseif page.class_name and page.class_name == 'Blog' %}
 {% include 'views/front/' ~ template ~ '/templates/article.html.twig' %}
 {% else %}
 {{app.renderTemplate(page.lang_content.content ?? '').render( {'lang':lang, 'page': page }  )|raw}}
