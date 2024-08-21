@@ -30,7 +30,7 @@ class ProductStockRepository
 	*/
 	public function store($data) 
 	{
-
+		return $data;
 		$Model = new ProductStock();
 		
 		foreach ($data as $key => $value) 

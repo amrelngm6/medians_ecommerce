@@ -63,7 +63,7 @@ class ProductStockController extends CustomController
             [ 'key'=> "stock_id", 'title'=> "#", 'column_type'=>'hidden'],
 			
 			[ 'key'=> "product_id", 'title'=> translate('Product'), 'help_text'=> translate('Select the Product of this stock'),
-				'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'product_id', 'multiple'=> true, 'single'=> 1,
+				'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'product_id', 'multiple'=> true,
 				'data' => $this->productRepo->get()  
 			],	
 			[ 'key'=> "type", 'title'=> translate('Type'), 'help_text'=> translate('Select the Product of this stock'),
