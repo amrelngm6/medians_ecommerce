@@ -350,6 +350,10 @@ class APIController extends CustomController
 				$controller = new Branches\Application\BranchController; 
 				break;
 
+			case 'Plugin.update':
+				$controller = new Plugins\Application\PluginController; 
+				break;
+
 			case 'Hook.update':
 				$controller = new Hooks\Application\HookController; 
 				break;

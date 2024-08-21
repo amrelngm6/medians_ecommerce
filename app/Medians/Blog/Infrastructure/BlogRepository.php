@@ -85,14 +85,13 @@ class BlogRepository
 		->count();
 	}
 
-	public function paginateByCategory($id, $limit = 100, $offset = 0)
+	public function paginate($limit = 100, $offset = 0)
 	{
 		return Blog::with('lang_content','user')
 		->whereHas('lang_content', function($q){
 			return $q->where('content', '!=', '');
 		})
 		->where('status', 'on')
-		->where('category_id', $id)
 		->limit($limit)
 		->offset($offset)
 		->orderBy('id', 'DESC')

@@ -74,8 +74,13 @@
                                                         <input type="text" class="form-control mb-2" v-model="activeItem.content_langs[language.language_code].title" />
                                                         <div class="text-muted fs-7" v-text="translate('Name is required and recommended to be unique')"> </div>
                                                     </div>
+                                                    <div class="mb-10 fv-row">
+                                                        <label class="required form-label "><span v-text="translate('Short')"></span><strong class="px-4" v-text="translate(language.language_code)"></strong></label>
+                                                        <textarea v-model="activeItem.content_langs[tabLanguage.language_code].short" class=""></textarea>
+                                                        <div class="text-muted fs-7" v-text="translate('Used for articles list')"> </div>
+                                                    </div>
                                                     <div>
-                                                        <label class="form-label gap-6 flex"><span v-text="translate('Description')"></span><strong class="px-4" v-text="translate(language.language_code)"></strong> </label>
+                                                        <label class="form-label gap-6 flex"><span v-text="translate('Content')"></span><strong class="px-4" v-text="translate(language.language_code)"></strong> </label>
                                                         <ckeditor
                                                             v-model="activeItem.content_langs[language.language_code].content"
                                                             :editor="editor" :config="editorConfig" />

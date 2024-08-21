@@ -39,9 +39,7 @@ class BlogList
 			'basic'=> [	
 				[ 'key'=> "limit", 'title'=> translate('Page limit') , 'help_text'=> translate('Max number of articles to view at the page'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "show_title", 'title'=> translate('Show title') , 'help_text'=> translate('Show title of the Hook'), 'fillable'=> true, 'column_type'=>'checkbox' ],
-				[ 'key'=> "show_date", 'title'=> translate('Show Article Date') , 'help_text'=> translate('Show date of the article'), 'fillable'=> true, 'column_type'=>'checkbox' ],
-				[ 'key'=> "show_views", 'title'=> translate('Show Article views') , 'help_text'=> translate('Show views count of the article'), 'fillable'=> true, 'column_type'=>'checkbox' ],
-
+				
 			],	
             
 			'styles'=> [	
@@ -49,9 +47,8 @@ class BlogList
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'container_style', 
 					'data' => [["name"=> "Boxed", "container_style"=>"container"], ["name"=>"Full width", "container_style"=> "w-full"]]  
 				],
-				[ 'key'=> "mobile_view_limit", 'title'=> translate('Mobile view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for Mobile view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
-				[ 'key'=> "tablet_view_limit", 'title'=> translate('Tablet view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for Tablet view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
-				[ 'key'=> "desktop_view_limit", 'title'=> translate('Desktop view items limit') , 'help_text'=> translate('Max number of products to view at the slider wrapper for desktop view'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "show_date", 'title'=> translate('Show Article Date') , 'help_text'=> translate('Show date of the article'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "show_views", 'title'=> translate('Show Article views') , 'help_text'=> translate('Show views count of the article'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 			],	
             
 			
@@ -110,12 +107,9 @@ class BlogList
 		try {
 			
 			$hook = $this->hookRepo->find($params['id']);
+			$items = $this->repo->paginate($hook->field['limit']);
 
-			$params['categories_ids'] = json_decode($hook->field['categories']);
-
-			$items = $this->categoryRepo->getByIds($params['categories_ids']);
-
-            return renderPlugin('Shared/Plugins/views/category_carousel.html.twig', [
+            return renderPlugin('Shared/Plugins/views/blog.html.twig', [
 		        'items' => $items,
 				'hook' => $hook
 		    ],'output');
