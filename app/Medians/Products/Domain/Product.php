@@ -34,11 +34,16 @@ class Product extends CustomModel
 		'status',
 	];
 
-	public $appends = ['content_langs', 'lang_content','class_name'];
+	public $appends = ['content_langs', 'lang_content','class_name','name'];
 
 	public function getClassNameAttribute()
 	{
 		return 'Product';
+	} 
+
+	public function getNameAttribute()
+	{
+		return $this->lang_content->title;
 	} 
 
 	public function getContentLangsAttribute()

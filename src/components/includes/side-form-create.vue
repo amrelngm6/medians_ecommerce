@@ -41,7 +41,7 @@
 
                 </div>
 
-                <button class="uppercase h-12 mt-3 text-white w-full rounded bg-red-700 hover:bg-red-800 px-6" v-text="translate('save')"></button>
+                <button class="mt-4 btn btn-primary hover:bg-red-800 px-6 text-white font-semibold" v-text="translate('save')"></button>
             </form>
         </div>
     </div>

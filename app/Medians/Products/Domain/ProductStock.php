@@ -11,7 +11,7 @@ class ProductStock extends CustomModel
 	/*
 	/ @var String
 	*/
-	protected $table = 'products_stock';
+	protected $table = 'product_stock';
 
     protected $primaryKey = 'stock_id';
 	
@@ -19,9 +19,7 @@ class ProductStock extends CustomModel
 		'product_id',
 		'qty',
 		'type',
-		'purchase_price',
 		'created_by',
-		'status',
 	];
 
 

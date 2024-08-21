@@ -4,12 +4,13 @@ namespace Medians\Products\Application;
 use Shared\dbaser\CustomController;
 
 use Medians\Products\Infrastructure\ProductRepository;
+use Medians\Products\Infrastructure\ProductStockRepository;
 use Medians\Products\Infrastructure\CategoryRepository;
 use Medians\Brands\Infrastructure\BrandRepository;
 use Medians\Shipping\Infrastructure\ShippingRepository;
 use Medians\Orders\Infrastructure\OrderRepository;
 
-class StockController extends CustomController 
+class ProductStockController extends CustomController 
 {
 
 	/**
@@ -41,7 +42,7 @@ class StockController extends CustomController
 	public function columns( ) 
 	{
 		return [
-            [ 'value'=> "product_id", 'text'=> "#"],
+            [ 'value'=> "stock_id", 'text'=> "#"],
             [ 'value'=> "product.lang_content.title", 'text'=> translate('product_name'), 'sortable'=> true ],
             [ 'value'=> "type", 'text'=> translate('type'), 'sortable'=> true ],
             [ 'value'=> "qty", 'text'=> translate('Quantity'), 'sortable'=> true ],
@@ -57,6 +58,20 @@ class StockController extends CustomController
 	 */ 
 	public function fillable( ) 
 	{
+		
+		return [
+            [ 'key'=> "stock_id", 'title'=> "#", 'column_type'=>'hidden'],
+			
+			[ 'key'=> "product_id", 'title'=> translate('Product'), 'help_text'=> translate('Select the Product of this stock'),
+				'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'product_id',
+				'data' => $this->productRepo->get()  
+			],	
+			[ 'key'=> "type", 'title'=> translate('Type'), 'help_text'=> translate('Select the Product of this stock'),
+				'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'type', 'required' => true,
+				'data' => [['name'=>'Add stock','type'=>'add'], ['name'=>'Pull from stock','type'=>'pull']]  
+			],	
+            [ 'key'=> "qty", 'title'=> translate('Quantity'), 'required'=>true, 'fillable'=> true, 'column_type'=>'text' ],
+        ];
 	}
 
 	

@@ -407,6 +407,7 @@ class APP
 				array('permission'=>'Categories.index', 'title'=>translate('Categories'),  'icon'=>'user', 'link'=>'admin/product_categories', 'component'=>'categories'),
 				array('permission'=>'Brands.index', 'title'=>translate('Brands'),  'icon'=>'user', 'link'=>'admin/brands', 'component'=>'data_table'),
 				array('permission'=>'CSVImport.index', 'title'=>translate('Import CSV'),  'icon'=>'user', 'link'=>'admin/csv_import', 'component'=>'csv_import'),
+				array('permission'=>'Stock.index', 'title'=>translate('Stock'),  'icon'=>'user', 'link'=>'admin/stock', 'component'=>'data_table'),
 			]
 			),
 
