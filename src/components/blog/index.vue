@@ -4,7 +4,7 @@
         <div  v-if="content " class=" w-full relative">
             
             <div class=" " v-if="showWizard ">
-                <category_wizard  @callback="()=> {activeItem = null; showWizard = false}" :langs="langs" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.id ?? 'new')" :system_setting="system_setting" :setting="setting"  />
+                <blog_wizard  @callback="()=> {activeItem = null; showWizard = false}" :langs="langs" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.id ?? 'new')" :system_setting="system_setting" :setting="setting"  />
             </div>
 
             <main class=" flex-1 overflow-x-hidden overflow-y-auto  w-full relative" v-if="content.items && !showWizard">
@@ -78,7 +78,7 @@ const form_field = defineAsyncComponent(() =>
 );
 
 import tooltip from '@/components/includes/tooltip.vue';
-const category_wizard = defineAsyncComponent(() => import('@/components/categories/category_wizard.vue') );
+const blog_wizard = defineAsyncComponent(() => import('@/components/blog/blog_wizard.vue') );
 
 
 
@@ -86,7 +86,7 @@ export default
 {
     components:{
         'datatabble': Vue3EasyDataTable,
-        category_wizard,
+        blog_wizard,
         delete_icon,
         car_icon,
         form_field,
@@ -147,7 +147,7 @@ export default
                     break;  
 
                 case 'delete':
-                    deleteByKey('category_id', data, 'ProductCategory.delete');
+                    deleteByKey('id', data, 'Blog.delete');
                     break;  
 
                     
