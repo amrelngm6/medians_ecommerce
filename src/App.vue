@@ -54,6 +54,8 @@ const users = defineAsyncComponent(() => import('@/components/users.vue') );
 
 const pages = defineAsyncComponent(() => import('@/components/pages.vue') );
 
+const blog = defineAsyncComponent(() => import('@/components/blog.vue') );
+
 const payments = defineAsyncComponent(() => import('@/components/payments.vue') );
 
 const app_settings = defineAsyncComponent(() => import('@/components/settings/app_settings.vue') );
@@ -122,6 +124,7 @@ export default {
         hooks,
         payment_methods,
         csv_import,
+        blog,
         get_started,
         translate,
         'help_messages':HelpMessages,
