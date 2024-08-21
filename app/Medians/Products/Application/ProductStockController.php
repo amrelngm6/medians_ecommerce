@@ -115,8 +115,8 @@ class ProductStockController extends CustomController
 			// Administrator user id
         	$params['created_by'] = $user->id;
 
-			$returnData = (!empty($this->repo->store($params))) 
-			? array('success'=>1, 'result'=>translate('Added'), 'reload'=>0)
+			$returnData = (!empty($this->repo->storeProducts($params))) 
+			? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
 			: array('success'=>0, 'result'=>'Error', 'error'=>1);
 
 

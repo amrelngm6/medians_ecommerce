@@ -19,6 +19,7 @@ class ProductStock extends CustomModel
 		'product_id',
 		'qty',
 		'type',
+		'date',
 		'created_by',
 	];
 

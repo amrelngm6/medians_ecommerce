@@ -28,9 +28,30 @@ class ProductStockRepository
 	/**
 	* Save item to database
 	*/
+	public function storeProducts($data) 
+	{
+		$newArray = [];
+		$newArray['qty'] = $data['qty'];
+		$newArray['type'] = $data['type'];
+		foreach ($data['product_id'] as $key => $value) 
+		{
+			if ($value > 0)
+			{
+				$newArray['product_id'] = $value;
+				$item = $this->store($newArray);
+			}
+		}	
+
+		return $item;
+	}
+
+		
+
+	/**
+	* Save item to database
+	*/
 	public function store($data) 
 	{
-		return $data;
 		$Model = new ProductStock();
 		
 		foreach ($data as $key => $value) 
@@ -41,6 +62,8 @@ class ProductStockRepository
 			}
 		}	
 
+		$dataArray['date'] = date('Y-m-d');
+		
 		// Return the Model object with the new data
     	$Object = ProductStock::create($dataArray);
 
