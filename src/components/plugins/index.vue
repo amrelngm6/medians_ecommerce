@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="d-flex justify-content-end">
                                         <div class="form-check form-check-solid form-check-custom form-switch">
-                                            <input v-model="plugin.status" class="form-check-input w-45px h-30px" type="checkbox"
+                                            <input v-model="plugin.status" @change="setStatus(plugin)" class="form-check-input w-45px h-30px" type="checkbox"
                                                 id="slackswitch" />
                                             <label class="form-check-label" for="slackswitch"></label>
                                         </div>
@@ -138,6 +138,16 @@ export default
             }
 
 
+            const setStatus = (plugin) => {
+                plugin.status = !plugin.status;
+                var params = new URLSearchParams();
+                params.append('type', 'Plugin.update')
+                params.append('params', JSON.stringify(plugin))
+                handleRequest(params, '/api/update').then(response => {
+                    showAlert(response.result);
+                })
+            }
+
             /**
              * Handle actions from datatable buttons
              * Called From 'dataTableActions' component
@@ -173,6 +183,7 @@ export default
             const showTip = ref({});
 
             return {
+                setStatus,
                 showTip,
                 showEditSide,
                 url,
