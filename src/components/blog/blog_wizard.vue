@@ -91,7 +91,6 @@
                                                             v-model="activeItem.content_langs[language.language_code].content"
                                                             :editor="editor" :config="editorConfig" />
                                                         
-                                                        <textarea class="form-control" v-model="activeItem.content_langs[language.language_code].content"></textarea>
                                                         <div class="text-muted fs-7"
                                                             v-text="translate('Set a description to the item for better visibility')">
                                                         </div>
