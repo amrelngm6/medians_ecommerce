@@ -251,8 +251,8 @@
                                                             v-text="orderItem.quantity"></td>
                                                         <td  v-text="currency.symbol+''+orderItem.total_amount"></td>
                                                         <td >
-                                                            <span class="bg-danger text-white text-base py-2 px-4 rounded" @click="confirmStock('confirm')" v-if="!orderItem.stock_updated" v-text="translate('Confirm')"></span>
-                                                            <span class="text-white text-base py-2 px-4 rounded bg-gradient-purple" @click="confirmStock('rollback')" v-if="orderItem.stock_updated" v-text="translate('Rollback')"></span>
+                                                            <span class="bg-danger text-white text-base py-2 px-4 rounded" @click="confirmStock(orderItem, 'confirm')" v-if="!orderItem.stock_updated" v-text="translate('Confirm')"></span>
+                                                            <span class="text-white text-base py-2 px-4 rounded bg-gradient-purple" @click="confirmStock(orderItem, 'rollback')" v-if="orderItem.stock_updated" v-text="translate('Rollback')"></span>
                                                         </td>
                                                         <td  >
                                                             <form_field  @callback="(val) => {console.log(val), orderItem.status = val.status}" :item="orderItem" :column="{key:'status',title: '' , column_type:'select', text_key: 'name', column_key: 'status', data: statusList, withLabel:false}" ></form_field>
@@ -674,6 +674,7 @@ export default
                 params.append('type', 'OrderItem.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
                     handleAccess(response)
+                    load()
                 })
             }
 
@@ -763,16 +764,18 @@ export default
                 return activeItem.value.total_cost;
             }
 
-            const confirmStock = (type) => {
+            const confirmStock = (item, type) => {
 
                 let msg =  (type == 'confirm')? translate('Confirm and decrease stock quantity') : translate('Stock already pulled, Do you want to rollback the stock quantity');
                 customConfirm(msg)
                 .then((e) => {
-
+                    item.stock_updated = 1;
+                    saveItemStock(item)
                 })
             }
 
             return {
+                confirmStock,
                 statusList,
                 totalCost,
                 showTip,
