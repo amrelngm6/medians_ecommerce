@@ -301,7 +301,7 @@ class OrderRepository
 			$updateStock = $productField->update(['stock'=> !($data['stock_updated']) ? ($productField->stock + $data['quantity']) : ($productField->stock - $data['quantity'])]);
 		}
 		
-		$update = $Model->update(['stock_updated'=> $data['stock_updated'] ? 1 : null]);
+		$update = $Model->update(['stock_updated'=> $data['stock_updated'] ? 1 : '']);
 		
 		return $updateStock;
     }

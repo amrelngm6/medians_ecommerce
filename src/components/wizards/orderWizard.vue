@@ -766,7 +766,7 @@ export default
             const confirmStock = (item, type) => {
 
                 let msg =  (type == 'confirm') ? translate('Confirm and decrease stock quantity') : translate('Stock already pulled, Do you want to rollback the stock quantity');
-                let stockType =  (type == 'confirm') ? 1 : null;
+                let stockType =  (type == 'confirm') ? 1 : '';
                 customConfirm(msg)
                 .then((e) => {
                     console.log(e)
