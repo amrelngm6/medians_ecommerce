@@ -54,7 +54,7 @@
             :index="activeItem.id" v-if="showEditSide && !showAddSide" :columns="content.fillable"
             class="col-md-3" />
 
-        <side-form-create :conf="conf" @callback="closeSide" model="Role.create" v-if="showAddSide && content && content.fillable" :columns="content.fillable"  class="col-md-3" />
+        <side-form-create :conf="conf" @callback="closeSide" model="Role.create" v-if="showAddSide && content && content.fillable" :columns="content.fillable"  />
     </div>
 </template>
 <script>

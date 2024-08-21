@@ -45,9 +45,9 @@
                     </template>
                 </datatabble>
 
-                <side_form_create ref="activeFormCreate" @callback="closeSide" :conf="conf" :model="'EmailTemplate.create'" v-if="showAddSide && !showEditSide" :columns="content.fillable"  class="col-md-3" />
+                <side_form_create ref="activeFormCreate" @callback="closeSide" :conf="conf" :model="'EmailTemplate.create'" v-if="showAddSide && !showEditSide" :columns="content.fillable"  />
             
-                <side-form-update ref="activeFormUpdate" @callback="closeSide" :key="activeItem" :conf="conf" :model="'EmailTemplate.update'" v-if="showEditSide && !showAddSide" :item="activeItem" :model_id="activeItem.template_id" index="template_id"  :columns="content.fillable"  class="col-md-3" />
+                <side-form-update ref="activeFormUpdate" @callback="closeSide" :key="activeItem" :conf="conf" :model="'EmailTemplate.update'" v-if="showEditSide && !showAddSide" :item="activeItem" :model_id="activeItem.template_id" index="template_id"  :columns="content.fillable"  />
 
 
             </div>

@@ -65,7 +65,7 @@
                 </div>
             </main>
     
-            <side_form_create ref="activeFormCreate" @callback="closeSide" :auth="auth" :conf="conf" :model="'Gallery.create'" :columns="content.fillable"  class="col-md-3" v-if="showAddSide && !showWizard"  />
+            <side_form_create ref="activeFormCreate" @callback="closeSide" :auth="auth" :conf="conf" :model="'Gallery.create'" :columns="content.fillable"  v-if="showAddSide && !showWizard"  />
                 
         </div>
     </div>

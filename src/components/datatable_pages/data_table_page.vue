@@ -117,9 +117,9 @@
                 
             </main>
             
-            <side_form_create ref="activeFormCreate" @callback="closeSide" :auth="auth" :conf="conf" :model="(content.object_name ?? object_name)+'.create'" v-if="showAddSide && !showEditSide" :columns="content.fillable"  class="col-md-3" />
+            <side_form_create ref="activeFormCreate" @callback="closeSide" :auth="auth" :conf="conf" :model="(content.object_name ?? object_name)+'.create'" v-if="showAddSide && !showEditSide" :columns="content.fillable"  />
         
-            <side-form-update ref="activeFormUpdate" @callback="closeSide" :key="activeItem" :auth="auth" :conf="conf" :model="(content.object_name ?? object_name)+'.update'" v-if="showEditSide && !showAddSide" :item="activeItem" :model_id="activeItem[object_key]" :index="object_key"  :columns="content.fillable"  class="col-md-3" />
+            <side-form-update ref="activeFormUpdate" @callback="closeSide" :key="activeItem" :auth="auth" :conf="conf" :model="(content.object_name ?? object_name)+'.update'" v-if="showEditSide && !showAddSide" :item="activeItem" :model_id="activeItem[object_key]" :index="object_key"  :columns="content.fillable"  />
         </div> 
     </div>
 </template>

@@ -48,9 +48,9 @@
                 </div>
             </main>
     
-            <side_form_create ref="activeFormCreate" @callback="closeSide" :auth="auth" :conf="conf" :model="'PaymentMethod.create'" :columns="content.fillable"  class="col-md-3" v-if="showAddSide && !showWizard"  />
+            <side_form_create ref="activeFormCreate" @callback="closeSide" :auth="auth" :conf="conf" :model="'PaymentMethod.create'" :columns="content.fillable"  v-if="showAddSide && !showWizard"  />
                 
-            <!-- <side_form_update ref="activeFormUpdate" @callback="closeSide" :key="activeItem" :auth="auth" :conf="conf" :model="'PaymentMethod.update'" :item="activeItem" :model_id="activeItem.payment_method_id" index="payment_method_id"  :columns="content.fillable"  class="col-md-3"  v-if="showWizard && !showAddSide" /> -->
+            <!-- <side_form_update ref="activeFormUpdate" @callback="closeSide" :key="activeItem" :auth="auth" :conf="conf" :model="'PaymentMethod.update'" :item="activeItem" :model_id="activeItem.payment_method_id" index="payment_method_id"  :columns="content.fillable"   v-if="showWizard && !showAddSide" /> -->
             
         </div>
     </div>
