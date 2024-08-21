@@ -251,8 +251,8 @@
                                                             v-text="orderItem.quantity"></td>
                                                         <td  v-text="currency.symbol+''+orderItem.total_amount"></td>
                                                         <td >
-                                                            <span class="bg-danger text-white text-base py-2 px-4 rounded" v-if="!orderItem.stock_updated" v-text="translate('Confirm')"></span>
-                                                            <span class="text-white text-base py-2 px-4 rounded bg-gradient-purple" v-if="orderItem.stock_updated" v-text="translate('Confirmed')"></span>
+                                                            <span class="bg-danger text-white text-base py-2 px-4 rounded" @click="confirmStock('confirm')" v-if="!orderItem.stock_updated" v-text="translate('Confirm')"></span>
+                                                            <span class="text-white text-base py-2 px-4 rounded bg-gradient-purple" @click="confirmStock('rollback')" v-if="orderItem.stock_updated" v-text="translate('Rollback')"></span>
                                                         </td>
                                                         <td  >
                                                             <form_field  @callback="(val) => {console.log(val), orderItem.status = val.status}" :item="orderItem" :column="{key:'status',title: '' , column_type:'select', text_key: 'name', column_key: 'status', data: statusList, withLabel:false}" ></form_field>
@@ -592,7 +592,7 @@ import 'vue3-easy-data-table/dist/style.css';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 
 import { defineAsyncComponent, ref } from 'vue';
-import { translate, getProgressWidth, durationMonthsDate, handleRequest, deleteByKey, showAlert, handleAccess, getPositionAddress, findPlaces, getPlaceDetails } from '@/utils.vue';
+import { translate, getProgressWidth, durationMonthsDate, handleRequest, deleteByKey, showAlert, customConfirm, handleAccess, getPositionAddress, findPlaces, getPlaceDetails } from '@/utils.vue';
 
 const SideFormCreate = defineAsyncComponent(() =>
     import('@/components/includes/side-form-create.vue')
@@ -654,6 +654,24 @@ export default
 
                 let type = array.order_id > 0 ? 'update' : 'create';
                 params.append('type', 'Order.' + type)
+                handleRequest(params, '/api/' + type).then(response => {
+                    handleAccess(response)
+                })
+            }
+
+            const saveItemStock = (item) => {
+                var params = new URLSearchParams();
+                let array = JSON.parse(JSON.stringify(item));
+                let keys = Object.keys(array)
+                let k, d, value = '';
+                for (let i = 0; i < keys.length; i++) {
+                    k = keys[i]
+                    d = typeof array[k] === 'object' ? JSON.stringify(array[k]) : array[k]
+                    params.append('params[' + k + ']', d)
+                }
+
+                let type = array.order_item_id > 0 ? 'update' : 'create';
+                params.append('type', 'OrderItem.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
                     handleAccess(response)
                 })
@@ -745,6 +763,14 @@ export default
                 return activeItem.value.total_cost;
             }
 
+            const confirmStock = (type) => {
+
+                let msg =  (type == 'confirm')? translate('Confirm and decrease stock quantity') : translate('Stock already pulled, Do you want to rollback the stock quantity');
+                customConfirm(msg)
+                .then((e) => {
+
+                })
+            }
 
             return {
                 statusList,
