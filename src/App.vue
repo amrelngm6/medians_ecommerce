@@ -54,7 +54,7 @@ const users = defineAsyncComponent(() => import('@/components/users.vue') );
 
 const pages = defineAsyncComponent(() => import('@/components/pages.vue') );
 
-const blog = defineAsyncComponent(() => import('@/components/blog.vue') );
+const blog = defineAsyncComponent(() => import('@/components/blog/index.vue') );
 
 const payments = defineAsyncComponent(() => import('@/components/payments.vue') );
 

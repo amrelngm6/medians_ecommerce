@@ -77,7 +77,7 @@ class BlogController extends CustomController
 	public function index() 
 	{
 		
-		return render('data_table', 
+		return render('blog', 
 		[
 			'load_vue' => true,
 			'title' => translate('Blog'),
