@@ -37,7 +37,6 @@
                             :max="column.single ? 1 : (column.max ?? 100 )"
                         ></Multiselect>
                         
-                        <input v-if="column.multiple && column.data && column.column_type == 'select'" type="hidden" v-for="selected in  item[column.column_key]" :name="'params['+(column.column_key)+'][]'" :value="selected[column.column_key]" />
 
                         <select :required="column.required" :disabled="column.disabled" v-if="!column.multiple && column.data && column.column_type == 'select'" :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid"   :placeholder="column.title">
                             <option value="0"  v-if="!column.required" v-text="translate('select') +' '+ column.title"></option>
