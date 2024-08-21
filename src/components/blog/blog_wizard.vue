@@ -295,6 +295,8 @@ export default
             });
 
             return {
+                editor,
+                editorConfig,
                 getLang,
                 showAddCategory,
                 showEditSide,
