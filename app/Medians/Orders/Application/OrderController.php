@@ -176,6 +176,11 @@ class OrderController extends CustomController
 
         try {
 
+			if ($params['status'] == 'cancelled' && $params['stock_updated'] == 'true')
+			{
+				return array('error'=>translate('This item has been cancelled'));
+			}
+			
            	$returnData =  ($this->repo->updateItemStock($params))
            	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0)
            	: array('error'=>translate('Not allowed'));

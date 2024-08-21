@@ -294,11 +294,15 @@ class OrderRepository
     {
 		
 		$Model = OrderItem::find($data['order_item_id']);
+		
+		if ($Model->stock_updated != $data['stock_updated'])
+		{
+			$productField = ProductField::where('product_id', $data['item_id'])->first();
+			$updateStock = $productField->update(['stock'=> !($data['stock_updated']) ? ($productField->stock + $data['quantity']) : ($productField->stock - $data['quantity'])]);
+		}
+		
 		$update = $Model->update(['stock_updated'=> $data['stock_updated'] ? 1 : null]);
 		
-		$productField = ProductField::where('product_id', $data['item_id'])->first();
-		$updateStock = $productField->update(['stock'=> !($data['stock_updated']) ? ($productField->stock + $data['quantity']) : ($productField->stock - $data['quantity'])]);
-
 		return $updateStock;
     }
 
