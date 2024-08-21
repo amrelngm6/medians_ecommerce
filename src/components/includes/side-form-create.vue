@@ -28,6 +28,7 @@
                             v-model="multipleValue"
                             :object="false"
                             :hideSelected="true"
+                            :tagPlaceholder="translate('Click here to choose')+' '+ column.title"
                             :searchable="true"
                             :allowAbsent="true"
                             :valueProp="column.column_key ? column.column_key : column.key"
