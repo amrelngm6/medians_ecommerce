@@ -24,8 +24,13 @@ class Blog extends CustomModel
 	];
 
 
-	public $appends = ['title','photo','field','category_name','date', 'update_date'];
+	public $appends = ['title','photo','field','category_name','date', 'update_date','class_name'];
 
+
+	public function getClassNameAttribute() 
+	{
+		return 'Blog';
+	}
 
 	public function getTitleAttribute() 
 	{
@@ -77,7 +82,7 @@ class Blog extends CustomModel
 		return $this->morphMany(CustomField::class, 'model');
 	}
 
-	public function content()
+	public function lang_content()
 	{
 		return $this->morphOne(Content::class, 'item')->where('lang', translate('lang'));
 	}
@@ -100,6 +105,20 @@ class Blog extends CustomModel
     	return is_file($return) ? $return : $this->picture;
 	}
 
+
+	public function similar($limit = 3)
+	{
+		$title = str_replace([' ','-'], '%', $this->lang_content->title);
+
+		return Blog::whereHas('lang_content', function($q) use ($title){
+			foreach (explode('%', $title) as $i) {
+				$q->where('title', 'LIKE', '%'.$i.'%')->orWhere('content', 'LIKE', '%'.$i.'%');
+			}
+		})
+		->where('id', '!=', $this->id)
+		->where('status', 'on')
+		->with('lang_content')->limit($limit)->orderBy('updated_at', 'DESC')->get();
+	}
 
 
 }

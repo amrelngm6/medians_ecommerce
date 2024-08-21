@@ -35,7 +35,7 @@ class BlogRepository
 
 	public function find($id)
 	{
-		$item = Blog::with('content', 'langs')->withSum('views','times')->find($id);
+		$item = Blog::with('lang_content', 'langs')->withSum('views','times')->find($id);
 		$item->content_langs = $item->langs->keyBy('lang');
 		return $item;
 	}
@@ -43,20 +43,20 @@ class BlogRepository
 	public function get($limit = 500, $lang = null)
 	{
 		
-		return Blog::with('user','content')->with(['category'=>function($q){
-			return $q->with('content');
+		return Blog::with('user','lang_content')->with(['category'=>function($q){
+			return $q->with('lang_content');
 		}])->limit($limit)->orderBy('id', 'DESC')->get();
 	}
 
 	
 	public function getFront($limit = 100, $lang = null)
 	{
-		return Blog::with('user','content')
-		->whereHas('content', function($q){
+		return Blog::with('user','lang_content')
+		->whereHas('lang_content', function($q){
 			return $q->where('content', '!=', '');
 		})
 		->with(['category'=>function($q){
-			return $q->with('content');
+			return $q->with('lang_content');
 		}])->limit($limit)
 		->where('status', 'on')
 		->orderBy('id', 'DESC')->get();
@@ -65,8 +65,8 @@ class BlogRepository
 
 	public function getByCategory($id, $limit = 100)
 	{
-		return Blog::with('content', 'user')
-		->whereHas('content', function($q){
+		return Blog::with('lang_content', 'user')
+		->whereHas('lang_content', function($q){
 			return $q->where('content', '!=', '');
 		})
 		->where('status', 'on')
@@ -77,7 +77,7 @@ class BlogRepository
 
 	public function countByCategory($id)
 	{
-		return Blog::whereHas('content', function($q){
+		return Blog::whereHas('lang_content', function($q){
 			return $q->where('content', '!=', '');
 		})
 		->where('status', 'on')
@@ -87,8 +87,8 @@ class BlogRepository
 
 	public function paginateByCategory($id, $limit = 100, $offset = 0)
 	{
-		return Blog::with('content','user')
-		->whereHas('content', function($q){
+		return Blog::with('lang_content','user')
+		->whereHas('lang_content', function($q){
 			return $q->where('content', '!=', '');
 		})
 		->where('status', 'on')
@@ -101,9 +101,9 @@ class BlogRepository
 
 	public function getFeatured($limit = 1)
 	{
-		return Blog::with('content','user')
+		return Blog::with('lang_content','user')
 		->where('status', 'on')
-		->whereHas('content', function($q){
+		->whereHas('lang_content', function($q){
 			return $q->where('content', '!=', '');
 		})->orderBy('updated_at', 'DESC')->first();
 	}
@@ -112,11 +112,11 @@ class BlogRepository
 	public function search($request, $limit = 20)
 	{
 		$title = $request->get('search');
-		$return = Blog::whereHas('content', function($q) use ($title){
+		$return = Blog::whereHas('lang_content', function($q) use ($title){
 			$q->where('title', 'LIKE', '%'.$title.'%');
 		})
 		->where('status', 'on')
-		->with('content','user')
+		->with('lang_content','user')
 		->limit($limit)->orderBy('updated_at', 'DESC')
 		->get();
 
@@ -127,14 +127,14 @@ class BlogRepository
 	{
 		$title = str_replace([' ','-'], '%', $model->content->title);
 
-		return Blog::whereHas('content', function($q) use ($title){
+		return Blog::whereHas('lang_content', function($q) use ($title){
 			foreach (explode('%', $title) as $i) {
 				$q->where('title', 'LIKE', '%'.$i.'%')->orWhere('content', 'LIKE', '%'.$i.'%');
 			}
 		})
 		->where('id', '!=', $model->id)
 		->where('status', 'on')
-		->with('category', 'content','user')->limit($limit)->orderBy('updated_at', 'DESC')->get();
+		->with('category', 'lang_content','user')->limit($limit)->orderBy('updated_at', 'DESC')->get();
 	}
 
 
@@ -161,7 +161,7 @@ class BlogRepository
     	$Object->update($dataArray);
 
     	// Store languages content
-    	$this->storeContent($data['content_langs'], $Object->id);
+		$this->storeContent(json_decode($data['content_langs'], true), $Object->id);
 
     	// Store Custom fields
     	isset($data['field']) ? $this->storeCustomFields($data['field'], $Object->id) : '';
@@ -235,7 +235,7 @@ class BlogRepository
 				$fields['item_type'] = Blog::class;	
 				$fields['item_id'] = $id;	
 				$fields['lang'] = $key;	
-				$fields['prefix'] = isset($value['prefix']) ? $value['prefix'] : Content::generatePrefix($value['title']);	
+				$fields['prefix'] = isset($value['prefix']) ? Content::generatePrefix($value['prefix']) : Content::generatePrefix($value['title']);	
 				$fields['created_by'] = $this->app->auth()->id;
 
 				$Model = Content::create($fields);
@@ -272,104 +272,4 @@ class BlogRepository
 
 
 
-	/**
-	 * Filter short codes for Hooks
-	 */
-	public function filterShortCode ($model)
-	{
-		$postContent = $model->content->content;
-
-		$hooks = $this->_plugins_shortcode_filter($postContent);
-		
-		if (!empty($hooks[2][0])) {
-			
-			foreach ($hooks[2] as $key => $value) 
-			{
-				$codeToReplace = $hooks[0][$key];
-				$id = $hooks[2][$key];
-
-				$hook = Hook::find($id);
-				$hookContent = unserialize($hook->content)['content'];
-
-				$postContent = str_replace($codeToReplace, $hookContent, $postContent);
-				
-			}
-		}
-
-		$output = str_replace("h=&amp;", '', $postContent);
-		preg_match_all('/<iframe.*src=\"(.*)\".*><\/iframe>/isU', $output, $matches);
-		if (isset($matches[1]))
-		{
-			foreach ($matches[1] as $k => $match) {
-
-				$video = str_replace('https://www.youtube.com/embed/' , '', $match); 
-				$videoContent = $this->videoContent($video, $model);
-				$output = str_replace($matches[0][$k] , $videoContent, $output); 
-			}
-
-			
-		}
-		
-
-		$model->content->content = $output;
-		return $model;
-	}
-	
- 
-	public static function _plugins_shortcode_filter($val) {
-		
-		/** 
-		 * Plugin shortcode 
-		 * Usage:  [--@plugin= Plugin Name --@id= Plugin ID --]
-		 * 
-		*/
-		
-		$val ? preg_match_all("|\[--@plugin=(.*)\--@id=(.*)\--](.*)</[^>]+>|U", $val, $matches, PREG_PATTERN_ORDER) : null;	
-		
-		return $matches ?? $val;
-		
-	}
-	
-	
-
-	public function videoContent($video_id, $model)
-	{
-		$img = $this->videoFrame($video_id);
-		return '
-		<div class="video-center show-modal-iframe relative" data-youtube-link="'.$video_id.'">
-			<div class="iframe-container">
-				<iframe  class="w-full lazy-iframe" height="460" data-src="https://www.youtube.com/embed/'.$video_id.'" frameborder="0" allowfullscreen></iframe>
-			</div>
-		</div>
-		';
-	}
-
-	public function storeFrame($remoteFile, $video_id)
-	{
-		$filepath =  '/uploads/youtube/'.$video_id.'.jpg';
-		file_put_contents($_SERVER['DOCUMENT_ROOT'].$filepath, file_get_contents($remoteFile));
-		return $filepath;
-	}
-
-	public function videoFrame($video_id)
-	{
-
-		if (is_file($_SERVER['DOCUMENT_ROOT'].'/uploads/youtube/'.$video_id.'.jpg'))
-			return '/uploads/youtube/'.$video_id.'.jpg';
-
-		$yt = new \helper\YTChannel('AIzaSyAX2RDygDexQhJ2QXhBUvY4LPlNZdlzXb8');
-
-		$output = $yt->video_info($video_id);
-
-		if (!empty($output['thumbnails']['hd']))
-			return $this->storeFrame($output['thumbnails']['hd'], $video_id);
-		
-			if (!empty($output['thumbnails']['high']))
-			return $this->storeFrame($output['thumbnails']['high'], $video_id);
-		
-		if (!empty($output['thumbnails']['default']))
-			return $this->storeFrame($output['thumbnails']['default'], $video_id);
-		
-		return '/stream?image=/uploads/thumbnails/video.webp';
-	}
 }

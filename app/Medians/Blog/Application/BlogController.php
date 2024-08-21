@@ -39,7 +39,7 @@ class BlogController extends CustomController
 	{
 		return [
             [ 'value'=> "id", 'text'=> "#"],
-            [ 'value'=> "content.title", 'text'=> translate('Title'), 'sortable'=> true ],
+            [ 'value'=> "lang_content.title", 'text'=> translate('Title'), 'sortable'=> true ],
             [ 'value'=> "path", 'text'=> translate('Path'), 'sortable'=> true ],
             [ 'value'=> "status", 'text'=> translate('status'), 'sortable'=> true ],
             [ 'value'=> "builder", 'text'=> translate('Page Builder'), 'sortable'=> true ],
@@ -126,7 +126,7 @@ class BlogController extends CustomController
         	
 			$params['status'] = !empty($params['status']) ? 'on' : 0;
 
-			$params['content_langs'] = ['english'=> $params, 'arabic'=>$params];
+			// $params['content_langs'] = ['english'=> $params, 'arabic'=>$params];
         	
             $returnData = (!empty($this->repo->store($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
@@ -199,7 +199,7 @@ class BlogController extends CustomController
 			$settings = $this->app->SystemSetting();
 
 			return render('views/front/'.($settings['template'] ?? 'default').'/article.html.twig', [
-		        'item' => $this->repo->filterShortCode($item),
+		        'item' => $item,
 		        'similar_articles' => $this->repo->similar($item, 3),
 		    ]);
 

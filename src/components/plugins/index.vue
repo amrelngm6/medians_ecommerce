@@ -15,11 +15,7 @@
             <main class=" flex-1 overflow-x-hidden overflow-y-auto  w-full relative"
                 v-if="content.items && !showWizard">
                 <div class="px-4 mb-6 py-4 rounded-lg shadow-md bg-white dark:bg-gray-700 flex w-full">
-
                     <h1 class="font-bold text-lg w-full" v-text="content.title"></h1>
-                    
-
-
                 </div>
                 <div class="w-full ">
 
@@ -36,14 +32,13 @@
                                         class="w-30px me-6" alt="" />
 
                                     <div class="d-flex flex-column">
-                                        <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-bold">Title</a>
+                                        <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-bold">{{translate('Title')}}</a>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <span>Status</span>
+                                    <span>{{translate('Status')}}</span>
                                 </div>
                             </div>
-                            <!--end::Item-->
                         </div>
                     </div>
                     
@@ -51,43 +46,29 @@
                         
                         <div class="card-body border-top p-9">
 
-
-                            <!--begin::Items-->
                             <div class="py-2">
-                                
-                                <!--begin::Item-->
                                 <div class="d-flex flex-stack">
                                     <div class="d-flex">
                                         <img :src="'/metronic8/demo1/assets/media/svg/brand-logos/google-icon.svg'"
                                             class="w-30px me-6" alt="" />
 
                                         <div class="d-flex flex-column">
-                                            <a href="#"
-                                                class="fs-5 text-gray-900 text-hover-primary fw-bold" v-text="plugin.name"></a>
-                                            <div class="fs-6 fw-semibold text-gray-500" v-text="plugin.description">
-                                            </div>
+                                            <a href="#" class="fs-5 text-gray-900 text-hover-primary fw-bold" v-text="plugin.name"></a>
+                                            <div class="fs-6 fw-semibold text-gray-500" v-text="plugin.description"></div>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-end">
                                         <div class="form-check form-check-solid form-check-custom form-switch">
-                                            <input class="form-check-input w-45px h-30px" type="checkbox"
+                                            <input v-model="plugin.status" class="form-check-input w-45px h-30px" type="checkbox"
                                                 id="slackswitch" />
                                             <label class="form-check-label" for="slackswitch"></label>
                                         </div>
                                     </div>
                                 </div>
-                                <!--end::Item-->
                             </div>
-                            <!--end::Items-->
                         </div>
-                        <!--end::Card body-->
-                        <!--end::Content-->
                     </div>
-
-                    <!--end::Connected Accounts-->
-
                 </div>
-                <!-- END New releases -->
             </main>
         </div>
     </div>

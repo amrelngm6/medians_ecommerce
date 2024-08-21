@@ -5,6 +5,7 @@ use Medians\Pages\Infrastructure\PageRepository;
 use Medians\Menus\Infrastructure\MenuRepository;
 use Medians\Content\Infrastructure\ContentRepository;
 use Medians\Pages\Domain\Page;
+use Medians\Blog\Domain\Blog;
 use Medians\Products\Domain\Product;
 use Medians\Categories\Domain\Category;
 use Shared\dbaser\CustomController;
@@ -249,9 +250,13 @@ class PageController extends CustomController
 
 			switch (get_class($pageContent->item)) {
 				case Product::class:
-					return (new \Medians\Products\Infrastructure\ProductRepository)->find($pageContent->item_id);
+					return (new \Medians\Products\Infrastructure\ProductRepository);
 					break;
 
+				case Blog::class:
+					return (new \Medians\Blog\Infrastructure\BlogRepository)->find($pageContent->item_id);
+					break;
+	
 				case Category::class:
 					return (new \Medians\Products\Infrastructure\CategoryRepository)->find($pageContent->item_id);
 					break;
@@ -260,6 +265,7 @@ class PageController extends CustomController
 					return $this->repo->find($pageContent->item_id, $pageContent->prefix);
 					break;
 			}
+			
 		}
 
 		return throw new \Exception(translate('Page not found'), 1);
