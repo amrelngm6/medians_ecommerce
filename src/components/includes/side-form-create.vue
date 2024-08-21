@@ -21,6 +21,7 @@
                         <input v-if="column.column_type == 'password'" autocomplete="off" :name="'params['+column.key+']'" :type="column.column_type" class="form-control form-control-solid" :placeholder="column.title">
 
                         <textarea  :required="column.required"  v-if="column.column_type == 'textarea'" :name="'params['+column.key+']'" rows="4" class="mt-3 form-control form-control-solid" :placeholder="column.title"></textarea>
+                        
                         <Multiselect
                             v-if="column.multiple && column.data && column.column_type == 'select'" 
                             mode="tags"
