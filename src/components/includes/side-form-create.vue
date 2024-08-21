@@ -25,6 +25,7 @@
                         <Multiselect
                             v-if="column.multiple && column.data && column.column_type == 'select'" 
                             mode="tags"
+                            v-model="multipleValue"
                             :object="false"
                             :hideSelected="true"
                             :searchable="true"
@@ -89,10 +90,12 @@ export default
     data() {
         return {
             file: '',
+            multipleValue: [],
             showLoader: false,
         }
     },
     methods: {
+
         emitClose(model)
         {
             model ? this.$emit('callback', model) : '';
