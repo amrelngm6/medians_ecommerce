@@ -139,10 +139,10 @@ export default
 
 
             const setStatus = (plugin) => {
-                plugin.status = !plugin.status;
                 var params = new URLSearchParams();
                 params.append('type', 'Plugin.update')
-                params.append('params', JSON.stringify(plugin))
+                params.append('params[id]', plugin.id)
+                params.append('params[status]', plugin.status)
                 handleRequest(params, '/api/update').then(response => {
                     showAlert(response.result);
                 })
