@@ -243,6 +243,9 @@ if(!empty($app->auth()))
     /** @return Plugins */
     RouteHandler::get('/admin/plugins', \Medians\Plugins\Application\PluginController::class.'@index');
 
+    /** @return Blog */
+    RouteHandler::get('/admin/blog', \Medians\Blog\Application\BlogController::class.'@index');
+
 
     /**
      * Master requests

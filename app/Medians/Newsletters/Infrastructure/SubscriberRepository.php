@@ -15,9 +15,9 @@ class SubscriberRepository
 		return Subscriber::find($id);
 	}
 	
-	public function findByEmail($newsletter_id, $email)
+	public function findByEmail($email)
 	{
-		return Subscriber::where('newsletter_id', $newsletter_id)->where('email', $email)->first();
+		return Subscriber::where('email', $email)->first();
 	}
 
 	public function get($limit = 100)

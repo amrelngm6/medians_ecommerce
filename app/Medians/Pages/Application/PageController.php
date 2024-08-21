@@ -205,12 +205,11 @@ class PageController extends CustomController
 
 		try {
 			
-            return processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
-                'title' => translate('Homepage'),
+            return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
                 'page' => $page,
                 'app' => $this->app,
 				'categories' => $categoryRepo->getGrouped(),
-            ]));
+            ], 'output')));
             
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);

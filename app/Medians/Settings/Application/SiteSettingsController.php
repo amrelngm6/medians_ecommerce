@@ -44,6 +44,7 @@ class SiteSettingsController extends CustomController
 		return [
             
 			'basic'=> [	
+				[ 'key'=> "menu_picture", 'title'=> translate('Menu picture'), 'help_text'=> translate('The image for the menu popup side background'), 'fillable'=> true, 'required'=> true, 'column_type'=>'picture' ],
 				[ 'key'=> "sitename", 'title'=> translate('sitename'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "lang", 'title'=> translate('Languange'), 'help_text'=> translate('The default language for new sessions'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 

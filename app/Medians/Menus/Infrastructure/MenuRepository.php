@@ -36,8 +36,8 @@ class MenuRepository
 	public function getMenuPages($type)
 	{
 		return Menu::where('type', $type)
-		->where('parent_id', 0)
-		->with('page', 'children')
+		// ->where('parent_id', 0)
+		->with('page')
 		->whereHas('page', function($q) {
 			$q->where('status', 'on');
 		})
@@ -79,7 +79,7 @@ class MenuRepository
 						$fields['parent_id'] = $Model->menu_id;	
 						$fields['position'] = $subkey;	
 						$fields['type'] = isset($params['type']) ? $params['type'] : 'header';	
-						$Model = Menu::firstOrCreate($fields);
+						$SubModel = Menu::firstOrCreate($fields);
 					}
 				}
 

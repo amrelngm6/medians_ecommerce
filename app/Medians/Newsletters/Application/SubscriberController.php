@@ -180,7 +180,7 @@ class SubscriberController extends CustomController
 			throw new \Exception(translate('EMAIL_EMPTY'), 0);
 		}
 
-		if (!empty($this->repo->findByEmail($params['newsletter_id'], $params['email'])))
+		if (!empty($this->repo->findByEmail($params['email'])))
 		{
 			throw new \Exception(translate('EMAIL_FOUND'), 0);
 		}

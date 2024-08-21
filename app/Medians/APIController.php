@@ -6,12 +6,6 @@ use \Shared\dbaser\CustomController;
 
 use Medians\Users\Infrastructure\UserRepository;
 
-use Medians\Devices\Infrastructure\OrderDevicesRepository;
-
-use Medians\Devices\Infrastructure\DevicesRepository;
-
-use Medians\Products\Infrastructure\ProductsRepository;
-
 use Medians\Bugs\Infrastructure\BugReportRepository;
 
 use Medians\Blog\Infrastructure\BlogRepository;
@@ -187,6 +181,10 @@ class APIController extends CustomController
 					$return = (new Hooks\Application\HookController)->store();
 					break;
 					
+				case 'Blog.create':
+					$return = (new Blog\Application\BlogController)->store();
+					break;
+					
 		
 			}
 
@@ -356,6 +354,10 @@ class APIController extends CustomController
 				$controller = new Hooks\Application\HookController; 
 				break;
 			
+			case 'Blog.update':
+				$controller = new Blog\Application\BlogController; 
+				break;
+			
 		}
 
 		return response(isset($controller) ? json_encode($controller->update()) : []);
@@ -465,6 +467,10 @@ class APIController extends CustomController
 			
 				case 'Hook.delete':
 					return response((new Hooks\Application\HookController())->delete());
+					break;
+			
+				case 'Blog.delete':
+					return response((new Blog\Application\BlogController())->delete());
 					break;
 			
 			}

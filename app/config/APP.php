@@ -444,6 +444,7 @@ class APP
 				array('permission'=> 'Roles.index', 'title'=> translate('ROLES MANAEGMENT'),  'icon'=>'tool', 'link'=>'admin/roles', 'component'=>'roles'),
 			]
 			),
+			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'data_table'),
 			array( 'title'=>translate('Frontend'),  'icon'=>'airplay', 'link'=>'#frontend', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=>'Pages.index', 'title'=>translate('Front Pages'),  'icon'=>'tool', 'link'=>'admin/pages', 'component'=>'pages'),
