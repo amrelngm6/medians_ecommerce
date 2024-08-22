@@ -10,6 +10,7 @@ use Medians\Branches\Domain\Branch;
 use Medians\Packages\Domain\PackageSubscription;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Invoices\Domain\Invoice;
+use Medians\Currencies\Domain\Currency;
 
 class Transaction extends CustomModel
 {
@@ -70,6 +71,11 @@ class Transaction extends CustomModel
 	public function invoice()
 	{
 		return $this->hasOne(Invoice::class, 'invoice_id', 'invoice_id');
+	}
+
+	public function currency()
+	{
+		return $this->hasOne(Currency::class, 'code', 'currency_code');
 	}
 
 

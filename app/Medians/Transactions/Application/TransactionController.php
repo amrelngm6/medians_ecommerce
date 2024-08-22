@@ -35,9 +35,9 @@ class TransactionController extends CustomController
 
 		return [
             [ 'value'=> "transaction_id", 'text'=> "#"],
-            [ 'value'=> "field.order_id", 'text'=> translate('Transaction code'), 'sortable'=> true ],
             [ 'value'=> "model", 'text'=> translate('User'), 'sortable'=> false ],
             [ 'value'=> "amount", 'text'=> translate('Amount'), 'sortable'=> true ],
+            [ 'value'=> "currency_code", 'text'=> translate('Currency'), 'sortable'=> true ],
             [ 'value'=> "payment_method", 'text'=> translate('Gateway'), 'sortable'=> true ],
             [ 'value'=> "date", 'text'=> translate('Date'), 'sortable'=> true ],
             [ 'value'=> "invoice.code", 'text'=> translate('Invoice'), 'sortable'=> false ],

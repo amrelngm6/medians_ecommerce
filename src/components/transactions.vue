@@ -6,21 +6,14 @@
         </div>
         <div class="mx-2 bg-white px-4 rounded shadow-sm py-2 ">
             <div class="card-header align-items-center py-5 gap-2 gap-md-5 w-full flex ">
-                <!--begin::Card title-->
                 <div class="card-title">
-                    <!--begin::Search-->
                     <div class="d-flex align-items-center position-relative my-1">
                         <input type="text"  v-model="searchValue" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-125px " placeholder="Search Report">
                     </div>
-                    <!--end::Search-->
 
-                    <!--begin::Export buttons-->
                     <div id="kt_ecommerce_report_views_export" class="d-none"><div class="dt-buttons btn-group flex-wrap">      <button class="btn btn-secondary buttons-copy buttons-html5" tabindex="0" aria-controls="kt_ecommerce_report_views_table" type="button"><span>Copy</span></button> <button class="btn btn-secondary buttons-excel buttons-html5" tabindex="0" aria-controls="kt_ecommerce_report_views_table" type="button"><span>Excel</span></button> <button class="btn btn-secondary buttons-csv buttons-html5" tabindex="0" aria-controls="kt_ecommerce_report_views_table" type="button"><span>CSV</span></button> <button class="btn btn-secondary buttons-pdf buttons-html5" tabindex="0" aria-controls="kt_ecommerce_report_views_table" type="button"><span>PDF</span></button> </div></div>
-                    <!--end::Export buttons-->
                 </div>
-                <!--end::Card title-->
 
-                <!--begin::Card toolbar-->
                 <div class="card-toolbar flex-row-fluid justify-content-end gap-5 w-200px">
 
                     <div class="w-150px">
@@ -31,7 +24,6 @@
 
                 </div>
 
-                <!--begin::Card toolbar-->
                 <div class="card-toolbar w-full flex-end">
 
                     <div class="w-full">
@@ -58,7 +50,7 @@
                 </template>
 
                 <template #item-amount="item">
-                    <span class="py-2" v-text="currency.symbol+''+item.amount"></span>
+                    <span class="py-2" v-text="item.currency.symbol+''+item.amount"></span>
                 </template>
 
                 <template #item-delete="item">

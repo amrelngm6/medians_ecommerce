@@ -27,7 +27,7 @@ class TransactionRepository
 	*/
 	public function get($limit = 500) 
 	{
-		return Transaction::with('model', 'item', 'invoice')
+		return Transaction::with('model', 'item', 'invoice','currency')
 		->limit($limit)
 		->orderBy('created_at', 'DESC')
 		->get();
