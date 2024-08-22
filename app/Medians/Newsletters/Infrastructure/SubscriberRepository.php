@@ -25,6 +25,11 @@ class SubscriberRepository
 		return Subscriber::with('newsletter')->limit($limit)->get();
 	}
 
+ 
+	public function eventsByDate($params)
+	{
+		return Subscriber::whereBetween('created_at', [$params['start'], $params['end']]);
+	}
 
 
 	/**

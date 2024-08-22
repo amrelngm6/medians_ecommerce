@@ -143,6 +143,8 @@ class ProductController extends CustomController
 		try {
 
 			$item = $this->repo->find($product_id);
+			
+			$item->addView();
 
 			return render('products', [
 		        'load_vue' => true,

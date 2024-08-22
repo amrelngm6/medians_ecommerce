@@ -315,22 +315,26 @@ export default {
 
         submit(element, props)
         {
-            this.loader = true;
-            let Things = $(element).serializeArray()
-            var params = new URLSearchParams();
-            Things.map(function(n){
-                params.append([n['name']],  n['value']);
-            });
-            
-            var t = this;
+            try {
+                this.loader = true;
+                let Things = $(element).serializeArray()
+                var params = new URLSearchParams();
+                Things.map(function(n){
+                    params.append([n['name']],  n['value']);
+                });
+                
+                var t = this;
 
-            handleRequest(params, $(element).attr('action')).then(response => {
-                t.loader = false;
-                handleAccess(response)
+                handleRequest(params, $(element).attr('action')).then(response => {
+                    t.loader = false;
+                    handleAccess(response)
 
-            }).catch(error => {
-                showAlert(error)
-            })
+                }).catch(error => {
+                    showAlert(error)
+                })
+            } catch (error) {
+                console.log(error)
+            }
         },
 
     }

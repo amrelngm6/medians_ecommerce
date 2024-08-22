@@ -1,25 +1,32 @@
 <template>
     <div class="" >
-        <BarChart :data="data" :options="options"  />
+        <line-chart></line-chart>
+        <LineChart :data="data" :options="options"  />
     </div>
 </template>
 <script >
 import {ref} from 'vue';
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js' 
-import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, 
+  Title,
+  Tooltip,
+  Legend,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement, } from 'chart.js' 
+import { Line } from 'vue-chartjs'
 
 
 export default 
 {
     components:{
-        BarChart: Bar,
+        LineChart: Line,
     },
     name:'Clean charts',
     setup(props) {
 
         // Register Chart.js components
-        ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-
+        ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement);
         const options = ref({
             plugins: {
                 legend: {
@@ -29,6 +36,8 @@ export default
                     enabled: true, // Hide tooltips if needed
                 },
             },
+            responsive: true,
+
             scales: {
                 x: {
                     display: false, // Hide x-axis labels

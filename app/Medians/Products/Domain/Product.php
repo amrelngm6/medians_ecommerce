@@ -43,7 +43,7 @@ class Product extends CustomModel
 
 	public function getNameAttribute()
 	{
-		return $this->lang_content->title;
+		return $this->lang_content->title ?? '';
 	} 
 
 	public function getContentLangsAttribute()

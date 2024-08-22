@@ -20,6 +20,15 @@
   --vt-c-text-dark-1: var(--vt-c-white);
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
   --bs-primary-active: #222222;
+  
+  --bs-primary-light: #E9F3FF;
+  --bs-secondary-light: #F9F9F9;
+  --bs-success-light: #DFFFEA;
+  --bs-info-light: #F8F5FF;
+  --bs-warning-light: #FFF8DD;
+  --bs-danger-light: #FFEEF3;
+  --bs-dark-light: #F9F9F9;
+  --bs-light-light: #ffffff;
 }
 
 /* semantic color variables for this project */

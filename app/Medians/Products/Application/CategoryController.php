@@ -104,14 +104,18 @@ class CategoryController extends CustomController
 	 */ 
 	public function category( $category_id ) 
 	{
+		$page = $this->repo->find($category_id);
+
 		try {
+			
+			$page->addView();
 
 			return render('category_wizard', [
 		        'load_vue' => true,
 		        'title' => translate('Category page'),
 		        'columns' => $this->columns(),
 		        'fillable' => $this->fillable(),
-		        'item' => $this->repo->find($category_id),
+		        'item' => $page,
 		        'categories' => $this->repo->list($category_id),
 		        'fillable_category' => (new CategoryController())->fillable(),
 		    ]);

@@ -121,7 +121,7 @@ class SubscriberController extends CustomController
 			}
 
             $returnData = (!empty($this->repo->store($params))) 
-            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>0)
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
 
         } catch (\Exception $es) {

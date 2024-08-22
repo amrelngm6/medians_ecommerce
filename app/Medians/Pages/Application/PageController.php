@@ -206,6 +206,8 @@ class PageController extends CustomController
 
 		try {
 			
+			$page->addView();
+
             return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
                 'page' => $page,
                 'app' => $this->app,
@@ -229,10 +231,14 @@ class PageController extends CustomController
 		$categoryRepo = new \Medians\Products\Infrastructure\CategoryRepository;
 		$settings = $this->app->SystemSetting();
 
+		$page = $this->handlePageObject($pageContent);
+
 		try {
+
+			$page->addView();
 						
             return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
-                'page' => $this->handlePageObject($pageContent),
+                'page' => $page,
                 'app' => $this->app,
 				'categories' => $categoryRepo->getGrouped(),
             ], 'output')));

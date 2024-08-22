@@ -4,6 +4,8 @@ namespace Medians;
 
 use \Shared\dbaser\CustomController;
 
+use Medians\Views\Domain\View;
+
 class DashboardController extends CustomController
 {
 
@@ -15,11 +17,12 @@ class DashboardController extends CustomController
 	public  $InvoiceRepository;
 	public  $TransactionRepository;
 	public  $CustomerRepository;
+	public  $ProductRepository;
 
 	protected $app;
 	public $start;
 	public $end;
-	public $month_first;
+	public $month_beginning;
 	
 
 	function __construct()
@@ -32,13 +35,15 @@ class DashboardController extends CustomController
 		$this->CustomerRepository = new Customers\Infrastructure\CustomerRepository();
 		$this->InvoiceRepository = new Invoices\Infrastructure\InvoiceRepository();
 		$this->TransactionRepository = new Transactions\Infrastructure\TransactionRepository();
+		$this->ProductRepository = new Products\Infrastructure\ProductRepository();
 
 		
 		$setting = $this->app->SystemSetting();
 		$defaultStart = isset($setting['default_dashboard_start_date']) ? date('Y-'. $setting['default_dashboard_start_date']) : date('Y-m-d');
 		$this->start = $this->app->request()->get('start_date') ? date('Y-m-d', strtotime($this->app->request()->get('start_date'))) : $defaultStart;
 		$this->end = $this->app->request()->get('end_date') ? date('Y-m-d', strtotime($this->app->request()->get('end_date'))) : date('Y-m-d');
-		
+		$this->end = date('Y-m-d', strtotime($this->end. ' + 1 days'));
+		$this->month_beginning = date('Y-m-01', strtotime($this->end));
 	}
 
 	/**
@@ -143,6 +148,7 @@ class DashboardController extends CustomController
 	{
 		$data = [];
 
+
         $data['customers_count'] = $this->CustomerRepository->masterByDateCount(['start'=>$this->start, 'end'=>$this->end]);
         $data['help_messages_count'] = $this->HelpMessageRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
         $data['latest_help_messages'] = $this->HelpMessageRepository->load(5);
@@ -164,19 +170,48 @@ class DashboardController extends CustomController
 	 */
 	public function loadMasterCounts()
 	{
+
+		$subscriberRepo = new Newsletters\Infrastructure\SubscriberRepository();
+		$orderRepo = new Orders\Infrastructure\OrderRepository();
+
 		$data = [];
 
-        $data['top_products'] = [];
+        $data['latest_visits'] = View::totalViews($this->start, $this->end)->with('item')->orderBy('updated_at', 'desc')->limit(5)->get();
+        $data['top_visits'] = View::totalViews($this->start, $this->end)->with('item')->orderBy('times', 'desc')->limit(5)->get();
+        $data['total_visits'] = View::totalViews($this->start, $this->end)->sum('times');
+
+
+        // $data['top_products'] = $this->ProductRepository;
         $data['top_customers'] = [];
-        $data['customers_count'] = $this->CustomerRepository->masterByDateCount(['start'=>$this->start, 'end'=>$this->end]);
         $data['help_messages_count'] = $this->HelpMessageRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
         $data['latest_help_messages'] = $this->HelpMessageRepository->allEventsByDate(['start'=>$this->start,'end'=>$this->end], 5);
-        $data['invoices_count'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
         $data['latest_invoices'] = $this->InvoiceRepository->get(5);
-		$data['invoices_charts'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->selectRaw('date as label, COUNT(*) as y')->having('y', '>', 0)->orderBy('y', 'desc')->groupBy('label')->get();
+		
+		$data['invoices_charts'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('date as label, COUNT(*) as y, SUM(total_amount) as total_amount')->having('y', '>', 0)->orderBy('y', 'desc')->groupBy('label')->limit('10')->get();
+        $data['invoices_count'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
+
+		$data['orders_charts'] = $orderRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('date as label, COUNT(*) as y, SUM(total_amount) as total_amount')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
+        $data['orders_count'] = $orderRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
+        $data['latest_orders'] = $orderRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->with('customer')->limit('10')->get();
+        $data['latest_order_items'] = $orderRepo->eventsItemsByDate(['start'=>$this->start, 'end'=>$this->end])->with('item')->selectRaw('*, COUNT(*) as y')->having('y', '>', 0)->orderBy('y', 'desc')->groupBy('item_id')->limit('6')->get();
+
+		$data['customers_count'] = $this->CustomerRepository->masterByDateCount(['start'=>$this->start, 'end'=>$this->end]);
+
+		$data['visits_charts'] = View::totalViews($this->month_beginning, $this->end)->selectRaw('date, SUM(times) as y, item_type')->having('y', '>', 0)->groupBy('date')->limit('10')->get();
+		$data['visits_count'] = View::totalViews($this->start, $this->end)->sum('times');
+
+		
 		$data['total_invoices_amount'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->sum('total_amount');
-        $data['payment_methods_invoices_amount'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->selectRaw('SUM(total_amount) as value, payment_method')->groupBy('payment_method')->get();
+		$data['payment_methods_invoices_amount'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->selectRaw('SUM(total_amount) as value, payment_method')->groupBy('payment_method')->get();
+
+		// Products stats
+		$data['products_charts'] = $this->ProductRepository->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
+		$data['products_count'] = $this->ProductRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
         
+		// Subscribers stats
+		$data['subscribers_charts'] = $subscriberRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
+		$data['subscribers_count'] = $subscriberRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
+
         return $data;
 
 	}  

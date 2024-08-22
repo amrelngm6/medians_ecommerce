@@ -59,8 +59,8 @@ class ProductRepository
 	/**
 	 * Load  productby prefix
 	 */
-	 public function findByPrefix($prefix)
-	 {
+	public function findByPrefix($prefix)
+	{
 		$model = Product::where('status', 'on')
 		 ->whereHas('product_content', function($q) use ($prefix) {
 			return $q->where('prefix', $prefix);
@@ -69,9 +69,14 @@ class ProductRepository
 		 ->first();
 		
 		return $this->handle($model);
-	 }
+	}
  
-	
+	public function eventsByDate($params)
+	{
+		return Product::whereBetween('created_at', [$params['start'], $params['end']]);
+	}
+	 
+ 
 	
 	/**
 	 * Load  products with filters

@@ -122,6 +122,13 @@ class OrderRepository
 		return $query;
 	}
 	
+	
+	public function eventsItemsByDate($params)
+	{
+		$query = OrderItem::whereBetween('created_at', [$params['start'], $params['end']]);
+		return $query;
+	}
+	
 	public function allEventsByDate($params)
 	{
 		$query = Order::whereBetween('date', [$params['start'], $params['end']]);

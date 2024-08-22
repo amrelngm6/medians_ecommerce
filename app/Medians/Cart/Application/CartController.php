@@ -224,7 +224,7 @@ class CartController extends CustomController
 		
 		$price = $this->repo->getPrices($items);
 		$total = $price;
-		
+		print_r($price);
 		$shippingList = $this->shippingRepo->getByItems(array_column($items->toArray(), 'item_id'));
 		
 		if (!count($items))
