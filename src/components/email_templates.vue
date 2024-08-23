@@ -118,11 +118,10 @@ export default
          * @param Object data
          */  
         function  handleAction(actionName, data) {
-            console.log(props.lang.lang)
             switch(actionName) 
             {
                 case 'details':
-                    window.open(props.conf.url+'admin/email_builder?lang='+props.lang.lang+'&template_id='+data.template_id, '_blank').focus();
+                    window.open(props.conf.url+'admin/email_builder?lang='+props.langs_content.lang+'&template_id='+data.template_id, '_blank').focus();
                     break;  
 
                 case 'edit':
