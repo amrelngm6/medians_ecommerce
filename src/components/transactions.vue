@@ -50,7 +50,7 @@
                 </template>
 
                 <template #item-amount="item">
-                    <span class="py-2" v-text="item.currency.symbol+''+item.amount"></span>
+                    <span class="py-2" v-text="item.amount"></span>
                 </template>
 
                 <template #item-delete="item">

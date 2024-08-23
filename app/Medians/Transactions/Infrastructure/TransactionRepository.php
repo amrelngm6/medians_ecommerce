@@ -40,7 +40,7 @@ class TransactionRepository
 	public function getByDate($params )
 	{
 
-	  	$check = Transaction::with('model', 'item','invoice');
+	  	$check = Transaction::with('model', 'item','invoice','currency');
 
 	  	if (!empty($params["start_date"]))
 	  	{
