@@ -46,12 +46,12 @@ class SiteSettingsController extends CustomController
 			'basic'=> [	
 				[ 'key'=> "sitename", 'title'=> translate('sitename'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "lang", 'title'=> translate('Languange'), 'help_text'=> translate('The default language for new sessions'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 
-					'data' => [['lang'=>'arabic','title'=>translate('Arabic')], ['lang'=>'english','title'=>translate('English')]]  
-				],	
-				[ 'key'=> "template", 'title'=> translate('Template'), 'help_text'=> translate('The default template for frontend'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 'column_key'=>'folder_name',
-					'data' => $this->templateRepo->get()  
+				'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 
+				'data' => [['lang'=>'arabic','title'=>translate('Arabic')], ['lang'=>'english','title'=>translate('English')]]  
+			],	
+			[ 'key'=> "template", 'title'=> translate('Template'), 'help_text'=> translate('The default template for frontend'),
+			'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 'column_key'=>'folder_name',
+			'data' => $this->templateRepo->get()  
 				],	
 			],			
 			'pictures'=> [	
@@ -59,18 +59,12 @@ class SiteSettingsController extends CustomController
 	            [ 'key'=> "dark_logo", 'title'=> translate('Dark logo'), 'fillable'=>true, 'column_type'=>'file' ],
 				[ 'key'=> "menu_picture", 'title'=> translate('Menu picture'), 'help_text'=> translate('The image for the menu popup side background'), 'fillable'=> true, 'required'=> true, 'column_type'=>'picture' ],
 			],			
-			// 'styles'=> [	
-			// 	[ 'key'=> "header", 'title'=> translate('Header'), 
-			// 		'help_text' => translate('Choose the Header style for Frontend pages'),
-			// 		'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 
-			// 		'data' => [['header'=>'header1','title'=>'Header 1'], ['header'=>'header2','title'=>'Header 2']]  
-			// 	],
-			// 	[ 'key'=> "footer", 'title'=> translate('Footer'), 
-			// 		'help_text' => translate('Choose the footer style for Frontend pages'),
-			// 		'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 
-			// 		'data' => [['footer'=>'footer1','title'=>'Footer 1'], ['footer'=>'footer2','title'=>'Footer 2']]  
-			// 	],
-			// ],
+			'cookies'=> [	
+				
+				[ 'key'=> "cookie_text", 'title'=> translate('Cookies text'), 'help_text'=> translate('Text of the cookies box'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "cookie_button", 'title'=> translate('Cookies button'), 'help_text'=> translate('Button Text of the cookies box'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
+
+			],
 			'fonts'=> [	
 				
 				[ 'key'=> "head_font", 'title'=> translate('Headers font'),  'help_text' => translate('Choose the font style for Headlines elements'),
