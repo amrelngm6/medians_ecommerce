@@ -121,7 +121,7 @@ export default
             switch(actionName) 
             {
                 case 'details':
-                    window.open(props.conf.url+'admin/email_builder?lang='+props.langs_content.lang+'&template_id='+data.template_id, '_blank').focus();
+                    window.open(props.conf.url+'admin/email_builder?lang='+props.langs[0].language_code+'&template_id='+data.template_id, '_blank').focus();
                     break;  
 
                 case 'edit':
