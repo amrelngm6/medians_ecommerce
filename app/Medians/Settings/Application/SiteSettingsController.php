@@ -44,7 +44,6 @@ class SiteSettingsController extends CustomController
 		return [
             
 			'basic'=> [	
-				[ 'key'=> "menu_picture", 'title'=> translate('Menu picture'), 'help_text'=> translate('The image for the menu popup side background'), 'fillable'=> true, 'required'=> true, 'column_type'=>'picture' ],
 				[ 'key'=> "sitename", 'title'=> translate('sitename'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "lang", 'title'=> translate('Languange'), 'help_text'=> translate('The default language for new sessions'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 
@@ -58,7 +57,7 @@ class SiteSettingsController extends CustomController
 			'pictures'=> [	
 				[ 'key'=> "logo", 'title'=> translate('logo'), 'fillable'=>true, 'column_type'=>'file' ],
 	            [ 'key'=> "dark_logo", 'title'=> translate('Dark logo'), 'fillable'=>true, 'column_type'=>'file' ],
-	            [ 'key'=> "about_picture", 'title'=> translate('About us section picture'), 'help_text', 'fillable'=>true, 'column_type'=>'file' ],
+				[ 'key'=> "menu_picture", 'title'=> translate('Menu picture'), 'help_text'=> translate('The image for the menu popup side background'), 'fillable'=> true, 'required'=> true, 'column_type'=>'picture' ],
 			],			
 			'styles'=> [	
 				[ 'key'=> "header", 'title'=> translate('Header'), 

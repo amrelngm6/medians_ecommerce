@@ -18,7 +18,7 @@
                     </div>
                     <div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
                         <a href="/dashboard" class="d-lg-none">
-                            <img alt="Logo" :src="system_setting.logo" class="h-30px" />
+                            <img alt="Logo" :src="system_setting.backend_logo" class="h-30px" />
                         </a>
                     </div>
                     <div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1" id="kt_app_header_wrapper">

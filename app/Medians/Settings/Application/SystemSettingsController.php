@@ -52,7 +52,7 @@ class SystemSettingsController extends CustomController
 		return [
             
 			'basic'=> [	
-	            [ 'key'=> "logo", 'title'=> translate('logo'), 'fillable'=>true, 'column_type'=>'file' ],
+	            [ 'key'=> "backend_logo", 'title'=> translate('Dashboard Logo'), 'fillable'=>true, 'column_type'=>'file' ],
 				[ 'key'=> "sitename", 'title'=> translate('sitename'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "lang", 'title'=> translate('Languange'), 'help_text'=> translate('The default language for new sessions'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'language_code',
