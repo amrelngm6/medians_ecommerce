@@ -49,12 +49,27 @@
 							<a href="./signup" class="btn-text ">{{lang.translate('create new account')}}
 							</a>
 						</div>
+						<div class="fb-login-button" data-width="" data-size="" data-button-type="" data-layout="" data-auto-logout-link="false" data-use-continue-as="false"></div>
+						<div id="fb-root"></div>
+						<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v20.0&appId=319219408137978" nonce="JnMWr3qM"></script>
+
+
 					</form>
 				</div>
 			</div>
 		</div>
 	</section>
 
+	<script> 
+	addEventListener("load", (e) => {
+
+		console.log(e)	
+		FB.login(function(response) {
+		// handle the response
+		}, {scope: 'public_profile,email'});
+	});
+
+	</script> 
 
 	<!--  End login  -->
 </main>
