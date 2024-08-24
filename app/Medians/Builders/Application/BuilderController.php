@@ -56,9 +56,7 @@ class BuilderController extends CustomController
 				'page' => $check->lang_content ?? [], 
 				'item' => $check,
 				'current_lang' => $lang,
-				'canScrab' => true,
-				// 'precode' => isset($check->lang_content) && (substr(trim($check->lang_content), 0, 8) == '<section') ? '' : '<section id="newKeditItem" class="kedit">', 
-				// 'postcode' => isset($check->lang_content) && (substr(trim($check->lang_content), 0, 8) == '<section') ? '' : '</section>', 
+				'canScrab' => false,
 			]);
 
 		} catch (\Exception $e) {
