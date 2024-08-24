@@ -15,3 +15,15 @@
 
     <script src="/src/front_assets/js/main.js"></script>
     
+
+    {% if app.SystemSetting.show_cookie_box == 'on'  %}
+    <script>
+        const purecookieDesc = "{{app.SystemSetting.cookie_text}}",
+        purecookieButton  = "{{app.SystemSetting.cookie_button}}";
+        addEventListener('load', (e) => {
+            setTimeout(function(){
+                getCookie("purecookieDismiss") || (appendHtml(document.body, '<div class="cookieConsentContainer" id="cookieConsentContainer"><div class="cookieDesc"><p>' + purecookieDesc + '</p></div><div class="cookieButton"><a onClick="purecookieDismiss();">' + purecookieButton + "</a></div></div>"), pureFadeIn("cookieConsentContainer"))
+            }, 1000)
+        })
+    </script>
+    {% endif %}
