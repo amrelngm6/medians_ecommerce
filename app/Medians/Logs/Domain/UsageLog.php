@@ -4,6 +4,7 @@ namespace Medians\Logs\Domain;
 
 
 use Shared\dbaser\CustomModel;
+use Medians\Views\Domain\View;
 
 class UsageLog extends CustomModel
 {
@@ -29,7 +30,7 @@ class UsageLog extends CustomModel
 		try {
 			
 			$user = (new \config\APP)->auth();
-			if ($model::class == UsageLog::class)
+			if (in_array($model::class, [UsageLog::class, View::class]))
 			{
 				return null;
 			}

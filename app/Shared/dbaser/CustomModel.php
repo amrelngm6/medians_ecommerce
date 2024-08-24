@@ -150,7 +150,7 @@ class CustomModel extends Model
     	// Insert activation code 
 		$updateEvent = (new NotificationEvent)->handleEvent($this, 'create');
 
-		return UsageLog::addItem($this, 'create');
+    	return  DEBUG_MODE ? UsageLog::addItem($this, 'create') : $updateEvent;
     }  
 
     /**
@@ -176,7 +176,7 @@ class CustomModel extends Model
 
 		$updateEvent = (new NotificationEvent)->handleEventUpdate($this, 'update', array_keys($updatedFields));
 
-    	return  UsageLog::addItem($this, 'update', json_encode($updatedFields));
+    	return  DEBUG_MODE ? UsageLog::addItem($this, 'update', json_encode($updatedFields)) : $updateEvent;
 
     }  
 

@@ -52,6 +52,12 @@ $capsule->bootEloquent();
 $capsule->connection()->enableQueryLog();
 
 
+// Used to store actions log at the usage_log table
+// Boolen:  true / false
+const DEBUG_MODE = false;
+
+
+
 /**
  * Load all System Models
  * The base folder is /app folder
