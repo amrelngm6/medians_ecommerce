@@ -93,8 +93,8 @@ class ProductRepository
 			
 
 			if (isset($params['prices'])) {
-				$prices = explode(',', $params['prices']);
-				$model = $model->whereBetween('price', $prices);
+				// $prices = explode(',', $params['prices']);
+				$model = $model->whereBetween('price', $params['prices']);
 			}
 
 			if (isset($params['colors'])) {

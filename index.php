@@ -25,10 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
 }
 
+
 // Check if installed or redirect to installation 
 file_exists(__DIR__.'/app/config/database.php') 
     ?  require_once __DIR__.'/app/config/database.php' 
     : header('Location: ./installer/index.php');
+
 
 require_once __DIR__.'/vendor/autoload.php';
 

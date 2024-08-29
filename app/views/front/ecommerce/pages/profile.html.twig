@@ -1,58 +1,61 @@
 {% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
 {% include 'views/front/' ~ template ~ '/includes/header.html.twig' %}
+{% include 'views/front/' ~ template ~ '/blocks/breadcrumb.html.twig' %}
 
 <div class="profile-pg-1 ">
     <section class="container mx-auto py-4 tc-profile p-30 radius-4 bg-white mt-3 wow fadeInUp mb-3" style="visibility: visible; animation-name: fadeInUp;">
         <div class="row">
             <div class="col-lg-3">
                 <div class="tabs-side me-lg-5 mb-4 mb-lg-0">
-                    <div class="main-info flex gap-6 w-full">
+                    <div class="main-info">
                         <div class="img">
                             <img src="{{app.customer.picture ?? '/uploads/img/profile.png'}}" alt="" class="main-img img-cover">
                         </div>
-                        <div class="w-full">
-                            <h4 class="text-xl pt-4">
-                                {{app.customer.name}}
-                            </h4>
-                            <ul class="mt-2 color-666 lh-lg">
-                                <li>
-                                    <a href="#">
-                                        {{app.customer.email}}
-                                    </a>
-                                </li>
-                                <!-- <li> <a href="#"> Los Angeles, CA </a> </li> -->
-                            </ul>
-                        </div>
+                        <h4 class="text-xl pt-4">
+                            {{app.customer.name}}
+                        </h4>
+                        <ul class="mt-2 color-666 lh-lg">
+                            <li>
+                                <a href="#">
+                                    {{app.customer.email}}
+                                </a>
+                            </li>
+                            <!-- <li> <a href="#"> Los Angeles, CA </a> </li> -->
+                        </ul>
                     </div>
                     <ul class="nav nav-pills block py-4" id="pills-tab" role="tablist">
-                        <li class="nav-item navigation__item py-2" role="presentation">
-                            <button class="w-full flex navigation__link active" id="pills-prof1-tab" data-bs-toggle="pill" data-bs-target="#pills-prof1">
+                        <li class="nav-item " role="presentation">
+                            <button class="w-full flex nav-link active" id="pills-prof1-tab" data-bs-toggle="pill" data-bs-target="#pills-prof1">
                                 <span class="w-full text-start">
                                     {{(lang.translate('Account info'))}}
                                 </span>
                                 <i class="fa fa-arrow-right"></i>
                             </button>
                         </li>
-                        <li class="nav-item navigation__item py-2" role="presentation">
-                            <button class="w-full flex navigation__link" id="pills-prof3-tab" data-bs-toggle="pill" data-bs-target="#pills-prof3">
+                        <li class="nav-item" role="presentation">
+                            <button class="w-full flex nav-link" id="pills-orders-tab" data-bs-toggle="pill" data-bs-target="#pills-orders">
+                                <span class="w-full text-start">
+                                    {{lang.translate('My orders')}}
+                                </span>
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="w-full flex nav-link" id="pills-prof3-tab" data-bs-toggle="pill" data-bs-target="#pills-prof3">
                                 <span class="w-full text-start">
                                     {{lang.translate('My address')}}
                                 </span>
                                 <i class="fa fa-arrow-right"></i>
                             </button>
                         </li>
-                        <li class="nav-item navigation__item py-2" role="presentation">
-                            <button class="w-full flex navigation__link" id="pills-prof4-tab" data-bs-toggle="pill" data-bs-target="#pills-prof4">
+                        <li class="nav-item" role="presentation">
+                            <button class="w-full flex nav-link" id="pills-prof4-tab" data-bs-toggle="pill" data-bs-target="#pills-prof4">
                                 <span class="w-full text-start">
                                     {{lang.translate('Change password')}}
                                 </span>
                                 <i class="fa fa-arrow-right"></i>
                             </button>
                         </li>
-                        
-                        <li class="navigation__item py-2"><a href="/customer/orders" class="navigation__link">{{lang.translate('Orders')}}</a></li>
-                        <li class="navigation__item py-2"><a href="/cart" class="navigation__link">{{lang.translate('Cart')}}</a></li>
-                        <li class="navigation__item py-2"><a href="/wishlist" class="navigation__link">{{lang.translate('Wishlist')}}</a></li>
                     </ul>
                     <hr />
                     <a href="/logout" class="w-full flex nav-link" id="pills-prof4-tab" >
@@ -63,10 +66,13 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-9 pt-10">
+            <div class="col-lg-9">
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade active show" id="pills-prof1">
                         <div class="acount-tab">
+                            <h4 class=" text-capitalize mb-30 text-xl">
+                                {{lang.translate('Account info')}}
+                            </h4>
                             <div class="content">
                                 <form action="/front_api/update" id="profile-form" class="ajax-form row">
                                     <input type="hidden" value="Customer.update" name="type" />
@@ -116,6 +122,9 @@
                     </div>
                     <div class="tab-pane fade" id="pills-orders">
                         <div class="orders-tab">
+                            <h4 class=" text-capitalize mb-30 text-xl">
+                                {{lang.translate('Orders History')}}
+                            </h4>
                             <div class="orders">
                                 {% for order in orders %}
                                 <div class="order-card">
@@ -206,6 +215,9 @@
                         {% endfor %}
                         {% endfor %}
                         <div class="acount-tab"  x-data="{indexCountry:{{countryIndex ?? 0}}, indexCity:{{cityIndex ?? 0}}, indexState:{{stateIndex ?? 0}}, countries: {{countries}}, currentCountry: '{{customer.field.country ?? {} }}', currentState: '{{customer.field.state}}', currentCity:'{{customer.field.city}}'}">
+                            <h4 class=" text-capitalize mb-30">
+                                {{lang.translate('Address')}}
+                            </h4>
                             <div class="content">
                                 <form action="/front_api/update" id="address-form" class="ajax-form row">
                                     <input type="hidden" value="Customer.update" name="type" />
@@ -292,6 +304,9 @@
                     </div>
                     <div class="tab-pane fade " id="pills-prof4">
                         <div class="acount-tab">
+                            <h4 class=" text-capitalize mb-30 text-xl">
+                                {{lang.translate('Change Password')}}
+                            </h4>
                             <div class="content">
                                 <form action="/front_api/update" id="password-form" class="ajax-form row">
                                     <input type="hidden" value="Customer.changePassword" name="type" />
