@@ -431,31 +431,37 @@ export default
 
             if (data)
             {
-                invoicesDataset.value = {
-                    labels:  data.invoices_charts.map(e => e.label),
-                    datasets: [
-                        {
-                            label: '',
-                            opacity: .5,
-                            backgroundColor: 'rgba(233,94,210, .5)',
-                            borderRadius: 50,
-                            data: data.invoices_charts.map(e => e.total_amount),
-                        },
-                    ],
-                };
 
-                
-                
-                // Line charts for sales in last days 
-                pie_options.value  =  {
-                    labels: content.value.top_visits.map((e) => (e.item && e.item.lang_content) ? e.item.lang_content.title : e.class),
-                    datasets: [
-                    {
-                        backgroundColor: content.value.top_visits.map((e, i) => colors.value[i]),
-                        data: content.value.top_visits.map((e, i) => e.times),
-                    },
-                    ],
-                };
+                try {
+
+                    invoicesDataset.value = {
+                        labels:  data.invoices_charts.map(e => e.label),
+                        datasets: [
+                            {
+                                label: '',
+                                opacity: .5,
+                                backgroundColor: 'rgba(233,94,210, .5)',
+                                borderRadius: 50,
+                                data: data.invoices_charts.map(e => e.total_amount),
+                            },
+                        ],
+                    };
+
+                    
+                    
+                    // Line charts for sales in last days 
+                    pie_options.value  =  {
+                        labels: content.value.top_visits.map((e) => (e.item && e.item.lang_content) ? e.item.lang_content.title : e.class),
+                        datasets: [
+                        {
+                            backgroundColor: content.value.top_visits.map((e, i) => colors.value[i]),
+                            data: content.value.top_visits.map((e, i) => e.times),
+                        },
+                        ],
+                    };
+                } catch (e) {
+                    console.log(e)
+                }
 
             };
 
