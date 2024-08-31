@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="block w-full overflow-x-auto py-2">
+        <div class="block w-full overflow-x-auto py-2" v-if="content">
             <div class="w-full overflow-y-auto overflow-x-hidden px-2 mt-6" >
                 <div class="w-full gap-6 flex ">
                     <div class="card card-flush h-md-50 mb-5 mb-xl-10 w-full">
