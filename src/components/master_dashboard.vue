@@ -168,7 +168,7 @@
                                             <th class="text-end min-w-125px" v-text="translate('Status')"></th>
                                         </tr>
                                     </thead>
-                                    <tbody class="fw-bold text-gray-600">
+                                    <tbody class="fw-bold text-gray-600" v-if="content.latest_orders">
                                         
                                         <tr v-for="order in content.latest_orders.map(e=> (orderStatus == 0 || e.status == orderStatus) ? e : null).filter(e => e)" >
                                             <td>
