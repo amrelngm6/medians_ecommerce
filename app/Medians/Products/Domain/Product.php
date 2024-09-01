@@ -69,12 +69,12 @@ class Product extends CustomModel
 	 
 	public function shipping() 
 	{
-		return $this->hasManyThrough(Shipping::class, ProductShipping::class, 'product_id', 'shipping_id', 'product_id', 'shipping_id');	
+		return $this->belongsToMany(Shipping::class, ProductShipping::class, 'product_id', 'shipping_id');	
 	}
 
 	public function product_categories() 
 	{
-		return $this->hasManyThrough(Category::class, ProductCategory::class, 'product_id', 'category_id', 'category_id', 'product_id');	
+		return $this->belongsToMany(Category::class, ProductCategory::class, 'product_id', 'category_id');	
 	}
 
 	public function product_colors() 
