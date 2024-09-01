@@ -20,6 +20,7 @@
     
         <div class="w-full pb-6">
             {% set totalTax = 0 %}
+            {% set subtotal = 0 %}
             
                 <div class="w-full py-6">
                     {% if items|length %}
@@ -33,6 +34,7 @@
                         </div>
                         {% for cartItem in items %}
                         {% set totalTax =  totalTax + (cartItem.item.tax_amount() * cartItem.qty) %}
+                        {% set subtotal =  subtotal + (cartItem.item.price * cartItem.qty) %}
                         <div class="w-full flex gap-10 py-2">
                             <img class="rounded-full border-1 border" src="/app/image.php?w=80&h=80&src={{cartItem.item.picture}}" />
                             <p class="w-full text-xl pt-4"> <a href="/{{cartItem.item.lang_content.prefix}}">{{cartItem.item.lang_content.title}}</a></p>
@@ -47,7 +49,7 @@
                 </div>
                     
         </div>
-    <div class="w-full lg:flex   pt-6 gap-20" x-data="{shippings: {{shipping_list}},activeShipping: {{shipping_list.first().shipping_id}}, indexShipping:0}" >
+    <div class="w-full lg:flex   pt-6 gap-20" x-data="{shippings_cost:0,shippings: {{shipping_list}},activeShipping: {{shipping_list.first().shipping_id ?? 0}}, indexShipping:0}" >
     
         <div class="w-full pb-6" >
             <form class="action ajax-form w-full" action="{{app.CONF.url}}front_api/create" method="POST" id="checkout-form">
@@ -56,10 +58,10 @@
                 <input type="hidden" value="{{discount}}" name="params[total_discount]" />
                 <input type="hidden" value="{{totalTax}}" name="params[tax_amount]" />
 
-                <input x-model="(Number(shippings[indexShipping].price)) + Number({{totalTax}}) + {{total ?? 0}}" type="hidden" name="params[total_amount]" />
+                <input x-model="(Number(shippings_cost)) + Number({{totalTax}}) + {{total ?? 0}}" type="hidden" name="params[total_amount]" />
                 <input x-model="activeShipping" type="hidden" value="" name="params[field][shipping_id]" />
-                <input x-model="shippings[indexShipping].name" type="hidden" value="" name="params[field][shipping_name]" />
-                <input x-model="shippings[indexShipping].price" type="hidden" value="" name="params[shipping_amount]" />
+                <input x-model="(shippings[indexShipping] > 0 ? shippings[indexShipping].name : 0)" type="hidden" value="" name="params[field][shipping_name]" />
+                <input x-model="shippings_cost" type="hidden" value="" name="params[shipping_amount]" />
                 <div class="w-full flex gap gap-10">
                     <label class="w-full ">
                         <span class="block">{{lang.translate('First name')}}</span>
@@ -117,7 +119,7 @@
             <div class="w-full flex py-2">
                 <div class="w-full ">
                 <p>{{lang.translate('Shipping')}} </p>
-                <select x-model="activeShipping" name="params[shipping_id]" @change="activeShipping = $event.target.options[$event.target.selectedIndex].value; indexShipping = $event.target.options[$event.target.selectedIndex].index ">
+                                <select x-model="activeShipping" name="params[shipping_id]" @change="activeShipping = $event.target.options[$event.target.selectedIndex].value; indexShipping = $event.target.options[$event.target.selectedIndex].index; shippings_cost = shippings[indexShipping] ? shippings[indexShipping].price : 0 ">
                 {% for ship in shipping_list %} <option value="{{ship.shipping_id}}" >{{ship.name}} </option> {% endfor %}
                 </select>
                 </div> <span class="py-1 text-lg flex ">{{app.currency.symbol}}<span x-text="Math.round(Number(shippings[indexShipping].price) * {{app.currency_amount(1)}}, 2)">{{app.currency_amount(shipping)}}</span></span>
