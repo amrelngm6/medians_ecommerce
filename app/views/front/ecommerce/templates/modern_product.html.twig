@@ -110,7 +110,7 @@
                                 {% endif %}
                             </div>
                             <p class="color-666"> <strong class="color-000 text-uppercase me-1"> {{lang.translate('SKU')}}: </strong> <span> {{page.product_fields.sku}} </span> </p>
-                            <p class="color-666"> <strong class="color-000 text-uppercase me-1"> {{lang.translate('Category')}}: </strong> <span> {% for cat in page.categories %} <a href="{{cat.lang_content.prefix}}">{{ cat.lang_content.title }}</a> & {% endfor %} </span> </p>
+                            <p class="color-666"> <strong class="color-000 text-uppercase me-1"> {{lang.translate('Category')}}: </strong> <span> {% for cat in page.product_categories %} <a href="{{cat.lang_content.prefix}}">{{ cat.lang_content.title }}</a> & {% endfor %} </span> </p>
                             <p class="color-666"> <strong class="color-000 text-uppercase me-1"> {{lang.translate('Brand')}}: </strong> <span class="color-green2"> {{page.brand.name}} </span> </p>
                             <div class="social-icons mt-20 flex flex-wrap gap-2 ">
                                 <a href="#" class="text-center bg-gray-200 rounded-full p-1 w-8 h-8"> <i class="fab fa-twitter"></i> </a>
