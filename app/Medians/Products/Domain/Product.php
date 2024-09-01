@@ -74,7 +74,7 @@ class Product extends CustomModel
 
 	public function product_categories() 
 	{
-		return $this->hasManyThrough(Category::class, ProductCategory::class, 'product_id', 'category_id', 'product_id', 'category_id');	
+		return $this->hasManyThrough(Category::class, ProductCategory::class, 'product_id', 'category_id', 'category_id', 'product_id');	
 	}
 
 	public function product_colors() 
