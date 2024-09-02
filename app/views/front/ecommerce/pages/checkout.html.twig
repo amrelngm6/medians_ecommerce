@@ -122,7 +122,7 @@
                                 <select x-model="activeShipping" name="params[shipping_id]" @change="activeShipping = $event.target.options[$event.target.selectedIndex].value; indexShipping = $event.target.options[$event.target.selectedIndex].index; shippings_cost = shippings[indexShipping] ? shippings[indexShipping].price : 0 ">
                 {% for ship in shipping_list %} <option value="{{ship.shipping_id}}" >{{ship.name}} </option> {% endfor %}
                 </select>
-                </div> <span class="py-1 text-lg flex ">{{app.currency.symbol}}<span x-text="Math.round(Number(shippings[indexShipping].price) * {{app.currency_amount(1)}}, 2)">{{app.currency_amount(shipping)}}</span></span>
+                </div> <span class="py-1 text-lg flex ">{{app.currency.symbol}}<span x-text="Math.round(Number(shippings[indexShipping].price ?? 0) * {{app.currency_amount(1)}}, 2)">{{app.currency_amount(shipping)}}</span></span>
             </div>
             <div class="w-full flex py-2">
                 <div class="w-full ">{{lang.translate('Tax')}} </div> <span class="py-1 text-lg">{{app.currency.symbol}}{{app.currency_amount(totalTax)}}</span>
