@@ -58,7 +58,7 @@
                 <input type="hidden" value="{{discount}}" name="params[total_discount]" />
                 <input type="hidden" value="{{totalTax}}" name="params[tax_amount]" />
 
-                <input x-model="(Number(shippings_cost) + Number({{totalTax}}) + Number({{total ?? 0}}))" type="hidden" name="params[total_amount]" />
+                <input x-model="Number(shippings_cost) + Number({{totalTax}}) + Number({{total ?? 0}})" type="hidden" name="params[total_amount]" />
                 <input x-model="activeShipping" type="hidden" value="" name="params[field][shipping_id]" />
                 <input x-model="(shippings[indexShipping] ? shippings[indexShipping].name : 0)" type="hidden" value="" name="params[field][shipping_name]" />
                 <input x-model="shippings_cost" type="hidden" value="" name="params[shipping_amount]" />
@@ -119,7 +119,7 @@
             <div class="w-full flex py-2">
                 <div class="w-full ">
                 <p>{{lang.translate('Shipping')}} </p>
-                                <select x-model="activeShipping" name="params[shipping_id]" @change="activeShipping = $event.target.options[$event.target.selectedIndex].value; indexShipping = $event.target.options[$event.target.selectedIndex].index; shippings_cost = shippings[indexShipping] ? shippings[indexShipping].price : 0 ">
+                <select x-model="activeShipping" name="params[shipping_id]" @change="activeShipping = $event.target.options[$event.target.selectedIndex].value; indexShipping = $event.target.options[$event.target.selectedIndex].index; shippings_cost = shippings[indexShipping] ? shippings[indexShipping].price : 0 ">
                 {% for ship in shipping_list %} <option value="{{ship.shipping_id}}" >{{ship.name}} </option> {% endfor %}
                 </select>
                 </div> <span class="py-1 text-lg flex ">{{app.currency.symbol}}<span x-text="Math.round(Number(shippings[indexShipping] ? shippings[indexShipping].price : 0) * {{app.currency_amount(1)}}, 2)">{{app.currency_amount(shipping)}}</span></span>
