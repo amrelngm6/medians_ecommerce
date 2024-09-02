@@ -94,12 +94,12 @@
                     <img src="/uploads/img/close.svg" x-on:click="showMenu = false"  class="absolute right-10 top-12 " width="30" />
                     <ul class="block gap-4 w-full pt-1 " x-on:click="showLanguages = 0, showCurrency=0">
                         {% for menu in app.front_menu('header') %}
-                            <li class="navbar-dropdown py-2">
-                                <a href="/{{menu.page.lang_content.prefix}}">{{menu.page.lang_content.title}}</a>
+                            <li class="navbar-dropdown ">
+                                <a  class="py-2" href="/{{menu.page.lang_content.prefix}}">{{menu.page.lang_content.title}}</a>
                                 {% if menu.items|length > 0 %}
                                 <ul class="" style="padding-left:10px">
                                     {% for submenu in menu.items %}
-                                    <li class="py-2">-- <a href="/{{submenu.page.lang_content.prefix}}">{{submenu.page.lang_content.title}}</a></li>
+                                    <li>-- <a  class="py-2" href="/{{submenu.page.lang_content.prefix}}">{{submenu.page.lang_content.title}}</a></li>
                                     {% endfor %}
                                 </ul>
                                 {% endif %}
