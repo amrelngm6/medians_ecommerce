@@ -16,7 +16,7 @@
                             {% if menu.items|length > 0 %}
                             <ul class="submenu">
                                 {% for submenu in menu.items %}
-                                <a href="/{{submenu.page.lang_content.prefix}}">{{submenu.page.lang_content.title}}</a>
+                                <li><a href="/{{submenu.page.lang_content.prefix}}">{{submenu.page.lang_content.title}}</a></li>
                                 {% endfor %}
                             </ul>
                             {% endif %}
