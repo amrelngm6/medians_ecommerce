@@ -68,11 +68,11 @@ li ul.submenu li {
 
 li ul.submenu {
     position: absolute;
-    top: 40px;
+    top: 20px;
     width: 200px;
     display: none;
     background: white;
-    padding: 20px 10px;
+    padding: 30px 10px;
 }
 li:hover ul.submenu {
     display: block;
