@@ -129,7 +129,7 @@
             </div>
             <hr class="my-2" />
             <div class="w-full flex py-2">
-                <div class="w-full ">{{lang.translate('Total')}} </div> <span class="py-1 font-bold text-lg flex">{{app.currency.symbol}}<span x-text="cost(shippings[indexShipping].price)">{{total}}</span> </span>
+                <div class="w-full ">{{lang.translate('Total')}} </div> <span class="py-1 font-bold text-lg flex">{{app.currency.symbol}}<span x-text="cost(shippings[indexShipping] ? shippings[indexShipping].price : 0)">{{total}}</span> </span>
             </div>
             <hr class="my-2" />
 
