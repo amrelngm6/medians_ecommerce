@@ -61,6 +61,11 @@ h1,h2,h3,h4,h5,h6 {
 
 
 li.navbar-dropdown {position: relative;}
+li ul.submenu li {
+    display: block;
+    width: 100%;
+}
+
 li ul.submenu {
     position: absolute;
     top: 40px;
