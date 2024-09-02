@@ -58,7 +58,7 @@
                 <input type="hidden" value="{{discount}}" name="params[total_discount]" />
                 <input type="hidden" value="{{totalTax}}" name="params[tax_amount]" />
 
-                <input x-model="(Number(shippings_cost) + Number({{totalTax}}) + Number({{total ?? 0}} ))" type="hidden" name="params[total_amount]" />
+                <input x-model="(Number(shippings_cost) + Number({{totalTax}}) + Number({{total ?? 0}}))" type="hidden" name="params[total_amount]" />
                 <input x-model="activeShipping" type="hidden" value="" name="params[field][shipping_id]" />
                 <input x-model="(shippings[indexShipping] > 0 ? shippings[indexShipping].name : 0)" type="hidden" value="" name="params[field][shipping_name]" />
                 <input x-model="shippings_cost" type="hidden" value="" name="params[shipping_amount]" />
