@@ -79,4 +79,10 @@ li:hover ul.submenu {
     display: block;
 }
 
+.showMenu {
+    float: right;
+    position: absolute;
+    right: 20px;
+    padding: 4px 10px;
+}
 

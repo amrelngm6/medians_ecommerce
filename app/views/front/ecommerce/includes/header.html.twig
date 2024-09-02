@@ -1,4 +1,4 @@
-    <div id="main-header" class="relative pt-2 z-10 " x-data="{showSearch: false, showLanguages: false, showCurrency: false, showCart: false}">
+    <div id="main-header" class="relative pt-2 z-10 " x-data="{showSearch: false, showLanguages: false, showCurrency: false, showCart: false, showMenu:false}">
 
         <form class="ajax-form" action="/front_api" method="POST" id="form-sidecart">
             <input type="hidden" value="load_side_cart" name="type"/>
@@ -9,7 +9,7 @@
                 <a href="/"><img title="{{app.SystemSetting.sitename}}" src="{{app.CONF.url}}{{app.SystemSetting.logo}}"/></a>
             </div>
             <div id="main-nav" class="w-full flex mt-8 border border-1 rounded-2xl py-2 px-6 bg-white">
-                <ul class="flex gap-4 w-full pt-1 lg:block hidden" x-on:click="showLanguages = 0, showCurrency=0">
+                <ul class="flex gap-4 w-full pt-1 lg:flex hidden" x-on:click="showLanguages = 0, showCurrency=0">
                     {% for menu in app.front_menu('header') %}
                         <li class="navbar-dropdown">
                             <a href="/{{menu.page.lang_content.prefix}}">{{menu.page.lang_content.title}}</a>
@@ -84,8 +84,30 @@
                             </div>
                         </div>
                     </template>
+
                 </div>
 
+                <a href="#!"  x-on:click="showMenu = true" class="showMenu lg:hidden block flex-end" ><img src="/uploads/img/menu.svg" width="25" /> </a>
+
+                <template x-if="showMenu">
+                    <div class="fixed w-full h-full top-0 left-0 bg-white  py-10 px-20">
+                    <img src="/uploads/img/close.svg" x-on:click="showMenu = false"  class="absolute right-10 top-12 " width="30" />
+                    <ul class="block gap-4 w-full pt-1 " x-on:click="showLanguages = 0, showCurrency=0">
+                        {% for menu in app.front_menu('header') %}
+                            <li class="navbar-dropdown py-2">
+                                <a href="/{{menu.page.lang_content.prefix}}">{{menu.page.lang_content.title}}</a>
+                                {% if menu.items|length > 0 %}
+                                <ul class="" style="padding-left:10px">
+                                    {% for submenu in menu.items %}
+                                    <li class="py-2">-- <a href="/{{submenu.page.lang_content.prefix}}">{{submenu.page.lang_content.title}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    </div>
+                </template>
             </div>
 
         </div>
