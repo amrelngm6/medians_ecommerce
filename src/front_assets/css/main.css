@@ -64,6 +64,7 @@ li.navbar-dropdown {position: relative;}
 li ul.submenu li {
     display: block;
     width: 100%;
+    padding: 10px 0;
 }
 
 li ul.submenu {
