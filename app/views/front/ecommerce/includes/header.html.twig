@@ -9,7 +9,7 @@
                 <a href="/"><img title="{{app.SystemSetting.sitename}}" src="{{app.CONF.url}}{{app.SystemSetting.logo}}"/></a>
             </div>
             <div id="main-nav" class="w-full flex mt-8 border border-1 rounded-2xl py-2 px-6 bg-white">
-                <ul class="flex gap-4 w-full pt-1" x-on:click="showLanguages = 0, showCurrency=0">
+                <ul class="flex gap-4 w-full pt-1 lg:block hidden" x-on:click="showLanguages = 0, showCurrency=0">
                     {% for menu in app.front_menu('header') %}
                         <li class="navbar-dropdown">
                             <a href="/{{menu.page.lang_content.prefix}}">{{menu.page.lang_content.title}}</a>
