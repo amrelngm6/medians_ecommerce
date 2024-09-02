@@ -37,7 +37,11 @@ class MenuRepository
 	{
 		return Menu::where('type', $type)
 		// ->where('parent_id', 0)
-		->with('page', 'items')
+		->with('page')
+		->with(['items'=> function($q) {
+			return $q->with('page');
+		}])
+
 		->whereHas('page', function($q) {
 			$q->where('status', 'on');
 		})

@@ -13,9 +13,13 @@
                     {% for menu in app.front_menu('header') %}
                         <li class="navbar-dropdown">
                             <a href="/{{menu.page.lang_content.prefix}}">{{menu.page.lang_content.title}}</a>
+                            {% if menu.items|length > 0 %}
                             <ul class="submenu">
-                                <li><a href="#">a </a>
+                                {% for submenu in menu.items %}
+                                <a href="/{{submenu.page.lang_content.prefix}}">{{submenu.page.lang_content.title}}</a>
+                                {% endfor %}
                             </ul>
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
