@@ -17,9 +17,6 @@
                                 <component @callback="switchTab"  :langs="langs" class="pt-8 px-1 min-h-400px" ref="activeTab" :types-list="typesList"  :key="activeTab" :path="activeTab" :system_setting="system_setting" :setting="setting" :conf="conf" :auth="auth" :is="activeComponent" :currency="currency"></component>
                             </transition>
                         </div>
-                        <div class="w-full" v-if="!checkAccess() && !loader">
-                          <get_started :currency="currency" :system_setting="system_setting" :setting="setting" :langs="langs" :conf="conf" :auth="auth"></get_started>
-                        </div>
 
                     </div>
                     <div v-else class="w-full flex overflow-auto" >
@@ -39,8 +36,6 @@ import dashboard from '@/components/dashboard.vue';
 import master_dashboard from '@/components/master_dashboard.vue'; 
 import HelpMessages from '@/components/help_messages.vue'; 
 import {translate, handleAccess, handleRequest, handleGetRequest, showAlert} from '@/utils.vue';
-
-const get_started = defineAsyncComponent(() => import('@/components/wizards/get-started.vue') );
 
 // Default data table pages
 const data_table = defineAsyncComponent(() => import('@/components/datatable_pages/data_table_page.vue') );
@@ -126,7 +121,6 @@ export default {
         payment_methods,
         csv_import,
         blog,
-        get_started,
         translate,
         'help_messages':HelpMessages,
       },

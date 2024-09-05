@@ -12,9 +12,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-vue": "^7.0.0",
     "@coreui/vue-chartjs": "^3.0.0",
-    "@everapi/currencyapi-js": "^1.0.6",
     "@he-tree/vue": "^2.8.3",
-    "@paypal/paypal-js": "^8.0.0",
     "@vueform/multiselect": "^2.6.6",
     "ag-charts-vue3": "^9.0.1",
     "autoprefixer": "^10.4.16",
@@ -42,7 +40,6 @@
     "vue-tailwind-datepicker": "^1.7.3",
     "vue3-colorpicker": "^2.3.0",
     "vue3-easy-data-table": "^1.5.47",
-    "vue3-google-map": "^0.18.0",
     "vue3-tags-input": "^1.0.12",
     "vue3-toastify": "^0.2.1",
     "vuedraggable": "^2.24.3"
