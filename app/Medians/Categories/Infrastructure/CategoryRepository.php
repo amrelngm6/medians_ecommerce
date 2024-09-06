@@ -50,6 +50,11 @@ class CategoryRepository
 		return Genre::where('model', Genre::class)->limit($limit)->get();
 	}
 
+	public function getGenres( $limit = 100)
+	{
+		return Genre::where('status', 'on')->where('model', Genre::class)->limit($limit)->get();
+	}
+
 	public function getAllMoods( $limit = 100)
 	{
 		return Mood::where('model', Mood::class)->limit($limit)->get();

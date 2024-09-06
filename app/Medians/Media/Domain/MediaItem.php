@@ -2,7 +2,7 @@
 
 namespace Medians\Media\Domain;
 
-use Medians\Categories\Domain\Category;
+use Medians\Categories\Domain\Genre;
 use Medians\Content\Domain\Content;
 use Medians\Reviews\Domain\Review;
 use Medians\CustomFields\Domain\CustomField;
@@ -37,12 +37,6 @@ class MediaItem extends CustomModel
 		return !empty($this->custom_fields) ? array_column($this->custom_fields->toArray(), 'value', 'code') : [];
 	}
 
-
-	public function getNameAttribute()
-	{
-		return $this->lang_content->title ?? '';
-	} 
-
 	public function getContentLangsAttribute()
 	{
 		return $this->langs->keyBy('lang');
@@ -64,9 +58,9 @@ class MediaItem extends CustomModel
 		return $this->hasOne(Category::class , 'category_id', 'category_id')->where('model', MediaItem::class)->with('parent');	
 	}
 	 
-	public function media_categories() 
+	public function genres() 
 	{
-		return $this->hasManyThrough(Category::class, MediaItemCategory::class, 'media_id', 'category_id', 'media_id', 'category_id');	
+		return $this->belongsToMany(Genre::class, MediaGenre::class, 'genre_id', 'genre_id');	
 	}
 
 	public function media_tags() 

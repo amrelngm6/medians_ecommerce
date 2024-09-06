@@ -2,7 +2,7 @@
 
 <div class=" w-full">
 
-    <div class="w-full flex gap gap-2" id="main-container">
+    <div class="w-full flex gap gap-2" id="main-container" x-data="{selected_genres:[], genres: {{ genres }}}">
         
         <div  class="lg:fixed bg-white dark:bg-gray-900 h-screen">
             {% include 'views/front/' ~ template ~ '/includes/app_sidebar.html.twig' %}
@@ -14,7 +14,6 @@
                 {% include 'views/front/' ~ template ~ '/includes/app_header.html.twig' %}
             </header>
 
-            
             <div  class=" text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8">
                 <div class="w-full flex gap-6 overflow-hidden">
                     <div class="slide__audio js-audio pt-7">
@@ -54,23 +53,27 @@
                     <hr class="opacity-30 my-6" />
                     <div class="grid-cols-2 grid gap-10">
                         <div class="text-primary w-full block">
-                            <input placeholder="Item Title *" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
+                            <input name="params[name]" placeholder="{{lang.translate('Item Name')}} *" value="{{item.name}}" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
                         </div>
                         <div class="text-primary w-full block relative">
                             <span class="w-6 absolute my-2 mx-4 left-[90%] right-[90%]"><img src="/src/front_assets/svg/down.svg" /></span>
                             <input placeholder="Genres" class="active-parent cursor-pointer py-2 px-4 w-full rounded-2xl dark:bg-gray-900 dark:border-gray-700 bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
                             <div class="show-active hidden rounded-2xl w-full top-10 absolute bg-white dark:bg-gray-900 p-4 ">
-                                <a class="block" href="#!">1</a>
-                                <a class="block" href="#!">1</a>
+                                <template x-for="genre in genres">
+                                    <span  class="cursor-pointer block"  x-on:click="selected_genres.push(genre)" x-text="genre.name"></span>
+                                </template>
                             </div>
-                            <span class="mt-2 text-xs rounded-full py-1 px-2 bg-gray-300 text-gray-800  gap-2 inline-block">    
-                                <span class="flex gap-2">HipHop <img src="/src/front_assets/svg/close.svg" /></span> 
-                            </span> 
+                            <template x-for="genre in selected_genres">
+                                <span class="mt-2 text-xs rounded-full py-1 px-2 bg-gray-300 text-gray-800  gap-2 inline-block">    
+                                    <span class="flex gap-2" ><span x-text="genre.name"></span> <img src="/src/front_assets/svg/close.svg" /></span> 
+                                    <input type="hidden" name="params[selected_genres][]" x-model="genre.category_id" />
+                                </span> 
+                            </template>
                         </div>                        
                     </div>
                     
                     <div class="text-primary w-full block my-6">
-                        <textarea rows="3" placeholder="Description *" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" ></textarea>
+                        <textarea rows="3" placeholder="Description *" name="params[description]" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" >{{item.description}}</textarea>
                     </div>
                     
                     <button class=" dark:text-gray-400 float-right inline-block px-6 py-2 rounded-2xl border hover:border-orange-600 border-orange-300">{{lang.translate('Next')}}</button>

@@ -309,7 +309,7 @@ setTimeout(function() {
 	const page = currentURL.split("/")
 	const a =  ((page[page.length - 1]).replace('.html', ''))
 
-	jQuery('#'+(a ? a : 'home')).addClass('active')
+	// jQuery('#'+(a ? a : 'home')).addClass('active')
 	
 	stickyScroll()
 	runAudio()

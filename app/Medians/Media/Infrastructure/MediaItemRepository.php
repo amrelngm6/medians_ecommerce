@@ -4,6 +4,7 @@ namespace Medians\Media\Infrastructure;
 
 use Medians\Media\Domain\MediaItem;
 use Medians\Media\Domain\MediaFile;
+use Medians\Media\Domain\MediaGenre;
 use Medians\Categories\Domain\Genre;
 use Medians\Categories\Domain\Mood;
 use Medians\Blog\Domain\Blog;
@@ -37,7 +38,7 @@ class MediaItemRepository
 
 	public function find($id)
 	{
-		return MediaItem::with('main_file')->find($id);
+		return MediaItem::with('genres','main_file')->find($id);
 	}
 
 	public function get($limit = 100)
@@ -95,7 +96,7 @@ class MediaItemRepository
     	$Object->update( (array) $data);
 
     	// Store languages content
-    	$this->storeContent($data['files'] ,$Object->media_id);
+    	// $this->storeContent($data['files'] ,$Object->media_id);
 
     	return $Object;
 
