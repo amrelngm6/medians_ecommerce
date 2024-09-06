@@ -39,9 +39,9 @@
                             <button class="play-pause"></button>
                         </div>
                     </div>
-                    <div class="relative h-28 w-full" id="wave-container{{item.media_id}}" > 
+                    <div class="relative h-28 w-full"  > 
                         <div id="wave-{{item.media_id}}"  class="absolute w-full h-full top-0 right-0  opacity-50 bg-white z-50"> </div>
-                        <img class="w-full left-0 top-0 bottom-0 my-auto absolute" src="/stream?thumbnail=100&image={{item.main_file.wave}}" />
+                        <img id="wave-container{{item.media_id}}" class="w-full left-0 top-0 bottom-0 my-auto absolute" src="/stream?thumbnail=100&image={{item.main_file.wave}}" />
                     </div>
                 </div>
                 <form action="/front_api/update" method="post" enctype="multipart/form-data" id="upload-step" class="ajax-form w-full">
