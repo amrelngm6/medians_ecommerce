@@ -55,6 +55,7 @@ function submitForm(formId, elementId, append = null) {
     if (!form)
         return null;
 
+    console.log(jQuery(form).find('.loader').addClass('show'))
 
     // Get the form data as a FormData object
     const formData = new FormData(form);
@@ -65,6 +66,7 @@ function submitForm(formId, elementId, append = null) {
     // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhr.onreadystatechange = function () {
+        jQuery(form).find('.loader').removeClass('show')
         if (xhr.readyState === XMLHttpRequest.DONE ) {
 
             // Handle the successful response 

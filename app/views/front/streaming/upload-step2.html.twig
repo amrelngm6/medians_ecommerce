@@ -45,6 +45,8 @@
                     </div>
                 </div>
                 <form action="/front_api/update" method="post" enctype="multipart/form-data" id="upload-step" class="ajax-form w-full">
+                    <div class="loader absolute w-full h-full left-0 top-0 bg-white opacity-50 "></div>
+                
                     <input type="hidden" name="type" value="MediaItem.update" />
                     <input type="hidden" name="params[media_id]" value="{{item.media_id}}" />
                     

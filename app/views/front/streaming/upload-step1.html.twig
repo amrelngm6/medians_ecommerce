@@ -14,7 +14,8 @@
                 {% include 'views/front/' ~ template ~ '/includes/app_header.html.twig' %}
             </header>
 
-            <form action="/front_api/create" method="post" enctype="multipart/form-data" id="upload-step" class="ajax-form text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8">
+            <form action="/front_api/create" method="post" enctype="multipart/form-data" id="upload-step" class="ajax-form relative text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8">
+                <div class="loader absolute w-full h-full left-0 top-0 bg-white opacity-50 z-10"></div>
                 <input type="hidden" name="type" value="MediaItem.upload" />
                 <h2 class="text-2xl dark:text-gray-400 ">Upload Music</h2>
                 

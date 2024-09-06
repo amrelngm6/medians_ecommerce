@@ -742,6 +742,11 @@ li.active
 }
 
 
-
+.loader {
+  display: none;
+}
+.loader.show {
+  display: block;
+}
 
 
