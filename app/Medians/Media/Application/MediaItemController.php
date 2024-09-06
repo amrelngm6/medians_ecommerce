@@ -52,6 +52,15 @@ class MediaItemController extends CustomController
     {
 		$settings = $this->app->SystemSetting();
 
+        $item = $this->mediaItemRepo->find($media_id);
+
+        $filePath = $item->main_file->path;
+        $ext = explode('.', $filePath);
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.$ext, '.png', $filePath)))
+        {
+            $this->repo->_dir = 'audio';
+            $this->generateWave($file);
+        }
         
 		try {
 
@@ -83,17 +92,12 @@ class MediaItemController extends CustomController
             
             $save = $this->mediaItemRepo->store($params);
 
-            $filePath = $_SERVER['DOCUMENT_ROOT']. $this->repo->_dir. $file;
-            $encodedFilePath = $_SERVER['DOCUMENT_ROOT']. $this->repo->_dir. 'encoded_'.$file;
-            $outputPath = $_SERVER['DOCUMENT_ROOT']. $this->repo->_dir. str_replace(['mp3','wav','ogg'], 'png', $file);
+            $this->generateWave($file);
+			// $output2 = shell_exec('ffmpeg -i '.$filePath.' -c copy -map 0 -movflags +faststart '.$encodedFilePath.' ');
 
             $getID3 = new getID3;
             // Analyze file
             $fileInfo = $getID3->analyze($filePath);
-
-			$output = shell_exec('ffmpeg -i '.$filePath.'  -filter_complex "showwavespic=s=1024x200" -frames:v 1  '.$outputPath.' ');
-			$output2 = shell_exec('ffmpeg -i '.$filePath.' -c copy -map 0 -movflags +faststart '.$encodedFilePath.' ');
-
 		}
 
         return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"media/edit/$save->media_id");
@@ -102,5 +106,15 @@ class MediaItemController extends CustomController
 		// return json_encode(['data'=> ['message'=>'Uploaded successfully']]);
 	}
 
+    public function generateWave($file)
+    {
+        $this->repo->_dir = 'audio';
+
+        $ffmpeg = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg';
+        $filePath = $_SERVER['DOCUMENT_ROOT']. $this->repo->_dir. $file;
+        $outputPath = $_SERVER['DOCUMENT_ROOT']. $this->repo->_dir. str_replace(['mp3','wav','ogg'], 'png', $file);
+
+        return shell_exec($ffmpeg.' -i '.$filePath.'  -filter_complex "showwavespic=s=1024x200" -frames:v 1  '.$outputPath.' ');
+    }
 
 }
