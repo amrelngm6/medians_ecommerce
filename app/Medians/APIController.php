@@ -141,8 +141,12 @@ class APIController extends CustomController
 					$return = (new Products\Application\ProductController)->storeProductsCSV();
 					break;
 		
-				case 'ProductCategory.create':
-					$return = (new Products\Application\CategoryController)->store();
+				case 'Genre.create':
+					$return = (new Categories\Application\GenreController)->store();
+					break;
+					
+				case 'Mood.create':
+					$return = (new Categories\Application\MoodController)->store();
 					break;
 					
 				case 'Brand.create':
@@ -281,8 +285,12 @@ class APIController extends CustomController
 				$controller = new Products\Application\ProductController;
 				break;
 			
-			case 'ProductCategory.update':
-				$controller = new Products\Application\CategoryController;
+			case 'Genre.update':
+				$controller = new Categories\Application\GenreController;
+				break;
+
+			case 'Mood.update':
+				$controller = new Categories\Application\MoodController;
 				break;
 			
 			case 'Brand.update':
@@ -305,10 +313,6 @@ class APIController extends CustomController
 				$controller = new Customers\Application\CustomerController;
 				break;
 			
-			case 'Currency.update':
-				$controller = new Currencies\Application\CurrencyService;
-				break;
-				
 			case 'Language.update':
 				$controller = new Languages\Application\LanguageController;
 				break;
@@ -503,6 +507,14 @@ class APIController extends CustomController
 			
 				case 'EmailTemplate.delete':
 					return response((new Templates\Application\EmailTemplateController())->delete());
+					break;
+			
+				case 'Genre.delete':
+					return response((new Categories\Application\GenreController())->delete());
+					break;
+					
+				case 'Mood.delete':
+					return response((new Categories\Application\MoodController())->delete());
 					break;
 			
 			}

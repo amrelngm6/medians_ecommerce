@@ -8,31 +8,16 @@ function handleResponse(res, form) {
 
 }
 
-jQuery(document).on('click', '.addQty', function (e) {
-    let qty = jQuery(e.target).parent().find('input').val();
-    jQuery(e.target).parent().find('input').val(++qty);
-});
-
-jQuery(document).on('click', '.minusQty', function (e) {
-    let qty = jQuery(e.target).parent().find('input').val();
-    jQuery(e.target).parent().find('input').val((--qty) ? qty : 1);
-});
-
 jQuery(document).on('change', 'input', function (e) {
     setTimeout(() => {
         jQuery(e.target).data('element') ? submitForm(jQuery(e.target).data('form'), jQuery(e.target).data('element'),) : null;
     }, 100);
 });
 
-// jQuery(document).on('mouseup', 'input.price', function(e){
-//     console.log()
-//     setTimeout(() => {
-//         jQuery(e.target).data('target-element') ? submitForm(jQuery(e.target).data('form'), jQuery(e.target).data('target-element'), ) : null;
-//     }, 100);
-// });
-
 jQuery(document).on('submit', '.ajax-form', function (e) {
     e.preventDefault();
+    console.log(e.target)
+    console.log(e.target.attr)
     submitForm(e.target.id, e.target.attr);
 });
 
@@ -77,19 +62,21 @@ function submitForm(formId, elementId, append = null) {
     // Send the form data via AJAX
     const xhr = new XMLHttpRequest();
     xhr.open('POST', form.action, true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+        if (xhr.readyState === XMLHttpRequest.DONE ) {
+
             // Handle the successful response 
             try {
 
                 let res = JSON.parse(xhr.responseText);
-                handleResponse(res, form)
+                return handleResponse(res, form)
 
             } catch (error) {
 
                 element.innerHTML = xhr.responseText;
+                
             }
 
         } else {
@@ -99,7 +86,7 @@ function submitForm(formId, elementId, append = null) {
                 element.innerHTML = xhr.responseText;
         }
     };
-    xhr.send(new URLSearchParams(formData).toString());
+    xhr.send(formData);
 }
 
 

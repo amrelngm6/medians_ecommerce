@@ -18,6 +18,8 @@ class MediaRepository
 
 	public $files_dir = '/uploads/files/';
 
+	public $audio_dir = '/uploads/audio/';
+
 	public $customers_dir = '/uploads/customers/';
 
 	public $videos_dir = '/uploads/videos/';
@@ -39,6 +41,10 @@ class MediaRepository
 		{
 			case 'files':
 				$this->_dir = $this->files_dir;
+				break;
+
+			case 'audio':
+				$this->_dir = $this->audio_dir;
 				break;
 							
 			default:
@@ -110,6 +116,10 @@ class MediaRepository
 		{
 			case 'files':
 				return ['html', 'pdf', 'doc', 'docx', 'xls', 'xlsx']; 
+				break;
+
+			case 'audio':
+				return ['mp3', 'wav', 'oog']; 
 				break;
 			
 			default:

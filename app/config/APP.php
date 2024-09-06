@@ -9,9 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 use Medians\Settings\Infrastructure\SystemSettingsRepository;
-use Medians\Currencies\Infrastructure\CurrencyRepository;
 
-use Medians\Currencies\Application\CurrencyService;
 use \Medians\Auth\Application\AuthService;
 use \Medians\Auth\Application\CustomerAuthService;
 use \Medians\Auth\Application\GuestAuthService;
@@ -41,8 +39,6 @@ class APP
 	public $session;
 	
 	public $setting;
-
-	public $currency;
 
 
 	function __construct()
@@ -100,7 +96,6 @@ class APP
 	public function SystemSetting()
 	{
 		$output = (new \Medians\Settings\Application\SystemSettingsController())->getAll();
-		$_SESSION['currency'] = $_SESSION['currency'] ?? (isset($output['currency']) ? $output['currency'] : null);
 		return $output;
 	}
 
@@ -113,76 +108,7 @@ class APP
 		return $output;
 	}
 
-	/**
-	 * Load currency
-	 */ 
-	public function currency()
-	{	
-		$this->currency = (new CurrencyRepository)->load($_SESSION['currency']);
-		return $this->currency;
-	}
-
-	/**
-	 * Load custom currency
-	 */ 
-	public function customCurrency($currency)
-	{	
-		return  (new CurrencyRepository)->load($currency);
-	}
-
-	/**
-	 * Load currency
-	 */ 
-	public function currencies()
-	{	
-		$currencies = (new CurrencyRepository)->get();
-		return $currencies;
-	}
 	
-	/**
-	 * Price based on currency
-	 */ 
-	public function currency_amount($amount, $requiredCurrency = null)
-	{
-
-		$settings = $this->SystemSetting();
-		$activeCurrency =  $this->currency();
-		if ($activeCurrency->code == $settings['currency'])
-			return $amount;
-		
-		if ($activeCurrency->last_check == date('Y-m-d'))
-			return number_format($amount * ($activeCurrency->ratio ?? 1), 2);
-
-		
-		$activeCurrency = (new CurrencyService)->getCurrency($activeCurrency->code);
-		return $this->currency_amount($amount, $requiredCurrency);
-	}
-	
-	/**
-	 * Convert amount of currency
-	 */ 
-	public function currency_converter($amount, $requiredCurrency = null)
-	{
-		try {
-			$settings = $this->SystemSetting();
-			$activeCurrency = (object) (new CurrencyService)->getCurrency($requiredCurrency);
-
-			if (!$activeCurrency)
-				return 0;
-			
-			if ($activeCurrency->code == $settings['currency'])
-				return $amount;
-			
-			if ($activeCurrency->last_check == date('Y-m-d'))
-				return number_format($amount * ($activeCurrency->ratio ?? 1), 2);
-	
-			return ($amount && isset($activeCurrency->code)) ? $this->currency_converter($amount, $activeCurrency->code) : $amount;
-			
-		} catch (\Throwable $th) {
-			return null;
-		}
-	}
-
 
 	/**
 	 * Get setting value by code 
@@ -343,39 +269,11 @@ class APP
 			
 			array('permission'=> 'Dashboard.index', 'title'=>translate('Dashboard'), 'icon'=>'airplay', 'link'=>'dashboard', 'component'=>'master_dashboard'),
 			
-			array( 'title'=>translate('Products'),  'icon'=>'shopping-cart', 'link'=>'#Products', 'sub'=>
-			[
-				array('permission'=>'Products.index', 'title'=>translate('Products'),  'icon'=>'user', 'link'=>'admin/products', 'component'=>'products'),
-				array('permission'=>'Categories.index', 'title'=>translate('Categories'),  'icon'=>'user', 'link'=>'admin/product_categories', 'component'=>'categories'),
-				array('permission'=>'Brands.index', 'title'=>translate('Brands'),  'icon'=>'user', 'link'=>'admin/brands', 'component'=>'data_table'),
-				array('permission'=>'CSVImport.index', 'title'=>translate('Import CSV'),  'icon'=>'user', 'link'=>'admin/csv_import', 'component'=>'csv_import'),
-				array('permission'=>'Stock.index', 'title'=>translate('Stock'),  'icon'=>'user', 'link'=>'admin/stock', 'component'=>'data_table'),
-			]
-			),
 
-	        
 			array('permission'=>'Customers.index', 'title'=>translate('Customers'),  'icon'=>'users', 'link'=>'admin/customers', 'component'=>'data_table'),
 			
-			array('title'=>translate('Orders'),  'icon'=>'shopping-bag', 'link'=>'#Orders', 'sub'=>
-			[
-				array('permission'=>'Orders.index', 'title'=>translate('Orders'),  'icon'=>'truck', 'link'=>'admin/orders', 'component'=>'orders'),
-				array('permission'=>'Orders.index', 'title'=>translate('New Orders'),  'icon'=>'truck', 'link'=>'admin/orders?status=new', 'component'=>'orders'),
-				array('permission'=>'Orders.index', 'title'=>translate('Completed Orders'),  'icon'=>'truck', 'link'=>'admin/orders?status=completed', 'component'=>'orders'),
-				array('permission'=>'Orders.index', 'title'=>translate('Cancelled Orders'),  'icon'=>'truck', 'link'=>'admin/orders?status=cancelled', 'component'=>'orders'),
-			]
-			),
-			
-			array('title'=>translate('Finance'),  'icon'=>'credit-card', 'link'=>'#finance', 'sub'=>
-			[
-				array('permission'=> 'Invoice.index', 'title'=> translate('Invoices'), 'icon'=>'credit-card', 'link'=>'admin/invoices', 'component'=>'invoices'),
-				array('permission'=> 'Transaction.index', 'title'=> translate('Transactions'), 'icon'=>'credit-card', 'link'=>'admin/transactions', 'component'=>'transactions'),
-				array('permission'=> 'PaymentMethods.index', 'title'=> translate('Payment methods'), 'icon'=>'credit-card', 'link'=>'admin/payment_methods', 'component'=>'payment_methods'),
-				array('permission'=>'Currencies.index', 'title'=>translate('Currencies'),  'icon'=>'tool', 'link'=>'admin/currencies', 'component'=>'data_table'),
-			]
-			),
 			
 			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'data_table'),
-			array('permission'=>'Branch.index', 'title'=>translate('Branches'),  'icon'=>'map-pin', 'link'=>'admin/branches', 'component'=>'data_table'),
 			
 			array('title'=>translate('Marketing'),  'icon'=>'send', 'link'=>'#newsletters', 'sub'=>
 			[
@@ -408,15 +306,6 @@ class APP
 			]
 			),
 			
-
-			array( 'title'=>translate('Shipping'),  'icon'=>'map', 'link'=>'#locations', 'superadmin'=> true, 'sub'=>
-			[
-				array('permission'=>'Shipping.index', 'title'=>translate('Shipping methods'),  'icon'=>'truck', 'link'=>'admin/shipping', 'component'=>'data_table'),
-				array('permission'=>'Country.index', 'title'=>translate('Countries'),  'icon'=>'tool', 'link'=>'admin/countries', 'component'=>'data_table'),
-				array('permission'=>'State.index', 'title'=>translate('States'),  'icon'=>'tag', 'link'=>'admin/states', 'component'=>'data_table'),
-				array('permission'=>'City.index', 'title'=>translate('Cities'),  'icon'=>'tag', 'link'=>'admin/cities', 'component'=>'data_table'),
-			]
-			),
 			
 			array( 'title'=>translate('Users'),  'icon'=>'tool', 'link'=>'#users', 'superadmin'=> true, 'sub'=>
 			[
@@ -442,7 +331,6 @@ class APP
 			array( 'title'=>translate('Settings'),  'icon'=>'tool', 'link'=>'#setting', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=> 'SystemSettings.index', 'title'=> translate('System Settings'),  'icon'=>'tool', 'link'=>'admin/system_settings', 'component'=>'system_settings'),
-				array('permission'=> 'SystemSettings.index', 'title'=> translate('Payment settings'),  'icon'=>'tool', 'link'=>'admin/payment_settings', 'component'=>'system_settings'),
 			]
 			),
 			

@@ -4,7 +4,6 @@ namespace Medians\Settings\Application;
 use \Shared\dbaser\CustomController;
 
 use Medians\Settings\Infrastructure\SystemSettingsRepository;
-use Medians\Currencies\Infrastructure\CurrencyRepository;
 use Medians\Templates\Infrastructure\WebTemplateRepository;
 
 
@@ -50,8 +49,8 @@ class SiteSettingsController extends CustomController
 				'data' => [['lang'=>'arabic','title'=>translate('Arabic')], ['lang'=>'english','title'=>translate('English')]]  
 			],	
 			[ 'key'=> "template", 'title'=> translate('Template'), 'help_text'=> translate('The default template for frontend'),
-			'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 'column_key'=>'folder_name',
-			'data' => $this->templateRepo->get()  
+					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 'column_key'=>'folder_name',
+					'data' => $this->templateRepo->get()  
 				],	
 			],			
 			'pictures'=> [	
@@ -138,15 +137,8 @@ class SiteSettingsController extends CustomController
 	{	
 		$data = $this->repo->getAll();
 		$output = $data ? array_column(json_decode($data), 'value', 'code') :  [];
-		$_SESSION['currency'] = $output['currency'];
 		return $output;
 	}
-
-	public function currency() 
-	{	
-		return $this->currencyRepo->load($_SESSION['currency']);
-	}
-
 
 
 	/**

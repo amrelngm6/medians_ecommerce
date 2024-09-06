@@ -3,6 +3,8 @@
 namespace Medians\Categories\Infrastructure;
 
 use Medians\Categories\Domain\Category;
+use Medians\Categories\Domain\Genre;
+use Medians\Categories\Domain\Mood;
 use Medians\Blog\Domain\Blog;
 use Medians\Content\Domain\Content;
 
@@ -34,12 +36,23 @@ class CategoryRepository
 
 	public function find($id)
 	{
-		return Category::find($id);
+		$item = Category::find($id);
+		return (new $item->model)->find($id);
 	}
 
-	public function get($model = null, $limit = 100)
+	public function get($limit = 100)
 	{
-		return Category::with('content')->withCount('blog')->where('model', Blog::class)->limit($limit)->get();
+		return Category::where('model', null)->limit($limit)->get();
+	}
+
+	public function getAllGenres( $limit = 100)
+	{
+		return Genre::where('model', Genre::class)->limit($limit)->get();
+	}
+
+	public function getAllMoods( $limit = 100)
+	{
+		return Mood::where('model', Mood::class)->limit($limit)->get();
 	}
 
 	public function categories($model)
@@ -71,10 +84,9 @@ class CategoryRepository
 		$dataArray['status'] = isset($dataArray['status']) ? 'on' : 0;
 		// Return the FBUserInfo object with the new data
     	$Object = Category::create($dataArray);
-    	$Object->update($dataArray);
 
     	// Store languages content
-    	$this->storeContent($data['content'] ,$Object->id);
+    	$this->storeContent($data['content_langs'] ,$Object->category_id, $Object->model);
 
     	return $Object;
     }
@@ -87,14 +99,13 @@ class CategoryRepository
     public function update($data)
     {
 
-		$Object = Category::find($data['id']);
+		$Object = Category::find($data['category_id']);
 		
-		$data['updated_at'] = date('Y-m-d H:i:s');
 		// Return the FBUserInfo object with the new data
     	$Object->update( (array) $data);
 
     	// Store languages content
-    	$this->storeContent($data['content'] ,$Object->id);
+    	$this->storeContent($data['content_langs'] ,$Object->category_id, $Object->model);
 
     	return $Object;
 
@@ -110,10 +121,11 @@ class CategoryRepository
 	{
 		try {
 			
-			$delete = Category::find($id)->delete();
+			$item = Category::find($id);
+			$delete = $item->delete();
 
 			if ($delete){
-				$this->storeContent(null, $id);
+				$this->storeContent(null, $id, $item->model);
 			}
 
 			return true;
@@ -129,18 +141,19 @@ class CategoryRepository
 	/**
 	* Save related items to database
 	*/
-	public function storeContent($data, $id) 
+	public function storeContent($data, $id, $modelClass) 
 	{
-		Content::where('item_type', Category::class)->where('item_id', $id)->delete();
+		Content::where('item_type', $modelClass)->where('item_id', $id)->delete();
 		if ($data)
 		{
 			foreach ($data as $key => $value)
 			{
+				$value = (array) $value;
 				$fields = $value;
-				$fields['item_type'] = Category::class;	
+				$fields['item_type'] = $modelClass;	
 				$fields['item_id'] = $id;	
 				$fields['lang'] = $key;	
-				$fields['prefix'] = isset($value['prefix']) ? $value['prefix'] : Content::generatePrefix($value['title']);	
+				$fields['prefix'] = !empty($value['prefix']) ? $value['prefix'] : Content::generatePrefix($value['title']);	
 				$fields['created_by'] = $this->app->auth()->id;
 
 				$Model = Content::create($fields);

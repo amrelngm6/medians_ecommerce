@@ -27,11 +27,6 @@ RouteHandler::post('/send_message', Medians\Help\Application\HelpMessageControll
 RouteHandler::get('/switch-lang/(:all)', \Medians\DashboardController::class.'@switchLang');
 
 /**
- * Switch the items currency
- */ 
-RouteHandler::get('/switch-currency/(:all)', \Medians\Currencies\Application\CurrencyService::class.'@switchCurrency');
-
-/**
  * Authentication
  */
 RouteHandler::get('/', \Medians\Pages\Application\PageController::class.'@homepage');
@@ -61,8 +56,8 @@ RouteHandler::get('/mobile_api/(:all)', \Medians\MobileAPIController::class.'@ha
  * Cart routes
  */
 RouteHandler::get('/search', \Medians\Products\Application\ProductController::class.'@searchPage');
-RouteHandler::get('/cart', \Medians\Cart\Application\CartController::class.'@cart');
-RouteHandler::get('/wishlist', \Medians\Cart\Application\WishlistController::class.'@wishlist');
+RouteHandler::get('/upload', \Medians\Media\Application\MediaItemController::class.'@upload_page');
+RouteHandler::get('/media/edit/(:all)', \Medians\Media\Application\MediaItemController::class.'@upload_info');
 RouteHandler::get('/compare', \Medians\Cart\Application\CompareController::class.'@compare');
 RouteHandler::get('/checkout', \Medians\Cart\Application\CartController::class.'@checkout');
 RouteHandler::get('/invoice/(:all)', \Medians\Invoices\Application\InvoiceController::class.'@invoicePage');
@@ -118,8 +113,6 @@ if(!empty($app->auth()))
     RouteHandler::post('/api/(:all)', \Medians\APIController::class.'@handle');
     RouteHandler::post('/api', \Medians\APIController::class.'@handle');
 
-    RouteHandler::get('/admin/load_currencies', \Medians\Currencies\Application\CurrencyService::class.'@load');
-
     // API GET requests
     RouteHandler::get('/api/(:all)', \Medians\APIController::class.'@handle');
 
@@ -171,16 +164,16 @@ if(!empty($app->auth()))
     RouteHandler::get('/admin/stock', Medians\Products\Application\ProductStockController::class.'@index');
 
     /**
-    * @return Categories
+    * @return Genres
     */
-    RouteHandler::get('/admin/product_categories', Medians\Products\Application\CategoryController::class.'@index');
-    RouteHandler::get('/admin/product_categories/new', Medians\Products\Application\CategoryController::class.'@create');
-    RouteHandler::get('/admin/product_categories/(:all)', Medians\Products\Application\CategoryController::class.'@category');
+    RouteHandler::get('/admin/genres', Medians\Categories\Application\GenreController::class.'@index');
+    RouteHandler::get('/admin/genres/(:all)', Medians\Categories\Application\GenreController::class.'@genre');
 
     /**
-    * @return Brands
+    * @return Moods
     */
-    RouteHandler::get('/admin/brands', Medians\Brands\Application\BrandController::class.'@index');
+    RouteHandler::get('/admin/moods', Medians\Categories\Application\MoodController::class.'@index');
+    RouteHandler::get('/admin/moods/(:all)', Medians\Categories\Application\MoodController::class.'@mood');
 
     /**
     * @return Shipping
@@ -233,8 +226,6 @@ if(!empty($app->auth()))
     /** @return invoice */
     RouteHandler::get('/admin/invoices', \Medians\Invoices\Application\InvoiceController::class.'@index');
 
-    /** @return Currencies */
-    RouteHandler::get('/admin/currencies', \Medians\Currencies\Application\CurrencyController::class.'@index');
 
     /** @return Hooks */
     RouteHandler::get('/admin/hooks', \Medians\Hooks\Application\HookController::class.'@index');
@@ -366,6 +357,7 @@ RouteHandler::get('/assets', \Medians\Media\Application\MediaController::class.'
  * Streaming multi-media types
  */
 RouteHandler::get('/stream', \Medians\Media\Application\MediaController::class.'@stream'); 
+RouteHandler::get('/stream_audio', \Medians\Media\Application\MediaController::class.'@stream_audio'); 
 
 /**
  * Load sub-pages

@@ -147,12 +147,11 @@ export default
                     break;  
 
                 case 'delete':
-                    deleteByKey('category_id', data, 'ProductCategory.delete');
+                    deleteByKey('category_id', data, (content.value.model ?? 'Category')+'.delete');
                     break;  
 
                     
                 case 'close':
-                    
                     showEditSide.value = false;
                     activeItem.value = {};
                     break;

@@ -71,10 +71,6 @@ class GetStartedController
 				'value' => '/uploads/img/letters/'.strtolower(substr($user->first_name, 0, 1)).'.png'
 			],
 			[
-				'code' => 'currency',
-				'value' => 'USD'
-			],
-			[
 				'code' => 'allow_applicants',
 				'value' => 'on'
 			],

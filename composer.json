@@ -26,7 +26,8 @@
         "onesignal/onesignal-php-api": "*@dev",
         "php-http/httplug": "^2.4",
         "stripe/stripe-php": "^14.0",
-        "everapi/currencyapi-php": "^1.0"
+        "everapi/currencyapi-php": "^1.0",
+        "james-heinrich/getid3": "^1.9"
     },
     "config": {
         "allow-plugins": {

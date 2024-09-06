@@ -3,7 +3,6 @@
 namespace Medians\Settings\Domain;
 
 use Shared\dbaser\CustomModel;
-use Medians\Currencies\Domain\Currency;
 
 
 
@@ -24,10 +23,5 @@ class SystemSettings extends CustomModel
 
 	// public $timestamps = false;
 
-
-	public function currency()
-	{
-		return $this->hasOne(Currency::class, 'code', 'value');
-	}
 
 }

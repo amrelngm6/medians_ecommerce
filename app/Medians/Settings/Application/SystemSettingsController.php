@@ -4,7 +4,6 @@ namespace Medians\Settings\Application;
 use \Shared\dbaser\CustomController;
 
 use Medians\Settings\Infrastructure\SystemSettingsRepository;
-use Medians\Currencies\Infrastructure\CurrencyRepository;
 use Medians\Languages\Infrastructure\LanguageRepository;
 
 
@@ -18,8 +17,6 @@ class SystemSettingsController extends CustomController
 
 	protected $app;
 
-	protected $currencyRepo;
-	
 	protected $languageRepo;
 	
 	public $updated = true;
@@ -32,8 +29,6 @@ class SystemSettingsController extends CustomController
 		$this->app = new \config\APP;
 
 		$this->repo = new SystemSettingsRepository();
-
-		$this->currencyRepo = new CurrencyRepository();
 
 		$this->languageRepo = new LanguageRepository();
 
@@ -122,7 +117,6 @@ class SystemSettingsController extends CustomController
 		return render('system_settings', [
 		        'load_vue' => true,
 		        'setting' => $this->getAll(),
-		        'currency' => $this->currency(),
 		        'fillable' => $this->fillable(),
 	        	'title' => translate('System_Settings'),
 	    ]);
@@ -140,13 +134,7 @@ class SystemSettingsController extends CustomController
 	{	
 		$data = $this->repo->getAll();
 		$output = $data ? array_column(json_decode($data), 'value', 'code') :  [];
-		$_SESSION['currency'] = $_SESSION['currency'] ??  $output['currency'];
 		return $output;
-	}
-
-	public function currency() 
-	{	
-		return $this->currencyRepo->load($_SESSION['currency']);
 	}
 
 

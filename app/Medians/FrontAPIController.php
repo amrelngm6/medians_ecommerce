@@ -76,8 +76,12 @@ class FrontAPIController extends CustomController
 					return printResponse((new Help\Application\HelpMessageController())->store());
 					break;
 					
-				case 'Cart.create':
-					return printResponse((new Cart\Application\CartController())->store());
+				case 'MediaItem.create':
+					return printResponse((new Media\Application\MediaItemController())->store());
+					break;
+
+				case 'MediaItem.upload':
+					return printResponse((new Media\Application\MediaItemController())->upload());
 					break;
 	
 				case 'Wishlist.create':

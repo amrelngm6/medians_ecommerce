@@ -38,7 +38,7 @@
                                 <div class="card-title"><h2 v-text="translate('Details')"></h2></div>
                             </div>
                             <div class="card-body pt-0">
-                                <label class="form-label" v-text="translate('Main Category')"></label>
+                                <label class="form-label" v-text="translate('Parent')"></label>
                                 <form_field @callback="(val) => {activeItem.parent_id = val.parent_id}"  :item="activeItem" :column="{key:'parent_id',title: translate('Main Category') , column_type:'select', text_key: 'name', column_key: 'category_id', data: categories}" ></form_field>
                             </div>
                         </div>
@@ -286,7 +286,8 @@ export default
                 }
 
                 let type = array.category_id > 0 ? 'update' : 'create';
-                params.append('type', 'ProductCategory.' + type)
+                let model = content.value.model ?? 'Category';
+                params.append('type', model + '.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
                     handleAccess(response)
                 })

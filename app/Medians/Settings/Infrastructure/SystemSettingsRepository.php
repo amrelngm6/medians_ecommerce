@@ -48,7 +48,7 @@ class SystemSettingsRepository
 	{
 		try {
 
-			return SystemSettings::with('currency')->get();
+			return SystemSettings::get();
 
 		} catch (\Exception $e) {
     		throw new \Exception($e->getMessage(), 1);

@@ -95,7 +95,6 @@ function loadConfig($template, $data)
     $data['app']->customer = $app->customer_auth();
     $data['app']->setting = $setting;
     $data['template'] = $setting['template'] ?? 'default';
-    $data['app']->currency = $app->currency();
     $data['menu'] = $app->menu();
     $data['langs'] = $languages;
     $data['startdate'] = !empty($app->request()->get('start')) ? $app->request()->get('start') : date('Y-m-d');
@@ -172,7 +171,7 @@ function errorPage($data)
 {
     $app = new \config\APP;
     $settings = $app->SystemSetting();
-    echo $app->template()->render('views/front/'.$settings['template'].'/error.html.twig', [
+    echo $app->template()->render('views/front/error.html.twig', [
         'title' => 'Error',
         'msg' => $data,
         'template'  => $setting['template'] ?? 'default',
