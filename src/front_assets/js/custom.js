@@ -69,11 +69,9 @@ function updateAudio(e, $elem) {
 		
 	var y = Math.floor((value / 100) * maxduration);
 
-	setTimeout(function(){
-		audio.currentTime = 14.421;
-		console.log(audio.currentTime)
-		// audio.play()
-	}, 1000)
+	audio.pause()
+	audio.currentTime = y;
+	audio.play()
 
 }
 
@@ -108,9 +106,9 @@ function initAudioPlayer(player, index) {
 	play.on('click', () => {
 		console.log('Clicked')
 		if (audio.paused) {
-			// $('audio').each((index, el) => {
-			// 	$('audio')[index].pause();
-			// });
+			$('audio').each((index, el) => {
+				$('audio')[index].pause();
+			});
 			$('.js-audio').removeClass('playing');
 			$('.js-audio').parent().removeClass('active');
 			audio.play();
@@ -120,9 +118,9 @@ function initAudioPlayer(player, index) {
 		} else {
 
 			audio.pause();
-			// player.removeClass('playing');
-			// player.parent().removeClass('active');
-			// player.addClass('paused');
+			player.removeClass('playing');
+			player.parent().removeClass('active');
+			player.addClass('paused');
 		}
 	});
 

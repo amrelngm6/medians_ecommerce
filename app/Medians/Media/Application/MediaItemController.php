@@ -113,9 +113,7 @@ class MediaItemController extends CustomController
         $filePath = $_SERVER['DOCUMENT_ROOT']. $this->repo->_dir. $file;
         $outputPath = $_SERVER['DOCUMENT_ROOT']. $this->repo->_dir. str_replace(['mp3','wav','ogg'], 'png', $file);
         
-        echo ($ffmpeg.' -i '.$filePath.'  -filter_complex "showwavespic=s=1024x200" -frames:v 1  '.$outputPath.' ');
         $shell = shell_exec($ffmpeg.' -i '.$filePath.'  -filter_complex "showwavespic=s=1024x200" -frames:v 1  '.$outputPath.' ');
-        echo $shell;
         return $shell;
     }
 
