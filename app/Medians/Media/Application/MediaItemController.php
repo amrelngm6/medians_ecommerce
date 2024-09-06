@@ -59,14 +59,14 @@ class MediaItemController extends CustomController
         if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.$ext, '.png', $filePath)))
         {
             $this->repo->_dir = 'audio';
-            $this->generateWave($file);
+            $generateWave = $this->generateWave($file);
         }
         
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/upload-step2.html.twig', [
                 'app' => $this->app,
-                'item' => $this->mediaItemRepo->find($media_id)
+                'item' => $item
             ], 'output'));
             
 		} catch (\Exception $e) {
