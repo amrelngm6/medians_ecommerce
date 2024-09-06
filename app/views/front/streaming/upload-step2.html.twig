@@ -2,8 +2,7 @@
 
 <div class=" w-full">
 
-    <div class="w-full flex gap gap-2" id="main-container" x-data="{selected_genres: {{item.genres}} 
-    , genres: {{ genres }}}">
+    <div class="w-full flex gap gap-2" id="main-container" x-data="{title:'{{item.name}}', selected_genres: {{item.genres}}, genres: {{ genres }}}">
         
         <div  class="lg:fixed bg-white dark:bg-gray-900 h-screen">
             {% include 'views/front/' ~ template ~ '/includes/app_sidebar.html.twig' %}
@@ -26,6 +25,7 @@
                             <input id="imageInput" type="file" name="file" class="hidden" />
                         </label>
                         <div class="w-full">
+                            <h2 x-text="title"></h2>
                             {% include 'views/front/'~app.SystemSetting.template ~'/single-player.html.twig' %}        
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                     <hr class="opacity-30 my-2" />
                     <div class="grid-cols-2 grid gap-10">
                         <div class="text-primary w-full block">
-                            <input name="params[name]" placeholder="{{lang.translate('Item Name')}} *" value="{{item.name}}" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
+                            <input name="params[name]" placeholder="{{lang.translate('Item Name')}} *" x-model="title" value="{{item.name}}" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
                         </div>
                         <div class="text-primary w-full block relative">
                             <span class="w-6 absolute my-2 mx-4 left-[90%] right-[90%]"><img src="/src/front_assets/svg/down.svg" /></span>
