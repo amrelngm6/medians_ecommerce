@@ -52,17 +52,15 @@ function runAudio()
 		let $this = $(this);
 		let $elem = $this.closest('.js-audio');
 		
-		updateAudio(e, $elem);
+		updateAudio(e.handle.value, $elem);
 		$this.addClass('active');
 	});
 }
 
 
 function updateAudio(e, $elem) {
-	audio.pause()
-	console.log('update seek audio')
-	let value = e.handle.value;
-	// var thisPlayer = el.find('.js-audio'),
+
+	let value = e;
 	var play = $elem.find('.play-pause'),
 		maxduration = audio.duration;
 
@@ -177,6 +175,11 @@ function initAudioPlayer(player, index) {
 		// Calculate the percentage
 		var percentage = (clickPosition / elementWidth) * 100;
 		
+		
+		let $elem = this.closest('.js-audio');
+		
+		updateAudio(Math.floor(percentage), $elem);
+
 		// Display the result
 		console.log("Click position: " + percentage.toFixed(2) + "%");
 	});
