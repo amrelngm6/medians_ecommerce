@@ -19,8 +19,8 @@
                 <div class="w-full flex gap-6 overflow-hidden">
                     <div class="slide__audio js-audio pt-7">
                         <audio class="slide__audio-player" controls data-id="{{item.media_id}}" data-wave-id="wave-{{item.media_id}}" data-wave-container="wave-container{{item.media_id}}">
-                            <source src="{{item.main_file.path}}" type="audio/mpeg" />
-                            {# <source src="/stream_audio?audio={{item.main_file.path}}" type="audio/mpeg" /> #}
+                            {# <source src="{{item.main_file.path}}" type="audio/mpeg" /> #}
+                            <source src="/stream_audio?audio={{item.main_file.path}}" type="audio/mpeg" />
                         </audio>
                         <div class="audio__controls">
                             <svg version="1.1" id="circle" width="50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
