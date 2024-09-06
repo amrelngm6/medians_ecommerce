@@ -133,8 +133,11 @@ class MediaItemController extends CustomController
         try {
 
             
-            $picture = $this->mediaRepo->upload($this->app->request()->files->get('file'));
-            $params['picture'] = $this->mediaRepo->_dir.$picture;
+            if (!empty($this->app->request()->files->get('file')))
+            {
+                $picture = $this->mediaRepo->upload($this->app->request()->files->get('file'));
+                $params['picture'] = $this->mediaRepo->_dir.$picture;
+            }
 
             if ($this->repo->update($params))
             {
