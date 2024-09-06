@@ -175,8 +175,9 @@ function initAudioPlayer(player, index) {
 		// Calculate the percentage
 		var percentage = (clickPosition / elementWidth) * 100;
 		
-		
-		let $elem = this.closest('.js-audio');
+			console.log(event.target.parentNode.closest('.js-audio'))
+			console.log(this)
+		let $elem = event.parent().closest('.js-audio');
 		
 		updateAudio(Math.floor(percentage), $elem);
 

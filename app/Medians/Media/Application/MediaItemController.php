@@ -94,14 +94,14 @@ class MediaItemController extends CustomController
             $this->generateWave($file);
 			// $output2 = shell_exec('ffmpeg -i '.$filePath.' -c copy -map 0 -movflags +faststart '.$encodedFilePath.' ');
 
-            $getID3 = new getID3;
+            // $getID3 = new getID3;
             // Analyze file
-            $fileInfo = $getID3->analyze($filePath);
+            // $fileInfo = $getID3->analyze($filePath);
 		}
 
         return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"media/edit/$save->media_id");
 
-        return $fileInfo;
+        // return $fileInfo;
 		// return json_encode(['data'=> ['message'=>'Uploaded successfully']]);
 	}
 
@@ -110,6 +110,7 @@ class MediaItemController extends CustomController
         $this->repo->_dir = '/uploads/audio';
 
         $ffmpeg = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg';
+        $ffmpeg = 'ffmpeg';
         $filePath = $_SERVER['DOCUMENT_ROOT']. $this->repo->_dir. $file;
         $outputPath = $_SERVER['DOCUMENT_ROOT']. $this->repo->_dir. str_replace(['mp3','wav','ogg'], 'png', $file);
         
