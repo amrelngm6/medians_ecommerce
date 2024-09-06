@@ -16,7 +16,7 @@
 
             
             <div  class=" text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8">
-                <div class="w-full flex gap-6">
+                <div class="w-full flex gap-6 overflow-hidden">
                     <div class="slide__audio js-audio pt-7">
                         <audio class="slide__audio-player" controls data-id="{{item.media_id}}" data-wave-id="wave-{{item.media_id}}" data-wave-container="wave-container{{item.media_id}}">
                             <source src="{{item.main_file.path}}" type="audio/mpeg" />
