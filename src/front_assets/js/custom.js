@@ -64,12 +64,9 @@ function updateAudio(e, $elem) {
 	var play = $elem.find('.play-pause'),
 		maxduration = audio.duration;
 
-		
-	var y = Math.floor((value / 100) * maxduration);
+	var y = (value / 100) * maxduration;
 
-	audio.pause()
 	audio.currentTime = y;
-	audio.play()
 
 }
 
@@ -79,7 +76,6 @@ function initAudioPlayer(player, index) {
 
 	audio = mainAudio[0];
 	audio.load()
-	// getAudioBlog(audio.src)
 
 	let play = player.find('.play-pause'),
 		circle = player.find('#seekbar'),
@@ -95,14 +91,11 @@ function initAudioPlayer(player, index) {
 	mainAudio.on('loadedmetadata', function() {
 		const duration = audio.duration;
 		if (isFinite(duration)) {
-			console.log('Duration:', duration);
 		} else {
-			console.error('Duration is not available or is Infinity.');
 		}
 	});
 	
 	play.on('click', () => {
-		console.log('Clicked')
 		if (audio.paused) {
 			$('audio').each((index, el) => {
 				$('audio')[index].pause();
@@ -127,7 +120,6 @@ function initAudioPlayer(player, index) {
 	});
 
 	mainAudio.on('seeked', (e) => {
-		console.log('seeked')
 	});
 
 	mainAudio.on('timeupdate', (e) => {
@@ -136,13 +128,9 @@ function initAudioPlayer(player, index) {
 		maxduration = audio.duration,
 		calc = totalLength - (currentTime / maxduration * totalLength);
 
-		console.log(maxduration);
-		console.log(convertToTime( parseInt(currentTime)));
-		
 		circle.attr('stroke-dashoffset', calc);
 		
 		let value = (currentTime / maxduration) * 100;
-		console.log(value);
 
 		$('#'+jQuery(audio).data('wave-id')).css('right', '0')
 		$('#'+jQuery(audio).data('wave-id')).css('left', 'auto')
