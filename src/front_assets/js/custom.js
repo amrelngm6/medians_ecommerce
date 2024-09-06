@@ -268,6 +268,13 @@ activeParents.forEach((item, i) => {
 	})
 })
 
+const activeChilds = document.querySelectorAll('.active-child');
+activeChilds.forEach((item, i) => {
+	item.addEventListener('click',function(i){
+		item.parentElement.classList.toggle('active')
+	})
+})
+
 function stickyPlaylist()
 {
 	const sidebar = document.querySelector('#playlist-side');

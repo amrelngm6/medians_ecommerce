@@ -60,7 +60,7 @@ class MediaItem extends CustomModel
 	 
 	public function genres() 
 	{
-		return $this->belongsToMany(Genre::class, MediaGenre::class, 'genre_id', 'genre_id');	
+		return $this->belongsToMany(Genre::class, MediaGenre::class, 'media_id', 'genre_id');	
 	}
 
 	public function media_tags() 

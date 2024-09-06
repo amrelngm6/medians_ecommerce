@@ -2,7 +2,8 @@
 
 <div class=" w-full">
 
-    <div class="w-full flex gap gap-2" id="main-container" x-data="{selected_genres:[], genres: {{ genres }}}">
+    <div class="w-full flex gap gap-2" id="main-container" x-data="{selected_genres: {{item.genres}} 
+    , genres: {{ genres }}}">
         
         <div  class="lg:fixed bg-white dark:bg-gray-900 h-screen">
             {% include 'views/front/' ~ template ~ '/includes/app_sidebar.html.twig' %}
@@ -58,14 +59,16 @@
                         <div class="text-primary w-full block relative">
                             <span class="w-6 absolute my-2 mx-4 left-[90%] right-[90%]"><img src="/src/front_assets/svg/down.svg" /></span>
                             <input placeholder="Genres" class="active-parent cursor-pointer py-2 px-4 w-full rounded-2xl dark:bg-gray-900 dark:border-gray-700 bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
-                            <div class="show-active hidden rounded-2xl w-full top-10 absolute bg-white dark:bg-gray-900 p-4 ">
+                            <div class="show-active active-child hidden rounded-2xl w-full top-10 absolute bg-white dark:bg-gray-900 p-4 ">
                                 <template x-for="genre in genres">
-                                    <span  class="cursor-pointer block"  x-on:click="selected_genres.push(genre)" x-text="genre.name"></span>
+                                    <template x-if="!selected_genres.includes(genre)" >
+                                        <span class="cursor-pointer block"  x-on:click="selected_genres.push(genre)" x-text="genre.name"></span>
+                                    </template>
                                 </template>
                             </div>
-                            <template x-for="genre in selected_genres">
+                            <template x-for="(genre, i) in selected_genres">
                                 <span class="mt-2 text-xs rounded-full py-1 px-2 bg-gray-300 text-gray-800  gap-2 inline-block">    
-                                    <span class="flex gap-2" ><span x-text="genre.name"></span> <img src="/src/front_assets/svg/close.svg" /></span> 
+                                    <span class="flex gap-2" ><span x-text="genre.name"></span> <img x-on:click=" selected_genres.splice(i, 1)" src="/src/front_assets/svg/close.svg" /></span> 
                                     <input type="hidden" name="params[selected_genres][]" x-model="genre.category_id" />
                                 </span> 
                             </template>

@@ -96,7 +96,7 @@ class MediaItemRepository
     	$Object->update( (array) $data);
 
     	// Store languages content
-    	// $this->storeContent($data['files'] ,$Object->media_id);
+    	$this->storeGenres($data['selected_genres'] ,$Object->media_id);
 
     	return $Object;
 
@@ -146,6 +146,28 @@ class MediaItemRepository
 				$fields['sort'] = $value['sort'] ?? 0;	
 
 				$Model = MediaFile::create($fields);
+			}
+	
+			return $Model;		
+		}
+	}
+
+	/**
+	* Save related genres to database
+	*/
+	public function storeGenres($data, $id) 
+	{
+		MediaGenre::where('media_id', $id)->delete();
+		if ($data)
+		{
+			foreach ($data as $key => $value)
+			{
+				$fields = [];
+                
+				$fields['media_id'] = $id;	
+				$fields['genre_id'] = $value;	
+
+				$Model = MediaGenre::create($fields);
 			}
 	
 			return $Model;		
