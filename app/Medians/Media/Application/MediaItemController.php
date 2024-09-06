@@ -58,7 +58,6 @@ class MediaItemController extends CustomController
         $ext = explode('.', $filePath);
         if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.end($ext), '.png', $filePath)))
         {
-            $this->repo->_dir = 'audio';
             $generateWave = $this->generateWave($file);
         }
         
@@ -108,7 +107,7 @@ class MediaItemController extends CustomController
 
     public function generateWave($file)
     {
-        $this->repo->_dir = 'audio';
+        $this->repo->_dir = '/uploads/audio';
 
         $ffmpeg = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg';
         $filePath = $_SERVER['DOCUMENT_ROOT']. $this->repo->_dir. $file;
