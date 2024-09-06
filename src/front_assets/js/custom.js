@@ -167,19 +167,26 @@ function initAudioPlayer(player, index) {
 
 	document.getElementById(jQuery(audio).data('wave-container')).addEventListener("click", function(event) {
 		// Get the width of the element
-		var elementWidth = this.clientWidth;
-		
 		// Get the position of the click relative to the left edge of the element
-		var clickPosition = event.offsetX;
-		
 		// Calculate the percentage
-		var percentage = (clickPosition / elementWidth) * 100;
-		
+		var percentage = (event.offsetX / this.clientWidth) * 100;
 		
 		let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
 		
 		updateAudio(percentage.toFixed(2), $elem);
+		// Display the result
+		console.log("Click position: " + percentage.toFixed(2) + "%");
+	});
 
+	document.getElementById(jQuery(audio).data('wave-id')).addEventListener("click", function(event) {
+		// Get the width of the element
+		// Get the position of the click relative to the left edge of the element
+		// Calculate the percentage
+		var percentage = (event.offsetX / this.clientWidth) * 100;
+		
+		let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
+		
+		updateAudio(percentage.toFixed(2), $elem);
 		// Display the result
 		console.log("Click position: " + percentage.toFixed(2) + "%");
 	});
