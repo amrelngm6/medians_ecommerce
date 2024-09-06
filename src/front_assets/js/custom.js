@@ -165,7 +165,7 @@ function initAudioPlayer(player, index) {
 
 	});
 
-	document.getElementById(jQuery(audio).data('wave-id')).addEventListener("click", function(event) {
+	document.getElementById(jQuery(audio).data('wave-container')).addEventListener("click", function(event) {
 		// Get the width of the element
 		var elementWidth = this.clientWidth;
 		

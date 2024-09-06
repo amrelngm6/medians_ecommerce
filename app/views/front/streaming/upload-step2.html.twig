@@ -18,7 +18,7 @@
             <div  class=" text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8">
                 <div class="w-full flex gap-6">
                     <div class="slide__audio js-audio pt-4">
-                        <audio class="slide__audio-player" controls data-id="{{item.media_id}}" data-wave-id="wave-{{item.media_id}}">
+                        <audio class="slide__audio-player" controls data-id="{{item.media_id}}" data-wave-id="wave-{{item.media_id}}" data-wave-container="wave-container{{item.media_id}}">
                             <source src="{{item.main_file.path}}" type="audio/mpeg" />
                             {# <source src="/stream_audio?audio={{item.main_file.path}}" type="audio/mpeg" /> #}
                         </audio>
@@ -39,7 +39,7 @@
                             <button class="play-pause"></button>
                         </div>
                     </div>
-                    <div class="relative h-28 w-full" > 
+                    <div class="relative h-28 w-full" id="wave-container{{item.media_id}}" > 
                         <div id="wave-{{item.media_id}}"  class="absolute w-full h-full top-0 right-0  opacity-50 bg-white z-50"> </div>
                         <img class="w-full left-0 top-0 bottom-0 my-auto absolute" src="/stream?thumbnail=100&image={{item.main_file.wave}}" />
                     </div>
