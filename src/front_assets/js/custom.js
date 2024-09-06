@@ -178,7 +178,7 @@ function initAudioPlayer(player, index) {
 		
 		let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
 		
-		updateAudio(Math.floor(percentage), $elem);
+		updateAudio(percentage.toFixed(2), $elem);
 
 		// Display the result
 		console.log("Click position: " + percentage.toFixed(2) + "%");
