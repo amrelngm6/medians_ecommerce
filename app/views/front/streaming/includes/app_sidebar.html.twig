@@ -4,39 +4,39 @@
                 
                 <div class="py-4 lg:px-0 px-1 w-56 sidebar lg:relative fixed left-0 z-10 top-0 overflow-hidden h-full">
                     <div class="w-full flex gap-4 text-primary">
-                        <img src="svg/soundcloud.svg" />
-                        <span class="p-1 dark:text-orange-500 "> Medians Streaming</span>
+                        <img src="/src/front_assets/svg/soundcloud.svg" />
+                        <span class="p-1 dark:text-orange-500 "> {{app.SystemSetting.sitename}}</span>
                     </div>
                     <hr class="lg:block hidden my-4  opacity-30" />
-                    <div class="lg:block hidden pt-2 px-1 text-slate-400 text-opacity-70  text-base font-normal tracking-wide">MENU</div>
+                    <div class="lg:block hidden pt-2 px-1 text-slate-400 text-opacity-70  text-base font-normal tracking-wide">{{lang.translate('MENU')}}</div>
                     <ul class="pt-2 font-normal ">
                         <li class="w-full   " id="home">
-                            <a href="./" class="w-full flex gap gap-4  ">
+                            <a href="/" class="w-full flex gap gap-4  ">
                                 <span class="min-w-8  text-center relative my-2">
-                                    <img src="svg/home.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="svg/active-home.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
+                                    <img src="/src/front_assets/svg/home.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
+                                    <img src="/src/front_assets/svg/active-home.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50">Home</span>
+                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50">{{lang.translate('Home')}}</span>
                             </a>
                         </li>
 
                         <li class="w-full   " id="discover">
-                            <a href="./discover.html" class="w-full flex gap gap-4  ">
+                            <a href="/discover" class="w-full flex gap gap-4  ">
                                 <span class="min-w-8  text-center relative my-2">
-                                    <img src="svg/cloud-bolt.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="svg/active-cloud-bolt.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
+                                    <img src="/src/front_assets/svg/cloud-bolt.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
+                                    <img src="/src/front_assets/svg/active-cloud-bolt.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">Discover</span>
+                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Discover')}}</span>
                             </a>
                         </li>
 
                         <li class="w-full   " id="playlists">
-                            <a href="./playlists.html" class="w-full flex gap gap-4  ">
+                            <a href="/playlists" class="w-full flex gap gap-4  ">
                                 <span class="min-w-8  text-center relative my-2">
-                                    <img src="svg/playlist.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="svg/active-playlist.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
+                                    <img src="/src/front_assets/svg/playlist.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
+                                    <img src="/src/front_assets/svg/active-playlist.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">Playlists</span>
+                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Playlists')}}</span>
                             </a>
                         </li>
                         
@@ -44,10 +44,10 @@
                         <li class="w-full   " id="likes">
                             <a href="blank.html" class="w-full flex gap gap-4  ">
                                 <span class="min-w-8  text-center relative my-2">
-                                    <img src="svg/heart.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="svg/active-heart.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
+                                    <img src="/src/front_assets/svg/heart.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
+                                    <img src="/src/front_assets/svg/active-heart.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">Likes</span>
+                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Likes')}}</span>
                             </a>
                         </li>
                         
@@ -55,10 +55,10 @@
                         <li class="w-full   " id="artist">
                             <a href="authors.html" class="w-full flex gap gap-4  ">
                                 <span class="min-w-8  text-center relative my-2">
-                                    <img src="svg/heart.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="svg/active-heart.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
+                                    <img src="/src/front_assets/svg/heart.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
+                                    <img src="/src/front_assets/svg/active-heart.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">Artists</span>
+                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Artists')}}</span>
                             </a>
                         </li>
                         
@@ -66,20 +66,20 @@
                         <li class="w-full   ">
                             <a href="#!" class="w-full flex gap gap-4  ">
                                 <span class="min-w-8  text-center relative my-2">
-                                    <img src="svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
+                                    <img src="/src/front_assets/svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
+                                    <img src="/src/front_assets/svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">Notifications</span>
+                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Notifications')}}</span>
                             </a>
                         </li>
                         <li><hr class="my-2" /></li>
                         <li class="w-full " id="upload">
                             <a href="/upload" class="w-full flex gap gap-4  ">
                                 <span class="min-w-8  text-center relative my-2">
-                                    <img src="svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
+                                    <img src="/src/front_assets/svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
+                                    <img src="/src/front_assets/svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">Upload</span>
+                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Upload')}}</span>
                             </a>
                         </li>
 

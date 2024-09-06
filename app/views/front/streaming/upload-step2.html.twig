@@ -44,13 +44,11 @@
                         <img id="wave-container{{item.media_id}}" class="w-full left-0 top-0 bottom-0 my-auto absolute" src="/stream?thumbnail=100&image={{item.main_file.wave}}" />
                     </div>
                 </div>
-                <form action="/front_api/update" method="post" enctype="multipart/form-data" id="upload-step" class="ajax-form w-full">
+                <form action="/front_api/update" method="post" enctype="multipart/form-data" id="upload-step" class="ajax-form w-full pt-10">
                     <div class="loader absolute w-full h-full left-0 top-0 bg-white opacity-50 "></div>
                 
                     <input type="hidden" name="type" value="MediaItem.update" />
                     <input type="hidden" name="params[media_id]" value="{{item.media_id}}" />
-                    
-
                     
                     <div class=" text-primary"><h4 class="text-xl dark:text-gray-400">{{lang.translate('Basic info')}}</h4></div>
                     <hr class="opacity-30 my-6" />
