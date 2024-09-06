@@ -56,7 +56,7 @@ class MediaItemController extends CustomController
 
         $filePath = $item->main_file->path;
         $ext = explode('.', $filePath);
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.$ext, '.png', $filePath)))
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.end($ext), '.png', $filePath)))
         {
             $this->repo->_dir = 'audio';
             $generateWave = $this->generateWave($file);
