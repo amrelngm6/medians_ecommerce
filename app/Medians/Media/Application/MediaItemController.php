@@ -85,7 +85,6 @@ class MediaItemController extends CustomController
 		$this->app = new \config\APP;
         
 		foreach ($this->app->request()->files as $key => $value) {
-            // print_r();
 			$file = $this->mediaRepo->upload($value, 'audio');
     
             $params = [];
@@ -133,13 +132,17 @@ class MediaItemController extends CustomController
 		
         try {
 
+            
+            $picture = $this->mediaRepo->upload($this->app->request()->files->get('file'));
+            $params['picture'] = $this->mediaRepo->_dir.$picture;
+
             if ($this->repo->update($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0);
             }
 
         } catch (\Exception $e) {
-        	throw new \Exception("Error Processing Request", 1);
+        	throw new \Exception("Error Processing Request".$e->getMessage(), 1);
         }
 	}
 
