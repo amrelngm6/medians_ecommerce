@@ -166,6 +166,21 @@ function initAudioPlayer(player, index) {
 		circle.attr('stroke-dashoffset', totalLength);
 
 	});
+
+	document.getElementById(jQuery(audio).data('wave-id')).addEventListener("click", function(event) {
+		// Get the width of the element
+		var elementWidth = this.clientWidth;
+		
+		// Get the position of the click relative to the left edge of the element
+		var clickPosition = event.offsetX;
+		
+		// Calculate the percentage
+		var percentage = (clickPosition / elementWidth) * 100;
+		
+		// Display the result
+		console.log("Click position: " + percentage.toFixed(2) + "%");
+	});
+	
 }
 
 function convertToTime(num) {
@@ -288,6 +303,7 @@ function stickyPlaylist()
 
 
 jQuery('html').removeClass('dark') 
+
 
 setTimeout(function() {
 
