@@ -91,7 +91,6 @@ class MediaItemController extends CustomController
             $params['name'] = $value->getClientOriginalName();
             $params['description'] = $value->getClientOriginalName();
             $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
-            $params['author_id'] = $this->app->customer_auth()->customer_id ?? 0;
             
             $save = $this->repo->store($params);
 
@@ -118,7 +117,6 @@ class MediaItemController extends CustomController
         $filePath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir. $file;
         $outputPath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir. str_replace(['mp3','wav','ogg'], 'png', $file);
         
-        echo $ffmpeg.' -i '.$filePath.' -filter_complex "showwavespic=s=1024x200:colors=yellow|blue|green" -frames:v 1  '.$outputPath.' ';
         $shell = shell_exec($ffmpeg.' -i '.$filePath.' -filter_complex "showwavespic=s=1024x200:colors=yellow|blue|green" -frames:v 1  '.$outputPath.' ');
         return $shell;
     }
