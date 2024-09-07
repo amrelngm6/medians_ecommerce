@@ -11,8 +11,10 @@
                             </div>
                             <hr class="opacity-30 mb-4" />
 
-                            <div  class="carousel-container" data-count="4">
+                            <div  class="carousel-container flex gap-6" data-count="3" id="top-charts">
+                            {% for genre in genres %}
                                 {% include 'views/front/' ~ template ~ '/includes/genres_list.html.twig' %}
+                            {% endfor %}
                             </div>
 
                         </div>

@@ -200,7 +200,7 @@ class PageController extends CustomController
 		
         $page = $this->repo->homepage();
 
-		$categoryRepo = new \Medians\Products\Infrastructure\CategoryRepository;
+		$categoryRepo = new \Medians\Categories\Infrastructure\CategoryRepository;
 		$mediaItemRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
 
 		$settings = $this->app->SystemSetting();
@@ -214,7 +214,7 @@ class PageController extends CustomController
                 'page' => $page,
                 'app' => $this->app,
 				'explore_items' => $mediaItemRepo->getWithFilter($params),
-				'categories' => $categoryRepo->getGrouped(),
+				'genres' => $categoryRepo->getGenres(),
             ], 'output')));
             
 		} catch (\Exception $e) {
