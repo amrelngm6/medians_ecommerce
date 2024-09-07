@@ -2,7 +2,7 @@
 
 <div class=" w-full">
 
-    <div class="w-full flex gap gap-2" id="main-container" x-data="{title:'{{item.name}}', selected_genres: {{item.genres}}, genres: {{ genres }}}">
+    <div class="w-full flex gap gap-2" id="main-container" x-data="{}">
         
         <div  class="lg:fixed bg-white dark:bg-gray-900 h-screen">
             {% include 'views/front/' ~ template ~ '/includes/app_sidebar.html.twig' %}
@@ -27,8 +27,11 @@
                     </div>
                     <hr class="opacity-30 mb-4" />
 
-                    <div id="top-authors" class="carousel-container" data-count="5"></div>
-                    
+                    <div class="carousel-container" data-count="5">
+                        {# {% for media_item in list.items %} #}
+                        {% include 'views/front/' ~ template ~ '/includes/channel_list.html.twig' %}
+                        {# {% endfor %} #}
+                    </div>
                 </div>
 
 
