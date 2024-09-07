@@ -97,6 +97,7 @@ function initAudioPlayer(player, index) {
 		} else {
 		}
 	});
+
 	function playStyles() {
 		
 		$('.js-audio').removeClass('playing');
@@ -146,7 +147,7 @@ function initAudioPlayer(player, index) {
 		$('#'+jQuery(audioInfo).data('wave-overlay')).css('width', (100 - value)+'%')
 
 		var slider = jQuery(audioInfo).closest('.js-audio').find('.audio__slider');
-		// $(slider).roundSlider('setValue', value);
+		$(slider).roundSlider('setValue', value);
 	});
 
 	mainAudio.on('play', (e) => {
