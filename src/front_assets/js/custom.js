@@ -319,7 +319,7 @@ function stickyPlaylist()
 }
 
 
-jQuery('html').removeClass('dark') 
+// jQuery('html').removeClass('dark') 
 
 
 setTimeout(function() {
