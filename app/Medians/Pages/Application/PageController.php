@@ -201,6 +201,7 @@ class PageController extends CustomController
         $page = $this->repo->homepage();
 
 		$categoryRepo = new \Medians\Products\Infrastructure\CategoryRepository;
+		$mediaItemRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
 
 		$settings = $this->app->SystemSetting();
 
@@ -211,6 +212,7 @@ class PageController extends CustomController
             return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
                 'page' => $page,
                 'app' => $this->app,
+				'explore_items' => $mediaItemRepo->filter(),
 				'categories' => $categoryRepo->getGrouped(),
             ], 'output')));
             

@@ -52,6 +52,46 @@ class MediaItemRepository
 	}
 
 
+	/**
+	 * Load  products with filters
+	 */
+	public function getWithFilter($params)
+	{
+
+			$model = MediaItem::where('status', 'on')
+			->with('genres', 'main_file');
+
+			if (isset($params['prices'])) {
+				$prices = explode(',', $params['prices']);
+				$model = $model->whereBetween('price', $prices);
+			}
+
+			if (isset($params['title'])) {
+				$model = $model->whereHas('lang_content', function($q) use ($params) {
+					$q->where('content', 'LIKE', '%'.$params['title'].'%')->orWhere('title', 'LIKE', '%'.$params['title'].'%');
+				});
+			}
+
+			if (isset($params['sort_by']))
+			{
+				switch ($params['sort_by']) {
+					case 'best':
+						$model = $model->withCount('views')->orderBy('views_count','DESC');
+						break;
+						
+					default:
+						$model = $model->orderBy('product_id','DESC');
+						break;
+				}
+			}
+
+			$totalCount = $model->count();
+
+			$limit = (($params['limit'] ?? 4) * (floatval($params['page'] ?? 1) ?? 1));
+			return ['count' => $totalCount, 'items'=>$model->limit($limit)->get()];
+	 }
+ 
+	
 
 
 

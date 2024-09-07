@@ -2,6 +2,7 @@
 
 namespace Medians\Media\Domain;
 
+use Medians\Views\Domain\View;
 use Medians\Categories\Domain\Genre;
 use Medians\Content\Domain\Content;
 use Medians\Reviews\Domain\Review;
@@ -110,6 +111,11 @@ class MediaItem extends CustomModel
 	public function reviews() 
 	{
 		return $this->morphMany(Review::class , 'item')->where('status', 'on');	
+	}
+	
+	public function views() 
+	{
+		return $this->morphMany(View::class , 'item');	
 	}
 	
 	public function rate() 
