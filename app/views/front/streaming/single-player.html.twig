@@ -1,11 +1,10 @@
-        <div class="w-full flex gap-6 overflow-hidden">
+                            <div class="w-full flex gap-6 overflow-hidden">
                                 <div class="slide__audio js-audio pt-7">
                                     <audio class="slide__audio-player" controls data-id="{{item.media_id}}" data-wave-id="wave-{{item.media_id}}" data-wave-container="wave-container{{item.media_id}}">
                                         <source src="{{item.main_file.path}}" type="audio/mpeg" />
                                         {# <source src="/stream_audio?audio={{item.main_file.path}}" type="audio/mpeg" /> #}
                                     </audio>
                                     {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
-
                                 </div>
                                 <div class="relative h-28 w-full"  > 
                                     <div id="wave-{{item.media_id}}"  class="absolute w-full h-full top-0 right-0  opacity-50 bg-white z-50"> </div>
