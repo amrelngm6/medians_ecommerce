@@ -41,33 +41,8 @@
                 </div>  
                 <div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
                     
-                    <div class="w-full flex">
-                        <div class="slide__audio js-audio">
-                            <audio class="slide__audio-player" controls="">
-                            <source src="./audio/1.mp3" type="audio/mpeg"/>
-                            </audio>
-                            <div class="audio__controls">
-                            <svg version="1.1" id="circle" width="50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
-                                <path id="seekbar" fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
-                            </svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="equalizer" viewBox="0 0 100 100">
-                                <g class="equalizer-group">
-                                    <rect class="bar"></rect>
-                                    <rect class="bar"></rect>
-                                    <rect class="bar"></rect>
-                                    <rect class="bar"></rect>
-                                    <rect class="bar"></rect>
-                                </g>
-                            </svg>
-                            <div class="audio__slider"></div>
-                            <button class="play-pause"></button>
-                            </div>
-                        </div>
-                        
-                        <div  class="relative h-12 w-full ml-10" style="background-position:center; background-size: cover; background-repeat: no-repeat; background-image: url(./audio/waves/white.png);">
-                            <div style="transition: all .5s ease-in-out 0s; " id="track-wave-1" class="absolute dark:bg-gray-900 bg-white opacity-70 h-full left-0 w-full " style="left: 1%;"></div>
-                        </div>
-                        
+                    <div class="w-full ">
+                        {% include 'views/front/'~app.SystemSetting.template ~'/single-player.html.twig' %}        
                     </div>
                     <span class="block pt-10 text-sm text-gray-500">Description</span>
                     <div class="text-primary">
