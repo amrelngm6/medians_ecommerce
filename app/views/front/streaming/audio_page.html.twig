@@ -24,10 +24,10 @@
                         <div class="flex w-full text-white mx-auto text-center relative z-10">
                             <img src="{{item.picture}}"  class="w-40 h-40 lg:w-56 lg:h-56 rounded-full shadow-xl" />
                             <div class="p-8 text-left w-full">
-                                <span>Track</span>
-                                <h1 class="lg:text-2xl text-lg ">She Will Be Loved</h1>
+                                <span>{{Track}}</span>
+                                <h1 class="lg:text-2xl text-lg ">{{item.name}}</h1>
                                 <div class="py-2 font-thin">
-                                    <p class="truncate-text">The most played Bad Meets Evil tracks on Spotify right. most played Bad Meets Evil tracks on Spotify right now.  played Bad Meets Evil tracks on Spotify right. The most played Bad Meets Evil tracks on Spotify right now. </p>
+                                    <p class="truncate-text">{{item.description}} </p>
                                 </div>
                                 <div class="flex gap-4 py-2">
                                     <span class="text-sm text-gray-100">Likes : 108</span>
@@ -44,9 +44,9 @@
                     <div class="w-full ">
                         {% include 'views/front/'~app.SystemSetting.template ~'/single-player.html.twig' %}        
                     </div>
-                    <span class="block pt-10 text-sm text-gray-500">Description</span>
+                    <span class="block pt-10 text-sm text-gray-500">{{lang.translate('Description')}}</span>
                     <div class="text-primary">
-                        <p class="dark:text-gray-400 py-4">The most played Bad Meets Evil tracks on Spotify right. most played Bad Meets Evil tracks on Spotify right now.  played Bad Meets Evil tracks on Spotify right. The most played Bad Meets Evil tracks on Spotify right now.  most played Bad Meets Evil tracks on Spotify right. most played Bad Meets Evil tracks on Spotify right now.  played Bad Meets Evil tracks on Spotify right. The most played Bad Meets Evil tracks on Spotify right now. </p>
+                        <p class="dark:text-gray-400 py-4">{{item.description}}</p>
                     </div>
                     <div class="w-full 	py-10" id="top-followers">
                         <div class=" w-full flex gap-4 text-primary">
