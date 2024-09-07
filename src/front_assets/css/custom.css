@@ -72,7 +72,7 @@ li.active
   overflow: hidden;
   /* For modern browsers that support line-clamp */
   display: -webkit-box;
-  -webkit-line-clamp: 2; /* Number of lines to display */
+  /*-webkit-line-clamp: 2; /* Number of lines to display */
   -webkit-box-orient: vertical;
   /* Fallback for browsers that do not support line-clamp */
   max-height: calc(1.4em * 2); /* Approximate line height * number of lines */
