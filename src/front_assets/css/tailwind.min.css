@@ -1381,8 +1381,16 @@ video {
   min-width: 24rem;
 }
 
+.max-w-40 {
+  max-width: 10rem;
+}
+
 .max-w-6xl {
   max-width: 72rem;
+}
+
+.max-w-72 {
+  max-width: 18rem;
 }
 
 .max-w-96 {
