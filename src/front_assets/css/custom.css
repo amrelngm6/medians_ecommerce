@@ -97,7 +97,7 @@ li.active
     /* background: black; */
     width: 50px;
     top: 20%;
-    margin: 0 auto;
+    /* margin: 0 auto; */
   }
   
   .audio__controls {
