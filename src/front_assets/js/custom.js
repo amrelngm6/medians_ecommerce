@@ -125,6 +125,8 @@ function initAudioPlayer(player, index) {
 				player.parent().removeClass('active');
 				player.addClass('paused');
 				player.parent().parent().find('.wave-frame').addClass('hidden');
+			} else {
+				playStyles()
 			}
 		}
 	});
