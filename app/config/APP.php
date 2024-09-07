@@ -137,6 +137,11 @@ class APP
 		return $session ?? $this->checkAPISession();
 	}
 
+	public function customer_id()
+	{
+		return (new CustomerAuthService())->checkSessionId();
+	}
+
 	/**
 	 * Get session for the Guests
 	 */

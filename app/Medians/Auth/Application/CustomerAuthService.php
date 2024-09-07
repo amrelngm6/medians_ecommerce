@@ -522,6 +522,20 @@ class CustomerAuthService
 
 
 	/**
+	 * Check session id  
+	 * 
+	 * @return ? CustomerAuthModel
+	 */ 
+	public function checkSessionId($code = null) 
+	{
+		$this->CustomerAuthModel = new CustomerAuthModel($code);
+		
+		return $this->CustomerAuthModel->checkSession($code);
+
+	}
+
+
+	/**
 	 * Check session is valid or not 
 	 * for Mobile / API Tokens
 	 * 
