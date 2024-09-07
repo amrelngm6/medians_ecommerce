@@ -58,7 +58,7 @@ RouteHandler::get('/mobile_api/(:all)', \Medians\MobileAPIController::class.'@ha
 RouteHandler::get('/search', \Medians\Products\Application\ProductController::class.'@searchPage');
 RouteHandler::get('/upload', \Medians\Media\Application\MediaItemController::class.'@upload_page');
 RouteHandler::get('/media/edit/(:all)', \Medians\Media\Application\MediaItemController::class.'@upload_info');
-RouteHandler::get('/compare', \Medians\Cart\Application\CompareController::class.'@compare');
+RouteHandler::get('/discover', \Medians\Media\Application\MediaItemController::class.'@discover');
 RouteHandler::get('/checkout', \Medians\Cart\Application\CartController::class.'@checkout');
 RouteHandler::get('/invoice/(:all)', \Medians\Invoices\Application\InvoiceController::class.'@invoicePage');
 RouteHandler::get('/create-payment-intent', \Medians\Transactions\Application\TransactionController::class.'@createPaymentIntent');

@@ -51,6 +51,28 @@ class MediaItemController extends CustomController
     /**
      * Upload page for frontend
      */
+    public function discover()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $list = $this->repo->getWithFilter($this->app->params());
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/discover.html.twig', [
+                'app' => $this->app,
+                'list' => $list,
+                'genres' => $this->categoryRepo->getGenres(),
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+    /**
+     * Upload page for frontend
+     */
     public function upload_info($media_id)
     {
 		$settings = $this->app->SystemSetting();
