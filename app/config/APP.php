@@ -80,6 +80,14 @@ class APP
 		return $this;
 	}
 
+	/**
+	 * Is dark
+	 */
+	public function is_dark()
+	{
+		$_COOKIE['is_dark'] = $this->SystemSetting()->is_dark ?? null;
+		return isset($_COOKIE['is_dark']) ? true : false;
+	}
 
 	/**
 	 * Load all setting for a Business 
