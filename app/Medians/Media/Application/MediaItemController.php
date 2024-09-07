@@ -140,9 +140,6 @@ class MediaItemController extends CustomController
                 }
             }
             
-
-            $params['author_id'] = $this->app->customer_auth() ?? 0;
-
             if ($this->repo->update($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0);
