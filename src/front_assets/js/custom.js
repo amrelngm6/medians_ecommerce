@@ -72,9 +72,11 @@ function updateAudio(e, $elem) {
 
 function initAudioPlayer(player, index) {
 
-	let mainAudio = player.find('audio');
+	let audioInfo = player.find('.slide__audio-player');
+	let mainAudio = jQuery('audio');
 
 	audio = mainAudio[0];
+	audio.src = audioInfo.attr('data-path');
 	audio.load()
 
 	let play = player.find('.play-pause'),
