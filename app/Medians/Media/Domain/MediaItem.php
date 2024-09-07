@@ -90,10 +90,13 @@ class MediaItem extends CustomModel
 		$query = MediaItem::query();
 		
 		print_r(explode(' ', $this->name));
-
+		
         foreach (explode(' ', $this->name) as $word) {
-			$query->orWhere('name', 'LIKE', '%' . $word . '%');
-			$query->where('media_id', '!=' , $this->media_id);
+			$query->where('name', 'LIKE', '%' . $word . '%')
+			->where('media_id', '!=' , $this->media_id)
+			->orWhere('description', 'LIKE', '%' . $word . '%')
+			->where('media_id', '!=' , $this->media_id);
+
         }
 
 
