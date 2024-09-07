@@ -80,14 +80,14 @@ function initAudioPlayer(player, index) {
 	audio.load()
 
 	let play = player.find('.play-pause'),
-		circle = player.find('#seekbar'),
+		circle = player.find('.seekbar'),
 		getCircle = circle.get(0),
 		totalLength = getCircle.getTotalLength();
 
 		
 	circle.attr({
 		'stroke-dasharray': totalLength,
-		'stroke-dashoffset': totalLength,
+		'stroke-dashoffset': 0,
 	});
 
 	mainAudio.on('loadedmetadata', function() {
@@ -119,12 +119,7 @@ function initAudioPlayer(player, index) {
 			playStyles()
 
 		} else {
-		
-			if (audio.paused ) {
-				playStyles()
-
-			} else {
-	
+			if (!audio.paused ) {
 				audio.pause();
 				player.removeClass('playing');
 				player.parent().removeClass('active');
@@ -132,13 +127,6 @@ function initAudioPlayer(player, index) {
 				player.parent().parent().find('.wave-frame').addClass('hidden');
 			}
 		}
-	});
-
-	mainAudio.on('error', (e) => {
-		console.log(e)
-	});
-
-	mainAudio.on('seeked', (e) => {
 	});
 
 	mainAudio.on('timeupdate', (e) => {
@@ -155,8 +143,8 @@ function initAudioPlayer(player, index) {
 		$('#'+jQuery(audioInfo).data('wave-id')).css('left', 'auto')
 		$('#'+jQuery(audioInfo).data('wave-id')).css('width', (100 - value)+'%')
 
-		var slider = mainAudio.closest('.js-audio').find('.audio__slider');
-		$(slider).roundSlider('setValue', value);
+		var slider = jQuery(audioInfo).closest('.js-audio').find('.audio__slider');
+		// $(slider).roundSlider('setValue', value);
 	});
 
 	mainAudio.on('play', (e) => {

@@ -4,10 +4,6 @@
                                                 
                                                 <img src="{{media_item.picture}}" width="48" height="48" class="rounded-lg" />
                                                 <div class="slide__audio js-audio">
-                                                    {# <audio class="slide__audio-player" controls data-id="{{media_item.media_id}}" data-wave-id="wave-{{media_item.media_id}}" data-wave-container="wave-container{{media_item.media_id}}">
-                                                        <source src="{{media_item.main_file.path}}" type="audio/mpeg"/>
-                                                    </audio>
-                                                     #}
                                                     <div class="slide__audio-player" data-path="{{media_item.main_file.path}}" data-id="{{media_item.media_id}}" data-wave-id="wave-{{media_item.media_id}}" data-wave-container="wave-container{{media_item.media_id}}">
                                                     </div>
                                                     {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
