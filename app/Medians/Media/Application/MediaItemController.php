@@ -91,6 +91,7 @@ class MediaItemController extends CustomController
             $params['name'] = $value->getClientOriginalName();
             $params['description'] = $value->getClientOriginalName();
             $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
+            $params['author_id'] = $this->app->customer_auth()->customer_id ?? 0;
             
             $save = $this->repo->store($params);
 
@@ -131,13 +132,13 @@ class MediaItemController extends CustomController
 		$params = $this->app->params();
 		
         try {
-
             
             if (!empty($this->app->request()->files->get('file')))
             {
                 $picture = $this->mediaRepo->upload($this->app->request()->files->get('file'));
                 $params['picture'] = $this->mediaRepo->_dir.$picture;
             }
+            $params['author_id'] = $this->app->customer_auth()->customer_id ?? 0;
 
             if ($this->repo->update($params))
             {
