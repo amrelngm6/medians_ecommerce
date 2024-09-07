@@ -145,6 +145,10 @@ class APIController extends CustomController
 					$return = (new Categories\Application\GenreController)->store();
 					break;
 					
+				case 'Category.create':
+					$return = (new Categories\Application\GenreController)->store();
+					break;
+					
 				case 'Mood.create':
 					$return = (new Categories\Application\MoodController)->store();
 					break;
