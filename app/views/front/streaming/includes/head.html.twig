@@ -16,6 +16,6 @@
     <link rel="icon" type="image.webp" sizes="16x16" href="/uploads/images/favicon.webp">
 
     {% include 'views/front/'~ template ~'/includes/head_assets.html.twig' %}
-
+    <script> var rootURL = '{{app.CONF.url|slice(0,-1)}}'; </script>
 </head>
 <body class="p-0 m-0 {{page.lang == 'ar' ? 'rtl' : 'ltr'}} dark:bg-gray-800 bg-gray-50">

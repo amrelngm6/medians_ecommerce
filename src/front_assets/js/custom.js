@@ -99,31 +99,48 @@ function initAudioPlayer(player, index) {
 	});
 	
 	play.on('click', () => {
-		if (audio.paused) {
+		if (audio.src != rootURL+audioInfo.attr('data-path'))
+		{
+			audio.src = audioInfo.attr('data-path');
+			audio.load()
+
 			$('audio').each((index, el) => {
 				$('audio')[index].pause();
 			});
 			$('.js-audio').removeClass('playing');
 			$('.js-audio').parent().removeClass('active');
-
-			if (audio.src != audioInfo.attr('data-path'))
-			{
-				audio.src = audioInfo.attr('data-path');
-				audio.load()
-			}
 			
 			audio.play();
 			player.removeClass('paused');
 			player.addClass('playing');
 			player.parent().addClass('active');
-			player.parent().find('.wave-frame').removeClass('hidden');
-		} else {
+			jQuery('.wave-frame').addClass('hidden');
+			player.parent().parent().find('.wave-frame').removeClass('hidden');
 
-			audio.pause();
-			player.removeClass('playing');
-			player.parent().removeClass('active');
-			player.addClass('paused');
-			player.parent().find('.wave-frame').addClass('hidden');
+		} else {
+		
+			if (audio.paused ) {
+			console.log(2)
+				
+				$('.js-audio').removeClass('playing');
+				$('.js-audio').parent().removeClass('active');
+				
+				audio.play();
+				player.removeClass('paused');
+				player.addClass('playing');
+				player.parent().addClass('active');
+				jQuery('.wave-frame').addClass('hidden');
+				player.parent().parent().find('.wave-frame').removeClass('hidden');
+
+			} else {
+				console.log(3)
+	
+				audio.pause();
+				player.removeClass('playing');
+				player.parent().removeClass('active');
+				player.addClass('paused');
+				player.parent().parent().find('.wave-frame').addClass('hidden');
+			}
 		}
 	});
 
