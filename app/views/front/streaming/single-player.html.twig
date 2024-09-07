@@ -1,7 +1,7 @@
 
                             <div class="w-full flex gap-6 overflow-hidden">
                                 <div class="slide__audio js-audio pt-7">
-                                    <div class="slide__audio-player" controls data-id="{{item.media_id}}" data-wave-id="wave-{{item.media_id}}" data-wave-overlay="wave-overlay{{item.media_id}}">
+                                    <div class="slide__audio-player" data-path="{{item.main_file.path}}" data-id="{{item.media_id}}" data-wave-id="wave-{{item.media_id}}" data-wave-overlay="wave-overlay{{item.media_id}}">
                                     </div>
                                     {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
                                 </div>
