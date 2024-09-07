@@ -208,11 +208,12 @@ class PageController extends CustomController
 		try {
 			
 			$page->addView();
+			$params['limit'] = 12;
 
             return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
                 'page' => $page,
                 'app' => $this->app,
-				'explore_items' => $mediaItemRepo->getWithFilter(null),
+				'explore_items' => $mediaItemRepo->getWithFilter($params),
 				'categories' => $categoryRepo->getGrouped(),
             ], 'output')));
             
