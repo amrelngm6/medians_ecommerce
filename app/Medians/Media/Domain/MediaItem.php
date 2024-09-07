@@ -88,6 +88,8 @@ class MediaItem extends CustomModel
 	{
 		
 		$query = MediaItem::query();
+		
+		print_r(explode(' ', $this->name));
 
         foreach (explode(' ', $this->name) as $word) {
 			$query->orWhere('name', 'LIKE', '%' . $word . '%');
