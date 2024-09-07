@@ -162,7 +162,7 @@ function initAudioPlayer(player, index) {
 
 	});
 
-	let waveController = jQuery(audio).data('wave-container');
+	let waveController = jQuery(audioInfo).data('wave-container');
 	waveController != undefined ? document.getElementById(waveController).addEventListener("click", function(event) {
 		// Get the width of the element
 		// Get the position of the click relative to the left edge of the element
@@ -176,7 +176,7 @@ function initAudioPlayer(player, index) {
 		console.log("Click position: " + percentage.toFixed(2) + "%");
 	}) : '';
 
-	let waveIdController = jQuery(audio).data('wave-id');
+	let waveIdController = jQuery(audioInfo).data('wave-id');
 	waveIdController != undefined ? document.getElementById(waveIdController).addEventListener("click", function(event) {
 		// Get the width of the element
 		// Get the position of the click relative to the left edge of the element
