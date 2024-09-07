@@ -79,6 +79,14 @@ function initAudioPlayer(player, index) {
 
 	console.log(circle)
 
+	jQuery(circle).on('drag, change', '#circle-'+audioInfo.attr('data-id'), function (e) {
+		let $this = $(this);
+		let $elem = $this.closest('.js-audio');
+		
+		updateAudio(e.handle.value, $elem);
+		$this.addClass('active');
+	});
+
 	circle.attr({
 		'stroke-dasharray': totalLength,
 		'stroke-dashoffset': totalLength,
@@ -110,15 +118,6 @@ function initAudioPlayer(player, index) {
 		{
 			audio.src = audioInfo.attr('data-path');
 			audio.load()
-
-			jQuery(document).on('drag, change', '#circle-'+audioInfo.attr('data-id'), function (e) {
-				let $this = $(this);
-				let $elem = $this.closest('.js-audio');
-				
-				updateAudio(e.handle.value, $elem);
-				$this.addClass('active');
-			});
-		
 			playStyles()
 
 		} else {
