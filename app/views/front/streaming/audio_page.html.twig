@@ -33,6 +33,7 @@
                                     <span class="text-sm text-gray-100">{{lang.translate('Likes')}} : {{item.likes_count}}</span>
                                     <span class="text-sm text-gray-100">{{lang.translate('Plays')}} : {{item.plays_count}}</span>
                                     <span class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/white-heart.svg" class="w-5"></span>
+                                    <a href="/media/edit/{{item.media_id}}" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/right.svg" class="w-5"></a>
                                     <span class="cursor-pointer mx-2 text-gray-100 leading-3 text-xl font-extrabold" >...</span>
                                 </div>
                             </div>
@@ -48,10 +49,34 @@
                     <div class="text-primary">
                         <p class="dark:text-gray-400 py-4">{{item.description}}</p>
                     </div>
-                    <div class="w-full 	py-10" id="top-followers">
+                    <div class="w-full 	py-10" id="item-related-items">
                         <div class=" w-full flex gap-4 text-primary">
                             <div class=" w-full flex gap-4 dark:text-gray-400 ">
                                 <h2 class="text-2xl  font-semibold">Fans who liked</h3>
+                                <a href="#!" class="p-2 hover:text-orange-500">See all</a>
+                            </div>
+                            
+                            <div class="flex gap gap-4">
+                                <button class="prev-btn" data-slider="related-items"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
+                                <button class="next-btn" data-slider="related-items"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
+                            </div>
+                        </div>
+                        <div class="my-4 " ></div>
+
+                        <div id="related-items" class="carousel-container" data-count="5">
+                        
+                            {% for media_item in item.related() %}
+                            {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                    <div class="w-full 	py-10" id="top-followers">
+                        <div class=" w-full flex gap-4 text-primary">
+                            <div class=" w-full flex gap-4 dark:text-gray-400 ">
+                                <h2 class="text-2xl  font-semibold">Fans Also Played</h3>
                                 <a href="#!" class="p-2 hover:text-orange-500">See all</a>
                             </div>
                             
@@ -61,7 +86,13 @@
                             </div>
                         </div>
                         <div class="my-4 " ></div>
-                        <div id="top-authors" class="carousel-container" data-count="5"></div>
+                        <div id="related-items" class="carousel-container" data-count="5">
+                        
+                            {% for media_item in item.related() %}
+                            {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
+                            {% endfor %}
+
+                        </div>
 
                     </div>
 
@@ -70,7 +101,8 @@
                     <div class="w-full 	my-10 relative text-primary " id="latest-uploads">
                         <h2 class="text-2xl font-semibold dark:text-gray-400">Fans also played</h3>
                         <div class="my-4 " ></div>
-                        <div id="tracks-list" class=" overflow-auto max-h-80 "></div>
+                        <div id="tracks-list" class=" overflow-auto max-h-80 ">
+                        </div>
                         <div class="my-10 " ></div>
                         <div class="z-10 absolute bottom-0 bg-gradient-to-b from-transparent dark:to-gray-900 to-white w-full h-20"></div>
                     </div>

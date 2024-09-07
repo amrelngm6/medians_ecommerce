@@ -86,11 +86,10 @@ class MediaItem extends CustomModel
 	
 	public function related($limit = null) 
 	{
-		return $this->with('genres','main_file')
+		return MediaItem::with('genres','main_file')
 		->whereHas('lang_content', function($q) {
 			$q
-			->where('title', 'LIKE', '%'.str_replace(' ', '%', $this->lang_content->title).'%')
-			->orWhere('content', 'LIKE', '%'.str_replace(' ', '%', $this->lang_content->title).'%');
+			->where('name', 'LIKE', '%'.str_replace(' ', '%', $this->name).'%');
 		})
 		->where('media_id', '!=' , $this->media_id)
 		->limit($limit ?? 6)
