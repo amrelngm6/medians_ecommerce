@@ -25,17 +25,17 @@ function runSlide()
 
 
 
-var audio;
-
-
+var audio, canPlay;
 
 
 function runAudio()
 {
 
-	jQuery('.js-audio').each(function (index, el) {
-		
-		initAudioPlayer(jQuery(this), index);
+	jQuery('.start-player').on('click', function (index, el) {
+		if (jQuery(this).hasClass('start-player')) {
+			initAudioPlayer(jQuery(this), index);
+			jQuery(this).removeClass('start-player')
+		}
 	});
 	
 	jQuery('.audio__slider').roundSlider({
