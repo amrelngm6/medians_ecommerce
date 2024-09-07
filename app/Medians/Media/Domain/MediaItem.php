@@ -89,8 +89,6 @@ class MediaItem extends CustomModel
 		
 		$query = MediaItem::query();
 		
-		print_r(explode(' ', $this->name));
-		
         foreach (explode(' ', $this->name) as $word) {
 			$query->where('name', 'LIKE', '%' . strtolower($word) . '%')
 			->where('media_id', '!=' , $this->media_id)
