@@ -79,7 +79,7 @@ function initAudioPlayer(player, index) {
 
 	console.log(circle)
 
-	jQuery(circle).on('drag, change', '#circle-'+audioInfo.attr('data-id'), function (e) {
+	jQuery(circle).on('drag, change',  function (e) {
 		let $this = $(this);
 		let $elem = $this.closest('.js-audio');
 		
