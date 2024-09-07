@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div class="my-4 " ></div>
-                        <div id="played-items" class="carousel-container" data-count="5">
+                        <div id="played-items" class="carousel-container flex gap-10" data-count="5">
                         
                             {% for media_item in item.related() %}
                             {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
