@@ -77,6 +77,7 @@ function initAudioPlayer(player, index) {
 		getCircle = circle.get(0),
 		totalLength = getCircle.getTotalLength();
 
+	console.log(circle)
 		
 	circle.attr({
 		'stroke-dasharray': totalLength,
