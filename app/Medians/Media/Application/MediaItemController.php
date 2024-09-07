@@ -139,7 +139,7 @@ class MediaItemController extends CustomController
         $this->mediaRepo->_dir = '/uploads/audio';
 
         $ffmpeg = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg';
-        // $ffmpeg = 'ffmpeg';
+        $ffmpeg = 'ffmpeg';
         $filePath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir. $file;
         $outputPath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir. str_replace(['mp3','wav','ogg'], 'png', $file);
         

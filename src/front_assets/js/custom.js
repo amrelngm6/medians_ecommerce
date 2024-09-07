@@ -141,9 +141,9 @@ function initAudioPlayer(player, index) {
 		
 		let value = (currentTime / maxduration) * 100;
 
-		$('#'+jQuery(audioInfo).data('wave-id')).css('right', '0')
-		$('#'+jQuery(audioInfo).data('wave-id')).css('left', 'auto')
-		$('#'+jQuery(audioInfo).data('wave-id')).css('width', (100 - value)+'%')
+		$('#'+jQuery(audioInfo).data('wave-overlay')).css('right', '0')
+		$('#'+jQuery(audioInfo).data('wave-overlay')).css('left', 'auto')
+		$('#'+jQuery(audioInfo).data('wave-overlay')).css('width', (100 - value)+'%')
 
 		var slider = jQuery(audioInfo).closest('.js-audio').find('.audio__slider');
 		// $(slider).roundSlider('setValue', value);
@@ -162,32 +162,31 @@ function initAudioPlayer(player, index) {
 
 	});
 
-	let waveController = jQuery(audioInfo).data('wave-container');
+	let waveIdController = jQuery(audioInfo).data('wave-id');
+	let waveController = jQuery(audioInfo).data('wave-overlay');
 	waveController != undefined ? document.getElementById(waveController).addEventListener("click", function(event) {
 		// Get the width of the element
 		// Get the position of the click relative to the left edge of the element
 		// Calculate the percentage
-		var percentage = (event.offsetX / this.clientWidth) * 100;
+		const imageElement = document.getElementById(waveIdController);
+		const imageRect = imageElement.getBoundingClientRect(); // Get image position and size
+		const clickX = event.clientX - imageRect.left; // Calculate X position relative to the image
+		
+		var percentage = (clickX / imageElement.clientWidth) * 100;
 		
 		let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
 		
 		updateAudio(percentage.toFixed(2), $elem);
-		// Display the result
-		console.log("Click position: " + percentage.toFixed(2) + "%");
 	}) : '';
 
-	let waveIdController = jQuery(audioInfo).data('wave-id');
 	waveIdController != undefined ? document.getElementById(waveIdController).addEventListener("click", function(event) {
 		// Get the width of the element
 		// Get the position of the click relative to the left edge of the element
 		// Calculate the percentage
+
 		var percentage = (event.offsetX / this.clientWidth) * 100;
-		
 		let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
-		
 		updateAudio(percentage.toFixed(2), $elem);
-		// Display the result
-		console.log("Click position: " + percentage.toFixed(2) + "%");
 	}) : '';
 	
 }

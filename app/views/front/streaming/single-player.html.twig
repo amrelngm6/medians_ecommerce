@@ -1,13 +1,13 @@
 
                             <div class="w-full flex gap-6 overflow-hidden">
                                 <div class="slide__audio js-audio pt-7">
-                                    <div class="slide__audio-player" controls data-id="{{item.media_id}}" data-wave-id="wave-{{item.media_id}}" data-wave-container="wave-container{{item.media_id}}">
+                                    <div class="slide__audio-player" controls data-id="{{item.media_id}}" data-wave-id="wave-{{item.media_id}}" data-wave-overlay="wave-overlay{{item.media_id}}">
                                     </div>
                                     {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
                                 </div>
                                 <div class="relative h-28 w-full"  > 
                                     <div id="wave-{{item.media_id}}"  class="absolute w-full h-full top-0 right-0  opacity-50 bg-white z-50"> </div>
-                                    <img id="wave-container{{item.media_id}}" class="w-full left-0 top-0 bottom-0 my-auto absolute" src="/stream?thumbnail=100&image={{item.main_file.wave}}" />
+                                    <img id="wave-overlay{{item.media_id}}" class="w-full left-0 top-0 bottom-0 my-auto absolute" src="/stream?thumbnail=100&image={{item.main_file.wave}}" />
                                 </div>
                             </div>
                     
