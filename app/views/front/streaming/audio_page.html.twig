@@ -27,11 +27,11 @@
                                 <span>{{Track}}</span>
                                 <h1 class="lg:text-2xl text-lg ">{{item.name}}</h1>
                                 <div class="py-2 font-thin">
-                                    <p class="truncate-text">{{item.description}} </p>
+                                    <p class="truncate-text truncate">{{item.description}} </p>
                                 </div>
                                 <div class="flex gap-4 py-2">
-                                    <span class="text-sm text-gray-100">Likes : 108</span>
-                                    <span class="text-sm text-gray-100">Plays : 1453</span>
+                                    <span class="text-sm text-gray-100">{{lang.translate('Likes')}} : {{item.likes_count}}</span>
+                                    <span class="text-sm text-gray-100">{{lang.translate('Plays')}} : {{item.plays_count}}</span>
                                     <span class="cursor-pointer mx-2 text-sm text-gray-100"><img src="./svg/white-heart.svg" class="w-5"></span>
                                     <span class="cursor-pointer mx-2 text-gray-100 leading-3 text-xl font-extrabold" >...</span>
                                 </div>
