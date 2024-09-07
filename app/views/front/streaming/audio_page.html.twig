@@ -71,7 +71,7 @@
 
                     </div>
 
-                    <div class="w-full 	py-10" id="top-followers">
+                    <div class="w-full 	py-10" id="top-played-items">
                         <div class=" w-full flex gap-4 text-primary">
                             <div class=" w-full flex gap-4 dark:text-gray-400 ">
                                 <h2 class="text-2xl  font-semibold">Fans Also Played</h3>
@@ -79,12 +79,12 @@
                             </div>
                             
                             <div class="flex gap gap-4">
-                                <button class="prev-btn" data-slider="top-authors"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
-                                <button class="next-btn" data-slider="top-authors"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
+                                <button class="prev-btn" data-slider="played-items"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
+                                <button class="next-btn" data-slider="played-items"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
                             </div>
                         </div>
                         <div class="my-4 " ></div>
-                        <div id="related-items" class="carousel-container" data-count="5">
+                        <div id="played-items" class="carousel-container" data-count="5">
                         
                             {% for media_item in item.related() %}
                             {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
