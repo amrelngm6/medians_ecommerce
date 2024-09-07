@@ -53,7 +53,7 @@ class AuthService
 			$settings = $this->app->SystemSetting();
 
 		    // return  render('login', [
-			return render('views/front/'.($settings['template'] ?? 'default').'/auth/signin.html.twig', [
+			return render('views/front/default/auth/signin.html.twig', [
 		    	// 'load_vue' => true,
 		        'title' => translate('Login page'),
 		        'app' => $this->app,
