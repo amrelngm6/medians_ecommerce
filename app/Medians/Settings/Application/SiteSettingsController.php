@@ -43,6 +43,7 @@ class SiteSettingsController extends CustomController
 		return [
             
 			'basic'=> [	
+				[ 'key'=> "is_dark", 'title'=> translate('Dark mode'), 'help_text'=>translate('Allow dark mode'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "sitename", 'title'=> translate('sitename'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "lang", 'title'=> translate('Languange'), 'help_text'=> translate('The default language for new sessions'),
 				'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 
