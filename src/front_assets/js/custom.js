@@ -87,7 +87,7 @@ function initAudioPlayer(player, index) {
 		
 	circle.attr({
 		'stroke-dasharray': totalLength,
-		'stroke-dashoffset': 0,
+		'stroke-dashoffset': totalLength,
 	});
 
 	mainAudio.on('loadedmetadata', function() {
