@@ -55,7 +55,10 @@ class MediaItemController extends CustomController
     {
 		$settings = $this->app->SystemSetting();
 
-        $list = $this->repo->getWithFilter($this->app->params());
+        $params = $this->app->params();
+
+        $params['limit'] = 12;
+        $list = $this->repo->getWithFilter($params);
         
 		try 
         {
