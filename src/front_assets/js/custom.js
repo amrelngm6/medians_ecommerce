@@ -48,13 +48,6 @@ function runAudio()
 		sliderType: 'min-range'
 	});
 	
-	jQuery(document).on('drag, change', '.audio__slider', function (e) {
-		let $this = $(this);
-		let $elem = $this.closest('.js-audio');
-		
-		updateAudio(e.handle.value, $elem);
-		$this.addClass('active');
-	});
 }
 
 
@@ -117,6 +110,14 @@ function initAudioPlayer(player, index) {
 			audio.src = audioInfo.attr('data-path');
 			audio.load()
 
+			jQuery(document).on('drag, change', '#circle-'+audioInfo.attr('data-id'), function (e) {
+				let $this = $(this);
+				let $elem = $this.closest('.js-audio');
+				
+				updateAudio(e.handle.value, $elem);
+				$this.addClass('active');
+			});
+		
 			playStyles()
 
 		} else {
@@ -140,14 +141,14 @@ function initAudioPlayer(player, index) {
 
 		circle.attr('stroke-dashoffset', calc);
 		
-		let value = (currentTime / maxduration) * 100;
+		let value = (isNaN(maxduration) ? 0 : ((currentTime / maxduration) * 100));
 
 		$('#'+jQuery(audioInfo).data('wave-overlay')).css('right', '0')
 		$('#'+jQuery(audioInfo).data('wave-overlay')).css('left', 'auto')
 		$('#'+jQuery(audioInfo).data('wave-overlay')).css('width', (100 - value)+'%')
 
-		var slider = jQuery(audioInfo).closest('.js-audio').find('.audio__slider');
-		$(slider).roundSlider('setValue', value);
+		var slider = '#circle-'+jQuery(audioInfo).data('id');
+		value ? jQuery(slider).roundSlider('setValue', value) : '';
 	});
 
 	mainAudio.on('play', (e) => {
