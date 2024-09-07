@@ -47,7 +47,14 @@ function runAudio()
 		handleShape: 'round',
 		sliderType: 'min-range'
 	});
-	
+	jQuery(document).on('drag, change', '.audio__slider', function (e) {
+		let $this = $(this);
+		let $elem = $this.closest('.js-audio');
+		
+		updateAudio(e.handle.value, $elem);
+		$this.addClass('active');
+	});
+
 }
 
 
@@ -77,15 +84,8 @@ function initAudioPlayer(player, index) {
 		getCircle = circle.get(0),
 		totalLength = getCircle.getTotalLength();
 
-	console.log(circle)
+	// console.log(circle)
 
-	jQuery(circle).on('drag, change',  function (e) {
-		let $this = $(this);
-		let $elem = $this.closest('.js-audio');
-		
-		updateAudio(e.handle.value, $elem);
-		$this.addClass('active');
-	});
 
 	circle.attr({
 		'stroke-dasharray': totalLength,
