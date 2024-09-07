@@ -757,6 +757,10 @@ video {
   top: 16px;
 }
 
+.top-\[30px\] {
+  top: 30px;
+}
+
 .top-\[31px\] {
   top: 31px;
 }
@@ -913,6 +917,11 @@ video {
 .my-7 {
   margin-top: 1.75rem;
   margin-bottom: 1.75rem;
+}
+
+.my-8 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .my-auto {
@@ -3201,6 +3210,14 @@ video {
 
   .lg\:relative {
     position: relative;
+  }
+
+  .lg\:left-\[100\%\] {
+    left: 100%;
+  }
+
+  .lg\:top-\[-30px\] {
+    top: -30px;
   }
 
   .lg\:col-span-5 {

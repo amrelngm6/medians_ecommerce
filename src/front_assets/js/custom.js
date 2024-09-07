@@ -219,16 +219,16 @@ function includeFiles(file, id)
 	xhr.send();
 }
 
-includeFiles('header', 'main-header');
-includeFiles('sidebar', 'sidebar');
-includeFiles('playing', 'side-playing');
-includeFiles('authors_list', 'top-authors');
-includeFiles('channel_list', 'channel_list');
-includeFiles('genres_list', 'top-charts');
-includeFiles('tracks-list', 'tracks-list');
-includeFiles('public-playlists', 'public-playlists');
-includeFiles('playlist-items', 'playlist-items-list');
-includeFiles('playlist-items', 'playlist-items-list2');
+// includeFiles('header', 'main-header');
+// includeFiles('sidebar', 'sidebar');
+// includeFiles('playing', 'side-playing');
+// includeFiles('authors_list', 'top-authors');
+// includeFiles('channel_list', 'channel_list');
+// includeFiles('genres_list', 'top-charts');
+// includeFiles('tracks-list', 'tracks-list');
+// includeFiles('public-playlists', 'public-playlists');
+// includeFiles('playlist-items', 'playlist-items-list');
+// includeFiles('playlist-items', 'playlist-items-list2');
 
 
 
