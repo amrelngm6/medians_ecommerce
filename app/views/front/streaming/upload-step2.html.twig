@@ -25,7 +25,7 @@
                             <input id="imageInput" type="file" name="file" class="hidden" />
                         </label>
                         <div class="w-full">
-                            <h2 x-text="title"></h2>
+                            <a href="/track/{{item.media_id}}" x-text="title"></a>
                             {% include 'views/front/'~app.SystemSetting.template ~'/single-player.html.twig' %}        
                         </div>
                     </div>
