@@ -5,6 +5,7 @@
 /uploads/files
 /uploads/bugs
 /uploads/audio
+/uploads/thumbnails
 /src/tailwind
 /installer
 /app/config/database.php

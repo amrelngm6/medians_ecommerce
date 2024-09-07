@@ -83,6 +83,13 @@ class MediaController extends CustomController
 	{
 		$this->app = new \config\APP;
 		$filepath = $this->app->request()->get('image');
+		$isThumbnail = $this->app->request()->get('thumbnail');
+
+		if (!empty($isThumbnail))
+		{
+			$resized = $this->repo->resize($filepath, $isThumbnail);
+			$filepath = is_file($_SERVER['DOCUMENT_ROOT'].$resized) ? $resized : $filepath;
+		}
 
 		if (strpos($filepath, 'uploads/') && is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
 		{
