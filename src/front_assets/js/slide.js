@@ -24,7 +24,7 @@ function showSlide(container, i)
 
     const limit = parseInt(container.getAttribute('data-count') ? container.getAttribute('data-count') : 3);
     const slides = document.querySelectorAll('#'+id+' .slide');
-    console.log(slides)
+    // console.log(slides)
     const start = currentIndexes[i];
     const end = start + limit;
     slides.forEach((slide, index) => {
@@ -99,7 +99,6 @@ window.addEventListener('resize', function(e) {
     showSlides()
     const slides = document.querySelectorAll('.carousel-container');
     
-    console.log(window.innerWidth)
     if (window.innerWidth < 600)
     {
         slides.forEach((slide, index) => {

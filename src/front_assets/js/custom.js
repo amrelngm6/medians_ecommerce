@@ -91,6 +91,7 @@ function initAudioPlayer(player, index) {
 	mainAudio.on('loadedmetadata', function() {
 		const duration = audio.duration;
 		if (isFinite(duration)) {
+			console.log(duration)
 		} else {
 		}
 	});
