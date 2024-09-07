@@ -15,7 +15,92 @@
                 {% include 'views/front/' ~ template ~ '/includes/app_header.html.twig' %}
             </header>
 
-            <div class="w-full block px-2">
+            <div class="py-4  h-full overflow-hidden rounded-2xl">                     
+                    
+                <div class="w-full  ">
+                    <div class=" p-8 relative " >
+                        <div class="artist-overlay top-[-20px] left-0 absolute w-full h-full py-20 bg-gradient-to-b from-gray-800 to-black"></div>
+                        <img src="{{item.picture}}"  class="absolute bg-img left-20px top-0 w-full" />
+                        <div class="flex w-full text-white mx-auto text-center relative z-10">
+                            <img src="{{item.picture}}"  class="w-40 h-40 lg:w-56 lg:h-56 rounded-full shadow-xl" />
+                            <div class="p-8 text-left w-full">
+                                <span>Track</span>
+                                <h1 class="lg:text-2xl text-lg ">She Will Be Loved</h1>
+                                <div class="py-2 font-thin">
+                                    <p class="truncate-text">The most played Bad Meets Evil tracks on Spotify right. most played Bad Meets Evil tracks on Spotify right now.  played Bad Meets Evil tracks on Spotify right. The most played Bad Meets Evil tracks on Spotify right now. </p>
+                                </div>
+                                <div class="flex gap-4 py-2">
+                                    <span class="text-sm text-gray-100">Likes : 108</span>
+                                    <span class="text-sm text-gray-100">Plays : 1453</span>
+                                    <span class="cursor-pointer mx-2 text-sm text-gray-100"><img src="./svg/white-heart.svg" class="w-5"></span>
+                                    <span class="cursor-pointer mx-2 text-gray-100 leading-3 text-xl font-extrabold" >...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
+                    
+                    <div class="w-full flex">
+                        <div class="slide__audio js-audio">
+                            <audio class="slide__audio-player" controls="">
+                            <source src="./audio/1.mp3" type="audio/mpeg"/>
+                            </audio>
+                            <div class="audio__controls">
+                            <svg version="1.1" id="circle" width="50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                                <path id="seekbar" fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="equalizer" viewBox="0 0 100 100">
+                                <g class="equalizer-group">
+                                    <rect class="bar"></rect>
+                                    <rect class="bar"></rect>
+                                    <rect class="bar"></rect>
+                                    <rect class="bar"></rect>
+                                    <rect class="bar"></rect>
+                                </g>
+                            </svg>
+                            <div class="audio__slider"></div>
+                            <button class="play-pause"></button>
+                            </div>
+                        </div>
+                        
+                        <div  class="relative h-12 w-full ml-10" style="background-position:center; background-size: cover; background-repeat: no-repeat; background-image: url(./audio/waves/white.png);">
+                            <div style="transition: all .5s ease-in-out 0s; " id="track-wave-1" class="absolute dark:bg-gray-900 bg-white opacity-70 h-full left-0 w-full " style="left: 1%;"></div>
+                        </div>
+                        
+                    </div>
+                    <span class="block pt-10 text-sm text-gray-500">Description</span>
+                    <div class="text-primary">
+                        <p class="dark:text-gray-400 py-4">The most played Bad Meets Evil tracks on Spotify right. most played Bad Meets Evil tracks on Spotify right now.  played Bad Meets Evil tracks on Spotify right. The most played Bad Meets Evil tracks on Spotify right now.  most played Bad Meets Evil tracks on Spotify right. most played Bad Meets Evil tracks on Spotify right now.  played Bad Meets Evil tracks on Spotify right. The most played Bad Meets Evil tracks on Spotify right now. </p>
+                    </div>
+                    <div class="w-full 	py-10" id="top-followers">
+                        <div class=" w-full flex gap-4 text-primary">
+                            <div class=" w-full flex gap-4 dark:text-gray-400 ">
+                                <h2 class="text-2xl  font-semibold">Fans who liked</h3>
+                                <a href="#!" class="p-2 hover:text-orange-500">See all</a>
+                            </div>
+                            
+                            <div class="flex gap gap-4">
+                                <button class="prev-btn" data-slider="top-authors"><img class="w-8" src="./svg/left.svg"></button>
+                                <button class="next-btn" data-slider="top-authors"><img class="w-8" src="./svg/right.svg"></button>
+                            </div>
+                        </div>
+                        <div class="my-4 " ></div>
+                        <div id="top-authors" class="carousel-container" data-count="5"></div>
+
+                    </div>
+
+                    
+
+                    <div class="w-full 	my-10 relative text-primary " id="latest-uploads">
+                        <h2 class="text-2xl font-semibold dark:text-gray-400">Fans also played</h3>
+                        <div class="my-4 " ></div>
+                        <div id="tracks-list" class=" overflow-auto max-h-80 "></div>
+                        <div class="my-10 " ></div>
+                        <div class="z-10 absolute bottom-0 bg-gradient-to-b from-transparent dark:to-gray-900 to-white w-full h-20"></div>
+                    </div>
+
+                </div>
 
             </div>
         </div>
