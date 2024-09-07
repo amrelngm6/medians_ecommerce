@@ -14,7 +14,7 @@
                                         {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
                                     </div>
                                     <div class="w-full px-1 relative p-1 truncate"> 
-                                        <a href="media/edit/{{media_item.media_id}}" class="relative text-opacity-75 text-sm tracking-tight font-semibold ">{{media_item.name}} </a>
+                                        <a href="media/{{media_item.media_id}}" class="relative text-opacity-75 text-sm tracking-tight font-semibold ">{{media_item.name}} </a>
                                         <a href="artist.html" class="block relative text-gray-500 text-opacity-75 text-sm  tracking-tight">{{media_item.author.name}}</a>
                                     </div>
                                 </div>

@@ -49,7 +49,31 @@ class MediaItemController extends CustomController
 
     
     /**
-     * Upload page for frontend
+     * Discover page for frontend
+     */
+    public function audio_page($media_id)
+    {
+		$settings = $this->app->SystemSetting();
+
+        $item = $this->repo->find($media_id);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/audio_page.html.twig', [
+                'app' => $this->app,
+                'item' => $item,
+                'genres' => $this->categoryRepo->getGenres(),
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+
+    
+    /**
+     * Discover page for frontend
      */
     public function discover()
     {
@@ -74,7 +98,7 @@ class MediaItemController extends CustomController
     }
     
     /**
-     * Upload page for frontend
+     * Edit info page for frontend
      */
     public function upload_info($media_id)
     {
