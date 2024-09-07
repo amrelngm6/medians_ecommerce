@@ -119,7 +119,7 @@ class MediaItemController extends CustomController
             $params['description'] = $value->getClientOriginalName();
             $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
             $params['author_id'] = $this->app->customer_id() ?? 0;
-            $params['field'] = [ ['duration'=> $fileInfo['playtime_seconds']] ];
+            $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
             
             $save = $this->repo->store($params);
 

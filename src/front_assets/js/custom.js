@@ -105,6 +105,13 @@ function initAudioPlayer(player, index) {
 			});
 			$('.js-audio').removeClass('playing');
 			$('.js-audio').parent().removeClass('active');
+
+			if (audio.src != audioInfo.attr('data-path'))
+			{
+				audio.src = audioInfo.attr('data-path');
+				audio.load()
+			}
+			
 			audio.play();
 			player.removeClass('paused');
 			player.addClass('playing');
