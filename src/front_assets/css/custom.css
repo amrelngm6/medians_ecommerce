@@ -334,11 +334,11 @@ li.active
     background-repeat: no-repeat;
   }
   
-  #seekbar {
+  .seekbar {
     stroke-width: 6;
   }
   
-  .playing #seekbar {
+  .playing .seekbar {
     visibility: visible;
   }
   
