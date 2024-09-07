@@ -720,6 +720,7 @@ li.active
   margin: .8%;
   opacity: 0;
   transition: all 0.5s ease-in-out;
+  display: none;
 }
 .slide.active {
   opacity: 1;

@@ -23,8 +23,8 @@ function showSlide(container, i)
     const parentId = container.parentElement.getAttribute('id');
 
     const limit = parseInt(container.getAttribute('data-count') ? container.getAttribute('data-count') : 3);
-    console.log(limit)
     const slides = document.querySelectorAll('#'+id+' .slide');
+    console.log(slides)
     const start = currentIndexes[i];
     const end = start + limit;
     slides.forEach((slide, index) => {
