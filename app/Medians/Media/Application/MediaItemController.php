@@ -109,20 +109,23 @@ class MediaItemController extends CustomController
 		foreach ($this->app->request()->files as $key => $value) {
 			$file = $this->mediaRepo->upload($value, 'audio');
     
+            
+            $getID3 = new getID3;
+            // Analyze file
+            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
+
             $params = [];
             $params['name'] = $value->getClientOriginalName();
             $params['description'] = $value->getClientOriginalName();
             $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
-            $params['author_id'] = $this->app->customer_id();
+            $params['author_id'] = $this->app->customer_id() ?? 0;
+            $params['field'] = [ ['duration'=> $fileInfo['playtime_seconds']] ];
             
             $save = $this->repo->store($params);
 
             $this->generateWave($file);
 			// $output2 = shell_exec('ffmpeg -i '.$filePath.' -c copy -map 0 -movflags +faststart '.$encodedFilePath.' ');
 
-            // $getID3 = new getID3;
-            // Analyze file
-            // $fileInfo = $getID3->analyze($filePath);
 		}
 
         return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"media/edit/$save->media_id");
@@ -161,6 +164,14 @@ class MediaItemController extends CustomController
                     $params['picture'] = $this->mediaRepo->_dir.$picture;
                 }
             }
+            
+            $item = $this->repo->find($params['media_id']);
+            
+            $getID3 = new getID3;
+            // Analyze file
+            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $item->main_file->path);
+
+            $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
             
             if ($this->repo->update($params))
             {

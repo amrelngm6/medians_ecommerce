@@ -9,6 +9,7 @@ use Medians\Categories\Domain\Genre;
 use Medians\Categories\Domain\Mood;
 use Medians\Blog\Domain\Blog;
 use Medians\Content\Domain\Content;
+use Medians\CustomFields\Domain\CustomField;
 
 
 class MediaItemRepository 
@@ -119,6 +120,7 @@ class MediaItemRepository
 
     	// Store languages content
     	isset($data['files']) ? $this->storeFiles($data['files'] ,$Object->media_id) : '';
+    	isset($data['field']) ? $this->storeCustomFields($data['field'] ,$Object->media_id) : '';
 
     	return $Object;
     }
@@ -138,6 +140,7 @@ class MediaItemRepository
 
     	// Store languages content
     	isset($data['selected_genres']) ? $this->storeGenres($data['selected_genres'] ,$Object->media_id) : '';
+    	isset($data['field']) ? $this->storeCustomFields($data['field'] ,$Object->media_id) : '';
 
     	return $Object;
 
@@ -166,6 +169,30 @@ class MediaItemRepository
 
 			throw new \Exception("Error Processing Request " . $e->getMessage(), 1);
 			
+		}
+	}
+
+    
+	/**
+	* Save related items to database
+	*/
+	public function storeCustomFields($data, $id) 
+	{
+		CustomField::where('model_type', MediaItem::class)->where('model_id', $id)->delete();
+		if ($data)
+		{
+			foreach ($data as $key => $value)
+			{
+				$fields = [];
+				$fields['model_type'] = MediaItem::class;	
+				$fields['model_id'] = $id;	
+				$fields['code'] = $key;	
+				$fields['value'] = $value;
+
+				$Model = CustomField::create($fields);
+			}
+	
+			return $Model;		
 		}
 	}
 
