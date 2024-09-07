@@ -129,18 +129,17 @@ class MediaItemController extends CustomController
 	{
 		$this->app = new \config\APP;
 
-		$params = $this->app->params();
+        $params = $this->app->params();
 		
         try {
             
-            $file = $this->app->request()->files->get('file');
-
-            if (!empty($file))
-            {
-                $picture = $this->mediaRepo->upload($file);
-                $params['picture'] = $this->mediaRepo->_dir.$picture;
+            foreach ($this->app->request()->files as $key => $value) {
+                $picture = $this->mediaRepo->upload($value);
             }
-            $params['author_id'] = $this->app->customer_auth()->customer_id ?? 0;
+            
+            $params['picture'] = $this->mediaRepo->_dir.$picture;
+
+            $params['author_id'] = $this->app->customer_auth() ?? 0;
 
             if ($this->repo->update($params))
             {
@@ -148,7 +147,7 @@ class MediaItemController extends CustomController
             }
 
         } catch (\Exception $e) {
-        	throw new \Exception("Error Processing Request".$e->getMessage(), 1);
+        	throw new \Exception("Error Processing Request " .$e->getMessage(), 1);
         }
 	}
 
