@@ -106,12 +106,14 @@ function initAudioPlayer(player, index) {
 			player.removeClass('paused');
 			player.addClass('playing');
 			player.parent().addClass('active');
+			player.parent().find('.wave-frame').removeClass('hidden');
 		} else {
 
 			audio.pause();
 			player.removeClass('playing');
 			player.parent().removeClass('active');
 			player.addClass('paused');
+			player.parent().find('.wave-frame').addClass('hidden');
 		}
 	});
 

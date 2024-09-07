@@ -99,9 +99,11 @@
                         <div class="w-full p-8">
                             <div class="w-full flex">
                                 <div class="w-full ">
-                                    {% for media_item in list.items %}
+                                    <ul class="w-full space-y-4 pb-20">
+                                    {% for media_item in list.items %}                                   
                                     {% include 'views/front/' ~ template ~ '/includes/tracks-list.html.twig' %}
                                     {% endfor %}
+                                    </ul>
                                 </div>
                             </div>
                         </div>
