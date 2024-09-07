@@ -1381,8 +1381,8 @@ video {
   min-width: 24rem;
 }
 
-.max-w-40 {
-  max-width: 10rem;
+.max-w-64 {
+  max-width: 16rem;
 }
 
 .max-w-6xl {
