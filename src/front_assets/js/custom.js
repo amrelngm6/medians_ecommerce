@@ -87,7 +87,7 @@ function initAudioPlayer(player, index) {
 	mainAudio.on('loadedmetadata', function() {
 		const duration = audio.duration;
 		if (isFinite(duration)) {
-			// jQuery()
+			playStyles()
 		} else {
 		}
 	});
