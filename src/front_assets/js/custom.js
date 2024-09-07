@@ -97,42 +97,31 @@ function initAudioPlayer(player, index) {
 		} else {
 		}
 	});
+	function playStyles() {
+		
+		$('.js-audio').removeClass('playing');
+		$('.js-audio').parent().removeClass('active');
+		
+		audio.play();
+		player.removeClass('paused');
+		player.addClass('playing');
+		player.parent().addClass('active');
+		jQuery('.wave-frame').addClass('hidden');
+		player.parent().parent().find('.wave-frame').removeClass('hidden');
+	}
 	
 	play.on('click', () => {
 		if (audio.src != rootURL+audioInfo.attr('data-path'))
 		{
-			console.log("New")
-			console.log(rootURL+audioInfo.attr('data-path'))
-			console.log(audio.src)
 			audio.src = audioInfo.attr('data-path');
 			audio.load()
 
-			$('audio').each((index, el) => {
-				$('audio')[index].pause();
-			});
-			$('.js-audio').removeClass('playing');
-			$('.js-audio').parent().removeClass('active');
-			
-			audio.play();
-			player.removeClass('paused');
-			player.addClass('playing');
-			player.parent().addClass('active');
-			jQuery('.wave-frame').addClass('hidden');
-			player.parent().parent().find('.wave-frame').removeClass('hidden');
+			playStyles()
 
 		} else {
 		
 			if (audio.paused ) {
-				
-				$('.js-audio').removeClass('playing');
-				$('.js-audio').parent().removeClass('active');
-				
-				audio.play();
-				player.removeClass('paused');
-				player.addClass('playing');
-				player.parent().addClass('active');
-				jQuery('.wave-frame').addClass('hidden');
-				player.parent().parent().find('.wave-frame').removeClass('hidden');
+				playStyles()
 
 			} else {
 	
@@ -162,9 +151,9 @@ function initAudioPlayer(player, index) {
 		
 		let value = (currentTime / maxduration) * 100;
 
-		$('#'+jQuery(audio).data('wave-id')).css('right', '0')
-		$('#'+jQuery(audio).data('wave-id')).css('left', 'auto')
-		$('#'+jQuery(audio).data('wave-id')).css('width', (100 - value)+'%')
+		$('#'+jQuery(audioInfo).data('wave-id')).css('right', '0')
+		$('#'+jQuery(audioInfo).data('wave-id')).css('left', 'auto')
+		$('#'+jQuery(audioInfo).data('wave-id')).css('width', (100 - value)+'%')
 
 		var slider = mainAudio.closest('.js-audio').find('.audio__slider');
 		$(slider).roundSlider('setValue', value);
