@@ -134,10 +134,12 @@ class MediaItemController extends CustomController
         try {
             
             foreach ($this->app->request()->files as $key => $value) {
-                $picture = $this->mediaRepo->upload($value);
+                if ($value) {
+                    $picture = $this->mediaRepo->upload($value);
+                    $params['picture'] = $this->mediaRepo->_dir.$picture;
+                }
             }
             
-            $params['picture'] = $this->mediaRepo->_dir.$picture;
 
             $params['author_id'] = $this->app->customer_auth() ?? 0;
 
