@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html class="dark">
+
+<head>
+    <link rel="stylesheet" href="tailwind/tailwind.min.css" />
+    <link rel="stylesheet" href="custom.css" />
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/roundSlider/1.3/roundslider.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp|Concert+One|Jura|Fjord+One|Amaranth|Montserrat:wght@300;400;500;600">
+    
+</head>
+
+<body class="dark:bg-gray-800 bg-gray-50">
+    <div class=" w-full">
+
+        <div class="w-full flex gap gap-2" id="main-container">
+            
+            <div id="sidebar" class="lg:fixed bg-white dark:bg-gray-900 h-screen"></div>
+
+            <div class="w-full px-2 lg:px-0 relative overflow-hidden lg:ml-60" >
+                        
+                <header id="main-header"></header>
+
+                <div class="w-full block px-2">
+                    
+                <div class="w-full lg:flex gap-4  pt-8">
+                            
+                    <div class="w-full relative bg-white dark:bg-gray-900  lg:p-8 p-4 rounded-2xl rounded  shadow-md mb-4" id="top-charts-slider">
+
+                        <div class="flex w-full pb-4 text-primary">
+                            <h3 class=" text-xl font-semibold w-full dark:text-gray-400">Genres</h3>
+                            <div class="flex gap gap-4">
+                                <button class="prev-btn" data-slider="top-charts"><img class="w-8" src="./svg/left.svg"></button>
+                                <button class="next-btn" data-slider="top-charts"><img class="w-8" src="./svg/right.svg"></button>
+                            </div>
+                        </div>
+                        <hr class="opacity-30 mb-4" />
+
+                        <div id="top-charts" class="carousel-container" data-count="3"></div>
+
+                    </div>
+
+                    <div class="min-w-96  relative  mb-4">
+                        <div class="relative p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-md  overflow-hidden ">
+                            <div class="w-full  border-1 text-primary ">
+                                <div class="w-full text-xl font-bold tracking-wide dark:text-gray-400"> Top Authors</div>
+                                <p class="text-gray-500 py-2">Trends of this month</p>
+                            </div>
+                            <hr class="dark:opacity-0" />
+                            <div class="relative overflow-hidden rounded-full ">
+
+                                <div class="py-4 channel-slider flex">
+                                
+                                    <div  class="hover:text-orange-500 p-4 text-center flex gap-4">
+                                        <img class="rounded-full " src="https://via.placeholder.com/120x120" />
+                                        <p>
+                                            <a class="font-semibold text-lg pt-4 block">Amr Diab</a>
+                                            <span class="flex gap-2 text-gray-500">@ 20</span>
+                                            <span class="flex gap-2  text-gray-500">$% 90</span>
+                                        </p>
+                                    </div>
+                                    <div  class="hover:text-orange-500 p-4 text-center flex gap-4">
+                                        <img class="rounded-full " src="https://via.placeholder.com/120x120" />
+                                        <p>
+                                            <a class="font-semibold text-lg pt-4 block">Amr Diab</a>
+                                            <span class="flex gap-2 text-gray-500">@ 20</span>
+                                            <span class="flex gap-2  text-gray-500">$% 90</span>
+                                        </p>
+                                    </div>
+                                    <div  class="hover:text-orange-500 p-4 text-center flex gap-4">
+                                        <img class="rounded-full " src="https://via.placeholder.com/120x120" />
+                                        <p>
+                                            <a class="font-semibold text-lg pt-4 block">Amr Diab</a>
+                                            <span class="flex gap-2 text-gray-500">@ 20</span>
+                                            <span class="flex gap-2  text-gray-500">$% 90</span>
+                                        </p>
+                                    </div>
+                                    <div  class="hover:text-orange-500 p-4 text-center flex gap-4">
+                                        <img class="rounded-full " src="https://via.placeholder.com/120x120" />
+                                        <p>
+                                            <a class="font-semibold text-lg pt-4 block">Amr Diab</a>
+                                            <span class="flex gap-2 text-gray-500">@ 20</span>
+                                            <span class="flex gap-2  text-gray-500">$% 90</span>
+                                        </p>
+                                    </div>
+                                    <div  class="hover:text-orange-500 p-4 text-center flex gap-4">
+                                        <img class="rounded-full " src="https://via.placeholder.com/120x120" />
+                                        <p>
+                                            <a class="font-semibold text-lg pt-4 block">Amr Diab</a>
+                                            <span class="flex gap-2 text-gray-500">@ 20</span>
+                                            <span class="flex gap-2  text-gray-500">$% 90</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="py-2"><a class="text-primary hover:text-orange-500" href="#!">More channels</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="h-10"></div>
+                
+
+                
+                <div class="w-full lg:flex gap-6  mb-10">
+                    <div class="w-full h-28 relative overflow-hidden bg-gradient-to-r from-pink-600 to-red-400 rounded-full">
+                        <div class="pl-4 pr-2.5 py-2.5 left-[16px] top-[16px] absolute flex-col justify-start items-start gap-px inline-flex">
+                          <div class="text-white text-2xl font-bold">Music streaming</div>
+                          <div class="text-white text-2xl font-extrabold ">Best of 2024</div>
+                        </div>
+                        <img class="w-28 h-28 right-[-30px] top-[-6px] absolute origin-top-left rotate-[11.62deg] rounded-3xl" src="https://via.placeholder.com/100x100" />
+                    </div>  
+
+                      
+                    <div class="w-full h-28 relative overflow-hidden bg-gradient-to-r from-purple-600 to-cyan-200 rounded-full">
+                        <div class="pl-4 pr-2.5 py-2.5 left-[16px] top-[16px] absolute flex-col justify-start items-start gap-px inline-flex">
+                          <div class="text-white text-2xl font-bold">Audiobooks</div>
+                          <div class="text-white text-2xl font-extrabold ">With PDF</div>
+                        </div>
+                        <img class="w-28 h-28 right-[-30px] top-[-6px] absolute origin-top-left rotate-[11.62deg] rounded-3xl" src="https://via.placeholder.com/100x100" />
+                    </div>  
+                      
+                      
+                    <div class="w-full h-28 relative overflow-hidden bg-gradient-to-r from-orange-500 to-yellow-300 rounded-full">
+                        <div class="pl-4 pr-2.5 py-2.5 left-[16px] top-[16px] absolute flex-col justify-start items-start gap-px inline-flex">
+                          <div class="text-white text-2xl font-bold">Courses</div>
+                          <div class="text-white text-2xl font-extrabold ">and Toturials</div>
+                        </div>
+                        <img class="w-28 h-28 right-[-30px] top-[-6px] absolute origin-top-left rotate-[11.62deg] rounded-3xl" src="https://via.placeholder.com/100x100" />
+                      </div>  
+                </div>
+
+
+                <div class="w-full p-4 lg:p-8 bg-white dark:bg-gray-900 text-primary">
+
+                    <h2 class="text-2xl font-normal dark:text-gray-400">Explore trends</h2>
+                    <hr class=" dark:opacity-30 my-2" />
+                    
+                    <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap gap-4">
+
+                        <div class="lg:mx-0 mx-auto  dark:text-gray-400  hover:text-orange-500 lg:w-full  relative p-2 py-3 rounded-2xl">
+                            <img class="lg:mx-0 mx-auto rounded-2xl shadow hover:shadow-lg  hover:shadow-lg" src="https://via.placeholder.com/160x110" />
+                            <div class="  gap-1 flex py-4 min-w-40">
+                                <div class="slide__audio js-audio">
+                                    <audio class="slide__audio-player" controls="">
+                                    <source src="audio/1.mp3" type="audio/mpeg"/>
+                                    </audio>
+                                    <div class="audio__controls">
+                                    <svg version="1.1" id="circle" width="50"  viewBox="0 0 100 100">
+                                        <path id="seekbar" fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="equalizer" viewBox="0 0 100 100">
+                                        <g class="equalizer-group">
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                        </g>
+                                    </svg>
+                                    <div class="audio__slider"></div>
+                                    <button class="play-pause"></button>
+                                    </div>
+                                </div>
+                                <div class="w-full px-1 relative p-1 truncate"> 
+                                    <a href="track.html" class="relative text-opacity-75 text-sm tracking-tight font-semibold ">Good Kid, M.A.A.D City </a>
+                                    <a href="artist.html" class="block relative text-gray-500 text-opacity-75 text-sm  tracking-tight">Kendrick Lamar</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class=" dark:text-gray-400  hover:text-orange-500 lglg:mx-0 mx-auto  dark:text-gray-400  hover:text-orange-500 lg:w-full  relative p-2 py-3 rounded-2xl">
+                            <img class="lg:mx-0 mx-auto rounded-2xl shadow hover:shadow-lg " src="https://via.placeholder.com/160x110" />
+                            <div class="gap-1 flex py-4 min-w-40">
+                                <div class="slide__audio js-audio">
+                                    <audio class="slide__audio-player" controls="">
+                                    <source src="audio/1.mp3" type="audio/mpeg"/>
+                                    </audio>
+                                    <div class="audio__controls">
+                                    <svg version="1.1" id="circle" width="50"  viewBox="0 0 100 100">
+                                        <path id="seekbar" fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="equalizer" viewBox="0 0 100 100">
+                                        <g class="equalizer-group">
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                        </g>
+                                    </svg>
+                                    <div class="audio__slider"></div>
+                                    <button class="play-pause"></button>
+                                    </div>
+                                </div>
+                                <div class="w-full px-1 relative p-1 truncate"> 
+                                    <a href="track.html"  class="relative text-opacity-75 text-sm tracking-tight font-semibold  ">Lelly Yah - Remastered Lelly Yah - Remastered</a>
+                                    <a href="artist.html" class="block relative text-gray-500 text-opacity-75 text-sm  tracking-tight">Marwan Pablo</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class=" dark:text-gray-400  hover:text-orange-500 lglg:mx-0 mx-auto  dark:text-gray-400  hover:text-orange-500 lg:w-full  relative p-2 py-3 rounded-2xl">
+                            <img class="lg:mx-0 mx-auto rounded-2xl shadow hover:shadow-lg " src="https://via.placeholder.com/160x110" />
+                            <div class="gap-1 flex py-4 min-w-40">
+                                <div class="slide__audio js-audio">
+                                    <audio class="slide__audio-player" controls="">
+                                    <source src="audio/1.mp3" type="audio/mpeg"/>
+                                    </audio>
+                                    <div class="audio__controls">
+                                    <svg version="1.1" id="circle" width="50"  viewBox="0 0 100 100">
+                                        <path id="seekbar" fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="equalizer" viewBox="0 0 100 100">
+                                        <g class="equalizer-group">
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                        </g>
+                                    </svg>
+                                    <div class="audio__slider"></div>
+                                    <button class="play-pause"></button>
+                                    </div>
+                                </div>
+                                <div class="w-full px-1 relative p-1 truncate"> 
+                                    <a href="track.html"  class="relative text-opacity-75 text-sm tracking-tight font-semibold  ">Lelly Yah - Remastered Lelly Yah - Remastered</a>
+                                    <a href="artist.html" class="block relative text-gray-500 text-opacity-75 text-sm  tracking-tight">Marwan Pablo</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class=" dark:text-gray-400  hover:text-orange-500 lglg:mx-0 mx-auto  dark:text-gray-400  hover:text-orange-500 lg:w-full  relative p-2 py-3 rounded-2xl">
+                            <img class="lg:mx-0 mx-auto rounded-2xl shadow hover:shadow-lg " src="https://via.placeholder.com/160x110" />
+                            <div class="gap-1 flex py-4 min-w-40">
+                                <div class="slide__audio js-audio">
+                                    <audio class="slide__audio-player" controls="">
+                                    <source src="audio/1.mp3" type="audio/mpeg"/>
+                                    </audio>
+                                    <div class="audio__controls">
+                                    <svg version="1.1" id="circle" width="50"  viewBox="0 0 100 100">
+                                        <path id="seekbar" fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="equalizer" viewBox="0 0 100 100">
+                                        <g class="equalizer-group">
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                        </g>
+                                    </svg>
+                                    <div class="audio__slider"></div>
+                                    <button class="play-pause"></button>
+                                    </div>
+                                </div>
+                                <div class="w-full px-1 relative p-1 truncate"> 
+                                    <a href="track.html"  class="relative text-opacity-75 text-sm tracking-tight font-semibold  ">Lelly Yah - Remastered Lelly Yah - Remastered</a>
+                                    <a href="artist.html" class="block relative text-gray-500 text-opacity-75 text-sm  tracking-tight">Marwan Pablo</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class=" dark:text-gray-400  hover:text-orange-500 lglg:mx-0 mx-auto  dark:text-gray-400  hover:text-orange-500 lg:w-full  relative p-2 py-3 rounded-2xl">
+                            <img class="lg:mx-0 mx-auto rounded-2xl shadow hover:shadow-lg " src="https://via.placeholder.com/160x110" />
+                            <div class="gap-1 flex py-4 min-w-40">
+                                <div class="slide__audio js-audio">
+                                    <audio class="slide__audio-player" controls="">
+                                    <source src="audio/1.mp3" type="audio/mpeg"/>
+                                    </audio>
+                                    <div class="audio__controls">
+                                    <svg version="1.1" id="circle" width="50"  viewBox="0 0 100 100">
+                                        <path id="seekbar" fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="equalizer" viewBox="0 0 100 100">
+                                        <g class="equalizer-group">
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                        </g>
+                                    </svg>
+                                    <div class="audio__slider"></div>
+                                    <button class="play-pause"></button>
+                                    </div>
+                                </div>
+                                <div class="w-full px-1 relative p-1 truncate"> 
+                                    <a href="track.html"  class="relative text-opacity-75 text-sm tracking-tight font-semibold  ">Lelly Yah - Remastered Lelly Yah - Remastered</a>
+                                    <a href="artist.html" class="block relative text-gray-500 text-opacity-75 text-sm  tracking-tight">Marwan Pablo</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class=" dark:text-gray-400  hover:text-orange-500 lglg:mx-0 mx-auto  dark:text-gray-400  hover:text-orange-500 lg:w-full  relative p-2 py-3 rounded-2xl">
+                            <img class="lg:mx-0 mx-auto rounded-2xl shadow hover:shadow-lg " src="https://via.placeholder.com/160x110" />
+                            <div class="gap-1 flex py-4 min-w-40">
+                                <div class="slide__audio js-audio">
+                                    <audio class="slide__audio-player" controls="">
+                                    <source src="audio/1.mp3" type="audio/mpeg"/>
+                                    </audio>
+                                    <div class="audio__controls">
+                                    <svg version="1.1" id="circle" width="50"  viewBox="0 0 100 100">
+                                        <path id="seekbar" fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="equalizer" viewBox="0 0 100 100">
+                                        <g class="equalizer-group">
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                        </g>
+                                    </svg>
+                                    <div class="audio__slider"></div>
+                                    <button class="play-pause"></button>
+                                    </div>
+                                </div>
+                                <div class="w-full px-1 relative p-1 truncate"> 
+                                    <a href="track.html"  class="relative text-opacity-75 text-sm tracking-tight font-semibold  ">Lelly Yah - Remastered Lelly Yah - Remastered</a>
+                                    <a href="artist.html" class="block relative text-gray-500 text-opacity-75 text-sm  tracking-tight">Marwan Pablo</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class=" dark:text-gray-400  hover:text-orange-500 lglg:mx-0 mx-auto  dark:text-gray-400  hover:text-orange-500 lg:w-full  relative p-2 py-3 rounded-2xl">
+                            <img class="lg:mx-0 mx-auto rounded-2xl shadow hover:shadow-lg " src="https://via.placeholder.com/160x110" />
+                            <div class="gap-1 flex py-4 min-w-40">
+                                <div class="slide__audio js-audio">
+                                    <audio class="slide__audio-player" controls="">
+                                    <source src="audio/1.mp3" type="audio/mpeg"/>
+                                    </audio>
+                                    <div class="audio__controls">
+                                    <svg version="1.1" id="circle" width="50"  viewBox="0 0 100 100">
+                                        <path id="seekbar" fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="equalizer" viewBox="0 0 100 100">
+                                        <g class="equalizer-group">
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                        </g>
+                                    </svg>
+                                    <div class="audio__slider"></div>
+                                    <button class="play-pause"></button>
+                                    </div>
+                                </div>
+                                <div class="w-full px-1 relative p-1 truncate"> 
+                                    <a href="track.html"  class="relative text-opacity-75 text-sm tracking-tight font-semibold  ">Lelly Yah - Remastered Lelly Yah - Remastered</a>
+                                    <a href="artist.html" class="block relative text-gray-500 text-opacity-75 text-sm  tracking-tight">Marwan Pablo</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class=" dark:text-gray-400  hover:text-orange-500 lglg:mx-0 mx-auto  dark:text-gray-400  hover:text-orange-500 lg:w-full  relative p-2 py-3 rounded-2xl">
+                            <img class="lg:mx-0 mx-auto rounded-2xl shadow hover:shadow-lg " src="https://via.placeholder.com/160x110" />
+                            <div class="gap-1 flex py-4 min-w-40">
+                                <div class="slide__audio js-audio">
+                                    <audio class="slide__audio-player" controls="">
+                                    <source src="audio/1.mp3" type="audio/mpeg"/>
+                                    </audio>
+                                    <div class="audio__controls">
+                                    <svg version="1.1" id="circle" width="50"  viewBox="0 0 100 100">
+                                        <path id="seekbar" fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="equalizer" viewBox="0 0 100 100">
+                                        <g class="equalizer-group">
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                            <rect class="bar"></rect>
+                                        </g>
+                                    </svg>
+                                    <div class="audio__slider"></div>
+                                    <button class="play-pause"></button>
+                                    </div>
+                                </div>
+                                <div class="w-full truncate relative p-1 "> 
+                                    <a href="track.html"  class="relative text-opacity-75 text-sm tracking-tight font-semibold  ">Lelly Yah - Remastered Lelly Yah - Remastered</a>
+                                    <a href="artist.html" class="block relative text-gray-500 text-opacity-75 text-sm  tracking-tight">Marwan Pablo</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div id="side-playing"></div>
+        
+
+    </div>
+    <style>
+        .channel-slider {
+            animation-duration: 20s;
+        }
+    </style>
+    <script src="js/slide.js"></script>
+    <script src="js/custom.js"></script>
+    <script>
+	runSlide()
+    showSlides()
+    </script>
+</body>
+
+</html>
