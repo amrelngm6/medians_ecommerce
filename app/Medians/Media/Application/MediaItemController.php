@@ -107,7 +107,7 @@ class MediaItemController extends CustomController
 		$this->app = new \config\APP;
         
 		foreach ($this->app->request()->files as $key => $value) {
-			$file = $this->mediaRepo->upload($value, 'audio');
+			$file = $this->mediaRepo->upload($value, 'audio', true);
     
             
             $getID3 = new getID3;

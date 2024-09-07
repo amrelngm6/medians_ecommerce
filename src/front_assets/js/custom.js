@@ -101,6 +101,9 @@ function initAudioPlayer(player, index) {
 	play.on('click', () => {
 		if (audio.src != rootURL+audioInfo.attr('data-path'))
 		{
+			console.log("New")
+			console.log(rootURL+audioInfo.attr('data-path'))
+			console.log(audio.src)
 			audio.src = audioInfo.attr('data-path');
 			audio.load()
 
@@ -120,7 +123,6 @@ function initAudioPlayer(player, index) {
 		} else {
 		
 			if (audio.paused ) {
-			console.log(2)
 				
 				$('.js-audio').removeClass('playing');
 				$('.js-audio').parent().removeClass('active');
@@ -133,7 +135,6 @@ function initAudioPlayer(player, index) {
 				player.parent().parent().find('.wave-frame').removeClass('hidden');
 
 			} else {
-				console.log(3)
 	
 				audio.pause();
 				player.removeClass('playing');

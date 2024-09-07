@@ -129,14 +129,14 @@ class MediaRepository
 	}
 
 
-	public function upload(UploadedFile $file, $type = 'media')
+	public function upload(UploadedFile $file, $type = 'media', $customName = null)
     {
 
 		$this->setDir($type);
 
 		$this->validate($type, $file->guessExtension());
 
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $originalFilename = $customName ? rand(9999,999999) : pathinfo( $file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slug($originalFilename);
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
 		$store = MediaUpload::addItem($this->_dir.$fileName, $type);
