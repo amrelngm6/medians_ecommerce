@@ -153,7 +153,8 @@ function initAudioPlayer(player, index) {
 
 	});
 
-	document.getElementById(jQuery(audio).data('wave-container')).addEventListener("click", function(event) {
+	let waveController = jQuery(audio).data('wave-container');
+	waveController != undefined ? document.getElementById(waveController).addEventListener("click", function(event) {
 		// Get the width of the element
 		// Get the position of the click relative to the left edge of the element
 		// Calculate the percentage
@@ -164,9 +165,10 @@ function initAudioPlayer(player, index) {
 		updateAudio(percentage.toFixed(2), $elem);
 		// Display the result
 		console.log("Click position: " + percentage.toFixed(2) + "%");
-	});
+	}) : '';
 
-	document.getElementById(jQuery(audio).data('wave-id')).addEventListener("click", function(event) {
+	let waveIdController = jQuery(audio).data('wave-id');
+	waveIdController != undefined ? document.getElementById(waveIdController).addEventListener("click", function(event) {
 		// Get the width of the element
 		// Get the position of the click relative to the left edge of the element
 		// Calculate the percentage
@@ -177,7 +179,7 @@ function initAudioPlayer(player, index) {
 		updateAudio(percentage.toFixed(2), $elem);
 		// Display the result
 		console.log("Click position: " + percentage.toFixed(2) + "%");
-	});
+	}) : '';
 	
 }
 
@@ -325,8 +327,8 @@ setTimeout(function() {
 
 
 
-
-document.getElementById('imageInput').addEventListener('change', function(event) {
+let imgPreview = document.getElementById('imageInput');
+imgPreview ? imgPreview.addEventListener('change', function(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
     
@@ -339,4 +341,4 @@ document.getElementById('imageInput').addEventListener('change', function(event)
     if (file) {
         reader.readAsDataURL(file);
     }
-});
+}) : '';

@@ -212,7 +212,7 @@ class PageController extends CustomController
             return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
                 'page' => $page,
                 'app' => $this->app,
-				'explore_items' => $mediaItemRepo->filter(),
+				'explore_items' => $mediaItemRepo->getWithFilter(null),
 				'categories' => $categoryRepo->getGrouped(),
             ], 'output')));
             

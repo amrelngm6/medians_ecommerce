@@ -53,13 +53,14 @@ class MediaItemRepository
 
 
 	/**
-	 * Load  products with filters
+	 * Load items with filters
 	 */
 	public function getWithFilter($params)
 	{
 
-			$model = MediaItem::where('status', 'on')
-			->with('genres', 'main_file');
+			$model = MediaItem::
+            // where('status', 'on')->
+			with('genres', 'main_file');
 
 			if (isset($params['prices'])) {
 				$prices = explode(',', $params['prices']);
@@ -80,7 +81,7 @@ class MediaItemRepository
 						break;
 						
 					default:
-						$model = $model->orderBy('product_id','DESC');
+						$model = $model->orderBy('media_id','DESC');
 						break;
 				}
 			}
