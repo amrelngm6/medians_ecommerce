@@ -90,10 +90,10 @@ class MediaItem extends CustomModel
 		$query = MediaItem::query();
 
         foreach (explode(' ', $this->name) as $word) {
-            $query->orWhere('name', 'LIKE', '%' . $word . '%');
+			$query->orWhere('name', 'LIKE', '%' . $word . '%');
+			$query->where('media_id', '!=' , $this->media_id);
         }
 
-		$query->where('media_id', '!=' , $this->media_id);
 
 		return $query->with('genres','main_file')
 		->limit($limit ?? 6)
