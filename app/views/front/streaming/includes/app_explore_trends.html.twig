@@ -5,7 +5,7 @@
                         
                         <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 gap gap-4">
                             {% for media_item in explore_items.items %}
-                            {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
+                            {% include 'views/front/'~ template ~ '/includes/track_item.html.twig' %}
                             {% endfor %}
                             
                         </div>

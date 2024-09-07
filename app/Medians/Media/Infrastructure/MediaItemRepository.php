@@ -68,11 +68,6 @@ class MediaItemRepository
 				$model = $model->whereBetween('price', $prices);
 			}
 
-			if (isset($params['title'])) {
-				$model = $model->whereHas('lang_content', function($q) use ($params) {
-					$q->where('content', 'LIKE', '%'.$params['title'].'%')->orWhere('title', 'LIKE', '%'.$params['title'].'%');
-				});
-			}
 
 			if (isset($params['sort_by']))
 			{

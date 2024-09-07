@@ -208,6 +208,7 @@ class PageController extends CustomController
 		try {
 			
 			$page->addView();
+			$params = [];
 			$params['limit'] = 12;
 
             return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
