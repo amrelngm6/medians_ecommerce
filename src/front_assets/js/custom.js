@@ -73,7 +73,7 @@ function initAudioPlayer(player, index) {
 	audio.load()
 
 	let play = player.find('.play-pause'),
-		circle = player.find('.seekbar'),
+		circle = player.find('#seekbar-'+audio.attr('data-id')),
 		getCircle = circle.get(0),
 		totalLength = getCircle.getTotalLength();
 
