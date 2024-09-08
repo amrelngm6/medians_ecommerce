@@ -1,5 +1,5 @@
           
-            <div id="main-side" class=" flex">
+            <div id="main-side" class=" flex" x-data="{}">
                 <div class="w-1"></div>
                 
                 <div class="py-4 lg:px-0 px-1 w-56 sidebar lg:relative fixed left-0 z-10 top-0 overflow-hidden h-full">
@@ -80,6 +80,16 @@
                                     <img src="/src/front_assets/svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
                                         width="18" />
                                 </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Upload')}}</span>
+                            </a>
+                        </li>
+
+                        <li class="w-full " id="create-playlist">
+                            <a href="#!" x-on:click="jQuery('#create-playlist-popup').removeClass('hidden')" class="w-full flex gap gap-4  ">
+                                <span class="min-w-8  text-center relative my-2">
+                                    <img src="/src/front_assets/svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
+                                    <img src="/src/front_assets/svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
+                                        width="18" />
+                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create playlist')}}</span>
                             </a>
                         </li>
 

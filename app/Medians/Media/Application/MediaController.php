@@ -113,31 +113,48 @@ class MediaController extends CustomController
 	public function stream_audio()
 	{
 		$this->app = new \config\APP;
-		$filepath = $this->app->request()->get('audio');
+		$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
 
 		if (strpos($filepath, 'uploads/') && is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
 		{
+			$filename = explode('.', $filepath);
 
-			$ext = explode('.', $filepath);
+			$extension = "mp3";
+			$mime_type = "audio/mpeg, audio/x-mpeg, audio/x-mpeg-3, audio/mpeg3";
+
+			$file = $_SERVER['DOCUMENT_ROOT'].$filepath;
+
+			if(file_exists($file)){
+				header('Content-type: {$mime_type}');
+				header('Content-length: ' . filesize($file));
+				header('Content-Disposition: filename="' . $filename[0]);
+				header('X-Pad: avoid browser bug');
+				header('Cache-Control: no-cache');
+				readfile($file);
+			}else{
+				header("HTTP/1.0 404 Not Found");
+			}
+
+			// $ext = explode('.', $filepath);
 			// Set the caching headers
 			// $expires = 60 * 60 * 24 * 7; // 1 week (in seconds)
 			// header("Cache-Control: public, max-age=$expires");
 			// header("Expires: " . gmdate("D, d M Y H:i:s", time() + $expires) . " GMT");
-			header('Content-Disposition: attachment; filename="'.basename($filepath).'"');
+			// header('Content-Disposition: attachment; filename="'.basename($filepath).'"');
 
-			// Serve the CSS file
-			$extension = "audio/mpeg";
-			header("Content-Type: $extension");
-			header("Content-Length: ". filesize($filesize));
-			header("Accept-Ranges", "bytes");
-			header('Pragma: public');
-			header('Cache-Control: must-revalidate');
-			header('Expires: 0');
+			// // Serve the CSS file
+			// $extension = "audio/mpeg";
+			// header("Content-Type: $extension");
+			// header("Content-Length: ". filesize($filesize));
+			// header("Accept-Ranges", "bytes");
+			// header('Pragma: public');
+			// header('Cache-Control: must-revalidate');
+			// header('Expires: 0');
 
-			readfile($_SERVER['DOCUMENT_ROOT'].$filepath);
+			// readfile($_SERVER['DOCUMENT_ROOT'].$filepath);
 
 		} else {
-			echo $_SERVER['DOCUMENT_ROOT'].$filepath;
+			// echo $_SERVER['DOCUMENT_ROOT'].$filepath;
 		} 
 	}
 

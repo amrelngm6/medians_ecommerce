@@ -106,7 +106,7 @@ class CustomerAuthService
 			return render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
 		        'title' => translate('Activate account'),
 		        'app' => $this->app,
-				'layout' => 'customer_auth/confirm-email'
+				'layout' => 'confirm-email'
 		    ]);
 		    
 		} catch (Exception $e) {

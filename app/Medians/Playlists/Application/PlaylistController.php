@@ -92,6 +92,7 @@ class PlaylistController extends CustomController
 
         try {	
 
+        	$this->app->customer_auth();
         	$this->validate($params);
 			$params['customer_id'] = $this->app->customer->customer_id;
 
@@ -161,12 +162,12 @@ class PlaylistController extends CustomController
 
 		if (empty($params['name']))
 		{
-        	throw new \Exception(json_encode(array('result'=>translate('NAME_EMPTY'), 'error'=>1)), 1);
+        	throw new \Exception(translate('NAME_EMPTY'), 1);
 		}
 
 		if (empty($this->app->customer->customer_id))
 		{
-        	throw new \Exception(json_encode(array('result'=>translate('Login first'), 'error'=>1)), 1);
+        	throw new \Exception(translate('Login first'), 1);
 		}
 
 	}

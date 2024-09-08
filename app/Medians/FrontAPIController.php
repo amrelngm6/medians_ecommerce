@@ -112,6 +112,10 @@ class FrontAPIController extends CustomController
 					$return = (new Reviews\Application\ReviewController)->store();
 					break;
 		
+				case 'Playlist.create':
+					$return = (new Playlists\Application\PlaylistController)->store();
+					break;
+		
 				case 'Transaction.verify':
 					$return = (new Transactions\Application\TransactionController)->verifyTransaction();
 					break;
