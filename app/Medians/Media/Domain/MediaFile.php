@@ -23,12 +23,18 @@ class MediaFile extends CustomModel
 		'sort',
 	];
 
-	public $appends = ['wave'];
+	public $appends = ['wave', 'filename'];
 
 	public function getWaveAttribute() 
 	{
 		$e = explode('.', $this->path);
 		return !empty($this->path) ? str_replace(end($e), 'png', $this->path) : '';
+	}
+
+	public function getFilenameAttribute() 
+	{
+		$e = explode('/', $this->path);
+		return end($e);
 	}
 
 

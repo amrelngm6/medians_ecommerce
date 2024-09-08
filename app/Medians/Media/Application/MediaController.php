@@ -122,18 +122,61 @@ class MediaController extends CustomController
 			$extension = "mp3";
 			$mime_type = "audio/mpeg, audio/x-mpeg, audio/x-mpeg-3, audio/mpeg3";
 
-			$file = $_SERVER['DOCUMENT_ROOT'].$filepath;
+			$file_path = $_SERVER['DOCUMENT_ROOT'].$filepath;
 
-			if(file_exists($file)){
-				header('Content-type: {$mime_type}');
-				header('Content-length: ' . filesize($file));
-				header('Content-Disposition: filename="' . $filename[0]);
-				header('X-Pad: avoid browser bug');
-				header('Cache-Control: no-cache');
-				readfile($file);
-			}else{
-				header("HTTP/1.0 404 Not Found");
+			// Get the file size and MIME type
+			$file_size = filesize($file_path);
+			$mime_type = mime_content_type($file_path);
+
+			// Handle range requests (for seeking)
+			$start = 0;
+			$length = $file_size;
+			$end = $file_size - 1;
+
+			if (isset($_SERVER['HTTP_RANGE'])) {
+				$range = $_SERVER['HTTP_RANGE'];
+				list(, $range) = explode('=', $range, 2);
+				if (strpos($range, ',') !== false) {
+					header("HTTP/1.1 416 Requested Range Not Satisfiable");
+					header("Content-Range: bytes */$file_size");
+					exit;
+				}
+				list($start, $end) = explode('-', $range);
+				$start = intval($start);
+				if ($end === "") {
+					$end = $file_size - 1;
+				} else {
+					$end = intval($end);
+				}
+				if ($start > $end || $end >= $file_size) {
+					header("HTTP/1.1 416 Requested Range Not Satisfiable");
+					header("Content-Range: bytes */$file_size");
+					exit;
+				}
+				$length = $end - $start + 1;
+				header("HTTP/1.1 206 Partial Content");
+				header("Content-Range: bytes $start-$end/$file_size");
 			}
+
+			// Set the headers to stream the file
+			header("Content-Type: $mime_type");
+			header("Content-Length: $length");
+			header("Accept-Ranges: bytes");
+			header("Content-Disposition: inline; filename=\"$file_name\"");
+
+			// Open the file and stream the requested portion
+			$handle = fopen($file_path, 'rb');
+			fseek($handle, $start);
+			$buffer_size = 1024 * 8; // 8KB buffer
+			while (!feof($handle) && ($start <= $end)) {
+				echo fread($handle, min($buffer_size, $end - $start + 1));
+				$start += $buffer_size;
+				ob_flush();
+				flush();
+			}
+			fclose($handle);
+			exit;
+
 
 			// $ext = explode('.', $filepath);
 			// Set the caching headers

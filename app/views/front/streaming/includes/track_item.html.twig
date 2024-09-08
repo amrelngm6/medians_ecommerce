@@ -3,7 +3,7 @@
                                 <img class="lg:mx-0 mx-auto rounded-2xl shadow transition hover:shadow-lg  transition hover:shadow-lg w-48 h-48" width="300" height="300" src="/stream?thumbnail=300&image={{media_item.picture}}" />
                                 <div class="  gap-1 flex py-4 ">
                                     <div class="slide__audio js-audio start-player">
-                                        <div class="slide__audio-player" data-path="{{media_item.main_file.path}}" data-id="{{media_item.media_id}}" >
+                                        <div class="slide__audio-player" data-path="/stream_audio?audio={{media_item.main_file.filename}}" data-id="{{media_item.media_id}}" >
                                         </div>
                                         {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
                                     </div>
