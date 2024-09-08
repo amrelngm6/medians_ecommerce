@@ -38,8 +38,9 @@ class MediaItemController extends CustomController
 
 		try {
 
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/upload-step1.html.twig', [
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
+                'layout' => 'upload-step1'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -59,10 +60,11 @@ class MediaItemController extends CustomController
         
 		try 
         {
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/audio_page.html.twig', [
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item' => $item,
                 'genres' => $this->categoryRepo->getGenres(),
+                'layout' => 'audio_page'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -86,10 +88,11 @@ class MediaItemController extends CustomController
         
 		try 
         {
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/discover.html.twig', [
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'list' => $list,
                 'genres' => $this->categoryRepo->getGenres(),
+                'layout' => 'discover'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -115,10 +118,11 @@ class MediaItemController extends CustomController
         
 		try {
 
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/upload-step2.html.twig', [
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item' => $item,
                 'genres' => $this->categoryRepo->getGenres(),
+                'layout' => 'upload-step2'
             ], 'output'));
             
 		} catch (\Exception $e) {

@@ -53,12 +53,12 @@ class CustomerAuthService
             $settings = $this->app->SystemSetting();
 
 		    // return  render('login', [
-			return render('views/front/'.($settings['template'] ?? 'default').'/pages/signin.html.twig', [
+			return render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
 		    	// 'load_vue' => true,
 		        'title' => translate('Login page'),
 		        'app' => $this->app,
 		        'google_login' => $this->loginWithGoogle(),
-		        'formAction' => '/login',
+				'layout' => 'signin'
 		    ]);
 		    
 		} catch (Exception $e) {

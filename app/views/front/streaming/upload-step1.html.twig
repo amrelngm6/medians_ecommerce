@@ -1,51 +1,23 @@
-{% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
 
-<div class=" w-full">
-
-    <div class="w-full flex gap gap-2" id="main-container">
-        
-        <div  class="lg:fixed bg-white dark:bg-gray-900 h-screen">
-            {% include 'views/front/' ~ template ~ '/includes/app_sidebar.html.twig' %}
-        </div>
-
-        <div class="w-full px-2 lg:px-0 relative overflow-hidden lg:ml-60" >
-                    
-            <header >
-                {% include 'views/front/' ~ template ~ '/includes/app_header.html.twig' %}
-            </header>
-
-            <form action="/front_api/create" method="post" enctype="multipart/form-data" id="upload-step" class="ajax-form relative text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8">
-                <div class="loader absolute w-full h-full left-0 top-0 bg-white opacity-50 z-10"></div>
+            <form action="/front_api/create" method="post" enctype="multipart/form-data" id="upload-step" class="ajax-form relative text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8 pb-20">
+                <div class="loader absolute w-full h-full left-0 top-0 bg-white opacity-50 dark:bg-gray-900   z-10"></div>
                 <input type="hidden" name="type" value="MediaItem.upload" />
-                <h2 class="text-2xl dark:text-gray-400 ">Upload Music</h2>
+                <h2 class="text-2xl dark:text-gray-400 ">{{lang.translate('Upload Music')}}</h2>
                 
                 <div class="flex my-4 py-6 relative" id="upload-media-form">
-                    <div class="cursor-pointer p-8 dark:bg-gray-800  bg-gray-200 rounded-3xl w-40 h-40 border border-1 border-dashed	border-orange-600">
+                    <label for="media-file" class="cursor-pointer p-8 dark:bg-gray-800  bg-gray-200 rounded-3xl w-40 h-40 border border-1 border-dashed	border-orange-600">
                         <img src="/src/front_assets/svg/music-tone.svg" class="dark:opacity-30" />
-                    </div>
+                    </label>
                     <div class="text-primary absolute bottom-0 ml-48 mb-8">
                         <p class="block my-4 text-gray-400">{{lang.translate('Click to upload your files')}}</p>
-                        <label class="inline-block px-6 py-3 rounded-2xl border dark:text-gray-400 border-gray-100 hover:border-orange-600">
+                        <label class="inline-block px-6 py-3 rounded-2xl border dark:text-gray-400 border-gray-100 transition hover:border-orange-600">
                         {{lang.translate('Upload media')}}
-                        <input type="file" name="file" class="hidden" />
+                        <input id="media-file" type="file" name="file" class="hidden" />
                         </label>
                     </div>
                     <div></div>
                 </div>
                 
-                <button class=" dark:text-gray-400 float-right inline-block px-6 py-2 rounded-2xl border hover:border-orange-600 border-orange-300">{{lang.translate('Next')}}</button>
+                <button class=" dark:text-gray-400 float-right inline-block px-6 py-2 rounded-2xl border transition hover:border-orange-600 border-orange-300">{{lang.translate('Next')}}</button>
                 
             </form>
-        </div>
-         
-    </div>
-</div>
-    
-<!-- Footer -->
-{% include 'views/front/' ~ template ~ '/includes/footer.html.twig' %}
-
-<script src="/src/front_assets/js/main.js"></script>
-
-</body>
-
-</html>
