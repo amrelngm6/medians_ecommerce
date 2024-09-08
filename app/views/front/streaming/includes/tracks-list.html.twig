@@ -4,7 +4,7 @@
                                                 
                                                 <img src="{{media_item.picture}}" width="48" height="48" class="rounded-lg" />
                                                 <div class="slide__audio js-audio start-player">
-                                                    <div class="slide__audio-player" data-path="{{media_item.main_file.path}}" data-id="{{media_item.media_id}}" data-wave-id="wave-{{media_item.media_id}}" data-wave-overlay="wave-overlay{{media_item.media_id}}">
+                                                    <div class="slide__audio-player" data-path="/stream_audio?audio={{media_item.main_file.filename}}" data-id="{{media_item.media_id}}" data-wave-id="wave-{{media_item.media_id}}" data-wave-overlay="wave-overlay{{media_item.media_id}}">
                                                     </div>
                                                     {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
                                                 </div>
