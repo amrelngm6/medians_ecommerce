@@ -22,57 +22,27 @@
                         <div class="min-w-96  relative  mb-4">
                             <div class="relative p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-md  overflow-hidden ">
                                 <div class="w-full  border-1 text-primary ">
-                                    <div class="w-full text-xl font-bold tracking-wide dark:text-gray-400"> Top Authors</div>
-                                    <p class="text-gray-500 py-2">Trends of this month</p>
+                                    <div class="w-full text-xl font-bold tracking-wide dark:text-gray-400"> {{lang.translate('Top Authors')}}</div>
+                                    <p class="text-gray-500 py-2">{{lang.translate('Trends of this month')}}</p>
                                 </div>
                                 <hr class="dark:opacity-0" />
                                 <div class="relative overflow-hidden rounded-full ">
 
                                     <div class="py-4 channel-slider flex">
-                                    
+                                        {% for channel in channels  %}
+
                                         <div  class="transition hover:text-orange-500 p-4 text-center flex gap-4">
                                             <img class="rounded-full " src="https://via.placeholder.com/120x120" />
                                             <p>
-                                                <a class="font-semibold text-lg pt-4 block">Amr Diab</a>
-                                                <span class="flex gap-2 text-gray-500">@ 20</span>
+                                                <a class="font-semibold text-lg pt-4 block">{{channel.name}}</a>
+                                                <span class="flex gap-2 text-gray-500"> 20</span>
                                                 <span class="flex gap-2  text-gray-500">$% 90</span>
                                             </p>
                                         </div>
-                                        <div  class="transition hover:text-orange-500 p-4 text-center flex gap-4">
-                                            <img class="rounded-full " src="https://via.placeholder.com/120x120" />
-                                            <p>
-                                                <a class="font-semibold text-lg pt-4 block">Amr Diab</a>
-                                                <span class="flex gap-2 text-gray-500">@ 20</span>
-                                                <span class="flex gap-2  text-gray-500">$% 90</span>
-                                            </p>
-                                        </div>
-                                        <div  class="transition hover:text-orange-500 p-4 text-center flex gap-4">
-                                            <img class="rounded-full " src="https://via.placeholder.com/120x120" />
-                                            <p>
-                                                <a class="font-semibold text-lg pt-4 block">Amr Diab</a>
-                                                <span class="flex gap-2 text-gray-500">@ 20</span>
-                                                <span class="flex gap-2  text-gray-500">$% 90</span>
-                                            </p>
-                                        </div>
-                                        <div  class="transition hover:text-orange-500 p-4 text-center flex gap-4">
-                                            <img class="rounded-full " src="https://via.placeholder.com/120x120" />
-                                            <p>
-                                                <a class="font-semibold text-lg pt-4 block">Amr Diab</a>
-                                                <span class="flex gap-2 text-gray-500">@ 20</span>
-                                                <span class="flex gap-2  text-gray-500">$% 90</span>
-                                            </p>
-                                        </div>
-                                        <div  class="transition hover:text-orange-500 p-4 text-center flex gap-4">
-                                            <img class="rounded-full " src="https://via.placeholder.com/120x120" />
-                                            <p>
-                                                <a class="font-semibold text-lg pt-4 block">Amr Diab</a>
-                                                <span class="flex gap-2 text-gray-500">@ 20</span>
-                                                <span class="flex gap-2  text-gray-500">$% 90</span>
-                                            </p>
-                                        </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
-                                <p class="py-2"><a class="text-primary transition hover:text-orange-500" href="#!">More channels</a></p>
+                                <p class="py-2"><a class="text-primary transition hover:text-orange-500" href="/channels">{{lang.translate('More channels')}}</a></p>
                             </div>
                         </div>
                     </div>

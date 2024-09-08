@@ -85,7 +85,8 @@ class APP
 	 */
 	public function is_dark()
 	{
-		$_COOKIE['is_dark'] = $this->SystemSetting()['is_dark'] ?? null;
+		$setting = $this->SystemSetting();
+		$_COOKIE['is_dark'] = !empty($setting['is_dark']) ? true : null;
 		return isset($_COOKIE['is_dark']) ? true : false;
 	}
 
@@ -142,7 +143,9 @@ class APP
 		
 		$session = (new CustomerAuthService())->checkSession();
 
-		return $session ?? $this->checkAPISession();
+		$this->customer = $session ?? $this->checkAPISession();
+		
+		return  $this->customer;
 	}
 
 	public function customer_id()

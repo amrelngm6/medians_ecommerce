@@ -103,9 +103,10 @@ class CustomerAuthService
 			if (isset($this->app->customer_auth()->customer_id)) { return $this->app->redirect('/customer/dashboard'); }
             $settings = $this->app->SystemSetting();
 
-			return render('views/front/'.($settings['template'] ?? 'default').'/customer_auth/confirm-email.html.twig', [
+			return render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
 		        'title' => translate('Activate account'),
 		        'app' => $this->app,
+				'layout' => 'customer_auth/confirm-email'
 		    ]);
 		    
 		} catch (Exception $e) {
@@ -263,9 +264,6 @@ class CustomerAuthService
 				return null;
 			}  
 
-            $cart = new \Medians\Cart\Application\GuestCartController();
-            $updateCart = $cart->convertSession();
-
 			echo $this->app->redirect(isset($user->field['activation_token']) ? './activate-account/'.$user->field['activation_token'] : '/customer/dashboard');
 
 		} catch (Exception $e) {
@@ -311,9 +309,6 @@ class CustomerAuthService
 	            echo json_encode(array('error'=>1, 'result'=>$checkUser));
             }
 
-            $cart = new \Medians\Cart\Application\GuestCartController();
-            $updateCart = $cart->convertSession();
-            
         } catch (Exception $e) {
         	throw new Exception("Error Processing Request", 1);
         }
@@ -512,7 +507,6 @@ class CustomerAuthService
 		$this->CustomerAuthModel = new CustomerAuthModel($code);
 		
 		$check = $this->CustomerAuthModel->checkSession($code);
-
 
 		if (!empty ( $check ))
 		{

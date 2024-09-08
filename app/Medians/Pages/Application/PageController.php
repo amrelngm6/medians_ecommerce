@@ -202,6 +202,7 @@ class PageController extends CustomController
 
 		$categoryRepo = new \Medians\Categories\Infrastructure\CategoryRepository;
 		$mediaItemRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
+		$customerRepo = new \Medians\Customers\Infrastructure\CustomerRepository;
 
 		$settings = $this->app->SystemSetting();
 
@@ -211,11 +212,13 @@ class PageController extends CustomController
 			$params = [];
 			$params['limit'] = 12;
 
-            return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
+            return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'page' => $page,
                 'app' => $this->app,
 				'explore_items' => $mediaItemRepo->getWithFilter($params),
 				'genres' => $categoryRepo->getGenres(),
+				'channels' => $customerRepo->get(),
+				'layout' => 'app'
             ], 'output')));
             
 		} catch (\Exception $e) {

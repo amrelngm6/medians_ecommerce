@@ -60,7 +60,7 @@ RouteHandler::get('/upload', \Medians\Media\Application\MediaItemController::cla
 RouteHandler::get('/media/edit/(:all)', \Medians\Media\Application\MediaItemController::class.'@upload_info');
 RouteHandler::get('/track/(:all)', \Medians\Media\Application\MediaItemController::class.'@audio_page');
 RouteHandler::get('/discover', \Medians\Media\Application\MediaItemController::class.'@discover');
-RouteHandler::get('/checkout', \Medians\Cart\Application\CartController::class.'@checkout');
+RouteHandler::get('/channels', \Medians\Channels\Application\ChannelController::class.'@channels');
 RouteHandler::get('/invoice/(:all)', \Medians\Invoices\Application\InvoiceController::class.'@invoicePage');
 RouteHandler::get('/create-payment-intent', \Medians\Transactions\Application\TransactionController::class.'@createPaymentIntent');
 RouteHandler::post('/cart/delete', \Medians\Cart\Application\CartController::class.'@delete');

@@ -1,0 +1,19 @@
+                
+                <div class="py-4 w-full text-primary ">
+                    <h2 class="dark:text-gray-400 text-2xl py-4">Top Channels</h2>
+                    <div id="channel-list"  class="w-full grid lg:grid-cols-4 grid-cols-2 gap-10  py-4" >
+                            {% for channel in channels  %}
+
+                            <div class="dark:bg-gray-900 dark:text-gray-400  transition hover:text-orange-500 w-full  relative p-2 py-3 shadow-md rounded-3xl text-center bg-white">
+                                <img class=" rounded-full shadow-md transition hover:shadow-lg  mx-auto " src="/uploads/images/60x60.png" />
+                                <a href="artist.html" class="lg:text-base text-xs block px-1 lg:font-semibold pt-4 pb-1"> 1 HipHop Genre</a>
+                                <span class="px-1 relative text-gray-500 text-opacity-75 lg:text-sm text-xs font-normal  tracking-tight">Followers:  50</span>
+                                <span class="px-1 relative text-gray-500 text-opacity-75 lg:text-sm text-xs font-normal  tracking-tight">Items:  150</span>
+
+                            </div>  
+                            {% endfor %}
+
+
+                    </div>
+                </div>
+                <div class="h-10"></div>
