@@ -112,9 +112,9 @@ class MediaItemController extends CustomController
 
         $filePath = $item->main_file->path;
         $ext = explode('.', $filePath);
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.end($ext), '.png', $filePath)))
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'].$this->mediaRepo->audio_dir.str_replace('.'.end($ext), '.png', $filePath)))
         {
-            $generateWave = $this->generateWave( str_replace('/uploads/audio', '',  $filePath));
+            $generateWave = $this->generateWave( '/'.$filePath);
         }
         
 		try {
@@ -168,12 +168,10 @@ class MediaItemController extends CustomController
 
     public function generateWave($file)
     {
-        $this->mediaRepo->_dir = '/uploads/audio';
-
         $ffmpeg = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg';
         // $ffmpeg = 'ffmpeg';
-        $filePath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir. $file;
-        $outputPath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir. str_replace(['mp3','wav','ogg'], 'png', $file);
+        $filePath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->audio_dir. $file;
+        $outputPath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->audio_dir. str_replace(['mp3','wav','ogg'], 'png', $file);
         
         $shell = shell_exec($ffmpeg.' -i '.$filePath.' -filter_complex "showwavespic=s=1024x200:colors=yellow|blue|green" -frames:v 1  '.$outputPath.' ');
         return $shell;
