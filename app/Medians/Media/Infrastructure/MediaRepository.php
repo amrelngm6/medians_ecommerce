@@ -174,7 +174,7 @@ class MediaRepository
     {
 
     	$filepath = $_SERVER['DOCUMENT_ROOT'].$file;
-    	$output = str_replace('/images/', '/thumbnails/', str_replace(['.png','.jpg','.jpeg', '.webp'], $w.'.webp', $filepath));
+    	$output = str_replace(['/images/','/img/'], '/thumbnails/', str_replace(['.png','.jpg','.jpeg', '.webp'], $w.'.webp', $filepath));
 
 		if (is_file($output))
 		{

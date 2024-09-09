@@ -82,6 +82,12 @@ class MediaController extends CustomController
 		$this->app = new \config\APP;
 		$filepath = $this->app->request()->get('image');
 		$isThumbnail = $this->app->request()->get('thumbnail');
+		$folder = $this->app->request()->get('dir');
+
+		if (!empty($folder))
+		{
+			$filepath = '/uploads/'.$folder.'/'.$filepath;
+		}
 
 		if (!empty($isThumbnail))
 		{
@@ -89,7 +95,7 @@ class MediaController extends CustomController
 			$filepath = is_file($_SERVER['DOCUMENT_ROOT'].$resized) ? $resized : $filepath;
 		}
 
-		if (strpos($filepath, 'uploads/') && is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
 		{
 
 			$ext = explode('.', $filepath);
@@ -113,7 +119,7 @@ class MediaController extends CustomController
 		$this->app = new \config\APP;
 		$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
 
-		if (strpos($filepath, 'uploads/') && is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
 		{
 			$filename = explode('.', $filepath);
 
