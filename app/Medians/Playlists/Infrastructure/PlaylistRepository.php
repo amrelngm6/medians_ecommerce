@@ -3,8 +3,7 @@
 namespace Medians\Playlists\Infrastructure;
 
 use Medians\Playlists\Domain\Playlist;
-use Medians\Devices\Domain\Device;
-use Medians\Products\Domain\Product;
+use Medians\Playlists\Domain\PlaylistMedia;
 
 
 class PlaylistRepository 
@@ -26,12 +25,17 @@ class PlaylistRepository
 
 	public function get($limit = 1000)
 	{
-		return Playlist::with('items')->limit($limit)->get();
+		return Playlist::withCount('likes')->with('items')->limit($limit)->get();
+	}
+
+	public function getTop($limit = 1000)
+	{
+		return Playlist::withCount('likes')->with('items')->limit($limit)->orderBy('likes_count', 'DESC')->get();
 	}
 
 	public function getByCustomer($customer_id)
 	{
-		return Playlist::with('items')->where('customer_id', $customer_id)->get();
+		return Playlist::withCount('likes')->with('items')->where('customer_id', $customer_id)->get();
 	}
 
 
@@ -45,7 +49,6 @@ class PlaylistRepository
 
 		$Model = new Playlist();
 		
-		$data['item_type'] = (new \Medians\Products\Domain\Product)::class;
 		foreach ($data as $key => $value) 
 		{
 			if (in_array($key, $Model->getFields()))
@@ -57,6 +60,30 @@ class PlaylistRepository
 		$dataArray['status'] = isset($dataArray['status']) ? 'on' : null;
 		// Return the Model object with the new data
     	$Object = Playlist::firstOrCreate($dataArray);
+
+    	return $Object;
+    }
+    	
+
+	/**
+	* Save media item to database
+	*/
+	public function store_item($data) 
+	{
+
+		$Model = new PlaylistMedia();
+		
+		$data['item_type'] = PlaylistMedia::class;
+		foreach ($data as $key => $value) 
+		{
+			if (in_array($key, $Model->getFields()))
+			{
+				$dataArray[$key] = $value;
+			}
+		}	
+
+		// Return the Model object with the new data
+    	$Object = PlaylistMedia::firstOrCreate($dataArray);
 
     	return $Object;
     }

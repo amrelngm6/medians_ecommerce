@@ -116,8 +116,8 @@ class FrontAPIController extends CustomController
 					$return = (new Playlists\Application\PlaylistController)->store();
 					break;
 		
-				case 'Playlist.add_item':
-					$return = (new Playlists\Application\PlaylistController)->store();
+				case 'Playlist.add':
+					$return = (new Playlists\Application\PlaylistController)->add_item();
 					break;
 	
 				case 'Like.media':

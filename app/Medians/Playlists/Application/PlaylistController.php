@@ -108,6 +108,30 @@ class PlaylistController extends CustomController
 	}
 
 
+	public function add_item() 
+	{
+
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+
+        try {	
+
+        	$this->app->customer_auth();
+			$params['customer_id'] = $this->app->customer->customer_id;
+
+            $returnData = (!empty($this->repo->store_item($params))) 
+            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            : array('success'=>0, 'result'=>'Error', 'error'=>1);
+
+        } catch (\Exception $e) {
+        	return array('result'=>$e->getMessage(), 'error'=>1);
+        }
+
+		return $returnData;
+	}
+
+
 
 	public function update()
 	{
@@ -186,6 +210,28 @@ class PlaylistController extends CustomController
                 'app' => $this->app,
 				'item' => $this->repo->find($playlist_id),
                 'layout' => 'playlist'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
+    /**
+     * Playlists list page for frontend
+     */
+    public function playlists()
+    {
+		$this->app = new \config\APP;
+
+		$settings = $this->app->SystemSetting();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+				'items' => $this->repo->getTop(20),
+                'layout' => 'playlists'
             ], 'output'));
             
 		} catch (\Exception $e) {
