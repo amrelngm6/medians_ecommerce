@@ -110,11 +110,11 @@ class MediaItemController extends CustomController
 
         $item = $this->repo->find($media_id);
 
-        $filePath = $item->main_file->path;
+        $filePath = $this->mediaRepo->audio_dir.$item->main_file->path;
         $ext = explode('.', $filePath);
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.end($ext), '.png', $filePath)))
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.end($ext), '.png', $filePath))) 
         {
-            $generateWave = $this->generateWave( str_replace('/uploads/audio', '',  $filePath));
+            $generateWave = $this->generateWave( str_replace('/uploads/audio/', '',  $filePath));
         }
         
         if (!$item->field['duration'])
@@ -179,7 +179,7 @@ class MediaItemController extends CustomController
 
     public function generateWave($file)
     {
-        $this->mediaRepo->_dir = '/uploads/audio';
+        $this->mediaRepo->_dir = '/uploads/audio/';
 
         $ffmpeg = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg';
         // $ffmpeg = 'ffmpeg';
