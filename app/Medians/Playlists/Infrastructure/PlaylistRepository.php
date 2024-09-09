@@ -29,6 +29,11 @@ class PlaylistRepository
 		return Playlist::with('items')->limit($limit)->get();
 	}
 
+	public function getByCustomer($customer_id)
+	{
+		return Playlist::with('items')->where('customer_id', $customer_id)->get();
+	}
+
 
 
 

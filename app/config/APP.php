@@ -117,6 +117,16 @@ class APP
 		return $output;
 	}
 
+	/**
+	 * Load Playlists
+	 */ 
+	public function playlists()
+	{
+		$this->customer_auth();
+		$output = (new \Medians\Playlists\Infrastructure\PlaylistRepository())->getByCustomer($this->customer->customer_id);
+		return $output;
+	}
+
 	
 
 	/**
