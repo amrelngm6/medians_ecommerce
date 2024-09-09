@@ -27,8 +27,9 @@ class MediaFile extends CustomModel
 
 	public function getWaveAttribute() 
 	{
+		$a = explode('/', $this->path);
 		$e = explode('.', $this->path);
-		return !empty($this->path) ? str_replace(end($e), 'png', $this->path) : '';
+		return !empty(end($a)) ? str_replace(end($e), 'png', end($a)) : '';
 	}
 
 	public function getFilenameAttribute() 
