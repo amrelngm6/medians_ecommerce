@@ -4,9 +4,9 @@
                 <div class="w-full  ">
                     <div class=" p-8 relative " >
                         <div class="artist-overlay top-[-20px] left-0 absolute w-full h-full py-20 bg-gradient-to-b from-gray-800 to-black"></div>
-                        <img src="{{item.picture}}"  class="absolute bg-img left-20px top-0 w-full" />
+                        <img src="/stream?thumbnail=900&image={{item.picture_name}}"  class="absolute bg-img left-20px top-0 w-full" />
                         <div class="flex w-full text-white mx-auto text-center relative z-10">
-                            <img src="{{item.picture}}"  class="w-40 h-40 lg:w-56 lg:h-56 rounded-full shadow-xl" />
+                            <img src="/stream?thumbnail=300&image={{item.picture_name}}"  class="w-40 h-40 lg:w-56 lg:h-56 rounded-full shadow-xl" />
                             <div class="p-8 text-left w-full">
                                 <span>{{lang.translate('Track')}}</span>
                                 <h1 class="lg:text-2xl text-lg ">{{item.name}}</h1>

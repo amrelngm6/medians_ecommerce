@@ -31,9 +31,15 @@ class MediaItem extends CustomModel
 		'created_by',
 	];
 
-	public $appends = ['content_langs', 'lang_content', 'field'];
+	public $appends = ['content_langs', 'lang_content', 'field', 'picture_name'];
 
 	
+	public function getPictureNameAttribute() 
+	{
+		$e = explode('/', $this->picture);
+		return end($e);
+	}
+
 	public function getFieldAttribute() 
 	{
 		return !empty($this->custom_fields) ? array_column($this->custom_fields->toArray(), 'value', 'code') : [];
