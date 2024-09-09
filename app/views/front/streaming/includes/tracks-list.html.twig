@@ -29,7 +29,7 @@
                                                         <span class="w-full text-xs pt-1">{{lang.translate('Download')}}</span>
                                                     </a>
                                                     <hr class="opacity-50" />
-                                                    <a  class="cursor-pointer flex w-full gap-2 py-2"   x-on:click="jQuery('#add-playlist-media').val({{media_item.media_id}}); jQuery('#add-playlist-popup').removeClass('hidden')" >
+                                                    <a  class="cursor-pointer flex w-full gap-2 py-2"   x-on:click="jQuery('#add-playlist-cover').css('background-image', 'url( /stream?thumbnail=800&image={{media_item.picture_name}} )'); jQuery('#add-playlist-media').val({{media_item.media_id}}); jQuery('#add-playlist-popup').removeClass('hidden')" >
                                                         <img src="/src/front_assets/svg/queue_list.svg" width="24" />
                                                         <span class="w-full text-xs pt-1">{{lang.translate('Add to playlist')}}</span>
                                                     </a>
