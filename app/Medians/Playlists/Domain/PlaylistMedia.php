@@ -3,6 +3,7 @@
 namespace Medians\Playlists\Domain;
 
 use Shared\dbaser\CustomModel;
+use Medians\Media\Domain\MediaItem;
 
 
 class PlaylistMedia extends CustomModel
@@ -22,6 +23,9 @@ class PlaylistMedia extends CustomModel
 		'sort'
 	];
 
-
+	public function media()
+	{
+		return $this->hasOne(MediaItem::class, 'media_id', 'media_id');
+	}
 
 }

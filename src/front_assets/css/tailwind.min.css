@@ -1397,10 +1397,6 @@ video {
   min-width: 24rem;
 }
 
-.max-w-40 {
-  max-width: 10rem;
-}
-
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -2493,10 +2489,6 @@ video {
   line-height: .75rem;
 }
 
-.leading-4 {
-  line-height: 1rem;
-}
-
 .leading-5 {
   line-height: 1.25rem;
 }
@@ -2687,6 +2679,10 @@ video {
 
 .opacity-100 {
   opacity: 1;
+}
+
+.opacity-20 {
+  opacity: 0.2;
 }
 
 .opacity-30 {
