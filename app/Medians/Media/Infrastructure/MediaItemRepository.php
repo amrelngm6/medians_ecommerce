@@ -39,7 +39,7 @@ class MediaItemRepository
 
 	public function find($id)
 	{
-		return MediaItem::with('genres','main_file')->find($id);
+		return MediaItem::with('genres','main_file')->withCount('likes', 'plays')->find($id);
 	}
 
 	public function get($limit = 100)

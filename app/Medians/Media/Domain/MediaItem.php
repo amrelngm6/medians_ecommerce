@@ -3,6 +3,7 @@
 namespace Medians\Media\Domain;
 
 use Medians\Views\Domain\View;
+use Medians\Likes\Domain\Like;
 use Medians\Categories\Domain\Genre;
 use Medians\Content\Domain\Content;
 use Medians\Reviews\Domain\Review;
@@ -122,6 +123,16 @@ class MediaItem extends CustomModel
 	public function views() 
 	{
 		return $this->morphMany(View::class , 'item');	
+	}
+	
+	public function plays() 
+	{
+		return $this->morphMany(View::class , 'item');	
+	}
+	
+	public function likes() 
+	{
+		return $this->morphMany(Like::class , 'item');	
 	}
 	
 	public function rate() 
