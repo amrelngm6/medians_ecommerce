@@ -144,7 +144,7 @@ class MediaItemController extends CustomController
             
             $getID3 = new getID3;
             // Analyze file
-            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
+            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->audio_dir.$file);
 
             $params = [];
             $params['name'] = $value->getClientOriginalName();
