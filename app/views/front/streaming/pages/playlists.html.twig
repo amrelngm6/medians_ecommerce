@@ -30,7 +30,7 @@
                                                         
                                             {% for playlist_item in playlist.items %}                                   
                                             {% set media_item = playlist_item.media %}
-                                            {% if loop.index < 5 %}
+                                            {% if loop.index < 4 %}
                                             {% include 'views/front/' ~ template ~ '/includes/tracks-list.html.twig' %}
                                             {% endif %}
                                             {% endfor %}
