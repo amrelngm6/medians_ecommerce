@@ -112,9 +112,9 @@ class MediaItemController extends CustomController
 
         $filePath = $item->main_file->path;
         $ext = explode('.', $filePath);
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'].$this->mediaRepo->audio_dir.str_replace('.'.end($ext), '.png', $filePath)))
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.end($ext), '.png', $filePath)))
         {
-            $generateWave = $this->generateWave( $filePath);
+            $generateWave = $this->generateWave( str_replace('/uploads/audio', '',  $filePath));
         }
         
 		try {
@@ -144,12 +144,12 @@ class MediaItemController extends CustomController
             
             $getID3 = new getID3;
             // Analyze file
-            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->audio_dir.$file);
+            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
 
             $params = [];
             $params['name'] = $value->getClientOriginalName();
             $params['description'] = $value->getClientOriginalName();
-            $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $file] ];
+            $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
             $params['author_id'] = $this->app->customer_id() ?? 0;
             $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
             
@@ -168,10 +168,12 @@ class MediaItemController extends CustomController
 
     public function generateWave($file)
     {
+        $this->mediaRepo->_dir = '/uploads/audio';
+
         $ffmpeg = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg';
         // $ffmpeg = 'ffmpeg';
-        $filePath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->audio_dir. $file;
-        $outputPath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->audio_dir. str_replace(['mp3','wav','ogg'], 'png', $file);
+        $filePath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir. $file;
+        $outputPath = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir. str_replace(['mp3','wav','ogg'], 'png', $file);
         
         $shell = shell_exec($ffmpeg.' -i '.$filePath.' -filter_complex "showwavespic=s=1024x200:colors=yellow|blue|green" -frames:v 1  '.$outputPath.' ');
         return $shell;
