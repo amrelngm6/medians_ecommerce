@@ -121,7 +121,7 @@ class PlaylistController extends CustomController
 			$params['customer_id'] = $this->app->customer->customer_id;
 
             $returnData = (!empty($this->repo->store_item($params))) 
-            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>0)
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
 
         } catch (\Exception $e) {
