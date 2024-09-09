@@ -12,7 +12,8 @@
                                                     <a href="/track/{{media_item.media_id}}"  class="block truncate max-w-96 text-lg font-semibold transition hover:text-orange-500  dark:text-gray-400">{{media_item.name}}</a>
                                                     <span class="text-gray-400 text-sm">{{media_item.author.name}}</span>
                                                 </div>
-                                                <a href="#"  class="w-6 py-2 mx-2">
+            
+                                                <a href="/front_api/create?type=Like.media&params[item_id]={{media_item.media_id}}" class="ajax-link w-6 py-2 mx-2">
                                                     <img src="/src/front_assets/svg/heart.svg" />
                                                 </a>
                                                 <div class="p-1 text-gray-500" x-text="convertToTime({{media_item.field.duration}})"></div>
