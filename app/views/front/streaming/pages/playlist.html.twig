@@ -13,9 +13,12 @@
                                     <span>{{lang.translate('Playlist')}}</span>
                                     <h1 class="lg:text-4xl text-2xl ">{{item.name}}</h1>
                                     <div class="flex gap-4 py-2">
-                                        <span class="text-sm text-gray-100">{{lang.translate('Duration')}} : 1h,30m</span>
-                                        <span class="text-sm text-gray-100">{{lang.translate('Items')}} : 14</span>
+                                        <span class="text-sm text-gray-100">{{lang.translate('Likes')}} : {{item.likes_count}}</span>
+                                        <span class="text-sm text-gray-100">{{lang.translate('Items')}} : {{item.items|length}}</span>
                                     </div>
+                                    <a href="/front_api/create?type=Like.playlist&params[item_id]={{item.playlist_id}}" data-params="{item_id: {{item.media_id}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/white-heart.svg" class="w-5"></a>
+                                    <span x-on:click="jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
+
                                 </div>
                                 
                             </div>

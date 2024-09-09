@@ -54,6 +54,29 @@ class LikeRepository
 
     	return $Object;
     }
+
+	/**
+	* Save item to database
+	*/
+	public function store_playlist($data) 
+	{
+
+		$Model = new Like();
+		
+		$data['item_type'] = \Medians\Playlists\Domain\Playlist::class;
+		foreach ($data as $key => $value) 
+		{
+			if (in_array($key, $Model->getFields()))
+			{
+				$dataArray[$key] = $value;
+			}
+		}	
+
+		// Return the Model object with the new data
+    	$Object = Like::firstOrCreate($dataArray);
+
+    	return $Object;
+    }
     	
 
 	/**

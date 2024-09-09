@@ -119,7 +119,31 @@ class LikeController extends CustomController
 			$params['customer_id'] = $this->app->customer->customer_id;
 
             $returnData = (!empty($this->repo->store_media($params))) 
-            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            ? array('success'=>1, 'result'=>translate('Thanks for like'), 'reload'=>0)
+            : array('success'=>0, 'result'=>'Error', 'error'=>1);
+
+        } catch (\Exception $e) {
+        	return array('result'=>$e->getMessage(), 'error'=>1);
+        }
+
+		return $returnData;
+	}
+
+	public function likePlaylist() 
+	{
+
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+
+        try {	
+			
+        	$this->validate($params);
+			
+			$params['customer_id'] = $this->app->customer->customer_id;
+
+            $returnData = (!empty($this->repo->store_playlist($params))) 
+            ? array('success'=>1, 'result'=>translate('Thanks for like'), 'reload'=>0)
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
 
         } catch (\Exception $e) {

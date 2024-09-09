@@ -21,12 +21,12 @@ class PlaylistRepository
 
 	public function find($id)
 	{
-		return Playlist::find($id);
+		return Playlist::with('items')->find($id);
 	}
 
 	public function get($limit = 1000)
 	{
-		return Playlist::with('item')->limit($limit)->get();
+		return Playlist::with('items')->limit($limit)->get();
 	}
 
 

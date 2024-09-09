@@ -31,7 +31,12 @@ class Playlist extends CustomModel
 
 	public function items()
 	{
-		return $this->morphTo();	
+		return $this->hasMany(PlaylistMedia::class, 'playlist_id', 'playlist_id');	
+	}
+
+	public function likes()
+	{
+		return $this->morphMany(Like::class, 'item');	
 	}
 
 }
