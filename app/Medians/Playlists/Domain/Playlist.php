@@ -4,6 +4,7 @@ namespace Medians\Playlists\Domain;
 
 use Shared\dbaser\CustomModel;
 
+use Medians\Likes\Domain\Like;
 
 class Playlist extends CustomModel
 {

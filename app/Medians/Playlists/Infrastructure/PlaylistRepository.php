@@ -21,7 +21,7 @@ class PlaylistRepository
 
 	public function find($id)
 	{
-		return Playlist::with('items')->find($id);
+		return Playlist::with('items')->withCount('likes')->find($id);
 	}
 
 	public function get($limit = 1000)
