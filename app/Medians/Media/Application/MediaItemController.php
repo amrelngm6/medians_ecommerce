@@ -117,6 +117,17 @@ class MediaItemController extends CustomController
             $generateWave = $this->generateWave( str_replace('/uploads/audio', '',  $filePath));
         }
         
+        if (!$item->field['duration'])
+        {
+            $getID3 = new getID3;
+            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->audio_dir.$filePath);
+
+            $params['media_id'] = $item->media_id;
+            $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+            $this->repo->update($params);
+        }
+
+
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [

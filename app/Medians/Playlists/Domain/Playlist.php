@@ -4,8 +4,6 @@ namespace Medians\Playlists\Domain;
 
 use Shared\dbaser\CustomModel;
 
-use Medians\Devices\Domain\Device;
-use Medians\Products\Domain\Product;
 
 class Playlist extends CustomModel
 {

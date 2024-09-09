@@ -136,7 +136,6 @@ class PlaylistController extends CustomController
 	public function delete() 
 	{
 
-
 		$this->app = new \config\APP;
 
 		$params = $this->app->params();
@@ -171,5 +170,27 @@ class PlaylistController extends CustomController
 		}
 
 	}
+
+    /**
+     * Playlist page for frontend
+     */
+    public function playlist($playlist_id)
+    {
+		$this->app = new \config\APP;
+		
+		$settings = $this->app->SystemSetting();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+				'item' => $this->repo->find($playlist_id),
+                'layout' => 'playlist'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
 
 }

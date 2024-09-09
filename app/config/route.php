@@ -61,7 +61,7 @@ RouteHandler::get('/media/edit/(:all)', \Medians\Media\Application\MediaItemCont
 RouteHandler::get('/track/(:all)', \Medians\Media\Application\MediaItemController::class.'@audio_page');
 RouteHandler::get('/discover', \Medians\Media\Application\MediaItemController::class.'@discover');
 RouteHandler::get('/channels', \Medians\Channels\Application\ChannelController::class.'@channels');
-RouteHandler::get('/invoice/(:all)', \Medians\Invoices\Application\InvoiceController::class.'@invoicePage');
+RouteHandler::get('/playlist/(:all)', \Medians\Playlists\Application\PlaylistController::class.'@playlist');
 RouteHandler::get('/create-payment-intent', \Medians\Transactions\Application\TransactionController::class.'@createPaymentIntent');
 RouteHandler::post('/cart/delete', \Medians\Cart\Application\CartController::class.'@delete');
 RouteHandler::post('/cart/update', \Medians\Cart\Application\CartController::class.'@update');
