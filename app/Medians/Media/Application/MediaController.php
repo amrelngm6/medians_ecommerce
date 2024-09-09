@@ -82,7 +82,7 @@ class MediaController extends CustomController
 		$this->app = new \config\APP;
 		$filepath = $this->app->request()->get('image');
 		$isThumbnail = $this->app->request()->get('thumbnail');
-		$folder = $this->app->request()->get('dir');
+		$folder = $this->app->request()->get('dir') ?? 'images';
 
 		if (!empty($folder))
 		{
