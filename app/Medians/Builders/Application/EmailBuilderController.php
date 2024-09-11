@@ -19,7 +19,6 @@ class EmailBuilderController extends CustomController
 
 	function __construct()
 	{
-		$this->app = new \Config\APP;
 
 		$this->repo = new BuilderRepository;
 		$this->contentRepo = new ContentRepository;
@@ -32,6 +31,7 @@ class EmailBuilderController extends CustomController
 	 */ 
 	public function index()
 	{
+		$this->app = new \Config\APP;
 
 		try {
 			
@@ -57,6 +57,7 @@ class EmailBuilderController extends CustomController
 	 */ 
 	public function load()
 	{
+		$this->app = new \Config\APP;
 
 		try {
 			
@@ -79,6 +80,7 @@ class EmailBuilderController extends CustomController
 	 */ 
 	public function updateContent()
 	{	
+		$this->app = new \Config\APP;
 
 		$request = $this->app->request();
 		
@@ -87,6 +89,7 @@ class EmailBuilderController extends CustomController
 
 		$contentJSON = json_decode($request->get('contentJSON'));
 		$check = $this->emailTemplateRepo->findByLang($request->get('templateId'), $request->get('lang'));
+		// print_r($check);
 		$langContent = $check->content;	
 		$langContent->content = str_replace('data-src', 'src', $contentJSON->contentArea);
 		$langContent->save();

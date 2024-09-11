@@ -27,7 +27,7 @@ class EmailTemplate extends CustomModel
 
 	public function content()
 	{
-		return $this->hasOne(Content::class, 'item_id', 'template_id')->where('item_type', EmailTemplate::class);
+		return $this->morphOne(Content::class, 'item');
 	}
 
 	public function langs_content()
