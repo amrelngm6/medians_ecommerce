@@ -1,0 +1,107 @@
+        <div id="swupMain" class="mil-main-transition"> <!-- content -->
+            <div id="smooth-content" class="mil-content"> <!-- intro -->
+
+
+                    <div class="mil-small-banner">
+                        <div class="mil-image-frame"> <img src="/stream?thumbnail=1000&image={{item.picture_name}}"
+                                alt="{{item.lang_content.title}}" class="mil-scale-img" data-value-1=".5"
+                                data-value-2="1.2" />
+                            <div class="mil-gradient-overlay-reverse"></div>
+                        </div>
+                    </div>
+                    <div class="mil-spacer"></div> <!-- intro end -->
+                    <div class="container mil-mb-120">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12 col-xl-9 mil-content-frame mil-appearance mil-p-120-0">
+                                <h3 class="mil-text-center single-post-title mil-appearance mil-mb-60">{{item.lang_content.title}}</h3> <!-- post info -->
+                                <div class="mil-post-info mil-appearance mil-center mil-mb-30">
+                                    <div class="mil-author"> 
+                                        <img 
+                                            src='/stream?thumbnail=800&image={{item.picture_name}}'
+                                            class="mil-dark mil-link">{{item.author.name}}</span></div> <span
+                                        class="mil-dot-divider mil-link mil-accent">&#x2022;</span> <span
+                                        class="mil-accent mil-link">Marketing</span> <span
+                                        class="mil-dot-divider mil-link mil-accent">&#x2022;</span> <span
+                                        class="mil-link mil-softened-30">{{item.created_at|date('M d, Y')}}</span>
+                                </div> <!-- post info end --> <a data-magnific="gallery"
+                                    href="/stream?thumbnail=1000&image={{item.picture_name}}" data-no-swup
+                                    class="mil-appearance mil-just-image mil-image-hori mil-icon-3-trigger mil-mb-90">
+                                    <img
+                                        src='/stream?thumbnail=1000&image={{item.picture_name}}'
+                                        alt="{{item.lang_content.title}}" class=" mil-scale-img"
+                                        data-value-1="1" data-value-2="1.1" /> </a>
+                            </div>
+                            <div class="col-lg-10 col-xl-7">
+                                <div id="post-111"
+                                    class="post-111 post type-post status-publish format-standard has-post-thumbnail hentry category-marketing">
+                                    <div class="single-post-text">
+                                        {{item.lang_content.content|raw}}
+                                    </div>
+                                    <div class="post-text-bottom"> <span class="cat-links">Posted in <a
+                                                href="https://lettery.bslthemes.com/category/marketing/"
+                                                rel="category tag">Marketing</a></span>
+                                        <div class="social-share"><strong>Share:</strong> <a href="https://www.facebook.com/sharer.php?u={{app.CONF.url}}/{{item.lang_content.prefix}}" class="share-btn share-btn-facebook"
+                                                title="Share on Facebook"><i class="icon fab fa-facebook"></i></a><a
+                                                class="share-btn share-btn-twitter" href="https://twitter.com/share?url={{app.CONF.url}}/{{item.lang_content.prefix}}&text={{item.lang_content.title}}&hashtags={{app.SystemSetting.sitename}}" title="Share on Twitter"><i
+                                                    class="icon fab fa-twitter"></i></a><a class="share-btn share-btn-linkedin" href="https://www.linkedin.com/shareArticle?url={{app.CONF.url}}/{{item.lang_content.prefix}}&title={{item.lang_content.title}}"
+                                                title="Share on Linkedin"><i class="icon fab fa-linkedin"></i></a><a href="https://reddit.com/submit?url={{app.CONF.url}}/{{item.lang_content.prefix}}&title={{item.lang_content.title}}"
+                                                class="share-btn share-btn-reddit" title="Share on Reddit"><i
+                                                    class="icon fab fa-reddit"></i></a><a class="share-btn share-btn-pinterest" href="https://pinterest.com/pin/create/bookmarklet/?media={{app.CONF.url}}/image={{item.picture}}&url={app.CONF.url}}/{{item.lang_content.prefix}}&description={{item.lang_content.title}}"
+                                                title="Share on Pinterest"><i class="icon fab fa-pinterest"></i></a></div>
+                                    </div>
+                                </div><!-- #post-111 --> <!-- navigation -->
+                                <div class="mil-post-navigation"> <!-- button --> <a
+                                        href="#!"
+                                        class="mil-link"> <i class="fas fa-chevron-left"></i> <span>Previous</span> </a>
+                                    <div class="mil-post-navigation-center mil-m-hidden"> <a class="mil-link"
+                                            href="/blog">All posts</a></div> <!-- button --> <a
+                                        href="#!"
+                                        class="mil-link"> <span>Next</span> <i class="fas fa-chevron-right"></i> </a>
+                                </div> <!-- projects navigation end -->
+                            </div>
+                        </div>
+                    </div> <!-- comments -->
+                    <div class="mil-gray-bg " style="display:none">
+                        <div class="container ">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-12 col-xl-7 mil-appearance mil-p-120-120">
+                                    <div id="comments" class="post-comments ">
+                                        <div class="form-comment form-comment-open">
+                                            <div id="respond" class="comment-respond">
+                                                <div id="reply-title" class="title comment-reply-title">
+                                                    <h4 class="mil-mb-30">Write a comment <small><a rel="nofollow"
+                                                                id="cancel-comment-reply-link"
+                                                                href="/5-steps-to-create-an-outstanding-marketing-plan/#respond"
+                                                                style="display:none;">Cancel Reply</a></small></h4>
+                                                </div>
+                                                <form action="https://lettery.bslthemes.com/wp-comments-post.php" method="post"
+                                                    id="commentform" class="comment-form" novalidate>
+                                                    <div class="mil-group-input mil-mb-30"><textarea placeholder="Comment" id="comment"
+                                                            name="comment" aria-required="true"></textarea>
+                                                    </div>
+                                                    <div class="mil-group-input"><input id="author" name="author" type="text"
+                                                            placeholder="Name" value="" aria-required='true' />
+                                                    </div>
+                                                    <div class="mil-group-input"><input id="email" name="email" type="text"
+                                                            placeholder="Email" value="" aria-required='true' /></div>
+                                                    <p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent"
+                                                            name="wp-comment-cookies-consent" type="checkbox" value="yes" />
+                                                        <label for="wp-comment-cookies-consent">Save my name, email, and
+                                                            website in this browser for the next time I comment.</label>
+                                                    </p>
+                                                    <div class="form-comment-submit"><button type="submit" name="submit" id="submit"
+                                                            class="mil-button mil-button-lg mil-button mil-button-lg-text"><span>Submit</span></button>
+                                                        <input type='hidden' name='comment_post_ID' value='111' id='comment_post_ID' />
+                                                        <input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+                                                    </div>
+                                                </form>
+                                            </div><!-- #respond -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- comments end -->
+
+                </div>
+            </div>

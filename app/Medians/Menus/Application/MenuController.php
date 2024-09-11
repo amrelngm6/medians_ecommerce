@@ -5,7 +5,6 @@ use \Shared\dbaser\CustomController;
 
 use Medians\Menus\Infrastructure\MenuRepository;
 use Medians\Pages\Infrastructure\PageRepository;
-use Medians\Products\Infrastructure\CategoryRepository;
 
 class MenuController extends CustomController
 {
@@ -27,7 +26,6 @@ class MenuController extends CustomController
 		$this->app = new \config\APP;
 		$this->repo = new MenuRepository();
 		$this->pagesRepo = new PageRepository();
-		$this->categoryRepo = new CategoryRepository();
 	}
 
 
@@ -86,7 +84,7 @@ class MenuController extends CustomController
 			'fillable' => $this->fillable(),
 	        'items' => $this->repo->get(),
 	        'pages' => $this->pagesRepo->get(),
-	        'categories' => $this->categoryRepo->get(),
+	        // 'categories' => $this->categoryRepo->get(),
 	    ]);
 	}
 

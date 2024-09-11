@@ -1,0 +1,49 @@
+<div
+	class="mil-services-1 mil-icon-2-trigger mil-accent-trigger mil-pseudo-hover-el">
+	<!-- background image -->
+	<div class="mil-just-image mil-section-bg mil-scale-img" data-value-1="1" data-value-2="1.1" style="translate: none; rotate: none; scale: none; transform: translate3d(0px, 0px, 0px) scale(1.0775, 1.0775);">
+    <img class=" ls-is-cached "  src="/stream?thumbnail=1000&dir=img&image=content-3.jpg" alt=""></div>
+	<div class="mil-gradient-overlay"></div>
+	<div class="row m-0">
+
+        {% for item in gallery.items %}
+    
+		<div
+			class="col-12 col-sm-6 col-lg-3 p-0">
+			<!-- service card -->
+			<div class="mil-card-1 mil-complex-hover mil-icon-2-trigger mil-accent-trigger mil-pseudo-hover mil-active">
+				<div class="mil-cover mil-long"></div>
+				<a href="{{item.link}}" class="mil-overlay mil-inside mil-between">
+					<div class="mil-top-hidden mil-flex justify-content-between">
+						<div
+							class="mil-icon mil-accent">
+							<!-- icon -->
+                            <img class=" ls-is-cached "  src="/src/front_assets/svg/{{item.button_text}}" alt="http://items.0.title"></div>
+						<!-- number -->
+						<div class="mil-text-lg mil-softened-40">
+							<span>
+								{{item.subtitle}}
+							</span>
+						</div>
+					</div>
+					<div
+						class="mil-bottom-part-hidden">
+						<!-- text -->
+						<h5 class="mil-light mil-mb-20">
+							<span>
+								{{item.title}}
+							</span>
+						</h5>
+						<p class="mil-hidden-part mil-softened-40">
+							<span>
+								{{item.text}}
+							</span>
+						</p>
+					</div>
+				</a>
+			</div>
+			<!-- service card end -->
+		</div>
+        {% endfor %}
+	</div>
+</div>

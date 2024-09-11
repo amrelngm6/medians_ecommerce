@@ -1,0 +1,111 @@
+    <div id="smooth-wrapper" data-smooth-scroll="" data-dark-color="" data-light-color="" data-accent-color="">
+        
+         <!-- cursor -->
+        <div class="mil-cursor"> 
+            <span class="mil-word-1">Play</span> 
+            <span class="mil-word-2">Open</span> 
+            <span class="mil-icon-1"> 
+                <img src="/src/front_assets/svg/loader.svg" />
+            </span>
+        </div> 
+        <!-- cursor end -->
+
+        <!-- preloader -->
+        <div class="mil-preloader-1">
+            <div class="mil-preloader-content">
+                <div class="mil-ticker mil-h5 mil-softened-80"> Loading <span class="mil-accent">&#x2022;</span> <b
+                        class="mil-text-stroke">Please wait</b> <span class="mil-accent">&#x2022;</span> Loading <span
+                        class="mil-accent">&#x2022;</span> <b class="mil-text-stroke">Please wait</b> <span
+                        class="mil-accent">&#x2022;</span> Loading <span class="mil-accent">&#x2022;</span> <b
+                        class="mil-text-stroke">Please wait</b> <span class="mil-accent">&#x2022;</span> Loading <span
+                        class="mil-accent">&#x2022;</span> <b class="mil-text-stroke">Please wait</b> <span
+                        class="mil-accent">&#x2022;</span> Loading <span class="mil-accent">&#x2022;</span> <b
+                        class="mil-text-stroke">Please wait</b> <span class="mil-accent">&#x2022;</span> Loading <span
+                        class="mil-accent">&#x2022;</span> <b class="mil-text-stroke">Please wait</b> <span
+                        class="mil-accent">&#x2022;</span></div>
+            </div>
+            <div class="mil-preloader-load-track">
+                <div class="mil-preloader-load"></div>
+            </div>
+        </div> 
+        <!-- preloader end -->
+
+
+
+        <!-- top panel -->
+        <div style="" class="mil-top-panel mil-transparent-nav mil-invert-nav mil-animated">
+            <div data-elementor-type="wp-post" data-elementor-id="138" class="elementor elementor-138">
+                <section
+                    class="elementor-section elementor-top-section elementor-element elementor-element-3efb8a8 elementor-section-content-middle elementor-section-boxed elementor-section-height-default elementor-section-height-default"
+                    data-id="3efb8a8" data-element_type="section">
+                    <div class="elementor-container elementor-column-gap-default">
+                        <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-0fdaa93"
+                            data-id="0fdaa93" data-element_type="column">
+                            <div class="elementor-widget-wrap elementor-element-populated">
+                                <div class="elementor-element elementor-element-de23316 elementor-widget elementor-widget-lettery-header-logo"
+                                    data-id="de23316" data-element_type="widget"
+                                    data-widget_type="lettery-header-logo.default">
+                                    <div class="elementor-widget-container"> <a href="/"
+                                            class="mil-logo mil-scale-down-trigger mil-accent-trigger">
+                                            <img src="/stream?thumbnail=200&image={{app.SystemSetting.logo|split('/')|last}}&dir=img" />
+                                        </a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="elementor-column elementor-col-50 elementor-top-column elementor-element elementor-element-57b9be9"
+                            data-id="57b9be9" data-element_type="column">
+                            <div class="elementor-widget-wrap elementor-element-populated">
+                                <div class="elementor-element elementor-element-7d84f42 elementor-widget elementor-widget-lettery-header-menu"
+                                    data-id="7d84f42" data-element_type="widget"
+                                    data-widget_type="lettery-header-menu.default">
+                                    <div class="elementor-widget-container">
+                                        <div class="mil-mobile-dropdown mil-menu-center">
+                                            <div id="swupTopbar" class="mil-top-bar-transition">
+                                                <nav class="mil-dark-nav">
+                                                    <ul id="menu-main-menu" class="mil-inline-list mil-hidden-trigger">
+                                                    
+                                                        {% for menu in app.front_menu %}
+                                                        <li class=" menu-item menu-item-type-post_type menu-item-object-page">
+                                                            <a class="mil-link" href="/{{menu.page.lang_content.prefix}}">{{menu.page.lang_content.title}}</a>
+                                                            {% if menu.items|length > 0 %}
+                                                            <ul class="sub-menu">
+                                                            {% for submenu in menu.items %}
+                                                                <li id="menu-item-145"
+                                                                    class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-home">
+                                                                    <a class="mil-link" href="/{{submenu.page.lang_content.prefix}}">{{submenu.page.lang_content.title}}</a>
+                                                                </li>
+                                                            {% endfor %}
+                                                            </ul>
+                                                            {% endif %}
+
+                                                        </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </nav>
+                                            </div>
+                                            <ul class="mil-social mil-hidden-trigger">
+                                                <li> <a target="_blank" href="{{app.SystemSetting.facebook_link}}" title="Facebook">
+                                                        <i class="fab fa-facebook"></i> </a></li>
+                                                <li> <a target="_blank" href="{{app.SystemSetting.instagram_link}}" title="Instagram">
+                                                        <i class="fab fa-instagram"></i> </a></li>
+                                                <li> <a target="_blank" href="{{app.SystemSetting.linkedin_link}}" title="Linked in">
+                                                        <i class="fab fa-linkedin"></i> </a></li>
+                                                <li> <a target="_blank" href="{{app.SystemSetting.twitter_link}}" title="Twitter"> <i
+                                                            class="fab fa-twitter"></i> </a></li>
+                                                <li> <a target="_blank" href="{{app.SystemSetting.behance_link}}" title="Behance"> <i
+                                                            class="fab fa-behance"></i> </a></li>
+                                            </ul>
+                                        </div> <!-- mobile menu button -->
+                                        <div class="mil-menu-btn"> <span></span></div> <!-- mobile menu button end -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div> 
+        <!-- top panel end -->
+
+        
+        

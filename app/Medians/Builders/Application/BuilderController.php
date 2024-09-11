@@ -56,7 +56,8 @@ class BuilderController extends CustomController
 				'page' => $check->lang_content ?? [], 
 				'item' => $check,
 				'current_lang' => $lang,
-				'canScrab' => false,
+				'canScrab' => true,
+				'canCreate' => true,
 			]);
 
 		} catch (\Exception $e) {

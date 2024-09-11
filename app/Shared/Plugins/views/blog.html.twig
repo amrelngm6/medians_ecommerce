@@ -1,35 +1,51 @@
-<section class="blog-page-title mb-4 mb-xl-5 mt-20">
-	<div class="title-bg">
-		<img loading="lazy" src="/uploads/img/blog_title_bg.jpg" width="1780" height="420" alt="">
-	</div>
-	<div class="container">
-		<h2 class="page-title">{{lang.translate('The Blog')}}</h2>
-		<div class="blog__filter">
-			<p>{{lang.translate('Great articles list')}}</p>
+
+<div class="elementor-container elementor-column-gap-no">
+	<div class="elementor-column elementor-col-100 elementor-top-column elementor-element elementor-element-5eeb179" data-id="5eeb179" data-element_type="column">
+		<div class="elementor-widget-wrap elementor-element-populated">
+			<div class="elementor-element elementor-element-e3df0bd elementor-widget elementor-widget-lettery-blog-grid" data-id="e3df0bd" data-element_type="widget" data-widget_type="lettery-blog-grid.default">
+				<div
+					class="elementor-widget-container">
+					<!-- blog -->
+					<div class="mil-blog-section">
+						<div class="container">
+							<div class="row js-blog ">
+								{% for item in items %}
+
+								<div class="col-xl-4 col-lg-6">
+									<div
+										id="post-1844" class="post-1844 post type-post status-publish format-standard has-post-thumbnail hentry category-art">
+										<!-- blog card -->
+										<a href="{{item.lang_content.prefix}}" class="mil-card-1 mil-icon-2-trigger mil-appearance mil-mb-30 " style="translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;">
+											<div class="mil-cover mil-square">
+												<div class="mil-image-frame">
+													<img class=" ls-is-cached " src="/stream?thumbnail=600&image={{item.picture_name}}" alt="{{item.lang_content.name}}"></div>
+											</div>
+											<div class="mil-overlay mil-inside mil-gradient-overlay">
+												<div class="mil-description">
+													<div class="mil-post-info mil-mb-30">
+														<span class="mil-accent mil-link">
+															{{item.author.name}}
+														</span>
+														<span class="mil-dot-divider mil-link mil-accent">•</span>
+														<span class="mil-link mil-softened-30">
+															{{item.created_at|date('M d, Y')}}
+														</span>
+													</div>
+													<h5 class="mil-light">{{item.lang_content.title}}</h5>
+												</div>
+											</div>
+										</a>
+										<!-- blog card end -->
+									</div>
+								</div>
+								{% endfor %}
+
+							</div>
+						</div>
+					</div>
+					<!-- blog end -->
+				</div>
+			</div>
 		</div>
 	</div>
-</section>
-<section class="blog-page container">
-	<h2 class="d-none">{{lang.translate('The Blog')}}</h2>
-	<div class="blog-list mw-930">
-        {% for item in items %}
-		<div class="blog-list__item">
-			<div class="blog-list__item-image">
-				<img loading="lazy" class="h-auto" src="{{item.picture}}" width="680" height="493" alt="">
-			</div>
-			<div class="blog-list__item-detail">
-				<div class="blog-list__item-meta">
-					<span class="blog-list__item-meta__date">{{item.created_at|date('Y-m-d')}}</span>
-				</div>
-				<div class="blog-list__item-title">
-					<a href="{{item.lang_content.prefix}}">{{item.lang_content.title}}</a>
-				</div>
-				<div class="blog-list__item-content">
-					<p>{{item.lang_content.short}}</p>
-					<a href="{{item.lang_content.prefix}}" class="readmore-link">{{lang.translate('Continue Reading')}}</a>
-				</div>
-			</div>
-		</div>
-        {% endfor %}
-	</adiv>
-</section>
+</div>

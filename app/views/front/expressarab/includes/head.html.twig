@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="{{lang_key}}" class="{{app.is_dark ? 'dark' : ''}}">
+<head>
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{page.lang_content.seo_title ? page.lang_content.seo_title : (page.lang_content ? page.lang_content.title : app.SystemSetting.sitename)}}</title>
+    <meta name="description" content="{{page.lang_content.seo_desc ? page.lang_content.seo_desc : app.SystemSetting.sitename}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="canonical" href="{{app.request.uri}}">
+    
+     <!-- Open Graph / Facebook -->
+    <meta property='og:type' content='website'>
+    <meta property='og:url' content='{{ canonicalUrl}}'>
+    <meta property='og:title' content="{{page.lang_content.title ? page.lang_content.title : app.SystemSetting.sitename}}">
+    <meta property='og:image' content='/app/image.php?src=1253926083_1828277228_581308477.jpg&img=pic&w=800'>
+    <meta property='og:description' content="{{page.lang_content.seo_desc ? page.lang_content.seo_desc : app.SystemSetting.sitename}}">
+    <!-- Twitter -->
+    <meta property='twitter:card' content='summary_large_image'>
+    <meta property='twitter:title' content="{{page.lang_content.title ? page.lang_content.title : app.SystemSetting.sitename}}">
+    <meta property='twitter:image' content='/app/image.php?src=1253926083_1828277228_581308477.jpg&img=pic&w=800'>
+    <meta property='twitter:description' content="{{page.lang_content.seo_desc ? page.lang_content.seo_desc : app.SystemSetting.sitename }}">
+    
+    <meta name="msapplication-config" content="none"/>
+
+    <link rel="mask-icon" sizes="any" href="https://www.bedayahospitals.com/uploads/img/logo.svg" color="#FFCC04">
+
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/stream?thumbnail=180&dir=img&image=favicon.png">
+    <link rel="icon" type="image.webp" sizes="32x32" href="/stream?thumbnail=32&dir=img&image=favicon.png">
+    <link rel="icon" type="image.webp" sizes="16x16" href="/stream?thumbnail=16&dir=img&image=favicon.png">
+
+    {% include 'views/front/'~ template ~'/includes/head_assets.html.twig' %}
+    <script> var rootURL = '{{app.CONF.url|slice(0,-1)}}'; </script>
+</head>
+<body class="p-0 m-0 {{page.lang == 'ar' ? 'rtl' : 'ltr'}} dark:bg-gray-800 bg-gray-50">

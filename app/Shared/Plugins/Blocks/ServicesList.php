@@ -1,13 +1,13 @@
 <?php
 
-namespace Shared\Plugins\Sliders;
+namespace Shared\Plugins\Blocks;
 
 use Medians\Gallery\Infrastructure\GalleryRepository;
 use Medians\Hooks\Infrastructure\HookRepository;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Hooks\Domain\Hook;
 
-class HeroSlider 
+class ServicesList
 {
 
     protected $hookRepo;
@@ -116,7 +116,7 @@ class HeroSlider
 			// print_r($params);
 			$gallery = $this->galleryRepo->find($params['gallery_id'][0]);
 			// print_r($gallery);
-            return renderPlugin('Shared/Plugins/views/home_slider_1.html.twig', [
+            return renderPlugin('Shared/Plugins/views/services_gallery_1.html.twig', [
 		        'gallery' => $gallery ?? '',
 				'hook' => $hook
 		    ],'output');

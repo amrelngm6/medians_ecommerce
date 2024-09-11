@@ -124,7 +124,7 @@ class BlogRepository
 
 	public function similar($model, $limit = 3)
 	{
-		$title = str_replace([' ','-'], '%', $model->content->title);
+		$title = str_replace([' ','-'], '%', $model->lang_content->title);
 
 		return Blog::whereHas('lang_content', function($q) use ($title){
 			foreach (explode('%', $title) as $i) {

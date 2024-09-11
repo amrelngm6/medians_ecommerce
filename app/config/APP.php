@@ -117,15 +117,6 @@ class APP
 		return $output;
 	}
 
-	/**
-	 * Load Playlists
-	 */ 
-	public function playlists()
-	{
-		$this->customer_auth();
-		$output = (new \Medians\Playlists\Infrastructure\PlaylistRepository())->getByCustomer($this->customer->customer_id);
-		return $output;
-	}
 
 	
 
@@ -299,7 +290,7 @@ class APP
 			array('permission'=>'Customers.index', 'title'=>translate('Customers'),  'icon'=>'users', 'link'=>'admin/customers', 'component'=>'data_table'),
 			
 			
-			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'data_table'),
+			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'blog'),
 			
 			array('title'=>translate('Marketing'),  'icon'=>'send', 'link'=>'#newsletters', 'sub'=>
 			[

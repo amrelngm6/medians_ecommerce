@@ -51,7 +51,7 @@ class PluginController extends CustomController
 	 */ 
 	public function index() 
 	{
-		$params = $this->app->request()->query->all();
+		// $params = $this->app->request()->query->all();
 
 		return render('plugins', [
 			'load_vue'=> true,

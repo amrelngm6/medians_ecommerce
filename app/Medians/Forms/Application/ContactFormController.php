@@ -135,7 +135,7 @@ class ContactFormController extends CustomController
 	{
 		if (empty($params['email']))
 		{
-        	throw new \Exception(json_encode(array('result'=>translate('Email EMPTY'), 'error'=>1)), 1);
+        	throw new \Exception(translate('Email EMPTY'), 1);
 		}
 		
 	}

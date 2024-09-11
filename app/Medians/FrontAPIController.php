@@ -72,6 +72,11 @@ class FrontAPIController extends CustomController
 			switch ($request->get('type')) 
 			{
 					
+				case 'ContactForm.create':
+					return printResponse((new Forms\Application\ContactFormController())->store());
+					break;
+					
+					
 				case 'HelpMessage.create':
 					return printResponse((new Help\Application\HelpMessageController())->store());
 					break;

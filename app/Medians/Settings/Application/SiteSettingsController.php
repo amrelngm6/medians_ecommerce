@@ -87,6 +87,8 @@ class SiteSettingsController extends CustomController
 				[ 'key'=> "twitter_link", 'title'=> translate('Twitter link'), 'fillable'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "youtube_link", 'title'=> translate('YouTube link'), 'fillable'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "instagram_link", 'title'=> translate('Instagram link'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "linkedin_link", 'title'=> translate('Linkedin link'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "behance_link", 'title'=> translate('Behance link'), 'fillable'=> true, 'column_type'=>'text' ],
 			],
 			
 			'options'=> [	

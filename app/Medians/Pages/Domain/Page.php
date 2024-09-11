@@ -27,13 +27,18 @@ class Page extends CustomModel
 	];
 
 
-	public $appends = ['photo','field','name', 'data','content_langs'];
+	public $appends = ['photo','field','name', 'data','content_langs', 'type'];
 
 
 
 	public function getContentLangsAttribute()
 	{
 		return $this->langs->keyBy('lang');
+	} 
+
+	public function getTypeAttribute()
+	{
+		return '';
 	} 
 
 	public function getDataAttribute() 

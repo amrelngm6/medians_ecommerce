@@ -3,6 +3,7 @@
 namespace Medians\Blog\Domain;
 
 use Shared\dbaser\CustomModel;
+use Medians\Users\Domain\User;
 use Medians\Views\Domain\View;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Content\Domain\Content;
@@ -24,8 +25,13 @@ class Blog extends CustomModel
 	];
 
 
-	public $appends = ['title','photo','field','category_name','date', 'update_date','class_name'];
+	public $appends = ['title','photo','field','category_name','date', 'update_date','class_name', 'picture_name'];
 
+	public function getPictureNameAttribute() 
+	{
+		$e = explode('/', $this->picture);
+		return end($e);
+	}
 
 	public function getClassNameAttribute() 
 	{
@@ -85,6 +91,11 @@ class Blog extends CustomModel
 	public function lang_content()
 	{
 		return $this->morphOne(Content::class, 'item')->where('lang', translate('lang'));
+	}
+
+	public function author()
+	{
+		return $this->hasOne(User::class, 'id','created_by');
 	}
 
 	public function views()
