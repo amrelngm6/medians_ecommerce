@@ -36,7 +36,7 @@ class MediaItem extends CustomModel
 	
 	public function getPictureNameAttribute() 
 	{
-		$e = explode('/', $this->picture);
+		$e = $this->picture ? explode('/', $this->picture) : [];
 		return end($e);
 	}
 

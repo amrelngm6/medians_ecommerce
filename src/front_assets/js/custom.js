@@ -33,6 +33,7 @@ function runAudio()
 
 	jQuery('.start-player').on('click', function (index, el) {
 		if (jQuery(this).hasClass('start-player')) {
+
 			initAudioPlayer(jQuery(this), index);
 			jQuery(this).removeClass('start-player')
 		}
@@ -114,6 +115,9 @@ function initAudioPlayer(player, index) {
 	}
 	
 	play.on('click', () => {
+		console.log('Clicked')
+		console.log(audioInfo)
+		console.log(audio.duration)
 		if (audio.src != rootURL+audioInfo.attr('data-path'))
 		{
 			audio.src = audioInfo.attr('data-path');
@@ -153,7 +157,7 @@ function initAudioPlayer(player, index) {
 
 	mainAudio.on('play', (e) => {
 		console.log(e)
-		console.log('playing')
+		
 	});
 
 	mainAudio.on('ended', () => {
@@ -162,6 +166,10 @@ function initAudioPlayer(player, index) {
         player.parent().removeClass('active');
 		circle.attr('stroke-dashoffset', totalLength);
 
+		let indx = player.data('index'); 
+		let list = player.data('list');
+		let media = list[indx+1] ?? {};
+		console.log(jQuery('#media-'+media.media_id)[0])
 	});
 
 	let waveIdController = jQuery(audioInfo).data('wave-id');
