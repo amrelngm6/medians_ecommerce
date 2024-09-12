@@ -39,7 +39,7 @@ class MediaItemRepository
 
 	public function find($id)
 	{
-		return MediaItem::with('genres','main_file')->withCount('likes', 'plays')->find($id);
+		return MediaItem::with('genres' ,'artist','main_file')->withCount('likes', 'plays')->find($id);
 	}
 
 	public function get($limit = 100)
@@ -61,7 +61,7 @@ class MediaItemRepository
 
 			$model = MediaItem::
             // where('status', 'on')->
-			with('genres', 'main_file');
+			with('genres', 'main_file' ,'artist');
 
 			if (isset($params['prices'])) {
 				$prices = explode(',', $params['prices']);

@@ -1,0 +1,55 @@
+
+@media screen and (min-width: 800px) and (max-width:1600px) {
+  .flex {
+    display: flex;
+  }
+}
+.block {display: block;}
+.w-full {width: 100%;}
+.text-center { text-align: center;}
+p, td, label {
+  position: relative;
+}
+input:disabled {
+  background-color: rgba(0,0,0,0.05);
+}
+label.error {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  left: 0;
+  font-size: 14px;
+  color: red;
+}
+
+.label-tips
+{
+  display: none;
+  position: absolute;
+  bottom: 100%; 
+  max-width: 200px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #333;
+  color: #fff;
+  font-size: 14px;
+}
+label:hover span.label-tips
+{
+  display: block;
+  z-index: 9;
+} 
+
+.gap-2
+{
+  gap: 10px;
+}
+input[type="checkbox"]:checked + label 
+{
+  background-color: red;
+}
+
+
+body .hidden {
+  display: none;
+}

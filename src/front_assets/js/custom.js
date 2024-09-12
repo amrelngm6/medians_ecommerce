@@ -115,9 +115,7 @@ function initAudioPlayer(player, index) {
 	}
 	
 	play.on('click', () => {
-		console.log('Clicked')
-		console.log(audioInfo)
-		console.log(audio.duration)
+		
 		if (audio.src != rootURL+audioInfo.attr('data-path'))
 		{
 			audio.src = audioInfo.attr('data-path');
@@ -157,7 +155,13 @@ function initAudioPlayer(player, index) {
 
 	mainAudio.on('play', (e) => {
 		console.log(e)
+		let dataset = jQuery(audioInfo)[0].dataset;
 		
+		console.log(dataset)
+		console.log(dataset['title'])
+		 
+		document.getElementById('track-name').innerHTML = dataset['title'] 
+		document.getElementById('album-name').innerHTML = dataset['artist'] 
 	});
 
 	mainAudio.on('ended', () => {

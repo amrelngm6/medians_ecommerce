@@ -7,6 +7,7 @@ use Medians\Likes\Domain\Like;
 use Medians\Categories\Domain\Genre;
 use Medians\Content\Domain\Content;
 use Medians\Reviews\Domain\Review;
+use Medians\Customers\Domain\Customer;
 use Medians\CustomFields\Domain\CustomField;
 use Shared\dbaser\CustomModel;
 
@@ -64,6 +65,11 @@ class MediaItem extends CustomModel
 	public function category() 
 	{
 		return $this->hasOne(Category::class , 'category_id', 'category_id')->where('model', MediaItem::class)->with('parent');	
+	}
+	
+	public function artist() 
+	{
+		return $this->hasOne(Customer::class , 'customer_id', 'author_id');	
 	}
 	 
 	public function genres() 
