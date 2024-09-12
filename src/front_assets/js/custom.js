@@ -141,6 +141,9 @@ function initAudioPlayer(player, index) {
 		maxduration = audio.duration,
 		calc = totalLength - (currentTime / maxduration * totalLength);
 
+		document.getElementById('track-length').innerHTML = convertToTime(maxduration) 
+		document.getElementById('current-time').innerHTML = convertToTime(currentTime) 
+
 		circle.attr('stroke-dashoffset', calc);
 		
 		let value = (isNaN(maxduration) ? 0 : ((currentTime / maxduration) * 100));
@@ -148,6 +151,7 @@ function initAudioPlayer(player, index) {
 		$('#'+jQuery(audioInfo).data('wave-overlay')).css('right', '0')
 		$('#'+jQuery(audioInfo).data('wave-overlay')).css('left', 'auto')
 		$('#'+jQuery(audioInfo).data('wave-overlay')).css('width', (100 - value)+'%')
+		$('#seek-bar').css('width', (value)+'%')
 
 		var slider = '#circle-'+jQuery(audioInfo).data('id');
 		value ? jQuery(slider).roundSlider('setValue', value) : '';
@@ -156,12 +160,10 @@ function initAudioPlayer(player, index) {
 	mainAudio.on('play', (e) => {
 		console.log(e)
 		let dataset = jQuery(audioInfo)[0].dataset;
-		
-		console.log(dataset)
-		console.log(dataset['title'])
-		 
-		document.getElementById('track-name').innerHTML = dataset['title'] 
-		document.getElementById('album-name').innerHTML = dataset['artist'] 
+		document.getElementById('track-name').innerHTML = dataset['artist'] 
+		document.getElementById('album-name').innerHTML = dataset['title'] 
+		document.getElementById('track-poster').src = dataset['poster'] 
+		document.getElementById('track-poster').classList.add('active') 
 	});
 
 	mainAudio.on('ended', () => {
@@ -211,7 +213,7 @@ function convertToTime(num) {
     }
   
     const hours = Math.floor(num / 60);
-    const minutes = num % 60;
+    const minutes = Math.floor(num % 60);
   
     const hoursText = hours < 10 ? `0${hours}` : `${hours}`;
     const minutesText = minutes < 10 ? `0${minutes}` : `${minutes}`;
