@@ -169,7 +169,7 @@ function initAudioPlayer(player, index) {
 		let indx = player.data('index'); 
 		let list = player.data('list');
 		let media = list[indx+1] ?? {};
-		console.log(jQuery('#media-'+media.media_id)[0])
+		console.log(jQuery('#media-'+media.media_id)[0].click())
 	});
 
 	let waveIdController = jQuery(audioInfo).data('wave-id');
