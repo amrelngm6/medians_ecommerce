@@ -129,6 +129,8 @@ function initAudioPlayer(player, index) {
 				player.parent().removeClass('active');
 				player.addClass('paused');
 				player.parent().parent().find('.wave-frame').addClass('hidden');
+				document.getElementById('app-cover').classList.add('hidden') 
+
 			} else {
 				playStyles()
 			}
@@ -160,6 +162,7 @@ function initAudioPlayer(player, index) {
 	mainAudio.on('play', (e) => {
 		console.log(e)
 		let dataset = jQuery(audioInfo)[0].dataset;
+		document.getElementById('app-cover').classList.remove('hidden') 
 		document.getElementById('track-name').innerHTML = dataset['artist'] 
 		document.getElementById('album-name').innerHTML = dataset['title'] 
 		document.getElementById('track-poster').src = dataset['poster'] 
