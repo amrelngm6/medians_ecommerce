@@ -204,6 +204,10 @@ function initAudioPlayer(player, index) {
 
 	document.getElementById('player-audio').addEventListener("change", function(event) {
 		audio.volume = event.target.value;
+	}) ;	
+
+	document.getElementById('volume-mute').addEventListener("click", function(event) {
+		audio.muted = !audio.muted;
 	}) ;
 	
 }
