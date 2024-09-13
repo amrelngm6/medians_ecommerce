@@ -25,17 +25,17 @@ function runSlide()
 
 
 
-var audio, canPlay;
+var audio, canPlay, player;
 
 
 function runAudio()
 {
 
 	jQuery('.start-player').on('click', function (index, el) {
-		if (jQuery(this).hasClass('start-player')) {
-
-			initAudioPlayer(jQuery(this), index);
-			jQuery(this).removeClass('start-player')
+		player = jQuery(this);
+		if (player.hasClass('start-player')) {
+			initAudioPlayer(player, index);
+			player.removeClass('start-player')
 		}
 	});
 	
@@ -56,8 +56,74 @@ function runAudio()
 		$this.addClass('active');
 	});
 
+	
+	document.getElementById('player-audio').addEventListener("change", function(event) {
+		audio.volume = event.target.value;
+	}) ;	
+
+	document.getElementById('play-pause-button').addEventListener("click", function(event) {
+		if (audio.paused ) {
+			playStyles();
+		} else  {
+			pauseStyles();
+		}
+
+	});
+
+	document.getElementById('play-previous').addEventListener("click", function(event) {
+		console.log(player)
+		let indx = player.data('index'); 
+		let list = player.data('list');
+		if (list[indx-1])
+		{
+			let media = list[indx-1] ?? {};
+			jQuery('#media-'+media.media_id)[0].click()
+		}
+
+	});
+	document.getElementById('play-next').addEventListener("click", function(event) {
+
+		let indx = player.data('index'); 
+		let list = player.data('list');
+		if (list[indx+1])
+		{
+			let media = list[indx+1] ?? {};
+			jQuery('#media-'+media.media_id)[0].click()
+		}
+
+	});
+
+	document.getElementById('volume-mute').addEventListener("click", function(event) {
+		audio.muted = !audio.muted;
+	}) ;
+
 }
 
+function pauseStyles() {
+		
+	audio.pause();
+	player.removeClass('playing');
+	player.parent().removeClass('active');
+	player.addClass('paused');
+	player.parent().parent().find('.wave-frame').addClass('hidden');
+	document.getElementById('album-art').classList.remove('active') 
+	document.getElementById('play-pause-button').classList.remove('active') 
+}
+
+function playStyles() {
+	
+	$('.js-audio').removeClass('playing');
+	$('.js-audio').parent().removeClass('active');
+	
+	audio.play();
+	player.removeClass('paused');
+	player.addClass('playing');
+	player.parent().addClass('active');
+	jQuery('.wave-frame').addClass('hidden');
+	player.parent().parent().find('.wave-frame').removeClass('hidden');
+	document.getElementById('album-art').classList.add('active') 
+	document.getElementById('play-pause-button').classList.add('active') 
+}
 
 function updateAudio(e, $elem) {
 
@@ -96,36 +162,11 @@ function initAudioPlayer(player, index) {
 	mainAudio.on('loadedmetadata', function() {
 		const duration = audio.duration;
 		if (isFinite(duration)) {
-			playStyles()
+			// playStyles()
 		} else {
 		}
 	});
 
-	function pauseStyles() {
-		
-		audio.pause();
-		player.removeClass('playing');
-		player.parent().removeClass('active');
-		player.addClass('paused');
-		player.parent().parent().find('.wave-frame').addClass('hidden');
-		document.getElementById('album-art').classList.remove('active') 
-		document.getElementById('play-pause-button').classList.remove('active') 
-	}
-	
-	function playStyles() {
-		
-		$('.js-audio').removeClass('playing');
-		$('.js-audio').parent().removeClass('active');
-		
-		audio.play();
-		player.removeClass('paused');
-		player.addClass('playing');
-		player.parent().addClass('active');
-		jQuery('.wave-frame').addClass('hidden');
-		player.parent().parent().find('.wave-frame').removeClass('hidden');
-		document.getElementById('album-art').classList.add('active') 
-		document.getElementById('play-pause-button').classList.add('active') 
-	}
 	
 	play.on('click', () => {
 		
@@ -136,12 +177,7 @@ function initAudioPlayer(player, index) {
 			playStyles()
 
 		} else {
-			if (!audio.paused ) {
-				pauseStyles()
-
-			} else {
-				playStyles()
-			}
+			(!audio.paused ) ?  pauseStyles() : playStyles()
 		}
 	});
 
@@ -167,6 +203,10 @@ function initAudioPlayer(player, index) {
 		value ? jQuery(slider).roundSlider('setValue', value) : '';
 	});
 
+	mainAudio.on('playing', (e) => {
+		// console.log('playing')
+	});
+	
 	mainAudio.on('play', (e) => {
 		console.log(e)
 		let dataset = jQuery(audioInfo)[0].dataset;
@@ -208,45 +248,6 @@ function initAudioPlayer(player, index) {
 		updateAudio(percentage.toFixed(2), $elem);
 	}) : '';
 
-	document.getElementById('player-audio').addEventListener("change", function(event) {
-		audio.volume = event.target.value;
-	}) ;	
-
-	document.getElementById('play-pause-button').addEventListener("click", function(event) {
-		if (audio.paused ) {
-			playStyles();
-		} else  {
-			pauseStyles();
-		}
-
-	});
-
-	document.getElementById('play-previous').addEventListener("click", function(event) {
-
-		let indx = player.data('index'); 
-		let list = player.data('list');
-		if (list[indx-1])
-		{
-			let media = list[indx-1] ?? {};
-			jQuery('#media-'+media.media_id)[0].click()
-		}
-
-	});
-	document.getElementById('play-next').addEventListener("click", function(event) {
-
-		let indx = player.data('index'); 
-		let list = player.data('list');
-		if (list[indx+1])
-		{
-			let media = list[indx+1] ?? {};
-			jQuery('#media-'+media.media_id)[0].click()
-		}
-
-	});
-
-	document.getElementById('volume-mute').addEventListener("click", function(event) {
-		audio.muted = !audio.muted;
-	}) ;
 	
 }
 
