@@ -354,10 +354,10 @@
   
 #volume-bar {display: none; left: 30px; top: 14px}
 #volume-mute:hover #volume-bar {display: block;}
-.active#play-pause-button .play ,
-#play-pause-button .pause {
+.active#player-pause-button .play ,
+#player-pause-button .pause {
     display: none;
 }
-.active#play-pause-button .pause {
+.active#player-pause-button .pause {
     display: block;
 }
