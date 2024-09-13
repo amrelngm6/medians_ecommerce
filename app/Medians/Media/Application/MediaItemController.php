@@ -51,7 +51,7 @@ class MediaItemController extends CustomController
 
     
     /**
-     * Discover page for frontend
+     * Audio page for frontend
      */
     public function audio_page($media_id)
     {
@@ -66,6 +66,52 @@ class MediaItemController extends CustomController
                 'item' => $item,
                 'genres' => $this->categoryRepo->getGenres(),
                 'layout' => 'audio_page'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+    
+    /**
+     * Audio page for frontend
+     */
+    public function artist($artist_name)
+    {
+		$settings = $this->app->SystemSetting();
+
+        $item = $this->repo->findByPrefix($artist_name);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'item' => $item,
+                'layout' => 'artist'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+    
+    /**
+     * Studio page for frontend
+     */
+    public function studio()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $customer = $this->app->customer_auth();
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'customer' => $customer,
+                'layout' => 'studio'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -103,7 +149,7 @@ class MediaItemController extends CustomController
     
     
     /**
-     * Discover page for frontend
+     * Likes page for frontend
      */
     public function likes()
     {
