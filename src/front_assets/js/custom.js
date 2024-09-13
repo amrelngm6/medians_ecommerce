@@ -43,6 +43,7 @@ jQuery('.start-player').on('click', function (i, el) {
 		audio.src = '/stream_audio?audio='+ audioObject.main_file.filename;
 		audio.load()
 		initAudioPlayer()
+		playStyles()
 		player.removeClass('start-player')
 	} 
 });
