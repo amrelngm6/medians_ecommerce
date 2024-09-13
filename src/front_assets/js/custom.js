@@ -183,7 +183,7 @@ function initAudioPlayer(player, index) {
 		let indx = player.data('index'); 
 		let list = player.data('list');
 		let media = list[indx+1] ?? {};
-		console.log(jQuery('#media-'+media.media_id)[0].click())
+		jQuery('#media-'+media.media_id)[0].click()
 
 	});
 
@@ -211,6 +211,30 @@ function initAudioPlayer(player, index) {
 	document.getElementById('play-pause-button').addEventListener("click", function(event) {
 		play.click()
 	});
+
+	document.getElementById('play-previous').addEventListener("click", function(event) {
+
+		let indx = player.data('index'); 
+		let list = player.data('list');
+		if (list[indx-1])
+		{
+			let media = list[indx-1] ?? {};
+			jQuery('#media-'+media.media_id)[0].click()
+		}
+
+	});
+	document.getElementById('play-next').addEventListener("click", function(event) {
+
+		let indx = player.data('index'); 
+		let list = player.data('list');
+		if (list[indx+1])
+		{
+			let media = list[indx+1] ?? {};
+			jQuery('#media-'+media.media_id)[0].click()
+		}
+
+	});
+
 	document.getElementById('volume-mute').addEventListener("click", function(event) {
 		audio.muted = !audio.muted;
 	}) ;
