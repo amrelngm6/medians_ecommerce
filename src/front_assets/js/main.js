@@ -133,7 +133,7 @@ function loadPage(path, title = '' ) {
             document.title = title
             setTimeout(function() {
                 reloadFuncs()
-            }, 1000)
+            }, 500)
         },
         error: function (xhr, status, error) {
             console.error('Error fetching data:', error);
