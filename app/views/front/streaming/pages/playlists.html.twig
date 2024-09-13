@@ -28,10 +28,10 @@
                                 <div id="playlist-items-list" class="">
                                         <ul class="w-full space-y-4 ">
                                                         
-                                            {% set list = playlist %}
                                             {% for playlist_item in playlist.items %}                                   
-                                            {% set media_item = playlist_item.media %}
                                             {% if loop.index < 4 %}
+                                            {% set media_item = playlist_item.media %}
+                                            {% set list = {'items': playlist.items|column('media')} %}
                                             {% include 'views/front/' ~ template ~ '/includes/tracks-list.html.twig' %}
                                             {% endif %}
                                             {% endfor %}
