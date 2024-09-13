@@ -25,14 +25,14 @@ function runSlide()
 
 var mainAudio = jQuery('audio');
 
-var audio, canPlay, player, audioInfo, audioObject, list, index;
+var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide;
 
 
 document.getElementById('player-audio').addEventListener("change", function(event) {
 	audio.volume = event.target.value;
 }) ;	
 
-jQuery('.start-player').on('click', function (i, el) {
+jQuery(document).on('click', '.start-player', function (i, el) {
 	player = jQuery(this);
 	list = player.data('list')
 	index = player.data('index')
