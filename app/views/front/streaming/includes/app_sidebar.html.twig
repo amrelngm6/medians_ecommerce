@@ -53,7 +53,7 @@
                         
 
                         <li class="w-full   " id="artist">
-                            <a title="{{lang.translate('Artists')}}" href="channels" class="w-full flex gap gap-4  ajax-load  ">
+                            <a title="{{lang.translate('Artists')}}" href="/channels" class="w-full flex gap gap-4  ajax-load  ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/heart.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-heart.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -63,7 +63,7 @@
                         </li>
 
                         <li class="w-full   " id="genres">
-                            <a title="{{lang.translate('genres')}}" href="genres" class="w-full flex gap gap-4  ajax-load  ">
+                            <a title="{{lang.translate('genres')}}" href="/genres" class="w-full flex gap gap-4  ajax-load  ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/heart.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-heart.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -74,7 +74,7 @@
                         
 
                         <li class="w-full   ">
-                            <a title="{{lang.translate('Playlists')}}" href="#!" class="w-full flex gap gap-4  ajax-load  ">
+                            <a title="{{lang.translate('Playlists')}}" href="#!" class="w-full flex gap gap-4 ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -83,8 +83,8 @@
                             </a>
                         </li>
                         <li><hr class="my-2" /></li>
-                        <li title="{{lang.translate('Playlists')}}" class="w-full " id="upload">
-                            <a href="/upload" class="w-full flex gap gap-4  ajax-load  ">
+                        <li class="w-full " id="upload">
+                            <a href="/upload" title="{{lang.translate('Upload')}}"  class="w-full flex gap gap-4  ajax-load  ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -94,7 +94,7 @@
                         </li>
 
                         <li class="w-full " id="create-playlist">
-                            <a title="{{lang.translate('Playlists')}}" href="#!" x-on:click="jQuery('#create-playlist-popup').removeClass('hidden')" class="w-full flex gap gap-4  ajax-load  ">
+                            <a title="{{lang.translate('Create Playlists')}}" href="#!" x-on:click="jQuery('#create-playlist-popup').removeClass('hidden')" class="w-full flex gap gap-4   ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"

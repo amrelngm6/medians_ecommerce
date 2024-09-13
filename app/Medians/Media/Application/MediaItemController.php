@@ -169,6 +169,9 @@ class MediaItemController extends CustomController
         {
             $item = $this->categoryRepo->getGenreByPrefix($prefix);
             
+            if (empty($item->category_id))
+    			throw new \Exception(translate('Page not found'), 1);
+
             $params['limit'] = 12;
             $params['genre'] = $item->category_id;
             $list = $this->repo->getWithFilter($params);
