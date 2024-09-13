@@ -130,7 +130,7 @@ function initAudioPlayer(player, index) {
 				player.addClass('paused');
 				player.parent().parent().find('.wave-frame').addClass('hidden');
 				document.getElementById('app-cover').classList.add('hidden') 
-				document.getElementById('track-poster').classList.remove('active') 
+				document.getElementById('album-art').classList.remove('active') 
 
 			} else {
 				playStyles()
@@ -180,6 +180,8 @@ function initAudioPlayer(player, index) {
 		let list = player.data('list');
 		let media = list[indx+1] ?? {};
 		console.log(jQuery('#media-'+media.media_id)[0].click())
+		document.getElementById('album-art').classList.remove('active') 
+
 	});
 
 	let waveIdController = jQuery(audioInfo).data('wave-id');
