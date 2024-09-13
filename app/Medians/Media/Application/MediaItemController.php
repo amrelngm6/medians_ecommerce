@@ -182,7 +182,10 @@ class MediaItemController extends CustomController
             $params['description'] = $value->getClientOriginalName();
             $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
             $params['author_id'] = $this->app->customer_id() ?? 0;
-            $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+            if (isset($fileInfo['playtime_seconds']))
+            {
+                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+            }
             
             $save = $this->repo->store($params);
 
@@ -234,7 +237,8 @@ class MediaItemController extends CustomController
             // Analyze file
             $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $item->main_file->path);
 
-            $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+            if (isset($fileInfo['playtime_seconds']))
+                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
             
             if ($this->repo->update($params))
             {

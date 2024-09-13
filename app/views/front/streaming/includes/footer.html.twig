@@ -1,8 +1,8 @@
-						{% include 'views/front/' ~ template ~ '/popups/signin-popup.html.twig' %}
-						{% include 'views/front/' ~ template ~ '/popups/signup-popup.html.twig' %}
-						{% include 'views/front/' ~ template ~ '/popups/create-playlist.html.twig' %}
-						{% include 'views/front/' ~ template ~ '/popups/add-playlist.html.twig' %}
-						{% include 'views/front/' ~ template ~ '/popups/share.html.twig' %}
+    {% include 'views/front/' ~ template ~ '/popups/signin-popup.html.twig' %}
+    {% include 'views/front/' ~ template ~ '/popups/signup-popup.html.twig' %}
+    {% include 'views/front/' ~ template ~ '/popups/create-playlist.html.twig' %}
+    {% include 'views/front/' ~ template ~ '/popups/add-playlist.html.twig' %}
+    {% include 'views/front/' ~ template ~ '/popups/share.html.twig' %}
 
 
 	<div id="app-cover" class="hidden">
@@ -60,84 +60,6 @@
 
 
 
-{# <div class=" mx-auto lg:flex gap-4 medians-player" data-volume="1" data-autoplay="0" data-playlist-id="" style="max-width: 100%"  id="player-10" >
-    <div id="app-cover" >
-        <div id="player" class="animate-fos">
-            <div class="audio"></div>
-            <div id="player-track" class="" >
-                <div class="w-full flex">
-
-                    <div  class="w-full lg:flex gap-4">
-                        <div id="track-name" class="show-side truncate">TRACK NAME</div>
-                        <div id="album-name">ARTIST NAME</div>
-                    </div>
-					<span id="volume-mute" class="text-xs button" style="background-color:transparent; padding:3px; margin:0">
-						<i class="lg:block hidden m-2 fa-solid fa-volume-high text-sm"></i>
-					</span>
-					<div id="volume-bar"  class="lg:block hidden">
-						<input type="range" class="volume" min="0" max="1" step="0.1" value="1" data-css="0.5">
-					</div>
-                    
-                </div>
-				<div id="track-time">
-					<div id="current-time"></div>
-					<div id="track-length"></div>
-				</div>
-				<div id="s-area">
-					<div id="ins-time"></div>
-					<div id="s-hover"></div>
-					<div id="seek-bar"></div>
-				</div>
-            </div>
-            <div id="player-content" >
-                <div id="album-art">
-                    <a href="#!" class="show-side"><img id="active-beat-image" src="https://randomuser.me/api/portraits/lego/6.jpg" class="active "></a>
-                    <div id="buffer-box">Buffering ...</div>
-                </div>
-
-				<div id="player-controls" class="flex gap-4">
-					<div class="control ">
-						<div class="button" id="play-previous">
-							<i class="fas fa-backward"></i>
-						</div>
-					</div>
-					<div class="control">
-						<div class="button" id="play-pause-button">
-							<i class="fas fa-play play-btn"></i>
-							<i class="fas fa-pause pause-btn hidden"></i>
-						</div>
-					</div>
-					<div class="control ">
-						<div class="button" id="play-next">
-							<i class="fas fa-forward"></i>
-						</div>
-					</div>
-					
-					<div class="control ">
-						<div class="button" id="toggle-playlist">
-							<i class="fa-solid  fa-bars"></i>
-						</div>
-					</div>
-				</div>
-				
-            </div>
-            <div class="player-plalist" id="playlist-items-list" style="display:none">
-                <ul class="relative animate-top play-list">
-                        
-                    <li class="flex gap-4 py-4 " >
-                        <img width="60" height="40" src="https://randomuser.me/api/portraits/lego/6.jpg" >
-                        <span class="w-full">Item title</span>
-                        <span class="font-semibold font-sm">00:00</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-
-</div> #}
-
-
 <audio id="main_audio"></audio>
 <style>
 	.channel-slider {
@@ -146,6 +68,7 @@
 </style>
  <script src="/src/front_assets/js/slide.js"></script>
  <script src="/src/front_assets/js/custom.js"></script>
+<script src="/src/front_assets/js/main.js"></script>
  <script>
 	runSlide()
     showSlides()
