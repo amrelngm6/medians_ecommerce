@@ -1,6 +1,6 @@
 
                             <div class="w-full flex gap-6 overflow-hidden">
-                                <div class="slide__audio js-audio pt-7 start-player" id="media-{{item.media_id}}"  data-list="[{{list.main_file}}]" data-index="0">
+                                <div class="slide__audio js-audio pt-7 start-player" id="media-{{item.media_id}}"  data-list="[{{item}}]" data-index="0">
                                     <div class="slide__audio-player" data-title="{{item.name}}" data-poster="/stream?thumbnail=800&image={{item.picture_name}}" data-artist="{{item.artist.name}}"  data-path="/stream_audio?audio={{item.main_file.filename}}" data-id="{{item.media_id}}" data-wave-id="wave-{{item.media_id}}" data-wave-overlay="wave-overlay{{item.media_id}}">
                                     </div>
                                     {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
