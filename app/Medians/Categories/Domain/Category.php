@@ -28,8 +28,15 @@ class Category extends CustomModel
 	];
 
 
-	public $appends = ['content_langs', 'lang_content','name', 'class_name'];
+	public $appends = ['content_langs', 'lang_content','name', 'class_name','picture_name'];
 
+	
+	public function getPictureNameAttribute() 
+	{
+		$e = $this->picture ? explode('/', $this->picture) : [];
+		return end($e);
+	}
+	
 	public function getClassNameAttribute()
 	{
 		return 'Category';

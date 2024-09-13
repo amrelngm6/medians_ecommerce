@@ -1,10 +1,13 @@
 
             
             <div class="py-4 px-2 w-full">                     
+
+                {% include 'views/front/' ~ template ~ '/includes/genres_section.html.twig' %}
+
                 <div class="z-20 w-full relative dark:bg-gray-900 bg-white   lg:p-8 p-4 rounded-lg rounded  shadow-md mb-4" id="channels-list">
 
                     <div class="flex text-primary  w-full pb-4">
-                        <h3 class="text-xl text-gray-500 font-semibold w-full">Top Channels</h3>
+                        <h3 class="text-xl text-gray-500 font-semibold w-full">{{lang.translate('Top Genres')}}</h3>
                         <div class="flex gap gap-4">
                             <button class="prev-btn" data-slider="top-authors"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
                             <button class="next-btn" data-slider="top-authors"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
