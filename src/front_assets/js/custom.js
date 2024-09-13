@@ -101,6 +101,17 @@ function initAudioPlayer(player, index) {
 		}
 	});
 
+	function pauseStyles() {
+		
+		audio.pause();
+		player.removeClass('playing');
+		player.parent().removeClass('active');
+		player.addClass('paused');
+		player.parent().parent().find('.wave-frame').addClass('hidden');
+		document.getElementById('album-art').classList.remove('active') 
+		document.getElementById('play-pause-button').classList.remove('active') 
+	}
+	
 	function playStyles() {
 		
 		$('.js-audio').removeClass('playing');
@@ -126,14 +137,7 @@ function initAudioPlayer(player, index) {
 
 		} else {
 			if (!audio.paused ) {
-				audio.pause();
-				player.removeClass('playing');
-				player.parent().removeClass('active');
-				player.addClass('paused');
-				player.parent().parent().find('.wave-frame').addClass('hidden');
-				// document.getElementById('app-cover').classList.add('hidden') 
-				document.getElementById('album-art').classList.remove('active') 
-				document.getElementById('play-pause-button').classList.remove('active') 
+				pauseStyles()
 
 			} else {
 				playStyles()
@@ -209,7 +213,12 @@ function initAudioPlayer(player, index) {
 	}) ;	
 
 	document.getElementById('play-pause-button').addEventListener("click", function(event) {
-		play.click()
+		if (audio.paused ) {
+			playStyles();
+		} else  {
+			pauseStyles();
+		}
+
 	});
 
 	document.getElementById('play-previous').addEventListener("click", function(event) {
