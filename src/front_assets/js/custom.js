@@ -314,7 +314,7 @@ function stickyScroll()
 	function fixSidebar() {
 	const rect = sidebar.getBoundingClientRect();
 	const containerRect = container.getBoundingClientRect();
-	const distanceFromBottom = containerRect.bottom - rect.height - 300; // Adjust with the top value
+	const distanceFromBottom = containerRect.bottom - rect.height + 400; // Adjust with the top value
 
 	if (window.scrollY >= distanceFromBottom && window.innerWidth > 1000)  {
 		sidebar.style.position = 'fixed';
