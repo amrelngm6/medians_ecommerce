@@ -45,11 +45,6 @@ $(function () {
     ],
     albumArtworks = ["_1", "_2", "_3", "_4", "_5"],
     trackUrl = [
-        "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3",
-        "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3",
-        "https://www.youtube.com/watch?v=xoWxv2yZXLQ&list=PLWL923jZIGrtOTDYPnk7wYo931GIS2-CD",
-        "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3",
-        "https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3"
     ],
     playPreviousTrackButton = $("#play-previous"),
     playNextTrackButton = $("#play-next"),
@@ -226,7 +221,7 @@ $(function () {
 
     audio.loop = false;
 
-    playPauseButton.on("click", playPause);
+    // playPauseButton.on("click", playPause);
 
     sArea.mousemove(function (event) {
       showHover(event);

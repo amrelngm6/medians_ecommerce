@@ -2,7 +2,7 @@
 #app-cover {
   position: relative;
   width: 430px;
-  height: 100px;
+  height: 70px;
 }
 
 #bg-artwork {
@@ -155,8 +155,8 @@
 #album-art {
   position: absolute;
   top: -40px;
-  width: 115px;
-  height: 115px;
+  width: 90px;
+  height: 90px;
   margin-left: 40px;
   transform: rotateZ(0);
   transition: 0.3s ease all;

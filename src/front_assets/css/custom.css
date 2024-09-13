@@ -39,7 +39,7 @@ li.active
 {
     color: #ff832c
 }
-.active .show-active 
+.active > .show-active 
 {
   display: block;
 }
