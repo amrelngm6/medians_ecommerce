@@ -40,4 +40,9 @@ class Playlist extends CustomModel
 		return $this->morphMany(Like::class, 'item');	
 	}
 
+	public function liked($customer_id) 
+	{
+		return $this->morphOne(Like::class , 'item')->where('customer_id', $customer_id);	
+	}
+	
 }

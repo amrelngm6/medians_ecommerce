@@ -3,9 +3,8 @@
 namespace Medians\Likes\Infrastructure;
 
 use Medians\Likes\Domain\Like;
-use Medians\Devices\Domain\Device;
-use Medians\Products\Domain\Product;
-
+use Medians\Media\Domain\MediaItem;
+use Medians\Playlists\Domain\Playlist;
 
 class LikeRepository 
 {
@@ -32,7 +31,12 @@ class LikeRepository
 
 	public function checkLiked($item_id, $customer_id)
 	{
-		return Like::where('item_id', $item_id)->where('customer_id', $customer_id)->first();
+		return Like::where('item_id', $item_id)->where('item_type', MediaItem::class)->where('customer_id', $customer_id)->first();
+	}
+
+	public function checkLikedPlaylist($item_id, $customer_id)
+	{
+		return Like::where('item_id', $item_id)->where('item_type', Playlist::class)->where('customer_id', $customer_id)->first();
 	}
 
 
@@ -46,7 +50,7 @@ class LikeRepository
 
 		$Model = new Like();
 		
-		$data['item_type'] = \Medians\Media\Domain\MediaItem::class;
+		$data['item_type'] = MediaItem::class;
 		foreach ($data as $key => $value) 
 		{
 			if (in_array($key, $Model->getFields()))
@@ -129,11 +133,29 @@ class LikeRepository
 	*
 	* @Returns Boolen
 	*/
-	public function delete($item_id, $customer_id) 
+	public function delete($params, $customer_id) 
 	{
 		try {
 			
-			return $this->checkLiked($item_id, $customer_id)->delete();
+			return $this->checkLiked($params['item_id'], $customer_id)->delete();
+
+		} catch (\Exception $e) {
+
+			throw new \Exception("Error Processing Request " . $e->getMessage(), 1);
+			
+		}
+	}
+
+	/**
+	* Delete item to database
+	*
+	* @Returns Boolen
+	*/
+	public function deletePlaylist($params, $customer_id) 
+	{
+		try {
+			
+			return $this->checkLikedPlaylist($params['item_id'], $customer_id)->delete();
 
 		} catch (\Exception $e) {
 

@@ -147,6 +147,11 @@ class LikeController extends CustomController
 			
 			$params['customer_id'] = $this->app->customer->customer_id;
 
+			if (!empty($this->repo->checkLikedPlaylist($params['item_id'], $params['customer_id']))) 
+			{
+				return $this->deletePlaylist($params);
+			}
+
             $returnData = (!empty($this->repo->store_playlist($params))) 
             ? array('success'=>1, 'result'=>translate('Thanks for like'), 'reload'=>0)
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
@@ -189,7 +194,22 @@ class LikeController extends CustomController
 
         try {
 
-            if ($this->repo->delete($params['item_id'], $this->app->customer->customer_id))
+            if ($this->repo->delete($params, $this->app->customer->customer_id))
+            {
+                return array('success'=>1, 'result'=>translate('Removed from likes'), 'reload'=>0);
+            }
+            
+        } catch (Exception $e) {
+        	throw new \Exception("Error Processing Request", 1);
+        }
+	}
+
+	public function deletePlaylist($params) 
+	{
+
+        try {
+			
+            if ($this->repo->deletePlaylist($params, $this->app->customer->customer_id))
             {
                 return array('success'=>1, 'result'=>translate('Removed from likes'), 'reload'=>0);
             }
