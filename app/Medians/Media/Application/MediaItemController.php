@@ -101,6 +101,38 @@ class MediaItemController extends CustomController
 		}
     }
     
+    
+    /**
+     * Discover page for frontend
+     */
+    public function likes()
+    {
+		$settings = $this->app->SystemSetting();
+        
+		$this->app->customer_auth();
+
+        $params = $this->app->params();
+
+        $params['limit'] = 12;
+        $params['likes'] = true;
+        echo $this->app->customer->customer_id;
+        $params['customer_id'] = $this->app->customer->customer_id;
+        $list = $this->repo->getWithFilter($params);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'list' => $list,
+                'genres' => $this->categoryRepo->getGenres(),
+                'layout' => 'likes'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
     /**
      * Edit info page for frontend
      */

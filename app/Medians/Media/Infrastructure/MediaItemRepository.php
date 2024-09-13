@@ -62,11 +62,12 @@ class MediaItemRepository
             // where('status', 'on')->
 			with('genres', 'main_file' ,'artist');
 
-			if (isset($params['prices'])) {
-				$prices = explode(',', $params['prices']);
-				$model = $model->whereBetween('price', $prices);
+			if (isset($params['likes']) && isset($params['customer_id']))
+			{
+				$model->whereHas('likes', function($q) use ($params) {
+					$q->where('customer_id', $params['customer_id'] );
+				});
 			}
-
 
 			if (isset($params['sort_by']))
 			{
