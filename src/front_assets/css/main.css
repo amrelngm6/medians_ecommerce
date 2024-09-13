@@ -255,7 +255,7 @@
   }
   
   .control {
-    width: 33.333%;
+    width: 24.753%;
     float: left;
     padding: 12px 0;
   }
@@ -263,7 +263,7 @@
   .button {
     /* width: 26px;
     height: 26px; */
-    padding: 10px 25px;
+    padding: 4px 20px;
     background-color: #fff;
     border-radius: 6px;
     cursor: pointer;
@@ -352,7 +352,12 @@
   }
   
   
-  #volume-bar {display: none; left: 30px; top: 3px}
+#volume-bar {display: none; left: 30px; top: 14px}
 #volume-mute:hover #volume-bar {display: block;}
-  
-  
+.active#play-pause-button .play ,
+#play-pause-button .pause {
+    display: none;
+}
+.active#play-pause-button .pause {
+    display: block;
+}

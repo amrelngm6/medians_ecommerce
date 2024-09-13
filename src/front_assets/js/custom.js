@@ -113,6 +113,7 @@ function initAudioPlayer(player, index) {
 		jQuery('.wave-frame').addClass('hidden');
 		player.parent().parent().find('.wave-frame').removeClass('hidden');
 		document.getElementById('album-art').classList.add('active') 
+		document.getElementById('play-pause-button').classList.add('active') 
 	}
 	
 	play.on('click', () => {
@@ -130,8 +131,9 @@ function initAudioPlayer(player, index) {
 				player.parent().removeClass('active');
 				player.addClass('paused');
 				player.parent().parent().find('.wave-frame').addClass('hidden');
-				document.getElementById('app-cover').classList.add('hidden') 
+				// document.getElementById('app-cover').classList.add('hidden') 
 				document.getElementById('album-art').classList.remove('active') 
+				document.getElementById('play-pause-button').classList.remove('active') 
 
 			} else {
 				playStyles()
@@ -206,6 +208,9 @@ function initAudioPlayer(player, index) {
 		audio.volume = event.target.value;
 	}) ;	
 
+	document.getElementById('play-pause-button').addEventListener("click", function(event) {
+		play.click()
+	});
 	document.getElementById('volume-mute').addEventListener("click", function(event) {
 		audio.muted = !audio.muted;
 	}) ;
