@@ -96,7 +96,7 @@ function runAudio()
 
 	});
 
-	document.getElementById('volume-mute').addEventListener("click", function(event) {
+	document.getElementById('volume-mute-img').addEventListener("click", function(event) {
 		audio.muted = !audio.muted;
 	}) ;
 
