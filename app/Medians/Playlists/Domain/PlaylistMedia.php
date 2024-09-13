@@ -25,7 +25,7 @@ class PlaylistMedia extends CustomModel
 
 	public function media()
 	{
-		return $this->hasOne(MediaItem::class, 'media_id', 'media_id');
+		return $this->hasOne(MediaItem::class, 'media_id', 'media_id')->with('main_file');
 	}
 
 }

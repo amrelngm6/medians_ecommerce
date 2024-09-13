@@ -150,6 +150,23 @@ function pureFadeIn(e, o) {
         }()
 }
 
+
+/**
+ * Set cookies
+ * @param {*} e 
+ * @returns void
+ */
+function setCookie(name, value, days) {
+    let expires = "";
+    if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); // Convert days to milliseconds
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+}
+
+
 function getCookie(e) {
     for (var o = e + "=", i = document.cookie.split(";"), t = 0; t < i.length; t++) {
         for (var n = i[t]; " " == n.charAt(0);) {

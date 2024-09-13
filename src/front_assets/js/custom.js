@@ -30,6 +30,7 @@ var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide;
 
 document.getElementById('player-audio').addEventListener("change", function(event) {
 	audio.volume = event.target.value;
+	setCookie('volume', event.target.value, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 }) ;	
 
 jQuery(document).on('click', '.start-player', function (i, el) {
@@ -165,6 +166,8 @@ function updateAudio(e, $elem) {
 
 function initAudioPlayer() {
 
+	jQuery('#player-audio').val(getCookie('volume'))
+	audio.volume = getCookie('volume')
 
 	let play = player.find('.play-pause'),
 		circle = player.find('#seekbar-'+audioInfo.attr('data-id')),
