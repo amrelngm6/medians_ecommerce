@@ -261,9 +261,9 @@
   }
   
   .button {
-    width: 26px;
-    height: 26px;
-    padding: 25px;
+    /* width: 26px;
+    height: 26px; */
+    padding: 10px 25px;
     background-color: #fff;
     border-radius: 6px;
     cursor: pointer;

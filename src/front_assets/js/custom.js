@@ -112,6 +112,7 @@ function initAudioPlayer(player, index) {
 		player.parent().addClass('active');
 		jQuery('.wave-frame').addClass('hidden');
 		player.parent().parent().find('.wave-frame').removeClass('hidden');
+		document.getElementById('album-art').classList.add('active') 
 	}
 	
 	play.on('click', () => {
@@ -175,12 +176,12 @@ function initAudioPlayer(player, index) {
 		player.removeClass('playing');
         player.parent().removeClass('active');
 		circle.attr('stroke-dashoffset', totalLength);
+		document.getElementById('album-art').classList.remove('active') 
 
 		let indx = player.data('index'); 
 		let list = player.data('list');
 		let media = list[indx+1] ?? {};
 		console.log(jQuery('#media-'+media.media_id)[0].click())
-		document.getElementById('album-art').classList.remove('active') 
 
 	});
 
@@ -201,15 +202,9 @@ function initAudioPlayer(player, index) {
 		updateAudio(percentage.toFixed(2), $elem);
 	}) : '';
 
-	waveIdController != undefined ? document.getElementById(waveIdController).addEventListener("click", function(event) {
-		// Get the width of the element
-		// Get the position of the click relative to the left edge of the element
-		// Calculate the percentage
-
-		var percentage = (event.offsetX / this.clientWidth) * 100;
-		let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
-		updateAudio(percentage.toFixed(2), $elem);
-	}) : '';
+	document.getElementById('player-audio').addEventListener("change", function(event) {
+		audio.volume = event.target.value;
+	}) ;
 	
 }
 
