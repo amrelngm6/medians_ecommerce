@@ -115,7 +115,6 @@ class MediaItemController extends CustomController
 
         $params['limit'] = 12;
         $params['likes'] = true;
-        echo $this->app->customer->customer_id;
         $params['customer_id'] = $this->app->customer->customer_id;
         $list = $this->repo->getWithFilter($params);
         
