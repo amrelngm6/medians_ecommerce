@@ -11,7 +11,7 @@
                     <div class="lg:block hidden pt-2 px-1 text-slate-400 text-opacity-70  text-base font-normal tracking-wide">{{lang.translate('MENU')}}</div>
                     <ul class="pt-2 font-normal ">
                         <li class="w-full   " id="home">
-                            <a href="/" class="w-full flex gap gap-4  ">
+                            <a href="/" {{lang.translate('Home')}} class="w-full flex gap gap-4 ajax-load ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/home.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-home.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -21,7 +21,7 @@
                         </li>
 
                         <li class="w-full   " id="discover">
-                            <a href="/discover" class="w-full flex gap gap-4  ">
+                            <a  title="{{lang.translate('Discover')}}" href="/discover" class="w-full flex gap gap-4 ajax-load ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/cloud-bolt.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-cloud-bolt.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -31,7 +31,7 @@
                         </li>
 
                         <li class="w-full   " id="playlists">
-                            <a href="/playlists" class="w-full flex gap gap-4  ">
+                            <a title="{{lang.translate('Playlists')}}" href="/playlists" class="w-full flex gap gap-4  ajax-load">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/playlist.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-playlist.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -42,7 +42,7 @@
                         
 
                         <li class="w-full   " id="likes">
-                            <a href="/likes" class="w-full flex gap gap-4  ">
+                            <a title="{{lang.translate('Playlists')}}" href="/likes" class="w-full flex gap gap-4   ajax-load ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/heart.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-heart.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -53,7 +53,7 @@
                         
 
                         <li class="w-full   " id="artist">
-                            <a href="channels" class="w-full flex gap gap-4  ">
+                            <a title="{{lang.translate('Playlists')}}" href="channels" class="w-full flex gap gap-4  ajax-load  ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/heart.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-heart.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -64,7 +64,7 @@
                         
 
                         <li class="w-full   ">
-                            <a href="#!" class="w-full flex gap gap-4  ">
+                            <a title="{{lang.translate('Playlists')}}" href="#!" class="w-full flex gap gap-4  ajax-load  ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -73,8 +73,8 @@
                             </a>
                         </li>
                         <li><hr class="my-2" /></li>
-                        <li class="w-full " id="upload">
-                            <a href="/upload" class="w-full flex gap gap-4  ">
+                        <li title="{{lang.translate('Playlists')}}" class="w-full " id="upload">
+                            <a href="/upload" class="w-full flex gap gap-4  ajax-load  ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -84,7 +84,7 @@
                         </li>
 
                         <li class="w-full " id="create-playlist">
-                            <a href="#!" x-on:click="jQuery('#create-playlist-popup').removeClass('hidden')" class="w-full flex gap gap-4  ">
+                            <a title="{{lang.translate('Playlists')}}" href="#!" x-on:click="jQuery('#create-playlist-popup').removeClass('hidden')" class="w-full flex gap gap-4  ajax-load  ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"

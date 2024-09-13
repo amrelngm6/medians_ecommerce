@@ -88,11 +88,6 @@ function goToPrev(i) {
     showSlide(cont, currentIndex);
 }
 
-setTimeout(function() {
-    
-    showSlides()
-
-}, 500);
 
 window.addEventListener('resize', function(e) {
     // Your JavaScript code to run on resize

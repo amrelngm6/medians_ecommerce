@@ -7,7 +7,6 @@ function runSlide()
 {
 	const slider = document.querySelector('.channel-slider');
 	const images = document.querySelectorAll('.channel-slider > div');
-
 	if (slider)
 	{
 		slider.style.width = `${images.length * 100}%`;
@@ -383,19 +382,24 @@ function stickyPlaylist()
 
 
 setTimeout(function() {
+	reloadFuncs()
+}, 1000);
 
+
+function reloadFuncs() 
+{
+	
 	const currentURL = window.location.href;
 	const page = currentURL.split("/")
 	const a =  ((page[page.length - 1]).replace('.html', ''))
 
-	// jQuery('#'+(a ? a : 'home')).addClass('active')
-	
 	stickyScroll()
 	runAudio()
 	stickyPlaylist();
-}, 1000);
+	runSlide()
+    showSlides()
 
-
+}
 
 let imgPreview = document.getElementById('imageInput');
 imgPreview ? imgPreview.addEventListener('change', function(event) {

@@ -24,6 +24,16 @@ function render($template, $data, $responseType = 'html')
         return true;
     }
 
+    
+    /**
+     * Check if response is required in JSON
+     */  
+    if (!empty($app->request()->get('load')) && $app->request()->get('load') == 'content' )
+    {
+        $setting = $app->SystemSetting();
+        $template = 'views/front/'.($setting['template'] ?? 'default').'/pages/'.$data['layout'].'.html.twig';
+    }
+
     /**
      * Response will be override only
      * In case the system works In Vue APP

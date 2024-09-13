@@ -21,6 +21,14 @@ jQuery(document).on('submit', '.ajax-form', function (e) {
     submitForm(e.target.id, e.target.attr);
 });
 
+jQuery(document).on('click', '.ajax-load', function (e) {
+    e.preventDefault();
+    let path = jQuery(this).attr('href');
+    let title = jQuery(this).attr('title');
+    loadPage(path, title);
+
+});
+
 jQuery(document).on('click', '.ajax-link', function (e) {
     e.preventDefault();
 
@@ -104,6 +112,27 @@ function submitLink(path, data) {
         success: function (data) {
             // Update your UI with the new data
             handleResponse(data, null)
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+}
+
+
+// Submit Ajax request
+function loadPage(path, title = '' ) {
+    $.ajax({
+        url: path +'?load=content',
+        type: 'GET',
+        processData: false,
+        success: function (data) {
+            // Update your UI with the new data
+            jQuery('#app-content').html(data)
+            window.history.pushState({"html":data,"pageTitle":title},"", path);
+            setTimeout(function() {
+                reloadFuncs()
+            }, 1000)
         },
         error: function (xhr, status, error) {
             console.error('Error fetching data:', error);
