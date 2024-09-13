@@ -50,7 +50,8 @@
                         <div class="my-4 " ></div>
 
                         <div id="related-items" class="carousel-container flex gap-2" data-count="4"  >
-                            {% for media_item in item.related(10) %}
+                            {% set list = {'items' : item.related(10)} %}
+                            {% for media_item in list.items %}
                             {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
                             {% endfor %}
                         </div>
@@ -72,9 +73,6 @@
                         <div class="my-4 " ></div>
                         <div id="played-items" class="carousel-container flex gap-2" data-count="4"  >
                         
-                            {% for media_item in item.related(10) %}
-                            {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
-                            {% endfor %}
 
                         </div>
 
