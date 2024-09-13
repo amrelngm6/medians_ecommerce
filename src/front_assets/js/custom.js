@@ -130,6 +130,7 @@ function initAudioPlayer(player, index) {
 				player.addClass('paused');
 				player.parent().parent().find('.wave-frame').addClass('hidden');
 				document.getElementById('app-cover').classList.add('hidden') 
+				document.getElementById('track-poster').classList.remove('active') 
 
 			} else {
 				playStyles()
