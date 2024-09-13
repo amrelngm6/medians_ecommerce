@@ -352,6 +352,7 @@
   }
   
   
-  
+  #volume-bar {display: none; left: 30px; top: 3px}
+#volume-mute:hover #volume-bar {display: block;}
   
   
