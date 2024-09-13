@@ -55,6 +55,13 @@ class CategoryRepository
 		return Genre::where('status', 'on')->where('model', Genre::class)->limit($limit)->get();
 	}
 
+	public function getGenreByPrefix( $prefix )
+	{
+		return Genre::where('status', 'on')->whereHas('langs', function($q) use ($prefix) {
+			$q->where('prefix', $prefix);
+		})->where('model', Genre::class)->first();
+	}
+
 	public function getAllMoods( $limit = 100)
 	{
 		return Mood::where('model', Mood::class)->limit($limit)->get();

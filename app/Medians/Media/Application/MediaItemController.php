@@ -139,9 +139,7 @@ class MediaItemController extends CustomController
     public function genres()
     {
 		$settings = $this->app->SystemSetting();
-        
 		$this->app->customer_auth();
-
         $params = $this->app->params();
 
 		try 
@@ -150,6 +148,38 @@ class MediaItemController extends CustomController
                 'app' => $this->app,
                 'genres' => $this->categoryRepo->getGenres(),
                 'layout' => 'genres'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
+    
+    /**
+     * Single Genre page for frontend
+     */
+    public function genre($prefix)
+    {
+		$settings = $this->app->SystemSetting();
+		$this->app->customer_auth();
+        $params = $this->app->params();
+
+		try 
+        {
+            $item = $this->categoryRepo->getGenreByPrefix($prefix);
+            
+            $params['limit'] = 12;
+            $params['genre'] = $item->category_id;
+            $list = $this->repo->getWithFilter($params);
+            
+            $item->langs;
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'item' => $item,
+                'list' => $list,
+                'layout' => 'genre'
             ], 'output'));
             
 		} catch (\Exception $e) {

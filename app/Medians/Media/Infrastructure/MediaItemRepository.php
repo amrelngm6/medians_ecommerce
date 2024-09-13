@@ -69,6 +69,13 @@ class MediaItemRepository
 				});
 			}
 
+			if (isset($params['genre']))
+			{
+				$model->whereHas('genres', function($q) use ($params) {
+					$q->where('category_id', $params['genre'] );
+				});
+			}
+
 			if (isset($params['sort_by']))
 			{
 				switch ($params['sort_by']) {
