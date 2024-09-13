@@ -132,6 +132,31 @@ class MediaItemController extends CustomController
 		}
     }
     
+    
+    /**
+     * Genres page for frontend
+     */
+    public function genres()
+    {
+		$settings = $this->app->SystemSetting();
+        
+		$this->app->customer_auth();
+
+        $params = $this->app->params();
+
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'genres' => $this->categoryRepo->getGenres(),
+                'layout' => 'genres'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
     /**
      * Edit info page for frontend
      */

@@ -63,6 +63,7 @@ RouteHandler::get('/discover', \Medians\Media\Application\MediaItemController::c
 RouteHandler::get('/channels', \Medians\Channels\Application\ChannelController::class.'@channels');
 RouteHandler::get('/playlists', \Medians\Playlists\Application\PlaylistController::class.'@playlists');
 RouteHandler::get('/likes', \Medians\Media\Application\MediaItemController::class.'@likes');
+RouteHandler::get('/genres', \Medians\Media\Application\MediaItemController::class.'@genres');
 RouteHandler::get('/playlist/(:all)', \Medians\Playlists\Application\PlaylistController::class.'@playlist');
 RouteHandler::get('/create-payment-intent', \Medians\Transactions\Application\TransactionController::class.'@createPaymentIntent');
 RouteHandler::post('/cart/delete', \Medians\Cart\Application\CartController::class.'@delete');
