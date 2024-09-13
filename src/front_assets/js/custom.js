@@ -24,8 +24,9 @@ function runSlide()
 
 
 
+var mainAudio = jQuery('audio');
 
-var audio, canPlay, player;
+var audio, canPlay, player, audioInfo;
 
 
 function runAudio()
@@ -61,7 +62,7 @@ function runAudio()
 		audio.volume = event.target.value;
 	}) ;	
 
-	document.getElementById('play-pause-button').addEventListener("click", function(event) {
+	document.getElementById('player-pause-button').addEventListener("click", function(event) {
 		if (audio.paused ) {
 			playStyles();
 		} else  {
@@ -70,25 +71,27 @@ function runAudio()
 
 	});
 
-	document.getElementById('play-previous').addEventListener("click", function(event) {
-		console.log(player)
+	document.getElementById('player-previous').addEventListener("click", function(event) {
 		let indx = player.data('index'); 
 		let list = player.data('list');
 		if (list[indx-1])
 		{
 			let media = list[indx-1] ?? {};
-			jQuery('#media-'+media.media_id)[0].click()
+			player = jQuery('#media-'+media.media_id);
+			initAudioPlayer(player, (indx-1));
+			playStyles()
 		}
 
 	});
-	document.getElementById('play-next').addEventListener("click", function(event) {
-
+	document.getElementById('player-next').addEventListener("click", function(event) {
 		let indx = player.data('index'); 
 		let list = player.data('list');
 		if (list[indx+1])
 		{
 			let media = list[indx+1] ?? {};
-			jQuery('#media-'+media.media_id)[0].click()
+			player = jQuery('#media-'+media.media_id);
+			initAudioPlayer(player, (indx+1));
+			playStyles()
 		}
 
 	});
@@ -107,7 +110,7 @@ function pauseStyles() {
 	player.addClass('paused');
 	player.parent().parent().find('.wave-frame').addClass('hidden');
 	document.getElementById('album-art').classList.remove('active') 
-	document.getElementById('play-pause-button').classList.remove('active') 
+	document.getElementById('player-pause-button').classList.remove('active') 
 }
 
 function playStyles() {
@@ -122,7 +125,7 @@ function playStyles() {
 	jQuery('.wave-frame').addClass('hidden');
 	player.parent().parent().find('.wave-frame').removeClass('hidden');
 	document.getElementById('album-art').classList.add('active') 
-	document.getElementById('play-pause-button').classList.add('active') 
+	document.getElementById('player-pause-button').classList.add('active') 
 }
 
 function updateAudio(e, $elem) {
@@ -139,8 +142,7 @@ function updateAudio(e, $elem) {
 
 function initAudioPlayer(player, index) {
 
-	let audioInfo = player.find('.slide__audio-player');
-	let mainAudio = jQuery('audio');
+	audioInfo = player.find('.slide__audio-player');
 
 	audio = mainAudio[0];
 	audio.src = audioInfo.attr('data-path');
