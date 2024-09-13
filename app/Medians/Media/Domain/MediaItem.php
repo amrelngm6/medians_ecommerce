@@ -33,7 +33,7 @@ class MediaItem extends CustomModel
 		'created_by',
 	];
 
-	public $appends = ['content_langs', 'lang_content', 'field', 'picture_name'];
+	public $appends = ['field', 'picture_name'];
 
 	
 	public function getPictureNameAttribute() 

@@ -25,20 +25,74 @@ function runSlide()
 
 var mainAudio = jQuery('audio');
 
-var audio, canPlay, player, audioInfo;
+var audio, canPlay, player, audioInfo, audioObject, list, index;
 
+
+document.getElementById('player-audio').addEventListener("change", function(event) {
+	audio.volume = event.target.value;
+}) ;	
+
+jQuery('.start-player').on('click', function (i, el) {
+	player = jQuery(this);
+	list = player.data('list')
+	index = player.data('index')
+	if (player.hasClass('start-player')) {
+		audioObject = list[player.data('index')] ?? {};
+		audioInfo = player.find('.slide__audio-player');
+		audio = mainAudio[0];
+		audio.src = '/stream_audio?audio='+ audioObject.main_file.filename;
+		audio.load()
+		initAudioPlayer()
+		player.removeClass('start-player')
+	} 
+});
+
+
+jQuery('#player-pause-button').on("click", function(event) {
+	if (audio.paused ) {
+		playStyles();
+	} else  {
+		pauseStyles();
+	}
+
+});
+
+jQuery('#player-previous').on("click", function(event) {
+	index = index ? (index - 1) : 0; 
+	if (list[index])
+	{
+		handleFile();
+	}
+
+});
+jQuery('#player-next').on("click", function(event) {
+	index = list[index + 1] ? (index + 1) : index; 
+	if (list[index])
+	{
+		handleFile();
+	}
+
+});
+
+jQuery('#volume-mute-img').on("click", function(event) {
+	audio.muted = !audio.muted;
+}) ;
+
+
+function handleFile()
+{
+	
+	audioObject = list[index] ?? {};
+	player = jQuery('#media-'+audioObject.media_id);
+	audioInfo = player.find('.slide__audio-player');
+	audio.src = '/stream_audio?audio='+ audioObject.main_file.filename;
+	audio.load()
+	playStyles()
+}
 
 function runAudio()
 {
 
-	jQuery('.start-player').on('click', function (index, el) {
-		player = jQuery(this);
-		if (player.hasClass('start-player')) {
-			initAudioPlayer(player, index);
-			player.removeClass('start-player')
-		}
-	});
-	
 	jQuery('.audio__slider').roundSlider({
 		radius: 50,
 		value: 0,
@@ -57,47 +111,6 @@ function runAudio()
 	});
 
 	
-	document.getElementById('player-audio').addEventListener("change", function(event) {
-		audio.volume = event.target.value;
-	}) ;	
-
-	document.getElementById('player-pause-button').addEventListener("click", function(event) {
-		if (audio.paused ) {
-			playStyles();
-		} else  {
-			pauseStyles();
-		}
-
-	});
-
-	document.getElementById('player-previous').addEventListener("click", function(event) {
-		let indx = player.data('index'); 
-		let list = player.data('list');
-		if (list[indx-1])
-		{
-			let media = list[indx-1] ?? {};
-			player = jQuery('#media-'+media.media_id);
-			initAudioPlayer(player, (indx-1));
-			playStyles()
-		}
-
-	});
-	document.getElementById('player-next').addEventListener("click", function(event) {
-		let indx = player.data('index'); 
-		let list = player.data('list');
-		if (list[indx+1])
-		{
-			let media = list[indx+1] ?? {};
-			player = jQuery('#media-'+media.media_id);
-			initAudioPlayer(player, (indx+1));
-			playStyles()
-		}
-
-	});
-
-	document.getElementById('volume-mute-img').addEventListener("click", function(event) {
-		audio.muted = !audio.muted;
-	}) ;
 
 }
 
@@ -117,7 +130,6 @@ function playStyles() {
 	$('.js-audio').removeClass('playing');
 	$('.js-audio').parent().removeClass('active');
 	
-	audio.play();
 	player.removeClass('paused');
 	player.addClass('playing');
 	player.parent().addClass('active');
@@ -125,6 +137,17 @@ function playStyles() {
 	player.parent().parent().find('.wave-frame').removeClass('hidden');
 	document.getElementById('album-art').classList.add('active') 
 	document.getElementById('player-pause-button').classList.add('active') 
+
+	
+	document.getElementById('app-cover').classList.remove('hidden') 
+	document.getElementById('album-name').innerHTML = audioObject.name ?? ''; 
+	document.getElementById('track-name').innerHTML = audioObject.artist ? audioObject.artist.name : ''; 
+	document.getElementById('track-poster').src = audioObject.picture ?? ''; 
+	document.getElementById('track-poster').classList.add('active') 
+
+	setTimeout(function(){
+		audio.play();
+	}, 100)
 }
 
 function updateAudio(e, $elem) {
@@ -139,13 +162,8 @@ function updateAudio(e, $elem) {
 
 }
 
-function initAudioPlayer(player, index) {
+function initAudioPlayer() {
 
-	audioInfo = player.find('.slide__audio-player');
-
-	audio = mainAudio[0];
-	audio.src = audioInfo.attr('data-path');
-	audio.load()
 
 	let play = player.find('.play-pause'),
 		circle = player.find('#seekbar-'+audioInfo.attr('data-id')),
@@ -204,18 +222,8 @@ function initAudioPlayer(player, index) {
 		value ? jQuery(slider).roundSlider('setValue', value) : '';
 	});
 
-	mainAudio.on('playing', (e) => {
-		// console.log('playing')
-	});
-	
 	mainAudio.on('play', (e) => {
-		console.log(e)
-		let dataset = jQuery(audioInfo)[0].dataset;
-		document.getElementById('app-cover').classList.remove('hidden') 
-		document.getElementById('track-name').innerHTML = dataset['artist'] 
-		document.getElementById('album-name').innerHTML = dataset['title'] 
-		document.getElementById('track-poster').src = dataset['poster'] 
-		document.getElementById('track-poster').classList.add('active') 
+		playStyles()
 	});
 
 	mainAudio.on('ended', () => {
@@ -226,7 +234,6 @@ function initAudioPlayer(player, index) {
 		document.getElementById('album-art').classList.remove('active') 
 
 		let indx = player.data('index'); 
-		let list = player.data('list');
 		let media = list[indx+1] ?? {};
 		jQuery('#media-'+media.media_id)[0].click()
 
