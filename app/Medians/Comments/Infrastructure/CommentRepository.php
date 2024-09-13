@@ -38,7 +38,7 @@ class CommentRepository
 
 		$Model = new Comment();
 		
-		$data['item_type'] = (new \Medians\Products\Domain\Product)::class;
+		$data['item_type'] = (new \Medians\Media\Domain\MediaItem)::class;
 		foreach ($data as $key => $value) 
 		{
 			if (in_array($key, $Model->getFields()))

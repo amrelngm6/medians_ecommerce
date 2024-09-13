@@ -89,13 +89,16 @@ class CommentController extends CustomController
 		$this->app = new \config\APP;
 
 		$params = $this->app->params();
+		$customer = $this->app->customer_auth();
 
         try {	
 
         	$this->validate($params);
 
+			$params['customer_id'] = $customer->customer_id;
+
             $returnData = (!empty($this->repo->store($params))) 
-            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            ? array('success'=>1, 'result'=>translate('Thanks for your comment'), 'reload'=>0)
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
 
         } catch (\Exception $e) {
@@ -157,6 +160,10 @@ class CommentController extends CustomController
 	public function validate($params) 
 	{
 
+		if (empty($this->app->customer))
+		{
+        	throw new \Exception(translate('Login first'), 1);
+		}
 
 		if (empty($params['item_id']))
 		{
@@ -164,6 +171,11 @@ class CommentController extends CustomController
 		}
 		
 		if (empty($params['comment']))
+		{
+			throw new \Exception(translate('Comment required'), 1);
+		}
+		
+		if (strlen(str_replace(' ','', $params['comment'])) < 1)
 		{
 			throw new \Exception(translate('Comment required'), 1);
 		}

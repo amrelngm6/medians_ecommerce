@@ -5,6 +5,7 @@ namespace Medians\Media\Domain;
 use Medians\Views\Domain\View;
 use Medians\Likes\Domain\Like;
 use Medians\Categories\Domain\Genre;
+use Medians\Comments\Domain\Comment;
 use Medians\Content\Domain\Content;
 use Medians\Reviews\Domain\Review;
 use Medians\Customers\Domain\Customer;
@@ -87,6 +88,13 @@ class MediaItem extends CustomModel
 		return $this->morphMany(CustomField::class, 'model');
 	}
 
+	
+	public function comments() 
+	{
+		return $this->morphMany(Comment::class , 'item');	
+	}
+	
+
 	public function files() 
 	{
 		return $this->hasMany(MediaFile::class , 'media_id', 'media_id');	
@@ -145,6 +153,11 @@ class MediaItem extends CustomModel
 	public function likes() 
 	{
 		return $this->morphMany(Like::class , 'item');	
+	}
+
+	public function liked($customer_id) 
+	{
+		return $this->morphOne(Like::class , 'item')->where('customer_id', $customer_id);	
 	}
 	
 	public function rate() 

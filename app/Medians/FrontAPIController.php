@@ -132,6 +132,10 @@ class FrontAPIController extends CustomController
 					$return = (new Transactions\Application\TransactionController)->verifyTransaction();
 					break;
 		
+				case 'Comment.create':
+					$return = (new Comments\Application\CommentController)->store();
+					break;
+		
 			}
 
 			return printResponse(json_encode($return));
@@ -176,6 +180,10 @@ class FrontAPIController extends CustomController
 			
 			case 'Order.update':
 				$controller = new Orders\Application\OrderController;
+				break;
+			
+			case 'Comment.update':
+				$controller = new Comments\Application\CommentController;
 				break;
 			
 
@@ -224,6 +232,10 @@ class FrontAPIController extends CustomController
 
 				case 'Review.delete':
 					return printResponse((new Reviews\Application\ReviewController())->delete());
+					break;
+
+				case 'Comment.delete':
+					return printResponse((new Comments\Application\CommentController())->delete());
 					break;
 			
 			

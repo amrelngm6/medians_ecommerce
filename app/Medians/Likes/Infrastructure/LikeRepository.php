@@ -24,9 +24,15 @@ class LikeRepository
 		return Like::find($id);
 	}
 
+
 	public function get($limit = 1000)
 	{
 		return Like::with('item')->limit($limit)->get();
+	}
+
+	public function checkLiked($item_id, $customer_id)
+	{
+		return Like::where('item_id', $item_id)->where('customer_id', $customer_id)->first();
 	}
 
 
@@ -123,11 +129,11 @@ class LikeRepository
 	*
 	* @Returns Boolen
 	*/
-	public function delete($id) 
+	public function delete($item_id, $customer_id) 
 	{
 		try {
 			
-			return Like::find($id)->delete();
+			return $this->checkLiked($item_id, $customer_id)->delete();
 
 		} catch (\Exception $e) {
 

@@ -118,6 +118,11 @@ class LikeController extends CustomController
 			
 			$params['customer_id'] = $this->app->customer->customer_id;
 
+			if (!empty($this->repo->checkLiked($params['item_id'], $params['customer_id']))) 
+			{
+				return $this->delete($params);
+			}
+
             $returnData = (!empty($this->repo->store_media($params))) 
             ? array('success'=>1, 'result'=>translate('Thanks for like'), 'reload'=>0)
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
@@ -179,27 +184,19 @@ class LikeController extends CustomController
 	}
 
 
-	public function delete() 
+	public function delete($params) 
 	{
 
-
-		$this->app = new \config\APP;
-
-		$params = $this->app->params();
-		
         try {
 
-            if ($this->repo->delete($params['like_id']))
+            if ($this->repo->delete($params['item_id'], $this->app->customer->customer_id))
             {
-                return array('success'=>1, 'result'=>translate('Deleted'), 'reload'=>1);
+                return array('success'=>1, 'result'=>translate('Removed from likes'), 'reload'=>0);
             }
             
-
         } catch (Exception $e) {
         	throw new \Exception("Error Processing Request", 1);
-        	
         }
-
 	}
 
 	public function validate($params) 
@@ -210,6 +207,12 @@ class LikeController extends CustomController
 		{
         	throw new \Exception(translate('Item is required'), 1);
 		}
+
+		if (empty($this->app->customer))
+		{
+        	throw new \Exception(translate('Login first'), 1);
+		}
+
 
 	}
 
