@@ -1477,6 +1477,10 @@ video {
   max-width: 80%;
 }
 
+.max-w-\[90\%\] {
+  max-width: 90%;
+}
+
 .max-w-lg {
   max-width: 32rem;
 }

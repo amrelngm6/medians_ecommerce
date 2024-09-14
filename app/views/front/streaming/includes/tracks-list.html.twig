@@ -8,7 +8,7 @@
                                                     </div>
                                                     {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
                                                 </div>
-                                                <div class="w-full hover:text-orange-500">
+                                                <div class="w-full hover:text-orange-500 max-w-[90%]">
                                                     <a href="/track/{{media_item.media_id}}"  class="ajax-load block truncate max-w-96 text-lg font-semibold transition hover:text-orange-500  dark:text-gray-400">{{media_item.name}}</a>
                                                     <a href="/artist/{{media_item.author_id}}"  class="ajax-load text-gray-400 text-sm">{{media_item.artist.name}}</a>
                                                 </div>
