@@ -125,6 +125,7 @@ function pauseStyles() {
 	player.parent().parent().find('.wave-frame').addClass('hidden');
 	document.getElementById('album-art').classList.remove('active') 
 	document.getElementById('player-pause-button').classList.remove('active') 
+	document.getElementById('player-track').classList.remove('active') 
 }
 
 function playStyles() {
@@ -146,6 +147,7 @@ function playStyles() {
 	document.getElementById('track-name').innerHTML = audioObject.artist ? audioObject.artist.name : ''; 
 	document.getElementById('track-poster').src = audioObject.picture ?? ''; 
 	document.getElementById('track-poster').classList.add('active') 
+	document.getElementById('player-track').classList.add('active') 
 
 	setTimeout(function(){
 		audio.play();
