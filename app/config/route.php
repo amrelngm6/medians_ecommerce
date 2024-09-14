@@ -65,6 +65,7 @@ RouteHandler::get('/playlists', \Medians\Playlists\Application\PlaylistControlle
 RouteHandler::get('/likes', \Medians\Media\Application\MediaItemController::class.'@likes');
 RouteHandler::get('/genres', \Medians\Media\Application\MediaItemController::class.'@genres');
 RouteHandler::get('/studio', \Medians\Media\Application\MediaItemController::class.'@studio');
+RouteHandler::get('/studio/media', \Medians\Media\Application\MediaItemController::class.'@studio_media');
 RouteHandler::get('/genre/(:all)', \Medians\Media\Application\MediaItemController::class.'@genre');
 RouteHandler::get('/artist/(:all)', \Medians\Media\Application\MediaItemController::class.'@artist');
 RouteHandler::get('/playlist/(:all)', \Medians\Playlists\Application\PlaylistController::class.'@playlist');

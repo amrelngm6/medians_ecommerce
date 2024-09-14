@@ -122,6 +122,36 @@ class MediaItemController extends CustomController
 		}
     }
     
+    /**
+     * Studio media page for frontend
+     */
+    public function studio_media()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $customer = $this->app->customer_auth();
+        
+        $this->checkSession($customer);
+
+        $params['limit'] = 20;
+        $params['author_id'] = $customer->customer_id;
+        $list = $this->repo->getWithFilter($params);
+
+
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'customer' => $customer,
+                'list' => $list,
+                'layout' => 'studio_media'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
 
     
     /**
@@ -381,5 +411,16 @@ class MediaItemController extends CustomController
         	throw new \Exception("Error Processing Request", 1);
         }
 	}
+
+
+    /**
+     * Check if customer session is valid
+     */
+    public function checkSession($customer)
+    {
+        
+        if (empty($customer->customer_id))
+            $this->app->redirect('/customer/login');
+    }
 
 }
