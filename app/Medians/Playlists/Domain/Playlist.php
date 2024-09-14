@@ -32,7 +32,7 @@ class Playlist extends CustomModel
 
 	public function items()
 	{
-		return $this->hasMany(PlaylistMedia::class, 'playlist_id', 'playlist_id');	
+		return $this->hasMany(PlaylistMedia::class, 'playlist_id', 'playlist_id')->with('media');	
 	}
 
 	public function likes()

@@ -8,6 +8,7 @@ use Medians\Media\Infrastructure\MediaRepository;
 use Medians\Media\Infrastructure\MediaItemRepository;
 use Medians\Categories\Infrastructure\CategoryRepository;
 use Medians\Customers\Infrastructure\CustomerRepository;
+use Medians\Playlists\Infrastructure\PlaylistRepository;
 
 
 class MediaItemController extends CustomController 
@@ -20,6 +21,7 @@ class MediaItemController extends CustomController
 	protected $mediaRepo;
 	protected $categoryRepo;
 	protected $customerRepo;
+	protected $playlistRepo;
 
 	function __construct()
 	{
@@ -28,6 +30,7 @@ class MediaItemController extends CustomController
 		$this->mediaRepo = new MediaRepository;
 		$this->categoryRepo = new CategoryRepository;
 		$this->customerRepo = new CustomerRepository;
+		$this->playlistRepo = new PlaylistRepository;
 	}
 
 
@@ -145,6 +148,31 @@ class MediaItemController extends CustomController
                 'customer' => $customer,
                 'list' => $list,
                 'layout' => 'studio_media'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+    
+    /**
+     * Studio media page for frontend
+     */
+    public function studio_playlists()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $customer = $this->app->customer_auth();
+        
+        $this->checkSession($customer);
+
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+				'items' => $this->playlistRepo->getByCustomer($customer->customer_id),
+                'layout' => 'studio_playlists'
             ], 'output'));
             
 		} catch (\Exception $e) {

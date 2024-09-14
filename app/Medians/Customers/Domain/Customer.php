@@ -6,6 +6,7 @@ use Shared\dbaser\CustomModel;
 use Medians\Followers\Domain\Follower;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Media\Domain\MediaItem;
+use Medians\Playlists\Domain\Playlist;
 
 
 class Customer extends CustomModel
@@ -75,6 +76,11 @@ class Customer extends CustomModel
 	public function media_items() 
 	{
 		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file');	
+	}
+
+	public function playlists() 
+	{
+		return $this->hasMany(Playlist::class , 'customer_id', 'customer_id')->with('items');	
 	}
 
 	public function following($customer_id) 
