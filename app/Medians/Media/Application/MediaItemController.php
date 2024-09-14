@@ -7,6 +7,7 @@ use getID3;
 use Medians\Media\Infrastructure\MediaRepository;
 use Medians\Media\Infrastructure\MediaItemRepository;
 use Medians\Categories\Infrastructure\CategoryRepository;
+use Medians\Customers\Infrastructure\CustomerRepository;
 
 
 class MediaItemController extends CustomController 
@@ -18,6 +19,7 @@ class MediaItemController extends CustomController
 
 	protected $mediaRepo;
 	protected $categoryRepo;
+	protected $customerRepo;
 
 	function __construct()
 	{
@@ -25,6 +27,7 @@ class MediaItemController extends CustomController
 		$this->repo = new MediaItemRepository;
 		$this->mediaRepo = new MediaRepository;
 		$this->categoryRepo = new CategoryRepository;
+		$this->customerRepo = new CustomerRepository;
 	}
 
 
@@ -81,7 +84,7 @@ class MediaItemController extends CustomController
     {
 		$settings = $this->app->SystemSetting();
 
-        $item = $this->repo->findByPrefix($artist_name);
+        $item = $this->customerRepo->find($artist_name);
         
 		try 
         {

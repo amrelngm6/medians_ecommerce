@@ -2,41 +2,34 @@
                 <div class="pb-4 lg:px-0 px-1 lg:w-64 w-full  relative overflow-hidden h-full">
                     <div class="lg:block hidden px-1 text-slate-400 text-opacity-70  text-base font-normal tracking-wide">{{lang.translate('MENU')}}</div>
                     <ul class="pt-2 font-normal lg:block flex ">
-                        <li class="w-full   " id="home">
-                            <a href="/" {{lang.translate('Home')}} class="w-full flex gap gap-4 ajax-load ">
-                               <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50">{{lang.translate('Home')}}</span>
+                        <li class="w-full   " id="dashboard">
+                            <a href="/studio" {{lang.translate('Studio')}} class="w-full flex gap gap-4 ajax-load ">
+                               <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50">{{lang.translate('Studio')}}</span>
                             </a>
                         </li>
 
-                        <li class="w-full   " id="discover">
-                            <a  title="{{lang.translate('Discover')}}" href="/discover" class="w-full flex gap gap-4 ajax-load ">
-                                <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Discover')}}</span>
+                        <li class="w-full   " id="Media">
+                            <a  title="{{lang.translate('Media')}}" href="/studio/media" class="w-full flex gap gap-4 ajax-load ">
+                                <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Media List')}}</span>
+                            </a>
+                        </li>
+
+                        <li class="w-full   " id="audiobooks">
+                            <a  title="{{lang.translate('Audio Books')}}" href="/studio/audio_books" class="w-full flex gap gap-4 ajax-load ">
+                                <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Audio Books')}}</span>
                             </a>
                         </li>
 
                         <li class="w-full   " id="playlists">
-                            <a title="{{lang.translate('Playlists')}}" href="/playlists" class="w-full flex gap gap-4  ajax-load">
+                            <a title="{{lang.translate('Playlists')}}" href="/studio/playlists" class="w-full flex gap gap-4  ajax-load">
                                 <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Playlists')}}</span>
                             </a>
                         </li>
                         
 
                         <li class="w-full   " id="likes">
-                            <a title="{{lang.translate('Playlists')}}" href="/likes" class="w-full flex gap gap-4   ajax-load ">
+                            <a title="{{lang.translate('likes')}}" href="/likes" class="w-full flex gap gap-4   ajax-load ">
                                  <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Likes')}}</span>
-                            </a>
-                        </li>
-                        
-
-                        <li class="w-full   " id="artist">
-                            <a title="{{lang.translate('Artists')}}" href="/channels" class="w-full flex gap gap-4  ajax-load  ">
-                                <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Artists')}}</span>
-                            </a>
-                        </li>
-
-                        <li class="w-full   " id="genres">
-                            <a title="{{lang.translate('genres')}}" href="/genres" class="w-full flex gap gap-4  ajax-load  ">
-                                 <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Genres')}}</span>
                             </a>
                         </li>
                         

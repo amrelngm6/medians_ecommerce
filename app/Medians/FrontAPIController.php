@@ -136,6 +136,10 @@ class FrontAPIController extends CustomController
 					$return = (new Comments\Application\CommentController)->store();
 					break;
 		
+				case 'Follower.create':
+					$return = (new Followers\Application\FollowerController)->store();
+					break;
+		
 			}
 
 			return printResponse(json_encode($return));

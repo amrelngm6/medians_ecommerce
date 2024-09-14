@@ -31,7 +31,14 @@ class Customer extends CustomModel
 
 
 
-	public $appends = [ 'photo', 'not_removeable', 'field'];
+	public $appends = [ 'photo', 'not_removeable', 'field','picture_name'];
+
+	
+	public function getPictureNameAttribute() 
+	{
+		$e = $this->picture ? explode('/', $this->picture) : [];
+		return end($e);
+	}
 
 	public function getFieldAttribute()
 	{
