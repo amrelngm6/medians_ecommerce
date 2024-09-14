@@ -99,7 +99,7 @@ class FollowerController extends CustomController
 			$params['follower_id'] = $customer->customer_id;
 
             $returnData = (!empty($this->repo->store($params))) 
-            ? array('success'=>1, 'result'=>translate('Thanks for your follow'), 'reload'=>0)
+            ? array('success'=>1, 'result'=>translate('Thanks for follow'), 'reload'=>0)
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
 
         } catch (\Exception $e) {
@@ -157,6 +157,28 @@ class FollowerController extends CustomController
 
 	}
 
+	
+	public function unfollow() 
+	{
+
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+		$customer = $this->app->customer_auth();
+
+        try {
+
+            if ($this->repo->unfollow($params['item_id'], $this->app->customer->customer_id))
+            {
+                return array('success'=>1, 'result'=>translate('Removed from followers list'), 'reload'=>0);
+            }
+            
+        } catch (Exception $e) {
+        	throw new \Exception("Error Processing Request", 1);
+        }
+	}
+
+
 	public function validate($params) 
 	{
 
@@ -165,7 +187,7 @@ class FollowerController extends CustomController
         	throw new \Exception(translate('Login first'), 1);
 		}
 
-		if (empty($params['follower_id']))
+		if (empty($params['item_id']))
 		{
 			throw new \Exception(translate('Follower required'), 1);
 		}

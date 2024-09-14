@@ -330,8 +330,10 @@ class MediaItemController extends CustomController
         $params = $this->app->params();
 		
         try {
-            
-            foreach ($this->app->request()->files as $key => $value) {
+
+            $files = $this->app->request()->files;
+
+            foreach ($files as $key => $value) {
                 if ($value) {
                     $picture = $this->mediaRepo->upload($value);
                     $params['picture'] = $this->mediaRepo->_dir.$picture;
@@ -346,7 +348,11 @@ class MediaItemController extends CustomController
 
             if (isset($fileInfo['playtime_seconds']))
                 $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-            
+        
+        
+            $params['author_id'] = $this->app->customer_auth()->customer_id ?? 0;
+                
+
             if ($this->repo->update($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0);

@@ -3,8 +3,9 @@
 namespace Medians\Customers\Domain;
 
 use Shared\dbaser\CustomModel;
-use Medians\Locations\Domain\RouteLocation;
+use Medians\Followers\Domain\Follower;
 use Medians\CustomFields\Domain\CustomField;
+use Medians\Media\Domain\MediaItem;
 
 
 class Customer extends CustomModel
@@ -66,16 +67,20 @@ class Customer extends CustomModel
 		return $this->fillable;
 	}
 
-    public function route_locations()
-    {
-        return $this->morphMany(RouteLocation::class, 'notifiable');
-    }
+	public function followers() 
+	{
+		return $this->hasMany(Follower::class , 'customer_id', 'customer_id');	
+	}
 
-    public function route_location()
-    {
-        return $this->morphOne(RouteLocation::class, 'notifiable');
-    }
+	public function media_items() 
+	{
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file');	
+	}
 
+	public function following($customer_id) 
+	{
+		return $this->hasOne(Follower::class , 'customer_id', 'customer_id')->where('follower_id', $customer_id);	
+	}
 
     public function receiverAsCustomer()
     {

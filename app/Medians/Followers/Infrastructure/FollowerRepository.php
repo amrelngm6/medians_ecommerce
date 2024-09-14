@@ -38,7 +38,6 @@ class FollowerRepository
 
 		$Model = new Follower();
 		
-		$data['item_type'] = (new \Medians\Media\Domain\MediaItem)::class;
 		foreach ($data as $key => $value) 
 		{
 			if (in_array($key, $Model->getFields()))
@@ -47,7 +46,6 @@ class FollowerRepository
 			}
 		}	
 
-		$dataArray['status'] = isset($dataArray['status']) ? 'on' : null;
 		// Return the Model object with the new data
     	$Object = Follower::firstOrCreate($dataArray);
 
@@ -87,5 +85,20 @@ class FollowerRepository
 			
 		}
 	}
+
+
+	/**
+	 * Unfollow customer
+	 */
+	
+	 public function unfollow($id, $follower_id ) 
+	 {
+		try {	
+			return Follower::where('customer_id', $id)->where('follower_id', $follower_id)->delete();
+		} catch (\Exception $e) {
+			throw new \Exception("Error Processing Request " . $e->getMessage(), 1);
+		}
+	}
+			 
 
 }

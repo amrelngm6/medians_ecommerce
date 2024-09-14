@@ -241,7 +241,11 @@ class FrontAPIController extends CustomController
 				case 'Comment.delete':
 					return printResponse((new Comments\Application\CommentController())->delete());
 					break;
-			
+		
+				case 'Follower.unfollow':
+					return printResponse((new Followers\Application\FollowerController())->unfollow());
+					break;
+				
 			
 			}
 
