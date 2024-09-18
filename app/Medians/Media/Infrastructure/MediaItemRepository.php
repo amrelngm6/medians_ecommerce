@@ -69,23 +69,39 @@ class MediaItemRepository
 				});
 			}
 
-			if (isset($params['genre']))
+			if (!empty($params['genre']))
 			{
 				$model = $model->whereHas('genres', function($q) use ($params) {
 					$q->where('category_id', $params['genre'] );
 				});
 			}
 
-			if (isset($params['type']) && in_array($params['type'], ['audio', 'audio_book','course']))
+			if (!empty($params['type']) && in_array($params['type'], ['audio', 'audio_book','course']))
 			{
 				$model = $model->where('type', $params['type']);
 			}
 
-			if (isset($params['sort_by']))
+			if (!empty($params['sort_by']))
 			{
 				switch ($params['sort_by']) {
 					case 'best':
 						$model = $model->withCount('views')->orderBy('views_count','DESC');
+						break;
+						
+					default:
+						$model = $model->orderBy('media_id','DESC');
+						break;
+				}
+			}
+
+			if (isset($params['date']))
+			{
+				switch (strtolower($params['date'])) {
+					case 'day':
+					case 'week':
+					case 'month':
+					case 'year':
+						$model = $model->whereBetween('created_at', [ date('Y-m-d', strtotime("-1 ".$params['date'])) , date('Y-m-d')]);
 						break;
 						
 					default:

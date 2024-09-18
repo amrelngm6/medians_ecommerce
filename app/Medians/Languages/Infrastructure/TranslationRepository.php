@@ -25,6 +25,9 @@ class TranslationRepository
 	
 	public function findByCodeLang($code, $languageCode)
 	{
+		if (empty($code))
+			return;
+
 		$code =  strtolower(str_replace([' ', '/', '&', '?','؟' , '@', '#', '$', '%', '(', ')', '-', '='], '_', $code)) ;
 		return Translation::where('language_code', $languageCode)->where('code', $code)->first();
 	}
