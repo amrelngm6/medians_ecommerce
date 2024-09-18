@@ -122,8 +122,11 @@ function submitLink(path, data) {
 
 // Submit Ajax request
 function loadPage(path, title = '' ) {
+
+    let mark = path.includes('?') ? '&' : '?'
+    
     $.ajax({
-        url: path +'?load=content',
+        url: path + mark +'load=content',
         type: 'GET',
         processData: false,
         success: function (data) {
