@@ -14,7 +14,7 @@
                                     </div>
                                     <div class="show-on-hover absolute w-40 lg:top-[-30px] top-[30px] lg:left-[100%] dark:bg-gray-900 bg-white  z-10 p-8 space-y-3">
                                         {% for genre in genres %}
-                                        <p><a href="/genre/{{genre.lang_content.prefix}}" class="ajax-load">{{genre.lang_content.title}}</a></p>
+                                        <p><a href="/genre/{{genre.lang_content.prefix}}?params[type]={{app.params.type}}&params[date]={{app.params.date}}" class="ajax-load">{{genre.lang_content.title}}</a></p>
                                         {% endfor %}
                                     </div>
                                 </li>
@@ -30,7 +30,7 @@
                                     </div>
                                     <div class="show-on-hover absolute w-40 lg:top-[-30px] top-[30px] lg:left-[100%] dark:bg-gray-900 bg-white  z-10 p-8 space-y-3">
                                         {% for type in ['audio','audio_book','course'] %}
-                                        <p><a href="/genre/{{item.lang_content.prefix}}?params[type]={{type}}" class="ajax-load">{{lang.translate(type)}}</a></p>
+                                        <p><a href="/genre/{{item.lang_content.prefix}}?params[type]={{type}}&params[date]={{app.params.date}}" class="ajax-load">{{lang.translate(type)}}</a></p>
                                         {% endfor %}
                                     </div>
                                 </li>
@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="show-on-hover absolute w-40 lg:top-[-30px] top-[30px] lg:left-[100%] dark:bg-gray-900 bg-white  w-40 z-10 p-8 space-y-3">
                                         {% for period in ['day','week','month', 'year'] %}
-                                        <p><a href="/genre/{{item.lang_content.prefix}}?params[type]={{type}}&params[date]={{lang.translate(period) }}" class="ajax-load">{{lang.translate(period)}}</a></p>
+                                        <p><a href="/genre/{{item.lang_content.prefix}}?params[type]={{app.params.type}}&params[date]={{period}}" class="ajax-load">{{lang.translate(period)}}</a></p>
                                         {% endfor %}
                                     </div>
                                 </li>
