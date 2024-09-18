@@ -429,3 +429,14 @@ imgPreview ? imgPreview.addEventListener('change', function(event) {
         reader.readAsDataURL(file);
     }
 }) : '';
+
+
+
+// Vanilla javascript
+window.addEventListener('popstate', function (e) {
+	e.preventDefault()
+    var state = e.state;
+    if (state !== null) {
+		loadPage(e.target.location.pathname)
+    }
+});

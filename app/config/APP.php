@@ -122,8 +122,8 @@ class APP
 	 */ 
 	public function playlists()
 	{
-		$this->customer_auth();
-		$output = (new \Medians\Playlists\Infrastructure\PlaylistRepository())->getByCustomer($this->customer->customer_id);
+		$this->customer = $this->customer_auth();
+		$output = (new \Medians\Playlists\Infrastructure\PlaylistRepository())->getByCustomer($this->customer->customer_id ?? 0);
 		return $output;
 	}
 

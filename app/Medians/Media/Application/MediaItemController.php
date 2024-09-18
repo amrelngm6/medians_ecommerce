@@ -47,7 +47,7 @@ class MediaItemController extends CustomController
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-                'layout' => 'upload-step1'
+                'layout' => isset($this->app->customer->customer_id) ? 'upload-step1' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -117,7 +117,7 @@ class MediaItemController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'customer' => $customer,
-                'layout' => 'studio'
+                'layout' => isset($this->app->customer->customer_id) ? 'studio' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -134,12 +134,11 @@ class MediaItemController extends CustomController
 
         $customer = $this->app->customer_auth();
         
-        $this->checkSession($customer);
+        // $this->checkSession($customer);
 
         $params['limit'] = 20;
-        $params['author_id'] = $customer->customer_id;
+        $params['author_id'] = $customer->customer_id ?? 0;
         $list = $this->repo->getWithFilter($params);
-
 
 		try 
         {
@@ -147,7 +146,7 @@ class MediaItemController extends CustomController
                 'app' => $this->app,
                 'customer' => $customer,
                 'list' => $list,
-                'layout' => 'studio_media'
+                'layout' => isset($this->app->customer->customer_id) ? 'studio_media' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -172,7 +171,7 @@ class MediaItemController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
 				'items' => $this->playlistRepo->getByCustomer($customer->customer_id),
-                'layout' => 'studio_playlists'
+                'layout' => isset($this->app->customer->customer_id) ? 'studio_playlists' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -222,7 +221,7 @@ class MediaItemController extends CustomController
 
         $params['limit'] = 12;
         $params['likes'] = true;
-        $params['customer_id'] = $this->app->customer->customer_id;
+        $params['customer_id'] = $this->app->customer->customer_id ?? 0;
         $list = $this->repo->getWithFilter($params);
         
 		try 
@@ -231,7 +230,7 @@ class MediaItemController extends CustomController
                 'app' => $this->app,
                 'list' => $list,
                 'genres' => $this->categoryRepo->getGenres(),
-                'layout' => 'likes'
+                'layout' => isset($this->app->customer->customer_id) ? 'likes' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -302,6 +301,8 @@ class MediaItemController extends CustomController
      */
     public function upload_info($media_id)
     {
+		$this->app->customer_auth();
+
 		$settings = $this->app->SystemSetting();
 
         $item = $this->repo->find($media_id);
@@ -319,7 +320,7 @@ class MediaItemController extends CustomController
                 'app' => $this->app,
                 'item' => $item,
                 'genres' => $this->categoryRepo->getGenres(),
-                'layout' => 'upload-step2'
+                'layout' => isset($this->app->customer->customer_id) ? 'upload-step2' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -446,9 +447,10 @@ class MediaItemController extends CustomController
      */
     public function checkSession($customer)
     {
-        
         if (empty($customer->customer_id))
             $this->app->redirect('/customer/login');
     }
+
+    
 
 }
