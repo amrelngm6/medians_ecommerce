@@ -133,6 +133,7 @@ function loadPage(path, title = '' ) {
             document.title = title
             setTimeout(function() {
                 reloadFuncs()
+                Alpine.initTree(document.getElementById('app-content'))
             }, 500)
         },
         error: function (xhr, status, error) {
