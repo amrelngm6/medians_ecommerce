@@ -344,20 +344,30 @@ function stickyScroll()
 }
 
 
+jQuery(document).on('click', '.active-parent', function(item){
 
-const activeParents = document.querySelectorAll('.active-parent');
-activeParents.forEach((item, i) => {
-	item.addEventListener('click',function(i){
-		item.parentElement.classList.toggle('active')
-	})
+	jQuery(this).parent().toggleClass('active')
 })
 
-const activeChilds = document.querySelectorAll('.active-child');
-activeChilds.forEach((item, i) => {
-	item.addEventListener('click',function(i){
-		item.parentElement.classList.toggle('active')
-	})
+
+jQuery(document).on('click', '.active-child', function(item){
+
+	jQuery(this).parent().toggleClass('active')
 })
+
+// const activeParents = document.querySelectorAll('.active-parent');
+// activeParents.forEach((item, i) => {
+// 	item.addEventListener('click',function(i){
+		
+// 	})
+// })
+
+// const activeChilds = document.querySelectorAll('.active-child');
+// activeChilds.forEach((item, i) => {
+// 	item.addEventListener('click',function(i){
+// 		item.parentElement.classList.toggle('active')
+// 	})
+// })
 
 function stickyPlaylist()
 {
