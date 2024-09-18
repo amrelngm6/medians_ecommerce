@@ -1,37 +1,34 @@
-<div class="py-8" id="filter-side" >
-                            <p class="text-xl text-gray-400">Filters</p>
+                        <div class="py-8" id="filter-side" >
+                            <p class="text-xl text-gray-400">{{lang.translate('Filters')}}</p>
                             <hr class="my-8 opacity-30" />
                             <ul class="dark:text-gray-400 flex lg:block">
                                 <li class="relative show-child w-full">
                                     <div class="flex w-full">
-                                        <span class="w-full text-base dark:text-gray-400  text-gray-600 ">Genre</span>
+                                        <span class="w-full text-base dark:text-gray-400  text-gray-600 ">{{lang.translate('Genre')}}</span>
                                         <img src="/src/front_assets/svg/arrow.svg" />
                                     </div>
                                     <div class="py-3 inline-block">
                                         <span class="text-xs rounded-full py-1 px-2 bg-gray-300 text-gray-800  gap-2 inline-block">    
-                                            <span class="flex gap-2">HipHop <img src="/src/front_assets/svg/close.svg" /></span> 
-                                        </span> 
-                                        <span class="text-xs rounded-full py-1 px-2 bg-gray-300 text-gray-800  gap-2 inline-block">    
-                                            <span class="flex gap-2">Jazz<img src="/src/front_assets/svg/close.svg" /></span> 
+                                            <span class="px-2 flex gap-2">{{item.lang_content.title}} </span> 
                                         </span> 
                                     </div>
                                     <div class="show-on-hover absolute  lg:top-[-30px] top-[30px] lg:left-[100%] dark:bg-gray-900 bg-white  z-10 p-8 space-y-3">
-                                        <p>HipHop</p>
-                                        <p>Jazz</p>
-                                        <p>Classic</p>
+                                        {% for genre in genres %}
+                                        <p><a href="/genre/{{genre.lang_content.prefix}}" class="ajax-load">{{genre.lang_content.title}}</a></p>
+                                        {% endfor %}
                                     </div>
                                 </li>
                                 <li class="relative show-child w-full">
                                     <div class="flex w-full">
-                                        <span class="w-full text-base dark:text-gray-400  text-gray-600 ">Type</span>
+                                        <span class="w-full text-base dark:text-gray-400  text-gray-600 ">{{lang.translate('Type')}}</span>
                                         <img src="/src/front_assets/svg/arrow.svg" />
                                     </div>
                                     <div class="py-2 inline-block">
                                     </div>
                                     <div class="show-on-hover absolute  lg:top-[-30px] top-[30px] lg:left-[100%] dark:bg-gray-900 bg-white  z-10 p-8 space-y-3">
-                                        <p>Music</p>
-                                        <p>Courses</p>
-                                        <p>Audiobooks</p>
+                                        {% for type in ['audio','audio_book','course'] %}
+                                        <p><a href="/genre/{{item.lang_content.prefix}}?params[type]={{type}}" class="ajax-load">{{lang.translate(type)}}</a></p>
+                                        {% endfor %}
                                     </div>
                                 </li>
                                 <li class="relative show-child w-full ">

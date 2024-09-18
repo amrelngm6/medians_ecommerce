@@ -284,12 +284,11 @@ class MediaItemController extends CustomController
             $params['genre'] = $item->category_id;
             $list = $this->repo->getWithFilter($params);
             
-            $item->langs;
-
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item' => $item,
                 'list' => $list,
+                'genres' => $this->categoryRepo->getGenres(),
                 'layout' => 'genre'
             ], 'output'));
             
