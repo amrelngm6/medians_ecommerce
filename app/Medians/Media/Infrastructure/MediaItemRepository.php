@@ -71,9 +71,14 @@ class MediaItemRepository
 
 			if (isset($params['genre']))
 			{
-				$model->whereHas('genres', function($q) use ($params) {
+				$model = $model->whereHas('genres', function($q) use ($params) {
 					$q->where('category_id', $params['genre'] );
 				});
+			}
+
+			if (isset($params['type']) && in_array($params['type'], ['audio', 'audio_book','course']))
+			{
+				$model = $model->where('type', $params['type']);
 			}
 
 			if (isset($params['sort_by']))
