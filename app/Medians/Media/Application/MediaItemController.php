@@ -43,6 +43,8 @@ class MediaItemController extends CustomController
     {
 		$settings = $this->app->SystemSetting();
 
+        $this->app->customer_auth();
+
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
