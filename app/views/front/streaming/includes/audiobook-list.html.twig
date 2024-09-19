@@ -5,6 +5,7 @@
                                                 <div class="slide__audio js-audio start-player" id="media-{{audiobook.media_id}}" data-list="{{audiobook.files|json_encode}}" data-index="{{loop.index - 1}}">
                                                     <div class="slide__audio-player"  data-title="{{file.title}}" data-poster="/stream?thumbnail=300&image={{audiobook.picture_name}}" data-artist="{{audiobook.artist.name}}" data-path="/stream_audio?audio={{audiobook.main_file.filename}}" data-id="{{audiobook.media_id}}" >
                                                     </div>
+                                                    {% set item = audiobook %}
                                                     {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
                                                 </div>
                                                 <div class="w-full hover:text-orange-500 max-w-[90%] pt-1">
