@@ -776,8 +776,8 @@ li.active
 */
 
 .pCard_card {
-  width: 400px;
-  height: 615px;
+  width: 100%;
+  min-height: 500px;
   margin: 50px auto;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
