@@ -848,6 +848,16 @@ UP
   height: 100px;
   box-shadow: 0 0 30px #CFD8DC;
 }
+.pCard_card .pCard_up::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 150px;
+  background: rgba(0, 0, 0, .5);
+  bottom: 0;
+  z-index: -1;
+}
 
 .pCard_card  .pCard_up .pCard_text {
   position: absolute;
