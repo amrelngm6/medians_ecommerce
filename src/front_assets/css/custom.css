@@ -916,6 +916,9 @@ UP
   transition: all .5s ease-in-out;
 }
 
+.pCard_card.pCard_on .pCard_up .pCard_text   h2 {
+  font-size: 20px;
+}
 .pCard_on  .pCard_up .pCard_add {
   -webkit-transform: rotate(360deg) scale(.7);
   -moz-transform: rotate(360deg) scale(.7);
