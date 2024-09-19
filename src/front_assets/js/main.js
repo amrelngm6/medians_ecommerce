@@ -131,7 +131,7 @@ function loadPage(path, title = '' ) {
         processData: false,
         success: function (data) {
             // Update your UI with the new data
-            jQuery('#app-content').html(data)
+            // jQuery('#app-content').html(data)
             window.history.pushState({"html":data,"pageTitle":title},"", path);
             document.title = title
             setTimeout(function() {
