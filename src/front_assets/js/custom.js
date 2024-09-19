@@ -39,6 +39,7 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 	index = player.data('index')
 	if (player.hasClass('start-player')) {
 		audioObject = list[player.data('index')] ?? {};
+		console.log(audioObject)
 		filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
 
 		audioInfo = player.find('.slide__audio-player');
@@ -85,10 +86,8 @@ jQuery('#volume-mute-img').on("click", function(event) {
 
 function handleFile()
 {
-	filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
-	console.log(audioObject)
-	
 	audioObject = list[index] ?? {};
+	filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
 	player = jQuery('#media-'+audioObject.media_id);
 	audioInfo = player.find('.slide__audio-player');
 	audio.src = '/stream_audio?audio='+ filename;
