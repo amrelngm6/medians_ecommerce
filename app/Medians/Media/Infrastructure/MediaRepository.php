@@ -142,7 +142,10 @@ class MediaRepository
 		$store = MediaUpload::addItem($this->_dir.$fileName, $type);
 
         try {
-            $file->move($this->dir, $fileName);
+            $move = $file->move($this->dir, $fileName);
+
+			return $fileName;
+
         } catch (FileException $e) {
         	return $e->getMessage();
         }

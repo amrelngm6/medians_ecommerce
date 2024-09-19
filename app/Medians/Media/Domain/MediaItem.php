@@ -5,6 +5,7 @@ namespace Medians\Media\Domain;
 use Medians\Views\Domain\View;
 use Medians\Likes\Domain\Like;
 use Medians\Categories\Domain\Genre;
+use Medians\Categories\Domain\BookGenre;
 use Medians\Comments\Domain\Comment;
 use Medians\Content\Domain\Content;
 use Medians\Reviews\Domain\Review;
@@ -28,7 +29,7 @@ class MediaItem extends CustomModel
 		'description',
 		'picture',
 		'author_id',
-		'model_class',
+		'type',
 		'status',
 		'created_by',
 	];
@@ -76,6 +77,11 @@ class MediaItem extends CustomModel
 	public function genres() 
 	{
 		return $this->belongsToMany(Genre::class, MediaGenre::class, 'media_id', 'genre_id');	
+	}
+	 
+	public function book_genres() 
+	{
+		return $this->belongsToMany(BookGenre::class, MediaGenre::class, 'media_id', 'genre_id');	
 	}
 
 	public function media_tags() 

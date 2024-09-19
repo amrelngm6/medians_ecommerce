@@ -17,6 +17,7 @@ class MediaFile extends CustomModel
 	
 	public $fillable = [
 		'media_id',
+		'title',
 		'type',
 		'storage',
 		'path',

@@ -37,7 +37,7 @@ class MediaItemController extends CustomController
     
     
     /**
-     * Upload page for frontend
+     * Upload Audio page for frontend
      */
     public function upload_page()
     {
@@ -49,13 +49,39 @@ class MediaItemController extends CustomController
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-                'layout' => isset($this->app->customer->customer_id) ? 'upload-step1' : 'signin'
+                'type' => 'audio',
+                'layout' => isset($this->app->customer->customer_id) ? 'upload-audio' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);
 		}
     }
+
+
+    
+    /**
+     * Upload Audio Book page for frontend
+     */
+    public function audiobook_upload_page()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $this->app->customer_auth();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'type' => 'audiobook',
+                'layout' => isset($this->app->customer->customer_id) ? 'upload-audiobook' : 'signin'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
 
     
     /**
@@ -297,10 +323,18 @@ class MediaItemController extends CustomController
 		}
     }
     
+
+
+
+
+
+
+
+
     /**
      * Edit info page for frontend
      */
-    public function upload_info($media_id)
+    public function edit_media($media_id)
     {
 		$this->app->customer_auth();
 
@@ -320,6 +354,8 @@ class MediaItemController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item' => $item,
+                'genre_type' => 'genres',
+                'model_type' => 'MediaItem',
                 'genres' => $this->categoryRepo->getGenres(),
                 'layout' => isset($this->app->customer->customer_id) ? 'upload-step2' : 'signin'
             ], 'output'));
@@ -331,6 +367,10 @@ class MediaItemController extends CustomController
 
 
 
+
+    /**
+     * Submit Upload Media page
+     */
 	public function upload()
 	{
 
@@ -339,7 +379,6 @@ class MediaItemController extends CustomController
 		foreach ($this->app->request()->files as $key => $value) {
 			$file = $this->mediaRepo->upload($value, 'audio', true);
     
-            
             $getID3 = new getID3;
             // Analyze file
             $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
@@ -357,15 +396,21 @@ class MediaItemController extends CustomController
             $save = $this->repo->store($params);
 
             $this->generateWave($file);
-			// $output2 = shell_exec('ffmpeg -i '.$filePath.' -c copy -map 0 -movflags +faststart '.$encodedFilePath.' ');
-
 		}
 
         return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"media/edit/$save->media_id");
-
-        // return $fileInfo;
-		// return json_encode(['data'=> ['message'=>'Uploaded successfully']]);
 	}
+
+
+
+
+
+
+
+
+
+
+
 
     public function generateWave($file)
     {
@@ -408,7 +453,6 @@ class MediaItemController extends CustomController
 
             if (isset($fileInfo['playtime_seconds']))
                 $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-        
         
             $params['author_id'] = $this->app->customer_auth()->customer_id ?? 0;
                 

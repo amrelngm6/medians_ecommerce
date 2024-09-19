@@ -83,6 +83,10 @@ class FrontAPIController extends CustomController
 				case 'MediaItem.upload':
 					return printResponse((new Media\Application\MediaItemController())->upload());
 					break;
+
+				case 'Audiobook.create':
+					return printResponse((new Media\Application\AudiobookController())->store());
+					break;
 	
 				case 'Wishlist.create':
 					return printResponse((new Cart\Application\WishlistController())->store());
@@ -180,6 +184,10 @@ class FrontAPIController extends CustomController
 			
 			case 'MediaItem.update':
 				$controller = new Media\Application\MediaItemController;
+				break;
+			
+			case 'Audiobook.update':
+				$controller = new Media\Application\AudiobookController;
 				break;
 			
 			case 'Order.update':

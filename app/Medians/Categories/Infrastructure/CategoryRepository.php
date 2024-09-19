@@ -3,6 +3,7 @@
 namespace Medians\Categories\Infrastructure;
 
 use Medians\Categories\Domain\Category;
+use Medians\Categories\Domain\BookGenre;
 use Medians\Categories\Domain\Genre;
 use Medians\Categories\Domain\Mood;
 use Medians\Blog\Domain\Blog;
@@ -37,7 +38,7 @@ class CategoryRepository
 	public function find($id)
 	{
 		$item = Category::find($id);
-		return (new $item->model)->find($id);
+		return isset($item->model) ? (new $item->model)->find($id) : null;
 	}
 
 	public function get($limit = 100)
@@ -53,6 +54,17 @@ class CategoryRepository
 	public function getGenres( $limit = 100)
 	{
 		return Genre::where('status', 'on')->where('model', Genre::class)->limit($limit)->get();
+	}
+
+	
+	public function getAllBookGenres( $limit = 100)
+	{
+		return BookGenre::where('model', BookGenre::class)->limit($limit)->get();
+	}
+
+	public function getBookGenres( $limit = 100)
+	{
+		return BookGenre::where('status', 'on')->where('model', BookGenre::class)->limit($limit)->get();
 	}
 
 	public function getGenreByPrefix( $prefix )

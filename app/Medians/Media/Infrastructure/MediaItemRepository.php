@@ -88,7 +88,12 @@ class MediaItemRepository
 						$model = $model->withCount('views')->orderBy('views_count','DESC');
 						break;
 						
-					default:
+					case 'old':
+						$model = $model->orderBy('media_id','ASC');
+						break;
+						
+					// default:
+					case 'new':
 						$model = $model->orderBy('media_id','DESC');
 						break;
 				}
@@ -142,7 +147,7 @@ class MediaItemRepository
     	$Object = MediaItem::create($dataArray);
 
     	// Store languages content
-    	isset($data['files']) ? $this->storeFiles($data['files'] ,$Object->media_id) : '';
+    	isset($data['files']) ? $this->storeFiles($data['files'] ,$Object) : '';
     	isset($data['field']) ? $this->storeCustomFields($data['field'] ,$Object->media_id) : '';
 
     	return $Object;
@@ -223,9 +228,9 @@ class MediaItemRepository
 	/**
 	* Save related items to database
 	*/
-	public function storeFiles($data, $id) 
+	public function storeFiles($data, $item) 
 	{
-		MediaFile::where('media_id', $id)->delete();
+		MediaFile::where('media_id', $item->media_id)->delete();
 		if ($data)
 		{
 			foreach ($data as $key => $value)
@@ -233,7 +238,8 @@ class MediaItemRepository
 				$value = (array) $value;
 				$fields = $value;
                 
-				$fields['media_id'] = $id;	
+				$fields['media_id'] = $item->media_id;	
+				$fields['title'] = $item->name;	
 				$fields['sort'] = $value['sort'] ?? 0;	
 
 				$Model = MediaFile::create($fields);

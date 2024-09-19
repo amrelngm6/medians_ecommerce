@@ -57,7 +57,9 @@ RouteHandler::get('/mobile_api/(:all)', \Medians\MobileAPIController::class.'@ha
  */
 RouteHandler::get('/search', \Medians\Products\Application\ProductController::class.'@searchPage');
 RouteHandler::get('/upload', \Medians\Media\Application\MediaItemController::class.'@upload_page');
-RouteHandler::get('/media/edit/(:all)', \Medians\Media\Application\MediaItemController::class.'@upload_info');
+RouteHandler::get('/media/edit/(:all)', \Medians\Media\Application\MediaItemController::class.'@edit_media');
+RouteHandler::get('/upload/audiobook', \Medians\Media\Application\AudiobookController::class.'@audiobook_upload_page');
+RouteHandler::get('/audiobook/edit/(:all)', \Medians\Media\Application\AudiobookController::class.'@edit_audiobook');
 RouteHandler::get('/track/(:all)', \Medians\Media\Application\MediaItemController::class.'@audio_page');
 RouteHandler::get('/discover', \Medians\Media\Application\MediaItemController::class.'@discover');
 RouteHandler::get('/channels', \Medians\Channels\Application\ChannelController::class.'@channels');
@@ -177,6 +179,12 @@ if(!empty($app->auth()))
     */
     RouteHandler::get('/admin/genres', Medians\Categories\Application\GenreController::class.'@index');
     RouteHandler::get('/admin/genres/(:all)', Medians\Categories\Application\GenreController::class.'@genre');
+
+    /**
+    * @return AudioGenres
+    */
+    RouteHandler::get('/admin/book_genres', Medians\Categories\Application\BookGenreController::class.'@index');
+    RouteHandler::get('/admin/book_genres/(:all)', Medians\Categories\Application\BookGenreController::class.'@genre');
 
     /**
     * @return Moods

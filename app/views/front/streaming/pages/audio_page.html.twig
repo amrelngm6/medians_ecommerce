@@ -26,7 +26,15 @@
 
                                     <span x-on:click="jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
                                     <a href="/media/edit/{{item.media_id}}" class="ajax-load cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/edit.svg" class="w-5"></a>
-                                    <span class="cursor-pointer mx-2 text-gray-100 leading-3 text-xl font-extrabold" >...</span>
+                                    <div class="w-4 relative">
+                                        <span class="active-parent cursor-pointer mx-2 text-gray-100 leading-3 text-xl font-extrabold" >...</span>
+                                        <div class="show-active active-child hidden z-20 rounded-2xl w-40 right-0 top-10 absolute bg-white dark:bg-gray-900 dark:text-gray-400 p-4 ">
+                                            <a  class="cursor-pointer text-gray-600 flex w-full gap-2 py-2"   x-on:click="jQuery('#add-playlist-cover').css('background-image', 'url( /stream?thumbnail=800&image={{media_item.picture_name}} )'); jQuery('#add-playlist-media').val({{media_item.media_id}}); jQuery('#add-playlist-popup').removeClass('hidden')" >
+                                                <img src="/src/front_assets/svg/queue_list.svg" width="24" />
+                                                <span class="w-full text-xs pt-1">{{lang.translate('Add to playlist')}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

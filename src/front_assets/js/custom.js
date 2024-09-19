@@ -424,8 +424,7 @@ function reloadFuncs()
 
 }
 
-let imgPreview = document.getElementById('imageInput');
-imgPreview ? imgPreview.addEventListener('change', function(event) {
+jQuery(document).on('change', '#imageInput', function(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
     
@@ -438,7 +437,7 @@ imgPreview ? imgPreview.addEventListener('change', function(event) {
     if (file) {
         reader.readAsDataURL(file);
     }
-}) : '';
+});
 
 
 
