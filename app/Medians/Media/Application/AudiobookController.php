@@ -98,6 +98,7 @@ class AudiobookController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = 12;
+        $params['type'] = 'audiobook';
         $list = $this->repo->getWithFilter($params);
         
 		try 

@@ -1,73 +1,63 @@
+<div class="py-4 px-2 w-full">
 
-            
-            <div class="py-4 px-2 w-full">                     
-
-                {% include 'views/front/' ~ template ~ '/includes/genres_section.html.twig' %}
+	{% include 'views/front/' ~ template ~ '/includes/genres_section.html.twig' %}
 
 
+	<div class="w-full lg:flex gap-6 dark:bg-gray-900 bg-white   p-8 rounded-lg shadow shadow-lg relative">
 
+		<div class="min-w-56  z-10 relative" id="filter-parent">
+			{% include 'views/front/' ~ template ~ '/includes/filter-sidebar.html.twig' %}
+		</div>
+		<div class="w-full relative  rounded-lg shadow-md  ">
+			<div class="w-full text-primary border-1 p-8">
+				<div class="w-full dark:text-gray-400 text-xl font-bold tracking-wide">
+					{{lang.translate('Explore what is trending')}}</div>
+			</div>
+			<hr class="opacity-30"/>
+			<div class="w-full p-8">
+				<div class="w-full flex">
+					<div class="w-full ">
+						<ul class="w-full space-y-4 pb-20">
+							{% for media_item in list.items %}
+								<div class="pCard_card">
 
-                <div class="w-full lg:flex gap-6 dark:bg-gray-900 bg-white   p-8 rounded-lg shadow shadow-lg relative" >
+									<div class="pCard_up" style=" background-image: url(/stream?thumbnail=400&image={{media_item.picture_name}}); ">
+										<div class="pCard_text">
+											<h2>{{media_item.name}}</h2>
+											<p class="truncate w-full">{{media_item.description}}</p>
+										</div>
+										<div class="pCard_add"><img src="/src/front_assets/svg/playlist.svg" class=" relative top-4 left-0 right-0 mx-auto" width="50"></div>
+									</div>
 
-                    <div class="min-w-56  z-10 relative" id="filter-parent" >
-                        {% include 'views/front/' ~ template ~ '/includes/filter-sidebar.html.twig' %}
-                    </div>
-                    <div class="w-full relative  rounded-lg shadow-md  ">
-                        <div class="w-full text-primary border-1 p-8">
-                            <div class="w-full dark:text-gray-400 text-xl font-bold tracking-wide"> {{lang.translate('Explore what is trending')}}</div>
-                        </div>
-                        <hr class="opacity-30" />
-                        <div class="w-full p-8">
-                            <div class="w-full flex">
-                                <div class="w-full ">
-                                    <ul class="w-full space-y-4 pb-20">
-                                    {% for media_item in list.items %}              
-                                    <div class="pCard_card">
-            
-            <div class="pCard_up" style=" background-image: url(/stream?thumbnail=400&image={{media_item.picture_name}}); ">
-                <div class="pCard_text">
-                    <h2>{{media_item.name}}</h2>
-                    <p class="truncate w-full">{{media_item.description}}</p>
-                </div>
-                <div class="pCard_add"><img src="/src/front_assets/svg/playlist.svg" class=" relative top-4 left-0 right-0 mx-auto" width="50"></div>
-            </div>
-            
-            <div class="pCard_down">
-                <div>
-                    <p>Projects</p>
-                    <p>26</p>
-                </div>
-                <div>
-                    <p>Views</p>
-                    <p>21579</p>
-                </div>
-                <div>
-                    <p>Likes</p>
-                    <p>976</p>
-                </div>
-            </div>
-            
-            <div class="pCard_back">
-                <p>See My Latest Work Here</p>
-                <a href="#"><i class="fa fa-facebook fa-2x fa-fw"></i></a>
-                <a href="#"><i class="fa fa-linkedin fa-2x fa-fw"></i></a>
-                <a href="#"><i class="fa fa-behance fa-2x fa-fw"></i></a> <br>
-                <a href="#"><i class="fa fa-codepen fa-2x fa-fw"></i></a>
-                <a href="#"><i class="fa fa-dribbble fa-2x fa-fw"></i></a>
-                <a href="#"><i class="fa fa-instagram fa-2x fa-fw"></i></a>
-                <p>Follow Me...</p>
-            </div>  
-            
-        </div>
+									<div class="pCard_down">
+										<div>
+											<p>Projects</p>
+											<p>26</p>
+										</div>
+										<div>
+											<p>Views</p>
+											<p>21579</p>
+										</div>
+										<div>
+											<p>Likes</p>
+											<p>976</p>
+										</div>
+									</div>
 
-                                    {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  
-                </div>
-                <div class="h-10"></div>
-            </div>
+									<div class="pCard_back">
+										<p>{{media_item.name}}</p>
+                                        {# {% include 'views/front/' ~ template ~ '/includes/tracks-list.html.twig' %} #}
+										<p>Follow Me...</p>
+									</div>
 
-         
+								</div>
+
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="h-10"></div>
+</div>
