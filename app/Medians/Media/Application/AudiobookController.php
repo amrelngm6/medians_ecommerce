@@ -35,6 +35,35 @@ class AudiobookController extends CustomController
 
 
     
+    /**
+     * Studio media page for frontend
+     */
+    public function studio_audiobooks()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $customer = $this->app->customer_auth();
+        
+        $params['limit'] = 20;
+        // $params['author_id'] = $customer->customer_id ?? 0;
+        $params['type'] = 'Audiobook';
+        $list = $this->repo->getWithFilter($params);
+
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'customer' => $customer,
+                'list' => $list,
+                'layout' => isset($this->app->customer->customer_id) ? 'studio_audiobooks' : 'signin'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+    
     
     /**
      * Upload Audio Book page for frontend
