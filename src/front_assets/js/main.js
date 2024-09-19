@@ -131,12 +131,12 @@ function loadPage(path, title = '' ) {
         processData: false,
         success: function (data) {
             // Update your UI with the new data
-            // jQuery('#app-content').html(data)
+            jQuery('#app-content').html(data)
             window.history.pushState({"html":data,"pageTitle":title},"", path);
             document.title = title
             setTimeout(function() {
+                // Alpine.initTree(document.getElementById('app-content'))
                 reloadFuncs()
-                Alpine.initTree(document.getElementById('app-content'))
             }, 500)
         },
         error: function (xhr, status, error) {
