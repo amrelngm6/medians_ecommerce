@@ -439,6 +439,10 @@ jQuery(document).on('change', '#imageInput', function(event) {
     }
 });
 
+jQuery(document).on('click','.pCard_add', function () {
+	$('.pCard_card').toggleClass('pCard_on');
+	$('.pCard_add i').toggleClass('fa-minus');
+});
 
 
 // Vanilla javascript
