@@ -46,7 +46,7 @@
 
 									<div class="pCard_back">
 										<p>{{media_item.name}}</p>
-                                        {% for file in item.files %}
+                                        {% for file in media_item.files %}
                                         {% include 'views/front/' ~ template ~ '/includes/audiobook-list.html.twig' %}
                                         {% endfor %}
 
