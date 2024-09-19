@@ -24,7 +24,7 @@
 									<div class="pCard_up" style=" background-image: url(/stream?thumbnail=400&image={{media_item.picture_name}}); ">
 										<div class="pCard_text">
 											<h2>{{media_item.name}}</h2>
-											<p class="truncate w-full">{{media_item.description}}</p>
+											<p class="truncate w-full px-2">{{media_item.description}}</p>
 										</div>
 										<div class="pCard_add"><img src="/src/front_assets/svg/playlist.svg" class=" relative top-4 left-0 right-0 mx-auto" width="50"></div>
 									</div>
@@ -46,8 +46,10 @@
 
 									<div class="pCard_back">
 										<p>{{media_item.name}}</p>
-                                        {# {% include 'views/front/' ~ template ~ '/includes/tracks-list.html.twig' %} #}
-										<p>Follow Me...</p>
+                                        {% for file in item.files %}
+                                        {% include 'views/front/' ~ template ~ '/includes/audiobook-list.html.twig' %}
+                                        {% endfor %}
+
 									</div>
 
 								</div>

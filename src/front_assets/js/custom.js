@@ -25,7 +25,7 @@ function runSlide()
 
 var mainAudio = jQuery('audio');
 
-var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide;
+var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename;
 
 
 document.getElementById('player-audio').addEventListener("change", function(event) {
@@ -39,9 +39,11 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 	index = player.data('index')
 	if (player.hasClass('start-player')) {
 		audioObject = list[player.data('index')] ?? {};
+		filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
+
 		audioInfo = player.find('.slide__audio-player');
 		audio = mainAudio[0];
-		audio.src = '/stream_audio?audio='+ audioObject.main_file.filename;
+		audio.src = '/stream_audio?audio='+ filename;
 		audio.load()
 		initAudioPlayer()
 		playStyles()
@@ -83,11 +85,13 @@ jQuery('#volume-mute-img').on("click", function(event) {
 
 function handleFile()
 {
+	filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
+	console.log(audioObject)
 	
 	audioObject = list[index] ?? {};
 	player = jQuery('#media-'+audioObject.media_id);
 	audioInfo = player.find('.slide__audio-player');
-	audio.src = '/stream_audio?audio='+ audioObject.main_file.filename;
+	audio.src = '/stream_audio?audio='+ filename;
 	audio.load()
 	playStyles()
 }

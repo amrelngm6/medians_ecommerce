@@ -1,0 +1,48 @@
+
+                                        <li class="relative" >
+                                            <div class="py-1 gap-4 flex text-primary transition px-2" >
+                                                
+                                                <div class="slide__audio js-audio start-player" id="media-{{media_item.media_id}}" data-list="{{media_item.files|json_encode}}" data-index="{{loop.index - 1}}">
+                                                    <div class="slide__audio-player"  data-title="{{media_item.name}}" data-poster="/stream?thumbnail=300&image={{media_item.picture_name}}" data-artist="{{media_item.artist.name}}" data-path="/stream_audio?audio={{media_item.main_file.filename}}" data-id="{{media_item.media_id}}" >
+                                                    </div>
+                                                    {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
+                                                </div>
+                                                <div class="w-full hover:text-orange-500 max-w-[90%] pt-1">
+                                                    <a href="/audiobook/{{media_item.media_id}}"  class="ajax-load block truncate max-w-96 text-lg font-semibold transition hover:text-orange-500  dark:text-gray-400">{{media_item.name}}</a>
+                                                </div>
+
+                                                <div class="w-6">
+                                                    {% set item = media_item  %}
+                                                    {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/like.html.twig' %}
+                                                </div>
+            
+                                                <div class="p-1 text-gray-500" x-text="convertToTime({{media_item.field.duration}})"></div>
+                                                <div class="w-4 relative">
+                                                    <span class="active-parent cursor-pointer dark:text-gray-100 leading-5 text-xl font-extrabold" >...</span>
+                                                    <div class="show-active active-child hidden z-20 rounded-2xl w-40 right-0 top-10 absolute bg-white dark:bg-gray-900 dark:text-gray-400 p-4 ">
+                                                        <a  class="cursor-pointer flex w-full gap-2 py-2"  x-on:click="selected_genres.push(genre)" >
+                                                            <img src="/src/front_assets/svg/play-next.svg" width="24" />
+                                                            <span class="w-full text-xs pt-1">{{lang.translate('Add to Queue')}}</span>
+                                                        </a>
+                                                        <hr class="opacity-50" />
+                                                        <a  class="cursor-pointer flex w-full gap-2 py-2"   x-on:click="selected_genres.push(genre)" >
+                                                            <img src="/src/front_assets/svg/download.svg" width="24" />
+                                                            <span class="w-full text-xs pt-1">{{lang.translate('Download')}}</span>
+                                                        </a>
+                                                        <hr class="opacity-50" />
+                                                        <a  class="cursor-pointer flex w-full gap-2 py-2"   x-on:click="jQuery('#add-playlist-cover').css('background-image', 'url( /stream?thumbnail=800&image={{media_item.picture_name}} )'); jQuery('#add-playlist-media').val({{media_item.media_id}}); jQuery('#add-playlist-popup').removeClass('hidden')" >
+                                                            <img src="/src/front_assets/svg/queue_list.svg" width="24" />
+                                                            <span class="w-full text-xs pt-1">{{lang.translate('Add to playlist')}}</span>
+                                                        </a>
+                                                        <hr class="opacity-50" />
+                                                        <a  class="cursor-pointer flex w-full gap-2 py-2"   x-on:click="selected_genres.push(genre)" >
+                                                            <img src="/src/front_assets/svg/playlist.svg" width="24" />
+                                                            <span class="w-full text-xs pt-1">{{lang.translate('View')}}</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                            
+                                        </li>
+                                                
