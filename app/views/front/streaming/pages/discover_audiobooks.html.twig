@@ -18,13 +18,13 @@
 				<div class="w-full flex">
 					<div class="w-full ">
 						<ul class="w-full grid-cols-2 grid gap-10 pb-20">
-							{% for media_item in list.items %}
+							{% for audiobook in list.items %}
 								<div class="pCard_card" id="audiobook-card-{{loop.index}}">
 
-									<div class="pCard_up" style=" background-image: url(/stream?thumbnail=400&image={{media_item.picture_name}}); ">
+									<div class="pCard_up" style=" background-image: url(/stream?thumbnail=400&image={{audiobook.picture_name}}); ">
 										<div class="pCard_text">
-											<h2>{{media_item.name}}</h2>
-											<p class="truncate w-full px-2">{{media_item.description}}</p>
+											<h2>{{audiobook.name}}</h2>
+											<p class="truncate w-full px-2">{{audiobook.description}}</p>
 										</div>
 										<div class="pCard_add" data-id="audiobook-card-{{loop.index}}"><img src="/src/front_assets/svg/playlist.svg" class=" relative top-4 left-0 right-0 mx-auto" width="50"></div>
 									</div>
@@ -36,18 +36,17 @@
 										</div>
 										<div>
 											<p>Views</p>
-											<p>{{media_item.views_count}}</p>
+											<p>{{audiobook.views_count}}</p>
 										</div>
 										<div>
 											<p>Likes</p>
-											<p>{{media_item.likes_count}}</p>
+											<p>{{audiobook.likes_count}}</p>
 										</div>
 									</div>
 
 									<div class="pCard_back">
-										<p>{{media_item.name}}</p>
                                         <ul>
-                                        {% for file in media_item.files %}
+                                        {% for file in audiobook.files %}
                                         {% include 'views/front/' ~ template ~ '/includes/audiobook-list.html.twig' %}
                                         {% endfor %}
                                         </ul>

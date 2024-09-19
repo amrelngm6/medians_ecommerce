@@ -821,7 +821,7 @@ UP
 .pCard_card  .pCard_up {
   position: absolute;
   width: 100%;
-  height: 70%;
+  height: calc(100% - 120px);
   background-position: 50%;
   background-size: cover;
   z-index: 3;
@@ -851,7 +851,7 @@ UP
 
 .pCard_card  .pCard_up .pCard_text {
   position: absolute;
-  top: 319px;
+  top: 250px;
   left: 0;
   right: 0;
   color: #f1f7f9;
