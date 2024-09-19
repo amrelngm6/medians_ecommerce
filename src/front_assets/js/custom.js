@@ -39,9 +39,7 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 	index = player.data('index')
 	if (player.hasClass('start-player')) {
 		audioObject = list[player.data('index')] ?? {};
-		console.log(audioObject)
 		filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
-
 		audioInfo = player.find('.slide__audio-player');
 		audio = mainAudio[0];
 		audio.src = '/stream_audio?audio='+ filename;
@@ -146,7 +144,7 @@ function playStyles() {
 
 	
 	document.getElementById('app-cover').classList.remove('hidden') 
-	document.getElementById('album-name').innerHTML = audioObject.name ?? ''; 
+	document.getElementById('album-name').innerHTML = audioObject.name ?? (audioObject.title ?? ''); 
 	document.getElementById('track-name').innerHTML = audioObject.artist ? audioObject.artist.name : ''; 
 	document.getElementById('track-poster').src = audioObject.picture ?? ''; 
 	document.getElementById('track-poster').classList.add('active') 
