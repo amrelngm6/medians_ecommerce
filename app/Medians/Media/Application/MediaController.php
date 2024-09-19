@@ -82,6 +82,7 @@ class MediaController extends CustomController
 		$this->app = new \config\APP;
 		$filepath = $this->app->request()->get('image');
 		$isThumbnail = $this->app->request()->get('thumbnail');
+		$h = $this->app->request()->get('h');
 		$folder = $this->app->request()->get('dir') ?? 'images';
 
 		if (!empty($folder))
@@ -91,7 +92,7 @@ class MediaController extends CustomController
 
 		if (!empty($isThumbnail))
 		{
-			$resized = $this->repo->resize($filepath, $isThumbnail);
+			$resized = $this->repo->resize($filepath, $isThumbnail, $h);
 			$filepath = is_file($_SERVER['DOCUMENT_ROOT'].$resized) ? $resized : $filepath;
 		}
 
