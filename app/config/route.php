@@ -64,6 +64,7 @@ RouteHandler::get('/audiobook/edit_chapters/(:all)', \Medians\Media\Application\
 RouteHandler::get('/track/(:all)', \Medians\Media\Application\MediaItemController::class.'@audio_page');
 RouteHandler::get('/discover', \Medians\Media\Application\MediaItemController::class.'@discover');
 RouteHandler::get('/discover/audiobook', \Medians\Media\Application\AudiobookController::class.'@discover');
+RouteHandler::get('/audiobook/(:all)', \Medians\Media\Application\AudiobookController::class.'@book_page');
 RouteHandler::get('/channels', \Medians\Channels\Application\ChannelController::class.'@channels');
 RouteHandler::get('/playlists', \Medians\Playlists\Application\PlaylistController::class.'@playlists');
 RouteHandler::get('/likes', \Medians\Media\Application\MediaItemController::class.'@likes');

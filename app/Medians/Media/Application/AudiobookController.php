@@ -118,6 +118,28 @@ class AudiobookController extends CustomController
 
 
 
+    /**
+     * Audio page for frontend
+     */
+    public function book_page($media_id)
+    {
+		$settings = $this->app->SystemSetting();
+
+        $item = $this->repo->find($media_id);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'item' => $item,
+                'genres' => $this->categoryRepo->getGenres(),
+                'layout' => '/audiobook/page'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
 
 
 
