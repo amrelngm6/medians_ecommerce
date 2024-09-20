@@ -1,12 +1,12 @@
 <div class="px-2 lg:flex gap-10">
-
+	{% set activeTab = 'audio_books' %}
 	{% include 'views/front/' ~ template ~ '/includes/sidemenu.html.twig' %}
 
-	<div class="w-full gap-6 overflow-hidden dark:bg-gray-900 bg-white   p-8 rounded-lg shadow shadow-lg relative">
+	<div class="dark:text-gray-400 w-full gap-6 overflow-hidden dark:bg-gray-900 bg-white   p-8 rounded-lg shadow shadow-lg relative">
 
 		<div class="box">
 			<div class="box-header with-border">
-				<h4 class="box-title text-2xl">{{('Audiobooks List')}}</h4>
+				<h4 class="box-title text-2xl dark:text-gray-400">{{('Audiobooks List')}}</h4>
 				<p class="text-fade">{{('List of uploaded audio books')}}</p>
 			</div>
             <hr class="my-6" />

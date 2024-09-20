@@ -3317,6 +3317,11 @@ video {
   opacity: 0.3;
 }
 
+.dark\:hover\:text-gray-200:hover:is(.dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
+}
+
 .dark\:hover\:text-orange-600:hover:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(234 88 12 / var(--tw-text-opacity));
