@@ -84,9 +84,11 @@
                                         {% set comments = item.comments %}
                                         {% include 'views/front/' ~ template ~ '/includes/comment-form.html.twig' %}
                                     </div>
+                                    {% if item.comments|length > 0 %}
                                     <div class="w-full mx-auto">
                                         {% include 'views/front/' ~ template ~ '/includes/comments.html.twig'%}
                                     </div>
+                                    {% endif  %}
                                 </div>
                                 <div class="my-10 " ></div>
                                 <div class="z-10 absolute bottom-0 bg-gradient-to-b from-transparent dark:to-gray-900 to-white w-full h-20"></div>

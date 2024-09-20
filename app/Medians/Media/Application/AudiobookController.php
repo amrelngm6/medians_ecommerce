@@ -79,6 +79,7 @@ class AudiobookController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'type' => 'audiobook',
+                'genres' => $this->categoryRepo->getBookGenres(),
                 'layout' => isset($this->app->customer->customer_id) ? 'audiobook/upload' : 'signin'
             ], 'output'));
             
@@ -132,7 +133,7 @@ class AudiobookController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item' => $item,
-                'genres' => $this->categoryRepo->getGenres(),
+                'genres' => $this->categoryRepo->getBookGenres(),
                 'layout' => '/audiobook/page'
             ], 'output'));
             

@@ -21,7 +21,7 @@
 
                     <div class="loader absolute w-full h-full left-0 top-0 bg-white dark:bg-gray-900 opacity-50 "></div>
                 
-                    <input type="hidden" name="type" value="{{model_type}}.update" />
+                    <input type="hidden" name="type" value="{{model_type|capitalize }}.update" />
                     <input type="hidden" name="params[media_id]" value="{{item.media_id}}" />
                     
                     <div class=" text-primary mt-6"><h4 class="text-xl dark:text-gray-400">{{lang.translate('Basic info')}}</h4></div>
