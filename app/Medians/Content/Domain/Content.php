@@ -48,12 +48,12 @@ class Content extends CustomModel
 	}
 
 
-	public static function generatePrefix($text)
+	public static function generatePrefix($text, $id = 0)
 	{
 		$text = str_replace(array(' ', '/', '\\', '"', "'", '&', '@', '#', '$', '(', ')', '=', '+'), '_', $text);
-		$check = Content::where('prefix', $text)->first();
+		$check = Content::where('prefix', $text)->where('item_id', '!=', $id)->first();
 
-		return strtolower(isset($check->id) ? $text.date('Ymd') : $text);
+		return strtolower(isset($check->id) ? $text.date('Ymdhis') : $text);
 
 	}
 

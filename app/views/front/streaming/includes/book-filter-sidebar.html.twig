@@ -14,7 +14,7 @@
                                     </div>
                                     <div class="show-on-hover absolute w-40 lg:top-[-30px] top-[30px] lg:left-[100%] dark:bg-gray-900 bg-white  z-10 p-8 space-y-3">
                                         {% for genre in genres %}
-                                        <p><a href="/genre/{{genre.lang_content.prefix}}?params[sort_by]={{app.params.sort_by}}&params[date]={{app.params.date}}" class="ajax-load">{{genre.lang_content.title}}</a></p>
+                                        <p><a href="/book_genre/{{genre.lang_content.prefix}}?params[sort_by]={{app.params.sort_by}}&params[date]={{app.params.date}}" class="ajax-load">{{genre.lang_content.title}}</a></p>
                                         {% endfor %}
                                     </div>
                                 </li>

@@ -199,6 +199,43 @@ class AudiobookController extends CustomController
     }
 
 
+        
+    /**
+     * Single Genre page for frontend
+     */
+    public function genre($prefix)
+    {
+		$settings = $this->app->SystemSetting();
+		$this->app->customer_auth();
+        $params = $this->app->params();
+
+		try 
+        {
+            $item = $this->categoryRepo->getBookGenreByPrefix($prefix);
+
+            
+            if (empty($item->category_id))
+    			throw new \Exception(translate('Page not found'), 1);
+
+            $params['limit'] = 12;
+            $params['genre'] = $item->category_id;
+            $list = $this->repo->getWithFilter($params);
+            
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'item' => $item,
+                'list' => $list,
+                'genres' => $this->categoryRepo->getBookGenres(),
+                'layout' => 'audiobook/genre'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+
+
 
 
     /**

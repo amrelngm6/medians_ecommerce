@@ -74,6 +74,13 @@ class CategoryRepository
 		})->where('model', Genre::class)->first();
 	}
 
+	public function getBookGenreByPrefix( $prefix )
+	{
+		return BookGenre::where('status', 'on')->whereHas('langs', function($q) use ($prefix) {
+			$q->where('prefix', $prefix);
+		})->where('model', BookGenre::class)->first();
+	}
+
 	public function getAllMoods( $limit = 100)
 	{
 		return Mood::where('model', Mood::class)->limit($limit)->get();
@@ -177,7 +184,7 @@ class CategoryRepository
 				$fields['item_type'] = $modelClass;	
 				$fields['item_id'] = $id;	
 				$fields['lang'] = $key;	
-				$fields['prefix'] = !empty($value['prefix']) ? $value['prefix'] : Content::generatePrefix($value['title']);	
+				$fields['prefix'] = !empty($value['prefix']) ? Content::generatePrefix($value['prefix']) : Content::generatePrefix($value['title']);	
 				$fields['created_by'] = $this->app->auth()->id;
 
 				$Model = Content::create($fields);
