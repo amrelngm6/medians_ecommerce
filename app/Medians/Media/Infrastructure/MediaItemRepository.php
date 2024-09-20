@@ -21,15 +21,6 @@ class MediaItemRepository
 	 * methods for authentication and
 	 * settings for branch
 	 */ 
-	protected $app ;
-
-
-
-	function __construct()
-	{
-		$this->app = new \config\APP;
-	}
-
 
 	public static function getModel()
 	{
@@ -39,6 +30,13 @@ class MediaItemRepository
 	public function find($id)
 	{
 		return MediaItem::with('genres' ,'artist','main_file')->withCount('likes', 'comments', 'plays')->find($id);
+	}
+
+	public function findByFile($file)
+	{
+		return MediaItem::whereHas('main_file' , function($q) use ($file) {
+			return $q->where('path', $file);
+		})->withCount('likes', 'comments', 'plays')->first();
 	}
 
 	public function get($limit = 100)
