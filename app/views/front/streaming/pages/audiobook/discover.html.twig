@@ -45,7 +45,7 @@
 									</div>
 
 									<div class="pCard_back">
-                                        <ul>
+                                        <ul class="pb-10 overflow-auto " style="max-height:325px">
                                         {% for file in audiobook.files %}
                                         {% include 'views/front/' ~ template ~ '/includes/audiobook-list.html.twig' %}
                                         {% endfor %}

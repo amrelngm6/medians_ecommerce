@@ -86,7 +86,7 @@ function handleFile()
 {
 	audioObject = list[index] ?? {};
 	filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
-	player = jQuery('#media-'+audioObject.media_id);
+	player = jQuery('#media-'+(audioObject.media_file_id ?? audioObject.media_id));
 	audioInfo = player.find('.slide__audio-player');
 	audio.src = '/stream_audio?audio='+ filename;
 	audio.load()
@@ -226,6 +226,7 @@ function initAudioPlayer() {
 		$('#seek-bar').css('width', (value)+'%')
 
 		var slider = '#circle-'+jQuery(audioInfo).data('id');
+		console.log(slider)
 		value ? jQuery(slider).roundSlider('setValue', value) : '';
 	});
 
@@ -234,7 +235,6 @@ function initAudioPlayer() {
 	});
 
 	mainAudio.on('ended', () => {
-		console.log('ended')
 		player.removeClass('playing');
         player.parent().removeClass('active');
 		circle.attr('stroke-dashoffset', totalLength);
