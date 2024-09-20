@@ -55,7 +55,7 @@ class AudiobookController extends CustomController
                 'app' => $this->app,
                 'customer' => $customer,
                 'list' => $list,
-                'layout' => isset($this->app->customer->customer_id) ? 'studio_audiobooks' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'audiobook/studio' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -79,7 +79,7 @@ class AudiobookController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'type' => 'audiobook',
-                'layout' => isset($this->app->customer->customer_id) ? 'upload-audiobook' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'audiobook/upload' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -107,7 +107,7 @@ class AudiobookController extends CustomController
                 'app' => $this->app,
                 'list' => $list,
                 'genres' => $this->categoryRepo->getBookGenres(),
-                'layout' => 'discover_audiobooks'
+                'layout' => 'audiobook/discover'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -138,9 +138,36 @@ class AudiobookController extends CustomController
                 'app' => $this->app,
                 'item' => $item,
                 'genre_type' => 'book_genres',
-                'model_type' => 'Audiobook',
+                'model_type' => 'audiobook',
                 'genres' => $this->categoryRepo->getBookGenres(),
                 'layout' => isset($this->app->customer->customer_id) ? 'upload-step2' : 'signin'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
+    /**
+     * Edit Book Chapter page for frontend
+     */
+    public function edit_chapters($media_id)
+    {
+		$this->app->customer_auth();
+
+		$settings = $this->app->SystemSetting();
+
+        $item = $this->repo->find($media_id);
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'item' => $item,
+                'genre_type' => 'book_genres',
+                'model_type' => 'Audiobook',
+                'genres' => $this->categoryRepo->getBookGenres(),
+                'layout' => isset($this->app->customer->customer_id) ? 'audiobook/chapters' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -158,30 +185,26 @@ class AudiobookController extends CustomController
 	{
 
 		$this->app = new \config\APP;
+
+        $params = $this->app->params();
         
+        $item = $this->repo->find($params['media_id']);
+
 		foreach ($this->app->request()->files as $key => $value) {
-			$file = $this->mediaRepo->upload($value, 'audio', true);
+		
+            $file = $this->mediaRepo->upload($value, 'audio', true);
     
             $getID3 = new getID3;
+
             // Analyze file
             $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
 
-            $params = [];
-            $params['name'] = $value->getClientOriginalName();
-            $params['description'] = $value->getClientOriginalName();
-            $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
-            $params['author_id'] = $this->app->customer_id() ?? 0;
-            if (isset($fileInfo['playtime_seconds']))
-            {
-                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-            }
-            
-            $save = $this->repo->store($params);
+            $fileArray = [ 'type'=> 'audio', 'title' => $value->getClientOriginalName(), 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file];
 
-            $this->generateWave($file);
+            $update = $this->repo->storeFile($fileArray, $item);
 		}
 
-        return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"media/edit/$save->media_id");
+        return array('success'=>1, 'result'=>translate('Uploaded'), 'reload'=>1);
 	}
 
 
@@ -268,6 +291,27 @@ class AudiobookController extends CustomController
             if ($this->repo->update($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0);
+            }
+
+        } catch (\Exception $e) {
+        	throw new \Exception("Error Processing Request " .$e->getMessage(), 1);
+        }
+	}
+
+
+	public function update_chapters()
+	{
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+		
+        try {
+            
+            $item = $this->repo->find($params['media_id']);
+
+            if ($this->repo->storeChapters($params['chapters'], $item))
+            {
+                return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
             }
 
         } catch (\Exception $e) {

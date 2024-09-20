@@ -17,7 +17,7 @@
 							<tr class="py-4 text-left">
 								<th style="width: 50px">{{lang.translate('Title')}}</th>
 								<th style="min-width: 200px"></th>
-								<th style="min-width: 100px">{{lang.translate('Likes')}}</th>
+								<th style="min-width: 100px">{{lang.translate('Chapters')}}</th>
 								<th style="min-width: 100px">{{lang.translate('Views')}}</th>
 								<th style="min-width: 100px">{{lang.translate('Comments')}}</th>
 								<th class="text-right py-8 min-h-20" >{{lang.translate('Action')}}</th>
@@ -34,10 +34,11 @@
 								<td class="px-2 ">
 									<a href="/track/{{item.media_id}}" class="ajax-load text-dark font-weight-600 text-primary font-size-16">{{item.name}}</a>
 								</td>
-								<td>
+								<td class="flex gap-2 py-4">
 									<span class="text-fade block">
-										{{item.likes|length}}
+										({{item.files|length}})
 									</span>
+									<a href="/audiobook/edit_chapters/{{item.media_id}}" class="ajax-load" >{{lang.translate('Manage')}}</a>
 								</td>
 								<td>
 									<span class="text-fade block">{{item.views|length}}</span>
@@ -45,7 +46,13 @@
 								<td>
 									<span class="text-fade block">{{item.comments|length}}</span>
 								</td>
-								<td class="text-right py-4">
+								<td class=" text-right py-4">
+									<a href="/audiobook/edit_chapters/{{item.media_id}}" class="ajax-load waves-effect waves-light btn btn-primary rounded-full ">
+										<img src="/src/front_assets/svg/edit-2.svg" class="w-5" />
+									</a>
+								</td>
+								<td class=" text-right py-4">
+									
 									<a href="/audiobook/edit/{{item.media_id}}" class="ajax-load waves-effect waves-light btn btn-primary rounded-full ">
 										<img src="/src/front_assets/svg/edit-2.svg" class="w-5" />
 									</a>

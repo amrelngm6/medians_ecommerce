@@ -169,6 +169,8 @@ class MediaItemRepository
     	// Store languages content
     	isset($data['selected_genres']) ? $this->storeGenres($data['selected_genres'] ,$Object->media_id) : '';
     	isset($data['field']) ? $this->storeCustomFields($data['field'] ,$Object->media_id) : '';
+    	isset($data['files']) ? $this->storeFiles($data['files'] ,$Object) : '';
+    	isset($data['chapters']) ? $this->storeChapters($data['chapters'] ,$Object) : '';
 
     	return $Object;
 
@@ -230,19 +232,65 @@ class MediaItemRepository
 	*/
 	public function storeFiles($data, $item) 
 	{
-		MediaFile::where('media_id', $item->media_id)->delete();
 		if ($data)
 		{
 			foreach ($data as $key => $value)
 			{
 				$value = (array) $value;
 				$fields = $value;
-                
 				$fields['media_id'] = $item->media_id;	
 				$fields['title'] = $item->name;	
 				$fields['sort'] = $value['sort'] ?? 0;	
 
-				$Model = MediaFile::create($fields);
+				$Model = $this->storeFile($fields, $item);
+			}
+	
+			return $Model;		
+		}
+	}
+
+	/**
+	* Save related items to database
+	*/
+	public function storeFile($file, $item) 
+	{
+		if ($file)
+		{
+			$fields = [];
+			$fields['media_id'] = $item->media_id;	
+			$fields['title'] = $file['title'] ?? '';	
+			$fields['path'] = $file['path'];
+			$fields['sort'] = $file['sort'] ?? 0;	
+			$fields['type'] = 'audio';
+			$fields['storage'] = 'local';
+
+			$Model = MediaFile::firstOrCreate($fields);
+	
+			return $Model;		
+		}
+	}
+
+	/**
+	* Save related items to database
+	*/
+	public function storeChapters($data, $item) 
+	{
+
+		if ($data['media_file_id'])
+		{
+	
+			MediaFile::where('media_id', $item->media_id)->delete();
+
+			foreach ($data['media_file_id'] as $key => $value)
+			{
+
+				$fields = [];
+				$fields['media_id'] = $item->media_id;	
+				$fields['title'] = $data['title'][$key];	
+				$fields['path'] = $data['path'][$key];	
+				$fields['sort'] = $key;	
+
+				$Model = $this->storeFile($fields, $item);
 			}
 	
 			return $Model;		

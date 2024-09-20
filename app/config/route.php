@@ -60,6 +60,7 @@ RouteHandler::get('/upload', \Medians\Media\Application\MediaItemController::cla
 RouteHandler::get('/media/edit/(:all)', \Medians\Media\Application\MediaItemController::class.'@edit_media');
 RouteHandler::get('/upload/audiobook', \Medians\Media\Application\AudiobookController::class.'@audiobook_upload_page');
 RouteHandler::get('/audiobook/edit/(:all)', \Medians\Media\Application\AudiobookController::class.'@edit_audiobook');
+RouteHandler::get('/audiobook/edit_chapters/(:all)', \Medians\Media\Application\AudiobookController::class.'@edit_chapters');
 RouteHandler::get('/track/(:all)', \Medians\Media\Application\MediaItemController::class.'@audio_page');
 RouteHandler::get('/discover', \Medians\Media\Application\MediaItemController::class.'@discover');
 RouteHandler::get('/discover/audiobook', \Medians\Media\Application\AudiobookController::class.'@discover');
