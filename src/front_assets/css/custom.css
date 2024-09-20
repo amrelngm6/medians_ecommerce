@@ -818,10 +818,14 @@ Back
 UP
 ****************/
 
+.pCard_card:not(.pCard_on):hover  .pCard_up {
+  height: calc(100% - 120px);
+}
 .pCard_card  .pCard_up {
   position: absolute;
   width: 100%;
-  height: calc(100% - 120px);
+  /* height: calc(100% - 120px); */
+  height: 100%;
   background-position: 50%;
   background-size: cover;
   z-index: 3;
