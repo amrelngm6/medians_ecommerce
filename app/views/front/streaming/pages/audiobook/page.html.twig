@@ -24,7 +24,6 @@
                                         
                                         <img class="{{liked ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{item.media_id}}').addClass('hidden'); jQuery('#unheart-{{item.media_id}}').removeClass('hidden')" id="heart-{{item.media_id}}" src="/src/front_assets/svg/white-heart.svg">
                                         <img class="{{liked ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{item.media_id}}').addClass('hidden'); jQuery('#heart-{{item.media_id}}').removeClass('hidden')" id="unheart-{{item.media_id}}" src="/src/front_assets/svg/blank-heart.svg">
-
                                         </a>
                                         <span x-on:click="jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
                                     </div>
@@ -40,7 +39,8 @@
                             <hr class="w-10 my-4 " />
                             <div id="tracks-list" class="">
                                 <ul class="w-full space-y-4 pb-20">
-                        
+                                
+                                {% set audiobook = item %}
                                 {% for file in item.files %}
                                 {% include 'views/front/' ~ template ~ '/includes/audiobook-list.html.twig' %}
                                 {% endfor %}
