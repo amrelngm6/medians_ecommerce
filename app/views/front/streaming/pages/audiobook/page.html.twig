@@ -52,7 +52,6 @@
                         </div>
 
                         
-                        
                         <div class="w-full 	py-10">
                             <div class="w-full relative rounded-2xl rounded  mb-4" id="related-items">
                                 
@@ -76,6 +75,23 @@
 
                             </div>
 
+                            <div class="w-full 	my-10 relative text-primary " id="latest-comments">
+                                <h2 class="text-2xl font-semibold dark:text-gray-400">{{lang.translate('Fans commented')}} <a href="javascript:;" x-on:click="jQuery('#comments-form').toggleClass('hidden')" class="float-right text-base font-normal">{{lang.translate('Add your comment')}}</a></h3>
+                                <div class="my-4 " ></div>
+                                <div id="tracks-list" class=" overflow-auto  ">
+                                    <div class="w-full mx-auto hidden" id="comments-form" >
+                                        {% set id = item.media_id %}
+                                        {% set comments = item.comments %}
+                                        {% include 'views/front/' ~ template ~ '/includes/comment-form.html.twig' %}
+                                    </div>
+                                    <div class="w-full mx-auto">
+                                        {% include 'views/front/' ~ template ~ '/includes/comments.html.twig'%}
+                                    </div>
+                                </div>
+                                <div class="my-10 " ></div>
+                                <div class="z-10 absolute bottom-0 bg-gradient-to-b from-transparent dark:to-gray-900 to-white w-full h-20"></div>
+                            </div>
+                            
                         </div>
 
 

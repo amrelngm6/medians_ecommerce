@@ -1,6 +1,6 @@
 
     <!-- Vertical Timeline #3 -->
-    <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:ml-[8.75rem] md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent pb-10">
+    <div class="space-y-8 pb-20 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:ml-[8.75rem] md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent pb-10">
 
         {% for comment in comments %}
         <!-- Item #{{loop.index}} -->
@@ -17,7 +17,7 @@
                     <time class="text-sm font-medium text-indigo-500 md:w-28">{{comment.created_at|date('M d, Y')}}</time>
                 </div>
                 <!-- Title -->
-                <div class="text-slate-500 ml-14"><span class="text-slate-900 font-bold">{{comment.customer.name}}</span> {{comment.customer.type}}</div>
+                <div class="text-slate-500 ml-14"><span class="text-slate-900 dark:text-gray-400 font-bold">{{comment.customer.name}}</span> {{comment.customer.type}}</div>
             </div>
             <!-- Card -->
             <div class="bg-white p-4 rounded border border-slate-200 text-slate-500 shadow ml-14 md:ml-44">{{comment.comment}}.</div>
