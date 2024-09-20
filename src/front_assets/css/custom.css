@@ -821,6 +821,9 @@ UP
 .pCard_card:not(.pCard_on):hover  .pCard_up {
   height: calc(100% - 120px);
 }
+.pCard_card:not(.pCard_on):hover  .pCard_up::after {
+  height: 200px;
+}
 .pCard_card  .pCard_up {
   position: absolute;
   width: 100%;
@@ -857,11 +860,17 @@ UP
   display: block;
   position: absolute;
   width: 100%;
-  height: 200px;
+  height: 80%;
   bottom: 0;
   z-index: -1;
   background: rgb(0,13,36);
   background: linear-gradient(0deg, rgba(0,13,36,0.8519782913165266) 0%, rgba(0,13,36,0) 100%);
+  
+  -webkit-transition: .5s ease-in-out;
+  -moz-transition: .5s ease-in-out;
+  -ms-transition: .5s ease-in-out;
+  -o-transition: .5s ease-in-out;
+  transition: .5s ease-in-out;
 }
 
 .pCard_card  .pCard_up .pCard_text {
