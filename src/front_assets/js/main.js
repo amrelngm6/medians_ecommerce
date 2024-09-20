@@ -124,7 +124,7 @@ function submitLink(path, data) {
 function loadPage(path, title = '' ) {
 
     let mark = path.includes('?') ? '&' : '?'
-    
+    jQuery('#page-loader').removeClass('hidden')
     $.ajax({
         url: path + mark +'load=content',
         type: 'GET',
@@ -138,6 +138,8 @@ function loadPage(path, title = '' ) {
                 // Alpine.initTree(document.getElementById('app-content'))
                 reloadFuncs()
             }, 500)
+            jQuery('#page-loader').addClass('hidden')
+
         },
         error: function (xhr, status, error) {
             console.error('Error fetching data:', error);
