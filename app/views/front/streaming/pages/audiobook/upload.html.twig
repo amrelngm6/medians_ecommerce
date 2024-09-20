@@ -1,6 +1,6 @@
 
 
-            <div  class=" text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8" x-data="{genres: {{genres|json_encode}}, selected_genres: {{ item.genres|json_encode}}, title: '{{item.name}}' }">
+            <div  class=" text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8" x-data="{genres: {{genres|json_encode}}, selected_genres: {{ item.genres|length ? item.genres|json_encode : '[]' }},  title: '{{item.name}}' }">
                 <h2 class="text-2xl dark:text-gray-400 ">{{lang.translate('Upload Audiobook')}}</h2>
                 <hr class="my-6 opacity-0" />
                 <form action="/front_api/create" method="post" enctype="multipart/form-data" id="create-audiobook" class="ajax-form w-full  pb-10">
@@ -38,9 +38,7 @@
                             <input placeholder="Genres" class="active-parent cursor-pointer py-2 px-4 w-full rounded-2xl dark:bg-gray-900 dark:border-gray-700 bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
                             <div class="show-active active-child hidden rounded-2xl w-full top-10 absolute bg-white dark:bg-gray-900 p-4 ">
                                 <template x-for="genre in genres">
-                                    <template x-if="selected_genres != null"  >
-                                        <span  x-if="!selected_genres.includes(genre)"  class="cursor-pointer block"  x-on:click="selected_genres.push(genre)" x-text="genre.name"></span>
-                                    </template>
+                                        <span    class="cursor-pointer block"  x-on:click="selected_genres.push(genre)" x-text="genre.name"></span>
                                 </template>
                             </div>
                             <template x-for="(genre, i) in selected_genres">

@@ -255,7 +255,7 @@ class AudiobookController extends CustomController
                 // Analyze file
                 $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
 
-                $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
+                $params['picture'] = $this->mediaRepo->_dir.$file;
                 $params['author_id'] = $this->app->customer_id() ?? 0;
     			$params['status'] = isset($params['status']) ? 'on' : null;
             }

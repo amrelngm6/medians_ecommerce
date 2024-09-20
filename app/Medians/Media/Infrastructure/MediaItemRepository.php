@@ -147,6 +147,7 @@ class MediaItemRepository
     	$Object = MediaItem::create($dataArray);
 
     	// Store languages content
+    	isset($data['selected_genres']) ? $this->storeGenres($data['selected_genres'] ,$Object->media_id) : '';
     	isset($data['files']) ? $this->storeFiles($data['files'] ,$Object) : '';
     	isset($data['field']) ? $this->storeCustomFields($data['field'] ,$Object->media_id) : '';
 
