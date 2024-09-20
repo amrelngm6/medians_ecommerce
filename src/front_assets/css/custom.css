@@ -925,7 +925,7 @@ UP
   -ms-transform: rotate(360deg) scale(.7);
   -o-transform: rotate(360deg) scale(.7);
   transform: rotate(360deg) scale(.7);
-  margin: 20px auto 0 auto;
+  margin: 30px auto 0 auto;
 }
 
 /****************
@@ -970,7 +970,7 @@ Down
   width: 33.333%;
   float: left;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 60px;
   font-size: 18px;
   -webkit-transition: .5s ease-in-out;
   -moz-transition: .5s ease-in-out;
