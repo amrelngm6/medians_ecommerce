@@ -309,6 +309,13 @@ class APP
 			]
 			),
 			
+			array('title'=>translate('Categories'),  'icon'=>'send', 'link'=>'#genres', 'sub'=>
+			[
+				array('permission'=>'MediaGenres.index', 'title'=>translate('Genres'),  'icon'=>'truck', 'link'=>'admin/genres', 'component'=>'categories'),
+				array('permission'=>'BookGenres.index', 'title'=>translate('Book Genres'),  'icon'=>'truck', 'link'=>'admin/book_genres', 'component'=>'categories'),
+			]
+			),
+			
 			array( 'title'=>translate('Frontend'),  'icon'=>'airplay', 'link'=>'#frontend', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=>'Pages.index', 'title'=>translate('Front Pages'),  'icon'=>'tool', 'link'=>'admin/pages', 'component'=>'pages'),
