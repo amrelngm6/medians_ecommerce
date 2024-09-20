@@ -56,6 +56,7 @@ jQuery(document).on('click', '.ajax-link', function (e) {
 });
 
 function submitForm(formId, elementId, append = null) {
+    
     // Get the form and submit button elements
     const form = document.getElementById(formId);
     const element = document.getElementById(elementId);
@@ -63,7 +64,7 @@ function submitForm(formId, elementId, append = null) {
     if (!form)
         return null;
 
-    console.log(jQuery(form).find('.loader').addClass('show'))
+    jQuery('#page-loader').removeClass('hidden')
 
     // Get the form data as a FormData object
     const formData = new FormData(form);
@@ -74,7 +75,7 @@ function submitForm(formId, elementId, append = null) {
     // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
     xhr.onreadystatechange = function () {
-        jQuery(form).find('.loader').removeClass('show')
+        jQuery('#page-loader').addClass('hidden')
         if (xhr.readyState === XMLHttpRequest.DONE ) {
 
             // Handle the successful response 
