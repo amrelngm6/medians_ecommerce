@@ -7,8 +7,8 @@
                         {'id':2, 'title':'{{lang.translate('Audio Books')}}', 'link':'/studio/audio_books'}, 
                         {'id':3, 'title':'{{lang.translate('Playlists')}}', 'link':'/studio/playlists'}, 
                         {'id':4, 'title':'{{lang.translate('Likes')}}', 'link':'/likes'},
-                        {'id':5, 'title':'{{lang.translate('Profile')}}', 'link':'/artist/{{app.customer_auth().customer_id}}'},
-                        {'id':5, 'title':'{{lang.translate('Picture')}}', 'link':'/studio/profile'}
+                        {'id':5, 'title':'{{lang.translate('Profile Info')}}', 'link':'/studio/profile'},
+                        {'id':5, 'title':'{{lang.translate('Profile')}}', 'link':'/artist/{{app.customer_auth().customer_id}}'}
                         ] ">
                             <li class="w-full dark:hover:text-gray-200" :id="'menu-'+menuItem.id">
                                 <a :href="menuItem.link" class="w-full flex gap gap-4 ajax-load ">
