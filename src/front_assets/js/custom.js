@@ -285,25 +285,22 @@ function initAudioPlayer() {
 
 	});
 
-	let waveIdController = jQuery(audioInfo).attr('data-wave-id');
-	let waveController = jQuery(audioInfo).attr('data-wave-overlay');
-	waveController != undefined ? document.getElementById(waveController).addEventListener("click", function(event) {
-		// Get the width of the element
-		// Get the position of the click relative to the left edge of the element
-		// Calculate the percentage
-		const imageElement = document.getElementById(waveIdController);
-		const imageRect = imageElement.getBoundingClientRect(); // Get image position and size
-		const clickX = event.clientX - imageRect.left; // Calculate X position relative to the image
-		
-		var percentage = (clickX / imageElement.clientWidth) * 100;
-		
-		let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
-		
-		updateAudio(percentage.toFixed(2), $elem);
-	}) : '';
 
-	
 }
+
+jQuery(document).on('click', '#data-wave-overlay', function(item){
+
+	const imageElement = document.getElementById("data-wave-id");
+	const imageRect = imageElement.getBoundingClientRect(); // Get image position and size
+	const clickX = event.clientX - imageRect.left; // Calculate X position relative to the image
+	
+	var percentage = (clickX / imageElement.clientWidth) * 100;
+	
+	let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
+	
+	updateAudio(percentage.toFixed(2), $elem);
+
+});
 
 function convertToTime(num) {
     if (typeof num !== 'number' || num < 0) {
