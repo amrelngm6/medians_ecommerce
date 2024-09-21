@@ -71,6 +71,32 @@
 
                     </div>
 
+
+
+                    <div class="w-full 	py-10" id="audiobooks-items-slider">
+                        <div class=" w-full flex gap-4 text-primary">
+                            <div class=" w-full flex gap-4 dark:text-gray-400 ">
+                                <h2 class="text-2xl  font-semibold">{{lang.translate('Audio books')}}</h3>
+                                <a href="#!" class="p-2 transition hover:text-orange-500">{{lang.translate('See all')}}</a>
+                            </div>
+                            
+                            <div class="flex gap gap-4">
+                                <button class="prev-btn" data-slider="audiobooks-items"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
+                                <button class="next-btn" data-slider="audiobooks-items"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
+                            </div>
+                        </div>
+                        <div class="my-4 " ></div>
+
+                        <div id="audiobooks-items" class="carousel-container flex gap-2" data-count="3"  >
+                            {% set list = {'items' : item.audiobooks} %}
+                            {% for audiobook in list.items %}
+							{% include 'views/front/' ~ template ~ '/pages/audiobook/item.html.twig' %}			
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+
                     <div class="w-full 	py-10" id="top-played-items">
                         <div class=" w-full flex gap-4 text-primary">
                             <div class=" w-full flex gap-4 dark:text-gray-400 ">
