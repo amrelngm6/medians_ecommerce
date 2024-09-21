@@ -285,12 +285,13 @@ function initAudioPlayer() {
 
 	});
 
-	jQuery(document).on('click', '#' + jQuery(audioInfo).attr('data-wave-id'), function(item){
+	jQuery(document).on('click', '#' + jQuery(audioInfo).attr('data-wave-overlay'), function(event){
 		const imageElement = document.getElementById(jQuery(audioInfo).attr('data-wave-id'));
 		const imageRect = imageElement.getBoundingClientRect(); // Get image position and size
 		const clickX = event.clientX - imageRect.left; // Calculate X position relative to the image
 		
-		console.log(imageElement)
+		console.log(event)
+		console.log(imageElement.clientWidth)
 		console.log(this)
 		var percentage = (clickX / imageElement.clientWidth) * 100;
 		
