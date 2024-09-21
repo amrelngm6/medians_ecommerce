@@ -1,7 +1,7 @@
 
 
             <div  class=" text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8" x-data="{genres: {{genres ?? []}}, selected_genres: {{ item[genre_type] ?? [] }}, title: '{{item.name}}' }">
-                <form action="/front_api/update" method="post" enctype="multipart/form-data" id="upload-step" class="ajax-form w-full  pb-10">
+                <form action="/front_api/update" method="post" enctype="multipart/form-data" id="upload-step" class="ajax-form w-full text-gray-600 dark:text-gray-400 pb-10">
                 
                     <div class=" text-primary"><h4 class="text-xl dark:text-gray-400">{{lang.translate( model_type ~ ' picture')}} </h4></div>
                     <hr class="opacity-30 my-4" />
@@ -28,7 +28,7 @@
                     <hr class="opacity-30 my-2" />
                     <div class="grid-cols-2 grid gap-10">
                         <div class="text-primary w-full block">
-                            <input name="params[name]" placeholder="{{lang.translate('Item Name')}} *" x-model="title" value="{{item.name}}" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
+                            <input name="params[name]" placeholder="{{lang.translate('Item Name')}} *" x-model="title" value="{{item.name}}" class="text-gray-600 dark:text-gray-400 dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
                         </div>
                         <div class="text-primary w-full block relative">
                             <span class="w-6 absolute my-2 mx-4 left-[90%] right-[90%]"><img src="/src/front_assets/svg/down.svg" /></span>
@@ -50,7 +50,7 @@
                     </div>
                     
                     <div class="text-primary w-full block my-6">
-                        <textarea rows="3" placeholder="Description *" name="params[description]" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" >{{item.description}}</textarea>
+                        <textarea rows="3" placeholder="Description *" name="params[description]" class="text-gray-600 dark:text-gray-400 dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" >{{item.description}}</textarea>
                     </div>
                     
                     
