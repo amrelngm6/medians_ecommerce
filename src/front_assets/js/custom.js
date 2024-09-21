@@ -81,6 +81,22 @@ jQuery('#volume-mute-img').on("click", function(event) {
 	audio.muted = !audio.muted;
 }) ;
 
+function moveItem(array, fromIndex, direction) {
+    const toIndex = direction === 'up' ? fromIndex - 1 : fromIndex + 1;
+
+    // Ensure the new index is within bounds
+    if (toIndex < 0 || toIndex >= array.length) {
+        return array; // No movement, return original array
+    }
+
+    // Swap the elements
+    const temp = array[toIndex];
+    array[toIndex] = array[fromIndex];
+    array[fromIndex] = temp;
+
+    return array; // Updated array
+}
+
 
 function handleFile()
 {
