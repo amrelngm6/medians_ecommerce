@@ -221,6 +221,7 @@ class MediaItemController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = $settings['category_products_count'] ?? null;
+        $params['type'] = 'audio';
         $list = $this->repo->getWithFilter($params);
         
 		try 
