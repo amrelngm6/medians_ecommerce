@@ -250,6 +250,8 @@ class AudiobookController extends CustomController
         
         $item = $this->repo->find($params['media_id']);
 
+        $mediaController = new MediaItemController();
+
 		foreach ($this->app->request()->files as $key => $value) {
 		
             $file = $this->mediaRepo->upload($value, 'audio', true);
@@ -262,6 +264,8 @@ class AudiobookController extends CustomController
             $fileArray = [ 'type'=> 'audio', 'title' => $value->getClientOriginalName(), 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file];
 
             $update = $this->repo->storeFile($fileArray, $item);
+
+            $mediaController->generateWave($this->mediaRepo->_dir.$file);
 		}
 
         return array('success'=>1, 'result'=>translate('Uploaded'), 'reload'=>1);
