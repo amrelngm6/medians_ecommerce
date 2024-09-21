@@ -43,6 +43,7 @@ class AudiobookController extends CustomController
 		$settings = $this->app->SystemSetting();
 
         $customer = $this->app->customer_auth();
+		$params = $this->app->params();
         
         $params['limit'] = $settings['category_products_count'] ?? null;
         $params['author_id'] = $customer->customer_id ?? 0;
