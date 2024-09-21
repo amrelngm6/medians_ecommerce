@@ -290,9 +290,6 @@ function initAudioPlayer() {
 		const imageRect = imageElement.getBoundingClientRect(); // Get image position and size
 		const clickX = event.clientX - imageRect.left; // Calculate X position relative to the image
 		
-		console.log(event)
-		console.log(imageElement.clientWidth)
-		console.log(this)
 		var percentage = (clickX / imageElement.clientWidth) * 100;
 		
 		let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
