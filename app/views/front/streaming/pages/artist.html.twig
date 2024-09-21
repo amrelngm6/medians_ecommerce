@@ -157,10 +157,9 @@
 
 			<div id="liked-books-items" class="carousel-container flex gap-2" data-count="4">
 				{% set list = {'items' : item.likes|column('item')} %}
-				{% for media_item in list.items %}
-                    {% if media_item.type == 'audiobook' %}
-
-                        {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
+				{% for audiobook in list.items %}
+                    {% if audiobook.type == 'audiobook' %}
+					    {% include 'views/front/' ~ template ~ '/pages/audiobook/item.html.twig' %}
                     {% endif %}
 				{% endfor %}
 			</div>
