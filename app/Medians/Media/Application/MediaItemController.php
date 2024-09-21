@@ -164,7 +164,7 @@ class MediaItemController extends CustomController
         
         // $this->checkSession($customer);
 
-        $params['limit'] = 20;
+        $params['limit'] = $settings['category_products_count'] ?? null;
         $params['author_id'] = $customer->customer_id ?? 0;
         $list = $this->repo->getWithFilter($params);
 
@@ -218,7 +218,7 @@ class MediaItemController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = 12;
+        $params['limit'] = $settings['category_products_count'] ?? null;
         $list = $this->repo->getWithFilter($params);
         
 		try 
@@ -247,7 +247,7 @@ class MediaItemController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = 12;
+        $params['limit'] = $settings['category_products_count'] ?? null;
         $params['likes'] = true;
         $params['customer_id'] = $this->app->customer->customer_id ?? 0;
         $list = $this->repo->getWithFilter($params);
@@ -306,7 +306,7 @@ class MediaItemController extends CustomController
             if (empty($item->category_id))
     			throw new \Exception(translate('Page not found'), 1);
 
-            $params['limit'] = 12;
+            $params['limit'] = $settings['category_products_count'] ?? null;
             $params['genre'] = $item->category_id;
             $list = $this->repo->getWithFilter($params);
             
