@@ -35,10 +35,10 @@ document.getElementById('player-audio').addEventListener("change", function(even
 
 jQuery(document).on('click', '.start-player', function (i, el) {
 	player = jQuery(this);
-	list = player.data('list')
-	index = player.data('index')
+	list = player.attr('data-list')
+	index = player.attr('data-index')
 	if (player.hasClass('start-player')) {
-		audioObject = list[player.data('index')] ?? {};
+		audioObject = list[player.attr('data-index')] ?? {};
 		filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
 		audioInfo = player.find('.slide__audio-player');
 		audio = mainAudio[0];
@@ -236,12 +236,12 @@ function initAudioPlayer() {
 		
 		let value = (isNaN(maxduration) ? 0 : ((currentTime / maxduration) * 100));
 
-		$('#'+jQuery(audioInfo).data('wave-overlay')).css('right', '0')
-		$('#'+jQuery(audioInfo).data('wave-overlay')).css('left', 'auto')
-		$('#'+jQuery(audioInfo).data('wave-overlay')).css('width', (100 - value)+'%')
+		$('#'+jQuery(audioInfo).attr('data-wave-overlay')).css('right', '0')
+		$('#'+jQuery(audioInfo).attr('data-wave-overlay')).css('left', 'auto')
+		$('#'+jQuery(audioInfo).attr('data-wave-overlay')).css('width', (100 - value)+'%')
 		$('#seek-bar').css('width', (value)+'%')
 
-		var slider = '#circle-'+jQuery(audioInfo).data('id');
+		var slider = '#circle-'+jQuery(audioInfo).attr('data-id');
 		console.log(slider)
 		value ? jQuery(slider).roundSlider('setValue', value) : '';
 	});
@@ -256,14 +256,14 @@ function initAudioPlayer() {
 		circle.attr('stroke-dashoffset', totalLength);
 		document.getElementById('album-art').classList.remove('active') 
 
-		let indx = player.data('index'); 
+		let indx = player.attr('data-index'); 
 		let media = list[indx+1] ?? {};
 		jQuery('#media-'+media.media_id)[0].click()
 
 	});
 
-	let waveIdController = jQuery(audioInfo).data('wave-id');
-	let waveController = jQuery(audioInfo).data('wave-overlay');
+	let waveIdController = jQuery(audioInfo).attr('data-wave-id');
+	let waveController = jQuery(audioInfo).attr('data-wave-overlay');
 	waveController != undefined ? document.getElementById(waveController).addEventListener("click", function(event) {
 		// Get the width of the element
 		// Get the position of the click relative to the left edge of the element
@@ -457,7 +457,7 @@ jQuery(document).on('change', '#imageInput', function(event) {
 });
 
 jQuery(document).on('click','.pCard_add', function () {
-	jQuery('#'+jQuery(this).data('id')).toggleClass('pCard_on');
+	jQuery('#'+jQuery(this).attr('data-id')).toggleClass('pCard_on');
 });
 
 
