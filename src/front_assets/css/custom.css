@@ -1067,3 +1067,10 @@ Down
   line-height: 88px;
 }
 
+.gradient-overlay {
+  background: linear-gradient(180deg, rgba(0,13,36,0.8519782913165266) 0%, rgba(0,13,36,0) 100%);
+}
+
+.gradient-top-overlay {
+  background: linear-gradient(0deg, rgba(0,13,36,0.8519782913165266) 0%, rgba(0,13,36,0) 50%);
+}

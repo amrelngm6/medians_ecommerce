@@ -379,15 +379,12 @@
                     <div class="flex flex-col">
                         <p
                             class="nui-heading nui-heading-md nui-weight-medium nui-lead-normal text-muted-800 dark:text-muted-100 mb-&amp;">
-                            <!--[-->
-                            Chase bank
-                            <!--]-->
+                            {{lang.translate('Total Media items')}}
                         </p>
                         <p
                             class="nui-paragraph nui-paragraph-sm nui-weight-normal nui-lead-normal text-muted-400">
-                            <!--[-->
-                            **** **** 1728
-                            <!--]-->
+                            <span class="font-bold"> {{app.customer_auth.media_items|length}} </span>
+                            <small> {{lang.translate('Media items')}}</small>
                         </p>
                     </div>
                     <div><img src="/img/logos/companies/chase-full.svg" alt="Bank logo" class="size-8"></div>
@@ -396,9 +393,9 @@
                     <div>
                         <h5
                             class="nui-heading nui-heading-xl nui-weight-semibold nui-lead-normal">
-                            <!--[-->
-                            $3,462.12
-                            <!--]-->
+                            <span class="font-bold"> {{app.customer_auth.media_items|length}} </span>
+                            <small> {{lang.translate('Tracks')}}</small>
+
                         </h5>
                     </div>
                     <div>
@@ -406,7 +403,24 @@
                                 <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"></path>
                             </svg><!--]--></button>
                     </div>
-                </div><!--]--></div>
+                </div>
+                
+                <div class="flex justify-between">
+                    <div>
+                        <h5
+                            class="nui-heading nui-heading-xl nui-weight-semibold nui-lead-normal">
+                            <span class="font-bold"> {{app.customer_auth.audiobooks|length}} </span>
+                            <small> {{lang.translate('Audiobooks')}}</small>
+
+                        </h5>
+                    </div>
+                    <div>
+                        <button type="button" rel="" target="" class="nui-button-icon nui-button-rounded-lg nui-button-small nui-button-default"><!--[--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="icon" style="" width="1em" height="1em" viewbox="0 0 24 24" data-v-b4402e20="">
+                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7-7l7 7l-7 7"></path>
+                            </svg><!--]--></button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="col-span-12 sm:col-span-4">
             <div class="nui-card nui-card-rounded-md nui-card-default p-6"><!--[--><div class="mb-6 flex justify-between">

@@ -649,6 +649,14 @@ video {
   bottom: 0px;
 }
 
+.bottom-40 {
+  bottom: 10rem;
+}
+
+.bottom-64 {
+  bottom: 16rem;
+}
+
 .end-0 {
   inset-inline-end: 0px;
 }
@@ -663,6 +671,10 @@ video {
 
 .left-4 {
   left: 1rem;
+}
+
+.left-40 {
+  left: 10rem;
 }
 
 .left-\[16px\] {
@@ -3814,6 +3826,11 @@ video {
   .lg\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+
+  .lg\:text-6xl {
+    font-size: 3.75rem;
+    line-height: 1;
   }
 
   .lg\:text-base {
