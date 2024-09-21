@@ -57,7 +57,7 @@
                     <button class=" dark:text-gray-400 float-right inline-block px-6 py-2 rounded-2xl border transition hover:border-orange-600 border-orange-300">{{lang.translate('Next')}}</button>
                     
                     {% if item.type == 'audiobook' %}        
-                    <button class=" dark:text-gray-400 float-left inline-block px-6 py-2 rounded-2xl border transition hover:border-orange-600 border-orange-300">{{lang.translate('Add Chapters')}}</button>
+                    <a href="/audiobook/edit_chapters/{{item.media_id}}" class="ajax-load dark:text-gray-400 float-left inline-block px-6 py-2 rounded-2xl border transition hover:border-orange-600 border-orange-300">{{lang.translate('Add Chapters')}}</a>
                     {% endif %}
                     
                 </form>
