@@ -183,6 +183,13 @@ class AudiobookController extends CustomController
 
         $item = $this->repo->find($media_id);
 
+        $mediaController = new MediaItemController();
+
+        foreach($item->files as $value)
+        {
+            $mediaController->generateWave($value->path);
+        }
+
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
