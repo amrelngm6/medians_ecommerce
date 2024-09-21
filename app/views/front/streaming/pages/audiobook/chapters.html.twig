@@ -24,7 +24,7 @@
                                 </label>  
                                 
                                 <div class="flex gap-10 w-full">
-                                    <div class="w-full">
+                                    <div class="w-1/2">
                                         <p class="text-lg py-2">{{lang.translate('Chapter name')}} </p>
                                         <input name="params[chapters][title][]" placeholder="{{lang.translate('Chapter Name')}} *" x-model="chapter.title" value="{{chapter.title}}" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200 w-full"  />
                                         
@@ -48,8 +48,8 @@
                                                 <span class="play-pause"></span>
                                             </div>
                                             <div class="relative h-28 w-full"  > 
-                                                <img id="wave-{{item.media_id}}" class="w-full left-0 top-0 bottom-0 my-auto absolute " src="/stream?thumbnail=1000&dir=audio&image={{item.main_file.wave}}" />
-                                                <div id="wave-overlay{{item.media_id}}"  class="absolute w-full h-full top-0 right-0 opacity-50 dark:bg-gray-900 bg-white z-50 duration-150 transition transition-all"> </div>
+                                                <img :id="wave-'+chapter.media_file_id" class="w-full left-0 top-0 bottom-0 my-auto absolute " src="/stream?thumbnail=1000&dir=audio&image={{item.main_file.wave}}" />
+                                                <div :id="'wave-overlay'+chapter.media_file_id"  class="absolute w-full h-full top-0 right-0 opacity-50 dark:bg-gray-900 bg-white z-50 duration-150 transition transition-all"> </div>
                                             </div>
                                         </div>
                                                     
