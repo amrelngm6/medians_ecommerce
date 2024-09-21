@@ -108,29 +108,7 @@ class MediaItemController extends CustomController
     }
     
     
-    /**
-     * Audio page for frontend
-     */
-    public function artist($artist_name)
-    {
-		$settings = $this->app->SystemSetting();
 
-        $item = $this->customerRepo->find($artist_name);
-        
-		try 
-        {
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
-                'app' => $this->app,
-                'item' => $item,
-                'layout' => 'artist'
-            ], 'output'));
-            
-		} catch (\Exception $e) {
-			throw new \Exception($e->getMessage(), 1);
-		}
-    }
-    
-    
     /**
      * Studio page for frontend
      */

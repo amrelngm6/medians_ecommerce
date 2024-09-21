@@ -7,6 +7,7 @@ use Medians\Followers\Domain\Follower;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Media\Domain\MediaItem;
 use Medians\Playlists\Domain\Playlist;
+use Medians\Likes\Domain\Like;
 
 
 class Customer extends CustomModel
@@ -96,6 +97,12 @@ class Customer extends CustomModel
 	public function following($customer_id) 
 	{
 		return $this->hasOne(Follower::class , 'customer_id', 'customer_id')->where('follower_id', $customer_id);	
+	}
+
+	
+	public function likes() 
+	{
+		return $this->hasMany(Like::class, 'customer_id', 'customer_id')->with('item');	
 	}
 
     public function receiverAsCustomer()

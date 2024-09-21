@@ -116,6 +116,55 @@
 			</div>
 		</div>
 
+		<div class="w-full 	py-10" id="liked-items">
+			<div class=" w-full flex gap-4 text-primary">
+				<div class=" w-full flex gap-4 dark:text-gray-400 ">
+					<h2 class="text-2xl  font-semibold">{{lang.translate('Liked items')}}</h3>
+					<a href="#!" class="p-2 transition hover:text-orange-500">See all</a>
+				</div>
+
+				<div class="flex gap gap-4">
+					<button class="prev-btn" data-slider="liked-items"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
+					<button class="next-btn" data-slider="liked-items"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
+				</div>
+			</div>
+			<div class="my-4 "></div>
+
+			<div id="liked-items" class="carousel-container flex gap-2" data-count="4">
+				{% set list = {'items' : item.likes|column('item')} %}
+				{% for media_item in list.items %}
+                    {% if media_item.type == 'audio' %}
+				    	{% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
+                    {% endif %}
+				{% endfor %}
+			</div>
+		</div>
+
+        
+		<div class="w-full 	py-10" id="liked-books-slider">
+			<div class=" w-full flex gap-4 text-primary">
+				<div class=" w-full flex gap-4 dark:text-gray-400 ">
+					<h2 class="text-2xl  font-semibold">{{lang.translate('liked-books items')}}</h3>
+					<a href="#!" class="p-2 transition hover:text-orange-500">See all</a>
+				</div>
+
+				<div class="flex gap gap-4">
+					<button class="prev-btn" data-slider="liked-books-items"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
+					<button class="next-btn" data-slider="liked-books-items"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
+				</div>
+			</div>
+			<div class="my-4 "></div>
+
+			<div id="liked-books-items" class="carousel-container flex gap-2" data-count="4">
+				{% set list = {'items' : item.likes|column('item')} %}
+				{% for media_item in list.items %}
+                    {% if media_item.type == 'audiobook' %}
+                        {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
+                    {% endif %}
+				{% endfor %}
+			</div>
+		</div>
+
 
 		<div class="w-full 	py-10" id="audiobooks-items-slider">
 			<div class=" w-full flex gap-4 text-primary">

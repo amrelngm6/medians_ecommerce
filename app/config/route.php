@@ -76,7 +76,7 @@ RouteHandler::get('/studio/audio_books', \Medians\Media\Application\AudiobookCon
 RouteHandler::get('/studio/profile', \Medians\Customers\Application\CustomerController::class.'@edit_profile');
 RouteHandler::get('/genre/(:all)', \Medians\Media\Application\MediaItemController::class.'@genre');
 RouteHandler::get('/book_genre/(:all)', \Medians\Media\Application\AudiobookController::class.'@genre');
-RouteHandler::get('/artist/(:all)', \Medians\Media\Application\MediaItemController::class.'@artist');
+RouteHandler::get('/artist/(:all)', \Medians\Customers\Application\CustomerController::class.'@artist');
 RouteHandler::get('/playlist/(:all)', \Medians\Playlists\Application\PlaylistController::class.'@playlist');
 RouteHandler::get('/create-payment-intent', \Medians\Transactions\Application\TransactionController::class.'@createPaymentIntent');
 RouteHandler::post('/cart/delete', \Medians\Cart\Application\CartController::class.'@delete');
