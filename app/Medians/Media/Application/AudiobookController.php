@@ -187,7 +187,7 @@ class AudiobookController extends CustomController
 
         foreach($item->files as $value)
         {
-            $mediaController->generateWave($value->path);
+            $save = $mediaController->generateWave($value->path);
         }
 
 		try {
