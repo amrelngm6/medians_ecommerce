@@ -114,7 +114,7 @@ class MediaItemRepository
 			}
 
 			$totalCount = $model->count();
-			
+
 			$limit = (($params['limit'] ?? 4) * (floatval($params['page'] ?? 1) ?? 1));
 			return ['count' => $totalCount, 'items'=>$model->limit($limit)->get()];
 	 }
