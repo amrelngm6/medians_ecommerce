@@ -98,7 +98,7 @@ class AudiobookController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = 2;
+        // $params['limit'] = 12;
         $params['type'] = 'audiobook';
         $list = $this->repo->getWithFilter($params);
         
@@ -217,7 +217,7 @@ class AudiobookController extends CustomController
             if (empty($item->category_id))
     			throw new \Exception(translate('Page not found'), 1);
 
-            $params['limit'] = 12;
+            // $params['limit'] = 12;
             $params['genre'] = $item->category_id;
             $list = $this->repo->getWithFilter($params);
             
