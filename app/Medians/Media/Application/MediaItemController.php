@@ -161,6 +161,7 @@ class MediaItemController extends CustomController
 		$settings = $this->app->SystemSetting();
 
         $customer = $this->app->customer_auth();
+        $params = $this->app->params();
         
         // $this->checkSession($customer);
 
