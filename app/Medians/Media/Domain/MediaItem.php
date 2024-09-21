@@ -151,6 +151,12 @@ class MediaItem extends CustomModel
 		return $this->morphMany(View::class , 'item');	
 	}
 	
+	
+	public function viewscount() 
+	{
+		return $this->morphMany(View::class , 'item')->count();	
+	}
+	
 	public function plays() 
 	{
 		return $this->morphMany(View::class , 'item');	
