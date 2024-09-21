@@ -159,6 +159,7 @@
 				{% set list = {'items' : item.likes|column('item')} %}
 				{% for media_item in list.items %}
                     {% if media_item.type == 'audiobook' %}
+
                         {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
                     {% endif %}
 				{% endfor %}
