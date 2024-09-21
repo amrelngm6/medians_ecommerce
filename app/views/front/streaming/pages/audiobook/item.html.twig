@@ -2,7 +2,7 @@
 
 									<div class="pCard_up" style=" background-image: url(/stream?thumbnail=400&image={{audiobook.picture_name}}); ">
 										<div class="pCard_text">
-											<h2>{{audiobook.name}}</h2>
+											<h2><a href="/audiobook/{{audiobook.media_id}}"  class="ajax-load">{{audiobook.name}}</a></h2>
 											<p class="truncate w-full px-2">{{audiobook.description}}</p>
 										</div>
 										<div class="pCard_add" data-id="audiobook-card-{{loop.index}}"><img src="/src/front_assets/svg/playlist.svg" class=" relative top-2 pt-1 left-0 right-0 mx-auto" width="40"></div>
