@@ -44,7 +44,7 @@ class AudiobookController extends CustomController
 
         $customer = $this->app->customer_auth();
         
-        $params['limit'] = 20;
+        $params['limit'] = $settings['category_products_count'] ?? null;
         $params['author_id'] = $customer->customer_id ?? 0;
         $params['type'] = 'audiobook';
         $list = $this->repo->getWithFilter($params);
