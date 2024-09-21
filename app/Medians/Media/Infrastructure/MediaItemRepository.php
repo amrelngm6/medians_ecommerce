@@ -115,8 +115,8 @@ class MediaItemRepository
 
 			$totalCount = $model->count();
 
-			$limit = (($params['limit'] ?? 4) * (floatval($params['page'] ?? 1) ?? 1));
-			return ['count' => $totalCount, 'items'=>$model->limit($limit)->get()];
+			$offset = (($params['limit'] ?? 1) * (floatval($params['page'] - 1) ?? 0));
+			return ['count' => $totalCount, 'items'=>$model->offset($offset)->limit($params['limit'])->get()];
 	 }
  
 	
