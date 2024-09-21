@@ -36,9 +36,9 @@ document.getElementById('player-audio').addEventListener("change", function(even
 jQuery(document).on('click', '.start-player', function (i, el) {
 	player = jQuery(this);
 	list = JSON.parse(player.attr('data-list'))
-	index = player.attr('data-index')
+	index = parseInt(player.attr('data-index'))
 	if (player.hasClass('start-player')) {
-		audioObject = list[player.attr('data-index')] ?? {};
+		audioObject = list[index] ?? {};
 		console.log(audioObject)
 		filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
 		console.log(filename)
