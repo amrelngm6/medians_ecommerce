@@ -97,7 +97,7 @@ class MediaItemRepository
 				}
 			}
 
-			if (isset($params['date']))
+			if (!empty($params['date']))
 			{
 				switch (strtolower($params['date'])) {
 					case 'day':
@@ -115,8 +115,8 @@ class MediaItemRepository
 
 			$totalCount = $model->count();
 
-			$offset = (($params['limit'] ?? 1) * (floatval($params['page'] - 1) ?? 0));
-			return ['count' => $totalCount, 'items'=>$model->offset($offset)->limit($params['limit'])->get()];
+			$offset = (($params['limit'] ?? 1) * (!empty($params['page']) ? floatval( $params['page'] - 1)  : 0));
+			return ['count' => $totalCount, 'items'=>$model->offset($offset)->limit(floatval($params['limit']))->get()];
 	 }
  
 	
