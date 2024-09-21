@@ -19,6 +19,7 @@
 					<div class="w-full ">
 						<ul class="w-full grid-cols-2 grid gap-10 pb-20">
 							{% for audiobook in list.items %}
+
 								<div class="pCard_card" id="audiobook-card-{{loop.index}}">
 
 									<div class="pCard_up" style=" background-image: url(/stream?thumbnail=400&image={{audiobook.picture_name}}); ">
@@ -36,7 +37,7 @@
 										</div>
 										<div>
 											<p>{{lang.translate('Views')}}</p>
-											<p>{{audiobook.views|length}}</p>
+											<p>{{audiobook.viewscount()}}</p>
 										</div>
 										<div>
 											<p>{{lang.translate('Likes')}}</p>

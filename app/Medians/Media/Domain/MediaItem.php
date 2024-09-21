@@ -154,7 +154,7 @@ class MediaItem extends CustomModel
 	
 	public function viewscount() 
 	{
-		return $this->morphMany(View::class , 'item')->count();	
+		return $this->morphMany(View::class , 'item')->sum('times');	
 	}
 	
 	public function plays() 
