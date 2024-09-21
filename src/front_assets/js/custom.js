@@ -35,11 +35,13 @@ document.getElementById('player-audio').addEventListener("change", function(even
 
 jQuery(document).on('click', '.start-player', function (i, el) {
 	player = jQuery(this);
-	list = player.attr('data-list')
+	list = JSON.parse(player.attr('data-list'))
 	index = player.attr('data-index')
 	if (player.hasClass('start-player')) {
 		audioObject = list[player.attr('data-index')] ?? {};
+		console.log(audioObject)
 		filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
+		console.log(filename)
 		audioInfo = player.find('.slide__audio-player');
 		audio = mainAudio[0];
 		audio.src = '/stream_audio?audio='+ filename;
