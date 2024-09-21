@@ -1,12 +1,12 @@
 
 
 
-            <div  class=" text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8" x-data="{media_id:'{{item.media_id}}', chapters: {{item.files ?? [] }}, title: '{{item.name}}' }">
+            <div  class=" text-primary  w-full  rounded-2xl bg-white dark:bg-gray-900  p-8" x-data="{'media_id':'{{item.media_id}}', 'chapters': {{item.files ?? [] }}, 'title': '{{item.name}}' }">
                 <div class=" text-primary"><h4 class="text-xl dark:text-gray-400">{{lang.translate( model_type ~ ' picture')}} </h4></div>
                 <hr class="opacity-0 my-4" />
                 <form action="/front_api/update" method="post" enctype="multipart/form-data" id="upload-step" class="ajax-form w-full  pb-10">
 
-                    <input type="hidden" name="params[media_id]" x-model="{{item.media_id}}" />
+                    <input type="hidden" name="params[media_id]" value="{{item.media_id}}" />
                     <input type="hidden" name="type" value="Audiobook.update_chapters" />
                     
                     <div class="flex gap-4 text-primary mt-6"><h4 class="text-xl dark:text-gray-400" >{{lang.translate('Chapters list')}}</h4> </div>
@@ -22,6 +22,7 @@
                                     <img id="" src="/src/front_assets/svg/music-tone.svg" class="dark:opacity-30" />
                                     {# <input :id="'imageInput'+chapter.media_file_id" type="file" name="file[]" class="hidden" /> #}
                                 </label>  
+                                
                                 <div class="grid-cols-2 grid gap-10">
                                     <div class="text-primary dark:text-gray-400  w-full block">
                                         <p class="text-lg py-2">{{lang.translate('Chapter name')}} </p>
@@ -48,6 +49,27 @@
                                                 </svg>
                                             </div>
                                         </div>
+                                        <div class="slide__audio js-audio pt-7 start-player" :id="'media-'+chapter.media_id"  :data-list="[chapter]" :data-index="i">
+                                            <div class="slide__audio-player" :data-title="chapter.title" data-poster="/stream?thumbnail=800&image={{item.picture_name}}" data-artist="{{item.artist.name}}"  :data-id="chapter.media_file_id">
+                                            </div>
+                                            <div class="audio__controls " >
+                                                <svg version="1.1" id="circle" width="50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 100">
+                                                    <path class="seekbar" :id="'seekbar-'+chapter.media_file_id" fill="none" stroke-meterlimit="10" d="M50,2.9L50,2.9C76,2.9,97.1,24,97.1,50v0C97.1,76,76,97.1,50,97.1h0C24,97.1,2.9,76,2.9,50v0C2.9,24,24,2.9,50,2.9z"/>
+                                                </svg>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="equalizer" viewBox="0 0 100 100">
+                                                    <g class="equalizer-group">
+                                                        <rect class="bar"></rect>
+                                                        <rect class="bar"></rect>
+                                                        <rect class="bar"></rect>
+                                                        <rect class="bar"></rect>
+                                                        <rect class="bar"></rect>
+                                                    </g>
+                                                </svg>
+                                                <div class="audio__slider" :id="'circle-'+chapter.media_file_id"></div>
+                                                <span class="play-pause"></span>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
