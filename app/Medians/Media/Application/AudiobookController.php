@@ -185,11 +185,6 @@ class AudiobookController extends CustomController
 
         $mediaController = new MediaItemController();
 
-        foreach($item->files as $value)
-        {
-            $save = $mediaController->generateWave( str_replace('/uploads/audio/', '', $value->path));
-        }
-
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [

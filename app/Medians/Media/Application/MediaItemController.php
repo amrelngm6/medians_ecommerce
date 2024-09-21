@@ -406,15 +406,6 @@ class MediaItemController extends CustomController
 
 
 
-
-
-
-
-
-
-
-
-
     public function generateWave($file)
     {
         $this->mediaRepo->_dir = '/uploads/audio/';

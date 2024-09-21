@@ -4,8 +4,6 @@ namespace Medians\Customers\Application;
 use \Shared\dbaser\CustomController;
 
 use Medians\Customers\Infrastructure\CustomerRepository;
-use Medians\Orders\Infrastructure\OrderRepository;
-use Medians\Locations\Infrastructure\CountryRepository;
 
 
 class CustomerController extends CustomController
@@ -20,8 +18,6 @@ class CustomerController extends CustomController
 	
 	protected $orderRepo;
 
-	protected $countryRepo;
-
 
 
 	function __construct()
@@ -31,9 +27,6 @@ class CustomerController extends CustomController
 
 		$this->repo = new CustomerRepository();
 
-		$this->orderRepo = new OrderRepository();
-
-		$this->countryRepo = new CountryRepository();
 	}
 
 
@@ -94,21 +87,6 @@ class CustomerController extends CustomController
 	} 
 
 
-	/**
-	 * Create page
-	 * 
-	 */
-	public function create()
-	{
-		return render('views/admin/customers/create.html.twig', [
-	        'title' => 'Customers',
-	        'Model' => $this->repo->getClassName(),
-	        'app' => $this->app,
-	    ]);
-	} 
-
-
-
 
 
 	/**
@@ -151,8 +129,19 @@ class CustomerController extends CustomController
 
 		$params = $this->app->params();
 
+		$mediaRepo = new \Medians\Media\Infrastructure\MediaRepository;
+		
 		try {
 
+            $files = $this->app->request()->files;
+
+            foreach ($files as $key => $value) {
+                if ($value) {
+                    $picture = $mediaRepo->upload($value);
+                    $params['picture'] = $mediaRepo->_dir.$picture;
+                }
+            }
+            
 			$params['customer_id'] = $this->app->customer_auth()->customer_id;
 
             return (!empty($this->repo->update($params))) 
@@ -181,47 +170,29 @@ class CustomerController extends CustomController
 
 	}  
 
-
-	public function dashboard()
-	{
-		$settings = $this->app->SystemSetting();
-
+	
+    /**
+     * Edit info page for frontend
+     */
+    public function edit_profile()
+    {
 		$customer = $this->app->customer_auth();
 
-		if (!$customer) { return $this->app->redirect('/customer/login'); }
-
-		return render('views/front/'.$settings['template'].'/pages/profile.html.twig', [
-			'customer' =>  $this->repo->find($customer->customer_id),
-			'orders' =>  $this->orderRepo->getCustomerOrders($customer->customer_id),
-			'countries' =>  $this->countryRepo->getActive(),
-	        'title' => translate('Customers'),
-			'columns' =>  $this->columns(),
-			'fillable' =>  $this->fillable(),
-			'object_name' => 'Customer',
-			'object_key' => 'customer_id',
-
-	    ]);
-	}
-
-	public function orders()
-	{
 		$settings = $this->app->SystemSetting();
 
-		$customer = $this->app->customer_auth();
+		try {
 
-		if (!$customer) { return $this->app->redirect('/customer/login'); }
-
-		return render('views/front/'.$settings['template'].'/pages/orders.html.twig', [
-			'customer' =>  $this->repo->find($customer->customer_id),
-			'orders' =>  $this->orderRepo->getCustomerOrders($customer->customer_id),
-			'countries' =>  $this->countryRepo->getActive(),
-	        'title' => translate('Customers'),
-			'columns' =>  $this->columns(),
-			'fillable' =>  $this->fillable(),
-			'object_name' => 'Customer',
-			'object_key' => 'customer_id',
-
-	    ]);
-	}
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'item' => $customer,
+                'genre_type' => 'book_genres',
+                'model_type' => 'audiobook',
+                'layout' => isset($this->app->customer->customer_id) ? 'artist/profile' : 'signin'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
 
 }
