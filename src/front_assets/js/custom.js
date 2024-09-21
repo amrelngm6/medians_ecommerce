@@ -285,22 +285,25 @@ function initAudioPlayer() {
 
 	});
 
+	jQuery(document).on('click', '#' + jQuery(audioInfo).attr('data-wave-id'), function(item){
 
+		const imageElement = document.getElementById(jQuery(audioInfo).attr('data-wave-id'));
+		const imageRect = imageElement.getBoundingClientRect(); // Get image position and size
+		const clickX = event.clientX - imageRect.left; // Calculate X position relative to the image
+		
+		var percentage = (clickX / imageElement.clientWidth) * 100;
+		
+		let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
+		
+		updateAudio(percentage.toFixed(2), $elem);
+	
+	});
+
+	
 }
 
-jQuery(document).on('click', '#data-wave-overlay', function(item){
 
-	const imageElement = document.getElementById("data-wave-id");
-	const imageRect = imageElement.getBoundingClientRect(); // Get image position and size
-	const clickX = event.clientX - imageRect.left; // Calculate X position relative to the image
-	
-	var percentage = (clickX / imageElement.clientWidth) * 100;
-	
-	let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
-	
-	updateAudio(percentage.toFixed(2), $elem);
 
-});
 
 function convertToTime(num) {
     if (typeof num !== 'number' || num < 0) {
