@@ -47,6 +47,27 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 		initAudioPlayer()
 		playStyles()
 		player.removeClass('start-player')
+		jQuery('#player-previous').removeClass('hidden')
+		jQuery('#player-next').removeClass('hidden')
+
+	} 
+});
+
+jQuery(document).on('click', '.start-single-player', function (i, el) {
+	player = jQuery(this);
+	list = JSON.parse(player.attr('data-list'))
+	index = player.attr('data-index')
+	if (player.hasClass('start-single-player')) {
+		audioObject = list[index];
+		filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
+		audioInfo = player.find('.slide__audio-player');
+		audio = mainAudio[0];
+		audio.src = '/stream_audio?audio='+ filename;
+		audio.load()
+		initAudioPlayer()
+		playStyles()
+		jQuery('#player-previous').addClass('hidden')
+		jQuery('#player-next').addClass('hidden')
 	} 
 });
 

@@ -49,7 +49,7 @@
                                                 </svg>
                                             </div>
                                         </div>
-                                        <div class="slide__audio js-audio pt-7 start-player" :id="'media-'+chapter.media_id"  :data-list="[chapter]" :data-index="i">
+                                        <div style="top:0"  class="slide__audio js-audio start-single-player pt-0 mt-0" :id="'media-'+chapter.media_id"  data-list="{{item.files ?? [] }}" :data-index="i">
                                             <div class="slide__audio-player" :data-title="chapter.title" data-poster="/stream?thumbnail=800&image={{item.picture_name}}" data-artist="{{item.artist.name}}"  :data-id="chapter.media_file_id">
                                             </div>
                                             <div class="audio__controls " >
