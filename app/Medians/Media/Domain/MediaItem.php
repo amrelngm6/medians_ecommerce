@@ -166,6 +166,11 @@ class MediaItem extends CustomModel
 	{
 		return $this->morphMany(Like::class , 'item');	
 	}
+	
+	public function likescount() 
+	{
+		return $this->morphMany(Like::class , 'item')->count();	
+	}
 
 	public function liked($customer_id) 
 	{
