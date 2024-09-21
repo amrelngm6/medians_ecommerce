@@ -127,6 +127,7 @@ class CustomerController extends CustomController
 	public function update() 
 	{
 		$customer = $this->app->customer_auth();
+		$params = $this->app->params();
 
 		$mediaRepo = new \Medians\Media\Infrastructure\MediaRepository;
 
@@ -142,7 +143,6 @@ class CustomerController extends CustomController
             }
             
 			$params['customer_id'] = $customer->customer_id;
-			// $params['customer_id'] = 0;
 
             return (!empty($this->repo->update($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)

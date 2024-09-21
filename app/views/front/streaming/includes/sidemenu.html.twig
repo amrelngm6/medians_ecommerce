@@ -8,6 +8,7 @@
                         {'id':3, 'title':'{{lang.translate('Playlists')}}', 'link':'/studio/playlists'}, 
                         {'id':4, 'title':'{{lang.translate('Likes')}}', 'link':'/likes'},
                         {'id':5, 'title':'{{lang.translate('Profile')}}', 'link':'/artist/{{app.customer_auth().customer_id}}'}
+                        {'id':5, 'title':'{{lang.translate('Information')}}', 'link':'/studio/profile'}
                         ] ">
                             <li class="w-full dark:hover:text-gray-200" :id="'menu-'+menuItem.id">
                                 <a :href="menuItem.link" class="w-full flex gap gap-4 ajax-load ">
