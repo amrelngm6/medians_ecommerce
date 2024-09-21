@@ -187,7 +187,7 @@ class AudiobookController extends CustomController
 
         foreach($item->files as $value)
         {
-            $save = $mediaController->generateWave($value->path);
+            $save = $mediaController->generateWave( str_replace('/uploads/audio/', '', $value->path));
         }
 
 		try {
@@ -272,7 +272,7 @@ class AudiobookController extends CustomController
 
             $update = $this->repo->storeFile($fileArray, $item);
 
-            $mediaController->generateWave($this->mediaRepo->_dir.$file);
+            $mediaController->generateWave($file);
 		}
 
         return array('success'=>1, 'result'=>translate('Uploaded'), 'reload'=>1);
