@@ -66,7 +66,7 @@
                                 </div>
                                 <hr class="opacity-30 mb-4" />
 
-                                <div id="related-items" class="carousel-container flex gap-2" data-count="4"  >
+                                <div id="related-items" class="carousel-container lg:flex gap-2" data-count="2" x-data="{is_slide: 'slide'}"  >
                                     {% set list = {'items' : item.related(10)} %}
                                     {% for audiobook in list.items %}
                                     {% include 'views/front/' ~ template ~ '/pages/audiobook/item.html.twig' %}			
