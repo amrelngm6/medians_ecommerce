@@ -183,8 +183,8 @@ class MediaRepository
 		
     	if (is_file($filepath) && function_exists('shell_exec'))
     	{
-			// shell_exec($_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
-			shell_exec('ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.($h ?? '-1').'" '.$output);
+			shell_exec($_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
+			// shell_exec('ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.($h ?? '-1').'" '.$output);
     	}
 
 		
