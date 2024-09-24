@@ -4,7 +4,6 @@ namespace Medians\Media\Application;
 use Shared\dbaser\CustomController;
 
 use Medians\Media\Infrastructure\MediaRepository;
-use Medians\Media\Infrastructure\MediaItemRepository;
 
 
 class MediaController extends CustomController 
@@ -14,12 +13,10 @@ class MediaController extends CustomController
 	
 	protected $repo;
 
-	protected $mediaRepo;
 
 	function __construct()
 	{
 		$this->repo = new MediaRepository;
-		$this->mediaRepo = new MediaItemRepository;
 
 	}
 
