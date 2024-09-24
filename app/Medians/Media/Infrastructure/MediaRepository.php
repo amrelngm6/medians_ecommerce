@@ -142,7 +142,10 @@ class MediaRepository
 		$store = MediaUpload::addItem($this->_dir.$fileName, $type);
 
         try {
-            $file->move($this->dir, $fileName);
+            $move = $file->move($this->dir, $fileName);
+
+			return $fileName;
+
         } catch (FileException $e) {
         	return $e->getMessage();
         }
@@ -170,7 +173,7 @@ class MediaRepository
     	}
     }
 
-    public function resize($file, $w=null, $h=null)
+    public function resize($file, $w=null, $h='-1')
     {
 
     	$filepath = $_SERVER['DOCUMENT_ROOT'].$file;
@@ -181,14 +184,13 @@ class MediaRepository
 			return str_replace($_SERVER['DOCUMENT_ROOT'], '', $output);
 		}
 		
-    	if (is_file($filepath) && function_exists('shell_exec'))
+    	if (is_file($filepath))
     	{
 			shell_exec($_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
-			// shell_exec('ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.($h ?? '-1').'" '.$output);
+			// shell_exec('ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
     	}
 
-		
-		return str_replace($_SERVER['DOCUMENT_ROOT'], '', resizeImageToWebP($filepath, $output, $w, $h));
+		return str_replace($_SERVER['DOCUMENT_ROOT'], '', $output);
     }
 
     public static function slug($value)

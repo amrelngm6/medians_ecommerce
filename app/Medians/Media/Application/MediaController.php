@@ -4,6 +4,7 @@ namespace Medians\Media\Application;
 use Shared\dbaser\CustomController;
 
 use Medians\Media\Infrastructure\MediaRepository;
+use Medians\Media\Infrastructure\MediaItemRepository;
 
 
 class MediaController extends CustomController 
@@ -13,9 +14,13 @@ class MediaController extends CustomController
 	
 	protected $repo;
 
+	protected $mediaRepo;
+
 	function __construct()
 	{
 		$this->repo = new MediaRepository;
+		$this->mediaRepo = new MediaItemRepository;
+
 	}
 
 	public function list()
@@ -92,7 +97,7 @@ class MediaController extends CustomController
 
 		if (!empty($isThumbnail))
 		{
-			$resized = $this->repo->resize($filepath, $isThumbnail, $h);
+			$resized = $this->repo->resize($filepath, $isThumbnail, $h > 0 ? $h : '-1');
 			$filepath = is_file($_SERVER['DOCUMENT_ROOT'].$resized) ? $resized : $filepath;
 		}
 
@@ -120,8 +125,13 @@ class MediaController extends CustomController
 		$this->app = new \config\APP;
 		$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
 
+		$item = $this->mediaRepo->findByFile($filepath);
+
+		$addView = $item->addView();
+
 		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
 		{
+
 			$filename = explode('.', $filepath);
 
 			$file_path = $_SERVER['DOCUMENT_ROOT'].$filepath;
