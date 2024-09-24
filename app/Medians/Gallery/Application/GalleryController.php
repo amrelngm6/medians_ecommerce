@@ -90,7 +90,7 @@ class GalleryController extends CustomController
         try {
         	$user = $this->app->auth();
 
-			$params['created_by'] = $user->id;
+			$params['created_by'] = !empty($user->id) ? $user->id : 1;
             
 			return ($this->repo->store($params))
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=> true)

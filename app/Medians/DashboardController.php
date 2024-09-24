@@ -33,9 +33,6 @@ class DashboardController extends CustomController
 		$this->contentRepo = new Content\Infrastructure\ContentRepository();
 		$this->HelpMessageRepository = new Help\Infrastructure\HelpMessageRepository();
 		$this->CustomerRepository = new Customers\Infrastructure\CustomerRepository();
-		$this->InvoiceRepository = new Invoices\Infrastructure\InvoiceRepository();
-		$this->TransactionRepository = new Transactions\Infrastructure\TransactionRepository();
-		$this->ProductRepository = new Products\Infrastructure\ProductRepository();
 
 		
 		$setting = $this->app->SystemSetting();
@@ -58,7 +55,7 @@ class DashboardController extends CustomController
 			$user = $this->app->auth();
 
 			// Name of the Vue components
-	        return $user->role_id == 1 ?  render('master_dashboard', $this->master_data()) :   render('master_dashboard', $this->data());
+	        return  render('master_dashboard', $this->master_data());
 	        
 		} catch (Exception $e) {
 			return $e->getMessage();
@@ -152,12 +149,6 @@ class DashboardController extends CustomController
         $data['customers_count'] = $this->CustomerRepository->masterByDateCount(['start'=>$this->start, 'end'=>$this->end]);
         $data['help_messages_count'] = $this->HelpMessageRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
         $data['latest_help_messages'] = $this->HelpMessageRepository->load(5);
-        $data['invoices_count'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
-        $data['total_invoices_amount'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->sum('total_amount');
-        $data['payment_methods_invoices_amount'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->selectRaw('SUM(total_amount) as value, payment_method')->groupBy('payment_method')->get();
-        $data['latest_invoices'] = $this->InvoiceRepository->get(5);
-        $data['latest_transactions'] = $this->TransactionRepository->get(5);
-        $data['transactions_count'] = $this->TransactionRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
 
         return $data;
 
@@ -172,7 +163,9 @@ class DashboardController extends CustomController
 	{
 
 		$subscriberRepo = new Newsletters\Infrastructure\SubscriberRepository();
-		$orderRepo = new Orders\Infrastructure\OrderRepository();
+		$blogRepo = new Blog\Infrastructure\BlogRepository();
+		$pageRepo = new Pages\Infrastructure\PageRepository();
+		$ContactFormRepository = new Forms\Infrastructure\ContactFormRepository();
 
 		$data = [];
 
@@ -184,33 +177,25 @@ class DashboardController extends CustomController
         // $data['top_products'] = $this->ProductRepository;
         $data['top_customers'] = [];
         $data['help_messages_count'] = $this->HelpMessageRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
-        $data['latest_help_messages'] = $this->HelpMessageRepository->allEventsByDate(['start'=>$this->start,'end'=>$this->end], 5);
-        $data['latest_invoices'] = $this->InvoiceRepository->get(5);
+        $data['latest_contact_messages'] = $ContactFormRepository->eventsByDate(['start'=>$this->start,'end'=>$this->end])->limit(10)->get();
 		
-		$data['invoices_charts'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('date as label, COUNT(*) as y, SUM(total_amount) as total_amount')->having('y', '>', 0)->orderBy('y', 'desc')->groupBy('label')->limit('10')->get();
-        $data['invoices_count'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
-
-		$data['orders_charts'] = $orderRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('date as label, COUNT(*) as y, SUM(total_amount) as total_amount')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
-        $data['orders_count'] = $orderRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
-        $data['latest_orders'] = $orderRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->with('customer')->limit('10')->get();
-        $data['latest_order_items'] = $orderRepo->eventsItemsByDate(['start'=>$this->start, 'end'=>$this->end])->with('item')->selectRaw('*, COUNT(*) as y')->having('y', '>', 0)->orderBy('y', 'desc')->groupBy('item_id')->limit('6')->get();
-
 		$data['customers_count'] = $this->CustomerRepository->masterByDateCount(['start'=>$this->start, 'end'=>$this->end]);
 
 		$data['visits_charts'] = View::totalViews($this->month_beginning, $this->end)->selectRaw('date, SUM(times) as y, item_type')->having('y', '>', 0)->groupBy('date')->limit('10')->get();
 		$data['visits_count'] = View::totalViews($this->start, $this->end)->sum('times');
 
 		
-		$data['total_invoices_amount'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->sum('total_amount');
-		$data['payment_methods_invoices_amount'] = $this->InvoiceRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->selectRaw('SUM(total_amount) as value, payment_method')->groupBy('payment_method')->get();
-
-		// Products stats
-		$data['products_charts'] = $this->ProductRepository->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
-		$data['products_count'] = $this->ProductRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
-        
 		// Subscribers stats
 		$data['subscribers_charts'] = $subscriberRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
 		$data['subscribers_count'] = $subscriberRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
+
+		// Articles stats
+		$data['articles_charts'] = $blogRepo->model()->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
+		$data['articles_count'] = $blogRepo->model()->get()->count();
+
+		// Articles stats
+		$data['pages_charts'] = $pageRepo->model()->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
+		$data['pages_count'] = $pageRepo->model()->get()->count();
 
         return $data;
 

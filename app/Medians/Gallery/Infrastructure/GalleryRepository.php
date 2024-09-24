@@ -119,6 +119,7 @@ class GalleryRepository
 					{
 						$fields = $item;
 						$fields['gallery_id'] = $id;	
+						$fields['created_by'] = 1;	
 						$fields['status'] = 'on';	
 						
 						$Model = GalleryItem::firstOrCreate($fields);

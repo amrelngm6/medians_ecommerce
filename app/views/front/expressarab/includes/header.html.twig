@@ -5,13 +5,13 @@
             <span class="mil-word-1">Play</span> 
             <span class="mil-word-2">Open</span> 
             <span class="mil-icon-1"> 
-                <img src="/src/front_assets/svg/loader.svg" />
+                <img src="/src/front_assets/svg/loader.svg" alt="Loader" />
             </span>
         </div> 
         <!-- cursor end -->
 
         <!-- preloader -->
-        <div class="mil-preloader-1">
+        {# <div class="mil-preloader-1">
             <div class="mil-preloader-content">
                 <div class="mil-ticker mil-h5 mil-softened-80"> Loading <span class="mil-accent">&#x2022;</span> <b
                         class="mil-text-stroke">Please wait</b> <span class="mil-accent">&#x2022;</span> Loading <span
@@ -27,7 +27,7 @@
             <div class="mil-preloader-load-track">
                 <div class="mil-preloader-load"></div>
             </div>
-        </div> 
+        </div>  #}
         <!-- preloader end -->
 
 
@@ -47,7 +47,7 @@
                                     data-widget_type="lettery-header-logo.default">
                                     <div class="elementor-widget-container"> <a href="/"
                                             class="mil-logo mil-scale-down-trigger mil-accent-trigger">
-                                            <img src="/stream?thumbnail=200&image={{app.SystemSetting.logo|split('/')|last}}&dir=img" />
+                                            <img title="Logo" src="/stream?thumbnail=200&image={{app.SystemSetting.logo|split('/')|last}}&dir=img" />
                                         </a></div>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                                                     
                                                         {% for menu in app.front_menu %}
                                                         <li class=" menu-item menu-item-type-post_type menu-item-object-page">
-                                                            <a class="mil-link" href="/{{menu.page.lang_content.prefix}}">{{menu.page.lang_content.title}}</a>
+                                                            <a class="mil-link" href="{{menu.page.lang_content.prefix == '#!' ? '' : '/'}}{{menu.page.lang_content.prefix}}">{{menu.page.lang_content.title}}</a>
                                                             {% if menu.items|length > 0 %}
                                                             <ul class="sub-menu">
                                                             {% for submenu in menu.items %}

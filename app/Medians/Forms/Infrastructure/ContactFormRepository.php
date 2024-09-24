@@ -28,6 +28,10 @@ class ContactFormRepository
 		return ContactForm::where('status', 'on')->orderBy('subscriber_code','DESC')->get();
 	}
 
+	public function eventsByDate($params)
+	{
+		return ContactForm::whereBetween('created_at', [$params['start'], $params['end']]);
+	}
 
 
 	/**

@@ -49,6 +49,11 @@ class PageRepository
 	}
 
 
+	public function model()
+	{
+		return new Page;
+	}
+
 
 	/**
 	* Save item to database

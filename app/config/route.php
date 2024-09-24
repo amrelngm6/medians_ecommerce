@@ -246,15 +246,6 @@ if(!empty($app->auth()))
 
 
     /**
-     * Master requests
-     * The next reuests available only 
-     * if the user is Master 
-     * has role_id = 1
-     */ 
-    if ($app->auth()->role_id != 1)
-        return $app->run();
-
-    /**
     * @return System settings
     */
     RouteHandler::get('/admin/system_settings', \Medians\Settings\Application\SystemSettingsController::class.'@index');

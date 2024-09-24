@@ -2,7 +2,8 @@
 {% include 'views/front/' ~ template ~ '/includes/head.html.twig' %}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<link rel="stylesheet" href="/src/front_assets/css/style.css">
+<link rel="stylesheet" href="/src/front_assets/css/login.css">
+<link rel="stylesheet" href="/src/front_assets/css/tailwind.min.css">
 <link rel="stylesheet" crossorigin href="/dist/index.min.css">
 
 <section class="pt-20 ">
@@ -26,10 +27,9 @@
                     <p>{{lang.translate('LOGIN_MSG') | raw}}</p>
                     <form action="/dashboard/login" method="POST" id="login-form">
                         <label class="relative block  "><input required="true" type="email" name="params[email]"
-                                class="rounded-input with-icon" value="admin@a.com" placeholder="Enter your Email address..."><i
-                                class="fa fa-envelope py-2 w-4 absolute right-4 left-4 top-5"></i></label>
-                        <label class="relative block  "><input required="true" value="admin" type="password" name="params[password]"
-                                class="rounded-input with-icon" placeholder="Enter your Password..."><i
+                                class="rounded-input with-icon text-white" value="" placeholder="Enter your Email address..."></label>
+                        <label class="relative block  "><input required="true" value="" type="password" name="params[password]"
+                                class="rounded-input with-icon text-white" placeholder="Enter your Password..."><i
                                 class="fa fa-circle-check py-2 w-4 absolute right-4 left-4 top-5"></i></label>
                         <div class="flex gap-6">
                           <button class="btn mt-2 px-8 py-2  text-white fw-bold">{{lang.translate('Login')}}</button>

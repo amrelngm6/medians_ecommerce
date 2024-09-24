@@ -137,6 +137,16 @@ class BlogRepository
 	}
 
 
+	public function eventsByDate($params)
+	{
+		return Blog::whereBetween('created_at', [$params['start'], $params['end']]);
+	}
+
+	public function model()
+	{
+		return new Blog;
+	}
+
 
 
 	/**

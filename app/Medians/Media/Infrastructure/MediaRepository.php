@@ -170,7 +170,7 @@ class MediaRepository
     	}
     }
 
-    public function resize($file, $w=null, $h='-1')
+    public function resize($file, $w=null, $h=null)
     {
 
     	$filepath = $_SERVER['DOCUMENT_ROOT'].$file;
@@ -181,13 +181,14 @@ class MediaRepository
 			return str_replace($_SERVER['DOCUMENT_ROOT'], '', $output);
 		}
 		
-    	if (is_file($filepath))
+    	if (is_file($filepath) && function_exists('shell_exec'))
     	{
 			// shell_exec($_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
-			shell_exec('ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
+			shell_exec('ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.($h ?? '-1').'" '.$output);
     	}
 
-		return str_replace($_SERVER['DOCUMENT_ROOT'], '', $output);
+		
+		return str_replace($_SERVER['DOCUMENT_ROOT'], '', resizeImageToWebP($filepath, $output, $w, $h));
     }
 
     public static function slug($value)

@@ -3,7 +3,9 @@
 
 
                     <div class="mil-small-banner">
-                        <div class="mil-image-frame"> <img src="/stream?thumbnail=1000&image={{item.picture_name}}"
+                        <div class="mil-image-frame"> <img 
+                                srcset="/stream?thumbnail=400&image={{item.picture_name}} 480w, /stream?thumbnail=900&image={{item.picture_name}} 1200w" sizes="(max-width: 600px) 480px, 1200px"
+                                src="/stream?thumbnail=1000&image={{item.picture_name}}"
                                 alt="{{item.lang_content.title}}" class="mil-scale-img" data-value-1=".5"
                                 data-value-2="1.2" />
                             <div class="mil-gradient-overlay-reverse"></div>
@@ -17,6 +19,7 @@
                                 <div class="mil-post-info mil-appearance mil-center mil-mb-30">
                                     <div class="mil-author"> 
                                         <img 
+                                            srcset="/stream?thumbnail=400&image={{item.picture_name}} 480w, /stream?thumbnail=900&image={{item.picture_name}} 1200w" sizes="(max-width: 600px) 480px, 1200px"
                                             src='/stream?thumbnail=800&image={{item.picture_name}}'
                                             class="mil-dark mil-link">{{item.author.name}}</span></div> <span
                                         class="mil-dot-divider mil-link mil-accent">&#x2022;</span> <span
@@ -28,6 +31,7 @@
                                     class="mil-appearance mil-just-image mil-image-hori mil-icon-3-trigger mil-mb-90">
                                     <img
                                         src='/stream?thumbnail=1000&image={{item.picture_name}}'
+                                        srcset="/stream?thumbnail=400&image={{item.picture_name}} 480w, /stream?thumbnail=900&image={{item.picture_name}} 1200w" sizes="(max-width: 600px) 480px, 1200px"
                                         alt="{{item.lang_content.title}}" class=" mil-scale-img"
                                         data-value-1="1" data-value-2="1.1" /> </a>
                             </div>
@@ -37,10 +41,10 @@
                                     <div class="single-post-text">
                                         {{item.lang_content.content|raw}}
                                     </div>
-                                    <div class="post-text-bottom"> <span class="cat-links">Posted in <a
+                                    <div class="post-text-bottom"> <span class="cat-links text-color" >Posted in <a
                                                 href="https://lettery.bslthemes.com/category/marketing/"
                                                 rel="category tag">Marketing</a></span>
-                                        <div class="social-share"><strong>Share:</strong> <a href="https://www.facebook.com/sharer.php?u={{app.CONF.url}}/{{item.lang_content.prefix}}" class="share-btn share-btn-facebook"
+                                        <div class="social-share "><strong class="text-color">Share:</strong> <a href="https://www.facebook.com/sharer.php?u={{app.CONF.url}}/{{item.lang_content.prefix}}" class="share-btn share-btn-facebook"
                                                 title="Share on Facebook"><i class="icon fab fa-facebook"></i></a><a
                                                 class="share-btn share-btn-twitter" href="https://twitter.com/share?url={{app.CONF.url}}/{{item.lang_content.prefix}}&text={{item.lang_content.title}}&hashtags={{app.SystemSetting.sitename}}" title="Share on Twitter"><i
                                                     class="icon fab fa-twitter"></i></a><a class="share-btn share-btn-linkedin" href="https://www.linkedin.com/shareArticle?url={{app.CONF.url}}/{{item.lang_content.prefix}}&title={{item.lang_content.title}}"
@@ -51,10 +55,11 @@
                                     </div>
                                 </div><!-- #post-111 --> <!-- navigation -->
                                 <div class="mil-post-navigation"> <!-- button --> <a
-                                        href="#!"
+                                        href="#!" aria-label="Previous"
                                         class="mil-link"> <i class="fas fa-chevron-left"></i> <span>Previous</span> </a>
                                     <div class="mil-post-navigation-center mil-m-hidden"> <a class="mil-link"
                                             href="/blog">All posts</a></div> <!-- button --> <a
+                                            aria-label="Next"
                                         href="#!"
                                         class="mil-link"> <span>Next</span> <i class="fas fa-chevron-right"></i> </a>
                                 </div> <!-- projects navigation end -->
@@ -105,3 +110,65 @@
 
                 </div>
             </div>
+
+ <script type="application/ld+json">
+ {
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "name": "{{item.lang_content.title}}",
+    "headline": "{{item.lang_content.seo_title ?? item.lang_content.title}}",
+    "author": {
+        "@type": "Person",
+        "name": "{{item.author.name}}"
+    },
+    "datePublished": "{{item.created_at|date('Y-m-d')}}",
+    "image": "{{app.CONF.url}}/stream?thumbnail=400&image={{item.picture_name}}",
+    "articleSection": "Blog",
+    "articleBody": [
+        "{{item.lang_content.content}}"
+    ],
+    "url": "{{app.CONF.url}}/{{item.lang_content.prefix}}"
+}
+ </script>
+
+ <script data-schema="Organization" type="application/ld+json">
+ 
+{
+    "@context": "http://schema.org",
+    "@type": "Corporation",
+    "name": "{{app.SystemSetting.sitename}}",
+    "url": "{{app.CONF.url}}/",
+    "logo": "{{app.CONF.url}}/stream?image=logo.png&thumbnail=600&dir=img",
+    "contactPoint": [
+        {
+            "@type": "ContactPoint",
+            "telephone": "{{app.SystemSetting.footer_phone}}",
+            "contactType": "Customer service",
+            "email": "{{app.SystemSetting.footer_email}}"
+        }
+    ],
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "{{app.CONF.url}}/search?key={key}",
+        "query-input": "required name=key"
+    },
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "{{app.SystemSetting.footer_address}}",
+        "addressLocality": "ُمصر",
+        "postalCode": "12611",
+        "addressCountry": "مصر"
+    },
+    "sameAs": [
+        "{{app.SystemSetting.facebook_link}}",
+        "{{app.SystemSetting.twitter_link}}",
+        "{{app.SystemSetting.instagram_link}}",
+        "{{app.SystemSetting.linkedin_link}}",
+        "{{app.SystemSetting.behance_link}}",
+        "{{app.SystemSetting.youtube_link}}"
+    ]
+}
+
+
+ </script>
+

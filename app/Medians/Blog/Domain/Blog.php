@@ -25,11 +25,11 @@ class Blog extends CustomModel
 	];
 
 
-	public $appends = ['title','photo','field','category_name','date', 'update_date','class_name', 'picture_name'];
+	public $appends = ['name', 'title', 'photo','field','category_name','date', 'update_date','class_name', 'picture_name'];
 
 	public function getPictureNameAttribute() 
 	{
-		$e = explode('/', $this->picture);
+		$e = $this->picture ? explode('/', $this->picture) : [];
 		return end($e);
 	}
 
@@ -38,9 +38,14 @@ class Blog extends CustomModel
 		return 'Blog';
 	}
 
+	public function getNameAttribute() 
+	{
+		return !empty($this->lang_content->title) ? $this->lang_content->title : '';
+	}
+
 	public function getTitleAttribute() 
 	{
-		return !empty($this->content->title) ? $this->content->title : '';
+		return !empty($this->lang_content->title) ? $this->lang_content->title : '';
 	}
 
 	public function getCategoryNameAttribute() 
@@ -60,7 +65,7 @@ class Blog extends CustomModel
 
 	public function getDateAttribute() : ?String
 	{
-		return date('Y-m-d', strtotime($this->created_at));
+		return $this->created_at ? date('Y-m-d', strtotime($this->created_at)) : '';
 	}
 	
 	public function getUpdateDateAttribute() 
@@ -112,7 +117,7 @@ class Blog extends CustomModel
 	public function thumbnail() 
 	{
 		
-    	$return = str_replace('/images/', '/thumbnails/', str_replace(['.png','.jpg','.jpeg'],'.webp', $this->picture));
+    	$return = $this->picture ? str_replace('/images/', '/thumbnails/', str_replace(['.png','.jpg','.jpeg'],'.webp', $this->picture)) : '';
     	return is_file($return) ? $return : $this->picture;
 	}
 

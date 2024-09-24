@@ -33,7 +33,7 @@ class View extends CustomModel
 
 	public function item()
 	{
-		return $this->morphTo();
+		return $this->morphTo()->with('lang_content');
 	}
 
 	public static function itemViews($item, $item_id, $start, $end)

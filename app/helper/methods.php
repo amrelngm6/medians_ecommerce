@@ -293,6 +293,52 @@ function curLng()
     return $_SESSION['lang'] ?? $app->lang;
 }
 
+function resizeImageToWebP($sourcePath, $destinationPath, $newWidth) {
+    // Determine the image type
+    $imageInfo = getimagesize($sourcePath);
+    $mimeType = $imageInfo['mime'];
+
+    // Load the image based on its type
+    switch ($mimeType) {
+        case 'image/jpeg':
+            $image = imagecreatefromjpeg($sourcePath);
+            break;
+        case 'image/png':
+            $image = imagecreatefrompng($sourcePath);
+            break;
+        default:
+            die('Unsupported image type.');
+    }
+
+    
+    // Get original dimensions
+    list($width, $height) = getimagesize($sourcePath);
+
+    // Calculate new height to maintain aspect ratio
+    $aspectRatio = $height / $width;
+    $newHeight = $newHeight ?? ($newWidth * $aspectRatio);
+
+    // Create a new true color image
+    $resizedImage = imagecreatetruecolor($newWidth, $newHeight);
+
+    // For PNG files, preserve transparency
+    if ($mimeType == 'image/png') {
+        imagealphablending($resizedImage, false);
+        imagesavealpha($resizedImage, true);
+    }
+
+    // Resize the image
+    imagecopyresampled($resizedImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+    // Save the resized image as WebP
+    imagewebp($resizedImage, $destinationPath, 80); // Quality can be between 0-100
+
+    // Free up memory
+    imagedestroy($image);
+    imagedestroy($resizedImage);
+}
+
+
 /**
  * Secure the inputs from XSS vulneribility
  * Save from cyber attacks
