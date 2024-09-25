@@ -183,6 +183,7 @@ class MediaRepository
 		{
 			return str_replace($_SERVER['DOCUMENT_ROOT'], '', $output);
 		} else {
+			echo($_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
 			shell_exec($_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
 			// shell_exec('ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
     	}
