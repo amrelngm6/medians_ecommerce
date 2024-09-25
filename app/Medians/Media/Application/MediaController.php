@@ -93,16 +93,17 @@ class MediaController extends CustomController
 		{
 			$resized = $this->repo->resize($filepath, $isThumbnail, $h > 0 ? $h : '-1');
 			$filepath = is_file($_SERVER['DOCUMENT_ROOT'].$resized) ? $resized : $filepath;
+			// echo $filepath;
 		}
-
 		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
 		{
+			return ;
 
 			$ext = explode('.', $filepath);
 			// Set the caching headers
 			$expires = 60 * 60 * 24 * 7; // 1 week (in seconds)
-			// header("Cache-Control: public, max-age=$expires");
-			// header("Expires: " . gmdate("D, d M Y H:i:s", time() + $expires) . " GMT");
+			header("Cache-Control: public, max-age=$expires");
+			header("Expires: " . gmdate("D, d M Y H:i:s", time() + $expires) . " GMT");
 
 			// Serve the CSS file
 			$extension = "image/".end($ext);

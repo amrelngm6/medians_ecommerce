@@ -178,13 +178,15 @@ class MediaRepository
 
     	$filepath = $_SERVER['DOCUMENT_ROOT'].$file;
     	$output = str_replace(['/images/','/img/'], '/thumbnails/', str_replace(['.png','.jpg','.jpeg', '.webp'], $w.'.webp', $filepath));
-
+		echo $filepath;
+		echo $output;
+		return;
 		if (is_file($output))
 		{
 			return str_replace($_SERVER['DOCUMENT_ROOT'], '', $output);
 		} else{
 			shell_exec($_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
-			// shell_exec('ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
+			shell_exec('ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
     	}
 
 		return str_replace($_SERVER['DOCUMENT_ROOT'], '', $output);
