@@ -97,7 +97,6 @@ class MediaController extends CustomController
 		}
 		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
 		{
-			return ;
 
 			$ext = explode('.', $filepath);
 			// Set the caching headers
