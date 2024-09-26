@@ -74,7 +74,7 @@ RouteHandler::get('/search/audiobook', \Medians\Media\Application\AudiobookContr
 RouteHandler::get('/search/artist', \Medians\Channels\Application\ChannelController::class.'@search');
 RouteHandler::get('/studio', \Medians\Media\Application\MediaItemController::class.'@studio');
 RouteHandler::get('/studio/media', \Medians\Media\Application\MediaItemController::class.'@studio_media');
-RouteHandler::get('/studio/playlists', \Medians\Media\Application\MediaItemController::class.'@studio_playlists');
+RouteHandler::get('/studio/playlist', \Medians\Media\Application\MediaItemController::class.'@studio_playlists');
 RouteHandler::get('/studio/audio_books', \Medians\Media\Application\AudiobookController::class.'@studio_audiobooks');
 RouteHandler::get('/studio/profile', \Medians\Customers\Application\CustomerController::class.'@edit_profile');
 RouteHandler::get('/genre/(:all)', \Medians\Media\Application\MediaItemController::class.'@genre');
