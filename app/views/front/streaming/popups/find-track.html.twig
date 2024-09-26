@@ -31,7 +31,7 @@
                                             </span>
                                         </div>
                                     </form>
-                                     <form action="/front_api/crete" class="flex items-center max-w-lg mx-auto ajax-form" id="new-station-item">   
+                                     <form action="/front_api/create" class=" max-w-lg mx-auto ajax-form" id="new-station-item">   
                                         <input type="hidden" name="type" value="StationMedia.create" />
                                         <input type="hidden" name="params[station_id]" id="station-id" value="" />
                                         <input type="hidden" name="params[start_at]" value="" id="stationMediaStart" />
@@ -41,6 +41,12 @@
                                             <nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="search-result-popup">
                                                 
                                             </nav>
+                                        </div>
+                                        <div class="text-center w-full py-2">
+                                            <button type="submit" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
+                                                <div class="absolute inset-0 w-3 bg-purple-800 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+                                                <span class="relative text-black group-hover:text-white">{{lang.translate('Send')}}</span>
+                                            </button>
                                         </div>
                                     </form>
                                 </div>
