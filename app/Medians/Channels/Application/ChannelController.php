@@ -197,6 +197,29 @@ class ChannelController extends CustomController
 			throw new \Exception($e->getMessage(), 1);
 		}
     }
+	
+    
+    /**
+     * search Channels list page for frontend
+     */
+    public function search()
+    {
+		$this->app = new \config\APP;
+
+		$settings = $this->app->SystemSetting();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/pages/search/search.html.twig', [
+                'app' => $this->app,
+                'channels' => $this->repo->get(),
+                'layout' => 'artist'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
 
 
 }

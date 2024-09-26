@@ -297,7 +297,7 @@ class PageController extends CustomController
 		$categoryRepo = new \Medians\Categories\Infrastructure\CategoryRepository;
 		$mediaItemRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
 
-        $params['limit'] = $settings['category_products_count'] ?? null;
+        $params['limit'] = $settings['view_items_limit'] ?? null;
         $params['type'] = 'audio';
         $list = $mediaItemRepo->getWithFilter($params);
         

@@ -39,6 +39,71 @@ class PlaylistRepository
 	}
 
 
+	
+	/**
+	 * Load items with filters
+	 */
+	public function getWithFilter($params)
+	{
+
+			$model = Playlist::
+            // where('status', 'on')->
+			with('items');
+
+			if (isset($params['likes']) && isset($params['customer_id']))
+			{
+				$model->whereHas('likes', function($q) use ($params) {
+					$q->where('customer_id', $params['customer_id'] );
+				});
+			}
+
+			if (!empty($params['title']))
+			{
+				$model = $model->where('name', 'LIKE', '%'.$params['title'].'%');
+			}
+
+			if (!empty($params['sort_by']))
+			{
+				switch ($params['sort_by']) {
+					case 'best':
+						$model = $model->withCount('views')->orderBy('views_count','DESC');
+						break;
+						
+					case 'old':
+						$model = $model->orderBy('playlist_id','ASC');
+						break;
+						
+					// default:
+					case 'new':
+						$model = $model->orderBy('playlist_id','DESC');
+						break;
+				}
+			}
+
+			if (!empty($params['date']))
+			{
+				switch (strtolower($params['date'])) {
+					case 'day':
+					case 'week':
+					case 'month':
+					case 'year':
+						$model = $model->whereBetween('created_at', [ date('Y-m-d', strtotime("-1 ".$params['date'])) , date('Y-m-d')]);
+						break;
+						
+					default:
+						$model = $model->orderBy('playlist_id','DESC');
+						break;
+				}
+			}
+
+			$totalCount = $model->count();
+
+			$offset = (($params['limit'] ?? 1) * (!empty($params['page']) ? floatval( $params['page'] - 1)  : 0));
+			return ['count' => $totalCount, 'items'=>$model->offset($offset)->limit(floatval($params['limit']))->get()];
+	 }
+ 
+	
+
 
 
 	/**

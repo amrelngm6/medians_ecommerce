@@ -261,4 +261,36 @@ class PlaylistController extends CustomController
 		}
     }
 
+
+	
+    
+    /**
+     * Discover page for frontend
+     */
+    public function search()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $params = $this->app->params();
+
+        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['type'] = 'audiobook';
+        $list = $this->repo->getWithFilter($params);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'list' => $list,
+                'genres' => $this->categoryRepo->getBookGenres(),
+                'layout' => 'search/search',
+                'sub_layout' => 'audiobook',
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+	
 }

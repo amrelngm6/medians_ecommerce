@@ -45,7 +45,7 @@ class AudiobookController extends CustomController
         $customer = $this->app->customer_auth();
 		$params = $this->app->params();
         
-        $params['limit'] = $settings['category_products_count'] ?? null;
+        $params['limit'] = $settings['view_items_limit'] ?? null;
         $params['author_id'] = $customer->customer_id ?? 0;
         $params['type'] = 'audiobook';
         $list = $this->repo->getWithFilter($params);
@@ -99,7 +99,7 @@ class AudiobookController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = $settings['category_products_count'] ?? null;
+        $params['limit'] = $settings['view_items_limit'] ?? null;
         $params['type'] = 'audiobook';
         $list = $this->repo->getWithFilter($params);
         
@@ -219,7 +219,7 @@ class AudiobookController extends CustomController
             if (empty($item->category_id))
     			throw new \Exception(translate('Page not found'), 1);
 
-            $params['limit'] = $settings['category_products_count'] ?? null;
+            $params['limit'] = $settings['view_items_limit'] ?? null;
             $params['genre'] = $item->category_id;
             $list = $this->repo->getWithFilter($params);
             
@@ -425,7 +425,7 @@ class AudiobookController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = $settings['category_products_count'] ?? null;
+        $params['limit'] = $settings['view_items_limit'] ?? null;
         $params['type'] = 'audiobook';
         $list = $this->repo->getWithFilter($params);
         
@@ -435,7 +435,8 @@ class AudiobookController extends CustomController
                 'app' => $this->app,
                 'list' => $list,
                 'genres' => $this->categoryRepo->getBookGenres(),
-                'layout' => 'search'
+                'layout' => 'search/search',
+                'sub_layout' => 'audiobook',
             ], 'output'));
             
 		} catch (\Exception $e) {

@@ -312,7 +312,7 @@ class ProductController extends CustomController
 	{
 		$params = $this->app->params();
 		$settings = $this->app->SystemSetting();
-		$params['limit'] = $settings['category_products_count'] ?? 4;
+		$params['limit'] = $settings['view_items_limit'] ?? 4;
 		$data = $this->repo->getWithFilter($params);
 		echo render('/views/front/'.$settings['template'].'/blocks/list_category_product.html.twig', [
 			'products'=> $data['items'],
@@ -327,7 +327,7 @@ class ProductController extends CustomController
 	{
 		$params = $this->app->params();
 		$settings = $this->app->SystemSetting();
-		$params['limit'] = $settings['category_products_count'] ?? 4;
+		$params['limit'] = $settings['view_items_limit'] ?? 4;
 		$data = !empty($params['title']) ? $this->repo->getWithFilter($params) : ['items'=>null, 'count'=>0];
 		echo render('/views/front/'.$settings['template'].'/blocks/search_product.html.twig', [
 			'products'=> $data['items'],
