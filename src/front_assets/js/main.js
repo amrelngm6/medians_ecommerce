@@ -14,6 +14,13 @@ jQuery(document).on('change', 'input', function (e) {
     }, 100);
 });
 
+jQuery(document).on('change', 'input.search', function (e) {
+    setTimeout(() => {
+        link = '?' + jQuery(this).attr('name')+'='+jQuery(this).val();
+        jQuery(this).val() ? loadPage(link, '') : null;
+    }, 100);
+});
+
 jQuery(document).on('submit', '.ajax-form', function (e) {
     e.preventDefault();
     console.log(e.target)
