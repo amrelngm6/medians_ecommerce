@@ -10,7 +10,6 @@
     <form action="/front_api/update" class="ajax-form" id="calendar-form">
         <input type="hidden" name="type" value="StationMedia.update" />
         <input type="hidden" name="params[station_media_id]" value="" id="stationMediaId" />
-        <input type="hidden" name="params[start_at]" value="" id="stationMediaStart" />
     </form>
     <div id="slider-container">
         <label for="slotDurationRange">Slot Duration (minutes): </label>
@@ -46,16 +45,20 @@
                 ],
 
                 dateClick: function(info) {
+                    console.log(info)
+                    jQuery('#station-id').val(info.id)
                     jQuery('#find-track-popup').toggleClass('hidden')
+
                     console.log('Date: ' + info.dateStr.substr(0, 10));
-                    console.log('Time: ' + info.dateStr.substr(11, 8));
+                    console.log('Time: ' + );
                 },
                 
                 eventDragStop: function(info) {
                     jQuery("#stationMediaId").val(info.event.id);
                 },
                 eventDrop: function(info) {
-                        jQuery("#stationMediaStart").val(info.event.startStr.substr(11, 8));
+                    jQuery("#stationMediaStart").val(info.event.startStr.substr(11, 8));
+                    jQuery("#stationMediaStartDate").val(info.event.startStr.substr(0, 10));
                     setTimeout(function(){
 
                         jQuery("#stationMediaId").parent('form').submit();
