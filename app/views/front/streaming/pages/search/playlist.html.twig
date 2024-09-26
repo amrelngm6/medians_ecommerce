@@ -10,8 +10,7 @@
                         </div>
                         <hr class="opacity-30" />
                         <div class="w-full p-8">
-                                
-                            {% for playlist in items %}
+                            {% for playlist in search_list.items %}
                             <div class="my-4 h-full lg:flex overflow-hidden rounded-2xl">                     
                             
                                 <div class="overflow-hidden w-full lg:w-96 " >
@@ -55,7 +54,7 @@
                             </div>
                             {% endfor %}
                         </div>
-                        
+                        {% set list = search_list %}
                         {% include 'views/front/' ~ template ~ '/includes/pagination.html.twig' %}
                         
                     </div>  

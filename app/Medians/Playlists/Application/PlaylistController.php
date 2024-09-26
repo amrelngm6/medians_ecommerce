@@ -282,7 +282,7 @@ class PlaylistController extends CustomController
         {
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-                'items' => $list,
+                'search_list' => $list,
                 'layout' => 'search/search',
                 'sub_layout' => 'playlist',
             ], 'output'));

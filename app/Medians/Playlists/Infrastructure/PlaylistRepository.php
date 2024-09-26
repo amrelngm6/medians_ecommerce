@@ -53,7 +53,7 @@ class PlaylistRepository
 
 			if (isset($params['likes']) && isset($params['customer_id']))
 			{
-				$model->whereHas('likes', function($q) use ($params) {
+				$model = $model->whereHas('likes', function($q) use ($params) {
 					$q->where('customer_id', $params['customer_id'] );
 				});
 			}
@@ -100,7 +100,7 @@ class PlaylistRepository
 			$totalCount = $model->count();
 
 			$offset = (($params['limit'] ?? 1) * (!empty($params['page']) ? floatval( $params['page'] - 1)  : 0));
-			return ['count' => $totalCount, 'items'=>$model->offset($offset)->limit(floatval($params['limit'] ?? 4))->get()];
+			return ['count' => $totalCount, 'items'=>$model->offset($offset)->limit(floatval($params['limit']))->get()];
 	 }
  
 	
