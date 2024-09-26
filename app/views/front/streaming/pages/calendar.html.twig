@@ -12,7 +12,13 @@
         <input type="hidden" name="params[station_media_id]" value="" id="stationMediaId" />
         <input type="hidden" name="params[start_at]" value="" id="stationMediaStart" />
     </form>
-    <div id='calendar'></div>
+    <div id="slider-container">
+        <label for="slotDurationRange">Slot Duration (minutes): </label>
+        <input type="range" id="slotDurationRange" min="1" max="60" step="2" value="30">
+        <span id="durationValue">30</span> minutes
+    </div>
+
+    <div id='calendar' style="max-height:calc(100vh - 135px)"></div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.js" integrity="sha512-3I+0zIxy2IkeeCvvhXUEu+AFT3zAGuHslHLDmM8JBv6FT7IW6WjhGpUZ55DyGXArYHD0NshixtmNUWJzt0K32w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -20,7 +26,7 @@
 
             const calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'timeGridDay',
-                slotDuration: '00:02:00', // Time slots every 30 minutes
+                slotDuration: '00:05:00', // Time slots every 30 minutes
                 allDaySlot: false, // Disable all-day slot
                 editable: true,
                 droppable: true, 
@@ -61,5 +67,19 @@
             });
 
             calendar.render();
+
+            var slider = document.getElementById('slotDurationRange');
+            var durationValue = document.getElementById('durationValue');
+
+            slider.addEventListener('input', function() {
+                var newDuration = slider.value;
+                durationValue.textContent = newDuration;
+                
+                // Convert the slider value to the appropriate format for slotDuration (HH:mm:ss)
+                var slotDuration = '00:' + (newDuration.length === 1 ? '0' : '') + newDuration + ':00';
+                
+                // Reconfigure the calendar with the new slotDuration
+                calendar.setOption('slotDuration', slotDuration);
+            });
         });
     </script>
