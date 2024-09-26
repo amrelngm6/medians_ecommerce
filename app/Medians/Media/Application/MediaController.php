@@ -289,6 +289,7 @@ class MediaController extends CustomController
 		$filePath = $_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path;
 
 		echo $stationMedia->start_at;
+		echo date('H:i:s');
 		echo $filePath;
 		echo $startTime;
 		return;
