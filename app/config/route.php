@@ -82,6 +82,7 @@ RouteHandler::get('/genre/(:all)', \Medians\Media\Application\MediaItemControlle
 RouteHandler::get('/book_genre/(:all)', \Medians\Media\Application\AudiobookController::class.'@genre');
 RouteHandler::get('/artist/(:all)', \Medians\Customers\Application\CustomerController::class.'@artist');
 RouteHandler::get('/playlist/(:all)', \Medians\Playlists\Application\PlaylistController::class.'@playlist');
+RouteHandler::get('/stations', \Medians\Stations\Application\StationController::class.'@stations');
 RouteHandler::get('/station/(:all)/calendar', \Medians\Stations\Application\StationController::class.'@calendar');
 RouteHandler::get('/station/(:all)', \Medians\Stations\Application\StationController::class.'@station');
 
