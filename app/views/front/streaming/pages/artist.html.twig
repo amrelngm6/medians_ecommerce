@@ -53,8 +53,7 @@
 					<span>{{lang.translate('Artist')}}</span>
 					<h1 class="lg:text-2xl text-lg ">{{item.name}}</h1>
 					<div class="py-2 font-thin">
-						<p class="truncate-text truncate">{{item.description |replace({"
-":' ', "\r":' '})}}
+						<p class="truncate-text truncate">{{item.description |nl2br }}
 						</p>
 					</div>
 					{% if item.customer_id == app.customer.customer_id %}
