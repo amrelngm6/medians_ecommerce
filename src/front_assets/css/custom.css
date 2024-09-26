@@ -1087,7 +1087,6 @@ Down
   /* IE 10+ */
   -webkit-overflow-scrolling: touch;
   margin: 0 -20px;
-  padding-bottom: 80px ;
 }
 .hs__header {
   display: flex;
