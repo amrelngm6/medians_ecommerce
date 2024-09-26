@@ -186,6 +186,7 @@ class FrontAPIController extends CustomController
 				$controller = new Customers\Application\CustomerController;
 				break;
 			
+			case 'Mediaitem.update':
 			case 'MediaItem.update':
 				$controller = new Media\Application\MediaItemController;
 				break;
