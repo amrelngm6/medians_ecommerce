@@ -1,29 +1,26 @@
                     <div class="w-full lg:flex gap-4  pt-8">
                         
                         {% include 'views/front/' ~ template ~ '/includes/genres_section.html.twig' %}
-                              
 
-                        <div class="min-w-96  relative  mb-4">
+                        <div class="min-w-64  relative  mb-4">
                             <div class="relative p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-md  overflow-hidden ">
                                 <div class="w-full  border-1 text-primary ">
                                     <div class="w-full text-xl font-bold tracking-wide dark:text-gray-400"> {{lang.translate('Top Authors')}}</div>
                                     <p class="text-gray-500 py-2">{{lang.translate('Trends of this month')}}</p>
                                 </div>
                                 <hr class="dark:opacity-0" />
-                                <div class="relative overflow-hidden rounded-full ">
-
-                                    <div class="py-4 channel-slider flex">
-                                        {% for channel in channels  %}
-
-                                        <div  class="transition hover:text-orange-500 p-4 text-center flex gap-4">
-                                            <img class="rounded-full " src="/uploads/img/60x60.png" />
-                                            <p>
-                                                <a class="font-semibold text-lg pt-4 block">{{channel.name}}</a>
-                                                <span class="flex gap-2 text-gray-500"> 20</span>
-                                                <span class="flex gap-2  text-gray-500">$% 90</span>
-                                            </p>
-                                        </div>
-                                        {% endfor %}
+                                <div class="relative overflow-hidden rounded-full py-4  flex  min-h-40">
+                                    <div class="scroll-transition absolute left-0 top-0  flex gap-2 w-full " style="width:max-content">
+                                            {% for channel in channels  %}
+                                            <div class="min-h-[180px] w-auto  hover:text-orange-500 p-4 text-center flex gap-4">
+                                                <img class="rounded-full w-20 h-20" src="/uploads/img/60x60.png" />
+                                                <p>
+                                                    <a class="font-semibold text-lg pt-4 block">{{channel.name}}</a>
+                                                    <span class="flex gap-2 text-gray-500"> 20</span>
+                                                    <span class="flex gap-2  text-gray-500">$% 90</span>
+                                                </p>
+                                            </div>
+                                            {% endfor %}
                                     </div>
                                 </div>
                                 <p class="py-2"><a class="text-primary transition hover:text-orange-500" href="/channels">{{lang.translate('More channels')}}</a></p>

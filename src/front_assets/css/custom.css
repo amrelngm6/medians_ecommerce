@@ -1210,3 +1210,12 @@ Down
   }
 }
 
+.scroll-transition
+{
+  left: 0;
+  animation: scroll 10s linear 1s infinite;
+}
+
+@keyframes scroll {
+	100% { left: -100%; }
+}

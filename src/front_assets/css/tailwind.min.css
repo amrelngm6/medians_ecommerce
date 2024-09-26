@@ -653,14 +653,6 @@ video {
   bottom: 2.5rem;
 }
 
-.bottom-20 {
-  bottom: 5rem;
-}
-
-.bottom-40 {
-  bottom: 10rem;
-}
-
 .end-0 {
   inset-inline-end: 0px;
 }
@@ -683,10 +675,6 @@ video {
 
 .left-4 {
   left: 1rem;
-}
-
-.left-40 {
-  left: 10rem;
 }
 
 .left-\[16px\] {
@@ -811,6 +799,10 @@ video {
 
 .z-20 {
   z-index: 20;
+}
+
+.z-30 {
+  z-index: 30;
 }
 
 .z-50 {
@@ -1345,6 +1337,10 @@ video {
   min-height: 5rem;
 }
 
+.min-h-40 {
+  min-height: 10rem;
+}
+
 .min-h-\[180px\] {
   min-height: 180px;
 }
@@ -1395,6 +1391,10 @@ video {
 
 .w-3 {
   width: 0.75rem;
+}
+
+.w-3\/4 {
+  width: 75%;
 }
 
 .w-32 {
@@ -1475,10 +1475,6 @@ video {
 
 .min-w-8 {
   min-width: 2rem;
-}
-
-.min-w-96 {
-  min-width: 24rem;
 }
 
 .min-w-\[160px\] {
