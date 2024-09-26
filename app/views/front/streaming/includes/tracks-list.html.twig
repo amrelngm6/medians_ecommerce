@@ -20,7 +20,7 @@
             
                                                 <div class="p-1 text-gray-500" x-text="convertToTime({{media_item.field.duration}})"></div>
                                                 <div class="w-4 relative">
-                                                    <span onclick="(function(){ return jQuery('#activeItemId').val('{{media_item.media_id}}'), jQuery('#track-options-cover').css('background-image', 'url(/stream?thumbnail=600&image={{media_item.picture_name}})' ), jQuery('#activeItemPicture').val('{{media_item.picture_name}}'),  jQuery('#track-options-popup').toggleClass('hidden'); })();return false;" class=" cursor-pointer dark:text-gray-100 leading-5 text-xl font-extrabold" >...</span>
+                                                    <span onclick="(function(){ return jQuery('#activeItemId').val('{{media_item.media_id}}'), jQuery('#activeItemPicture').val('{{media_item.picture_name}}'),  jQuery('#track-options-cover').css('background-image', 'url(/stream?thumbnail=600&image={{media_item.picture_name}})' ),  jQuery('#track-item-title').html('{{media_item.name}}'), jQuery('#track-options-popup').toggleClass('hidden'); })();return false;" class=" cursor-pointer dark:text-gray-100 leading-5 text-xl font-extrabold" >...</span>
                                                 </div>
                                                 
                                             </div>
