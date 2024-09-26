@@ -44,13 +44,16 @@
                     {% endfor %}
                 ],
 
-                dateClick: function(info) {
+                dateClick: function(info, i) {
                     console.log(info)
+                    console.log(i)
                     jQuery('#station-id').val(info.id)
+                    
+                    jQuery("#stationMediaStart").val(info.dateStr.substr(11, 8));
+                    jQuery("#stationMediaStartDate").val(info.dateStr.substr(0, 10));
                     jQuery('#find-track-popup').toggleClass('hidden')
 
                     console.log('Date: ' + info.dateStr.substr(0, 10));
-                    console.log('Time: ' + );
                 },
                 
                 eventDragStop: function(info) {
