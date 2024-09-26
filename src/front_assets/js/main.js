@@ -147,6 +147,7 @@ function loadPage(path, title = '' ) {
                 reloadFuncs()
             }, 500)
             jQuery('#page-loader').addClass('hidden')
+            window.scrollTo({top: 0, behavior: 'smooth'});
 
         },
         error: function (xhr, status, error) {
