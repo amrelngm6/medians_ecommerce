@@ -208,13 +208,16 @@ class ChannelController extends CustomController
 
 		$settings = $this->app->SystemSetting();
 
+        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $list = $this->repo->getWithFilter($params);
+
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-                'channels' => $this->repo->get(),
+                'list' => $list,
                 'layout' => 'search/search',
-                'sub_layout' => 'playlist',
+                'sub_layout' => 'artist',
             ], 'output'));
             
 		} catch (\Exception $e) {
