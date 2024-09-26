@@ -193,8 +193,25 @@ class MediaController extends CustomController
 
 	public function stream_station()
 	{
+		
+		date_default_timezone_set('Africa/Cairo');
+
 		$this->app = new \config\APP;
-		$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
+		$stationId = $this->app->request()->get('station_id');
+
+		$stationRepo = new \Medians\Stations\Infrastructure\StationRepository; 
+		$stationMedia = $stationRepo->findMedia($stationId);
+		$distance = floatval(strtotime($stationMedia->start_at) - time());
+		print_r(date('H:i:s'));
+		print_r($stationMedia->start_at);
+		echo date_default_timezone_get();
+
+		$first  = new \DateTime( date('H:i:s') );
+		$second = new \DateTime( $stationMedia->start_at ?? date('H:i:s')  );
+
+		$diff = $first->diff( $second )->format( '%H:%I:%S' );
+		echo $diff;
+		return;
 		// $startTime = 
 
 		$item = $this->mediaRepo->findByFile($filepath);

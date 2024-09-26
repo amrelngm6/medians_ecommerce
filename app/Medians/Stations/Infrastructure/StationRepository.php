@@ -23,6 +23,11 @@ class StationRepository
 		return Station::with('items')->withCount('likes')->find($id);
 	}
 
+	public function findMedia($id)
+	{
+		return StationMedia::with('media')->where('station_id', $id)->first();
+	}
+
 	public function get($limit = 1000)
 	{
 		return Station::withCount('likes')->with('items')->limit($limit)->get();

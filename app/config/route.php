@@ -386,6 +386,7 @@ RouteHandler::get('/assets', \Medians\Media\Application\MediaController::class.'
  */
 RouteHandler::get('/stream', \Medians\Media\Application\MediaController::class.'@stream'); 
 RouteHandler::get('/stream_audio', \Medians\Media\Application\MediaController::class.'@stream_audio'); 
+RouteHandler::get('/stream_station', \Medians\Media\Application\MediaController::class.'@stream_station'); 
 
 /**
  * Load sub-pages
