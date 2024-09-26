@@ -277,12 +277,12 @@ class PlaylistController extends CustomController
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
         $list = $this->repo->getWithFilter($params);
-        
+
 		try 
         {
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-                'list' => $list,
+                'items' => $list,
                 'layout' => 'search/search',
                 'sub_layout' => 'playlist',
             ], 'output'));
