@@ -145,7 +145,7 @@ class FrontAPIController extends CustomController
 					break;
 		
 				case 'StationMedia.create':
-					$return = (new Stations\Application\StationController)->store_item();
+					$return = (new Stations\Application\StationController)->add_item();
 					break;
 		
 			}

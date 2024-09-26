@@ -20,35 +20,7 @@
             
                                                 <div class="p-1 text-gray-500" x-text="convertToTime({{media_item.field.duration}})"></div>
                                                 <div class="w-4 relative">
-                                                    <span class="active-parent cursor-pointer dark:text-gray-100 leading-5 text-xl font-extrabold" >...</span>
-                                                    <div class="show-active active-child hidden z-20 rounded-2xl w-40 right-0 top-10 absolute bg-white dark:bg-gray-900 dark:text-gray-400 p-4 ">
-                                                        <a  class="cursor-pointer flex w-full gap-2 py-2"  x-on:click="selected_genres.push(genre)" >
-                                                            <img src="/src/front_assets/svg/play-next.svg" width="24" />
-                                                            <span class="w-full text-xs pt-1">{{lang.translate('Add to Queue')}}</span>
-                                                        </a>
-                                                        <hr class="opacity-50" />
-                                                        <a  class="cursor-pointer flex w-full gap-2 py-2"   x-on:click="selected_genres.push(genre)" >
-                                                            <img src="/src/front_assets/svg/download.svg" width="24" />
-                                                            <span class="w-full text-xs pt-1">{{lang.translate('Download')}}</span>
-                                                        </a>
-                                                        <hr class="opacity-50" />
-                                                        {% if playlist_item.media_id %}
-                                                        <a  class="cursor-pointer flex w-full gap-2 py-2 ajax-link" data-confirm="{{lang.translate('Confirm delete')}}" data-confirm-text="{{lang.translate('Delete this item from playlist')}}" href="/front_api/delete?type=PlaylistItem.delete&params[playlist_media_id]={{playlist_item.playlist_media_id}}">
-                                                            <img src="/src/front_assets/svg/queue_list.svg" width="24" />
-                                                            <span class="w-full text-xs pt-1">{{lang.translate('Remove from playlist')}}</span>
-                                                        </a>
-                                                        {% else %}
-                                                        <a  class="cursor-pointer flex w-full gap-2 py-2"   x-on:click="jQuery('#add-playlist-cover').css('background-image', 'url( /stream?thumbnail=800&image={{media_item.picture_name}} )'); jQuery('#add-playlist-media').val({{media_item.media_id}}); jQuery('#add-playlist-popup').removeClass('hidden')" >
-                                                            <img src="/src/front_assets/svg/queue_list.svg" width="24" />
-                                                            <span class="w-full text-xs pt-1">{{lang.translate('Add to playlist')}}</span>
-                                                        </a>
-                                                        {% endif %}
-                                                        <hr class="opacity-50" />
-                                                        <a  class="cursor-pointer flex w-full gap-2 py-2"   x-on:click="selected_genres.push(genre)" >
-                                                            <img src="/src/front_assets/svg/playlist.svg" width="24" />
-                                                            <span class="w-full text-xs pt-1">{{lang.translate('View')}}</span>
-                                                        </a>
-                                                    </div>
+                                                    <span onclick="(function(){ return jQuery('#track-options-popup{{media_item.media_id}}').toggleClass('hidden'); })();return false;" class=" cursor-pointer dark:text-gray-100 leading-5 text-xl font-extrabold" >...</span>
                                                 </div>
                                                 
                                             </div>
@@ -57,5 +29,7 @@
                                                 <img id="wave-{{media_item.media_id}}" class="w-full left-0 top-0 bottom-0 my-auto absolute" src="/stream?thumbnail=1000&dir=audio&image={{media_item.main_file.wave}}" />
                                                 <div id="wave-overlay{{media_item.media_id}}"  class="absolute w-full h-full top-0 right-0 dark:bg-gray-900 opacity-50 bg-white z-50"> </div>
                                             </div>
+
+                                            {% include 'views/front/'~ template ~'/popups/track-options.html.twig' %}
                                         </li>
                                                 
