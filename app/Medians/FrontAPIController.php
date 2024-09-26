@@ -264,7 +264,7 @@ class FrontAPIController extends CustomController
 					break;
 				
 				case 'PlaylistItem.delete':
-					return printResponse((new Playlists\Application\PlaylistController())->delete());
+					return printResponse((new Playlists\Application\PlaylistController())->deleteItem());
 					break;
 				
 			

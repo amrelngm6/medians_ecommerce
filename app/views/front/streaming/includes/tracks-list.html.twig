@@ -33,7 +33,7 @@
                                                         </a>
                                                         <hr class="opacity-50" />
                                                         {% if playlist_item.media_id %}
-                                                        <a  class="cursor-pointer flex w-full gap-2 py-2"  href="/front_api/delete?type=PlaylistItem.delete&params[playlist_media_id]={{playlist_item.playlist_media_id}}">
+                                                        <a  class="cursor-pointer flex w-full gap-2 py-2 ajax-link" data-confirm="{{lang.translate('Confirm delete')}}" data-confirm-text="{{lang.translate('Delete this item from playlist')}}" href="/front_api/delete?type=PlaylistItem.delete&params[playlist_media_id]={{playlist_item.playlist_media_id}}">
                                                             <img src="/src/front_assets/svg/queue_list.svg" width="24" />
                                                             <span class="w-full text-xs pt-1">{{lang.translate('Remove from playlist')}}</span>
                                                         </a>

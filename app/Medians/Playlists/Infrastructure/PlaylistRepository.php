@@ -132,7 +132,7 @@ class PlaylistRepository
 	{
 		try {
 			
-			return PlaylistItem::find($id)->delete();
+			return PlaylistMedia::find($id)->delete();
 
 		} catch (\Exception $e) {
 
