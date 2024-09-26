@@ -18,7 +18,7 @@
                                 <div class="z-20 rounded-2xl w-full  bg-white dark:bg-gray-900 dark:text-gray-400 p-4 ">
                                     
                                     {% if app.customer_auth %}
-                                    <p  class="cursor-pointer flex w-full gap-2 py-2"   x-on:click="(function(){ return jQuery('#add-playlist-popup').removeClass('hidden'),  jQuery('#add-playlist-cover').css('background-image', 'url( /stream?thumbnail=800&image={{media_item.picture_name}} )'), jQuery('#add-playlist-media').val({{media_item.media_id}}),  jQuery('#track-options-popup{{media_item.media_id}}').addClass('hidden');  })();return false;" >
+                                    <p  class="cursor-pointer flex w-full gap-2 py-2"   onclick="(function(){ return jQuery('#add-playlist-popup').removeClass('hidden'),  jQuery('#add-playlist-cover').css('background-image', 'url( /stream?thumbnail=800&image={{media_item.picture_name}} )'), jQuery('#add-playlist-media').val({{media_item.media_id}}),  jQuery('#track-options-popup{{media_item.media_id}}').addClass('hidden');  })();return false;" >
                                         <img src="/src/front_assets/svg/queue_list.svg" width="24" />
                                         <span class="w-full text-xs pt-1">{{lang.translate('Add to playlist')}}</span>
                                     </p>
@@ -27,7 +27,7 @@
                                     <hr class="opacity-50" />
                                     <a  class="cursor-pointer flex w-full gap-2 py-2"   >
                                         <img src="/src/front_assets/svg/play-next.svg" width="24" />
-                                        <span class="w-full text-xs pt-1">{{lang.translate('Add to Queue')}}</span>
+                                        <span class="w-full text-xs pt-1">{{lang.translate('Add to Station')}}</span>
                                     </a>
                                     <hr class="opacity-50" />
                                     <a  class="cursor-pointer flex w-full gap-2 py-2"    >
