@@ -199,15 +199,20 @@ class MediaController extends CustomController
 
 		$stationRepo = new \Medians\Stations\Infrastructure\StationRepository; 
 		$stationMedia = $stationRepo->findMedia($stationId);
-		$distance = floatval(strtotime($stationMedia->start_at) - time());
 
-		echo round($distance / 60, 2);
+		$currentTime = new \DateTime();
+		$targetTime = new \DateTime('21:30:00');
 		
-		$first  = new \DateTime( date('H:i:s') );
-		$second = new \DateTime( $stationMedia->start_at ?? date('H:i:s')  );
+		if ($currentTime > $targetTime) {
+			// If the target time has already passed today, add one day
+			$targetTime->modify('+1 day');
+		}
+		
+		$interval = $currentTime->diff($targetTime);
+		$seconds = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
+		
+		echo $seconds;
 
-		$diff = $first->diff( $second )->format( '%H:%I:%S' );
-		echo $diff;
 		return;
 		// $startTime = 
 
