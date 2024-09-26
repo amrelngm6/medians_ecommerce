@@ -149,7 +149,6 @@ class StationRepository
 
 		$Model = new StationMedia();
 		
-		$data['item_type'] = StationMedia::class;
 		foreach ($data as $key => $value) 
 		{
 			if (in_array($key, $Model->getFields()))

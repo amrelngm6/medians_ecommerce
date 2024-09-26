@@ -144,6 +144,10 @@ class FrontAPIController extends CustomController
 					$return = (new Followers\Application\FollowerController)->store();
 					break;
 		
+				case 'StationMedia.create':
+					$return = (new Stations\Application\StationController)->store_item();
+					break;
+		
 			}
 
 			return printResponse(json_encode($return));
