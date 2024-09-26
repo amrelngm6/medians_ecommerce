@@ -1,7 +1,9 @@
 
+#station-app-cover.hidden ,
 #app-cover.hidden {
     bottom: -200px;
 }
+#station-app-cover ,
 #app-cover {
     transition: all .5s ease-in-out ;
     position: fixed;
@@ -25,12 +27,14 @@
     z-index: 2;
   }
   
+  #station-player, 
   #player {
     position: relative;
     height: 100%;
     z-index: 3;
   }
   
+  #station-player-track ,
   #player-track {
     position: absolute;
     top: 0;
@@ -43,17 +47,24 @@
     z-index: 1;
   }
   
+  #station-player-track  {
+    padding: 13px 22px 32px 140px;
+  }
   #player-track.active {
     top: -115px;
   }
+  #station-player-track {
+    top: -90px
+  }
+
   
-  #album-name {
+  #station-album-name {
     color: #54576f;
     font-size: 17px;
     font-weight: bold;
   }
   
-  #track-name {
+  #station-track-name {
     color: #acaebd;
     font-size: 13px;
     margin: 2px 0 7px 0;
@@ -137,6 +148,7 @@
     z-index: 1;
   }
   
+  #station-player-content ,
   #player-content {
     position: relative;
     height: 100%;
@@ -247,6 +259,7 @@
     opacity: 1;
   }
   
+  #station-player-controls ,
   #player-controls {
     width: 250px;
     height: 100%;

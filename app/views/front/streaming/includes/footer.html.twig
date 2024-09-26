@@ -58,6 +58,42 @@
         </div>
     </div>
 
+
+
+	<div id="station-app-cover" class="">
+        <div id="station-player">
+            <div id="station-player-track" class="active">
+                <div id="station-album-name" class="truncate">Album name</div>
+                <div id="station-track-name" class="truncate">Item name</div>
+            </div>
+            <div id="station-player-content">
+                <div id="album-art" class="active">
+                    <img src="" class="active" id="track-poster">
+                    <div id="buffer-box">Buffering ...</div>
+                </div>
+                <div id="station-player-controls">
+                    <div class="control relative">
+                        <div id="volume-mute" class="text-xs button" style="background-color:transparent; padding:3px; margin:0">
+                            <img id="volume-mute-img" src="/src/front_assets/svg/player-volume.svg" width="24" />
+                            <div id="volume-bar"  class="absolute lg:block hidden pt-2">
+                                <input type="range" class="volume w-20" id="player-audio" min="0" max="1" step="0.1" value="1" data-css="0.5">
+                            </div>
+                        </div>
+					</div>
+					
+                    <div class="control">
+                        <div class="button" id="player-pause-button">
+                            <img width="24" class="play" src="/src/front_assets/svg/player-play.svg" >
+                            <img width="24" class="pause " src="/src/front_assets/svg/player-pause.svg" >
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 <div id="page-loader" class="fixed w-full h-full left-0 top-0 hidden " style="z-index:999" >
     <div class="w-full h-full absolute dark:bg-gray-800 bg-white opacity-70"></div>
     <img src="/uploads/img/loader.gif" class="w-40 h-40 my-auto m-auto absolute left-0 right-0 bottom-0 top-0" />
