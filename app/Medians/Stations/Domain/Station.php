@@ -36,6 +36,11 @@ class Station extends CustomModel
 		return $this->hasMany(StationMedia::class, 'station_id', 'station_id')->with('media');	
 	}
 
+	public function activeItem()
+	{
+		return $this->hasOne(StationMedia::class, 'station_id', 'station_id')->where('start_at', '<', date('H:i:s'))->with('media');	
+	}
+
 	public function likes()
 	{
 		return $this->morphMany(Like::class, 'item');	
