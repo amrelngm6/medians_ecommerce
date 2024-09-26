@@ -35,10 +35,10 @@
                                         <span class="w-full text-xs pt-1">{{lang.translate('Download')}}</span>
                                     </a>
                                     <hr class="opacity-50" />
-                                    <a  class="cursor-pointer flex w-full gap-2 py-2 ajax-load"  onclick="jQuery('#track-options-popup').toggleClass('hidden'); " href="/track/{{media_item.media_id}}" >
+                                    <p  class="cursor-pointer flex w-full gap-2 py-2 ajax-load"  onclick="(function(){ return loadPage('/track/'+jQuery('#activeItemId').val()), jQuery('#track-options-popup').addClass('hidden');  })(); return false; "  >
                                         <img src="/src/front_assets/svg/playlist.svg" width="24" />
                                         <span class="w-full text-xs pt-1">{{lang.translate('View')}}</span>
-                                    </a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
