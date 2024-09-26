@@ -201,6 +201,8 @@ class MediaController extends CustomController
 		$stationMedia = $stationRepo->findMedia($stationId);
 		$distance = floatval(strtotime($stationMedia->start_at) - time());
 
+		echo intval($distance / 60);
+		
 		$first  = new \DateTime( date('H:i:s') );
 		$second = new \DateTime( $stationMedia->start_at ?? date('H:i:s')  );
 
