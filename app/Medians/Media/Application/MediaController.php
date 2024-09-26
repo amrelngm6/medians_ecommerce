@@ -279,7 +279,7 @@ class MediaController extends CustomController
 
 		$stationRepo = new \Medians\Stations\Infrastructure\StationRepository; 
 		$stationMedia = $stationRepo->findMediaByTime($stationId, date('H:i:s'));
-
+		
 		$targetTime = new \DateTime($stationMedia->start_at);
 		$currentTime = new \DateTime();
 
@@ -288,6 +288,9 @@ class MediaController extends CustomController
 			
 		$filePath = $_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path;
 
+		echo $filePath;
+		echo $startTime;
+		return;
 		return $this->streamAudioFromTime($filePath, $startTime);
 
 	}
