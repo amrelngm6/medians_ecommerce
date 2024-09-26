@@ -69,7 +69,8 @@ RouteHandler::get('/channels', \Medians\Channels\Application\ChannelController::
 RouteHandler::get('/playlists', \Medians\Playlists\Application\PlaylistController::class.'@playlists');
 RouteHandler::get('/likes', \Medians\Media\Application\MediaItemController::class.'@likes');
 RouteHandler::get('/genres', \Medians\Media\Application\MediaItemController::class.'@genres');
-RouteHandler::get('/search/media', \Medians\Media\Application\MediaItemController::class.'@search');
+RouteHandler::get('/search/audio', \Medians\Media\Application\MediaItemController::class.'@search');
+RouteHandler::get('/search/audiobook', \Medians\Media\Application\MediaItemController::class.'@search');
 RouteHandler::get('/studio', \Medians\Media\Application\MediaItemController::class.'@studio');
 RouteHandler::get('/studio/media', \Medians\Media\Application\MediaItemController::class.'@studio_media');
 RouteHandler::get('/studio/playlists', \Medians\Media\Application\MediaItemController::class.'@studio_playlists');

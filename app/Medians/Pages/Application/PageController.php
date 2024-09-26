@@ -305,8 +305,8 @@ class PageController extends CustomController
         {
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-                'lang' => $this->app->lang,
-                'list' => $list,
+				'lang' =>  new \helper\Lang($_SESSION['lang']),
+				'list' => $list,
                 'genres' => $categoryRepo->getGenres(),
                 'layout' => 'search'
             ], 'output'));

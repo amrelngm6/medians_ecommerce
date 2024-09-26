@@ -415,5 +415,33 @@ class AudiobookController extends CustomController
     }
 
     
+    
+    /**
+     * Discover page for frontend
+     */
+    public function search()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $params = $this->app->params();
+
+        $params['limit'] = $settings['category_products_count'] ?? null;
+        $params['type'] = 'audiobook';
+        $list = $this->repo->getWithFilter($params);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'list' => $list,
+                'genres' => $this->categoryRepo->getBookGenres(),
+                'layout' => 'search'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
 
 }
