@@ -16,7 +16,8 @@
                         <div class="text-primary  w-full  rounded-2xl ">
                             <div class="w-full ">
                                 <div class="z-20 rounded-2xl w-full  bg-white dark:bg-gray-900 dark:text-gray-400 p-4 ">
-                                    <form class="flex items-center max-w-lg mx-auto ajax-form" id="new-item-form">   
+                                    <form action="/front_api" class="flex items-center max-w-lg mx-auto ajax-form" id="new-item-form">   
+                                        <input type="hidden" name="type" value="load-list" />
                                         <label for="voice-search" class="sr-only">{{lang.translate('Search')}}</label>
                                         <div class="relative w-full">
                                             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -24,7 +25,7 @@
                                                     <path d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
                                             </div>
-                                            <input rel="nofollow" name="load-list/?params[title]" type="text" id="voice-search" data-element="search-result-popup" data-form="new-item-form" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Search for media items')}}" required />
+                                            <input rel="nofollow" name="load-list/?params[title]=a&load=content" type="text" id="voice-search" data-element="search-result-popup" data-form="new-item-form" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Search for media items')}}" required />
                                             <span class="cursor-pointer absolute inset-y-0 end-0 flex items-center pe-3">
                                                 {% include 'views/front/streaming/popups/speech-to-text.html.twig' %}
                                             </span>
@@ -32,27 +33,7 @@
                                     </form>
                                     <div class="mt-4 relative flex w-96 flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
                                         <nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="search-result-popup">
-                                            <div role="button" class="text-slate-800 flex w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
-                                                <div class="mr-4 grid place-items-center"><img alt="candice" src="https://docs.material-tailwind.com/img/face-1.jpg" class="relative inline-block h-12 w-12 !rounded-full object-cover object-center"></div>
-                                                <div>
-                                                    <h6 class="text-slate-800 font-medium">Tania Andrew</h6>
-                                                    <p class="text-slate-500 text-sm">Software Engineer @ Material Tailwind</p>
-                                                </div>
-                                            </div>
-                                            <div role="button" class="text-slate-800 flex w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
-                                                <div class="mr-4 grid place-items-center"><img alt="alexander" src="https://docs.material-tailwind.com/img/face-2.jpg" class="relative inline-block h-12 w-12 !rounded-full object-cover object-center"></div>
-                                                <div>
-                                                    <h6 class="text-slate-800 font-medium">Alexander</h6>
-                                                    <p class="text-slate-500 text-sm">Backend Developer @ Material Tailwind</p>
-                                                </div>
-                                            </div>
-                                            <div role="button" class="text-slate-800 flex w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
-                                                <div class="mr-4 grid place-items-center"><img alt="emma" src="https://docs.material-tailwind.com/img/face-3.jpg" class="relative inline-block h-12 w-12 !rounded-full object-cover object-center"></div>
-                                                <div>
-                                                    <h6 class="text-slate-800 font-medium">Emma Willever</h6>
-                                                    <p class="text-slate-500 text-sm">UI/UX Designer @ Material Tailwind</p>
-                                                </div>
-                                            </div>
+                                            
                                         </nav>
                                     </div>
 

@@ -37,17 +37,8 @@ class FrontAPIController extends CustomController
 		$return = [];
 		switch ($type) 
 		{
-			case 'load_products':
-				return (new Products\Application\ProductController)->load_products();
-				break;
-			case 'search_products':
-				return (new Products\Application\ProductController)->search_products();
-				break;
-			case 'quick-search':
-				return (new Products\Application\ProductController)->quick_search_products();
-				break;
-			case 'load_side_cart':
-				return (new Cart\Application\CartController)->sideCart();
+			case 'load-list':
+				return (new Media\Application\MediaItemController)->search_popup();
 				break;
 		}
 
