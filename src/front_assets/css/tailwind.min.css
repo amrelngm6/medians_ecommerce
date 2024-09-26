@@ -653,10 +653,6 @@ video {
   bottom: 10rem;
 }
 
-.bottom-64 {
-  bottom: 16rem;
-}
-
 .end-0 {
   inset-inline-end: 0px;
 }
@@ -3284,6 +3280,11 @@ video {
 .dark\:text-gray-100:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(243 244 246 / var(--tw-text-opacity));
+}
+
+.dark\:text-gray-200:is(.dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(229 231 235 / var(--tw-text-opacity));
 }
 
 .dark\:text-gray-300:is(.dark *) {
