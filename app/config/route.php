@@ -82,6 +82,7 @@ RouteHandler::get('/genre/(:all)', \Medians\Media\Application\MediaItemControlle
 RouteHandler::get('/book_genre/(:all)', \Medians\Media\Application\AudiobookController::class.'@genre');
 RouteHandler::get('/artist/(:all)', \Medians\Customers\Application\CustomerController::class.'@artist');
 RouteHandler::get('/playlist/(:all)', \Medians\Playlists\Application\PlaylistController::class.'@playlist');
+RouteHandler::get('/station/(:all)', \Medians\Stations\Application\StationController::class.'@station');
 RouteHandler::get('/create-payment-intent', \Medians\Transactions\Application\TransactionController::class.'@createPaymentIntent');
 RouteHandler::post('/cart/delete', \Medians\Cart\Application\CartController::class.'@delete');
 RouteHandler::post('/cart/update', \Medians\Cart\Application\CartController::class.'@update');

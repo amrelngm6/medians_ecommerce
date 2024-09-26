@@ -191,6 +191,53 @@ class MediaController extends CustomController
 		exit;
 	}
 
+	public function stream_station()
+	{
+		$this->app = new \config\APP;
+		$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
+		// $startTime = 
+
+		$item = $this->mediaRepo->findByFile($filepath);
+
+		$addView = $item->addView();
+
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
+		{
+			$size = filesize($filePath);
+			$time = date('r', filemtime($filePath));
+		
+			$fm = @fopen($filePath, 'rb');
+			if (!$fm) {
+				header("HTTP/1.0 505 Internal server error");
+				return;
+			}
+		
+			$begin = $startTime * 44100 * 2; // Assuming 44.1kHz, 16-bit stereo
+			fseek($fm, $begin);
+		
+			$size = $size - $begin;
+		
+			header("Content-Type: audio/mpeg");
+			header("Cache-Control: public, must-revalidate");
+			header("Pragma: no-cache");
+			header("Accept-Ranges: bytes");
+			header("Content-Length: " . $size);
+			header("Last-Modified: " . $time);
+		
+			$buffer = 8192;
+			while(!feof($fm) && ($p = ftell($fm)) <= $size) {
+				if ($p + $buffer > $size) {
+					$buffer = $size - $p;
+				}
+				echo fread($fm, $buffer);
+				flush();
+			}
+		
+			fclose($fm);
+		} 
+		exit;
+	}
+
 
 	public function assets()
 	{
