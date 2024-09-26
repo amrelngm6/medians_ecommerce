@@ -290,8 +290,10 @@ class MediaController extends CustomController
 
 		echo $filePath;
 		echo $startTime;
-		return;
-		return $this->streamAudioFromTime($filePath, $startTime);
+		if (file_exists($filePath))
+		{
+			return $this->streamAudioFromTime($filePath, $startTime);
+		}
 
 	}
 
