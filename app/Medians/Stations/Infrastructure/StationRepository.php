@@ -28,6 +28,11 @@ class StationRepository
 		return StationMedia::with('media')->where('station_id', $id)->first();
 	}
 
+	public function findMediaByTime($id, $time)
+	{
+		return StationMedia::with('media')->where('start_at', '<', $time)->where('station_id', $id)->first();
+	}
+
 	public function get($limit = 1000)
 	{
 		return Station::withCount('likes')->with('items')->limit($limit)->get();

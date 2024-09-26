@@ -278,68 +278,19 @@ class MediaController extends CustomController
 		$stationId = $this->app->request()->get('station_id');
 
 		$stationRepo = new \Medians\Stations\Infrastructure\StationRepository; 
-		$stationMedia = $stationRepo->findMedia($stationId);
+		$stationMedia = $stationRepo->findMediaByTime($stationId, date('H:i:s'));
 
+		
 		$targetTime = new \DateTime($stationMedia->start_at);
 		$currentTime = new \DateTime();
-		
-		if ($currentTime > $targetTime) {
-			// If the target time has already passed today, add one day
-			// $targetTime->modify('+1 day');
-			
-			$interval = $targetTime->diff($currentTime);
-			$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
-			
-		} else {
 
-			$interval = $currentTime->diff($targetTime);
-			$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
+		$interval = $targetTime->diff($currentTime);
+		$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
 			
-			// $interval = $currentTime->diff($targetTime);
-			// $seconds = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
-			
-		}
-
 		$filePath = $_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path;
 
 		return $this->streamAudioFromTime($filePath, $startTime);
 
-		if (is_file($filePath))
-		{
-
-			$size = filesize($filePath);
-			$time = date('r', filemtime($filePath));
-		
-			$fm = @fopen($filePath, 'rb');
-			if (!$fm) {
-				header("HTTP/1.0 505 Internal server error");
-				return;
-			}
-
-			$begin = $startTime * 44100 * 2; // Assuming 44.1kHz, 16-bit stereo
-			fseek($fm, $begin);
-		
-			$size = $size - $begin;
-		
-			header("Content-Type: audio/mpeg");
-			header("Cache-Control: public, must-revalidate");
-			header("Pragma: no-cache");
-			header("Accept-Ranges: bytes");
-			header("Content-Length: " . $size);
-			header("Last-Modified: " . $time);
-		
-			$buffer = 8192;
-			while(!feof($fm) && ($p = ftell($fm)) <= $size) {
-				if ($p + $buffer > $size) {
-					$buffer = $size - $p;
-				}
-				echo fread($fm, $buffer);
-				flush();
-			}
-		
-			fclose($fm);
-		} 
-		exit;
 	}
 
 
