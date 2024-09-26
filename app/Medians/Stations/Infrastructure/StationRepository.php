@@ -30,7 +30,7 @@ class StationRepository
 
 	public function findMediaByTime($id, $time)
 	{
-		return StationMedia::with('media')->where('start_at', '<', $time)->where('station_id', $id)->first();
+		return StationMedia::with('media')->where('start_at', '<', $time)->where('station_id', $id)->orderBy('start_at', 'DESC')->first();
 	}
 
 	public function get($limit = 1000)
