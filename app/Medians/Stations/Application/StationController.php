@@ -291,6 +291,33 @@ class StationController extends CustomController
 			throw new \Exception($e->getMessage(), 1);
 		}
     }
+
+	
+    /**
+     * Discover page for frontend
+     */
+    public function calendar($id)
+    {
+		$this->app = new \config\APP;
+
+		$settings = $this->app->SystemSetting();
+
+        $params = $this->app->params();
+
+		$station = $this->repo->find($id);
+
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'station' => $station,
+                'layout' => 'calendar',
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
     
 	
 }

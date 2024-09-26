@@ -20,6 +20,7 @@ class StationMedia extends CustomModel
 		'media_id',
 		'station_id',
 		'start_at',
+		'date',
 		'sort'
 	];
 

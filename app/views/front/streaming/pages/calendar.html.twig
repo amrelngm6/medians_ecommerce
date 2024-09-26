@@ -1,0 +1,44 @@
+
+    <style>
+        #calendar {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+    </style>
+    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css' rel='stylesheet' />
+
+    <div id='calendar'></div>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.js" integrity="sha512-3I+0zIxy2IkeeCvvhXUEu+AFT3zAGuHslHLDmM8JBv6FT7IW6WjhGpUZ55DyGXArYHD0NshixtmNUWJzt0K32w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarEl = document.getElementById('calendar');
+
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridDay',
+                slotDuration: '00:05:00', // Time slots every 30 minutes
+                allDaySlot: false, // Disable all-day slot
+                editable: true,
+                droppable: true, 
+                events: 
+                [
+                    {% for item in station.items %}
+                    {
+                        title: '{{item.media.name}}',
+                        start: '{{item.date|date('Y-m-d')}}T{{item.start_at}}',
+                        end: '{{item.date|date('Y-m-d')}}T{{item.start_at|date_modify("+" ~ item.media.field.duration ~ " seconds")|date("H:i:s")}}'
+                    },
+                    {% endfor %}
+                ],
+                dateClick: function(info) {
+                    alert('Date: ' + info.dateStr);
+                },
+                
+                eventResize: function(info) {
+                    alert("This item depends on the media duration");
+                    info.revert();
+                }
+            });
+
+            calendar.render();
+        });
+    </script>

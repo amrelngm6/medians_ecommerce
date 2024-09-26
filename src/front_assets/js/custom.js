@@ -38,7 +38,7 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 	jQuery('#station-app-cover').removeClass('hidden')
 		const stationId = jQuery(this).data('station'); 
 		audio = mainAudio[0];
-		audio.src = '/stream_station?station_id='+ stationId;
+		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ Math.random();
 		audio.load()
 		setTimeout(function(){
 			audio.play();
