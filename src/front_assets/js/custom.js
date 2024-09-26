@@ -33,6 +33,18 @@ document.getElementById('player-audio').addEventListener("change", function(even
 	setCookie('volume', event.target.value, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 }) ;	
 
+jQuery(document).on('click', '.start-station', function (i, el) {
+	
+	jQuery('#station-app-cover').removeClass('hidden')
+		const stationId = jQuery(this).data('station'); 
+		audio = mainAudio[0];
+		audio.src = '/stream_station?station_id='+ stationId;
+		audio.load()
+		setTimeout(function(){
+			audio.play();
+		}, 100)
+});
+
 jQuery(document).on('click', '.start-player', function (i, el) {
 	player = jQuery(this);
 	list = JSON.parse(player.attr('data-list'))
