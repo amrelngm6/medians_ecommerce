@@ -8,7 +8,7 @@
                                 <img style="z-index:-1" src="/stream?thumbnail=1000&image={{item.picture_name}}" class="w-full  shadow-xl absolute top-0 left-0 "/>
                             </div>
                             <div class=" w-full h-96 absolute bottom-0 left-0 gradient-top-overlay" style="z-index:-1; "></div>
-                            <div class="absolute bottom-20 left-20  z-10 w-1/2 text-gray-100 dark:text-gray-400">
+                            <div class="absolute bottom-20 left-20  z-10 w-2/3 text-gray-100 dark:text-gray-400">
                                 <a class="lg:text-6xl text-lg text-white ajax-load" href="/artist/{{item.customer_id}}">{{item.name}}</a>
 
                                 {% set following = item.following(customer.customer_id).first() %}
