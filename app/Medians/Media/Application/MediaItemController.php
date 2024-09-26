@@ -263,7 +263,6 @@ class MediaItemController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
-        $params['type'] = 'audio';
         $list = $this->repo->getWithFilter($params);
         
 		try 
