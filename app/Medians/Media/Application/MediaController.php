@@ -283,13 +283,11 @@ class MediaController extends CustomController
 		$targetTime = new \DateTime($stationMedia->start_at);
 		$currentTime = new \DateTime();
 
-		$interval = $targetTime->diff($currentTime);
+		$interval = $currentTime->diff($targetTime);
 		$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
 			
 		$filePath = $_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path;
 
-		echo $stationMedia->start_at;
-		echo date('H:i:s');
 		echo $filePath;
 		echo $startTime;
 		return;
