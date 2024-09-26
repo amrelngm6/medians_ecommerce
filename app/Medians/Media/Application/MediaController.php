@@ -286,11 +286,11 @@ class MediaController extends CustomController
 		$interval = $targetTime->diff($currentTime);
 		$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
 			
-		$filePath = $_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path;
+		$filePath = $stationMedia->media->main_file->path;
 
-		echo $filePath;
-		echo $startTime;
-		return;
+		// echo $filePath;
+		// echo $startTime;
+		// return;
 		return $this->streamAudioFromTime($filePath, $startTime);
 
 	}
