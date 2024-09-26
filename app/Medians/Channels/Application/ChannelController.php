@@ -210,10 +210,11 @@ class ChannelController extends CustomController
 
 		try {
 
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/pages/search/search.html.twig', [
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'channels' => $this->repo->get(),
-                'layout' => 'artist'
+                'layout' => 'search/search',
+                'sub_layout' => 'playlist',
             ], 'output'));
             
 		} catch (\Exception $e) {
