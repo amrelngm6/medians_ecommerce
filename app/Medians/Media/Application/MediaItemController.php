@@ -254,6 +254,34 @@ class MediaItemController extends CustomController
     
     
     /**
+     * Discover page for frontend
+     */
+    public function search_popup()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $params = $this->app->params();
+
+        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['type'] = 'audio';
+        $list = $this->repo->getWithFilter($params);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/pages/popup-list.html.twig', [
+                'app' => $this->app,
+                'list' => $list,
+                'genres' => $this->categoryRepo->getGenres(),
+                'layout' => 'popup-list',
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+    
+    /**
      * Likes page for frontend
      */
     public function likes()
