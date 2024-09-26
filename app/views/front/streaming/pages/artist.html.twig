@@ -110,7 +110,7 @@
                 <ul class="hs" >
 					{% set list = {'items' : item.media_items} %}
 					{% for media_item in list.items %}
-                    <li class="hs__item truncate-text max-w-[200px]"> 
+                    <li class="hs__item  max-w-[200px]"> 
 						{% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
                     </li>
     				{% endfor %}    
