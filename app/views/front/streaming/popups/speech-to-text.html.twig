@@ -20,7 +20,6 @@ recognition.onresult = function (event) {
     }
     jQuery('#voice-search').val(value)
     let id = jQuery('#voice-search').data('form');
-    alert(id)
     jQuery('form#'+ id).submit();
 }
 
