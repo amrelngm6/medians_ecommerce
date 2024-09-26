@@ -475,6 +475,7 @@ function reloadFuncs()
 	stickyPlaylist();
 	runSlide()
     showSlides()
+	handleSlides()
 
 }
 

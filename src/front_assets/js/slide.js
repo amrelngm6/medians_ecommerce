@@ -121,6 +121,10 @@ window.addEventListener('resize', function(e) {
 });
 
 
+
+function handleSlides() 
+{
+  
 // work in progress - needs some refactoring and will drop JQuery i promise :)
 var instance = jQuery(".hs__wrapper");
 $.each( instance, function(key, value) {
@@ -183,3 +187,6 @@ $.each( instance, function(key, value) {
   
 });
 
+
+}
+handleSlides()
