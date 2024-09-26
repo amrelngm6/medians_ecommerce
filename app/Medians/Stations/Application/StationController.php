@@ -157,6 +157,29 @@ class StationController extends CustomController
 	}
 
 
+	public function update_item()
+	{
+
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+
+        try {
+
+            if ($this->repo->update_item($params))
+            {
+                return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
+            }
+        
+
+        } catch (\Exception $e) {
+        	throw new \Exception("Error Processing Request", 1);
+        	
+        }
+
+	}
+
+
 	public function delete() 
 	{
 
@@ -306,11 +329,15 @@ class StationController extends CustomController
 
 		$station = $this->repo->find($id);
 
+		$datetime = new \DateTime();
+		$datetime_string = $datetime->format('c');
+		
 		try 
         {
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'station' => $station,
+				'now' => $datetime_string,
                 'layout' => 'calendar',
             ], 'output'));
             

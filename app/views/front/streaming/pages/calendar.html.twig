@@ -7,6 +7,11 @@
     </style>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css' rel='stylesheet' />
 
+    <form action="/front_api/update" class="ajax-form" id="calendar-form">
+        <input type="hidden" name="type" value="StationMedia.update" />
+        <input type="hidden" name="params[station_media_id]" value="" id="stationMediaId" />
+        <input type="hidden" name="params[start_at]" value="" id="stationMediaStart" />
+    </form>
     <div id='calendar'></div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.js" integrity="sha512-3I+0zIxy2IkeeCvvhXUEu+AFT3zAGuHslHLDmM8JBv6FT7IW6WjhGpUZ55DyGXArYHD0NshixtmNUWJzt0K32w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
@@ -19,18 +24,31 @@
                 allDaySlot: false, // Disable all-day slot
                 editable: true,
                 droppable: true, 
+                nowIndicator: true,
+                now: "{{now}}",
                 events: 
                 [
                     {% for item in station.items %}
                     {
                         title: '{{item.media.name}}',
+                        id: '{{item.station_media_id}}',
                         start: '{{item.date|date('Y-m-d')}}T{{item.start_at}}',
                         end: '{{item.date|date('Y-m-d')}}T{{item.start_at|date_modify("+" ~ item.media.field.duration ~ " seconds")|date("H:i:s")}}'
                     },
                     {% endfor %}
                 ],
+
                 dateClick: function(info) {
                     alert('Date: ' + info.dateStr);
+                },
+                
+                eventDragStop: function(info) {
+                    console.log(info)
+                    console.log(info.event)
+                    jQuery("#stationMediaId").val(info.event.id);
+                    jQuery("#stationMediaStart").val(info.event.startStr.substr(11, 8));
+                    jQuery("#stationMediaId").parent('form').submit();
+
                 },
                 
                 eventResize: function(info) {

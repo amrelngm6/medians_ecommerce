@@ -178,6 +178,21 @@ class StationRepository
     	return $Object;
 
     } 
+    	
+    /**
+     * Update Lead
+     */
+    public function update_item($data)
+    {
+
+		$Object = Station::find($data['station_media_id']);
+		
+		// Return the Model object with the new data
+    	$Object->update( (array) $data);
+
+    	return $Object;
+
+    } 
 
 
 	/**

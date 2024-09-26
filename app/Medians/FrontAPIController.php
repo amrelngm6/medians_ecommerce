@@ -199,8 +199,8 @@ class FrontAPIController extends CustomController
 				return printResponse((new Media\Application\AudiobookController)->update_chapters());
 				break;
 			
-			case 'Order.update':
-				$controller = new Orders\Application\OrderController;
+			case 'StationMedia.update':
+				return printResponse((new Media\Application\AudiobookController)->update_item());
 				break;
 			
 			case 'Comment.update':
