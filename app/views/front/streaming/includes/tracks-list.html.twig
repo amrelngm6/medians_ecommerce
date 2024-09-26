@@ -32,10 +32,17 @@
                                                             <span class="w-full text-xs pt-1">{{lang.translate('Download')}}</span>
                                                         </a>
                                                         <hr class="opacity-50" />
+                                                        {% if playlist_item.media_id %}
+                                                        <a  class="cursor-pointer flex w-full gap-2 py-2"  href="/front_api/delete?type=PlaylistItem.delete&params[playlist_media_id]={{playlist_item.playlist_media_id}}">
+                                                            <img src="/src/front_assets/svg/queue_list.svg" width="24" />
+                                                            <span class="w-full text-xs pt-1">{{lang.translate('Remove from playlist')}}</span>
+                                                        </a>
+                                                        {% else %}
                                                         <a  class="cursor-pointer flex w-full gap-2 py-2"   x-on:click="jQuery('#add-playlist-cover').css('background-image', 'url( /stream?thumbnail=800&image={{media_item.picture_name}} )'); jQuery('#add-playlist-media').val({{media_item.media_id}}); jQuery('#add-playlist-popup').removeClass('hidden')" >
                                                             <img src="/src/front_assets/svg/queue_list.svg" width="24" />
                                                             <span class="w-full text-xs pt-1">{{lang.translate('Add to playlist')}}</span>
                                                         </a>
+                                                        {% endif %}
                                                         <hr class="opacity-50" />
                                                         <a  class="cursor-pointer flex w-full gap-2 py-2"   x-on:click="selected_genres.push(genre)" >
                                                             <img src="/src/front_assets/svg/playlist.svg" width="24" />

@@ -179,6 +179,28 @@ class PlaylistController extends CustomController
 
 	}
 
+	public function deleteItem() 
+	{
+
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+		
+        try {
+
+            if ($this->repo->deleteItem($params['playlist_media_id']))
+            {
+                return array('success'=>1, 'result'=>translate('Deleted'), 'reload'=>1);
+            }
+            
+
+        } catch (Exception $e) {
+        	throw new \Exception("Error Processing Request", 1);
+        	
+        }
+
+	}
+
 	public function validate($params) 
 	{
 

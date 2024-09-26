@@ -263,6 +263,10 @@ class FrontAPIController extends CustomController
 					return printResponse((new Followers\Application\FollowerController())->unfollow());
 					break;
 				
+				case 'PlaylistItem.delete':
+					return printResponse((new Playlists\Application\PlaylistController())->delete());
+					break;
+				
 			
 			}
 

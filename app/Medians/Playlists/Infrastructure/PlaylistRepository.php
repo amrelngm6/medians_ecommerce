@@ -122,4 +122,23 @@ class PlaylistRepository
 		}
 	}
 
+
+	/**
+	* Delete item to database
+	*
+	* @Returns Boolen
+	*/
+	public function deleteItem($id) 
+	{
+		try {
+			
+			return PlaylistItem::find($id)->delete();
+
+		} catch (\Exception $e) {
+
+			throw new \Exception("Error Processing Request " . $e->getMessage(), 1);
+			
+		}
+	}
+
 }
