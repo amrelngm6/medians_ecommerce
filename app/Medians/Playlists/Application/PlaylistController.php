@@ -269,6 +269,8 @@ class PlaylistController extends CustomController
      */
     public function search()
     {
+		$this->app = new \config\APP;
+
 		$settings = $this->app->SystemSetting();
 
         $params = $this->app->params();
@@ -281,7 +283,6 @@ class PlaylistController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'list' => $list,
-                'genres' => $this->categoryRepo->getBookGenres(),
                 'layout' => 'search/search',
                 'sub_layout' => 'playlist',
             ], 'output'));
