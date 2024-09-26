@@ -288,8 +288,6 @@ class MediaController extends CustomController
 			
 		$filePath = $_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path;
 
-		echo $filePath;
-		echo $startTime;
 		if (file_exists($filePath))
 		{
 			return $this->streamAudioFromTime($filePath, $startTime);
