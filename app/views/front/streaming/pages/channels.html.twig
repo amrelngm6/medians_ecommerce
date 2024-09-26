@@ -9,7 +9,7 @@
                             </div>
                             <div class=" w-full h-96 absolute bottom-0 left-0 gradient-top-overlay" style="z-index:-1; "></div>
                             <div class="absolute bottom-20 left-20  z-10 w-1/2 text-gray-100 dark:text-gray-400">
-                                <h1 class="lg:text-6xl text-lg text-white">{{item.name}}</h1>
+                                <a class="lg:text-6xl text-lg text-white ajax-load" href="/artist/{{item.customer_id}}">{{item.name}}</a>
 
                                 {% set following = item.following(customer.customer_id).first() %}
                                 <div class="{{ following == null ? '' : ' hidden'}} float-right" x-on:click="jQuery('#heart-{{item.customer_id}}').addClass('hidden'); jQuery('#unheart-{{item.customer_id}}').removeClass('hidden')" id="heart-{{item.customer_id}}">
