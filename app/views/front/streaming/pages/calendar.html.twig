@@ -20,7 +20,7 @@
 
             const calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'timeGridDay',
-                slotDuration: '00:05:00', // Time slots every 30 minutes
+                slotDuration: '00:02:00', // Time slots every 30 minutes
                 allDaySlot: false, // Disable all-day slot
                 editable: true,
                 droppable: true, 
@@ -43,11 +43,14 @@
                 },
                 
                 eventDragStop: function(info) {
-                    console.log(info)
-                    console.log(info.event)
                     jQuery("#stationMediaId").val(info.event.id);
-                    jQuery("#stationMediaStart").val(info.event.startStr.substr(11, 8));
-                    jQuery("#stationMediaId").parent('form').submit();
+                },
+                eventDrop: function(info) {
+                        jQuery("#stationMediaStart").val(info.event.startStr.substr(11, 8));
+                    setTimeout(function(){
+
+                        jQuery("#stationMediaId").parent('form').submit();
+                    }, 50)
 
                 },
                 

@@ -200,7 +200,7 @@ class FrontAPIController extends CustomController
 				break;
 			
 			case 'StationMedia.update':
-				return printResponse((new Media\Application\AudiobookController)->update_item());
+				return printResponse((new Stations\Application\StationController)->update_item());
 				break;
 			
 			case 'Comment.update':

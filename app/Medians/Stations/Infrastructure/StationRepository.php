@@ -185,7 +185,7 @@ class StationRepository
     public function update_item($data)
     {
 
-		$Object = Station::find($data['station_media_id']);
+		$Object = StationMedia::find($data['station_media_id']);
 		
 		// Return the Model object with the new data
     	$Object->update( (array) $data);

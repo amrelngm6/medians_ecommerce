@@ -168,7 +168,7 @@ class StationController extends CustomController
 
             if ($this->repo->update_item($params))
             {
-                return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
+                return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0);
             }
         
 
