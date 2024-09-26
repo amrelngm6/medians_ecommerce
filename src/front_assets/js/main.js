@@ -23,8 +23,6 @@ jQuery(document).on('change', 'input.search', function (e) {
 
 jQuery(document).on('submit', '.ajax-form', function (e) {
     e.preventDefault();
-    console.log(e.target)
-    console.log(e.target.attr)
     submitForm(e.target.id, e.target.attr);
 });
 
