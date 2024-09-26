@@ -1,7 +1,7 @@
           
             <div id="main-side" class=" flex" x-data="{}">
                 <div class="w-1"></div>
-                
+                {% set customer = app.customer_auth() %}
                 <div class="py-4 lg:px-0 px-1 w-56 sidebar lg:relative fixed left-0 z-10 top-0 overflow-hidden h-full">
                     <div class="w-full flex gap-4 text-primary">
                         <img src="/src/front_assets/svg/soundcloud.svg" />
@@ -52,7 +52,7 @@
                             </a>
                         </li>
                         
-
+                        {% if customer.customer_id %}
                         <li class="w-full   " id="likes">
                             <a title="{{lang.translate('Playlists')}}" href="/likes" class="w-full flex gap gap-4   ajax-load ">
                                 <span class="min-w-8  text-center relative my-2">
@@ -62,7 +62,7 @@
                                 </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Likes')}}</span>
                             </a>
                         </li>
-                        
+                        {% endif %}
 
                         <li class="w-full   " id="artist">
                             <a title="{{lang.translate('Artists')}}" href="/channels" class="w-full flex gap gap-4  ajax-load  ">
@@ -77,16 +77,17 @@
                         <li class="w-full   " id="genres">
                             <a title="{{lang.translate('genres')}}" href="/genres" class="w-full flex gap gap-4  ajax-load  ">
                                 <span class="min-w-8  text-center relative my-2">
-                                    <img src="/src/front_assets/svg/heart.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="/src/front_assets/svg/active-heart.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
+                                    <img src="/src/front_assets/svg/audiobook-tab.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
+                                    <img src="/src/front_assets/svg/audiobook-tab-active.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
                                         width="18" />
                                 </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Genres')}}</span>
                             </a>
                         </li>
                         
+                        {% if customer.customer_id %}
 
                         <li class="w-full   ">
-                            <a title="{{lang.translate('Playlists')}}" href="#!" class="w-full flex gap gap-4 ">
+                            <a title="{{lang.translate('Notifications')}}" href="#!" class="w-full flex gap gap-4 ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/notification.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/active-notification.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
@@ -123,6 +124,14 @@
                                 </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create playlist')}}</span>
                             </a>
                         </li>
+
+                        <li class="w-full " id="logout">
+                            <a title="{{lang.translate('Logout')}}" href="/logout"class="w-full flex gap gap-4   ">
+                                <span class="min-w-8  text-center relative my-2">
+                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Logout')}}</span>
+                            </a>
+                        </li>
+                        {% endif %}
 
                     </ul>
 
