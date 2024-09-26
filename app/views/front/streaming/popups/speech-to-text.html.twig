@@ -19,6 +19,7 @@ recognition.onresult = function (event) {
         }
     }
     jQuery('#voice-search').val(value).trigger('input')
+    jQuery('#voice-search').val(value).trigger('change')
     let id = jQuery('#voice-search').data('form');
     let element = jQuery('#voice-search').data('element');
     submitForm(id, element)
