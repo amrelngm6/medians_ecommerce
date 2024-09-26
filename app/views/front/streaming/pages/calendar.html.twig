@@ -31,6 +31,7 @@
                 editable: true,
                 droppable: true, 
                 nowIndicator: true,
+                scrollTime: '{{now}}',
                 now: "{{now}}",
                 events: 
                 [
@@ -45,7 +46,9 @@
                 ],
 
                 dateClick: function(info) {
-                    alert('Date: ' + info.dateStr);
+                    jQuery('#find-track-popup').toggleClass('hidden')
+                    console.log('Date: ' + info.dateStr.substr(0, 10));
+                    console.log('Time: ' + info.dateStr.substr(11, 8));
                 },
                 
                 eventDragStop: function(info) {
@@ -83,3 +86,6 @@
             });
         });
     </script>
+
+
+    {% include 'views/front/' ~ template ~ '/popups/find-track.html.twig' %}
