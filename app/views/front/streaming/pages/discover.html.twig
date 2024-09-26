@@ -7,7 +7,7 @@
                 <div class="z-20 w-full relative dark:bg-gray-900 bg-white   lg:p-8 p-4 rounded-lg rounded  shadow-md mb-4" id="channels-list">
 
                     <div class="flex text-primary  w-full pb-4">
-                        <h3 class="text-xl text-gray-500 font-semibold w-full">{{lang.translate('Top Genres')}}</h3>
+                        <h3 class="text-xl text-gray-500 font-semibold w-full">{{lang.translate('Top Artists')}}</h3>
                         <div class="flex gap gap-4">
                             <button class="prev-btn" data-slider="top-authors"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
                             <button class="next-btn" data-slider="top-authors"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
@@ -16,9 +16,7 @@
                     <hr class="opacity-30 mb-4" />
 
                     <div class="carousel-container flex gap-2" data-count="5" id="top-authors" >
-                        {# {% for media_item in list.items %} #}
                         {% include 'views/front/' ~ template ~ '/includes/channel_list.html.twig' %}
-                        {# {% endfor %} #}
                     </div>
                 </div>
 
