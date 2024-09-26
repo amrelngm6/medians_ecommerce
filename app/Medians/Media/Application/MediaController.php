@@ -221,8 +221,9 @@ class MediaController extends CustomController
 		// return;
 		// $startTime = 
 		$filepath = $_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path;
-		if (is_file($filepath))
+		if (!is_file($filepath))
 		{
+
 			$size = filesize($filePath);
 			$time = date('r', filemtime($filePath));
 		
@@ -231,7 +232,7 @@ class MediaController extends CustomController
 				header("HTTP/1.0 505 Internal server error");
 				return;
 			}
-		
+
 			$begin = $startTime * 44100 * 2; // Assuming 44.1kHz, 16-bit stereo
 			fseek($fm, $begin);
 		
