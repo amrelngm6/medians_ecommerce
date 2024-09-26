@@ -6,6 +6,7 @@ use Shared\dbaser\CustomController;
 use Medians\Media\Infrastructure\MediaRepository;
 use Medians\Media\Infrastructure\MediaItemRepository;
 
+use getID3;
 
 class MediaController extends CustomController 
 {
@@ -191,6 +192,85 @@ class MediaController extends CustomController
 		exit;
 	}
 
+
+	function streamAudioFromTime($filePath, $startTimeInSeconds = 0) {
+		if (!file_exists($filePath)) {
+			header("HTTP/1.0 404 Not Found");
+			return;
+		}
+	
+		$getID3 = new \getID3;
+		$fileInfo = $getID3->analyze($filePath);
+	
+		if (!isset($fileInfo['playtime_seconds'])) {
+			header("HTTP/1.0 500 Internal Server Error");
+			return;
+		}
+	
+		$totalDuration = $fileInfo['playtime_seconds'];
+		$bitRate = $fileInfo['bitrate'];
+	
+		// Calculate byte offset
+		$byteOffset = (int)(($startTimeInSeconds / $totalDuration) * $fileInfo['filesize']);
+	
+		// Ensure the byte offset is at a valid MP3 frame
+		$byteOffset = $this->findValidMP3Frame($filePath, $byteOffset);
+	
+		$fm = @fopen($filePath, 'rb');
+		if (!$fm) {
+			header("HTTP/1.0 505 Internal server error");
+			return;
+		}
+	
+		fseek($fm, $byteOffset);
+		$size = filesize($filePath) - $byteOffset;
+	
+		header("Content-Type: audio/mpeg");
+		header("Cache-Control: public, must-revalidate");
+		header("Pragma: no-cache");
+		header("Accept-Ranges: bytes");
+		header("Content-Length: " . $size);
+		header("X-Pad: avoid browser bug");
+		header("Content-Duration: " . ($totalDuration - $startTimeInSeconds));
+	
+		// Output file from the calculated position
+		$buffer = 8192;
+		while(!feof($fm) && ($p = ftell($fm)) <= filesize($filePath)) {
+			if ($p + $buffer > filesize($filePath)) {
+				$buffer = filesize($filePath) - $p;
+			}
+			echo fread($fm, $buffer);
+			flush();
+		}
+	
+		fclose($fm);
+		exit;
+	}
+	
+	function findValidMP3Frame($filePath, $startByte) {
+		$fm = fopen($filePath, 'rb');
+		fseek($fm, $startByte);
+	
+		// Look for the next valid MP3 frame header
+		while (!feof($fm)) {
+			$headerBytes = fread($fm, 4);
+			if (strlen($headerBytes) < 4) break;
+	
+			$headerData = unpack('N', $headerBytes)[1];
+			
+			// Check for a valid MP3 frame header
+			if (($headerData & 0xFFE00000) == 0xFFE00000) {
+				return ftell($fm) - 4;  // Return the position of the frame start
+			}
+	
+			fseek($fm, -3, SEEK_CUR);  // Move back 3 bytes and try again
+		}
+	
+		fclose($fm);
+		return $startByte;  // If no valid frame found, return original position
+	}
+
+
 	public function stream_station()
 	{
 		
@@ -212,15 +292,18 @@ class MediaController extends CustomController
 			
 		} else {
 
+			$interval = $currentTime->diff($targetTime);
+			$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
+			
 			// $interval = $currentTime->diff($targetTime);
 			// $seconds = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
 			
 		}
-		
 
-		// return;
-		// $startTime = 
 		$filePath = $_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path;
+
+		return $this->streamAudioFromTime($filePath, $startTime);
+
 		if (is_file($filePath))
 		{
 
