@@ -45,10 +45,8 @@
                 ],
 
                 dateClick: function(info, i) {
-                    console.log(info)
-                    console.log(i)
-                    jQuery('#station-id').val(info.id)
                     
+                    jQuery('#station-id').val({{station.station_id}})
                     jQuery("#stationMediaStart").val(info.dateStr.substr(11, 8));
                     jQuery("#stationMediaStartDate").val(info.dateStr.substr(0, 10));
                     jQuery('#find-track-popup').toggleClass('hidden')
