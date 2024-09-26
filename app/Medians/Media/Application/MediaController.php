@@ -221,7 +221,7 @@ class MediaController extends CustomController
 		// return;
 		// $startTime = 
 		$filepath = $stationMedia->media->main_file->path;
-		
+		echo $filepath;
 		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
 		{
 			$size = filesize($filePath);
