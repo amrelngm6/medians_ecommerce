@@ -3,6 +3,7 @@
     {% include 'views/front/' ~ template ~ '/popups/create-playlist.html.twig' %}
     {% include 'views/front/' ~ template ~ '/popups/add-playlist.html.twig' %}
     {% include 'views/front/' ~ template ~ '/popups/share.html.twig' %}
+    {% include 'views/front/' ~ template ~ '/popups/track-options.html.twig' %}
 
 
 	<div id="app-cover" class="hidden">
@@ -98,7 +99,8 @@
     <div class="w-full h-full absolute dark:bg-gray-800 bg-white opacity-70"></div>
     <img src="/uploads/img/loader.gif" class="w-40 h-40 my-auto m-auto absolute left-0 right-0 bottom-0 top-0" />
 </div>
-
+<input id="activeItemId" type="hidden" />
+<input id="activeItemPicture" type="hidden" />
 <audio id="main_audio"></audio>
 <style>
 	.channel-slider {
