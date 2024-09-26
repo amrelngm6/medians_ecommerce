@@ -33,7 +33,7 @@
                         title: '{{item.media.name}}',
                         id: '{{item.station_media_id}}',
                         start: '{{item.date|date('Y-m-d')}}T{{item.start_at}}',
-                        end: '{{item.date|date('Y-m-d')}}T{{item.start_at|date_modify("+" ~ item.media.field.duration ~ " seconds")|date("H:i:s")}}'
+                        end: '{{item.date|date('Y-m-d')}}T{{item.start_at|date_modify("+" ~ (item.media.field.duration ?? '1') ~ " seconds")|date("H:i:s")}}'
                     },
                     {% endfor %}
                 ],
