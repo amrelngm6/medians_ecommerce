@@ -274,7 +274,6 @@ class PlaylistController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
-        $params['type'] = 'audiobook';
         $list = $this->repo->getWithFilter($params);
         
 		try 
@@ -284,7 +283,7 @@ class PlaylistController extends CustomController
                 'list' => $list,
                 'genres' => $this->categoryRepo->getBookGenres(),
                 'layout' => 'search/search',
-                'sub_layout' => 'audiobook',
+                'sub_layout' => 'playlist',
             ], 'output'));
             
 		} catch (\Exception $e) {
