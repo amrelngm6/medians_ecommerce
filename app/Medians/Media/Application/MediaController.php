@@ -200,26 +200,28 @@ class MediaController extends CustomController
 		$stationRepo = new \Medians\Stations\Infrastructure\StationRepository; 
 		$stationMedia = $stationRepo->findMedia($stationId);
 
+		$targetTime = new \DateTime($stationMedia->start_at);
 		$currentTime = new \DateTime();
-		$targetTime = new \DateTime('21:30:00');
 		
 		if ($currentTime > $targetTime) {
 			// If the target time has already passed today, add one day
-			$targetTime->modify('+1 day');
+			// $targetTime->modify('+1 day');
+			
+			$interval = $targetTime->diff($currentTime);
+			$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
+			
+		} else {
+
+			// $interval = $currentTime->diff($targetTime);
+			// $seconds = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
+			
 		}
 		
-		$interval = $currentTime->diff($targetTime);
-		$seconds = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
-		
-		echo $seconds;
 
-		return;
+		// return;
 		// $startTime = 
-
-		$item = $this->mediaRepo->findByFile($filepath);
-
-		$addView = $item->addView();
-
+		$filepath = $stationMedia->media->main_file->path;
+		
 		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
 		{
 			$size = filesize($filePath);
