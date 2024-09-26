@@ -35,45 +35,6 @@
                     </div>  
                     <div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900  rounded-2xl p-8 h-full">
                         
-                        <div class="w-full 	mb-10 relative" id="latest-uploads">
-                            <span class="dark:text-gray-400">{{lang.translate('Station')}}</span>
-                            <hr class="w-10 my-4 " />
-                            <div id="tracks-list" class="">
-                                <ul class="w-full space-y-4 pb-20">
-                                {% for station_item in item.items %}                                   
-                                {% set media_item = station_item.media %}
-                                {% set list = {'items': item.items|column('media')} %}
-                                {% include 'views/front/' ~ template ~ '/includes/tracks-list.html.twig' %}
-                                {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="my-10 " ></div>
-                            <div class="z-10 absolute bottom-0 bg-gradient-to-b from-transparent dark:to-gray-900 to-white w-full h-20"></div>
-                        </div>
-
-                        
-                        
-                        <div class="w-full 	py-10">
-                            <div class="w-full relative rounded-2xl rounded  mb-4" id="top-stations">
-                                
-                                <div class="flex w-full pb-4">
-                                    <div class=" w-full flex gap-4 text-primary ">
-                                        <h2 class="text-2xl font-semibold dark:text-gray-400">Fans also played</h3>
-                                    </div>
-                                    <div class="flex gap gap-4">
-                                        <button class="prev-btn" data-slider="public-stations"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
-                                        <button class="next-btn" data-slider="public-stations"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
-                                    </div>
-                                </div>
-                                <hr class="opacity-30 mb-4" />
-
-                                <div id="public-stations" class="carousel-container" data-count="3"></div>
-
-                            </div>
-
-                        </div>
-
-
 
                     </div>
 
