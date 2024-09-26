@@ -1149,6 +1149,11 @@ Down
   .hs__item {
     flex-basis: calc(100% / 3 - (10px * 2) - (20px / 3));
   }
+  [data-count="4"] .hs__item ,  
+  [data-count="3"] .hs__item {  
+    flex-basis: calc(100% / 1 - (10px * 2) - (20px / 3));
+  }
+
 }
 .hs__item:last-child:after {
   content: "";
