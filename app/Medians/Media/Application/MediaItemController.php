@@ -440,6 +440,7 @@ class MediaItemController extends CustomController
 	{
 		$this->app = new \config\APP;
 
+        $params = $this->app->params();
 		
         try {
 
@@ -451,20 +452,20 @@ class MediaItemController extends CustomController
                 }
             }   
             
-            $params = $this->app->params();
             $params['picture'] = $this->mediaRepo->_dir.$picture;
             
             $item = $this->repo->find($params['media_id']);
             
             $getID3 = new getID3;
+
             // Analyze file
             $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $item->main_file->path);
 
-            if (isset($fileInfo['playtime_seconds']))
+            if (isset($fileInfo['playtime_seconds'])) {
                 $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+            }
         
-            $params['author_id'] = $this->app->customer_auth()->customer_id ?? 0;
-                
+            // $params['author_id'] = $this->app->customer_auth()->customer_id ?? 0;
 
             if ($this->repo->update($params))
             {
