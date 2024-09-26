@@ -125,7 +125,7 @@ class MediaItem extends CustomModel
         }
 
 
-		return $query->with('genres','main_file', 'author')
+		return $query->with('genres','main_file', 'artist')
 		->limit($limit ?? 6)
 		->get();	
 	}
