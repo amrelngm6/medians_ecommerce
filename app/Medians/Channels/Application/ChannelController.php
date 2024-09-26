@@ -2,7 +2,7 @@
 
 namespace Medians\Channels\Application;
 
-use Medians\Channels\Infrastructure\ChannelRepository;
+use Medians\Customers\Infrastructure\CustomerRepository;
 
 use Shared\dbaser\CustomController;
 
@@ -21,7 +21,7 @@ class ChannelController extends CustomController
 
 	function __construct()
 	{
-		$this->repo = new ChannelRepository();
+		$this->repo = new CustomerRepository();
 	}
 
 	
