@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg fill="#ff832c" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+<svg fill="currentColor" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	 viewBox="0 0 512 512" xml:space="preserve">
 <g>
 	<g>
-		<path d="M486.881,282.188h-9.086v-51.841C477.795,108.048,378.299,8.551,256,8.551S34.205,108.048,34.205,230.347v51.841h-9.086
+		<path fill="#ff832c"  d="M486.881,282.188h-9.086v-51.841C477.795,108.048,378.299,8.551,256,8.551S34.205,108.048,34.205,230.347v51.841h-9.086
 			C11.268,282.188,0,293.456,0,307.307v102.614c0,13.851,11.268,25.119,25.119,25.119h10.405c3.354,9.93,12.752,17.102,23.8,17.102
 			h17.102c13.851,0,25.119-11.268,25.119-25.119V290.205c0-13.851-11.268-25.119-25.119-25.119H59.324
 			c-3.203,0-6.266,0.609-9.086,1.707v-36.446c0-113.458,92.304-205.762,205.762-205.762s205.762,92.304,205.762,205.762v36.446
