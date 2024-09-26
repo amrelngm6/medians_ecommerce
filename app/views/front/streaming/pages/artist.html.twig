@@ -1,12 +1,12 @@
-<div class=" w-full h-screen gradient-top-overlay">
-	<img style="z-index:1" src="/stream?thumbnail=1600&image={{item.picture_name}}" class="w-full  shadow-xl absolute top-0 left-0 "/>
+<div class=" w-full  lg:h-screen gradient-top-overlay" style="min-height: 300px">
+	<img style="z-index:-1" src="/stream?thumbnail=1600&image={{item.picture_name}}" class="w-full  shadow-xl absolute top-0 left-0 "/>
 </div>
 <div class=" w-full h-40 absolute top-0 left-0 gradient-overlay" style="z-index:1; "></div>
 
 {% set customer = app.customer_auth() %}
 <div class=" w-full  relative">
-	<div class="absolute bottom-40 left-40  z-10 w-2/3 text-gray-100 dark:text-gray-400">
-		<h1 class="lg:text-6xl text-lg text-white">{{item.name}}</h1>
+	<div class="absolute lg:bottom-40 lg:left-40 left-10 bottom-10  z-10 w-2/3 text-gray-100 dark:text-gray-400">
+		<h1 class="lg:text-6xl text-4xl text-white">{{item.name}}</h1>
 
 		{% if item.customer_id == customer.customer_id %}
 			<div class="{{ following == null ? '' : ' hidden'}} float-right" x-on:click="jQuery('#heart-{{item.customer_id}}').addClass('hidden'); jQuery('#unheart-{{item.customer_id}}').removeClass('hidden')" id="heart-{{item.customer_id}}">
