@@ -208,6 +208,7 @@ class ChannelController extends CustomController
 
 		$settings = $this->app->SystemSetting();
 
+        $params = $this->app->params();
         $params['limit'] = $settings['view_items_limit'] ?? null;
         $list = $this->repo->getWithFilter($params);
 
