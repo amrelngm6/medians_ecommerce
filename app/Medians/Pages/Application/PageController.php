@@ -285,4 +285,35 @@ class PageController extends CustomController
 		
 	}
     
+	
+    /**
+     * Discover page for frontend
+     */
+    public function search()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $params = $this->app->params();
+		$categoryRepo = new \Medians\Categories\Infrastructure\CategoryRepository;
+		$mediaItemRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
+
+        $params['limit'] = $settings['category_products_count'] ?? null;
+        $params['type'] = 'audio';
+        $list = $mediaItemRepo->getWithFilter($params);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'lang' => $this->app->lang,
+                'list' => $list,
+                'genres' => $categoryRepo->getGenres(),
+                'layout' => 'search'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
 }

@@ -74,6 +74,11 @@ class MediaItemRepository
 				});
 			}
 
+			if (!empty($params['title']))
+			{
+				$model = $model->where('name', 'LIKE', '%'.$params['title'].'%');
+			}
+
 			if (!empty($params['type']) && in_array($params['type'], ['audio', 'audiobook','course']))
 			{
 				$model = $model->where('type', $params['type']);

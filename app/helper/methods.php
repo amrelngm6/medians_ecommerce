@@ -41,7 +41,6 @@ function render($template, $data, $responseType = 'html')
     $isFront = strpos($template, 'front/');
     
     $path = isset($data['load_vue']) ? 'views/admin/vue.html.twig' : $template;
-    $app = new \config\APP;
     $data = loadConfig($template, $data);
     $output =  $app->template()->render($path, $data);
 

@@ -2,6 +2,10 @@
                     <div class="w-full text-primary">
                         <h2 class="text-xl font-semibold  dark:text-gray-400 py-2">{{title ?? app.SystemSetting.sitename}}</h2>
                     </div>
+                    <a href="/search" class="ajax-load w-8 py-4" >
+                        <img src="/src/front_assets/svg/search.svg" class="" width="18" />
+                    </a>
+
                     {% if app.customer %}
                     <a href="#" class="w-8 py-4">
                         <img src="/src/front_assets/svg/notification.svg" class="" width="18" />
