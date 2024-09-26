@@ -94,26 +94,29 @@
 		<div class="text-primary overflow-auto" style="max-height: 400px;">
 			<div class="dark:text-gray-400 py-4">{{item.field.about|raw| nl2br  }}</div>
 		</div>
-		<div class="w-full 	py-10" id="slide-related-items">
-			<div class=" w-full flex gap-4 text-primary">
-				<div class=" w-full flex gap-4 dark:text-gray-400 ">
+		
+		<div class="w-full 	pt-6" id="slide-audio-items">
+            <div class="hs__wrapper" x-data="{is_slide: false}">
+            
+                <div class=" w-full flex gap-4 text-primary pb-10">
+                    <div class=" w-full flex gap-4 dark:text-gray-400 ">
 					<h2 class="text-2xl  font-semibold">{{lang.translate('Media items')}}</h3>
-					<a href="#!" class="p-2 transition hover:text-orange-500">See all</a>
-				</div>
+                        <a href="#!" class="p-2 transition hover:text-orange-500">See all</a>
+                    </div>
 
-				<div class="flex gap gap-4">
-					<button class="prev-btn" data-slider="related-items"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
-					<button class="next-btn" data-slider="related-items"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
-				</div>
-			</div>
-			<div class="my-4 "></div>
+                    <div class="hs__arrows flex gap-4"><a class="arrow disabled arrow-prev"></a><a class="arrow arrow-next"></a></div>
 
-			<div id="related-items" class="carousel-container flex gap-2" data-count="4">
-				{% set list = {'items' : item.media_items} %}
-				{% for media_item in list.items %}
-					{% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
-				{% endfor %}
-			</div>
+                </div>
+                <ul class="hs" >
+					{% set list = {'items' : item.media_items} %}
+					{% for media_item in list.items %}
+                    <li class="hs__item"> 
+						{% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
+                    </li>
+    				{% endfor %}    
+                </ul>
+            </div>
+
 		</div>
 
 
