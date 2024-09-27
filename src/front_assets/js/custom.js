@@ -192,7 +192,6 @@ function playStyles() {
 	player.parent().parent().find('.wave-frame').removeClass('hidden');
 	document.getElementById('album-art').classList.add('active') 
 	document.getElementById('player-pause-button').classList.add('active') 
-
 	
 	document.getElementById('app-cover').classList.remove('hidden') 
 	document.getElementById('album-name').innerHTML = audioObject.name ?? (audioObject.title ?? ''); 
