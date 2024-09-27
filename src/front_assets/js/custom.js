@@ -60,18 +60,17 @@ async function load (stationId)
 	}
 	activeStationMedia = activeStation.active_item;
 
-	console.log(a)
 	jQuery('#station-album-name').html(activeStationMedia.media.name ?? '')
 	jQuery('#station-stream-name').html(activeStationMedia.media.name ?? '')
 	jQuery('#station-track-name').html(activeStation.name ?? '')
 	jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture ?? '')
-	if (stationId != activeStationMedia.media_id)
+	if (a == 'new')
 	{
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ Math.random();
 		audio.load();
 		setTimeout(function(){
 			audio.play();
-		}, 100)
+		}, 500)
 	}
 }
 
