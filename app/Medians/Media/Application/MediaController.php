@@ -214,7 +214,7 @@ class MediaController extends CustomController
 		$byteOffset = (int)(($startTimeInSeconds / $totalDuration) * $fileInfo['filesize']);
 	
 		// Ensure the byte offset is at a valid MP3 frame
-		$byteOffset = findValidMP3Frame($filePath, $byteOffset);
+		$byteOffset = $this->findValidMP3Frame($filePath, $byteOffset);
 	
 		$fm = @fopen($filePath, 'rb');
 		if (!$fm) {
