@@ -287,17 +287,17 @@ class MediaController extends CustomController
 		$interval = $targetTime->diff($currentTime);
 		$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
 			
-		$filePath = $_SERVER['DOCUMENT_ROOT'].($stationMedia->media_path ?? $stationMedia->media->main_file->path);
+		$filePath =  isset($stationMedia->media->main_file->path) ? ($_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path) : $stationMedia->media_path;
 
-		if (file_exists($filePath))
+		if (isset($stationMedia->media) && file_exists($filePath))
 		{
 			return $this->streamAudioFromTime($filePath, $startTime);
 		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
 			return $this->stream_external($stationMedia->media_path, $startTime);
 		} else {
-			sleep(5);
+			// sleep(5);
 			
-			return $this->stream_station();
+			// return $this->stream_station();
 		}
 
 	}

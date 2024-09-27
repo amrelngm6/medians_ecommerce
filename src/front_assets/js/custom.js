@@ -63,12 +63,12 @@ async function loadStation(stationId, play = true)
 	}
 	if (activeStation.active_item) {
 		activeStationMedia = activeStation.active_item;
+		jQuery('#station-album-name').html(activeStationMedia.media.name ?? 'UNKNOWN')
+		jQuery('#station-stream-name').html(activeStationMedia.media.name ?? 'UNKNOWN')
+		jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
+		jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture ?? '')
 	}
 
-	jQuery('#station-album-name').html(activeStationMedia.media.name ?? 'UNKNOWN')
-	jQuery('#station-stream-name').html(activeStationMedia.media.name ?? 'UNKNOWN')
-	jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
-	jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture ?? '')
 	if (a == 'new' && play)
 	{
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ Math.random();
