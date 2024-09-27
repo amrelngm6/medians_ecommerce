@@ -128,14 +128,12 @@
                     let props = info.event.extendedProps;
                     
                     jQuery('#editStationStationId').val(props.station_id)
-                    jQuery('#editStationMediaPicture').attr('src', props.picture)
-
                     jQuery('#editStationMediaId').val(info.event.id)
-                    jQuery('#editStationMediaName').text(info.event.title)
                     jQuery('#editStationMediaStartAt').val(info.event.startStr.substr(11, 8))
                     jQuery('#editStationMediaStartDate').val(info.event.startStr.substr(0, 10))
+                    jQuery('#editStationMediaPicture').attr('src', props.picture)
+                    jQuery('#editStationMediaName').text(info.event.title)
                     jQuery('#edit-station-track-popup').toggleClass('hidden')
-                    {# jQuery('#editStationMediaArtistName').text(info.event.title) #}
 
                 },
                 
