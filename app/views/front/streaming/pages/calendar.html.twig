@@ -170,8 +170,9 @@
                 
         function updateSlotDuration (newDuration, calendar) 
         {
-            if (newDuration < 1)
-                return;
+            if (newDuration < 1) {
+                newDuration = 1
+            }
 
             // Convert the slider value to the appropriate format for slotDuration (HH:mm:ss)
             var slotDuration = '00:' + (newDuration.length === 1 ? '0' : '') + newDuration + ':00';
