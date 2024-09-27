@@ -106,7 +106,7 @@
                         title: '{{item.media.name}}',
                         id: '{{item.station_media_id}}',
                         picture: '{{item.media.picture}}',
-                        station_id: {{station.station_id}},
+                        station_id: '{{station.station_id}}',
                         start: '{{item.date|date('Y-m-d')}}T{{item.start_at}}',
                         end: '{{item.date|date('Y-m-d')}}T{{item.start_at|date_modify("+" ~ (item.media.field.duration ?? '1') ~ " seconds")|date("H:i:s")}}'
                     },
@@ -127,7 +127,7 @@
                 eventClick: function(info) {
                     let props = info.event.extendedProps;
                     
-                    jQuery('#editStationId').text(props.station_id)
+                    jQuery('#editStationStationId').val(props.station_id)
                     jQuery('#editStationMediaPicture').attr('src', props.picture)
 
                     jQuery('#editStationMediaId').val(info.event.id)
