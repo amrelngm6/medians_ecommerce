@@ -36,14 +36,7 @@ document.getElementById('player-audio').addEventListener("change", function(even
 jQuery(document).on('click', '.start-station', function (i, el) {
 	
 	jQuery('#station-app-cover').removeClass('hidden')
-		const stationId = jQuery(this).data('station'); 
-		audio = mainAudio[0];
-		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ Math.random();
-		audio.load()
-		setTimeout(function(){
-			audio.play();
-		}, 100)
-
+		
 		load(stationId)
 		setInterval(function(){
 			load(stationId)
@@ -52,6 +45,7 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 
 async function load (stationId)
 {
+		
 	const response  = await $.get('/station_json/'+stationId);
 
 	activeStation = JSON.parse(response);
@@ -61,6 +55,11 @@ async function load (stationId)
 	jQuery('#station-album-name').html(activeStationMedia.media.name ?? '')
 	jQuery('#station-track-name').html(activeStation.name ?? '')
 	jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture ?? '')
+	audio.src = '/stream_station?station_id='+ stationId+'&hash='+ Math.random();
+	audio.load()
+	setTimeout(function(){
+		audio.play();
+	}, 100)
 }
 
 jQuery(document).on('click', '.start-player', function (i, el) {
