@@ -1,4 +1,22 @@
 
+    
+    <script>
+        /* This is all the JS used and it does only 2 things: */
+
+        /* 1. datalist option render support test (for support info box) */
+        addEventListener('load', e => {
+            if (+document.querySelector('option').getBoundingClientRect().width)
+                document.body.style.setProperty('--list', 'none')
+        })
+
+        /* 2. update the --val custom property on dragging slider thumb */
+        addEventListener('input', e => {
+            let _t = e.target;
+            _t.parentNode.style.setProperty('--val', +_t.value)
+        })
+
+        /* Absolutely no JS is needed for creating the look of the slider. */
+    </script>
     <style>
         #calendar {
             max-width: 900px;
@@ -14,84 +32,64 @@
         <input type="hidden" name="params[date]" value="" id="stationMediaDate" />
     </form>
 
-    <div class="w-full flex gap-2">
-        <div id="slider-container" style="width: 200px;">
-            <label for="slotDurationRange">Slot Duration (minutes): </label>
-            <span id="durationValue">30</span> minutes
+    <div class="w-full flex gap-20">
+        <div id="slider-container" class="w-32" >
+            
+            <div class="absolute top-0 bottom-0" style="max-width: 200px; display: grid;  transform: scale(.4);">
 
-            
-            <!-- put all in a wrapper:-->
-            <div class="range-slide-wrap" role="group" aria-label="slider with ruler" style="--min: 0; --val: 18; --max: 36">
-                <!-- slider:-->
-                <input id="r"  type="range" list="l"  id="slotDurationRange" min="1" max="60" step="2" value="30">
-                <!-- value display:-->
-                <output for="r"></output>
-                <!-- ruler:-->
-                <datalist id="l">
-                    <option value="0" style="--idx: 0" label="0"></option>
-                    <option value="1" style="--idx: 1"></option>
-                    <option value="2" style="--idx: 2"></option>
-                    <option value="3" style="--idx: 3"></option>
-                    <option value="4" style="--idx: 4"></option>
-                    <option value="5" style="--idx: 5"></option>
-                    <option value="6" style="--idx: 6" label="6"></option>
-                    <option value="7" style="--idx: 7"></option>
-                    <option value="8" style="--idx: 8"></option>
-                    <option value="9" style="--idx: 9"></option>
-                    <option value="10" style="--idx: 10"></option>
-                    <option value="11" style="--idx: 11"></option>
-                    <option value="12" style="--idx: 12" label="12"></option>
-                    <option value="13" style="--idx: 13"></option>
-                    <option value="14" style="--idx: 14"></option>
-                    <option value="15" style="--idx: 15"></option>
-                    <option value="16" style="--idx: 16"></option>
-                    <option value="17" style="--idx: 17"></option>
-                    <option value="18" style="--idx: 18" label="18"></option>
-                    <option value="19" style="--idx: 19"></option>
-                    <option value="20" style="--idx: 20"></option>
-                    <option value="21" style="--idx: 21"></option>
-                    <option value="22" style="--idx: 22"></option>
-                    <option value="23" style="--idx: 23"></option>
-                    <option value="24" style="--idx: 24" label="24"></option>
-                    <option value="25" style="--idx: 25"></option>
-                    <option value="26" style="--idx: 26"></option>
-                    <option value="27" style="--idx: 27"></option>
-                    <option value="28" style="--idx: 28"></option>
-                    <option value="29" style="--idx: 29"></option>
-                    <option value="30" style="--idx: 30" label="30"></option>
-                    <option value="31" style="--idx: 31"></option>
-                    <option value="32" style="--idx: 32"></option>
-                    <option value="33" style="--idx: 33"></option>
-                    <option value="34" style="--idx: 34"></option>
-                    <option value="35" style="--idx: 35"></option>
-                    <option value="36" style="--idx: 36" label="36"></option>
-                </datalist>
+                <!-- put all in a wrapper:-->
+                <div class="wrap" role="group" aria-label="slider with ruler" style="display: grid; --min: 1; --val: 30; --max: 60">
+                    <!-- slider:-->
+                    <input id="r" type="range" list="l" min="1" max="60" />
+                    <!-- value display:-->
+                    <output for="r"></output>
+                    <!-- ruler:-->
+                    <datalist id="l">
+                        {% set arr = range(0, 12) %}
+                        {% for i in range(1, 10) %}
+                        <option value="{{((i * 6) - 1) }}" style="--idx: {{((i * 6) - 4)}}" ></option>
+                        <option value="{{((i * 6) - 1) }}" style="--idx: {{((i * 6) - 2)}}" ></option>
+                        <option value="{{((i * 6)) }}" style="--idx: {{((i * 6))}}" label="{{((i * 6))}}" ></option>
+
+                        {% endfor %}
+                        <option value="22" style="--idx: 22"></option>
+
+                    </datalist>
+                </div>
+                <section class="range-info">
+                    <p class="box box--fail box--list">Sorry, it appears your browser has failed displaying the slider ruler.
+                        Currently, recent versions of Firefox and Chromium browsers should be able to display it.</p>
+                    <p class="box box--warn box--trig">Sorry, it appears your browser does not support trigonometric functions in
+                        CSS, so the slider ruler offset won't look ideal. Currently, trigonometric functions are supported in
+                        Safari, Firefox and Chromium browsers starting with version 111 when enabling the<strong>Experimental Web
+                            Platform features</strong>
+                        flag in<kbd>chrome://flags</kbd>.
+                    </p>
+                    <p class="box box--fail box--cmix">Sorry, it appears your browser does not support<code>color-mix</code>. No
+                        support or this features prevents the slider's highlight from responding to changes in value.
+                        Currently,<code>color-mix</code>
+                        is supported in Safari, Chromium browsers starting with version 111 (version 109 when enabling
+                        the<strong>Experimental Web Platform features</strong>
+                        flag in<kbd>chrome://flags</kbd>) and Firefox starting with version 111 (version 88 when setting
+                        the<kbd>layout.css.color-mix.enabled</kbd>
+                        flag to<code>true</code>
+                        in<kbd>about:config</kbd>).
+                    </p>
+                </section>
             </div>
-            
-            <section class="range-wrap">
-                <p class="box box--fail box--list">Sorry, it appears your browser has failed displaying the slider ruler. Currently, recent versions of Firefox and Chromium browsers should be able to display it.</p>
-                <p class="box box--warn box--trig">Sorry, it appears your browser does not support trigonometric functions in CSS, so the slider ruler offset won't look ideal. Currently, trigonometric functions are supported in Safari, Firefox and Chromium browsers starting with version 111 when enabling the<strong>Experimental Web Platform features</strong>
-                    flag in<kbd>chrome://flags</kbd>.
-                </p>
-                <p class="box box--fail box--cmix">Sorry, it appears your browser does not support<code>color-mix</code>. No support or this features prevents the slider's highlight from responding to changes in value. Currently,<code>color-mix</code>
-                    is supported in Safari, Chromium browsers starting with version 111 (version 109 when enabling the<strong>Experimental Web Platform features</strong>
-                    flag in<kbd>chrome://flags</kbd>) and Firefox starting with version 111 (version 88 when setting the<kbd>layout.css.color-mix.enabled</kbd>
-                    flag to<code>true</code>
-                    in<kbd>about:config</kbd>).
-                </p>
-            </section>
         </div>
-        <div class="w-full" id='calendar' style="max-height:calc(100vh - 135px)"></div>
+        <div class="w-full " id='calendar' style="width: calc(100% - 200px); max-height:calc(100vh - 135px)"></div>
     </div>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.js" integrity="sha512-3I+0zIxy2IkeeCvvhXUEu+AFT3zAGuHslHLDmM8JBv6FT7IW6WjhGpUZ55DyGXArYHD0NshixtmNUWJzt0K32w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+        var calendar;
         document.addEventListener('DOMContentLoaded', function() {
             const calendarEl = document.getElementById('calendar');
 
-            const calendar = new FullCalendar.Calendar(calendarEl, {
+            calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'timeGridDay',
-                slotDuration: '00:05:00', // Time slots every 30 minutes
+                slotDuration: '00:30:00', // Time slots every 30 minutes
                 allDaySlot: false, // Disable all-day slot
                 editable: true,
                 droppable: true, 
@@ -148,27 +146,33 @@
                 updateSlotDuration();
             }); #}
 
-                
-            function updateSlotDuration () 
-            {
-                var newDuration = slider.value;
-                // Convert the slider value to the appropriate format for slotDuration (HH:mm:ss)
-                var slotDuration = '00:' + (newDuration.length === 1 ? '0' : '') + newDuration + ':00';
-                
-                // Reconfigure the calendar with the new slotDuration
-                calendar.setOption('slotDuration', slotDuration);
-            }
         });
+        
+                
+        function updateSlotDuration (newDuration, calendar) 
+        {
+            if (newDuration < 1)
+                return;
 
-        if(+document.querySelector('option').getBoundingClientRect().width) {
-                document.body.style.setProperty('--list', 'none')
+            // Convert the slider value to the appropriate format for slotDuration (HH:mm:ss)
+            var slotDuration = '00:' + (newDuration.length === 1 ? '0' : '') + newDuration + ':00';
+            
+            // Reconfigure the calendar with the new slotDuration
+            calendar.setOption('slotDuration', slotDuration);
         }
+        
+        addEventListener('load', e => {
+            if(+document.querySelector('option').getBoundingClientRect().width) {
+                    document.body.style.setProperty('--list', 'none')
+            }
+        })
 
         /* 2. update the --val custom property on dragging slider thumb */
         jQuery(document).on('input', 'input[type=range]' , function(e) {
             let _t = e.target;
             _t.parentNode.style.setProperty('--val', +_t.value)
             console.log(_t.value)
+            updateSlotDuration(_t.value, calendar)
         })
 
     </script>
