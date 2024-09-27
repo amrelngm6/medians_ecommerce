@@ -41,7 +41,7 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 		load(stationId)
 		setInterval(function(){
 			load(stationId)
-		}, 30000);
+		}, 10000);
 });
 
 async function load (stationId)
