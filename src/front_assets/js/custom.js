@@ -55,6 +55,8 @@ async function load (stationId)
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
 	{
 		a = 'same'
+	} else {
+		a = 'new'
 	}
 	activeStationMedia = activeStation.active_item;
 
