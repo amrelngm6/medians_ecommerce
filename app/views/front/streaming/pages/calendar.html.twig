@@ -114,8 +114,6 @@
 
                 dateClick: function(info) {
                     
-                    let props = info.event.extendedProps;
-                    
                     jQuery("#stationMediaStart").val(info.dateStr.substr(11, 8));
                     jQuery("#linkStationMediaStart").val(info.dateStr.substr(11, 8));
                     jQuery('#stationMediaStartDate').val(info.event.startStr.substr(0, 10))
