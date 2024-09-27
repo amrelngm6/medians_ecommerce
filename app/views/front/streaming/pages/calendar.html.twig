@@ -119,6 +119,15 @@
                     jQuery('#find-track-popup').toggleClass('hidden')
 
                     console.log('Date: ' + info.dateStr.substr(0, 10));
+                    
+                },
+
+                eventClick: function(info) {
+                    
+                    jQuery('#edit-station-track-popup').toggleClass('hidden')
+                    {# jQuery('#edit-station-track-cover').attr('src', ) #}
+
+                    console.log(info.event);
                 },
                 
                 eventDragStop: function(info) {
@@ -185,3 +194,4 @@
 
 
     {% include 'views/front/' ~ template ~ '/popups/find-track.html.twig' %}
+    {% include 'views/front/' ~ template ~ '/popups/edit-station-track.html.twig' %}
