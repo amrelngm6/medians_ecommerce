@@ -241,6 +241,22 @@ class StationController extends CustomController
 	}
 
     /**
+     * Station JSON for frontend
+     */
+    public function station_json($station_id)
+    {
+
+		try {
+
+			echo json_encode($this->repo->find($station_id));
+			return;
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
+    /**
      * Station page for frontend
      */
     public function station($station_id)

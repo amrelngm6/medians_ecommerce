@@ -85,6 +85,7 @@ RouteHandler::get('/playlist/(:all)', \Medians\Playlists\Application\PlaylistCon
 RouteHandler::get('/stations', \Medians\Stations\Application\StationController::class.'@stations');
 RouteHandler::get('/station/(:all)/calendar', \Medians\Stations\Application\StationController::class.'@calendar');
 RouteHandler::get('/station/(:all)', \Medians\Stations\Application\StationController::class.'@station');
+RouteHandler::get('/station_json/(:all)', \Medians\Stations\Application\StationController::class.'@station_json');
 
 RouteHandler::get('/customer/login', \Medians\Auth\Application\CustomerAuthService::class.'@loginPage');
 RouteHandler::get('/customer/signup', \Medians\Auth\Application\CustomerAuthService::class.'@signupPage');
