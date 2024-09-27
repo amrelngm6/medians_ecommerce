@@ -62,7 +62,7 @@ async function load (stationId)
 	audio.load();
 	setTimeout(function(){
 		audio.play();
-	}, 500)
+	}, 100)
 }
 
 jQuery(document).on('click', '.start-player', function (i, el) {
