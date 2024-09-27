@@ -36,6 +36,7 @@ document.getElementById('player-audio').addEventListener("change", function(even
 jQuery(document).on('click', '.start-station', function (i, el) {
 	
 	jQuery('#station-app-cover').removeClass('hidden')
+	const stationId = jQuery(this).data('station'); 
 		
 		load(stationId)
 		setInterval(function(){
