@@ -17,86 +17,84 @@
 
         /* Absolutely no JS is needed for creating the look of the slider. */
     </script>
-    <style>
-        #calendar {
-            max-width: 900px;
-            margin: 40px auto;
-        }
-    </style>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css' rel='stylesheet' />
 
-    <form action="/front_api/update" class="ajax-form" id="calendar-form">
-        <input type="hidden" name="type" value="StationMedia.update" />
-        <input type="hidden" name="params[station_media_id]" value="" id="stationMediaId" />
-        <input type="hidden" name="params[start_at]" value="" id="stationMediaStartTime" />
-        <input type="hidden" name="params[date]" value="" id="stationMediaDate" />
-    </form>
 
-    <div class="courses-container">
-        <div class="course">
-            <div class="course-preview">
-                <h6 class="text-sm">{{lang.translate('Station')}}</h6>
-                <h2>{{station.name}}</h2>
-            </div>
-            <div class="course-info">
-                <div class="progress-container flex ">
-                    <span class="progress-text flex-none">6/9 {{lang.translate("Streaming")}}</span>
-                    <div class="progress"></div>
+    <div class="pb-20 w-full">
+        
+        <form action="/front_api/update" class="ajax-form" id="calendar-form">
+            <input type="hidden" name="type" value="StationMedia.update" />
+            <input type="hidden" name="params[station_media_id]" value="" id="stationMediaId" />
+            <input type="hidden" name="params[start_at]" value="" id="stationMediaStartTime" />
+            <input type="hidden" name="params[date]" value="" id="stationMediaDate" />
+        </form>
+
+        <div class="courses-container">
+            <div class="course">
+                <div class="course-preview">
+                    <h6 class="text-sm">{{lang.translate('Station')}}</h6>
+                    <h2>{{station.name}}</h2>
                 </div>
-                <h6>{{lang.translate('Currently streaming')}}</h6>
-                <h2>Callbacks & Closures</h2>
-                <button data-station="{{item.station_id}}" class="btn py-2 start-station"><img src="/src/front_assets/svg/play-active.svg" /></button>
+                <div class="course-info">
+                    <div class="progress-container flex ">
+                        <span class="progress-text flex-none">6/9 {{lang.translate("Streaming")}}</span>
+                        <div class="progress"></div>
+                    </div>
+                    <h6>{{lang.translate('Currently streaming')}}</h6>
+                    <h2>Callbacks & Closures</h2>
+                    <button data-station="{{item.station_id}}" class="btn py-2 start-station"><img src="/src/front_assets/svg/play-active.svg" /></button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="w-full flex gap-20 relative">
-        <div id="slider-container" class="w-32" >
-            
-            <div class="absolute top-0 bottom-0" style="max-width: 200px; display: grid;  transform: scale(.4);">
+        <div class="w-full flex gap-20 relative">
+            <div id="slider-container" class="w-32" >
+                
+                <div class="absolute top-0 bottom-0" style="max-width: 200px; display: grid;  transform: scale(.4);">
 
-                <!-- put all in a wrapper:-->
-                <div class="wrap" role="group" aria-label="slider with ruler" style="display: grid; --min: 1; --val: 30; --max: 60">
-                    <!-- slider:-->
-                    <input id="r" type="range" list="l" min="1" max="60" />
-                    <!-- value display:-->
-                    <output for="r"></output>
-                    <!-- ruler:-->
-                    <datalist id="l">
-                        {% set arr = range(0, 12) %}
-                        {% for i in range(1, 10) %}
-                        <option value="{{((i * 6) - 1) }}" style="--idx: {{((i * 6) - 4)}}" ></option>
-                        <option value="{{((i * 6) - 1) }}" style="--idx: {{((i * 6) - 2)}}" ></option>
-                        <option value="{{((i * 6)) }}" style="--idx: {{((i * 6))}}" label="{{((i * 6))}}" ></option>
+                    <!-- put all in a wrapper:-->
+                    <div class="wrap" role="group" aria-label="slider with ruler" style="display: grid; --min: 1; --val: 30; --max: 60">
+                        <!-- slider:-->
+                        <input id="r" type="range" list="l" min="1" max="60" />
+                        <!-- value display:-->
+                        <output for="r"></output>
+                        <!-- ruler:-->
+                        <datalist id="l">
+                            {% set arr = range(0, 12) %}
+                            {% for i in range(1, 10) %}
+                            <option value="{{((i * 6) - 1) }}" style="--idx: {{((i * 6) - 4)}}" ></option>
+                            <option value="{{((i * 6) - 1) }}" style="--idx: {{((i * 6) - 2)}}" ></option>
+                            <option value="{{((i * 6)) }}" style="--idx: {{((i * 6))}}" label="{{((i * 6))}}" ></option>
 
-                        {% endfor %}
-                        <option value="22" style="--idx: 22"></option>
+                            {% endfor %}
+                            <option value="22" style="--idx: 22"></option>
 
-                    </datalist>
+                        </datalist>
+                    </div>
+                    <section class="range-info">
+                        <p class="box box--fail box--list">Sorry, it appears your browser has failed displaying the slider ruler.
+                            Currently, recent versions of Firefox and Chromium browsers should be able to display it.</p>
+                        <p class="box box--warn box--trig">Sorry, it appears your browser does not support trigonometric functions in
+                            CSS, so the slider ruler offset won't look ideal. Currently, trigonometric functions are supported in
+                            Safari, Firefox and Chromium browsers starting with version 111 when enabling the<strong>Experimental Web
+                                Platform features</strong>
+                            flag in<kbd>chrome://flags</kbd>.
+                        </p>
+                        <p class="box box--fail box--cmix">Sorry, it appears your browser does not support<code>color-mix</code>. No
+                            support or this features prevents the slider's highlight from responding to changes in value.
+                            Currently,<code>color-mix</code>
+                            is supported in Safari, Chromium browsers starting with version 111 (version 109 when enabling
+                            the<strong>Experimental Web Platform features</strong>
+                            flag in<kbd>chrome://flags</kbd>) and Firefox starting with version 111 (version 88 when setting
+                            the<kbd>layout.css.color-mix.enabled</kbd>
+                            flag to<code>true</code>
+                            in<kbd>about:config</kbd>).
+                        </p>
+                    </section>
                 </div>
-                <section class="range-info">
-                    <p class="box box--fail box--list">Sorry, it appears your browser has failed displaying the slider ruler.
-                        Currently, recent versions of Firefox and Chromium browsers should be able to display it.</p>
-                    <p class="box box--warn box--trig">Sorry, it appears your browser does not support trigonometric functions in
-                        CSS, so the slider ruler offset won't look ideal. Currently, trigonometric functions are supported in
-                        Safari, Firefox and Chromium browsers starting with version 111 when enabling the<strong>Experimental Web
-                            Platform features</strong>
-                        flag in<kbd>chrome://flags</kbd>.
-                    </p>
-                    <p class="box box--fail box--cmix">Sorry, it appears your browser does not support<code>color-mix</code>. No
-                        support or this features prevents the slider's highlight from responding to changes in value.
-                        Currently,<code>color-mix</code>
-                        is supported in Safari, Chromium browsers starting with version 111 (version 109 when enabling
-                        the<strong>Experimental Web Platform features</strong>
-                        flag in<kbd>chrome://flags</kbd>) and Firefox starting with version 111 (version 88 when setting
-                        the<kbd>layout.css.color-mix.enabled</kbd>
-                        flag to<code>true</code>
-                        in<kbd>about:config</kbd>).
-                    </p>
-                </section>
             </div>
+            <div class="w-full " id='calendar' style="width: calc(100% - 200px); max-height:calc(100vh - 135px)"></div>
         </div>
-        <div class="w-full " id='calendar' style="width: calc(100% - 200px); max-height:calc(100vh - 135px)"></div>
     </div>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.js" integrity="sha512-3I+0zIxy2IkeeCvvhXUEu+AFT3zAGuHslHLDmM8JBv6FT7IW6WjhGpUZ55DyGXArYHD0NshixtmNUWJzt0K32w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

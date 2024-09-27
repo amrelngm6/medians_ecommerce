@@ -1712,3 +1712,8 @@ Station card
 	right: 30px;
 	letter-spacing: 1px;
 }
+
+#calendar {
+  max-width: 900px;
+  margin: 40px auto;
+}
