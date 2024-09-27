@@ -57,7 +57,7 @@ async function load (stationId)
 	}
 	activeStationMedia = activeStation.active_item;
 
-	console.log(activeStationMedia)
+	console.log(a)
 	jQuery('#station-album-name').html(activeStationMedia.media.name ?? '')
 	jQuery('#station-stream-name').html(activeStationMedia.media.name ?? '')
 	jQuery('#station-track-name').html(activeStation.name ?? '')
