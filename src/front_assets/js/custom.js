@@ -46,11 +46,15 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 
 async function load (stationId)
 {
-		
+	var a = false;
 	const response  = await $.get('/station_json/'+stationId);
 
 	activeStation = JSON.parse(response);
 
+	if (activeStation.active_item != activeStationMedia)
+	{
+		a = 'new'
+	}
 	activeStationMedia = activeStation.active_item;
 
 	console.log(activeStationMedia)
@@ -58,7 +62,7 @@ async function load (stationId)
 	jQuery('#station-stream-name').html(activeStationMedia.media.name ?? '')
 	jQuery('#station-track-name').html(activeStation.name ?? '')
 	jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture ?? '')
-	if (stationId != activeStationMedia.station_id)
+	if (stationId != activeStationMedia.media_id)
 	{
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ Math.random();
 		audio.load();
