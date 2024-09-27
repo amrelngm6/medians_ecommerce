@@ -120,13 +120,21 @@ class StationController extends CustomController
 
         	$this->app->customer_auth();
 			
-            $getID3 = new getID3;
-            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $params['media_path']);
+			$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
+			$getID3 = new getID3;
+			if (substr($params['media_path'], 0, 4) == 'http' ) {
+				
+				$tempFilePath = tempnam(sys_get_temp_dir(), 'audio');
+				file_put_contents($tempFilePath, fopen($params['media_path'], 'r'));
+				$filePath = $tempFilePath;
+			}
+			$fileInfo = $getID3->analyze($filePath);
+
             if (isset($fileInfo['playtime_seconds'])) {
                 $params['duration'] = round($fileInfo['playtime_seconds'], 0);
 			}
-			
-            $returnData = (!empty($this->repo->store_item($params))) 
+
+			$returnData = (!empty($this->repo->store_item($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
 
