@@ -25,7 +25,7 @@ function runSlide()
 
 var mainAudio = jQuery('audio');
 
-var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename;
+var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename, activeStation, activeStationMedia;
 
 
 document.getElementById('player-audio').addEventListener("change", function(event) {
@@ -43,7 +43,21 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 		setTimeout(function(){
 			audio.play();
 		}, 100)
+
+		load(stationId)
+		setInterval(function(){
+			load(stationId)
+		}, 30000);
 });
+
+async function load (stationId)
+{
+	const response  = await $.get('/station_json/'+stationId);
+
+	activeStation = JSON.parse(response);
+
+	activeStationMedia = activeStation.active_item;
+}
 
 jQuery(document).on('click', '.start-player', function (i, el) {
 	player = jQuery(this);
