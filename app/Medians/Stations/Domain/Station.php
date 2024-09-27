@@ -38,7 +38,7 @@ class Station extends CustomModel
 
 	public function activeItem()
 	{
-		return $this->hasOne(StationMedia::class, 'station_id', 'station_id')->where('start_at', '<', date('H:i:s'))->with('media')->orderBy('created_at');	
+		return $this->hasOne(StationMedia::class, 'station_id', 'station_id')->where('start_at', '<', date('H:i:s'))->with('media');	
 	}
 
 	public function likes()
