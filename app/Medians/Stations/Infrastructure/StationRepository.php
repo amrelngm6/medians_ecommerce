@@ -20,7 +20,7 @@ class StationRepository
 
 	public function find($id)
 	{
-		return Station::with('items')->withCount('likes')->find($id);
+		return Station::with('items', 'activeItem')->withCount('likes')->find($id);
 	}
 
 	public function findMedia($id)
