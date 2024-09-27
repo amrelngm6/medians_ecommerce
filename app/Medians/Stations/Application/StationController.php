@@ -5,6 +5,7 @@ namespace Medians\Stations\Application;
 use Medians\Stations\Infrastructure\StationRepository;
 
 use Shared\dbaser\CustomController;
+use getID3;
 
 class StationController extends CustomController
 {
@@ -118,10 +119,15 @@ class StationController extends CustomController
         try {	
 
         	$this->app->customer_auth();
-			$params['customer_id'] = $this->app->customer->customer_id;
-
+			
+            $getID3 = new getID3;
+            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $params['media_path']);
+            if (isset($fileInfo['playtime_seconds'])) {
+                $params['duration'] = round($fileInfo['playtime_seconds'], 0);
+			}
+			
             $returnData = (!empty($this->repo->store_item($params))) 
-            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>0)
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
 
         } catch (\Exception $e) {

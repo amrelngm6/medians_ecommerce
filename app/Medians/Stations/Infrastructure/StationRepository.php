@@ -21,7 +21,7 @@ class StationRepository
 	public function find($id)
 	{
 		return Station::with('items')->with(['activeItem'=> function($q){
-			return $q->orderBy('start_at', 'DESC');
+			return $q->orderBy('created_at', 'DESC');
 
 		}])->withCount('likes')->find($id);
 	}

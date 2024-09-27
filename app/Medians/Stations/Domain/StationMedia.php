@@ -18,8 +18,10 @@ class StationMedia extends CustomModel
 
 	public $fillable = [
 		'media_id',
+		'media_path',
 		'station_id',
 		'start_at',
+		'duration',
 		'date',
 		'sort'
 	];
