@@ -60,7 +60,7 @@ async function load (stationId)
 
 	jQuery('#station-album-name').html(activeStationMedia.media.name ?? '')
 	jQuery('#station-track-name').html(activeStation.name ?? '')
-	jQuery('#station-track-poster').html(activeStationMedia.media.picture ?? '')
+	jQuery('#station-track-poster').src(activeStationMedia.media.picture ?? '')
 }
 
 jQuery(document).on('click', '.start-player', function (i, el) {
