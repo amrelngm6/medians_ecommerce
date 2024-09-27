@@ -60,8 +60,8 @@
                     jQuery("#stationMediaId").val(info.event.id);
                 },
                 eventDrop: function(info) {
-                    jQuery("#stationMediaStartTime").val(info.event.startStr.substr(0, 10));
-                    jQuery("#stationMediaDate").val(info.event.startStr.substr(11, 8));
+                    jQuery("#stationMediaDate").val(info.event.startStr.substr(0, 10));
+                    jQuery("#stationMediaStartTime").val(info.event.startStr.substr(11, 8));
                     setTimeout(function(){
                         jQuery("#calendar-form").submit();
                     }, 50)
