@@ -51,7 +51,7 @@ async function load (stationId)
 
 	activeStation = JSON.parse(response);
 
-	if (activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
+	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
 	{
 		a = 'same'
 	}
