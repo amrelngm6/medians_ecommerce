@@ -44,9 +44,10 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 		}, 10000);
 });
 
+var a;
+
 async function load (stationId)
 {
-	var a = false;
 	const response  = await $.get('/station_json/'+stationId);
 
 	activeStation = JSON.parse(response);
