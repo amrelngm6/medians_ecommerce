@@ -53,6 +53,7 @@ async function load (stationId)
 
 	activeStationMedia = activeStation.active_item;
 
+	console.log(activeStationMedia)
 	jQuery('#station-album-name').html(activeStationMedia.media.name ?? '')
 	jQuery('#station-track-name').html(activeStation.name ?? '')
 	jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture ?? '')
