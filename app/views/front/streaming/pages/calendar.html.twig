@@ -43,9 +43,9 @@
                     <span class="progress-text flex-none">6/9 {{lang.translate("Streaming")}}</span>
                     <div class="progress"></div>
                 </div>
-                <h6>Chapter 4</h6>
+                <h6>{{lang.translate('Currently streaming')}}</h6>
                 <h2>Callbacks & Closures</h2>
-                <button class="btn py-2"><img src="/src/front_assets/svg/play-active.svg" /></button>
+                <button data-station="{{item.station_id}}" class="btn py-2 start-station"><img src="/src/front_assets/svg/play-active.svg" /></button>
             </div>
         </div>
     </div>
