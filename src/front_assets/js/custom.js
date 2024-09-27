@@ -58,7 +58,8 @@ async function load (stationId)
 	jQuery('#station-stream-name').html(activeStationMedia.media.name ?? '')
 	jQuery('#station-track-name').html(activeStation.name ?? '')
 	jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture ?? '')
-	audio.pause();
+	audio.src = '/stream_station?station_id='+ stationId+'&hash='+ Math.random();
+	audio.load();
 	setTimeout(function(){
 		audio.play();
 	}, 100)
