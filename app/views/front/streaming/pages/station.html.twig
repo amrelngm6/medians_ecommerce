@@ -34,7 +34,13 @@
                         </div>
                     </div>  
                     <div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900  rounded-2xl p-8 h-full">
-                        
+                                        
+
+                        <div class="container mx-auto">
+                        {% set station = item %}
+                        {{item}}
+                        {% include 'views/front/' ~ template ~ '/includes/station-stream-block.html.twig' %}
+                        </div>
 
                     </div>
 

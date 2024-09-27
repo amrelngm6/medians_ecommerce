@@ -20,36 +20,39 @@ class StationRepository
 
 	public function find($id)
 	{
-		// $now = date('H:i:s', strtotime("+1 Hours"));
+		
 		$now = date('H:i:s');
 		return Station::with('items')->with(['activeItem'=> function($q) use ($now) {
 			return $q->whereRaw("? BETWEEN `start_at` AND DATE_ADD(`start_at`, INTERVAL `duration` SECOND)", [$now]);
 		}])->withCount('likes')->find($id);
+
+
+		// return Station::with('items', 'activeItem')->withCount('likes')->find($id);
 	}
 
 	public function findMedia($id)
 	{
-		return StationMedia::with('media')->where('station_id', $id)->first();
+		return StationMedia::with('media', 'activeItem')->where('station_id', $id)->first();
 	}
 
 	public function findMediaByTime($id, $time)
 	{
-		return StationMedia::with('media')->where('start_at', '<', $time)->where('station_id', $id)->orderBy('start_at', 'DESC')->first();
+		return StationMedia::with('media', 'activeItem')->where('start_at', '<', $time)->where('station_id', $id)->orderBy('start_at', 'DESC')->first();
 	}
 
 	public function get($limit = 1000)
 	{
-		return Station::withCount('likes')->with('items')->limit($limit)->get();
+		return Station::withCount('likes')->with('items', 'activeItem')->limit($limit)->get();
 	}
 
 	public function getTop($limit = 1000)
 	{
-		return Station::withCount('likes')->with('items')->limit($limit)->orderBy('likes_count', 'DESC')->get();
+		return Station::withCount('likes')->with('items', 'activeItem')->limit($limit)->orderBy('likes_count', 'DESC')->get();
 	}
 
 	public function getByCustomer($customer_id)
 	{
-		return Station::withCount('likes')->with('items')->where('customer_id', $customer_id)->get();
+		return Station::withCount('likes')->with('items','activeItem')->where('customer_id', $customer_id)->get();
 	}
 
 

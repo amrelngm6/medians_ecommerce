@@ -29,24 +29,11 @@
             <input type="hidden" name="params[date]" value="" id="stationMediaDate" />
         </form>
 
-        <div class="courses-container">
-            <div class="course">
-                <div class="course-preview">
-                    <h6 class="text-sm">{{lang.translate('Station')}}</h6>
-                    <h2 class="truncate">{{station.name}}</h2>
-                </div>
-                <div class="course-info">
-                    <div class="progress-container flex ">
-                        <span class="progress-text flex-none">6/{{station.items|length}} {{lang.translate("Streaming")}}</span>
-                        <div class="progress"></div>
-                    </div>
-                    <h6>{{lang.translate('Currently streaming')}}</h6>
-                    <h2>Callbacks & Closures</h2>
-                    <button data-station="{{station.station_id}}" class="btn py-2 start-station"><img src="/src/front_assets/svg/play-active.svg" /></button>
-                </div>
-            </div>
+        <div class="container mx-auto">
+        {% include 'views/front/' ~ template ~ '/includes/station-stream-block.html.twig' %}
         </div>
 
+        
         <div class="w-full flex gap-20 relative">
             <div id="slider-container" class="w-32" >
                 

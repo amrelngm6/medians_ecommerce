@@ -1645,7 +1645,7 @@ Station card
 .course-preview {
 	background-color: #2A265F;
 	color: #fff;
-	padding: 30px;
+	padding: 20px;
 	max-width: 250px;
 }
 
@@ -1654,12 +1654,12 @@ Station card
 	display: inline-block;
 	font-size: 12px;
 	opacity: 0.6;
-	margin-top: 30px;
+	margin-top: 20px;
 	text-decoration: none;
 }
 
 .course-info {
-	padding: 30px;
+	padding: 20px;
 	position: relative;
 	width: 100%;
 }
@@ -1667,7 +1667,7 @@ Station card
 .progress-container {
 	position: absolute;
 	top: 30px;
-	right: 30px;
+	right: 100px;
 	text-align: right;
 	width: 150px;
 }
@@ -1708,7 +1708,7 @@ Station card
 	font-size: 16px;
 	padding: 15px;
 	position: absolute;
-	bottom: 30px;
+	bottom: 20px;
 	right: 30px;
 	letter-spacing: 1px;
 }
