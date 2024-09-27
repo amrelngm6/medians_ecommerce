@@ -49,7 +49,7 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 
 var a;
 
-async function load (stationId)
+async function loadStation(stationId)
 {
 	const response  = await $.get('/station_json/'+stationId);
 
