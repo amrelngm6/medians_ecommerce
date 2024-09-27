@@ -61,11 +61,13 @@ async function loadStation(stationId, play = true)
 	} else {
 		a = 'new'
 	}
-	activeStationMedia = activeStation.active_item;
+	if (activeStation.active_item) {
+		activeStationMedia = activeStation.active_item;
+	}
 
-	jQuery('#station-album-name').html(activeStationMedia.media.name ?? '')
-	jQuery('#station-stream-name').html(activeStationMedia.media.name ?? '')
-	jQuery('#station-track-name').html(activeStation.name ?? '')
+	jQuery('#station-album-name').html(activeStationMedia.media.name ?? 'UNKNOWN')
+	jQuery('#station-stream-name').html(activeStationMedia.media.name ?? 'UNKNOWN')
+	jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
 	jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture ?? '')
 	if (a == 'new' && play)
 	{
