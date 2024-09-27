@@ -20,8 +20,10 @@ class StationRepository
 
 	public function find($id)
 	{
-		return Station::with('items')->with(['activeItem'=> function($q){
-			return $q->where('start_at', '<', date('H:i:s'))->orderByRaw('CASE WHEN start_at <= ? THEN 1 ELSE 0 END, start_at', [date('H:i:s')]);
+		// $now = date('H:i:s', strtotime("+1 Hours"));
+		$now = date('H:i:s');
+		return Station::with('items')->with(['activeItem'=> function($q) use ($now) {
+			return $q->whereRaw("? BETWEEN `start_at` AND DATE_ADD(`start_at`, INTERVAL `duration` SECOND)", [$now]);
 		}])->withCount('likes')->find($id);
 	}
 
