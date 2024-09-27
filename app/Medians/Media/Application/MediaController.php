@@ -293,8 +293,10 @@ class MediaController extends CustomController
 		{
 			return $this->streamAudioFromTime($filePath, $startTime);
 		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
+			echo 1;
 			return $this->stream_external($stationMedia->media_path, $startTime);
 		} else {
+			print_r($stationMedia);
 			// sleep(5);
 			
 			// return $this->stream_station();
