@@ -214,7 +214,7 @@ class MediaController extends CustomController
 		$byteOffset = (int)(($startTimeInSeconds / $totalDuration) * $fileInfo['filesize']);
 	
 		// Ensure the byte offset is at a valid MP3 frame
-		$byteOffset = $this->findValidMP3Frame($filePath, $byteOffset);
+		$byteOffset = findValidMP3Frame($filePath, $byteOffset);
 	
 		$fm = @fopen($filePath, 'rb');
 		if (!$fm) {
@@ -229,9 +229,11 @@ class MediaController extends CustomController
 		header("Cache-Control: public, must-revalidate");
 		header("Pragma: no-cache");
 		header("Accept-Ranges: bytes");
-		header("Content-Length: " . $size);
+		// header("Content-Length: " . $size);
 		header("X-Pad: avoid browser bug");
 		header("Content-Duration: " . ($totalDuration - $startTimeInSeconds));
+		header("Content-Length: " . ($fileInfo['filesize'] - $byteOffset));  // Set content length from the byte offset
+
 	
 		// Output file from the calculated position
 		$buffer = 8192;
@@ -249,9 +251,9 @@ class MediaController extends CustomController
 	
 	function findValidMP3Frame($filePath, $startByte) {
 		$fm = fopen($filePath, 'rb');
-		fseek($fm, $startByte);
-	
+		fseek($fm, $startByte);	
 		// Look for the next valid MP3 frame header
+
 		while (!feof($fm)) {
 			$headerBytes = fread($fm, 4);
 			if (strlen($headerBytes) < 4) break;
