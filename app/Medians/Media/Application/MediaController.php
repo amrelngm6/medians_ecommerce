@@ -270,7 +270,6 @@ class MediaController extends CustomController
 		return $startByte;  // If no valid frame found, return original position
 	}
 
-
 	public function stream_station()
 	{
 		
