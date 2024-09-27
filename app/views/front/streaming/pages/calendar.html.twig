@@ -60,24 +60,9 @@
                         </datalist>
                     </div>
                     <section class="range-info">
-                        <p class="box box--fail box--list">Sorry, it appears your browser has failed displaying the slider ruler.
-                            Currently, recent versions of Firefox and Chromium browsers should be able to display it.</p>
-                        <p class="box box--warn box--trig">Sorry, it appears your browser does not support trigonometric functions in
-                            CSS, so the slider ruler offset won't look ideal. Currently, trigonometric functions are supported in
-                            Safari, Firefox and Chromium browsers starting with version 111 when enabling the<strong>Experimental Web
-                                Platform features</strong>
-                            flag in<kbd>chrome://flags</kbd>.
-                        </p>
-                        <p class="box box--fail box--cmix">Sorry, it appears your browser does not support<code>color-mix</code>. No
-                            support or this features prevents the slider's highlight from responding to changes in value.
-                            Currently,<code>color-mix</code>
-                            is supported in Safari, Chromium browsers starting with version 111 (version 109 when enabling
-                            the<strong>Experimental Web Platform features</strong>
-                            flag in<kbd>chrome://flags</kbd>) and Firefox starting with version 111 (version 88 when setting
-                            the<kbd>layout.css.color-mix.enabled</kbd>
-                            flag to<code>true</code>
-                            in<kbd>about:config</kbd>).
-                        </p>
+                        <p class="box box--fail box--list"></p>
+                        <p class="box box--warn box--trig"></p>
+                        <p class="box box--fail box--cmix"></p>
                     </section>
                 </div>
             </div>
@@ -119,17 +104,22 @@
                         id: '{{item.station_media_id}}',
                         picture: '{{item.media.picture}}',
                         station_id: '{{station.station_id}}',
+                        backgroundColor: '#333',
+                        color: '#111',
                         start: '{{item.date|date('Y-m-d')}}T{{item.start_at}}',
                         end: '{{item.date|date('Y-m-d')}}T{{item.start_at|date_modify("+" ~ (item.media.field.duration ?? '1') ~ " seconds")|date("H:i:s")}}'
                     },
                     {% endfor %}
                 ],
 
-                dateClick: function(info, i) {
+                dateClick: function(info) {
                     
-                    jQuery('#station-id').val({{station.station_id}})
+                    let props = info.event.extendedProps;
+                    
                     jQuery("#stationMediaStart").val(info.dateStr.substr(11, 8));
-                    jQuery("#stationMediaStartDate").val(info.dateStr.substr(0, 10));
+                    jQuery("#linkStationMediaStart").val(info.dateStr.substr(11, 8));
+                    jQuery('#stationMediaStartDate').val(info.event.startStr.substr(0, 10))
+                    jQuery("#linkStationMediaStartDate").val(info.dateStr.substr(0, 10));
                     jQuery('#find-track-popup').toggleClass('hidden')
 
                     console.log('Date: ' + info.dateStr.substr(0, 10));
@@ -140,9 +130,12 @@
                     let props = info.event.extendedProps;
                     
                     jQuery('#editStationStationId').val(props.station_id)
+                    jQuery('#link-station-id').val(props.station_id)
                     jQuery('#editStationMediaId').val(info.event.id)
+                    jQuery('#stationMediaStart').val(info.event.startStr.substr(11, 8))
                     jQuery('#editStationMediaStartAt').val(info.event.startStr.substr(11, 8))
                     jQuery('#editStationMediaStartDate').val(info.event.startStr.substr(0, 10))
+                    jQuery('#stationMediaStartDate').val(info.event.startStr.substr(0, 10))
                     jQuery('#editStationMediaPicture').attr('src', props.picture)
                     jQuery('#editStationMediaName').text(info.event.title)
                     jQuery('#edit-station-track-popup').toggleClass('hidden')

@@ -287,11 +287,13 @@ class MediaController extends CustomController
 		$interval = $targetTime->diff($currentTime);
 		$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
 			
-		$filePath = $_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path;
+		$filePath = $_SERVER['DOCUMENT_ROOT'].($stationMedia->media_path ?? $stationMedia->media->main_file->path);
 
 		if (file_exists($filePath))
 		{
 			return $this->streamAudioFromTime($filePath, $startTime);
+		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
+			return $this->stream_external($stationMedia->media_path, $startTime);
 		} else {
 			sleep(5);
 			
@@ -300,6 +302,64 @@ class MediaController extends CustomController
 
 	}
 
+	public function stream_external($fileUrl, $startTimeInSeconds = 0)
+	{
+		
+		// $fileUrl = 'https://streaming.quatre-co.com/uploads/audio/260983-66dc0d2975759.mp3';
+
+		if (!filter_var($fileUrl, FILTER_VALIDATE_URL)) {
+			header("HTTP/1.0 404 Not Found");
+			return;
+		}
+	
+		$headers = get_headers($fileUrl, 1);
+	
+		// Check if the file is accessible
+		if (!$headers || strpos($headers[0], '200') === false) {
+			header("HTTP/1.0 404 Not Found");
+			return;
+		}
+	
+		// Get file size
+		$fileSize = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
+	
+		// Analyze file metadata (using getID3 or another library if needed)
+		// Here we assume you know the total duration and bitrate
+		$totalDuration = 300; // Example duration in seconds (this can be extracted with getID3 for local files)
+		$bitRate = 128 * 1000; // Example bitrate in bits per second
+	
+		// Calculate byte offset based on start time
+		$byteOffset = (int)(($startTimeInSeconds / $totalDuration) * $fileSize);
+	
+		// Open remote file stream
+		$stream = fopen($fileUrl, 'rb');
+		if (!$stream) {
+			header("HTTP/1.0 500 Internal Server Error");
+			return;
+		}
+	
+		// Set headers for streaming
+		header("Content-Type: audio/mpeg");
+		header("Cache-Control: public, must-revalidate");
+		header("Pragma: no-cache");
+		header("Accept-Ranges: bytes");
+		header("Content-Length: " . ($fileSize - $byteOffset));
+		header("X-Pad: avoid browser bug");
+	
+		// Move to the byte offset for starting the stream
+		fseek($stream, $byteOffset);
+	
+		// Stream the audio from the offset
+		$buffer = 8192;
+		while (!feof($stream)) {
+			echo fread($stream, $buffer);
+			flush();
+		}
+	
+		fclose($stream);
+		exit;
+		
+	}
 
 	public function assets()
 	{
