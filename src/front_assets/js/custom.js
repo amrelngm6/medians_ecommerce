@@ -44,7 +44,7 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 	
 	setInterval(function(){
 		loadStation(stationId)
-	}, val ?? 5000);
+	}, val > 1000  ? val : 5000);
 });
 
 var a;
