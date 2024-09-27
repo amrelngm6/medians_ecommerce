@@ -49,7 +49,7 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 
 var a;
 
-async function loadStation(stationId)
+async function loadStation(stationId, play = true)
 {
 	const response  = await $.get('/station_json/'+stationId);
 
@@ -67,7 +67,7 @@ async function loadStation(stationId)
 	jQuery('#station-stream-name').html(activeStationMedia.media.name ?? '')
 	jQuery('#station-track-name').html(activeStation.name ?? '')
 	jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture ?? '')
-	if (a == 'new')
+	if (a == 'new' && play)
 	{
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ Math.random();
 		audio.load();
