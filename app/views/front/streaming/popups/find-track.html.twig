@@ -31,13 +31,17 @@
                                             </span>
                                         </div>
                                     </form>
+                                </div>
+                            </div>
+                        </div>
+                        
                                      <form action="/front_api/create" class=" max-w-lg mx-auto ajax-form" id="new-station-item">   
                                         <input type="hidden" name="type" value="StationMedia.create" />
                                         <input type="hidden" name="params[station_id]" id="station-id" value="" />
                                         <input type="hidden" name="params[start_at]" value="" id="stationMediaStart" />
                                         <input type="hidden" name="params[date]" value="" id="stationMediaStartDate" />
                                         
-                                        <div class="mt-4 relative flex w-96 max-h-80 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
+                                        <div class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
                                             <nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="search-result-popup">
                                                 
                                             </nav>
@@ -49,10 +53,8 @@
                                             </button>
                                         </div>
                                     </form>
-                                </div>
-                            </div>
-                        </div>
                         <div class="h-10"></div>
+
 					</div>
 					<div class="hidden md:block">
 						<div class="flex justify-start gap-6 items-center">
