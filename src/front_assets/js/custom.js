@@ -38,10 +38,13 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 	jQuery('#station-app-cover').removeClass('hidden')
 	const stationId = jQuery(this).data('station'); 
 		
+	load(stationId)
+
+	let val = jQuery('#startions-interval').val();
+	
+	setInterval(function(){
 		load(stationId)
-		setInterval(function(){
-			load(stationId)
-		}, 10000);
+	}, val ?? 5000);
 });
 
 var a;
