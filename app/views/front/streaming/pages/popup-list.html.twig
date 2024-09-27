@@ -1,5 +1,5 @@
                                             {% for item in list.items %}
-                                            <label for="item-input-{{item.media_id}}" role="button" class="text-slate-800 flex gap-2 w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
+                                            <label style="max-width:68%" for="item-input-{{item.media_id}}" role="button" class="text-slate-800 flex gap-2 w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
                                                 <input  type="radio" value="{{item.media_id}}" id="item-input-{{item.media_id}}" class="hidden" name="params[media_id]" />
                                                 <span class="checkmark"></span>
                                                 <div class="mr-4 grid place-items-center"><img alt="candice" src="{{item.picture}}" class="relative inline-block h-12 w-12 !rounded-full object-cover object-center"></div>
