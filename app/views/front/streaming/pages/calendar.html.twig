@@ -33,11 +33,11 @@
             <div class="course">
                 <div class="course-preview">
                     <h6 class="text-sm">{{lang.translate('Station')}}</h6>
-                    <h2>{{station.name}}</h2>
+                    <h2 class="truncate">{{station.name}}</h2>
                 </div>
                 <div class="course-info">
                     <div class="progress-container flex ">
-                        <span class="progress-text flex-none">6/9 {{lang.translate("Streaming")}}</span>
+                        <span class="progress-text flex-none">6/{{station.items|length}} {{lang.translate("Streaming")}}</span>
                         <div class="progress"></div>
                     </div>
                     <h6>{{lang.translate('Currently streaming')}}</h6>
