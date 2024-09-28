@@ -21,7 +21,7 @@ class StationRepository
 	public function find($id)
 	{
 		
-		$now = date('H:i:s');
+		$now = date('H:i:s', strtotime("+1 Hours"));
 		return Station::with('items')->with(['activeItem'=> function($q) use ($now) {
 			return $q->whereRaw("? BETWEEN `start_at` AND DATE_ADD(`start_at`, INTERVAL `duration` SECOND)", [$now]);
 		}])->withCount('likes')->find($id);
@@ -37,7 +37,7 @@ class StationRepository
 
 	public function findMediaByTime($id, $time)
 	{
-		return StationMedia::with('media')->where('start_at', '<', $time)->where('station_id', $id)->orderBy('start_at', 'DESC')->first();
+		return StationMedia::with('media')->whereRaw("? BETWEEN `start_at` AND DATE_ADD(`start_at`, INTERVAL `duration` SECOND)", [$time])->where('station_id', $id)->orderBy('start_at', 'DESC')->first();
 	}
 
 	public function get($limit = 1000)

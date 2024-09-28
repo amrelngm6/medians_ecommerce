@@ -277,23 +277,35 @@ class MediaController extends CustomController
 		
 		$this->app = new \config\APP;
 		$stationId = $this->app->request()->get('station_id');
-
-		$stationRepo = new \Medians\Stations\Infrastructure\StationRepository; 
-		$stationMedia = $stationRepo->findMediaByTime($stationId, date('H:i:s'));
 		
-		$targetTime = new \DateTime($stationMedia->start_at);
-		$currentTime = new \DateTime();
+		$stationRepo = new \Medians\Stations\Infrastructure\StationRepository; 
+		$station = $stationRepo->find($stationId);
 
-		$interval = $targetTime->diff($currentTime);
-		$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
+		try {
+			$stationMedia = $station->activeItem;
 			
-		$filePath =  isset($stationMedia->media->main_file->path) ? ($_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path) : $stationMedia->media_path;
+			if (empty($stationMedia->start_at))
+				return;
+
+
+			$targetTime = new \DateTime($stationMedia->start_at);
+			$currentTime = new \DateTime();
+
+				//code...
+			$interval = $targetTime->diff($currentTime);
+			$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
+				
+			$filePath =  isset($stationMedia->media->main_file->path) ? ($_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path) : null;
+
+		} catch (\Throwable $th) {
+		}
 
 		if (isset($stationMedia->media) && file_exists($filePath))
 		{
+
 			return $this->streamAudioFromTime($filePath, $startTime);
 		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
-			echo 1;
+
 			return $this->stream_external($stationMedia->media_path, $startTime);
 		} else {
 			print_r($stationMedia);

@@ -58,6 +58,9 @@ async function loadStation(stationId, play = true)
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
 	{
 		a = 'same'
+	// } else if (activeStationMedia && !activeStationMedia.media) {
+	// 	a = activeStationMedia == 1 ? 'same' : 'new'
+	// 	activeStationMedia = 1;
 	} else {
 		a = 'new'
 	}
