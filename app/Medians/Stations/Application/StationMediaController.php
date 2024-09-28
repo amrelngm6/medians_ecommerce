@@ -99,9 +99,11 @@ class StationMediaController extends CustomController
 			$getID3 = new getID3;
 			if (substr($params['media_path'], 0, 4) == 'http' ) {
 				
-				$tempFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($params['media_path']).'.mp3';
+                $media_path = '/uploads/audio/tmp/'.md5($params['media_path']).'.mp3';
+				$tempFilePath = $_SERVER['DOCUMENT_ROOT'].$media_path;
 				file_put_contents($tempFilePath, fopen($params['media_path'], 'r'));
 				$filePath = $tempFilePath;
+                $params['media_path'] = $media_path;
 			}
 			$fileInfo = $getID3->analyze($filePath);
 
