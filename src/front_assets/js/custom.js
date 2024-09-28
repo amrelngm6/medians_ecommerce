@@ -74,10 +74,6 @@ async function loadStation(stationId, play = true)
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ Math.random();
 		audio.load();
 		audio.play();
-		setTimeout(function(){
-			audio.play();
-			audio.loop = true
-		}, 100)
 	}
 
 	jQuery('#station-album-name').html(activeStationMedia.media ? activeStationMedia.media.name : activeStationMedia.title)
