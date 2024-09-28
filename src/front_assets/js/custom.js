@@ -52,15 +52,18 @@ var a;
 async function loadStation(stationId, play = true)
 {
 	const response  = await $.get('/station_json/'+stationId);
+	const chunkTimer  = jQuery('#station-chunk-timer').val() > 10 ? jQuery('#station-chunk-timer').val() : 60 ;
 
 	activeStation = JSON.parse(response);
 
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
 	{
 		a = 'same'
-		if (audio.currentTime > 58) {
+		if (audio.currentTime > chunkTimer) {
 			a = 'new'
 		}
+	} else if (activeStation.active_item == null) {
+		a = null;
 	} else {
 		a = 'new'
 	}
