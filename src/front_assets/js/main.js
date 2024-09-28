@@ -172,7 +172,7 @@ function loadSection(path, elementId, loader = true ) {
         success: function (data) {
             // Update your UI with the new data
             if (!loader)
-                element.append(data)
+                element.prepend(data)
             else 
                 element.html(data)
 

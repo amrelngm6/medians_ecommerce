@@ -66,8 +66,12 @@
 
 <script>
 var lastId;
-setInterval(function(){
+var stationCommentsInterval = setInterval(function(){
     lastId = jQuery('.comment').first().data('id')
-    loadSection('/front_api?type=comments-list&params[item_id]={{station.station_id}}&params[last_id]='+lastId , 'comments-list', false)
+    loadSection('/front_api?type=comments-list&params[item_id]={{station.station_id}}&params[last_id]='+lastId , 'comments-list', false, true)
 }, 5000)
+window.navigation.addEventListener("navigate", (event) => {
+    console.log('location changed!');
+    clearInterval(stationCommentsInterval)
+})
 </script>
