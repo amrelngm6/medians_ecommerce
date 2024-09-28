@@ -34,8 +34,13 @@
                                 <span class=" py-2 block">{{lang.translate('Start time')}} </span>
                                 <input name="params[start_at]" type="time" value="{{item.start_at}}" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-2 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Search for media items')}}" required/>
 							</div>
-							<div class="text-center w-full py-2">
-								<button type="submit" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
+							<div class="text-center w-full py-2 flex  gap-2">
+
+								<a href="/front_api/delete?type=StationMedia.delete?params[station_media_id]={{item.station_media_id}}"  class="mx-auto mt-2 group relative h-12 w-12 overflow-hidden rounded-lg bg-white text-lg shadow">
+									<div class="absolute inset-0 w-3 bg-purple-800 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+									<img src="/src/front_assets/svg/delete.svg">
+								</button>
+                                <button type="submit" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
 									<div class="absolute inset-0 w-3 bg-purple-800 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
 									<span class="relative text-black group-hover:text-white">{{lang.translate('Send')}}</span>
 								</button>

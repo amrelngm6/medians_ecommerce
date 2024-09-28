@@ -145,7 +145,7 @@ class FrontAPIController extends CustomController
 					break;
 		
 				case 'StationMedia.create':
-					$return = (new Stations\Application\StationController)->add_item();
+					$return = (new Stations\Application\StationItemController)->store();
 					break;
 		
 			}
@@ -205,7 +205,7 @@ class FrontAPIController extends CustomController
 				break;
 			
 			case 'StationMedia.update':
-				return printResponse((new Stations\Application\StationController)->update_item());
+				$controller = new Stations\Application\StationController;
 				break;
 			
 			case 'Comment.update':
@@ -270,6 +270,11 @@ class FrontAPIController extends CustomController
 				
 				case 'PlaylistItem.delete':
 					return printResponse((new Playlists\Application\PlaylistController())->deleteItem());
+					break;
+				
+				
+				case 'StationMedia.delete':
+					return printResponse((new Stations\Application\StationController())->delete());
 					break;
 				
 			
