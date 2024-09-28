@@ -61,6 +61,7 @@ async function loadStation(stationId, play = true)
 	{
 		a = 'same'
 		if (audio.currentTime > chunkTimer) {
+			a = 'new'
 		}
 	} else if (activeStation.active_item == null) {
 		a = null;
