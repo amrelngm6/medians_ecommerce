@@ -53,11 +53,11 @@ async function loadStation(stationId, play = true)
 {
 	const response  = await $.get('/station_json/'+stationId);
 	const chunkTimerVal  = jQuery('#station_media_chunk').val() > 10 ? (jQuery('#station_media_chunk').val() - 5) : 55 ;
-	const chunkTimer  = chunkTimerVal > 10 ? chunkTimerVal : 58 ;
+	const chunkTimer  = chunkTimerVal > 5 ? chunkTimerVal : 58 ;
 
 	activeStation = JSON.parse(response);
 	let rand = Math.random();
-	
+
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
 	{
 		a = 'same'
