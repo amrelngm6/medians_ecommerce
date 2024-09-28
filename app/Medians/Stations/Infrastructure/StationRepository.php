@@ -27,8 +27,6 @@ class StationRepository
 			return $q->whereRaw("? BETWEEN `start_at` AND DATE_ADD(`start_at`, INTERVAL `duration` SECOND)", [$now])->orderBy('start_at', 'DESC')->orderBy('duration', 'ASC');
 		}])->withCount('likes')->find($id);
 
-
-		// return Station::with('items', 'activeItem')->withCount('likes')->find($id);
 	}
 
 	public function findMedia($id)
