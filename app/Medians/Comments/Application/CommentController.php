@@ -99,7 +99,7 @@ class CommentController extends CustomController
 
 			$store = $this->repo->store($params);
 
-			$response = isset($params['append']) ? translate('Thanks for your comment') : $this->comment_response($store);
+			$response = isset($params['append']) ? translate('Thanks for your comment') : $this->comment_response([$store]);
 
             $returnData = (!empty($store)) 
             ? array('success'=>1, 'result'=>$response, 'reload'=>0)
@@ -187,18 +187,38 @@ class CommentController extends CustomController
 	}
 
 
+    /**
+     * Discover page for frontend
+     */
+    public function load_stream_comments()
+    {
+        $this->app = new \config\APP();
+
+        $params = $this->app->params();
+
+		$comments = $this->repo->getStreamComments($params['item_id'], $params['last_id'], 100);
+
+		try 
+        {
+            return $this->comment_response($comments);
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
 	
     /**
      * Station page for frontend
      */
-    public function comment_response($comment)
+    public function comment_response($comments)
     {
 		$settings = $this->app->SystemSetting();
 
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/includes/station-comment-block.html.twig', [
-				'comment' => $comment
+				'comments' => $comments
             ], 'output'));
             
 		} catch (\Exception $e) {

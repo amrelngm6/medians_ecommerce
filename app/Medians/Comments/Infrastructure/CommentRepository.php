@@ -3,6 +3,7 @@
 namespace Medians\Comments\Infrastructure;
 
 use Medians\Comments\Domain\Comment;
+use Medians\Stations\Domain\Station;
 
 
 class CommentRepository 
@@ -25,6 +26,16 @@ class CommentRepository
 	public function get($limit = 1000)
 	{
 		return Comment::with('item')->limit($limit)->get();
+	}
+
+	public function getByItem($itemId, $itemType, $limit = 100)
+	{
+		return Comment::with('item')->where('item_type', $itemType)->where('item_id', $itemId)->limit($limit)->get();
+	}
+
+	public function getStreamComments($itemId, $lastId, $limit = 100)
+	{
+		return Comment::with('item')->where('comment_id', '>', $lastId)->where('item_type', Station::class)->where('item_id', $itemId)->limit($limit)->orderBy('comment_id', 'DESC')->get();
 	}
 
 

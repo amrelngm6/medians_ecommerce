@@ -49,6 +49,10 @@ class FrontAPIController extends CustomController
 				return (new Stations\Application\StationMediaController)->json_media();
 				break;
 				
+			case 'comments-list':
+				return (new Comments\Application\CommentController)->load_stream_comments();
+				break;
+				
 		}
 
 		$return = isset($controller) ? $controller->find($this->app->request()->get('id')) : $return;

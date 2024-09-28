@@ -89,12 +89,17 @@ function submitForm(formId, elementId, append = null, prepend = null) {
                 return handleResponse(res, form)
 
             } catch (error) {
-                if (append)
-                    element.append(xhr.responseText)
-                else if (prepend)
-                    element.prepend(xhr.responseText)
-                else 
-                    element.html(xhr.responseText);
+                if (xhr.responseText)
+                {
+                    if (append)
+                        element.append(xhr.responseText)
+                    else if (prepend)
+                        element.prepend(xhr.responseText)
+                    else 
+                        element.html(xhr.responseText);
+
+                }
+
             }
         }
     };
@@ -152,17 +157,25 @@ function loadPage(path, title = '' ) {
 
 
 // Submit Ajax request
-function loadSection(path, elementId ) {
+function loadSection(path, elementId, loader = true ) {
 
-    jQuery('#'+elementId).html('')
-    jQuery('#page-loader').removeClass('hidden')
+    var element = jQuery('#'+elementId);
+    if (loader) {
+        element.html('')
+        jQuery('#page-loader').removeClass('hidden')
+    }
+    
     $.ajax({
         url: path ,
         type: 'POST',
         processData: false,
         success: function (data) {
             // Update your UI with the new data
-            jQuery('#'+elementId).html(data)
+            if (!loader)
+                element.append(data)
+            else 
+                element.html(data)
+
             setTimeout(function() {
                 reloadFuncs()
             }, 500)

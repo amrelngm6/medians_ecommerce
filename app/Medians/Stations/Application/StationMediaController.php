@@ -170,7 +170,7 @@ class StationMediaController extends CustomController
 	}
 
     /**
-     * Station page for frontend
+     * Calendar edit item popup for frontend
      */
     public function media_popup()
     {
