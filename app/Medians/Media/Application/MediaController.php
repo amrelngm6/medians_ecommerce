@@ -323,6 +323,9 @@ class MediaController extends CustomController
 	}
 
 	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60) {
+		
+		echo $filePath;
+		return;
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
 			return;
@@ -387,8 +390,6 @@ class MediaController extends CustomController
 	public function stream_external($fileUrl, $startTimeInSeconds = 0)
 	{
 		
-		echo $fileUrl;
-		return;
 		// $fileUrl = 'https://streaming.quatre-co.com/uploads/audio/260983-66dc0d2975759.mp3';
 		if (!filter_var($fileUrl, FILTER_VALIDATE_URL)) {
 			header("HTTP/1.0 404 Not Found");
