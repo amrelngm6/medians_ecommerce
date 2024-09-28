@@ -276,6 +276,7 @@ class MediaController extends CustomController
 	{
 		
 		$this->app = new \config\APP;
+		$settings = $this->app->SystemSetting();
 		$stationId = $this->app->request()->get('station_id');
 		
 		$stationRepo = new \Medians\Stations\Infrastructure\StationRepository; 
@@ -302,7 +303,7 @@ class MediaController extends CustomController
 
 		if (isset($stationMedia->media) && file_exists($filePath))
 		{
-			return $this->streamAudioFromTimeRange($filePath, $startTime, 60);
+			return $this->streamAudioFromTimeRange($filePath, $startTime, $settings['station_media_chunk'] ?? 60);
 
 			// return $this->streamAudioFromTime($filePath, $startTime);
 		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
@@ -314,7 +315,6 @@ class MediaController extends CustomController
 			
 			// return $this->stream_station();
 		}
-
 	}
 
 	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60) {
