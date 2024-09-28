@@ -64,8 +64,8 @@ async function loadStation(stationId, play = true)
 	} else {
 		a = 'new'
 	}
-	if (activeStation.active_item) {
-		activeStationMedia = activeStation.active_item;
+	activeStationMedia = activeStation.active_item;
+	if (activeStationMedia.media) {
 		jQuery('#station-album-name').html(activeStationMedia.media.name ?? 'UNKNOWN')
 		jQuery('#station-stream-name').html(activeStationMedia.media.name ?? 'UNKNOWN')
 		jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
