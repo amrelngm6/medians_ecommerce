@@ -58,7 +58,7 @@ async function loadStation(stationId, play = true)
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
 	{
 		a = 'same'
-		if (audio.currentTime > 55) {
+		if (audio.currentTime > 25) {
 			a = 'new'
 		}
 	// } else if (activeStationMedia && !activeStationMedia.media) {
