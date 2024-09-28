@@ -36,7 +36,7 @@ class StationMedia extends CustomModel
 
 	public function getPictureAttribute()
 	{
-		return isset($this->media->picture) ? $this->media->picture : '';
+		return isset($this->media->picture) ? $this->media->picture : $this->station->picture;
 	}
 	
 	public function getStartAttribute()
