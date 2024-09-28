@@ -103,7 +103,7 @@ class StationMediaController extends CustomController
 				$tempFilePath = $_SERVER['DOCUMENT_ROOT'].$media_path;
 				file_put_contents($tempFilePath, fopen($params['media_path'], 'r'));
 				$filePath = $tempFilePath;
-                $params['media_path'] = $media_path;
+                // $params['media_path'] = $media_path;
 			}
 			$fileInfo = $getID3->analyze($filePath);
 

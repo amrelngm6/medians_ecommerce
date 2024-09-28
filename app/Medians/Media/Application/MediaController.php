@@ -310,7 +310,7 @@ class MediaController extends CustomController
 			return $this->stream_external($stationMedia->media_path, $startTime);
 		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
 			
-			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60);
+			return $this->streamAudioFromTimeRange($filePath, $startTime, $settings['station_media_chunk'] ?? 60);
 		} else {
 			print_r($stationMedia);
 			// sleep(5);
@@ -414,7 +414,7 @@ class MediaController extends CustomController
 		// Analyze file metadata (using getID3 or another library if needed)
 		// Here we assume you know the total duration and bitrate
 		$totalDuration = round($fileInfo['playtime_seconds'], 0); // Example duration in seconds (this can be extracted with getID3 for local files)
-		$bitRate = 128 * 1000; // Example bitrate in bits per second
+		$bitRate = $fileInfo['bitrate']; // Example bitrate in bits per second
 	
 		// Calculate byte offset based on start time
 		$byteOffset = (int)(($startTimeInSeconds / $totalDuration) * $fileSize);
