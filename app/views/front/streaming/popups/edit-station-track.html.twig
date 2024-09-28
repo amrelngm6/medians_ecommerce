@@ -24,20 +24,14 @@
 							<input type="hidden" name="type" value="StationMedia.update"/>
 							<input type="hidden" name="params[station_id]"  value="{{item.station_id}}"/>
 							<input type="hidden" value="{{item.station_media_id}}" name="params[station_media_id]"  />
+							<div class="w-full p-6 mt-4 relative flex w-96 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
                             {% if item.media_id < 1 %}
-							<div class="w-full p-6 mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
-                                <span class="pb-2 block">{{lang.translate('title')}} </span>
+                                <span class="py-2 block">{{lang.translate('title')}} </span>
                                 <input name="params[title]" type="text"  value="{{item.title}}"  class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Search for media items')}}" required/>
-							</div>
-
-							<div class="w-full p-6 mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
-                                <span class="pb-2 block">{{lang.translate('External link')}} </span>
+                                <span class="py-2 block">{{lang.translate('External link')}} </span>
                                 <input name="params[media_path]" type="text"  value="{{item.media_path}}"  class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Search for media items')}}" required/>
-							</div>
                             {% endif %}
-
-							<div class="w-full p-6 mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
-                                <span class=" pb-2 block">{{lang.translate('Start time')}} </span>
+                                <span class=" py-2 block">{{lang.translate('Start time')}} </span>
                                 <input name="params[start_at]" type="time" value="{{item.start_at}}" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Search for media items')}}" required/>
 							</div>
 							<div class="text-center w-full py-2">

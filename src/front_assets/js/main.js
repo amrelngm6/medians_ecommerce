@@ -158,6 +158,7 @@ function loadPage(path, title = '' ) {
 // Submit Ajax request
 function loadSection(path, elementId ) {
 
+    jQuery('#'+elementId).html('')
     $.ajax({
         url: path ,
         type: 'POST',
