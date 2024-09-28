@@ -61,18 +61,10 @@ async function loadStation(stationId, play = true)
 		if (audio.currentTime > 25) {
 			a = 'new'
 		}
-	// } else if (activeStationMedia && !activeStationMedia.media) {
-	// 	a = activeStationMedia == 1 ? 'same' : 'new'
-	// 	activeStationMedia = 1;
 	} else {
 		a = 'new'
 	}
 	activeStationMedia = activeStation.active_item;
-
-	jQuery('#station-album-name').html(activeStationMedia.media ? activeStationMedia.media.name : activeStationMedia.title)
-	jQuery('#station-stream-name').html(activeStationMedia.media ? activeStationMedia.media.name  : activeStationMedia.title)
-	jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
-	activeStationMedia.media ? jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture) : activeStation.picture;
 
 	if (a == 'new' && play)
 	{
@@ -80,8 +72,14 @@ async function loadStation(stationId, play = true)
 		audio.load();
 		setTimeout(function(){
 			audio.play();
-		}, 500)
+		}, 100)
 	}
+
+	jQuery('#station-album-name').html(activeStationMedia.media ? activeStationMedia.media.name : activeStationMedia.title)
+	jQuery('#station-stream-name').html(activeStationMedia.media ? activeStationMedia.media.name  : activeStationMedia.title)
+	jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
+	activeStationMedia.media ? jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture) : activeStation.picture;
+
 }
 
 jQuery(document).on('click', '.start-player', function (i, el) {
