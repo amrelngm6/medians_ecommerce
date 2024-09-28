@@ -84,6 +84,11 @@ class MediaItemRepository
 				$model = $model->where('type', $params['type']);
 			}
 
+			if (!empty($params['author_id']) )
+			{
+				$model = $model->where('author_id', $params['author_id']);
+			}
+
 			if (!empty($params['sort_by']))
 			{
 				switch ($params['sort_by']) {

@@ -40,7 +40,7 @@
                         {% set station = item %}
                         {% include 'views/front/' ~ template ~ '/includes/station-stream-block.html.twig' %}
                         </div>
-                        <div class="max-h-[400px] overflow-auto" id="comments-list">
+                        <div class="max-h-[200px] overflow-auto" id="comments-list">
                             {% for comment in station.comments %}
                             {% include 'views/front/' ~ template ~ '/includes/station-comment-block.html.twig' %}
                             {% endfor %}

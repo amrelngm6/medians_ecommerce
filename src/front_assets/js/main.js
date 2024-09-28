@@ -64,11 +64,11 @@ function submitForm(formId, elementId, append = null) {
     
     // Get the form and submit button elements
     const form = document.getElementById(formId);
-    const element = jQuery(elementId);
+    const element = jQuery('#'+elementId);
 
     if (!form)
         return null;
-
+    
     jQuery('#page-loader').removeClass('hidden')
 
     // Get the form data as a FormData object
@@ -82,30 +82,18 @@ function submitForm(formId, elementId, append = null) {
     xhr.onreadystatechange = function () {
         jQuery('#page-loader').addClass('hidden')
         if (xhr.readyState === XMLHttpRequest.DONE ) {
-
             // Handle the successful response 
             try {
 
-                if (append)
-                    element.append(xhr.responseText)
-                
                 let res = JSON.parse(xhr.responseText);
                 return handleResponse(res, form)
 
             } catch (error) {
-
                 if (append)
                     element.append(xhr.responseText)
                 else
                     element.html(xhr.responseText);
-                
             }
-
-        } else {
-            if (append)
-                element.append(xhr.responseText)
-            else
-                element.html(xhr.responseText);
         }
     };
     xhr.send(formData);

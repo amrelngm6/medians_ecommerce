@@ -420,7 +420,18 @@ class MediaItemController extends CustomController
 
 		$this->app = new \config\APP;
         
-		foreach ($this->app->request()->files as $key => $value) {
+        $request = $this->app->request();
+        $params = $this->app->params();
+        
+        if (!empty($params['link']))
+        {
+
+            return;
+        }
+
+
+
+		foreach ($request->files as $key => $value) {
 			$file = $this->mediaRepo->upload($value, 'audio', true);
     
             $getID3 = new getID3;
@@ -442,7 +453,14 @@ class MediaItemController extends CustomController
             $this->generateWave($file);
 		}
 
-        return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"media/edit/$save->media_id");
+        try {
+            
+            return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"media/edit/$save->media_id");
+
+        } catch (\Throwable $th) {
+        	throw new \Exception("Error Processing Request ".$th->getMessage(), 1);
+        }
+
 	}
 
 
