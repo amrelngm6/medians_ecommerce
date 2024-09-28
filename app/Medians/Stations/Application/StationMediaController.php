@@ -94,12 +94,12 @@ class StationMediaController extends CustomController
         try {	
 
         	$this->app->customer_auth();
-			
+            
 			$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
 			$getID3 = new getID3;
 			if (substr($params['media_path'], 0, 4) == 'http' ) {
 				
-				$tempFilePath = tempnam(sys_get_temp_dir(), 'audio');
+				$tempFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($params['media_path']).'.mp3';
 				file_put_contents($tempFilePath, fopen($params['media_path'], 'r'));
 				$filePath = $tempFilePath;
 			}
