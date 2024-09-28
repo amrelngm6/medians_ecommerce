@@ -189,5 +189,32 @@ class StationMediaController extends CustomController
 		}
     }
 
+    
+
+    /**
+     * Station page for frontend
+     */
+    public function json_media()
+    {
+		$this->app = new \config\APP;
+		
+		$settings = $this->app->SystemSetting();
+
+        $params = $this->app->params();
+
+        $station = $this->repo->find($params['station_id']);
+
+		try {
+
+            return render('', 
+				$station->items,
+            );
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
+
 	
 }

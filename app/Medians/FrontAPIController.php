@@ -45,6 +45,10 @@ class FrontAPIController extends CustomController
 				return (new Stations\Application\StationMediaController)->media_popup();
 				break;
 				
+			case 'station-media-json':
+				return (new Stations\Application\StationMediaController)->json_media();
+				break;
+				
 		}
 
 		$return = isset($controller) ? $controller->find($this->app->request()->get('id')) : $return;

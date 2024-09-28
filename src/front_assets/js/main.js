@@ -159,6 +159,7 @@ function loadPage(path, title = '' ) {
 function loadSection(path, elementId ) {
 
     jQuery('#'+elementId).html('')
+    jQuery('#page-loader').removeClass('hidden')
     $.ajax({
         url: path ,
         type: 'POST',
@@ -169,6 +170,7 @@ function loadSection(path, elementId ) {
             setTimeout(function() {
                 reloadFuncs()
             }, 500)
+            jQuery('#page-loader').addClass('hidden')
         },
         error: function (xhr, status, error) {
             console.error('Error fetching data:', error);

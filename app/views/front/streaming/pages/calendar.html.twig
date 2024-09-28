@@ -1,22 +1,5 @@
 
-    
-    <script>
-        /* This is all the JS used and it does only 2 things: */
 
-        /* 1. datalist option render support test (for support info box) */
-        addEventListener('load', e => {
-            if (+document.querySelector('option').getBoundingClientRect().width)
-                document.body.style.setProperty('--list', 'none')
-        })
-
-        /* 2. update the --val custom property on dragging slider thumb */
-        addEventListener('input', e => {
-            let _t = e.target;
-            _t.parentNode.style.setProperty('--val', +_t.value)
-        })
-
-        /* Absolutely no JS is needed for creating the look of the slider. */
-    </script>
     <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css' rel='stylesheet' />
 
 
@@ -38,7 +21,7 @@
         <div class="w-full flex gap-20 relative">
             <div id="slider-container" class="w-32" >
                 
-                <div class="absolute top-0 bottom-0" style="max-width: 200px; display: grid;  transform: scale(.5);">
+                <div class="absolute top-0 bottom-0 mb-20" style=" max-width: 200px; display: grid;  transform: scale(.5);">
 
                     <!-- put all in a wrapper:-->
                     <div class="wrap" role="group" aria-label="slider with ruler" style="display: grid; --min: 1; --val: 30; --max: 60">
@@ -66,7 +49,10 @@
                     </section>
                 </div>
             </div>
-            <div class="w-full " id='calendar' style="width: calc(100% - 200px); max-height:calc(100vh - 135px)"></div>
+
+            <div class="w-full pt-10">
+                <div class="w-full bg-white p-8 rounded-xl shadow-md" id='calendar' style="width: calc(100% - 60px); max-height:calc(100vh - 50px)"></div>
+            </div>
 
         </div>
         <div class="max-w-lg mx-auto transition rounded-lg bg-white p-6 fixed left-0 transition-all right-0 top-auto shadow-xl" style="z-index: 999; bottom: -100%" id="calendar-hover-info">
@@ -81,7 +67,28 @@
     </div>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.js" integrity="sha512-3I+0zIxy2IkeeCvvhXUEu+AFT3zAGuHslHLDmM8JBv6FT7IW6WjhGpUZ55DyGXArYHD0NshixtmNUWJzt0K32w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    
+    <style>
+.fc-day-today {
+    background: #FFF !important;
+    border: none !important;
+  
+} 
+    </style>
     <script>
+    
+        addEventListener('load', e => {
+            if (+document.querySelector('option').getBoundingClientRect().width)
+                document.body.style.setProperty('--list', 'none')
+        })
+
+        /* 2. update the --val custom property on dragging slider thumb */
+        addEventListener('input', e => {
+            let _t = e.target;
+            _t.parentNode.style.setProperty('--val', +_t.value)
+        })
+
+
         var calendar;
         document.addEventListener('DOMContentLoaded', function() {
             const calendarEl = document.getElementById('calendar');
@@ -95,8 +102,9 @@
                 nowIndicator: true,
                 scrollTime: '{{now}}',
                 now: "{{now}}",
-                events: 
-                [
+                events: '/front_api?type=station-media-json&params[station_id]={{station.station_id}}&load=json',
+
+                {# [
                     {% for item in station.items %}
                     {
                         title: '{{item.media.name ?? item.title}}',
@@ -109,7 +117,7 @@
                         end: '{{item.date|date('Y-m-d')}}T{{item.start_at|date_modify("+" ~ (item.duration ?? '1') ~ " seconds")|date("H:i:s")}}'
                     },
                     {% endfor %}
-                ],
+                ], #}
 
                 dateClick: function(info) {
                     
@@ -127,9 +135,8 @@
 
                     let link = '/front_api?type=station-media-popup&params[station_id]={{station.station_id}}&params[station_media_id]='+ info.event.id;
                     loadSection(link, 'editStationPopupContent')
+
                     let props = info.event.extendedProps;
-                    
-                    
                     jQuery('#editStationStationId').val(props.station_id)
                     jQuery('#link-station-id').val(props.station_id)
                     jQuery('#editStationMediaId').val(info.event.id)
@@ -230,41 +237,4 @@
 
 
     {% include 'views/front/' ~ template ~ '/popups/find-track.html.twig' %}
-
-    <div x-data="{}" class="fixed inset-0  overflow-y-auto hidden transition-all transition" id="edit-station-track-popup" role="dialog" aria-modal="true" data-headlessui-state="open" style="z-index:99">
-	<div class="min-h-full text-center">
-		<div class="fixed inset-0 bg-download_popup blurFilter opacity-100" id="headlessui-dialog-overlay-:r3n:" aria-hidden="true" data-headlessui-state="open"></div>
-		<span class="inline-block h-screen align-middle" aria-hidden="true">​</span>
-		<div data-testid="loginContainer" class="inline-block dark:text-white w-full max-w-[42.125rem] sm:w-auto overflow-hidden text-left align-middle transition-all transform shadow-xl h-auto md:h-[29.125rem] rounded-xl border-box opacity-100 scale-100">
-			<div class="grid grid-cols-7 md:grid-cols-12 h-full relative">
-				<div class="align-middle bg-wynk-dark-dark_popup col-span-12 px-8 pb-8 pt-10 md:pb-6 md:pl-[2.125rem] md:pr-7 relative flex flex-col justify-between">
-					<div x-on:click="jQuery('#edit-station-track-popup').addClass('hidden')" data-testid="loginCrossButton" class="h-6 w-6 right-4 top-4 dark:text-white hover:text-gray-400 cursor-pointer absolute">
-						<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 20 20" fill="currentColor" aria-hidden="true">
-							<path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-						</svg>
-					</div>
-					<div class="inline-block w-full" id="editStationPopupContent"></div>
-					<div class="hidden md:block">
-						<div class="flex justify-start gap-6 items-center">
-							<div class="text-xs">{{lang.translate('Available on')}}</div>
-							<div>
-								<span title="Android App" data-testid="loginRedirectAndroidStore" class="cursor-pointer">
-									<span>
-										<img src="/src/front_assets/svg/google-play.svg"/>
-									</span>
-								</span>
-							</div>
-							<div>
-								<span data-testid="loginRedirectIOSStore" title="IOS App" class="cursor-pointer">
-									<span>
-										<img src="/src/front_assets/svg/apple-store.svg"/>
-									</span>
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+    {% include 'views/front/' ~ template ~ '/popups/station-calendar.html.twig' %}
