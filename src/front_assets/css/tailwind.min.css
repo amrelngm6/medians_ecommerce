@@ -797,6 +797,10 @@ video {
   top: 9px;
 }
 
+.top-auto {
+  top: auto;
+}
+
 .top-full {
   top: 100%;
 }
