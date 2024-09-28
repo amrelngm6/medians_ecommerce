@@ -296,12 +296,12 @@ class MediaController extends CustomController
 			$interval = $targetTime->diff($currentTime);
 			$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
 				
-			$filePath =  isset($stationMedia->media->main_file->path) ? ($_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path) : null;
+			$filePath =  isset($stationMedia->media->main_file->path) ? ($_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path) : $stationMedia->media_path;
 
 		} catch (\Throwable $th) {
 		}
 
-		if (isset($stationMedia->media) && file_exists($filePath))
+		if (substr($filePath, 0 , 4) != 'http' && file_exists($filePath))
 		{
 			return $this->streamAudioFromTimeRange($filePath, $startTime, $settings['station_media_chunk'] ?? 60);
 
