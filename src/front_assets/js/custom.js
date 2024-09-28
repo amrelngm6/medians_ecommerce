@@ -52,7 +52,8 @@ var a;
 async function loadStation(stationId, play = true)
 {
 	const response  = await $.get('/station_json/'+stationId);
-	const chunkTimer  = jQuery('#station-chunk-timer').val() > 10 ? jQuery('#station-chunk-timer').val() : 60 ;
+	const chunkTimerVal  = jQuery('#station_media_chunk').val() > 10 ? jQuery('#station_media_chunk').val() : 58 ;
+	const chunkTimer  = chunkTimerVal > 10 ? chunkTimerVal : 58 ;
 
 	activeStation = JSON.parse(response);
 
