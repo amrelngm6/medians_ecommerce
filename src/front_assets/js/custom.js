@@ -40,7 +40,7 @@ document.getElementById('station-player-audio').addEventListener("change", funct
 
 jQuery(document).on('click', '.start-station', function (i, el) {
 	
-	
+	jQuery('#station-player-audio').val(getCookie('volume'))
 	jQuery('#station-player-pause-button').addClass('active')
 	jQuery('#station-app-cover').removeClass('hidden')
 	const stationId = jQuery(this).data('station'); 
@@ -140,16 +140,15 @@ jQuery('#player-pause-button').on("click", function(event) {
 	} else  {
 		pauseStyles();
 	}
-
 });
 
 jQuery('#station-player-pause-button').on("click", function(event) {
 	if (audio.paused ) {
-		loadStation(stationId)
+		loadStation(activeStation.station_id)
 	} else  {
 		audio.pause();
 	}
-
+	jQuery(this).toggleClass('active')
 });
 
 jQuery('#player-previous').on("click", function(event) {
