@@ -41,12 +41,12 @@ class StationMedia extends CustomModel
 	
 	public function getStartAttribute()
 	{
-		return $this->date . ' '.$this->start_at;
+		return $this->date . 'T'.$this->start_at;
 	}
 	
 	public function getEndAttribute()
 	{
-		return date($this->date . ' '.$this->start_at, strtotime("+".$this->duration." Seconds"));
+		return date("Y-m-d\TH:i:s", strtotime("+".$this->duration." Seconds", strtotime($this->date . ' '.$this->start_at)));
 	}
 
 	public function media()
