@@ -400,9 +400,18 @@ class MediaController extends CustomController
 		// Get file size
 		$fileSize = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
 	
+		
+		$getID3 = new getID3;
+		if (substr($params['media_path'], 0, 4) == 'http' ) {
+			
+			$tempFilePath = tempnam(sys_get_temp_dir(), 'audio');
+			file_put_contents($tempFilePath, fopen($params['media_path'], 'r'));
+			$filePath = $tempFilePath;
+		}
+		$fileInfo = $getID3->analyze($filePath);
 		// Analyze file metadata (using getID3 or another library if needed)
 		// Here we assume you know the total duration and bitrate
-		$totalDuration = 300; // Example duration in seconds (this can be extracted with getID3 for local files)
+		$totalDuration = round($fileInfo['playtime_seconds'], 0); // Example duration in seconds (this can be extracted with getID3 for local files)
 		$bitRate = 128 * 1000; // Example bitrate in bits per second
 	
 		// Calculate byte offset based on start time
