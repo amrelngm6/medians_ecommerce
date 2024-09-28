@@ -74,6 +74,7 @@ async function loadStation(stationId, play = true)
 	{
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ Math.random();
 		audio.load();
+		audio.play();
 		setTimeout(function(){
 			audio.play();
 		}, 100)
