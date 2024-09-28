@@ -76,6 +76,7 @@ async function loadStation(stationId, play = true)
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ rand;
 		audio.load();
 		audio.play();
+		audio.volume = getCookie('volume')
 	}
 
 	jQuery('#station-album-name').html(activeStationMedia.media ? activeStationMedia.media.name : activeStationMedia.title)
