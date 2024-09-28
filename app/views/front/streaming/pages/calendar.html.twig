@@ -140,11 +140,6 @@
                     jQuery('#editStationMediaPicture').attr('src', props.picture)
                     jQuery('#editStationMediaName').text(info.event.title)
                     jQuery('#edit-station-track-popup').toggleClass('hidden')
-                    if (!props.picture) {
-                        jQuery('#editStationPopupInfo').addClass('hidden')
-                    } else {
-                        jQuery('#editStationPopupInfo').addClass('hidden')
-                    }
 
 
                 },
@@ -156,7 +151,7 @@
                     jQuery('#eventHoverPopupPicture').removeClass('hidden').attr('src', props.picture)
                     if (!props.picture) {
                         jQuery('#eventHoverPopupPicture').addClass('hidden')
-                        jQuery('#eventHoverPopupName').text('UNKNOWN')
+                        jQuery('#eventHoverPopupName').text(info.event.title)
                         jQuery("#eventHoverPopupTime").text(info.event.startStr.substr(11, 5) + ' - ' +info.event.endStr.substr(11, 5));
                     }
                 },
