@@ -13,7 +13,7 @@
 					</div>
 
 					<div class="inline-block w-full">
-						<div class="text-primary  w-full  rounded-2xl ">
+						<div class="text-primary  w-full  rounded-2xl " id="station-find-track-form" >
 							<div class="w-full ">
 								<div class="z-20 rounded-2xl w-full  bg-white dark:bg-gray-900 dark:text-gray-400 p-4 ">
 									<form action="/front_api" class="flex items-center max-w-lg mx-auto ajax-form" id="new-item-form">
@@ -41,15 +41,18 @@
 							<input type="hidden" name="params[start_at]" value="" id="linkStationMediaStart"/>
 							<input type="hidden" name="params[date]" value="" id="linkStationMediaStartDate"/>
 
-							<div class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
-								<nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="item-link-nav">
+							<div  class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
+								<nav class="flex min-w-[240px] flex-col gap-1 p-1.5" >
 									<span class="text-center">OR</span>
 								</nav>
 							</div>
 							
 							<div class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
 								<nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="item-link-nav">
-									<input placeholder="{{lang.translate('Add MP3 Link directly')}}" name="params[media_path]" onclick="(function(){ return jQuery('#link-station-submit-button').removeClass('hidden'), jQuery('#new-station-item').addClass('hidden'); })()" type="text"  data-form="new-item-link-form" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
+									<input placeholder="{{lang.translate('Add MP3 Link directly')}}" name="params[media_path]" onclick="(function(){ return jQuery('#link-station-submit-button').removeClass('hidden'), jQuery('#new-station-item').addClass('hidden'), jQuery('#station-find-track-form').addClass('hidden'); })()" type="text"  data-form="new-item-link-form" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
+								</nav>
+								<nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="item-link-nav">
+									<input placeholder="{{lang.translate('Media Title')}}" name="params[title]" onclick="(function(){ return jQuery('#link-station-submit-button').removeClass('hidden'), jQuery('#new-station-item').addClass('hidden') , jQuery('#station-find-track-form').addClass('hidden'); })()" type="text"  data-form="new-item-link-form" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
 								</nav>
 								
 								<div class="text-center w-full py-2 hidden" id="link-station-submit-button">
