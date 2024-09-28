@@ -302,7 +302,7 @@ class MediaController extends CustomController
 
 		if (isset($stationMedia->media) && file_exists($filePath))
 		{
-			return $this->streamAudioFromTimeRange($filePath, $startTime, 30);
+			return $this->streamAudioFromTimeRange($filePath, $startTime, 60);
 
 			// return $this->streamAudioFromTime($filePath, $startTime);
 		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
