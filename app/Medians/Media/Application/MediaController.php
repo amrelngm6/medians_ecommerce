@@ -303,7 +303,9 @@ class MediaController extends CustomController
 		if (isset($stationMedia->media) && file_exists($filePath))
 		{
 
-			return $this->streamAudioFromTime($filePath, $startTime);
+			return $this->streamAudioFromTimeRange($filePath, $startTime, 30);
+
+			// return $this->streamAudioFromTime($filePath, $startTime);
 		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
 
 			return $this->stream_external($stationMedia->media_path, $startTime);
@@ -316,6 +318,68 @@ class MediaController extends CustomController
 
 	}
 
+	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60) {
+		if (!file_exists($filePath)) {
+			header("HTTP/1.0 404 Not Found");
+			return;
+		}
+	
+		$getID3 = new \getID3;
+		$fileInfo = $getID3->analyze($filePath);
+	
+		if (!isset($fileInfo['playtime_seconds'])) {
+			header("HTTP/1.0 500 Internal Server Error");
+			return;
+		}
+	
+		$totalDuration = $fileInfo['playtime_seconds'];
+		$bitRate = $fileInfo['bitrate']; // Bitrate in bits per second
+	
+		// Calculate byte offset for the start time
+		$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileInfo['filesize']);
+		$endByte = (int)(($streamDuration / $totalDuration) * $fileInfo['filesize']) + $startByte;
+	
+		// Open the file
+		$fm = @fopen($filePath, 'rb');
+		if (!$fm) {
+			header("HTTP/1.0 505 Internal server error");
+			return;
+		}
+	
+		// Prevent session blocking
+		session_write_close();
+		ignore_user_abort(true); // Continue streaming even if the user disconnects
+	
+		// Seek to the start byte
+		fseek($fm, $startByte);
+	
+		$contentLength = $endByte - $startByte;
+		header("Content-Type: audio/mpeg");
+		header("Accept-Ranges: bytes");
+		header("Content-Length: " . $contentLength);
+		header("Content-Range: bytes $startByte-$endByte/" . filesize($filePath));
+		header("X-Pad: avoid browser bug");
+		header("Cache-Control: no-cache");
+	
+		// Stream the file
+		$bufferSize = 8192;
+		$bytesSent = 0;
+		while (!feof($fm) && ($bytesSent < $contentLength)) {
+			$buffer = fread($fm, $bufferSize);
+			echo $buffer;
+			flush();
+			$bytesSent += strlen($buffer);
+	
+			// Stop when we have sent enough bytes for the specified duration
+			if ($bytesSent >= $contentLength) {
+				break;
+			}
+		}
+	
+		fclose($fm);
+		exit;
+	}
+	
 	public function stream_external($fileUrl, $startTimeInSeconds = 0)
 	{
 		
