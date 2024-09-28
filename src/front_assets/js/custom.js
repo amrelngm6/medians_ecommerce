@@ -61,7 +61,6 @@ async function loadStation(stationId, play = true)
 	{
 		a = 'same'
 		if (audio.currentTime > chunkTimer) {
-			loop=true
 		}
 	} else if (activeStation.active_item == null) {
 		a = null;
@@ -77,6 +76,7 @@ async function loadStation(stationId, play = true)
 		audio.play();
 		setTimeout(function(){
 			audio.play();
+			audio.loop = true
 		}, 100)
 	}
 
