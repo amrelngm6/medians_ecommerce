@@ -303,6 +303,9 @@ class MediaController extends CustomController
 
 		if (isset($stationMedia->media) && file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
+			
+		echo $filePath;
+		return;
 			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60);
 
 		} elseif (strpos($filePath, 0 , 4) == 'http' &&  empty($stationMedia->media)) {
@@ -313,6 +316,8 @@ class MediaController extends CustomController
 			return $this->stream_external($stationMedia->media_path, $startTime);
 		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
 			
+		echo $filePath.' http';
+		return;
 			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60);
 		} else {
 			print_r($stationMedia);
@@ -324,8 +329,6 @@ class MediaController extends CustomController
 
 	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60) {
 		
-		echo $filePath;
-		return;
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
 			return;
