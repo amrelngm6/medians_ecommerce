@@ -56,7 +56,8 @@ async function loadStation(stationId, play = true)
 	const chunkTimer  = chunkTimerVal > 10 ? chunkTimerVal : 58 ;
 
 	activeStation = JSON.parse(response);
-
+	let rand = Math.random();
+	
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
 	{
 		a = 'same'
@@ -72,7 +73,7 @@ async function loadStation(stationId, play = true)
 
 	if (a == 'new' && play)
 	{
-		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ Math.random();
+		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ rand;
 		audio.load();
 		audio.play();
 	}
