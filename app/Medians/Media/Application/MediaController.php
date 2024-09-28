@@ -305,7 +305,6 @@ class MediaController extends CustomController
 		{
 			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60);
 
-			// return $this->streamAudioFromTime($filePath, $startTime);
 		} elseif (strpos($filePath, 0 , 4) == 'http' &&  empty($stationMedia->media)) {
 
 			if (file_exists( $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'. md5($stationMedia->media_path).'.mp3'))
@@ -389,7 +388,7 @@ class MediaController extends CustomController
 	{
 		
 		// $fileUrl = 'https://streaming.quatre-co.com/uploads/audio/260983-66dc0d2975759.mp3';
-
+		echo $fileUrl;
 		if (!filter_var($fileUrl, FILTER_VALIDATE_URL)) {
 			header("HTTP/1.0 404 Not Found");
 			return;
