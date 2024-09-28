@@ -86,10 +86,10 @@ async function loadStation(stationId, play = true)
 		audio.volume = getCookie('volume')
 	}
 
-	jQuery('#station-album-name').html(activeStationMedia.media ? activeStationMedia.media.name : activeStationMedia.title)
-	jQuery('#station-stream-name').html(activeStationMedia.media ? activeStationMedia.media.name  : activeStationMedia.title)
+	jQuery('#station-album-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name : activeStationMedia.title)
+	jQuery('#station-stream-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name  : activeStationMedia.title)
 	jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
-	activeStationMedia.media ? jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture) : activeStation.picture;
+	(activeStationMedia && activeStationMedia.media) ? jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture) : activeStation.picture;
 
 }
 
