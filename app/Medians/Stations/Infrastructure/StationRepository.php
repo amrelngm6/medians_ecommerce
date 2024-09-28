@@ -21,7 +21,7 @@ class StationRepository
 	public function find($id)
 	{
 		
-		$now = date('H:i:s', strtotime("+1 Hours"));
+		$now = date('H:i:s');
 		return Station::with('items')->with(['activeItem'=> function($q) use ($now) {
 			return $q->whereRaw("? BETWEEN `start_at` AND DATE_ADD(`start_at`, INTERVAL `duration` SECOND)", [$now]);
 		}])->withCount('likes')->find($id);
