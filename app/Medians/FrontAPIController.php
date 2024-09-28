@@ -145,7 +145,7 @@ class FrontAPIController extends CustomController
 					break;
 		
 				case 'StationMedia.create':
-					$return = (new Stations\Application\StationItemController)->store();
+					$return = (new Stations\Application\StationMediaController)->store();
 					break;
 		
 			}
@@ -205,7 +205,7 @@ class FrontAPIController extends CustomController
 				break;
 			
 			case 'StationMedia.update':
-				$controller = new Stations\Application\StationController;
+				$controller = new Stations\Application\StationMediaController;
 				break;
 			
 			case 'Comment.update':
@@ -274,7 +274,7 @@ class FrontAPIController extends CustomController
 				
 				
 				case 'StationMedia.delete':
-					return printResponse((new Stations\Application\StationController())->delete());
+					return printResponse((new Stations\Application\StationMediaController())->delete());
 					break;
 				
 			
