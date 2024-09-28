@@ -33,8 +33,15 @@ document.getElementById('player-audio').addEventListener("change", function(even
 	setCookie('volume', event.target.value, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 }) ;	
 
+document.getElementById('station-player-audio').addEventListener("change", function(event) {
+	audio.volume = event.target.value;
+	setCookie('volume', event.target.value, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
+}) ;	
+
 jQuery(document).on('click', '.start-station', function (i, el) {
 	
+	
+	jQuery('#station-player-pause-button').addClass('active')
 	jQuery('#station-app-cover').removeClass('hidden')
 	const stationId = jQuery(this).data('station'); 
 		
@@ -132,6 +139,15 @@ jQuery('#player-pause-button').on("click", function(event) {
 		playStyles();
 	} else  {
 		pauseStyles();
+	}
+
+});
+
+jQuery('#station-player-pause-button').on("click", function(event) {
+	if (audio.paused ) {
+		loadStation(stationId)
+	} else  {
+		audio.pause();
 	}
 
 });

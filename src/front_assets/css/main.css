@@ -371,6 +371,7 @@
 #volume-mute:hover #station-volume-bar {display: block;}
 
 .active#station-player-pause-button .play ,
+#station-player-pause-button .pause ,
 .active#player-pause-button .play ,
 #player-pause-button .pause {
     display: none;
