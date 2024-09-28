@@ -316,9 +316,8 @@ class MediaController extends CustomController
 			
 			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60);
 		} else {
-			print_r($stationMedia);
+
 			// sleep(5);
-			
 			// return $this->stream_station();
 		}
 	}
