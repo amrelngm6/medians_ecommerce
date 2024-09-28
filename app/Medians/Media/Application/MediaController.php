@@ -296,21 +296,21 @@ class MediaController extends CustomController
 			$interval = $targetTime->diff($currentTime);
 			$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
 				
-			$filePath =  isset($stationMedia->media->main_file->path) ? ($_SERVER['DOCUMENT_ROOT'].$stationMedia->media->main_file->path) : $stationMedia->media_path;
+			$filePath =  isset($stationMedia->media->main_file->path) ? ($stationMedia->media->main_file->path) : $stationMedia->media_path;
 
 		} catch (\Throwable $th) {
 		}
 
-		if (isset($stationMedia->media) && file_exists($filePath))
+		if (isset($stationMedia->media) && file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
-			return $this->streamAudioFromTimeRange($filePath, $startTime, $settings['station_media_chunk'] ?? 60);
+			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60);
 
 			// return $this->streamAudioFromTime($filePath, $startTime);
 		} elseif (strpos($filePath, 0 , 4) == 'http' &&  empty($stationMedia->media)) {
 			return $this->stream_external($stationMedia->media_path, $startTime);
 		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
 			
-			return $this->streamAudioFromTimeRange($filePath, $startTime, $settings['station_media_chunk'] ?? 60);
+			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60);
 		} else {
 			print_r($stationMedia);
 			// sleep(5);
