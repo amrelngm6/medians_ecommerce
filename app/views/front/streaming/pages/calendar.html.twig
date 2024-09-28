@@ -99,7 +99,7 @@
                 [
                     {% for item in station.items %}
                     {
-                        title: '{{item.media.name ?? "Unknown"}}',
+                        title: '{{item.media.name ?? item.title}}',
                         id: '{{item.station_media_id}}',
                         picture: '{{item.media.picture}}',
                         station_id: '{{station.station_id}}',
