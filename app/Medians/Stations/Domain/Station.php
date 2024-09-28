@@ -5,6 +5,7 @@ namespace Medians\Stations\Domain;
 use Shared\dbaser\CustomModel;
 
 use Medians\Likes\Domain\Like;
+use Medians\Comments\Domain\Comment;
 
 class Station extends CustomModel
 {
@@ -45,6 +46,11 @@ class Station extends CustomModel
 	public function likes()
 	{
 		return $this->morphMany(Like::class, 'item');	
+	}
+
+	public function comments()
+	{
+		return $this->morphMany(Comment::class, 'item');	
 	}
 
 	public function liked($customer_id) 

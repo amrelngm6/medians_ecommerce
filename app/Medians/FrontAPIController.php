@@ -137,7 +137,7 @@ class FrontAPIController extends CustomController
 					break;
 		
 				case 'Comment.create':
-					$return = (new Comments\Application\CommentController)->store();
+					return (new Comments\Application\CommentController)->store();
 					break;
 		
 				case 'Follower.create':

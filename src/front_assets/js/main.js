@@ -23,7 +23,7 @@ jQuery(document).on('change', 'input.search', function (e) {
 
 jQuery(document).on('submit', '.ajax-form', function (e) {
     e.preventDefault();
-    submitForm(e.target.id, e.target.attr);
+    submitForm(e.target.id, jQuery(this).data('element'), jQuery(this).data('append'));
 });
 
 jQuery(document).on('click', '.ajax-load', function (e) {
@@ -64,7 +64,7 @@ function submitForm(formId, elementId, append = null) {
     
     // Get the form and submit button elements
     const form = document.getElementById(formId);
-    const element = document.getElementById(elementId);
+    const element = jQuery(elementId);
 
     if (!form)
         return null;
@@ -86,20 +86,26 @@ function submitForm(formId, elementId, append = null) {
             // Handle the successful response 
             try {
 
+                if (append)
+                    element.append(xhr.responseText)
+                
                 let res = JSON.parse(xhr.responseText);
                 return handleResponse(res, form)
 
             } catch (error) {
 
-                element.innerHTML = xhr.responseText;
+                if (append)
+                    element.append(xhr.responseText)
+                else
+                    element.html(xhr.responseText);
                 
             }
 
         } else {
             if (append)
-                element.appendChild(xhr.responseText)
+                element.append(xhr.responseText)
             else
-                element.innerHTML = xhr.responseText;
+                element.html(xhr.responseText);
         }
     };
     xhr.send(formData);

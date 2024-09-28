@@ -32,6 +32,11 @@ class CustomModel extends Model
 		return  $this->table;
 	}
 
+	public function getClassName()
+	{
+		return  get_class($this);
+	}
+
 	
 	public function getFields()
 	{

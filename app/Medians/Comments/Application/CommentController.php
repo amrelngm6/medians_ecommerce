@@ -97,8 +97,12 @@ class CommentController extends CustomController
 
 			$params['customer_id'] = $customer->customer_id;
 
-            $returnData = (!empty($this->repo->store($params))) 
-            ? array('success'=>1, 'result'=>translate('Thanks for your comment'), 'reload'=>0)
+			$store = $this->repo->store($params);
+
+			$response = isset($params['append']) ? translate('Thanks for your comment') : $this->comment_response($store);
+
+            $returnData = (!empty($store)) 
+            ? array('success'=>1, 'result'=>$response, 'reload'=>0)
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
 
         } catch (\Exception $e) {
@@ -181,5 +185,25 @@ class CommentController extends CustomController
 		}
 
 	}
+
+
+	
+    /**
+     * Station page for frontend
+     */
+    public function comment_response($comment)
+    {
+		$settings = $this->app->SystemSetting();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/includes/station-comment-block.html.twig', [
+				'comment' => $comment
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
 
 }
