@@ -50,7 +50,7 @@ class Station extends CustomModel
 
 	public function comments()
 	{
-		return $this->morphMany(Comment::class, 'item');	
+		return $this->morphMany(Comment::class, 'item')->orderBy('comment_id', 'DESC');	
 	}
 
 	public function liked($customer_id) 

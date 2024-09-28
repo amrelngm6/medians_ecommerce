@@ -40,13 +40,13 @@
                         {% set station = item %}
                         {% include 'views/front/' ~ template ~ '/includes/station-stream-block.html.twig' %}
                         </div>
-                        <div class="max-h-[200px] overflow-auto" id="comments-list">
+                        <div class="max-h-[200px] overflow-auto flex" style="flex-direction: column-reverse;" id="comments-list">
                             {% for comment in station.comments %}
                             {% include 'views/front/' ~ template ~ '/includes/station-comment-block.html.twig' %}
                             {% endfor %}
                         </div>
                         <label for="chat" class="sr-only">{{lang.translate('Your comment')}}</label>
-                        <form action="/front_api/create" id="comment-station" class="ajax-form w-full " data-element="comments-list" data-append="true" >
+                        <form action="/front_api/create" id="comment-station" class="ajax-form w-full " data-element="comments-list" data-prepend="true" >
                             <div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700">
                                 <input type="hidden" name="type" value="Comment.create" />
                                 <input type="hidden" name="params[item_id]" value="{{station.station_id}}" />
