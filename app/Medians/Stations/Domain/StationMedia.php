@@ -20,6 +20,7 @@ class StationMedia extends CustomModel
 		'media_id',
 		'media_path',
 		'station_id',
+		'title',
 		'start_at',
 		'duration',
 		'date',

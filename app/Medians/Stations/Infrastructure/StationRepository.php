@@ -35,6 +35,11 @@ class StationRepository
 		return StationMedia::with('media')->where('station_id', $id)->first();
 	}
 
+	public function findItem($id)
+	{
+		return StationMedia::with('media')->find($id);
+	}
+
 	public function findMediaByTime($id, $time)
 	{
 		return StationMedia::with('media')->whereRaw("? BETWEEN `start_at` AND DATE_ADD(`start_at`, INTERVAL `duration` SECOND)", [$time])->where('station_id', $id)->orderBy('start_at', 'DESC')->first();

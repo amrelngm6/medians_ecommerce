@@ -155,6 +155,27 @@ function loadPage(path, title = '' ) {
 }
 
 
+// Submit Ajax request
+function loadSection(path, elementId ) {
+
+    $.ajax({
+        url: path ,
+        type: 'POST',
+        processData: false,
+        success: function (data) {
+            // Update your UI with the new data
+            jQuery('#'+elementId).html(data)
+            setTimeout(function() {
+                reloadFuncs()
+            }, 500)
+        },
+        error: function (xhr, status, error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+}
+
+
 function pureFadeIn(e, o) {
     var i = document.getElementById(e);
     i.style.opacity = 0, i.style.display = o || "block",

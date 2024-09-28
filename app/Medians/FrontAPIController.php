@@ -40,6 +40,11 @@ class FrontAPIController extends CustomController
 			case 'load-list':
 				return (new Media\Application\MediaItemController)->search_popup();
 				break;
+				
+			case 'station-media-popup':
+				return (new Stations\Application\StationMediaController)->media_popup();
+				break;
+				
 		}
 
 		$return = isset($controller) ? $controller->find($this->app->request()->get('id')) : $return;

@@ -65,12 +65,11 @@ async function loadStation(stationId, play = true)
 		a = 'new'
 	}
 	activeStationMedia = activeStation.active_item;
-	if (activeStationMedia.media) {
-		jQuery('#station-album-name').html(activeStationMedia.media.name ?? 'UNKNOWN')
-		jQuery('#station-stream-name').html(activeStationMedia.media.name ?? 'UNKNOWN')
-		jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
-		jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture ?? '')
-	}
+
+	jQuery('#station-album-name').html(activeStationMedia.media ? activeStationMedia.media.name : activeStationMedia.title)
+	jQuery('#station-stream-name').html(activeStationMedia.media ? activeStationMedia.media.name  : activeStationMedia.title)
+	jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
+	activeStationMedia.media ? jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture) : activeStation.picture;
 
 	if (a == 'new' && play)
 	{
