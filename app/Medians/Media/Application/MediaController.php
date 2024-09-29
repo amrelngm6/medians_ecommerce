@@ -333,6 +333,7 @@ class MediaController extends CustomController
 			header("HTTP/1.0 404 Not Found");
 			return;
 		}
+		
 	
 		$getID3 = new \getID3;
 		$fileInfo = $getID3->analyze($filePath);
