@@ -5,6 +5,7 @@ namespace Medians\Likes\Infrastructure;
 use Medians\Likes\Domain\Like;
 use Medians\Media\Domain\MediaItem;
 use Medians\Playlists\Domain\Playlist;
+use Medians\Stations\Domain\Station;
 
 class LikeRepository 
 {
@@ -39,18 +40,23 @@ class LikeRepository
 		return Like::where('item_id', $item_id)->where('item_type', Playlist::class)->where('customer_id', $customer_id)->first();
 	}
 
+	public function checkLikedStation($item_id, $customer_id)
+	{
+		return Like::where('item_id', $item_id)->where('item_type', Station::class)->where('customer_id', $customer_id)->first();
+	}
+
 
 
 
 	/**
 	* Save item to database
 	*/
-	public function store_media($data) 
+	public function store($data, $itemType) 
 	{
 
 		$Model = new Like();
 		
-		$data['item_type'] = MediaItem::class;
+		$data['item_type'] = $itemType;
 		foreach ($data as $key => $value) 
 		{
 			if (in_array($key, $Model->getFields()))
@@ -63,6 +69,16 @@ class LikeRepository
     	$Object = Like::firstOrCreate($dataArray);
 
     	return $Object;
+    }
+
+	/**
+	* Save item to database
+	*/
+	public function store_media($data) 
+	{
+		$data['item_type'] = MediaItem::class;
+
+		return $this->store($data);
     }
 
 	/**
@@ -71,47 +87,25 @@ class LikeRepository
 	public function store_playlist($data) 
 	{
 
-		$Model = new Like();
-		
-		$data['item_type'] = \Medians\Playlists\Domain\Playlist::class;
-		foreach ($data as $key => $value) 
-		{
-			if (in_array($key, $Model->getFields()))
-			{
-				$dataArray[$key] = $value;
-			}
-		}	
+		$data['item_type'] = Playlist::class;
 
-		// Return the Model object with the new data
-    	$Object = Like::firstOrCreate($dataArray);
-
-    	return $Object;
+		return $this->store($data);
     }
+    	
     	
 
 	/**
 	* Save item to database
 	*/
-	public function store($data) 
+	public function store_station($data) 
 	{
 
-		$Model = new Like();
-		
-		$data['item_type'] = (new \Medians\Products\Domain\Product)::class;
-		foreach ($data as $key => $value) 
-		{
-			if (in_array($key, $Model->getFields()))
-			{
-				$dataArray[$key] = $value;
-			}
-		}	
+		$data['item_type'] = Station::class;
 
-		// Return the Model object with the new data
-    	$Object = Like::firstOrCreate($dataArray);
-
-    	return $Object;
+		return $this->store($data);
     }
     	
+
     /**
      * Update Lead
      */
@@ -156,6 +150,24 @@ class LikeRepository
 		try {
 			
 			return $this->checkLikedPlaylist($params['item_id'], $customer_id)->delete();
+
+		} catch (\Exception $e) {
+
+			throw new \Exception("Error Processing Request " . $e->getMessage(), 1);
+			
+		}
+	}
+
+	/**
+	* Delete item to database
+	*
+	* @Returns Boolen
+	*/
+	public function deleteStation($params, $customer_id) 
+	{
+		try {
+			
+			return $this->checkLikedStation($params['item_id'], $customer_id)->delete();
 
 		} catch (\Exception $e) {
 

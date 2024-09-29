@@ -135,6 +135,10 @@ class FrontAPIController extends CustomController
 				case 'Like.playlist':
 					$return = (new Likes\Application\LikeController)->likePlaylist();
 					break;
+
+				case 'Like.station':
+					$return = (new Likes\Application\LikeController)->likeStation();
+					break;
 		
 				case 'Transaction.verify':
 					$return = (new Transactions\Application\TransactionController)->verifyTransaction();

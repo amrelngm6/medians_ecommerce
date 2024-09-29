@@ -164,6 +164,36 @@ class LikeController extends CustomController
 	}
 
 
+	public function likeStation() 
+	{
+
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+
+        try {	
+			
+        	$this->validate($params);
+			
+			$params['customer_id'] = $this->app->customer->customer_id;
+
+			if (!empty($this->repo->checkLikedStation($params['item_id'], $params['customer_id']))) 
+			{
+				return $this->deleteStation($params);
+			}
+
+            $returnData = (!empty($this->repo->store_station($params))) 
+            ? array('success'=>1, 'result'=>translate('Thanks for like'), 'reload'=>0)
+            : array('success'=>0, 'result'=>'Error', 'error'=>1);
+
+        } catch (\Exception $e) {
+        	return array('result'=>$e->getMessage(), 'error'=>1);
+        }
+
+		return $returnData;
+	}
+
+
 
 	public function update()
 	{
@@ -210,6 +240,21 @@ class LikeController extends CustomController
         try {
 			
             if ($this->repo->deletePlaylist($params, $this->app->customer->customer_id))
+            {
+                return array('success'=>1, 'result'=>translate('Removed from likes'), 'reload'=>0);
+            }
+            
+        } catch (Exception $e) {
+        	throw new \Exception("Error Processing Request", 1);
+        }
+	}
+
+	public function deleteStation($params) 
+	{
+
+        try {
+			
+            if ($this->repo->deleteStation($params, $this->app->customer->customer_id))
             {
                 return array('success'=>1, 'result'=>translate('Removed from likes'), 'reload'=>0);
             }
