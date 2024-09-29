@@ -70,7 +70,7 @@ async function loadStation(stationId, play = true)
 {
 	// const chunkTimerVal  = jQuery('#station_media_chunk').val() > 5 ? (jQuery('#station_media_chunk').val() - 5) : 55 ;
 	// const chunkTimer  = chunkTimerVal > 1 ? chunkTimerVal : 58 ;
-
+	
 	activeStation = await loadStationJson(stationId);
 	let rand = Math.random();
 
@@ -89,7 +89,6 @@ async function loadStation(stationId, play = true)
 
 	if (streamingStatus == 'new' && play)
 	{
-		console.log('playing')
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ rand;
 		audio.load();
 		audio.play();
@@ -169,6 +168,9 @@ jQuery('#station-player-pause-button').on("click", function(event) {
 		loadStation(activeStation.station_id)
 	} else  {
 		audio.pause();
+		if (stationInterval) {
+			clearInterval(stationInterval)
+		}
 	}
 	jQuery(this).toggleClass('active')
 });
