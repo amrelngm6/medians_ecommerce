@@ -77,8 +77,8 @@ $(function() {
         loadSection('/front_api?type=comments-list&params[item_id]={{station.station_id}}&params[last_id]='+lastId , 'comments-list', false, true)
         if (activeStationMedia) {
             jQuery('#station-stream-name{{station.station_id}}').text(activeStationMedia.title)
-            jQuery('#stationStreamingPicture').attr('src', activeStationMedia.media ? activeStationMedia.media.picture : '')
-            jQuery('#stationStreamingPictureCircle').attr('src', activeStationMedia.media ? activeStationMedia.media.picture : '')
+            jQuery('#stationStreamingPicture').attr('src', activeStationMedia.media ? activeStationMedia.media.picture : activeStation.picture)
+            jQuery('#stationStreamingPictureCircle').attr('src', activeStationMedia.media ? activeStationMedia.media.picture : activeStation.picture)
         }
     }, 5000)
 });
