@@ -134,8 +134,8 @@ class StationMediaController extends CustomController
 
         	$this->app->customer_auth();
             
-
-			$filePath = $_SERVER['DOCUMENT_ROOT']. '/uploads/audio/record-'.uniqid().'.mp3';
+			$params['media_path'] = '/uploads/audio/record-'.uniqid().'.mp3';
+			$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
 			$getID3 = new getID3;
 			if (isset($_FILES['audio']['tmp_name'])) {
 				
