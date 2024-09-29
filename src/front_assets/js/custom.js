@@ -89,6 +89,7 @@ async function loadStation(stationId, play = true)
 
 	if (streamingStatus == 'new' && play)
 	{
+		console.log('playing')
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ rand;
 		audio.load();
 		audio.play();
