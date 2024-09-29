@@ -308,6 +308,8 @@ class MediaController extends CustomController
 		} catch (\Throwable $th) {
 		}
 
+		
+
 		if (isset($stationMedia->media) && file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
 			
@@ -321,7 +323,7 @@ class MediaController extends CustomController
 			return $this->stream_external($stationMedia->media_path, $startTime);
 		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
 			
-			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60, $stationMedia->duration);
+			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, 0, $settings['station_media_chunk'] ?? 60, $stationMedia->duration);
 		} else {
 
 			// sleep(5);
