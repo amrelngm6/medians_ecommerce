@@ -51,12 +51,11 @@ class LikeRepository
 	/**
 	* Save item to database
 	*/
-	public function store($data, $itemType) 
+	public function store($data) 
 	{
 
 		$Model = new Like();
 		
-		$data['item_type'] = $itemType;
 		foreach ($data as $key => $value) 
 		{
 			if (in_array($key, $Model->getFields()))
