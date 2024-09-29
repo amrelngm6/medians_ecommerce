@@ -126,8 +126,8 @@
             formData.append('audio', audioBlob, 'recording.wav');
             formData.append('type', 'StationMedia.create_record');
             formData.append('params[title]', jQuery('#stationRecordTitle').val());
-            formData.append('params[start_at]', jQuery('#stationRecordDate').val());
-            formData.append('params[date]', jQuery('#stationRecordStart').val());
+            formData.append('params[start_at]', jQuery('#stationRecordStart').val());
+            formData.append('params[date]', jQuery('#stationRecordDate').val());
             formData.append('params[station_id]', {{station.station_id}});
             formData.append('params[duration]', duration);
 
