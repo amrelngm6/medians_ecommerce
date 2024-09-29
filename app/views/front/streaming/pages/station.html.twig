@@ -6,9 +6,9 @@
                     <div class="overflow-hidden w-96 " id="station-parent">
                         <div class=" p-8 relative overflow-hidden  rounded-2xl  w-80" id="station-side" >
                             <div class="artist-overlay top-[-20px] left-0 absolute w-full h-full py-20 bg-gradient-to-b from-gray-800 to-black"></div>
-                            <img src="/stream?thumbnail=800&image={{item.items[0].media.picture_name}}"  class="absolute bg-img left-0 top-0" />
+                            <img src="/stream?thumbnail=800&image={{item.items[0].media.picture_name}}"  class="absolute bg-img left-0 top-0" id="stationStreamingPicture" />
                             <div class=" w-full overflow-hidden rounded-2xl text-white mx-auto text-center relative z-10 ">
-                                <img src="/stream?thumbnail=300&image={{item.items[0].media.picture_name}}"  class="w-40 h-40 lg:w-56 lg:h-56 rounded-full shadow-xl" />
+                                <img src="/stream?thumbnail=300&image={{item.items[0].media.picture_name}}" id="stationStreamingPictureCircle" class="w-40 h-40 lg:w-56 lg:h-56 rounded-full shadow-xl" />
                                 <div class="p-8 text-left ">
                                     <span>{{lang.translate('Station')}}</span>
                                     <h1 class="lg:text-4xl text-2xl start-station" data-station="{{item.station_id}}">{{item.name}}</h1>
@@ -64,14 +64,25 @@
 
             </div>
 
-<script>
+<script  type="text/javascript">
 var lastId;
-var stationCommentsInterval = setInterval(function(){
-    lastId = jQuery('.comment').first().data('id')
-    loadSection('/front_api?type=comments-list&params[item_id]={{station.station_id}}&params[last_id]='+lastId , 'comments-list', false, true)
-}, 5000)
-window.navigation.addEventListener("navigate", (event) => {
-    console.log('location changed!');
-    clearInterval(stationCommentsInterval)
-})
+$(function() {
+    /* code */
+    loadStationJson({{station.station_id}})
+
+    window.navigation.addEventListener("navigate", (event) => {
+        clearInterval(stationCommentsInterval)
+        window.navigation.removeEventListener("navigate", function(){})
+    })
+    var stationCommentsInterval = setInterval(async function(){
+        lastId = jQuery('.comment').first().data('id')
+        loadSection('/front_api?type=comments-list&params[item_id]={{station.station_id}}&params[last_id]='+lastId , 'comments-list', false, true)
+        if (activeStationMedia) {
+            jQuery('#station-stream-name').text(activeStationMedia.title)
+            jQuery('#stationStreamingPicture').attr('src', activeStationMedia.media.picture ?? '')
+            jQuery('#stationStreamingPictureCircle').attr('src', activeStationMedia.media.picture ?? '')
+        }
+    }, 5000)
+});
+
 </script>

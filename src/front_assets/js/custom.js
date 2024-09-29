@@ -54,31 +54,39 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 	}, val > 1000  ? val : 5000);
 });
 
-var a;
+async function loadStationJson(stationId)
+{
+	const response  = await $.get('/station_json/'+stationId);
+
+	activeStation = JSON.parse(response)
+
+	return activeStation;
+}
+
+var streamingStatus;
 
 async function loadStation(stationId, play = true)
 {
-	const response  = await $.get('/station_json/'+stationId);
-	const chunkTimerVal  = jQuery('#station_media_chunk').val() > 5 ? (jQuery('#station_media_chunk').val() - 5) : 55 ;
-	const chunkTimer  = chunkTimerVal > 1 ? chunkTimerVal : 58 ;
+	// const chunkTimerVal  = jQuery('#station_media_chunk').val() > 5 ? (jQuery('#station_media_chunk').val() - 5) : 55 ;
+	// const chunkTimer  = chunkTimerVal > 1 ? chunkTimerVal : 58 ;
 
-	activeStation = JSON.parse(response);
+	activeStation = loadStationJson(stationId);
 	let rand = Math.random();
 
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
 	{
-		a = 'same'
+		streamingStatus = 'same'
 		if ((audio.duration - audio.currentTime) < 5) {
-			a = 'new'
+			streamingStatus = 'new'
 		}
 	} else if (activeStation.active_item == null) {
-		a = null;
+		streamingStatus = null;
 	} else {
-		a = 'new'
+		streamingStatus = 'new'
 	}
 	activeStationMedia = activeStation.active_item;
 
-	if (a == 'new' && play)
+	if (streamingStatus == 'new' && play)
 	{
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ rand;
 		audio.load();
@@ -86,9 +94,13 @@ async function loadStation(stationId, play = true)
 		audio.volume = getCookie('volume')
 	}
 
-	jQuery('#station-album-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name : activeStationMedia.title)
-	jQuery('#station-stream-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name  : activeStationMedia.title)
-	jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
+	if (activeStationMedia)
+	{
+
+		jQuery('#station-album-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name : activeStationMedia.title)
+		jQuery('#station-stream-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name  : activeStationMedia.title)
+		jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
+	}
 	(activeStationMedia && activeStationMedia.media) ? jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture) : activeStation.picture;
 
 }

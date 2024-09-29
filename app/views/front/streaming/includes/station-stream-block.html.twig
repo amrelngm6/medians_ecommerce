@@ -1,15 +1,17 @@
 
-        <div class="courses-container">
+        <div class="courses-container" >
             <div class="course">
                 <div class="course-preview">
-                    <h2 class="truncate">{{station.name}}</h2>
+                    <h2 class="truncate" >{{station.name}}</h2>
                 </div>
                 <div class="course-info">
                     <div class="progress-container flex ">
-                        <span class="progress-text flex-none">6/{{station.items|length}} {{lang.translate("Streaming")}}</span>
-                        <div class="progress"></div>
+                        {# <span class="progress-text flex-none">6/{{station.items|length}} {{lang.translate("Streaming")}}</span> #}
+                        {# <div class="progress"></div> #}
                     </div>
-                    <h2 id="station-stream-name">{{station.active_item.media.name ?? lang.translate('Streaming is offline now')}}</h2>
+                    <div>
+                        <h2 class="py-0 my-0"><span id="station-stream-name">{{station.active_item.media.name ?? lang.translate('Streaming is offline now')}}</span><small class="px-2 text-xs text-gray-400">{{lang.translate('Streaming now')}}</small></h2>
+                    </div>
                     <button data-station="{{station.station_id}}" class="btn  start-station"><img src="/src/front_assets/svg/play-active.svg" /></button>
                 </div>
             </div>
