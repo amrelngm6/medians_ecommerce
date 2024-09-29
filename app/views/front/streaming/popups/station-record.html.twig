@@ -16,7 +16,7 @@
                         <div class="text-primary  w-full  rounded-2xl ">
                             <div class="w-full ">
                                 <div class="relative w-12 h-12">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="equalizer disabled" disabled viewBox="0 0 100 100">
+                                    <svg xmlns="http://www.w3.org/2000/svg" id="equlizer-record" class="equalizer"  viewBox="0 0 100 100">
                                         <g class="equalizer-group">
                                             <rect class="bar"></rect>
                                             <rect class="bar"></rect>
@@ -88,7 +88,8 @@
             mediaRecorder.start();
             startTime = Date.now();
             document.getElementById('startRecording').style.display = 'none';
-            document.getElementById('stopRecording').disabled = style.display = 'block';
+            document.getElementById('stopRecording').style.display = 'block';
+            document.getElementById('equlizer-record').style.display = 'block';
         }
 
         function stopRecording() {
@@ -96,6 +97,7 @@
             duration = Math.round((Date.now() - startTime) / 1000);
             document.getElementById('startRecording').style.display = 'block';
             document.getElementById('stopRecording').style.display = 'none';
+            document.getElementById('equlizer-record').style.display = 'none';
         }
 
         function uploadRecording() {
