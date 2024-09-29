@@ -371,6 +371,7 @@ RouteHandler::get('/logout', function ()
 });
 
 // Front API GET requests
+RouteHandler::get('/front_api', \Medians\FrontAPIController::class.'@handle');
 RouteHandler::post('/front_api', \Medians\FrontAPIController::class.'@handle');
 RouteHandler::post('/front_api/create', \Medians\FrontAPIController::class.'@create');
 RouteHandler::post('/front_api/update', \Medians\FrontAPIController::class.'@update');
