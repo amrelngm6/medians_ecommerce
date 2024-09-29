@@ -40,7 +40,7 @@
                                     <audio id="audioPlayback" controls class="my-4" style="display: none;"></audio>
                                     <div class="w-full p-6 mt-4 relative flex w-96 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm" style="display: none" id="record-info">
                                         <span class="py-2 block">{{lang.translate('title')}} </span>
-                                        <input name="params[title]" type="text"  value="{{lang.translate('Recorded voice')}}"  class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-2 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Media title')}}" required/>
+                                        <input id="stationRecordTitle"  name="params[title]" type="text"  value="{{lang.translate('Recorded voice')}}"  class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-2 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Media title')}}" required/>
                                         <span class=" py-2 block">{{lang.translate('Date')}} / {{lang.translate('Start time')}} </span>
                                         <div class="w-full flex gap-2">
                                             <input name="params[date]"  type="date" value="{{item.date}}" id="stationRecordDate" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-2 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Start date')}}" required/>
@@ -125,6 +125,7 @@
             const formData = new FormData();
             formData.append('audio', audioBlob, 'recording.wav');
             formData.append('type', 'StationMedia.create_record');
+            formData.append('params[title]', jQuery('#stationRecordTitle').val());
             formData.append('params[start_at]', jQuery('#stationMediaStart').val());
             formData.append('params[date]', jQuery('#stationMediaStartDate').val());
             formData.append('params[station_id]', {{station.station_id}});
