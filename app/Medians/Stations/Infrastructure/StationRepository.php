@@ -72,11 +72,10 @@ class StationRepository
 			withCount('likes')->
 			with('items');
 
-			if (isset($params['likes']) && isset($params['customer_id']))
+			if (isset($params['customer_id']))
 			{
-				$model = $model->whereHas('likes', function($q) use ($params) {
-					$q->where('customer_id', $params['customer_id'] );
-				});
+				$model = $model->where('customer_id', $params['customer_id'] );
+				
 			}
 
 			if (!empty($params['title']))

@@ -269,6 +269,39 @@ class StationController extends CustomController
 		}
     }
 
+
+	
+    /**
+     * Studio page for frontend
+     */
+    public function studio()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $customer = $this->app->customer_auth();
+        
+        $params = $this->app->params();
+        
+        // $this->checkSession($customer);
+
+        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['customer_id'] = $customer->customer_id ?? 0;
+        $list = $this->repo->getWithFilter($params);
+
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'customer' => $customer,
+                'list' => $list,
+                'layout' => isset($this->app->customer->customer_id) ? 'studio_stations' : 'signin'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
     /**
      * Station page for frontend
      */
