@@ -87,16 +87,16 @@
 
             mediaRecorder.start();
             startTime = Date.now();
-            document.getElementById('startRecording').style.display = 'none';
-            document.getElementById('stopRecording').style.display = 'block';
+            document.getElementById('startRecording').style.display = 'block';
+            document.getElementById('stopRecording').style.display = 'none';
             document.getElementById('equlizer-record').style.display = 'block';
         }
 
         function stopRecording() {
             mediaRecorder.stop();
             duration = Math.round((Date.now() - startTime) / 1000);
-            document.getElementById('startRecording').style.display = 'block';
-            document.getElementById('stopRecording').style.display = 'none';
+            document.getElementById('stopRecording').style.display = 'block';
+            document.getElementById('startRecording').style.display = 'none';
             document.getElementById('equlizer-record').style.display = 'none';
         }
 
