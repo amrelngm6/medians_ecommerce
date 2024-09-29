@@ -87,24 +87,22 @@ async function loadStation(stationId, play = true)
 	}
 	activeStationMedia = activeStation.active_item;
 
-	if (streamingStatus == 'new' && play)
-	{
-		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ rand;
-		audio.load();
-		audio.play();
-		audio.volume = getCookie('volume')
-	}
-
 	if (activeStationMedia)
 	{
 		jQuery('#station-album-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name : activeStationMedia.title)
 		jQuery('#station-stream-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name  : activeStationMedia.title)
 		jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
+		
+		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ rand;
+		audio.load();
+		audio.play();
+		audio.volume = getCookie('volume')
 	} else {
 		
 		jQuery('#station-album-name').html('Offline')
 		jQuery('#station-stream-name').html("Offline")
 		jQuery('#station-track-name').html('UNKNOWN')
+		audio.pause()
 	}
 	(activeStationMedia && activeStationMedia.media) ? jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture) : activeStation.picture;
 
