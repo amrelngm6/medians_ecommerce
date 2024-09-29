@@ -134,9 +134,9 @@ class StationMediaController extends CustomController
 
         	$this->app->customer_auth();
             
-			$params['media_path'] = '/uploads/audio/record-'.uniqid().'.mp3';
+			$params['media_path'] = '/uploads/audio/record-'.uniqid().'.wav';
 			$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
-			
+
 			if (isset($_FILES['audio']['tmp_name'])) {
 				
 				$move = move_uploaded_file($_FILES['audio']['tmp_name'], $filePath);

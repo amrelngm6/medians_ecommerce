@@ -71,7 +71,7 @@ class MediaController extends CustomController
 		
 		    $item = json_decode($this->app->request()->get('file_name'));
 
-			echo $this->repo->delete($item->file_name);
+			$delete =  $this->repo->delete($item->file_name);
 
 			echo json_encode(['data'=> ['message'=>translate('Deleted')]]);
 			
