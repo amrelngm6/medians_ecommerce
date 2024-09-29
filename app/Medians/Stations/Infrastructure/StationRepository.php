@@ -24,7 +24,8 @@ class StationRepository
 		$now = date('H:i:s');
 		// $now = date('H:i:s', strtotime("+1 Hours"));
 		return Station::with('items')->with(['activeItem'=> function($q) use ($now) {
-			return $q->whereRaw("? BETWEEN `start_at` AND DATE_ADD(`start_at`, INTERVAL `duration` SECOND)", [$now])->orderBy('start_at', 'DESC')->orderBy('duration', 'ASC');
+			return $q->where('station_media_id', 60);
+			// return $q->whereRaw("? BETWEEN `start_at` AND DATE_ADD(`start_at`, INTERVAL `duration` SECOND)", [$now])->orderBy('start_at', 'DESC')->orderBy('duration', 'ASC');
 		}])->withCount('likes')->find($id);
 
 	}
