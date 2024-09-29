@@ -142,21 +142,17 @@ class StationMediaController extends CustomController
 				$move = move_uploaded_file($_FILES['audio']['tmp_name'], $filePath);
 
 				if ($move) {
-					echo "File uploaded successfully";
-				} else {
-					http_response_code(500);
-					echo "Error uploading file";
+					$fileInfo = $getID3->analyze($filePath);
+					if (isset($fileInfo['playtime_seconds'])) {
+						$params['duration'] = round($fileInfo['playtime_seconds'], 0);
+					}
+	
+					$returnData = (!empty($this->repo->store_item($params))) 
+					? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+					: array('success'=>0, 'result'=>'Error', 'error'=>1);
 				}
 			}
-			$fileInfo = $getID3->analyze($filePath);
 
-            if (isset($fileInfo['playtime_seconds'])) {
-                $params['duration'] = round($fileInfo['playtime_seconds'], 0);
-			}
-
-			$returnData = (!empty($this->repo->store_item($params))) 
-            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
-            : array('success'=>0, 'result'=>'Error', 'error'=>1);
 
         } catch (\Exception $e) {
         	return array('result'=>$e->getMessage(), 'error'=>1);
