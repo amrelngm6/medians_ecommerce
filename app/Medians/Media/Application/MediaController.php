@@ -299,7 +299,6 @@ class MediaController extends CustomController
 			$targetTime = new \DateTime($stationMedia->start_at);
 			$currentTime = new \DateTime();
 
-				//code...
 			$interval = $targetTime->diff($currentTime);
 			$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
 				
@@ -308,27 +307,23 @@ class MediaController extends CustomController
 		} catch (\Throwable $th) {
 		}
 
-		
+		// Check if the streaming media is external link
+		if (substr($filePath, 0 , 4) == 'http' &&  empty($stationMedia->media)) {
 
-		if (isset($stationMedia->media) && file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
-		{
-			
-			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60, $stationMedia->duration);
-
-		} elseif (substr($filePath, 0 , 4) == 'http' &&  empty($stationMedia->media)) {
-
+			// Check if the Temp file of streaming media is located at the server
 			if (file_exists( $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'. md5($stationMedia->media_path).'.mp3'))
 				return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'. md5($stationMedia->media_path).'.mp3', $startTime, $settings['station_media_chunk'] ?? 60, $stationMedia->duration);
 
+			// Stream External files
 			return $this->stream_external($stationMedia->media_path, $startTime);
-		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
-			
-			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60, $stationMedia->duration);
-		} else {
+		} 
+		
 
-			// sleep(5);
-			// return $this->stream_station();
-		}
+		// Check if the file is stored locally
+		if (substr($filePath, 0 , 4) == '/upl' &&  file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
+		{
+			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60, $stationMedia->duration);
+		} 
 	}
 
 	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60, $duration = 0) {
