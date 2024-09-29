@@ -134,8 +134,6 @@ class MediaController extends CustomController
 		
 		$item = $this->mediaRepo->findByFile($filepath);
 
-		print_r($filepath);
-		print_r($item);
 		$addView = $item->addView();
 
 		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
