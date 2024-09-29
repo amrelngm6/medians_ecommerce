@@ -193,6 +193,13 @@ class MediaRepository
 		return str_replace($_SERVER['DOCUMENT_ROOT'], '', $output);
     }
 
+
+	public function convertAudioWithFfmpeg($filepath, $output)
+	{
+		$ffmpeg = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg';
+		return shell_exec("$ffmpeg -i $filepath $output");
+	}
+
     public static function slug($value)
     {
     	return str_replace(['&',' ','@', '!','#','(',')','+','?'], '_', $value);

@@ -3,6 +3,7 @@
 namespace Medians\Stations\Application;
 
 use Medians\Stations\Infrastructure\StationRepository;
+use Medians\Media\Infrastructure\MediaRepository;
 
 use Shared\dbaser\CustomController;
 use getID3;
@@ -15,6 +16,8 @@ class StationMediaController extends CustomController
 	*/
 	protected $repo;
 
+	protected $mediaRepo;
+
 	protected $app;
 	
 
@@ -23,6 +26,7 @@ class StationMediaController extends CustomController
 	function __construct()
 	{
 		$this->repo = new StationRepository();
+		$this->mediaRepo = new MediaRepository();
 	}
 
 	
@@ -142,6 +146,11 @@ class StationMediaController extends CustomController
 				$move = move_uploaded_file($_FILES['audio']['tmp_name'], $filePath);
 
 				if ($move) {
+					
+					$output = str_replace( '.wav', '.mp3', $filePath);
+					$convert = $this->mediaRepo->convertAudioWithFfmpeg($filePath, $output);
+
+					$params['media_path'] = str_replace('.wav', '.mp3', $params['media_path']);
 
 					$returnData = (!empty($this->repo->store_item($params))) 
 					? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
