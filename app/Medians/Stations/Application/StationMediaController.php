@@ -103,7 +103,50 @@ class StationMediaController extends CustomController
 				$tempFilePath = $_SERVER['DOCUMENT_ROOT'].$media_path;
 				file_put_contents($tempFilePath, fopen($params['media_path'], 'r'));
 				$filePath = $tempFilePath;
-                // $params['media_path'] = $media_path;
+			}
+			$fileInfo = $getID3->analyze($filePath);
+
+            if (isset($fileInfo['playtime_seconds'])) {
+                $params['duration'] = round($fileInfo['playtime_seconds'], 0);
+			}
+
+			$returnData = (!empty($this->repo->store_item($params))) 
+            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            : array('success'=>0, 'result'=>'Error', 'error'=>1);
+
+        } catch (\Exception $e) {
+        	return array('result'=>$e->getMessage(), 'error'=>1);
+        }
+
+		return $returnData;
+	}
+
+
+
+	public function store_record() 
+	{
+
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+
+        try {	
+
+        	$this->app->customer_auth();
+            
+
+			$filePath = $_SERVER['DOCUMENT_ROOT']. '/uploads/audio/record-'.uniqid().'.mp3';
+			$getID3 = new getID3;
+			if (isset($_FILES['audio']['tmp_name'])) {
+				
+				$move = move_uploaded_file($_FILES['audio']['tmp_name'], $filePath);
+
+				if ($move) {
+					echo "File uploaded successfully";
+				} else {
+					http_response_code(500);
+					echo "Error uploading file";
+				}
 			}
 			$fileInfo = $getID3->analyze($filePath);
 

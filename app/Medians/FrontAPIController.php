@@ -151,6 +151,10 @@ class FrontAPIController extends CustomController
 				case 'StationMedia.create':
 					$return = (new Stations\Application\StationMediaController)->store();
 					break;
+
+				case 'StationMedia.create_record':
+					$return = (new Stations\Application\StationMediaController)->store_record();
+					break;
 		
 			}
 
