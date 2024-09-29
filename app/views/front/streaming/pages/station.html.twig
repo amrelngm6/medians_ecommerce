@@ -72,7 +72,10 @@ $(function() {
         clearInterval(stationCommentsInterval)
         window.navigation.removeEventListener("navigate", function(){})
     })
+
+    let stationIntervalAmount = jQuery('#startions-interval').val();
     var stationCommentsInterval = setInterval(async function(){
+    
         lastId = jQuery('.comment').first().data('id')
         loadSection('/front_api?type=comments-list&params[item_id]={{station.station_id}}&params[last_id]='+lastId , 'comments-list', false, true)
         if (activeStationMedia) {
@@ -84,7 +87,7 @@ $(function() {
             jQuery('#station-stream-name').html("Offline")
             jQuery('#station-track-name').html('UNKNOWN')
         }
-    }, 5000)
+	}, val > 1  ? (val * 1000) : 5000);
 });
 
 </script>
