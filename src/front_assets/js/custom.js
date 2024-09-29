@@ -25,7 +25,7 @@ function runSlide()
 
 var mainAudio = jQuery('audio');
 
-var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename, activeStation, activeStationMedia;
+var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename, activeStation, activeStationMedia, stationInterval;
 
 
 document.getElementById('player-audio').addEventListener("change", function(event) {
@@ -50,7 +50,7 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 
 	let val = jQuery('#startions-interval').val();
 	
-	setInterval(function(){
+	stationInterval = setInterval(function(){
 		loadStation(stationId)
 	}, val > 1000  ? val : 5000);
 });
@@ -125,6 +125,9 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 		jQuery('#player-next').removeClass('hidden')
 
 	} 
+	if (stationInterval) {
+		clearInterval(stationInterval)
+	}
 });
 
 jQuery(document).on('click', '.start-single-player', function (i, el) {
@@ -145,6 +148,10 @@ jQuery(document).on('click', '.start-single-player', function (i, el) {
 		jQuery('#player-previous').addClass('hidden')
 		jQuery('#player-next').addClass('hidden')
 	} 
+	if (stationInterval) {
+		clearInterval(stationInterval)
+	}
+
 });
 
 
