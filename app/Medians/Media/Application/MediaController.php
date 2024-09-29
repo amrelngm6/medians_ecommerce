@@ -316,12 +316,12 @@ class MediaController extends CustomController
 		} elseif (substr($filePath, 0 , 4) == 'http' &&  empty($stationMedia->media)) {
 
 			if (file_exists( $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'. md5($stationMedia->media_path).'.mp3'))
-				return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'. md5($stationMedia->media_path).'.mp3', $startTime, $settings['station_media_chunk'] ?? 60);
+				return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'. md5($stationMedia->media_path).'.mp3', $startTime, $settings['station_media_chunk'] ?? 60, $stationMedia->duration);
 
 			return $this->stream_external($stationMedia->media_path, $startTime);
 		} elseif (isset($stationMedia->media_path) && empty($stationMedia->media)) {
 			
-			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60);
+			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60, $stationMedia->duration);
 		} else {
 
 			// sleep(5);
