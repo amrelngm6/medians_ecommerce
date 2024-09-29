@@ -173,8 +173,9 @@ jQuery('#player-pause-button').on("click", function(event) {
 });
 
 jQuery('#station-player-pause-button').on("click", function(event) {
-	if (audio.paused ) {
+	if ( audio.paused ) {
 		loadStation(activeStation.station_id)
+		audio.play()
 	} else  {
 		audio.pause();
 		if (stationInterval) {
