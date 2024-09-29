@@ -136,14 +136,12 @@ class StationMediaController extends CustomController
             
 			$params['media_path'] = '/uploads/audio/record-'.uniqid().'.mp3';
 			$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
-			$getID3 = new getID3;
+			
 			if (isset($_FILES['audio']['tmp_name'])) {
 				
 				$move = move_uploaded_file($_FILES['audio']['tmp_name'], $filePath);
 
 				if ($move) {
-					$fileInfo = $getID3->analyze($filePath);
-					$params['duration'] = round($fileInfo['playtime_seconds'], 0);
 
 					$returnData = (!empty($this->repo->store_item($params))) 
 					? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
