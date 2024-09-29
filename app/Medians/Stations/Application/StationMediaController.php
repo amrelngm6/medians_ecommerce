@@ -143,11 +143,8 @@ class StationMediaController extends CustomController
 
 				if ($move) {
 					$fileInfo = $getID3->analyze($filePath);
-					if (isset($fileInfo['playtime_seconds'])) {
-						$params['duration'] = round($fileInfo['playtime_seconds'], 0);
-					}
-					print_r($fileInfo);
-					return;
+					$params['duration'] = round($fileInfo['playtime_seconds'], 0);
+
 					$returnData = (!empty($this->repo->store_item($params))) 
 					? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
 					: array('success'=>0, 'result'=>'Error', 'error'=>1);
