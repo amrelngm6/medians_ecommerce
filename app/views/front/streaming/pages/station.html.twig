@@ -80,12 +80,6 @@ $(function() {
         loadSection('/front_api?type=comments-list&params[item_id]={{station.station_id}}&params[last_id]='+lastId , 'comments-list', false, true)
         if (activeStationMedia) {
             jQuery('.station-stream-name').text(activeStationMedia.title)
-            jQuery('#stationStreamingPicture').attr('src', activeStationMedia.media ? activeStationMedia.media.picture : activeStation.picture)
-            jQuery('#stationStreamingPictureCircle').attr('src', activeStationMedia.media ? activeStationMedia.media.picture : activeStation.picture)
-        } else {
-            jQuery('#station-album-name').html('Offline')
-            jQuery('#station-stream-name').html("Offline")
-            jQuery('#station-track-name').html('UNKNOWN')
         }
 	}, stationIntervalAmount > 1  ? (stationIntervalAmount * 1000) : 30000);
 });
