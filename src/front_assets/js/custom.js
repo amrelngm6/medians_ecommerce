@@ -39,7 +39,7 @@ document.getElementById('station-player-audio').addEventListener("change", funct
 }) ;	
 
 jQuery(document).on('click', '.start-station', function (i, el) {
-	
+	audio.pause()
 	jQuery('#station-player-audio').val(getCookie('volume'))
 	jQuery('#station-player-pause-button').addClass('active')
 	jQuery('#station-app-cover').removeClass('hidden')
@@ -107,6 +107,7 @@ async function loadStation(stationId, play = true)
 
 jQuery(document).on('click', '.start-player', function (i, el) {
 	jQuery('#station-app-cover').addClass('hidden')
+	audio.pause()
 	player = jQuery(this);
 	list = JSON.parse(player.attr('data-list'))
 	index = parseInt(player.attr('data-index'))
@@ -128,6 +129,7 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 
 jQuery(document).on('click', '.start-single-player', function (i, el) {
 	player = jQuery(this);
+	audio.pause()
 	jQuery('#station-app-cover').addClass('hidden')
 	list = JSON.parse(player.attr('data-list'))
 	index = player.attr('data-index')
