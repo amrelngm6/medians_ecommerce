@@ -48,6 +48,8 @@
     <script>
         let mediaRecorder;
         let audioChunks = [];
+        let startTime;
+        let duration = 0;
 
         document.getElementById('startRecording').addEventListener('click', startRecording);
         document.getElementById('stopRecording').addEventListener('click', stopRecording);
@@ -70,12 +72,14 @@
             };
 
             mediaRecorder.start();
+            startTime = Date.now();
             document.getElementById('startRecording').disabled = true;
             document.getElementById('stopRecording').disabled = false;
         }
 
         function stopRecording() {
             mediaRecorder.stop();
+            duration = Math.round((Date.now() - startTime) / 1000);
             document.getElementById('startRecording').disabled = false;
             document.getElementById('stopRecording').disabled = true;
         }
@@ -88,6 +92,7 @@
             formData.append('params[start_at]', jQuery('#stationMediaStart').val());
             formData.append('params[date]', jQuery('#stationMediaStartDate').val());
             formData.append('params[station_id]', {{station.station_id}});
+            formData.append('params[duration]', duration);
 
             fetch('/front_api/create', {
                 method: 'POST',
