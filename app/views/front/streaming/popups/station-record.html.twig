@@ -38,7 +38,7 @@
                                         <span class="py-3">{{lang.translate('Start recording')}} </span>
                                     </div>
                                     <audio id="audioPlayback" controls class="my-4" style="display: none;"></audio>
-                                    <div class="w-full p-6 mt-4 relative flex w-96 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm" style="display:none" id="record-info">
+                                    <div class="w-full p-6 mt-4 relative flex w-96 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm" style="display: none" id="record-info">
                                         <span class="py-2 block">{{lang.translate('title')}} </span>
                                         <input name="params[title]" type="text"  value="{{item.title}}"  class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-2 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Media title')}}" required/>
                                         <span class=" py-2 block">{{lang.translate('Date')}} / {{lang.translate('Start time')}} </span>
@@ -100,6 +100,7 @@
                 document.getElementById('audioPlayback').src = audioUrl;
                 document.getElementById('audioPlayback').style.display = 'block';
                 document.getElementById('uploadRecording').style.display = 'block';
+                document.getElementById('record-info').style.display = 'block';
             };
 
             mediaRecorder.start();
@@ -107,6 +108,7 @@
             document.getElementById('startRecording').style.display = 'none';
             document.getElementById('stopRecording').style.display = 'block';
             document.getElementById('equlizer-record').style.display = 'block';
+            
         }
 
         function stopRecording() {
