@@ -311,7 +311,7 @@ class MediaController extends CustomController
 		if (isset($stationMedia->media) && file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
 			
-			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60);
+			return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, $startTime, $settings['station_media_chunk'] ?? 60, $stationMedia->duration);
 
 		} elseif (substr($filePath, 0 , 4) == 'http' &&  empty($stationMedia->media)) {
 
@@ -329,7 +329,7 @@ class MediaController extends CustomController
 		}
 	}
 
-	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60) {
+	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60, $duration = 0) {
 		
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
@@ -339,12 +339,7 @@ class MediaController extends CustomController
 		$getID3 = new \getID3;
 		$fileInfo = $getID3->analyze($filePath);
 	
-		if (!isset($fileInfo['playtime_seconds'])) {
-			header("HTTP/1.0 500 Internal Server Error");
-			return;
-		}
-	
-		$totalDuration = $fileInfo['playtime_seconds'];
+		$totalDuration = $fileInfo['playtime_seconds'] ?? $duration;
 		$bitRate = $fileInfo['bitrate']; // Bitrate in bits per second
 	
 		// Calculate byte offset for the start time
