@@ -234,11 +234,11 @@ class StationMediaController extends CustomController
 			throw new \Exception($e->getMessage(), 1);
 		}
     }
-
+	
     
 
     /**
-     * Station page for frontend
+     * Station JSON for frontend
      */
     public function json_media()
     {
