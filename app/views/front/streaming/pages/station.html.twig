@@ -79,6 +79,10 @@ $(function() {
             jQuery('#station-stream-name{{station.station_id}}').text(activeStationMedia.title)
             jQuery('#stationStreamingPicture').attr('src', activeStationMedia.media ? activeStationMedia.media.picture : activeStation.picture)
             jQuery('#stationStreamingPictureCircle').attr('src', activeStationMedia.media ? activeStationMedia.media.picture : activeStation.picture)
+        } else {
+            jQuery('#station-album-name').html('Offline')
+            jQuery('#station-stream-name').html("Offline")
+            jQuery('#station-track-name').html('UNKNOWN')
         }
     }, 5000)
 });
