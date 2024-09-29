@@ -339,7 +339,7 @@ class MediaController extends CustomController
 		$getID3 = new \getID3;
 		$fileInfo = $getID3->analyze($filePath);
 	
-		$totalDuration = $fileInfo['playtime_seconds'] ?? $duration;
+		$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;
 		$bitRate = $fileInfo['bitrate']; // Bitrate in bits per second
 	
 		// Calculate byte offset for the start time
