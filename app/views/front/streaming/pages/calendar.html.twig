@@ -123,8 +123,10 @@
 
                 dateClick: function(info) {
                     
+                    jQuery("#stationRecordStart").val(info.dateStr.substr(11, 8));
                     jQuery("#stationMediaStart").val(info.dateStr.substr(11, 8));
                     jQuery("#linkStationMediaStart").val(info.dateStr.substr(11, 8));
+                    jQuery('#stationRecordDate').val(info.dateStr.substr(0, 10))
                     jQuery('#stationMediaStartDate').val(info.dateStr.substr(0, 10))
                     jQuery("#linkStationMediaStartDate").val(info.dateStr.substr(0, 10));
                     jQuery('#find-track-popup').toggleClass('hidden')
