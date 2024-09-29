@@ -95,6 +95,7 @@ class SiteSettingsController extends CustomController
 			
 			'streaming'=> [	
 				[ 'key'=> "station_media_chunk", 'title'=> translate('Station Streaming Chunk limit'), 'help_text'=>translate('Limit in seconds to chunk the audio files for streaming at the Player'), 'fillable'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "station_interval", 'title'=> translate('Station Streaming Interval'), 'help_text'=>translate('Time in seconds to Check for the active audio files for stations streaming, This option recommeded to be accurated with streaming media duration average'), 'fillable'=> true, 'column_type'=>'number' ],
 			],
 			
 			'layout_options'=> [	
