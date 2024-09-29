@@ -333,6 +333,10 @@ class MediaController extends CustomController
 
 	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60, $duration = 0) {
 		
+		if ($startTimeInSeconds > 5)
+		{
+			$startTimeInSeconds = $startTimeInSeconds - 5;
+		}
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
 			return;
