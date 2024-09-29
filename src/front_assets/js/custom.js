@@ -43,6 +43,7 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 	jQuery('#station-player-audio').val(getCookie('volume'))
 	jQuery('#station-player-pause-button').addClass('active')
 	jQuery('#station-app-cover').removeClass('hidden')
+	jQuery('#app-cover').addClass('hidden')
 	const stationId = jQuery(this).data('station'); 
 		
 	loadStation(stationId)
@@ -105,14 +106,13 @@ async function loadStation(stationId, play = true)
 }
 
 jQuery(document).on('click', '.start-player', function (i, el) {
+	jQuery('#station-app-cover').addClass('hidden')
 	player = jQuery(this);
 	list = JSON.parse(player.attr('data-list'))
 	index = parseInt(player.attr('data-index'))
 	if (player.hasClass('start-player')) {
 		audioObject = list[index] ?? {};
-		console.log(audioObject)
 		filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
-		console.log(filename)
 		audioInfo = player.find('.slide__audio-player');
 		audio = mainAudio[0];
 		audio.src = '/stream_audio?audio='+ filename;
@@ -128,6 +128,7 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 
 jQuery(document).on('click', '.start-single-player', function (i, el) {
 	player = jQuery(this);
+	jQuery('#station-app-cover').addClass('hidden')
 	list = JSON.parse(player.attr('data-list'))
 	index = player.attr('data-index')
 	if (player.hasClass('start-single-player')) {
@@ -294,9 +295,6 @@ function initAudioPlayer() {
 		getCircle = circle.get(0),
 		totalLength = getCircle.getTotalLength();
 
-	// console.log(circle)
-
-
 	circle.attr({
 		'stroke-dasharray': totalLength,
 		'stroke-dashoffset': totalLength,
@@ -343,7 +341,7 @@ function initAudioPlayer() {
 		$('#seek-bar').css('width', (value)+'%')
 
 		var slider = '#circle-'+jQuery(audioInfo).attr('data-id');
-		console.log(slider)
+		
 		value ? jQuery(slider).roundSlider('setValue', value) : '';
 	});
 
@@ -520,9 +518,7 @@ function stickyPlaylist()
 		if (window.scrollY >= distanceFromBottom) {
 			sidebar.style.position = 'fixed';
 			sidebar.style.top = '10px';
-			console.log(1)
 		} else {
-			console.log(2)
 			sidebar.style.position = 'relative';
 		}
 	}

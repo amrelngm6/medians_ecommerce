@@ -21,10 +21,8 @@
                                     <div class="w-full flex gap-2">
                                         {% set liked = item.liked(app.customer.customer_id).first() %}
                                         <a href="/front_api/create?type=Like.station&params[item_id]={{item.station_id}}" data-params="{item_id: {{item.media_id}} }" class="ajax-link cursor-pointer text-sm text-gray-100">
-                                        
-                                        <img class="{{liked ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{item.media_id}}').addClass('hidden'); jQuery('#unheart-{{item.media_id}}').removeClass('hidden')" id="heart-{{item.media_id}}" src="/src/front_assets/svg/white-heart.svg">
-                                        <img class="{{liked ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{item.media_id}}').addClass('hidden'); jQuery('#heart-{{item.media_id}}').removeClass('hidden')" id="unheart-{{item.media_id}}" src="/src/front_assets/svg/blank-heart.svg">
-
+                                            <img class="{{liked ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{item.media_id}}').addClass('hidden'); jQuery('#unheart-{{item.media_id}}').removeClass('hidden')" id="heart-{{item.media_id}}" src="/src/front_assets/svg/white-heart.svg">
+                                            <img class="{{liked ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{item.media_id}}').addClass('hidden'); jQuery('#heart-{{item.media_id}}').removeClass('hidden')" id="unheart-{{item.media_id}}" src="/src/front_assets/svg/blank-heart.svg">
                                         </a>
                                         <span x-on:click="jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
                                     </div>
@@ -78,9 +76,9 @@ $(function() {
         lastId = jQuery('.comment').first().data('id')
         loadSection('/front_api?type=comments-list&params[item_id]={{station.station_id}}&params[last_id]='+lastId , 'comments-list', false, true)
         if (activeStationMedia) {
-            jQuery('#station-stream-name').text(activeStationMedia.title)
-            jQuery('#stationStreamingPicture').attr('src', activeStationMedia.media.picture ?? '')
-            jQuery('#stationStreamingPictureCircle').attr('src', activeStationMedia.media.picture ?? '')
+            jQuery('#station-stream-name{{station.station_id}}').text(activeStationMedia.title)
+            jQuery('#stationStreamingPicture').attr('src', activeStationMedia.media ? activeStationMedia.media.picture : '')
+            jQuery('#stationStreamingPictureCircle').attr('src', activeStationMedia.media ? activeStationMedia.media.picture : '')
         }
     }, 5000)
 });

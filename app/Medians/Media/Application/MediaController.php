@@ -124,10 +124,18 @@ class MediaController extends CustomController
 	public function stream_audio()
 	{
 		$this->app = new \config\APP;
-		$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
+		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/' . $this->app->request()->get('audio'))) {
+			$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
+		} elseif (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/' . $this->app->request()->get('audio')))
+		{
+			$filepath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
+		}
 
+		
 		$item = $this->mediaRepo->findByFile($filepath);
 
+		print_r($filepath);
+		print_r($item);
 		$addView = $item->addView();
 
 		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
