@@ -100,6 +100,11 @@ async function loadStation(stationId, play = true)
 		jQuery('#station-album-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name : activeStationMedia.title)
 		jQuery('#station-stream-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name  : activeStationMedia.title)
 		jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
+	} else {
+		
+		jQuery('#station-album-name').html('Offline')
+		jQuery('#station-stream-name').html("Offline")
+		jQuery('#station-track-name').html('UNKNOWN')
 	}
 	(activeStationMedia && activeStationMedia.media) ? jQuery('#station-track-poster').attr( 'src', activeStationMedia.media.picture) : activeStation.picture;
 
