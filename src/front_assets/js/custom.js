@@ -70,7 +70,7 @@ async function loadStation(stationId, play = true)
 	// const chunkTimerVal  = jQuery('#station_media_chunk').val() > 5 ? (jQuery('#station_media_chunk').val() - 5) : 55 ;
 	// const chunkTimer  = chunkTimerVal > 1 ? chunkTimerVal : 58 ;
 
-	activeStation = loadStationJson(stationId);
+	activeStation = await loadStationJson(stationId);
 	let rand = Math.random();
 
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
@@ -96,7 +96,6 @@ async function loadStation(stationId, play = true)
 
 	if (activeStationMedia)
 	{
-
 		jQuery('#station-album-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name : activeStationMedia.title)
 		jQuery('#station-stream-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name  : activeStationMedia.title)
 		jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
