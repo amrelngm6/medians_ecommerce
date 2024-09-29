@@ -52,7 +52,7 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 	
 	stationInterval = setInterval(function(){
 		loadStation(stationId)
-	}, val > 1  ? (val * 1000) : 5000);
+	}, val > 1  ? (val * 1000) : 30000);
 });
 
 async function loadStationJson(stationId)
