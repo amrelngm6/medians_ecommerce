@@ -286,7 +286,6 @@ class StationController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'type' => 'station',
-                'genres' => $this->categoryRepo->getBookGenres(),
                 'layout' => isset($this->app->customer->customer_id) ? 'station/upload' : 'signin'
             ], 'output'));
             
