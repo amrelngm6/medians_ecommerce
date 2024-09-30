@@ -12,7 +12,7 @@
             <input type="hidden" name="params[date]" value="" id="stationMediaDate" />
         </form>
 
-        <div class="container mx-auto">
+        <div class="pt-10 container mx-auto">
         {{station.active_item}}
         {% include 'views/front/' ~ template ~ '/includes/station-stream-block.html.twig' %}
         </div>
@@ -233,6 +233,7 @@ $(function() {
             calendar.scrollToTime( "{{'now'| date('H:i:00')}}");
 
         })
+        calendar.scrollToTime( "{{'now'| date('H:i:00')}}");
 });
 
     </script>
