@@ -297,7 +297,7 @@ class StationController extends CustomController
                 'app' => $this->app,
                 'customer' => $customer,
                 'list' => $list,
-                'layout' => isset($this->app->customer->customer_id) ? 'studio_stations' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'station/studio' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -319,7 +319,7 @@ class StationController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
 				'item' => $this->repo->find($station_id),
-                'layout' => 'station'
+                'layout' => 'station/page'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -341,7 +341,7 @@ class StationController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
 				'items' => $this->repo->getTop(20),
-                'layout' => 'stations'
+                'layout' => 'station/stations'
             ], 'output'));
             
 		} catch (\Exception $e) {
