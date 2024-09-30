@@ -76,7 +76,11 @@
 } 
     </style>
     <script>
-    
+
+var calendar;
+
+$(function() {
+
         addEventListener('load', e => {
             if (+document.querySelector('option').getBoundingClientRect().width)
                 document.body.style.setProperty('--list', 'none')
@@ -89,7 +93,6 @@
         })
 
 
-        var calendar;
         document.addEventListener('DOMContentLoaded', function() {
             const calendarEl = document.getElementById('calendar');
 
@@ -233,6 +236,7 @@
             calendar.scrollToTime( "{{'now'| date('H:i:00')}}");
 
         })
+});
 
     </script>
 
