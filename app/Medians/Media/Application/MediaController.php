@@ -275,7 +275,7 @@ class MediaController extends CustomController
 		$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;
 		$bitRate = $fileInfo['bitrate']; // Bitrate in bits per second
 		
-		$streamDuration = $streamDuration > 0 ? $streamDuration : $totalDuration;
+		$streamDuration = $streamDuration > 0 ? $streamDuration : ($totalDuration - $startTimeInSeconds);
 		// Calculate byte offset for the start time
 		$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileInfo['filesize']);
 		$endByte = (int)(($streamDuration / $totalDuration) * $fileInfo['filesize']) + $startByte;
