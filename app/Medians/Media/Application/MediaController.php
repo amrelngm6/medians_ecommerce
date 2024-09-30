@@ -123,6 +123,10 @@ class MediaController extends CustomController
 
 	public function stream_audio()
 	{
+
+		$this->isDirectAccess();
+
+		
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
 
@@ -333,8 +337,6 @@ class MediaController extends CustomController
 
 
 	function streamVideo($startTimeInSeconds = 0, $streamDuration = 20) {
-
-		$this->isDirectAccess();
 
 		$this->app = new \config\APP;
 		$video = $this->app->request()->get('video');
