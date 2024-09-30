@@ -172,10 +172,12 @@ class StationController extends CustomController
 
 		$params = $this->app->params();
 
+		$mediaRepo = new \Medians\Media\Infrastructure\MediaRepository;
+
 		foreach ($this->app->request()->files as $key => $value) {
 			if ($value) {
-				$picture = $this->mediaRepo->upload($value);
-				$params['picture'] = $this->mediaRepo->_dir.$picture;
+				$picture = $mediaRepo->upload($value);
+				$params['picture'] = $mediaRepo->_dir.$picture;
 			}
 		}   
 		
