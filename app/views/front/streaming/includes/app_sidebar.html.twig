@@ -17,6 +17,7 @@
                             {title:  "Stations",link: "/stations", icon: "station"},
                             {title:  "Playlists",link: "/playlists", icon: "playlist"},
                             {title:  "Artists",link: "/channels", icon: "user-tab"},
+                            {title:  "Genres",link: "/genres", icon: "audio-tab"},
                         ] %}
                         <li class="w-full   " id="sidemenu-{{loop.index}}">
                             <a href="{{menuitem.link}}" {{lang.translate(menuitem.icon)}} class="w-full flex gap gap-4 ajax-load ">
@@ -30,16 +31,6 @@
                         {% endfor %}
 
 
-                        <li class="w-full   " id="genres">
-                            <a title="{{lang.translate('genres')}}" href="/genres" class="w-full flex gap gap-4  ajax-load  ">
-                                <span class="min-w-8  text-center relative my-2">
-                                    <img src="/src/front_assets/svg/audio-tab.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="/src/front_assets/svg/audio-tab-active.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
-                                        width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Genres')}}</span>
-                            </a>
-                        </li>
-                        
                         {% if customer.customer_id %}
 
                         <li class="w-full   " id="likes">
