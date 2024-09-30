@@ -336,6 +336,8 @@ class MediaController extends CustomController
 
 		$this->app = new \config\APP;
 		$video = $this->app->request()->get('video');
+		$startTimeInSeconds = $this->app->request()->get('s');
+		$streamDuration = $this->app->request()->get('d');
 
 		$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/'.$video;
 
@@ -354,6 +356,8 @@ class MediaController extends CustomController
 			$bitRate = !empty($fileInfo['bitrate']) ? $fileInfo['bitrate'] : 0; // Bitrate in bits per second
 			$fileSize = $fileInfo['filesize']; // File size in bytes
 		
+			$streamDuration = $streamDuration > 0 ? $streamDuration : ($totalDuration - $startTimeInSeconds);
+
 			// Calculate byte offset for the start and end time based on the stream duration
 			$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileSize);
 			$endByte = (int)(($streamDuration / $totalDuration) * $fileSize) + $startByte;
