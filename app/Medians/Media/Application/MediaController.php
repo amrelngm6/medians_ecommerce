@@ -221,6 +221,7 @@ class MediaController extends CustomController
 
 	public function stream_station()
 	{
+		$this->isDirectAccess();
 		
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
@@ -265,6 +266,7 @@ class MediaController extends CustomController
 
 	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60, $duration = 0) {
 		
+		$this->isDirectAccess();
 		
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
@@ -336,6 +338,8 @@ class MediaController extends CustomController
 
 
 	function streamVideo($startTimeInSeconds = 0, $streamDuration = 20) {
+
+		$this->isDirectAccess();
 
 		$this->app = new \config\APP;
 		$video = $this->app->request()->get('video');
