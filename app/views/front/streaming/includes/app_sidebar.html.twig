@@ -9,7 +9,7 @@
                     </div>
                     <hr class="lg:block hidden my-4  opacity-30" />
                     <div class="lg:block hidden pt-2 px-1 text-slate-400 text-opacity-70  text-base font-normal tracking-wide">{{lang.translate('MENU')}}</div>
-                    <ul class="pt-2 font-normal overflow-auto" style="max-height:calc(100vh - 110px)">
+                    <ul class="pt-2 font-normal overflow-auto" style="max-height:calc(100vh - 110px)" id="menu-ul">
                         {% for menuitem in [
                             {title:  "Home",link: "/", icon: "home"},
                             {title:  "Discover",link: "/discover", icon: "cloud-bolt"},
@@ -18,11 +18,12 @@
                             {title:  "Playlists",link: "/playlists", icon: "playlist"},
                             {title:  "Artists",link: "/channels", icon: "user-tab"},
                             {title:  "Genres",link: "/genres", icon: "audio-tab"},
+                            {title:  "Likes",link: "/likes", icon: "heart"},
                         ] %}
-                        <li class="w-full   " id="sidemenu-{{loop.index}}">
+                        <li class="w-full   {{menuitem.link == app.request.pathInfo ? 'active' : '' }}" id="sidemenu-{{loop.index}}" onclick="(function(){ jQuery('#menu-ul').find('li.active').removeClass('active'), jQuery('#sidemenu-{{loop.index}}').addClass('active') })()">
                             <a href="{{menuitem.link}}" {{lang.translate(menuitem.icon)}} class="w-full flex gap gap-4 ajax-load ">
                                 <span class="min-w-8  text-center relative my-2">
-                                    <img src="/src/front_assets/svg/{{menuitem.icon}}{{menuitem.link == app.request.pathInfo ? '-active' : ''}}.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
+                                    <img src="/src/front_assets/svg/{{menuitem.icon}}.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
                                     <img src="/src/front_assets/svg/{{menuitem.icon}}-active.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
                                         width="18" />
                                 </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50">{{lang.translate(menuitem.title)}}</span>
@@ -30,18 +31,7 @@
                         </li>
                         {% endfor %}
 
-
                         {% if customer.customer_id %}
-
-                        <li class="w-full   " id="likes">
-                            <a title="{{lang.translate('Playlists')}}" href="/likes" class="w-full flex gap gap-4   ajax-load ">
-                                <span class="min-w-8  text-center relative my-2">
-                                    <img src="/src/front_assets/svg/heart.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="/src/front_assets/svg/heart-active.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
-                                        width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Likes')}}</span>
-                            </a>
-                        </li>
                         <li><hr class="my-2" /></li>
                         <li class="w-full " id="upload">
                             <a href="/upload" title="{{lang.translate('Upload')}}"  class="w-full flex gap gap-4  ajax-load  ">
