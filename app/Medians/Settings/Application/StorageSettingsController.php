@@ -43,12 +43,20 @@ class StorageSettingsController extends CustomController
 		return [
             
 			'basic'=> [	
+                
 				[ 'key'=> "default_storage", 'title'=> translate('Default Storage'), 'help_text'=> translate('The default storage location for media files'),
                     'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 'column_key' => 'default_storage',
                     'data' => [['default_storage'=>'google','title'=>translate('Google Storage')], ['default_storage'=>'local','title'=>translate('Local Server')]]  
                 ],	
 			],		
-					
+
+            'streaming'=> [	
+				[ 'key'=> "direct_link_streaming", 'title'=> translate('Streaming links directly'), 'help_text'=>translate('Allow customers to stream the media files through direct files. ( Recommended disable to prevent download media files anonymously )'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "station_media_chunk", 'title'=> translate('Station Streaming Chunk limit'), 'help_text'=>translate('Limit in seconds to chunk the audio files for streaming at the Player'), 'fillable'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "station_interval", 'title'=> translate('Station Streaming Interval'), 'help_text'=>translate('Time in seconds to Check for the active audio files for stations streaming, This option recommeded to be accurated with streaming media duration average'), 'fillable'=> true, 'column_type'=>'number' ],
+			],
+			
+	
         ];
 	}
 
