@@ -137,8 +137,13 @@ class MediaController extends CustomController
 		{
 			$service = new GoogleStorageService();
 			$filepath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
+			
+			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($filePath).'.mp3';
+
+			return file_exists($tmpFilePath) 
+			? $this->streamAudioFromTimeRange($tmpFilePath, $startTime, $settings['station_media_chunk'] ?? 60)
+			: $this->stream_external($service->generateSignedUrl($item->main_file->path), $tmpFilePath, $startTime, $settings['station_media_chunk'] ?? 60);
 			// $upload = file_exists($_SERVER['DOCUMENT_ROOT'] . $filepath) ? null : file_put_contents($_SERVER['DOCUMENT_ROOT'] . $filepath, file_get_contents($service->generateSignedUrl($item->main_file->path)));
-			return $this->stream_external($service->generateSignedUrl($item->main_file->path), 60);
 		}
 
 		if ($item)
@@ -239,7 +244,8 @@ class MediaController extends CustomController
 		if (substr($filePath, 0 , 4) == 'http' &&  empty($stationMedia->media)) {
 
 			// Stream External files
-			return $this->stream_external($filePath, $startTime, $settings['station_media_chunk'] ?? 60);
+			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($filePath).'.mp3';
+			return $this->stream_external($filePath, $tmpFilePath, $startTime, $settings['station_media_chunk'] ?? 60);
 		} 
 		
 
@@ -310,10 +316,9 @@ class MediaController extends CustomController
 		exit;
 	}
 	
-	public function stream_external($fileUrl, $startTimeInSeconds = 0, $streamDuration = 60)
+	public function stream_external($fileUrl, $tmpFilePath, $startTimeInSeconds = 0, $streamDuration = 60)
 	{
 		
-		$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($fileUrl).'.mp3';
 		if (!file_exists($tmpFilePath)) {
 			$saveTmpFile = file_put_contents($tmpFilePath, fopen($fileUrl, 'r'));
 		}
