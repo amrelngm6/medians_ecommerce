@@ -25,7 +25,14 @@ class Station extends CustomModel
 		'status'
 	];
 
+	public $appends = ['picture_name'];
 
+
+	public function getPictureNameAttribute() 
+	{
+		$e = $this->picture ? explode('/', $this->picture) : [];
+		return end($e);
+	}
 
 	public function getFields()
 	{
