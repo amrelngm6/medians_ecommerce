@@ -10,68 +10,25 @@
                     <hr class="lg:block hidden my-4  opacity-30" />
                     <div class="lg:block hidden pt-2 px-1 text-slate-400 text-opacity-70  text-base font-normal tracking-wide">{{lang.translate('MENU')}}</div>
                     <ul class="pt-2 font-normal overflow-auto" style="max-height:calc(100vh - 110px)">
-                        <li class="w-full   " id="home">
-                            <a href="/" {{lang.translate('Home')}} class="w-full flex gap gap-4 ajax-load ">
+                        {% for menuitem in [
+                            {title:  "Home",link: "/", icon: "home"},
+                            {title:  "Discover",link: "/discover", icon: "cloud-bolt"},
+                            {title:  "Audiobooks",link: "/discover/audiobook", icon: "audiobook-tab"},
+                            {title:  "Stations",link: "/stations", icon: "station"},
+                            {title:  "Playlists",link: "/playlists", icon: "playlist"},
+                            {title:  "Artists",link: "/channels", icon: "user-tab"},
+                        ] %}
+                        <li class="w-full   " id="sidemenu-{{loop.index}}">
+                            <a href="{{menuitem.link}}" {{lang.translate(menuitem.icon)}} class="w-full flex gap gap-4 ajax-load ">
                                 <span class="min-w-8  text-center relative my-2">
-                                    <img src="/src/front_assets/svg/home.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="/src/front_assets/svg/home-active.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
+                                    <img src="/src/front_assets/svg/{{menuitem.icon}}{{menuitem.link == app.request.pathInfo ? '-active' : ''}}.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
+                                    <img src="/src/front_assets/svg/{{menuitem.icon}}-active.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50">{{lang.translate('Home')}}</span>
+                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50">{{lang.translate(menuitem.title)}}</span>
                             </a>
                         </li>
+                        {% endfor %}
 
-                        <li class="w-full   " id="discover">
-                            <a  title="{{lang.translate('Discover')}}" href="/discover" class="w-full flex gap gap-4 ajax-load ">
-                                <span class="min-w-8  text-center relative my-2">
-                                    <img src="/src/front_assets/svg/cloud-bolt.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="/src/front_assets/svg/cloud-bolt-active.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
-                                        width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Discover')}}</span>
-                            </a>
-                        </li>
-
-
-                        <li class="w-full   " id="discover_audiobooks">
-                            <a  title="{{lang.translate('Discover')}}" href="/discover/audiobook" class="w-full flex gap gap-4 ajax-load ">
-                                <span class="min-w-8  text-center relative my-2">
-                                    <img src="/src/front_assets/svg/audiobook-tab.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="/src/front_assets/svg/audiobook-tab-active.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
-                                        width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Audiobooks')}}</span>
-                            </a>
-                        </li>
-
-
-                        <li class="w-full   " id="stations">
-                            <a title="{{lang.translate('stations')}}" href="/stations" class="w-full flex gap gap-4  ajax-load  ">
-                                <span class="min-w-8  text-center relative my-2">
-                                    <img src="/src/front_assets/svg/station.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="/src/front_assets/svg/station-active.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
-                                        width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Stations')}}</span>
-                            </a>
-                        </li>
-
-                        <li class="w-full   " id="playlists">
-                            <a title="{{lang.translate('Playlists')}}" href="/playlists" class="w-full flex gap gap-4  ajax-load">
-                                <span class="min-w-8  text-center relative my-2">
-                                    <img src="/src/front_assets/svg/playlist.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="/src/front_assets/svg/playlist-active.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
-                                        width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Playlists')}}</span>
-                            </a>
-                        </li>
-                        
-
-                        <li class="w-full   " id="artist">
-                            <a title="{{lang.translate('Artists')}}" href="/channels" class="w-full flex gap gap-4  ajax-load  ">
-                                <span class="min-w-8  text-center relative my-2">
-                                    <img src="/src/front_assets/svg/user-tab.svg" class="absolute top-2 left-0 right-0 mx-auto" width="18" />
-                                    <img src="/src/front_assets/svg/user-tab-active.svg" class="active-icon absolute top-2 left-0 right-0 mx-auto"
-                                        width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Artists')}}</span>
-                            </a>
-                        </li>
 
                         <li class="w-full   " id="genres">
                             <a title="{{lang.translate('genres')}}" href="/genres" class="w-full flex gap gap-4  ajax-load  ">
