@@ -477,7 +477,7 @@ class StationController extends CustomController
                 'app' => $this->app,
                 'station' => $station,
 				'now' => $datetime_string,
-                'layout' => 'calendar',
+                'layout' => 'station/calendar',
             ], 'output'));
             
 		} catch (\Exception $e) {
