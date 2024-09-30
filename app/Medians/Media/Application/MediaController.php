@@ -200,85 +200,6 @@ class MediaController extends CustomController
 	}
 
 
-	function streamAudioFromTime($filePath, $startTimeInSeconds = 0) {
-		if (!file_exists($filePath)) {
-			header("HTTP/1.0 404 Not Found");
-			return;
-		}
-	
-		$getID3 = new \getID3;
-		$fileInfo = $getID3->analyze($filePath);
-	
-		if (!isset($fileInfo['playtime_seconds'])) {
-			header("HTTP/1.0 500 Internal Server Error");
-			return;
-		}
-	
-		$totalDuration = $fileInfo['playtime_seconds'];
-		$bitRate = $fileInfo['bitrate'];
-	
-		// Calculate byte offset
-		$byteOffset = (int)(($startTimeInSeconds / $totalDuration) * $fileInfo['filesize']);
-	
-		// Ensure the byte offset is at a valid MP3 frame
-		$byteOffset = $this->findValidMP3Frame($filePath, $byteOffset);
-	
-		$fm = @fopen($filePath, 'rb');
-		if (!$fm) {
-			header("HTTP/1.0 505 Internal server error");
-			return;
-		}
-	
-		fseek($fm, $byteOffset);
-		$size = filesize($filePath) - $byteOffset;
-	
-		header("Content-Type: audio/mpeg");
-		header("Cache-Control: public, must-revalidate");
-		header("Pragma: no-cache");
-		header("Accept-Ranges: bytes");
-		// header("Content-Length: " . $size);
-		header("X-Pad: avoid browser bug");
-		header("Content-Duration: " . ($totalDuration - $startTimeInSeconds));
-		header("Content-Length: " . ($fileInfo['filesize'] - $byteOffset));  // Set content length from the byte offset
-
-	
-		// Output file from the calculated position
-		$buffer = 8192;
-		while(!feof($fm) && ($p = ftell($fm)) <= filesize($filePath)) {
-			if ($p + $buffer > filesize($filePath)) {
-				$buffer = filesize($filePath) - $p;
-			}
-			echo fread($fm, $buffer);
-			flush();
-		}
-	
-		fclose($fm);
-		exit;
-	}
-	
-	function findValidMP3Frame($filePath, $startByte) {
-		$fm = fopen($filePath, 'rb');
-		fseek($fm, $startByte);	
-		// Look for the next valid MP3 frame header
-
-		while (!feof($fm)) {
-			$headerBytes = fread($fm, 4);
-			if (strlen($headerBytes) < 4) break;
-	
-			$headerData = unpack('N', $headerBytes)[1];
-			
-			// Check for a valid MP3 frame header
-			if (($headerData & 0xFFE00000) == 0xFFE00000) {
-				return ftell($fm) - 4;  // Return the position of the frame start
-			}
-	
-			fseek($fm, -3, SEEK_CUR);  // Move back 3 bytes and try again
-		}
-	
-		fclose($fm);
-		return $startByte;  // If no valid frame found, return original position
-	}
-
 	public function stream_station()
 	{
 		
@@ -451,6 +372,62 @@ class MediaController extends CustomController
 		fclose($stream);
 		exit;
 		
+	}
+
+
+	function streamVideo() {
+
+		$this->app = new \config\APP;
+		$video = $this->app->request()->get('video');
+		$startSec = 0;
+		$endSec = 5;
+
+		$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/'.$video;
+
+		// Check if file exists
+		if (!file_exists($filePath)) {
+			header("HTTP/1.1 404 Not Found");
+			exit;
+		}
+		
+		$ffprobe = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffprobe'; 
+		$fileSize = filesize($filePath);
+		$fp = fopen($filePath, 'rb');
+		$mime = mime_content_type($filePath);
+		$duration = shell_exec("$ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 " . escapeshellarg($filePath));
+	
+		if ($duration) {
+			$duration = floatval($duration);
+			$startByte = ($startSec / $duration) * $fileSize;
+			$endByte = ($endSec / $duration) * $fileSize;
+	
+			$start = floor($startByte);
+			$end = floor($endByte);
+			$length = $end - $start + 1;
+	
+			header('Content-Type: ' . $mime);
+			header('Content-Length: ' . $length);
+			header("Content-Range: bytes $start-$end/$fileSize");
+			header('Accept-Ranges: bytes');
+			header('HTTP/1.1 206 Partial Content');
+	
+			fseek($fp, $start);
+	
+			$bufferSize = 1024 * 8; // 8KB buffer
+			while (!feof($fp) && ($pos = ftell($fp)) <= $end) {
+				if ($pos + $bufferSize > $end) {
+					$bufferSize = $end - $pos + 1;
+				}
+				echo fread($fp, $bufferSize);
+				flush();
+			}
+	
+			fclose($fp);
+		} else {
+			header("HTTP/1.1 500 Internal Server Error");
+			exit;
+		}
+				
 	}
 
 	public function assets()
