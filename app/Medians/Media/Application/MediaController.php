@@ -334,6 +334,8 @@ class MediaController extends CustomController
 
 	function streamVideo($startTimeInSeconds = 0, $streamDuration = 20) {
 
+		$this->isDirectAccess();
+
 		$this->app = new \config\APP;
 		$video = $this->app->request()->get('video');
 		$startTimeInSeconds = $this->app->request()->get('s');
@@ -407,6 +409,24 @@ class MediaController extends CustomController
 		
 	}
 	
+	function isDirectAccess() {
+		// Check the user-agent
+		$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+		$referer = $_SERVER['HTTP_REFERER'] ?? '';
+	
+		// Check if there's a referrer (usually means it's embedded in an HTML page)
+		if (empty($referer)) {
+			exit; // Assume embedded access
+		}
+	
+		// You can also inspect the user-agent for clues
+		if (stripos($userAgent, 'Mozilla') !== false || stripos($userAgent, 'Chrome') !== false) {
+			exit; // Assume embedded access
+		}
+	
+		return false; // Assume embedded access
+	}
+		
 	public function assets()
 	{
 		$this->app = new \config\APP;
