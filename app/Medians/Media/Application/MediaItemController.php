@@ -428,7 +428,6 @@ class MediaItemController extends CustomController
             $tempFilePath = '/uploads/audio/tmp/'.md5($params['link']).'.mp3';
 			file_put_contents($_SERVER['DOCUMENT_ROOT'].$tempFilePath, fopen($params['link'], 'r'));
             return $this->store($params, $tempFilePath);
-            return;
         }
 
 
