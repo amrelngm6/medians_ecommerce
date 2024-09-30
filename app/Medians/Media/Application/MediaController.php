@@ -131,7 +131,6 @@ class MediaController extends CustomController
 			$filepath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
 		}
 
-		
 		$item = $this->mediaRepo->findByFile($filepath);
 
 		if (isset($item->main_file->storage) && $item->main_file->storage == 'google')
@@ -239,12 +238,8 @@ class MediaController extends CustomController
 		// Check if the streaming media is external link
 		if (substr($filePath, 0 , 4) == 'http' &&  empty($stationMedia->media)) {
 
-			// Check if the Temp file of streaming media is located at the server
-			if (file_exists( $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'. md5($stationMedia->media_path).'.mp3'))
-				return $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'. md5($stationMedia->media_path).'.mp3', $startTime, $settings['station_media_chunk'] ?? 60, $stationMedia->duration);
-
 			// Stream External files
-			return $this->stream_external($stationMedia->media_path, $startTime);
+			return $this->stream_external($filePath, $startTime, $settings['station_media_chunk'] ?? 60);
 		} 
 		
 
@@ -315,70 +310,15 @@ class MediaController extends CustomController
 		exit;
 	}
 	
-	public function stream_external($fileUrl, $startTimeInSeconds = 0)
+	public function stream_external($fileUrl, $startTimeInSeconds = 0,$streamDuration = 60)
 	{
 		
-		// $fileUrl = 'https://streaming.quatre-co.com/uploads/audio/260983-66dc0d2975759.mp3';
-		if (!filter_var($fileUrl, FILTER_VALIDATE_URL)) {
-			header("HTTP/1.0 404 Not Found");
-			return;
-		}
-	
-		$headers = get_headers($fileUrl, 1);
-
-		// Check if the file is accessible
-		if (!$headers || strpos($headers[0], '200') === false) {
-			header("HTTP/1.0 404 Not Found");
-			return;
-		}
-	
-		// Get file size
-		$fileSize = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
-	
-		$getID3 = new getID3;
 		$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($fileUrl).'.mp3';
 		if (!file_exists($tmpFilePath)) {
 			$saveTmpFile = file_put_contents($tmpFilePath, fopen($fileUrl, 'r'));
 		}
-
-		$fileInfo = $getID3->analyze($tmpFilePath);
-		$deleteTempFile = unlink($tmpFilePath);
-		// Analyze file metadata (using getID3 or another library if needed)
-		// Here we assume you know the total duration and bitrate
-		$totalDuration = round($fileInfo['playtime_seconds'], 0); // Example duration in seconds (this can be extracted with getID3 for local files)
-		$bitRate = $fileInfo['bitrate']; // Example bitrate in bits per second
-	
-		// Calculate byte offset based on start time
-		$byteOffset = (int)(($startTimeInSeconds / $totalDuration) * $fileSize);
-	
-		// Open remote file stream
-		$stream = fopen($fileUrl, 'rb');
-		if (!$stream) {
-			header("HTTP/1.0 500 Internal Server Error");
-			return;
-		}
-	
-		// Set headers for streaming
-		header("Content-Type: audio/mpeg");
-		header("Cache-Control: public, must-revalidate");
-		header("Pragma: no-cache");
-		header("Accept-Ranges: bytes");
-		header("Content-Length: " . ($fileSize - $byteOffset));
-		header("X-Pad: avoid browser bug");
-	
-		// Move to the byte offset for starting the stream
-		fseek($stream, $byteOffset);
-	
-		// Stream the audio from the offset
-		$buffer = 8192;
-		while (!feof($stream)) {
-			echo fread($stream, $buffer);
-			flush();
-		}
-	
-		fclose($stream);
-		exit;
 		
+		return $this->streamAudioFromTimeRange($tmpFilePath, $startTimeInSeconds, $streamDuration);
 	}
 
 
