@@ -136,7 +136,7 @@ class StorageSettingsController extends CustomController
 	public function getAll() 
 	{	
 
-		return (new SystemSetingsController())->getAll();
+		return (new SystemSettingsController())->getAll();
 	}
 
 
@@ -145,7 +145,7 @@ class StorageSettingsController extends CustomController
 	*/
 	public function update() 
 	{
-		return (new SystemSetingsController())->update();
+		return (new SystemSettingsController())->update();
 	}
 
 
@@ -155,7 +155,7 @@ class StorageSettingsController extends CustomController
 	*/
 	public function updateSettings($params) 
 	{
-		return (new SystemSetingsController())->updateSettings($params);
+		return (new SystemSettingsController())->updateSettings($params);
 	}
 
 
@@ -163,19 +163,19 @@ class StorageSettingsController extends CustomController
 
 	public function saveItem($code, $value) 
 	{
-		return (new SystemSetingsController())->saveItem($code, $value);
+		return (new SystemSettingsController())->saveItem($code, $value);
 	}
 
 
 	public function saveItemArray($code, $value) 
 	{
-		return (new SystemSetingsController())->saveItemArray($code, $value);
+		return (new SystemSettingsController())->saveItemArray($code, $value);
 	}
 
 
 	public function deleteItem($code) 
 	{
-		return (new SystemSetingsController())->deleteItem($code);
+		return (new SystemSettingsController())->deleteItem($code);
 	}
 
 
