@@ -7,7 +7,7 @@ use Medians\Settings\Infrastructure\SystemSettingsRepository;
 use Medians\Templates\Infrastructure\WebTemplateRepository;
 
 
-class SiteSettingsController extends CustomController
+class StorageSettingsController extends CustomController
 {
 
 	/**
