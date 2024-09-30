@@ -84,7 +84,7 @@ RouteHandler::get('/book_genre/(:all)', \Medians\Media\Application\AudiobookCont
 RouteHandler::get('/artist/(:all)', \Medians\Customers\Application\CustomerController::class.'@artist');
 RouteHandler::get('/playlist/(:all)', \Medians\Playlists\Application\PlaylistController::class.'@playlist');
 RouteHandler::get('/stations', \Medians\Stations\Application\StationController::class.'@stations');
-RouteHandler::get('/station/(:all)/calendar', \Medians\Stations\Application\StationController::class.'@calendar');
+RouteHandler::get('/stations/manage/(:all)', \Medians\Stations\Application\StationController::class.'@calendar');
 RouteHandler::get('/station_json/(:all)', \Medians\Stations\Application\StationController::class.'@station_json');
 RouteHandler::get('/stations/create', \Medians\Stations\Application\StationController::class.'@station_upload_page');
 RouteHandler::get('/stations/edit/(:all)', \Medians\Stations\Application\StationController::class.'@station_edit');
