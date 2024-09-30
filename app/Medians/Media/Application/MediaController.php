@@ -347,63 +347,63 @@ class MediaController extends CustomController
 			return;
 		}
 	
-			// Analyze the file using getID3 for duration and bitrate
-			$getID3 = new \getID3;
-			$fileInfo = $getID3->analyze($filePath);
-		
-			// Get total duration and bitrate
-			$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;
-			$bitRate = !empty($fileInfo['bitrate']) ? $fileInfo['bitrate'] : 0; // Bitrate in bits per second
-			$fileSize = $fileInfo['filesize']; // File size in bytes
-		
-			$streamDuration = $streamDuration > 0 ? $streamDuration : ($totalDuration - $startTimeInSeconds);
+		// Analyze the file using getID3 for duration and bitrate
+		$getID3 = new \getID3;
+		$fileInfo = $getID3->analyze($filePath);
+	
+		// Get total duration and bitrate
+		$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;
+		$bitRate = !empty($fileInfo['bitrate']) ? $fileInfo['bitrate'] : 0; // Bitrate in bits per second
+		$fileSize = $fileInfo['filesize']; // File size in bytes
+	
+		$streamDuration = $streamDuration > 0 ? $streamDuration : ($totalDuration - $startTimeInSeconds);
 
-			// Calculate byte offset for the start and end time based on the stream duration
-			$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileSize);
-			$endByte = (int)(($streamDuration / $totalDuration) * $fileSize) + $startByte;
-		
-			// Open the file
-			$fm = @fopen($filePath, 'rb');
-			if (!$fm) {
-				header("HTTP/1.0 505 Internal server error");
-				return;
+		// Calculate byte offset for the start and end time based on the stream duration
+		$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileSize);
+		$endByte = (int)(($streamDuration / $totalDuration) * $fileSize) + $startByte;
+	
+		// Open the file
+		$fm = @fopen($filePath, 'rb');
+		if (!$fm) {
+			header("HTTP/1.0 505 Internal server error");
+			return;
+		}
+	
+		// Prevent session blocking and allow streaming after user disconnect
+		session_write_close();
+		ignore_user_abort(true); // Continue streaming even if the user disconnects
+	
+		// Seek to the start byte
+		fseek($fm, $startByte);
+	
+		$contentLength = $endByte - $startByte;
+	
+		// Set appropriate headers for video content
+		$mimeType = !empty($fileInfo['mime_type']) ? $fileInfo['mime_type'] : "video/mp4";
+		header("Content-Type: $mimeType");
+		header("Accept-Ranges: bytes");
+		header("Content-Length: " . $contentLength);
+		header("Content-Range: bytes $startByte-$endByte/$fileSize");
+		header("X-Pad: avoid browser bug");
+		header("Cache-Control: no-cache");
+	
+		// Stream the file in chunks (buffer size: 8KB)
+		$bufferSize = 8192;
+		$bytesSent = 0;
+		while (!feof($fm) && ($bytesSent < $contentLength)) {
+			$buffer = fread($fm, $bufferSize);
+			echo $buffer;
+			flush(); // Ensure immediate delivery to the client
+			$bytesSent += strlen($buffer);
+	
+			// Stop when we have sent enough bytes for the specified duration
+			if ($bytesSent >= $contentLength) {
+				break;
 			}
-		
-			// Prevent session blocking and allow streaming after user disconnect
-			session_write_close();
-			ignore_user_abort(true); // Continue streaming even if the user disconnects
-		
-			// Seek to the start byte
-			fseek($fm, $startByte);
-		
-			$contentLength = $endByte - $startByte;
-		
-			// Set appropriate headers for video content
-			$mimeType = !empty($fileInfo['mime_type']) ? $fileInfo['mime_type'] : "video/mp4";
-			header("Content-Type: $mimeType");
-			header("Accept-Ranges: bytes");
-			header("Content-Length: " . $contentLength);
-			header("Content-Range: bytes $startByte-$endByte/$fileSize");
-			header("X-Pad: avoid browser bug");
-			header("Cache-Control: no-cache");
-		
-			// Stream the file in chunks (buffer size: 8KB)
-			$bufferSize = 8192;
-			$bytesSent = 0;
-			while (!feof($fm) && ($bytesSent < $contentLength)) {
-				$buffer = fread($fm, $bufferSize);
-				echo $buffer;
-				flush(); // Ensure immediate delivery to the client
-				$bytesSent += strlen($buffer);
-		
-				// Stop when we have sent enough bytes for the specified duration
-				if ($bytesSent >= $contentLength) {
-					break;
-				}
-			}
-		
-			fclose($fm);
-			exit;
+		}
+	
+		fclose($fm);
+		exit;
 		
 	}
 	
