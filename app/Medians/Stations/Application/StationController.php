@@ -270,6 +270,29 @@ class StationController extends CustomController
     }
 
 
+	    /**
+     * Upload Audio Book page for frontend
+     */
+    public function station_upload_page()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $this->app->customer_auth();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'type' => 'station',
+                'genres' => $this->categoryRepo->getBookGenres(),
+                'layout' => isset($this->app->customer->customer_id) ? 'station/upload' : 'signin'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
 	
     /**
      * Studio page for frontend
