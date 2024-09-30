@@ -127,6 +127,7 @@ class MediaController extends CustomController
 		// $this->isDirectAccess();
 
 		print_r($_SERVER);
+		echo 11;
 		return;
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
