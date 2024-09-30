@@ -412,6 +412,7 @@ class MediaController extends CustomController
 	}
 	
 	function isDirectAccess() {
+		print_r($_SERVER);
 		// Check the user-agent
 		$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
 		$referer = $_SERVER['HTTP_REFERER'] ?? '';
