@@ -90,19 +90,20 @@ class StationController extends CustomController
 		$params = $this->app->params();
 
         try {	
-			
+			$mediaRepo = new \Medians\Media\Infrastructure\MediaRepository;
+
 			$customer = $this->app->customer_auth();
 
 			$params['status'] = isset($params['status']) ? 'on' : null;
 
             foreach ($this->app->request()->files as $key => $value) {
-                $file = $this->mediaRepo->upload($value);
+                $file = $mediaRepo->upload($value);
         
                 $getID3 = new getID3;
                 // Analyze file
-                $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
+                $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $mediaRepo->_dir.$file);
 
-                $params['picture'] = $this->mediaRepo->_dir.$file;
+                $params['picture'] = $mediaRepo->_dir.$file;
             }
 
 			$params['customer_id'] = $this->app->customer_id() ?? 0;
