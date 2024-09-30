@@ -134,12 +134,11 @@ class MediaController extends CustomController
 		
 		$item = $this->mediaRepo->findByFile($filepath);
 
-		if ($item->main_file->storage == 'google')
+		if (isset($item->main_file->storage) && $item->main_file->storage == 'google')
 		{
 			$service = new GoogleStorageService();
-			
 			$filepath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
-			$upload = file_put_contents($_SERVER['DOCUMENT_ROOT'] . $filepath, file_get_contents($service->generateSignedUrl($item->main_file->path)));
+			$upload = file_exists($_SERVER['DOCUMENT_ROOT'] . $filepath) ? null : file_put_contents($_SERVER['DOCUMENT_ROOT'] . $filepath, file_get_contents($service->generateSignedUrl($item->main_file->path)));
 		}
 
 		if ($item)
