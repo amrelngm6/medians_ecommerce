@@ -334,13 +334,11 @@ class MediaController extends CustomController
 		// Get file size
 		$fileSize = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
 	
-		
 		$getID3 = new getID3;
-		$tempFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($fileUrl).'.mp3';
-		if (!file_exists($tempFilePath)) {
-			$saveTmpFile = file_put_contents($tempFilePath, fopen($fileUrl, 'r'));
+		$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($fileUrl).'.mp3';
+		if (!file_exists($filePath)) {
+			$saveTmpFile = file_put_contents($filePath, fopen($fileUrl, 'r'));
 		}
-		$filePath = $tempFilePath;
 
 		$fileInfo = $getID3->analyze($filePath);
 		// Analyze file metadata (using getID3 or another library if needed)
