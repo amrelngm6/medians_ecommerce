@@ -468,19 +468,29 @@ class MediaItemController extends CustomController
 
     public function store($params, $filePath)
     {
+
+		$settings = $this->app->SystemSetting();
+
         $getID3 = new getID3;
         // Analyze file
         $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
 
         $params['name'] = '';
         $params['description'] = '';
-        $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $filePath] ];
+        $params['files'] = [ ['type'=> 'audio', 'storage'=> $settings['default_storage'], 'path'=> $filePath] ];
         $params['author_id'] = $this->app->customer_id() ?? 0;
         if (isset($fileInfo['playtime_seconds']))
         {
             $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
         }
         
+        if ($settings['default_storage'] == 'google')
+        {
+            $service = new GoogleStorageService();
+            $upload = $service->uploadFileToGCS($_SERVER['DOCUMENT_ROOT'].$filePath, $filePath);
+            unlink($_SERVER['DOCUMENT_ROOT'].$filePath);
+        }
+
         $save = $this->repo->store($params);
 
         $this->generateWave($file);
@@ -511,12 +521,6 @@ class MediaItemController extends CustomController
         $params = $this->app->params();
         $item = $this->repo->find($params['media_id']);
 		
-        $service = new GoogleStorageService();
-        $upload = $service->uploadFileToGCS($_SERVER['DOCUMENT_ROOT'].$item->main_file->path, $item->main_file->path);
-
-        print_r($upload);
-        return;
-
         try {
 
             $files = $this->app->request()->files;
