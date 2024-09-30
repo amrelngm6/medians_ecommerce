@@ -422,7 +422,7 @@ class MediaController extends CustomController
 		}
 	
 		// You can also inspect the user-agent for clues
-		if (stripos($userAgent, 'Mozilla') !== false || stripos($userAgent, 'Chrome') !== false) {
+		if (stripos($userAgent, 'Mozilla') == false || stripos($userAgent, 'Chrome') == false) {
 			exit; // Assume embedded access
 		}
 	
