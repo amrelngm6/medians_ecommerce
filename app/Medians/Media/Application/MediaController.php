@@ -415,16 +415,22 @@ class MediaController extends CustomController
 	
 	function isDirectAccess() {
 		// Check the user-agent
-		$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+		$range = $_SERVER['HTTP_RANGE'] ?? '';
 		$referer = $_SERVER['HTTP_REFERER'] ?? '';
+		$srcFetchSite = $_SERVER['HTTP_SEC_FETCH_SITE'] ?? '';
 	
 		// Check if there's a referrer (usually means it's embedded in an HTML page)
 		if (empty($referer)) {
 			exit; // Assume embedded access
 		}
+
+		// Check if there's a referrer (usually means it's embedded in an HTML page)
+		if ($srcFetchSite != 'same-origin') {
+			exit; // Assume embedded access
+		}
 	
-		// You can also inspect the user-agent for clues
-		if (stripos($userAgent, 'Mozilla') == false || stripos($userAgent, 'Chrome') == false) {
+		// Check if there's a HTTP_RANGE header parameter
+		if (empty($range)) {
 			exit; // Assume embedded access
 		}
 	
