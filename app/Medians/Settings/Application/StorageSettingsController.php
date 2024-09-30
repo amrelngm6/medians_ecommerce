@@ -62,7 +62,7 @@ class StorageSettingsController extends CustomController
 			'load_vue' => true,
 			'setting' => $this->getAll(),
 			'fillable' => $this->fillable(),
-			'title' => translate('Frontend Settings'),
+			'title' => translate('Storage Settings'),
 	    ]);
 	} 
 
