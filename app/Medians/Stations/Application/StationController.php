@@ -85,6 +85,7 @@ class StationController extends CustomController
 
 	public function store() 
 	{	
+		$this->app = new \config\APP;
 
 		$params = $this->app->params();
 
