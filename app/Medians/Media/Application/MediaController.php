@@ -145,8 +145,8 @@ class MediaController extends CustomController
 			$startTime = $this->app->request()->get('s');
 
 			return file_exists($tmpFilePath) 
-			? $this->streamAudioFromTimeRange($tmpFilePath, $startTime, $settings['station_media_chunk'] ?? 60)
-			: $this->stream_external($service->generateSignedUrl($item->main_file->path), $tmpFilePath, $startTime, $settings['station_media_chunk'] ?? 60);
+			? $this->streamAudioFromTimeRange($tmpFilePath, $startTime, 0)
+			: $this->stream_external($service->generateSignedUrl($item->main_file->path), $tmpFilePath, $startTime, 0);
 			// $upload = file_exists($_SERVER['DOCUMENT_ROOT'] . $filepath) ? null : file_put_contents($_SERVER['DOCUMENT_ROOT'] . $filepath, file_get_contents($service->generateSignedUrl($item->main_file->path)));
 		}
 
