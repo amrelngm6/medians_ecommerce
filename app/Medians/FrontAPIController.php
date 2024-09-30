@@ -139,7 +139,7 @@ class FrontAPIController extends CustomController
 				case 'Station.create':
 					$return = (new Stations\Application\StationController)->store();
 					break;
-					
+						
 				case 'StationMedia.create':
 					$return = (new Stations\Application\StationMediaController)->store();
 					break;
@@ -212,6 +212,11 @@ class FrontAPIController extends CustomController
 				$controller = new Comments\Application\CommentController;
 				break;
 			
+			case 'Station.update':
+				$controller = new Stations\Application\StationController;
+				break;
+
+
 
 		}
 
