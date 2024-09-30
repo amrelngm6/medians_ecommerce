@@ -310,7 +310,7 @@ class MediaController extends CustomController
 		exit;
 	}
 	
-	public function stream_external($fileUrl, $startTimeInSeconds = 0,$streamDuration = 60)
+	public function stream_external($fileUrl, $startTimeInSeconds = 0, $streamDuration = 60)
 	{
 		
 		$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($fileUrl).'.mp3';
