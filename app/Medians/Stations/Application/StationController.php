@@ -113,7 +113,7 @@ class StationController extends CustomController
 				$returnData = $this->repo->store($params);
 
 				return $returnData
-				? array('success'=>1, 'result'=>translate('Added'), 'redirect'=>'/station/edit/'.$returnData->station_id)
+				? array('success'=>1, 'result'=>translate('Added'), 'redirect'=>'/stations/edit/'.$returnData->station_id)
 				: array('success'=>0, 'result'=>'Error', 'error'=>1);
 	
 			} catch (\Throwable $th) {
@@ -172,6 +172,13 @@ class StationController extends CustomController
 
 		$params = $this->app->params();
 
+		foreach ($this->app->request()->files as $key => $value) {
+			if ($value) {
+				$picture = $this->mediaRepo->upload($value);
+				$params['picture'] = $this->mediaRepo->_dir.$picture;
+			}
+		}   
+		
         try {
 
         	$params['status'] = !empty($params['status']) ? $params['status'] : null;
@@ -289,7 +296,7 @@ class StationController extends CustomController
     }
 
 
-	    /**
+	/**
      * Upload Audio Book page for frontend
      */
     public function station_upload_page()
@@ -306,6 +313,28 @@ class StationController extends CustomController
                 'app' => $this->app,
                 'type' => 'station',
                 'layout' => isset($this->app->customer->customer_id) ? 'station/upload' : 'signin'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
+    /**
+     * Station page for frontend
+     */
+    public function station_edit($station_id)
+    {
+		$this->app = new \config\APP;
+		
+		$settings = $this->app->SystemSetting();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+				'item' => $this->repo->find($station_id),
+                'layout' => 'station/edit'
             ], 'output'));
             
 		} catch (\Exception $e) {
