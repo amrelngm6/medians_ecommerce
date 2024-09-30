@@ -124,7 +124,7 @@ class MediaController extends CustomController
 	public function stream_audio()
 	{
 
-		$this->isDirectAccess();
+		// $this->isDirectAccess();
 
 		print_r($_SERVER);
 		return;
