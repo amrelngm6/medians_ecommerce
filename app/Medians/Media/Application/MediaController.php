@@ -375,61 +375,77 @@ class MediaController extends CustomController
 	}
 
 
-	function streamVideo() {
+	function streamVideo($startTimeInSeconds = 0, $streamDuration = 20) {
 
 		$this->app = new \config\APP;
 		$video = $this->app->request()->get('video');
-		$startSec = 0;
-		$endSec = 5;
 
 		$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/'.$video;
 
-		// Check if file exists
-		if (!file_exists($filePath)) {
-			header("HTTP/1.1 404 Not Found");
-			exit;
-		}
-		
-		$ffprobe = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffprobe'; 
-		$fileSize = filesize($filePath);
-		$fp = fopen($filePath, 'rb');
-		$mime = mime_content_type($filePath);
-		$duration = shell_exec("$ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 " . escapeshellarg($filePath));
-	
-		if ($duration) {
-			$duration = floatval($duration);
-			$startByte = ($startSec / $duration) * $fileSize;
-			$endByte = ($endSec / $duration) * $fileSize;
-	
-			$start = floor($startByte);
-			$end = floor($endByte);
-			$length = $end - $start + 1;
-	
-			header('Content-Type: ' . $mime);
-			header('Content-Length: ' . $length);
-			header("Content-Range: bytes $start-$end/$fileSize");
-			header('Accept-Ranges: bytes');
-			header('HTTP/1.1 206 Partial Content');
-	
-			fseek($fp, $start);
-	
-			$bufferSize = 1024 * 8; // 8KB buffer
-			while (!feof($fp) && ($pos = ftell($fp)) <= $end) {
-				if ($pos + $bufferSize > $end) {
-					$bufferSize = $end - $pos + 1;
-				}
-				echo fread($fp, $bufferSize);
-				flush();
-			}
-	
-			fclose($fp);
-		} else {
-			header("HTTP/1.1 500 Internal Server Error");
-			exit;
-		}
-				
-	}
 
+		if (!file_exists($filePath)) {
+			header("HTTP/1.0 404 Not Found");
+			return;
+		}
+	
+			// Analyze the file using getID3 for duration and bitrate
+			$getID3 = new \getID3;
+			$fileInfo = $getID3->analyze($filePath);
+		
+			// Get total duration and bitrate
+			$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;
+			$bitRate = !empty($fileInfo['bitrate']) ? $fileInfo['bitrate'] : 0; // Bitrate in bits per second
+			$fileSize = $fileInfo['filesize']; // File size in bytes
+		
+			// Calculate byte offset for the start and end time based on the stream duration
+			$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileSize);
+			$endByte = (int)(($streamDuration / $totalDuration) * $fileSize) + $startByte;
+		
+			// Open the file
+			$fm = @fopen($filePath, 'rb');
+			if (!$fm) {
+				header("HTTP/1.0 505 Internal server error");
+				return;
+			}
+		
+			// Prevent session blocking and allow streaming after user disconnect
+			session_write_close();
+			ignore_user_abort(true); // Continue streaming even if the user disconnects
+		
+			// Seek to the start byte
+			fseek($fm, $startByte);
+		
+			$contentLength = $endByte - $startByte;
+		
+			// Set appropriate headers for video content
+			$mimeType = !empty($fileInfo['mime_type']) ? $fileInfo['mime_type'] : "video/mp4";
+			header("Content-Type: $mimeType");
+			header("Accept-Ranges: bytes");
+			header("Content-Length: " . $contentLength);
+			header("Content-Range: bytes $startByte-$endByte/$fileSize");
+			header("X-Pad: avoid browser bug");
+			header("Cache-Control: no-cache");
+		
+			// Stream the file in chunks (buffer size: 8KB)
+			$bufferSize = 8192;
+			$bytesSent = 0;
+			while (!feof($fm) && ($bytesSent < $contentLength)) {
+				$buffer = fread($fm, $bufferSize);
+				echo $buffer;
+				flush(); // Ensure immediate delivery to the client
+				$bytesSent += strlen($buffer);
+		
+				// Stop when we have sent enough bytes for the specified duration
+				if ($bytesSent >= $contentLength) {
+					break;
+				}
+			}
+		
+			fclose($fm);
+			exit;
+		
+	}
+	
 	public function assets()
 	{
 		$this->app = new \config\APP;

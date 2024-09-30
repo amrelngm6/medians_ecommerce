@@ -509,7 +509,14 @@ class MediaItemController extends CustomController
 		$this->app = new \config\APP;
 
         $params = $this->app->params();
+        $item = $this->repo->find($params['media_id']);
 		
+        $service = new GoogleStorageService();
+        $upload = $service->uploadFileToGCS($_SERVER['DOCUMENT_ROOT'].$item->main_file->path, $item->main_file->path);
+
+        print_r($upload);
+        return;
+
         try {
 
             $files = $this->app->request()->files;
