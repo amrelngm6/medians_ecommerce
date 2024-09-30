@@ -289,7 +289,6 @@ class AudiobookController extends CustomController
 			
 			$customer = $this->app->customer_auth();
 
-			$params['status'] = isset($params['status']) ? 'on' : null;
 
             foreach ($this->app->request()->files as $key => $value) {
                 $file = $this->mediaRepo->upload($value);
@@ -299,9 +298,10 @@ class AudiobookController extends CustomController
                 $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
 
                 $params['picture'] = $this->mediaRepo->_dir.$file;
-                $params['author_id'] = $this->app->customer_id() ?? 0;
-    			$params['status'] = isset($params['status']) ? 'on' : null;
             }
+
+            $params['author_id'] = $this->app->customer_id() ?? 0;
+			$params['status'] = isset($params['status']) ? 'on' : null;
 
 			try {
 

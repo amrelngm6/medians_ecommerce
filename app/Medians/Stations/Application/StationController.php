@@ -83,26 +83,43 @@ class StationController extends CustomController
 	}
 
 
-
 	public function store() 
-	{
-
-		$this->app = new \config\APP;
+	{	
 
 		$params = $this->app->params();
 
         try {	
+			
+			$customer = $this->app->customer_auth();
 
-        	$this->app->customer_auth();
-        	$this->validate($params);
-			$params['customer_id'] = $this->app->customer->customer_id;
+			$params['status'] = isset($params['status']) ? 'on' : null;
 
-            $returnData = (!empty($this->repo->store($params))) 
-            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
-            : array('success'=>0, 'result'=>'Error', 'error'=>1);
+            foreach ($this->app->request()->files as $key => $value) {
+                $file = $this->mediaRepo->upload($value);
+        
+                $getID3 = new getID3;
+                // Analyze file
+                $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
 
-        } catch (\Exception $e) {
-        	return array('result'=>$e->getMessage(), 'error'=>1);
+                $params['picture'] = $this->mediaRepo->_dir.$file;
+            }
+
+			$params['customer_id'] = $this->app->customer_id() ?? 0;
+
+			try {
+
+				$returnData = $this->repo->store($params);
+
+				return $returnData
+				? array('success'=>1, 'result'=>translate('Added'), 'redirect'=>'/station/edit/'.$returnData->station_id)
+				: array('success'=>0, 'result'=>'Error', 'error'=>1);
+	
+			} catch (\Throwable $th) {
+				return array('error'=>$th->getMessage());
+			}
+
+        } catch (Exception $e) {
+        	return array('error'=>$e->getMessage());
         }
 
 		return $returnData;

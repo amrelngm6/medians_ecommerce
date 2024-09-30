@@ -92,18 +92,6 @@ class FrontAPIController extends CustomController
 					return printResponse((new Media\Application\AudiobookController())->store());
 					break;
 	
-				case 'Wishlist.create':
-					return printResponse((new Cart\Application\WishlistController())->store());
-					break;
-	
-				case 'Compare.create':
-					return printResponse((new Cart\Application\CompareController())->store());
-					break;
-		
-				case 'Order.create':
-					return printResponse((new Orders\Application\OrderController())->store());
-					break;
-	
 				case 'HelpMessageComment.create':
 					$return =  (new Help\Application\HelpMessageController())->storeComment(); 
 					break;
@@ -140,10 +128,6 @@ class FrontAPIController extends CustomController
 					$return = (new Likes\Application\LikeController)->likeStation();
 					break;
 		
-				case 'Transaction.verify':
-					$return = (new Transactions\Application\TransactionController)->verifyTransaction();
-					break;
-		
 				case 'Comment.create':
 					return (new Comments\Application\CommentController)->store();
 					break;
@@ -152,6 +136,10 @@ class FrontAPIController extends CustomController
 					$return = (new Followers\Application\FollowerController)->store();
 					break;
 		
+				case 'Station.create':
+					$return = (new Stations\Application\StationController)->store();
+					break;
+					
 				case 'StationMedia.create':
 					$return = (new Stations\Application\StationMediaController)->store();
 					break;
