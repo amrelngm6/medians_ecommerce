@@ -275,6 +275,8 @@ class StationController extends CustomController
      */
     public function station_upload_page()
     {
+		$this->app = new \config\APP;
+
 		$settings = $this->app->SystemSetting();
 
         $this->app->customer_auth();
