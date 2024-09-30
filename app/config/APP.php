@@ -364,6 +364,7 @@ class APP
 			array( 'title'=>translate('Settings'),  'icon'=>'tool', 'link'=>'#setting', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=> 'SystemSettings.index', 'title'=> translate('System Settings'),  'icon'=>'tool', 'link'=>'admin/system_settings', 'component'=>'system_settings'),
+				array('permission'=> 'StorageSettings.index', 'title'=> translate('Storage settings'),  'icon'=>'tool', 'link'=>'admin/storage_settings', 'component'=>'system_settings'),
 			]
 			),
 			
