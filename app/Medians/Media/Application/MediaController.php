@@ -124,6 +124,8 @@ class MediaController extends CustomController
 	public function stream_audio()
 	{
 		$this->app = new \config\APP;
+		$settings = $this->app->SystemSetting();
+
 		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/' . $this->app->request()->get('audio'))) {
 			$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
 		} elseif (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/' . $this->app->request()->get('audio')))
@@ -139,6 +141,8 @@ class MediaController extends CustomController
 			$filepath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
 			
 			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($filePath).'.mp3';
+
+			$startTime = $this->app->request()->get('s');
 
 			return file_exists($tmpFilePath) 
 			? $this->streamAudioFromTimeRange($tmpFilePath, $startTime, $settings['station_media_chunk'] ?? 60)
