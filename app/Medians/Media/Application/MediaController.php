@@ -126,7 +126,8 @@ class MediaController extends CustomController
 
 		$this->isDirectAccess();
 
-		
+		print_r($_SERVER);
+		return;
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
 
@@ -412,7 +413,6 @@ class MediaController extends CustomController
 	}
 	
 	function isDirectAccess() {
-		print_r($_SERVER);
 		// Check the user-agent
 		$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
 		$referer = $_SERVER['HTTP_REFERER'] ?? '';
