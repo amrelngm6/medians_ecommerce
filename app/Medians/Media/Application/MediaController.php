@@ -336,12 +336,12 @@ class MediaController extends CustomController
 	
 		
 		$getID3 = new getID3;
-		if (substr($params['media_path'], 0, 4) == 'http' ) {
-			
-			$tempFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($params['media_path']).'.mp3';
-			file_put_contents($tempFilePath, fopen($params['media_path'], 'r'));
-			$filePath = $tempFilePath;
+		$tempFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($fileUrl).'.mp3';
+		if (!file_exists($tempFilePath)) {
+			$saveTmpFile = file_put_contents($tempFilePath, fopen($fileUrl, 'r'));
 		}
+		$filePath = $tempFilePath;
+
 		$fileInfo = $getID3->analyze($filePath);
 		// Analyze file metadata (using getID3 or another library if needed)
 		// Here we assume you know the total duration and bitrate
