@@ -276,6 +276,9 @@ class StationController extends CustomController
      */
     public function studio()
     {
+
+		$this->app = new \config\APP;
+
 		$settings = $this->app->SystemSetting();
 
         $customer = $this->app->customer_auth();
