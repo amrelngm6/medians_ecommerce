@@ -335,12 +335,13 @@ class MediaController extends CustomController
 		$fileSize = isset($headers['Content-Length']) ? (int)$headers['Content-Length'] : 0;
 	
 		$getID3 = new getID3;
-		$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($fileUrl).'.mp3';
-		if (!file_exists($filePath)) {
-			$saveTmpFile = file_put_contents($filePath, fopen($fileUrl, 'r'));
+		$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($fileUrl).'.mp3';
+		if (!file_exists($tmpFilePath)) {
+			$saveTmpFile = file_put_contents($tmpFilePath, fopen($fileUrl, 'r'));
 		}
 
-		$fileInfo = $getID3->analyze($filePath);
+		$fileInfo = $getID3->analyze($tmpFilePath);
+		$deleteTempFile = unlink($tmpFilePath);
 		// Analyze file metadata (using getID3 or another library if needed)
 		// Here we assume you know the total duration and bitrate
 		$totalDuration = round($fileInfo['playtime_seconds'], 0); // Example duration in seconds (this can be extracted with getID3 for local files)
