@@ -138,8 +138,8 @@ class MediaController extends CustomController
 		{
 			$service = new GoogleStorageService();
 			$filepath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
-			$upload = file_exists($_SERVER['DOCUMENT_ROOT'] . $filepath) ? null : file_put_contents($_SERVER['DOCUMENT_ROOT'] . $filepath, file_get_contents($service->generateSignedUrl($item->main_file->path)));
-			return $this->stream_external($service->generateSignedUrl($item->main_file->path, 30));
+			// $upload = file_exists($_SERVER['DOCUMENT_ROOT'] . $filepath) ? null : file_put_contents($_SERVER['DOCUMENT_ROOT'] . $filepath, file_get_contents($service->generateSignedUrl($item->main_file->path)));
+			return $this->stream_external($service->generateSignedUrl($item->main_file->path), 30);
 		}
 
 		if ($item)
