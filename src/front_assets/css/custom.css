@@ -1099,6 +1099,7 @@ Down
 .hs__arrows {
   align-self: center;
 }
+.dark .hs__arrows .arrow.disabled:before,
 .hs__arrows .arrow:before {
   content: "";
   display: inline-block;
@@ -1111,6 +1112,7 @@ Down
   height: 12px;
   cursor: pointer;
 }
+.dark .hs__arrows .arrow:not(.disabled):before,
 .hs__arrows .arrow.disabled:before {
   filter: brightness(5);
 }
