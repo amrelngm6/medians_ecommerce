@@ -404,32 +404,32 @@ class MediaItemController extends CustomController
         {
             $tempFilePath = '/uploads/audio/tmp/'.md5($params['link']).'.mp3';
 			file_put_contents($_SERVER['DOCUMENT_ROOT'].$tempFilePath, fopen($params['link'], 'r'));
-            return $this->store($params, $tempFilePath);
+            $save = $this->store($params, $tempFilePath);
+        } else {
+                
+            foreach ($request->files as $key => $value) {
+                $file = $this->mediaRepo->upload($value, 'audio', true);
+                
+                $getID3 = new getID3;
+                // Analyze file
+                $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
+
+                $params = [];
+                $params['name'] = $value->getClientOriginalName();
+                $params['description'] = $value->getClientOriginalName();
+                $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
+                $params['author_id'] = $this->app->customer_id() ?? 0;
+                if (isset($fileInfo['playtime_seconds']))
+                {
+                    $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+                }
+                
+                $save = $this->repo->store($params);
+
+                $this->generateWave($file);
+            }
         }
 
-
-
-		foreach ($request->files as $key => $value) {
-			$file = $this->mediaRepo->upload($value, 'audio', true);
-            
-            $getID3 = new getID3;
-            // Analyze file
-            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
-
-            $params = [];
-            $params['name'] = $value->getClientOriginalName();
-            $params['description'] = $value->getClientOriginalName();
-            $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
-            $params['author_id'] = $this->app->customer_id() ?? 0;
-            if (isset($fileInfo['playtime_seconds']))
-            {
-                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-            }
-            
-            $save = $this->repo->store($params);
-
-            $this->generateWave($file);
-		}
 
         try {
             
