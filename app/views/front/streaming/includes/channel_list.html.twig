@@ -4,6 +4,5 @@
                                     <a href="/artist/{{artist.customer_id}}" class="ajax-load lg:text-base text-xs block px-1 lg:font-semibold pt-4 pb-1 "> {{artist.name}}</a>
                                     <span class="px-1 relative text-gray-500 text-opacity-75 lg:text-sm text-xs font-normal  tracking-tight">{{lang.translate('Followers')}}:  {{artist.followers|length}}</span>
                                     <span class="px-1 relative text-gray-500 text-opacity-75 lg:text-sm text-xs font-normal  tracking-tight">{{lang.translate('Items')}}:  {{artist.audio_items|length}}</span>
-
                                 </div>  
                         {% endfor %}

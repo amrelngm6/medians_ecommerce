@@ -122,7 +122,7 @@
 		{% endif %}
 
 		{% if item.likes|length %}
-		<div class="w-full 	pt-6" id="slide-audiobooks-items" >
+		<div class="w-full 	pt-6 hidden" id="slide-audiobooks-items" >
             <div class="hs__wrapper" x-data="{is_slide: false}" data-count="4">
             
                 <div class=" w-full flex gap-4 text-primary pb-10">
@@ -178,7 +178,7 @@
 
 		{% if item.likes|length %}
         
-		<div class="w-full 	pt-10" id="slide-liked-books" data-count="3">
+		<div class="w-full 	pt-10 hidden" id="slide-liked-books" data-count="3">
             <div class="hs__wrapper" x-data="{is_slide: false}">
             
                 <div class=" w-full flex gap-4 text-primary pb-10">
