@@ -424,8 +424,6 @@ class MediaController extends CustomController
 			return;
 		}
 
-		echo 1;
-		return;
 
 		// Check the user-agent
 		$range = $_SERVER['HTTP_RANGE'] ?? '';
