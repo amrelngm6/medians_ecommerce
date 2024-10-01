@@ -473,6 +473,7 @@ class MediaItemController extends CustomController
             $upload ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
         }
 
+        return $save;
 
 	}
 
