@@ -108,7 +108,7 @@
 
                 </div>
                 <ul class="hs" >
-					{% set list = {'items' : item.media_items} %}
+					{% set list = {'items' : item.audio_items} %}
 					{% for media_item in list.items %}
                     <li class="hs__item  max-w-[250px]"> 
 						{% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
