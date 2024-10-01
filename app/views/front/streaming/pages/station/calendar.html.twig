@@ -51,7 +51,7 @@
             </div>
 
             <div class="w-full pt-10">
-                <div class="w-full bg-white p-8 rounded-xl shadow-md" id='calendar' style="width: calc(100% - 60px); max-height:calc(100vh - 50px)"></div>
+                <div class="w-full bg-white p-8 rounded-xl shadow-md dark:bg-gray-900 dark:text-gray-400" id='calendar' style="width: calc(100% - 60px); max-height:calc(100vh - 50px)"></div>
             </div>
 
         </div>
@@ -74,6 +74,14 @@
     border: none !important;
   
 } 
+.dark .fc-day-today {
+    background: #111827 !important;
+}
+.dark .fc-theme-standard td,.dark .fc-theme-standard th ,
+.dark .fc .fc-scrollgrid-liquid
+{
+    border-color: #1f2937;
+}
     </style>
     <script>
 
