@@ -531,6 +531,7 @@ class MediaItemController extends CustomController
             
             
             $item = $this->repo->find($params['media_id']);
+            $params['name'] = sanitizeInput($params['name'], true);
             
             $getID3 = new getID3;
 

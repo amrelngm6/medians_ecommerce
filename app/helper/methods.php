@@ -306,7 +306,7 @@ function curLng()
  * Secure the inputs from XSS vulneribility
  * Save from cyber attacks
  */
-function sanitizeInput($input) {
+function sanitizeInput($input, $ignore = null) {
     global $app;
 
     if (is_object($input)) {
@@ -322,6 +322,7 @@ function sanitizeInput($input) {
     } else if (gettype($input) =='string' && in_array(substr($input,0,1), ['{', '['])   ) {
         return sanitizeInput(json_decode($input));
     } else {
-        return isset($app->auth()->id) ? $input : str_replace(["&lt;", "&quot", "&gt;"], "",  htmlspecialchars($input, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+        // return (!$ignore && isset($app->auth()->id)) ? $input : 
+        return str_replace(["&lt;", "&quot", "&gt;", "&#039;", "&amp;apos;"], "",  htmlspecialchars($input, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
     }
 }
