@@ -461,16 +461,19 @@ class MediaItemController extends CustomController
             $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
         }
         
-        if ($settings['default_storage'] == 'google')
-        {
-            $service = new GoogleStorageService();
-            $upload = $service->uploadFileToGCS($_SERVER['DOCUMENT_ROOT'].$filePath, $filePath);
-            $upload ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
-        }
 
         $save = $this->repo->store($params);
 
         $this->generateWave($file);
+
+        if ($settings['default_storage'] == 'google')
+        {
+            $service = new GoogleStorageService();
+            $upload = $service->uploadFileToGCS($_SERVER['DOCUMENT_ROOT'].$filePath, $filePath);
+        }
+
+        $upload ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
+
 	}
 
 
