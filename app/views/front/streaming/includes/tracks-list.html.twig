@@ -3,7 +3,7 @@
                                             <div class="py-1 gap-4 flex text-primary transition " >
                                                 
                                                 <img src="/stream?thumbnail=300&image={{media_item.picture_name}}" width="48" height="48" class="rounded-lg" />
-                                                <div class="slide__audio js-audio start-player" id="media-{{media_item.media_id}}" data-list="{{list.items|json_encode}}" data-index="{{loop.index - 1}}">
+                                                <div class="slide__audio js-audio start-player" id="media-{{media_item.media_id}}" data-list="{{list.items|column('player_object')|json_encode}}" data-index="{{loop.index - 1}}">
                                                     <div class="slide__audio-player"  data-title="{{media_item.name}}" data-poster="/stream?thumbnail=300&image={{media_item.picture_name}}" data-artist="{{media_item.artist.name}}" data-path="/stream_audio?audio={{media_item.main_file.filename}}" data-id="{{media_item.media_id}}" data-wave-id="wave-{{media_item.media_id}}" data-wave-overlay="wave-overlay{{media_item.media_id}}">
                                                     </div>
                                                     {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}

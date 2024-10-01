@@ -50,12 +50,13 @@ class MediaItem extends CustomModel
 
 	public function getPlayerObjectAttribute() 
 	{
-		// return [
-		// 	'title' => $this->name,
-		// 	'filename' => $this->main_file->filename,
-		// 	'artist' => $this->artist->name,
-		// 	'poster' => $this->picture_name,
-		// ];
+		$filename = isset($this->filepath->path) ? explode('/', $this->filepath->path) : '';
+		return [
+			'title' => $this->name,
+			'file' => $filename ? end($filename) : '',
+			'artist' => $this->artist ? $this->artist->name : '',
+			'poster' => $this->picture_name ?? '',
+		];
 	}
 
 	public function getContentLangsAttribute()
@@ -119,6 +120,11 @@ class MediaItem extends CustomModel
 	public function main_file() 
 	{
 		return $this->hasOne(MediaFile::class , 'media_id', 'media_id');	
+	}
+	
+	public function filepath() 
+	{
+		return $this->hasOne(MediaFile::class , 'media_id', 'media_id')->select('path');	
 	}
 	
 	public function related($limit = null) 
