@@ -142,7 +142,7 @@ class MediaController extends CustomController
 		{
 			$service = new GoogleStorageService();
 			
-			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($filePath).'.mp3';
+			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'] . $filepath;
 
 			$startTime = $this->app->request()->get('s');
 
