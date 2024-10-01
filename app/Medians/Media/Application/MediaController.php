@@ -137,8 +137,7 @@ class MediaController extends CustomController
 		}
 
 		$item = $this->mediaRepo->findByFile($filepath);
-		print_r($item);
-		
+
 		if (isset($item->main_file->storage) && $item->main_file->storage == 'google')
 		{
 			$service = new GoogleStorageService();
@@ -423,8 +422,6 @@ class MediaController extends CustomController
 		{
 			return;
 		}
-		return;
-
 
 		// Check the user-agent
 		$range = $_SERVER['HTTP_RANGE'] ?? '';
