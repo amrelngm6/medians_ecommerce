@@ -12,7 +12,7 @@
                         </label>
                         {% if item.type == 'audio' %}        
                         <div class="w-full">
-                            <a href="/track/{{item.media_id}}" x-text="title"></a>
+                            <a class="ajax-load" href="/track/{{item.media_id}}" x-text="title"></a>
                             {% include 'views/front/'~app.SystemSetting.template ~'/single-player.html.twig' %}        
                         </div>
                         {% endif %}        
