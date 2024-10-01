@@ -437,6 +437,11 @@ class VideoController extends CustomController
         $item = $this->repo->find($params['media_id']);
 		
         try {
+            
+
+            $videoPath = $_SERVER['DOCUMENT_ROOT'].$item->main_file->path;
+            $outputDir = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->videos_dir. 'screenshots/';
+            $this->generateScreenshots($videoPath, $outputDir);
 
             $item = $this->repo->find($params['media_id']);
         
@@ -469,5 +474,55 @@ class VideoController extends CustomController
         }
 	}
 
+
+    function generateScreenshots($videoPath, $outputDir, $screenshotCount = 10) {
+
+        $duration = $this->getVideoDuration($videoPath);
+    
+        if ($duration <= 0) {
+            die("Unable to get video duration.");
+        }
+    
+        // Create output directory if it doesn't exist
+        if (!file_exists($outputDir)) {
+            mkdir($outputDir, 0777, true);
+        }
+    
+        // Calculate interval between each screenshot (every 10% of the duration)
+        $interval = $duration / $screenshotCount;
+    
+        for ($i = 1; $i <= $screenshotCount; $i++) {
+            $time = $i * $interval;
+    
+            // Format time into hh:mm:ss for ffmpeg
+            $formattedTime = gmdate("H:i:s", $time);
+    
+            $outputFile = $outputDir . "/screenshot_" . $i . ".jpg";
+    
+            // Command to capture screenshot at the specific time
+            $command = "ffmpeg -ss $formattedTime -i " . escapeshellarg($videoPath) . " -vframes 1 -q:v 2 " . escapeshellarg($outputFile) . " 2>&1";
+    
+            // Execute the command
+            shell_exec($command);
+        }
+    }
+
+    function getVideoDuration($videoPath) {
+        $command = "ffmpeg -i " . escapeshellarg($videoPath) . " 2>&1";
+        $output = shell_exec($command);
+    
+        preg_match('/Duration: (\d+):(\d+):(\d+\.\d+)/', $output, $matches);
+        
+        if (!empty($matches)) {
+            $hours = $matches[1];
+            $minutes = $matches[2];
+            $seconds = $matches[3];
+            
+            return ($hours * 3600) + ($minutes * 60) + $seconds;
+        }
+    
+        return 0;  // Return 0 if unable to get the duration
+    }
+    
 
 }

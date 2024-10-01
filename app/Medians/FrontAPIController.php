@@ -198,6 +198,10 @@ class FrontAPIController extends CustomController
 			case 'Audiobook.update':
 				$controller = new Media\Application\AudiobookController;
 				break;
+
+			case 'Video.update':
+				$controller = new Media\Application\VideoController;
+				break;
 			
 			case 'Audiobook.upload_file':
 				return printResponse((new Media\Application\AudiobookController)->upload());
