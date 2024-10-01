@@ -419,6 +419,7 @@ class StationController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
 				'items' => $list['items'],
+				'list' => $list,
                 'layout' => 'station/stations'
             ], 'output'));
             
