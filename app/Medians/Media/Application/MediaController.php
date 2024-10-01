@@ -418,6 +418,7 @@ class MediaController extends CustomController
 		
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
+		return;
 
 		if (!empty($settings['direct_link_streaming']))
 		{
