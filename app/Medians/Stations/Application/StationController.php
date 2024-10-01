@@ -409,12 +409,16 @@ class StationController extends CustomController
 		$this->app = new \config\APP;
 
 		$settings = $this->app->SystemSetting();
+        $params = $this->app->params();
+
+        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $list = $this->repo->getWithFilter($params);
 
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-				'items' => $this->repo->getTop(20),
+				'items' => $list['items'],
                 'layout' => 'station/stations'
             ], 'output'));
             
