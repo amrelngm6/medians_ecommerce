@@ -449,7 +449,7 @@ class MediaItemController extends CustomController
             $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
 
             $params['files'] = [ ['type'=> 'audio', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ];
-            // $params['author_id'] = $this->app->customer_id() ?? 0;
+            $params['author_id'] = $this->app->customer_id() ?? 0;
             
             if (isset($fileInfo['playtime_seconds']))
             {
@@ -469,6 +469,7 @@ class MediaItemController extends CustomController
                 $outputImagePath = $_SERVER['DOCUMENT_ROOT'].$params['picture'];
                 file_put_contents($outputImagePath, $imageData);
             }
+
 
             $save = $this->repo->store($params);
 
@@ -539,8 +540,6 @@ class MediaItemController extends CustomController
                 $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
             }
         
-            // $params['author_id'] = $this->app->customer_auth()->customer_id ?? 0;
-
             if ($this->repo->update($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
