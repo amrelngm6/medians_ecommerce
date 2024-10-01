@@ -409,7 +409,7 @@ class MediaItemController extends CustomController
                 $params['description'] = '';
                 $tempFilePath = '/uploads/audio/tmp/'.md5($params['link']).'.mp3';
                 file_put_contents($_SERVER['DOCUMENT_ROOT'].$tempFilePath, fopen($params['link'], 'r'));
-                $save = $this->store($params, $tempFilePath);
+                $save = $this->store($params, $tempFilePath, $settings);
 
             } else {
                     
@@ -421,7 +421,7 @@ class MediaItemController extends CustomController
                         $params['name'] = $value->getClientOriginalName();
                         $params['description'] = $value->getClientOriginalName();
                         
-                        $save = $this->store($params, $this->mediaRepo->_dir.$file);
+                        $save = $this->store($params, $this->mediaRepo->_dir.$file, $settings);
         
                         // $this->generateWave( $this->mediaRepo->_dir.$file);
 
@@ -439,43 +439,48 @@ class MediaItemController extends CustomController
 
 
 
-    public function store($params, $filePath)
+    public function store($params, $filePath, $settings)
     {
+        try {
+            
 
-        $settings = $this->app->SystemSetting();
+            $getID3 = new getID3;
+            // Analyze file
+            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
 
-        $getID3 = new getID3;
-        // Analyze file
-        $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
+            $params['files'] = [ ['type'=> 'audio', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ];
+            // $params['author_id'] = $this->app->customer_id() ?? 0;
+            
+            if (isset($fileInfo['playtime_seconds']))
+            {
+                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+            }
 
-        $params['files'] = [ ['type'=> 'audio', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ];
-        $params['author_id'] = $this->app->customer_id() ?? 0;
-        
-        if (isset($fileInfo['playtime_seconds']))
-        {
-            $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+            if (!empty($fileInfo['id3v2']['APIC'])) {
+                $imageData = $fileInfo['id3v2']['APIC'][0]['data']; // Album art data
+                // Save the image to a file
+                $params['picture'] = $this->mediaRepo->images_dir.str_replace(['.mp3','.wav'], '.png', (str_replace(['/uploads/audio','/tmp'], '', $filePath)));
+                $outputImagePath = $_SERVER['DOCUMENT_ROOT'].$params['picture'];
+                file_put_contents($outputImagePath, $imageData);
+            }
+
+            $save = $this->repo->store($params);
+
+            // $generateWave = $this->generateWave($filePath);
+
+            if ($settings['default_storage'] == 'google')
+            {
+                $service = new GoogleStorageService();
+                $upload = $service->uploadFileToGCS($filePath);
+                // ($generateWave && $upload) ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
+            }
+
+            return $save;
+
+        } catch (\Throwable $th) {
+            throw new \Exception("Error Processing Request ".$th->getMessage(), 1);
+            
         }
-
-        if (!empty($fileInfo['id3v2']['APIC'])) {
-            $imageData = $fileInfo['id3v2']['APIC'][0]['data']; // Album art data
-            // Save the image to a file
-            $params['picture'] = $this->mediaRepo->images_dir.str_replace(['.mp3','.wav'], '.png', $filePath);
-            $outputImagePath = $_SERVER['DOCUMENT_ROOT'].$params['picture'];
-            file_put_contents($outputImagePath, $imageData);
-        }
-
-        $save = $this->repo->store($params);
-
-        // $generateWave = $this->generateWave($filePath);
-
-        if ($settings['default_storage'] == 'google')
-        {
-            $service = new GoogleStorageService();
-            $upload = $service->uploadFileToGCS($filePath);
-            // ($generateWave && $upload) ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
-        }
-
-        return $save;
 
 	}
 

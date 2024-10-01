@@ -128,6 +128,7 @@ class MediaController extends CustomController
 
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
+		$startTime = $this->app->request()->get('s') ?? 0;
 
 		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/' . $this->app->request()->get('audio'))) {
 			$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
@@ -144,7 +145,6 @@ class MediaController extends CustomController
 			
 			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'] . $filepath;
 
-			$startTime = $this->app->request()->get('s');
 
 			return file_exists($tmpFilePath) 
 			? $this->streamAudioFromTimeRange($tmpFilePath, $startTime, 0)
@@ -154,6 +154,8 @@ class MediaController extends CustomController
 
 		if ($item)
 			$item->addView();
+
+		return  $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'] . $filepath, $startTime, 0);
 
 		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
 		{
@@ -264,8 +266,6 @@ class MediaController extends CustomController
 	}
 
 	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60, $duration = 0) {
-		
-		$this->isDirectAccess();
 		
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
@@ -429,19 +429,19 @@ class MediaController extends CustomController
 		$srcFetchSite = $_SERVER['HTTP_SEC_FETCH_SITE'] ?? '';
 	
 		// Check if there's a referrer (usually means it's embedded in an HTML page)
-		if (empty($referer)) {
-			exit; // Assume embedded access
-		}
+		// if (empty($referer)) {
+		// 	exit; // Assume direct access
+		// }
 
-		// Check if there's a referrer (usually means it's embedded in an HTML page)
+		// // Check if there's a referrer (usually means it's embedded in an HTML page)
 		if ($srcFetchSite != 'same-origin') {
-			exit; // Assume embedded access
+			exit; // Assume direct access
 		}
 	
 		// Check if there's a HTTP_RANGE header parameter
-		if (empty($range)) {
-			exit; // Assume embedded access
-		}
+		// if (empty($range)) {
+		// 	exit; // Assume direct access
+		// }
 	
 		return false; // Assume embedded access
 	}
