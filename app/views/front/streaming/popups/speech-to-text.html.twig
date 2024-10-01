@@ -23,6 +23,8 @@ recognition.onresult = function (event) {
     let id = jQuery('#voice-search').data('form');
     let element = jQuery('#voice-search').data('element');
     submitForm(id, element)
+    recognition.stop();
+
 }
 
 function reset() {
