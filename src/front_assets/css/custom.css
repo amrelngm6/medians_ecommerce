@@ -1177,6 +1177,9 @@ Down
           user-select: none;
 }
 
+[data-count="2"] .hs__item {
+  flex-basis: calc(100% / 2 - (10px * 2) - (20px / 3));
+}
 [data-count="3"] .hs__item {
   flex-basis: calc(100% / 3 - (10px * 2) - (20px / 3));
 }
