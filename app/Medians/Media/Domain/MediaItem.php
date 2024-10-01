@@ -50,14 +50,14 @@ class MediaItem extends CustomModel
 
 	public function getPlayerObjectAttribute() 
 	{
-		$filename = isset($this->filepath->path) ? explode('/', $this->filepath->path) : '';
-		return [
-			'media_id' => $this->media_id,
-			'title' => $this->name,
-			'file' => $filename ? end($filename) : '',
-			'artist' => $this->artist ? $this->artist->name : '',
-			'poster' => $this->picture_name ?? '',
-		];
+		$filename = !empty($this->filepath) ? explode('/', $this->filepath->path) : '';
+		// return [
+		// 	'media_id' => $this->media_id,
+		// 	'title' => $this->name,
+		// 	'file' => $filename ? end($filename) : '',
+		// 	'artist' => $this->artist ? $this->artist->name : '',
+		// 	'poster' => $this->picture_name ?? '',
+		// ];
 	}
 
 	public function getContentLangsAttribute()

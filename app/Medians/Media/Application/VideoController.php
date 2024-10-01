@@ -338,9 +338,9 @@ class VideoController extends CustomController
             return Page404();
 
 
-        // $videoPath = $_SERVER['DOCUMENT_ROOT'].$item->main_file->path;
-        // $outputDir = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->videos_dir. 'screenshots/';
-        // $list = $this->generateScreenshots($videoPath, $outputDir);
+        $videoPath = $_SERVER['DOCUMENT_ROOT'].$item->main_file->path;
+        $outputDir = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->videos_dir. 'screenshots/';
+        $list = $this->generateScreenshots($videoPath, $outputDir);
 
 		try {
 
@@ -349,7 +349,7 @@ class VideoController extends CustomController
                 'item' => $item,
                 'genre_type' => 'genres',
                 'model_type' => 'MediaItem',
-                // 'list' => $list,
+                'list' => $list,
                 'genres' => $this->categoryRepo->getGenres(),
                 'layout' => isset($this->app->customer->customer_id) ? 'videos/edit' : 'signin'
             ], 'output'));
@@ -502,6 +502,8 @@ class VideoController extends CustomController
 
     function generateScreenshots($videoPath, $outputDir, $screenshotCount = 10) {
 
+        $path_arr = explode('/', $videoPath);
+        $fileName = str_replace(['.mp4', '.ogg', '.wmv'], '.jpg', end($path_arr));
         $duration = $this->getVideoDuration($videoPath);
     
         if ($duration <= 0) {
@@ -522,13 +524,18 @@ class VideoController extends CustomController
             // Format time into hh:mm:ss for ffmpeg
             $formattedTime = gmdate("H:i:s", intval($time));
     
-            $items[$i] = $outputFile = $outputDir . "/screenshot_" . $i . "_" . $i . ".jpg";
-    
+            $outputFile = $outputDir . "screenshot_" . $i . "_" . $fileName;
+            
+
             // Command to capture screenshot at the specific time
             $command = "ffmpeg -ss $formattedTime -i " . escapeshellarg($videoPath) . " -vframes 1 -q:v 2 " . escapeshellarg($outputFile) . " 2>&1";
     
             // Execute the command
-            shell_exec($command);
+            file_exists($outputFile) ? null : shell_exec($command);
+            if (file_exists($outputFile))
+            {
+                $items[$i] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $outputFile);
+            }
         }
 
         return $items;
