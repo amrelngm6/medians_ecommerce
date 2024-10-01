@@ -426,9 +426,6 @@ class MediaItemController extends CustomController
                         $params['description'] = $value->getClientOriginalName();
                         
                         $save = $this->store($params, $this->mediaRepo->_dir.$file, $settings);
-        
-                        // $this->generateWave( $this->mediaRepo->_dir.$file);
-
                     }
                 }
             }
@@ -463,7 +460,7 @@ class MediaItemController extends CustomController
             if (isset($fileInfo['tags']['id3v2']))
             {
                 $params['name'] = $fileInfo['tags']['id3v2']['title'][0] ?? 'Unknown Title';
-                $params['descriptiondescription'] = $fileInfo['tags']['id3v2']['comment'][0] ?? 'No Description';
+                $params['description'] = $fileInfo['tags']['id3v2']['comment'][0] ?? 'No Description';
             }
 
             if (!empty($fileInfo['id3v2']['APIC'])) {

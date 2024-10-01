@@ -273,7 +273,7 @@ class MediaItemRepository
 			$fields['path'] = $file['path'];
 			$fields['sort'] = $file['sort'] ?? 0;	
 			$fields['storage'] = $file['storage'] ?? 'local';	
-			$fields['type'] = 'audio';
+			$fields['type'] = $file['type'] ?? 'audio';	
 
 			$Model = MediaFile::firstOrCreate($fields);
 	

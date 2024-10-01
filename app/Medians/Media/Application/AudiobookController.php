@@ -248,38 +248,43 @@ class AudiobookController extends CustomController
 
 		$this->app = new \config\APP;
 
+        
         $params = $this->app->params();
         
-        $item = $this->repo->find($params['media_id']);
-
-        $mediaController = new MediaItemController();
-
-		foreach ($this->app->request()->files as $key => $value) {
-		
-            $file = $this->mediaRepo->upload($value, 'audio', true);
-            
-            $filePath = $this->mediaRepo->_dir.$file;
-
-            $getID3 = new getID3;
-
-            // Analyze file
-            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
-
-            $fileArray = [ 'type'=> 'audio', 'title' => $value->getClientOriginalName(), 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath];
-
-            $update = $this->repo->storeFile($fileArray, $item);
-
-            $mediaController->generateWave($filePath);
-		}
-
-        if ($settings['default_storage'] == 'google')
+        try 
         {
-            $service = new GoogleStorageService();
-            $upload = $service->uploadFileToGCS($filePath);
-            $upload ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
-        }
 
-        return array('success'=>1, 'result'=>translate('Uploaded'), 'reload'=>1);
+            
+            if (!empty($params['link']))
+            {
+                
+                $filePath = '/uploads/audio/tmp/'.md5($params['link']).'.mp3';
+                file_put_contents($_SERVER['DOCUMENT_ROOT'].$filePath, fopen($params['link'], 'r'));
+                $title = null;
+
+            } else {
+
+                    
+                $item = $this->repo->find($params['media_id']);
+
+                foreach ($this->app->request()->files as $key => $value) {
+                
+                    $file = $this->mediaRepo->upload($value, 'audio', true);
+                    
+                    $filePath = $this->mediaRepo->_dir.$file;
+                    
+                    $title = $value->getClientOriginalName();
+                }
+            }
+
+            $update = $this->store_chapter($filePath, $item, $title);
+
+
+            return array('success'=>1, 'result'=>translate('Uploaded'), 'reload'=>1);
+
+        } catch (\Throwable $th) {
+            throw new \Exception("Error Processing Request ".$th->getMessage(), 1);
+        }
 	}
 
 
@@ -288,6 +293,37 @@ class AudiobookController extends CustomController
 
 
 
+    
+	public function store_chapter($filePath, $item, $title)
+    {	
+        
+		$settings = $this->app->SystemSetting();
+        
+        $getID3 = new getID3;
+        // Analyze file
+
+        $file = ['type'=> 'audio', 'title' => $title ?? 'Chapter', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ;
+        $params['author_id'] = $this->app->customer_id() ?? 0;
+        
+        $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
+
+        if (isset($fileInfo['tags']['id3v2']))
+        {
+            $params['name'] = $fileInfo['tags']['id3v2']['title'][0] ?? 'Unknown Title';
+            $params['description'] = $fileInfo['tags']['id3v2']['comment'][0] ?? 'No Description';
+        }
+
+        $mediaController = new MediaItemController();
+        $mediaController->generateWave($filePath);
+
+        if ($settings['default_storage'] == 'google')
+        {
+            $service = new GoogleStorageService();
+            $upload = $service->uploadFileToGCS($_SERVER['DOCUMENT_ROOT'].$filePath, $filePath);
+        }   
+
+        return $this->repo->storeFile($file, $item);
+    }
     
 	public function store() 
 	{	
