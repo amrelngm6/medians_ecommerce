@@ -105,6 +105,8 @@ class MediaItemRepository
 						$model = $model->orderBy('media_id','DESC');
 						break;
 				}
+			} else {
+				$model = $model->orderBy('media_id','DESC');
 			}
 
 			if (!empty($params['date']))
