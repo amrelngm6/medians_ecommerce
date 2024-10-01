@@ -403,6 +403,9 @@ class MediaItemController extends CustomController
         
         if (!empty($params['link']))
         {
+            
+            $params['name'] = '';
+            $params['description'] = '';
             $tempFilePath = '/uploads/audio/tmp/'.md5($params['link']).'.mp3';
 			file_put_contents($_SERVER['DOCUMENT_ROOT'].$tempFilePath, fopen($params['link'], 'r'));
             $save = $this->store($params, $tempFilePath);
@@ -411,29 +414,10 @@ class MediaItemController extends CustomController
             foreach ($request->files as $key => $value) {
                 $file = $this->mediaRepo->upload($value, 'audio', true);
                 
-                $getID3 = new getID3;
-                // Analyze file
-                $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
-
-                $params = [];
                 $params['name'] = $value->getClientOriginalName();
                 $params['description'] = $value->getClientOriginalName();
-                $params['files'] = [ ['type'=> 'audio', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
-                $params['author_id'] = $this->app->customer_id() ?? 0;
-                if (isset($fileInfo['playtime_seconds']))
-                {
-                    $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-                }
                 
-                if (!empty($fileInfo['id3v2']['APIC'])) {
-                    $imageData = $fileInfo['id3v2']['APIC'][0]['data']; // Album art data
-                    // Save the image to a file
-                    $params['picture'] = $this->mediaRepo->images_dir.str_replace(['.mp3','.wav'], '.png', $file);
-                    $outputImagePath = $_SERVER['DOCUMENT_ROOT'].$params['picture'];
-                    file_put_contents($outputImagePath, $imageData);
-                }
-
-                $save = $this->repo->store($params);
+                $save = $this->repo->store($params, $this->mediaRepo->_dir.$file);
 
                 $this->generateWave( $this->mediaRepo->_dir.$file);
             }
@@ -461,15 +445,21 @@ class MediaItemController extends CustomController
         // Analyze file
         $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
 
-        $params['name'] = '';
-        $params['description'] = '';
         $params['files'] = [ ['type'=> 'audio', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ];
         $params['author_id'] = $this->app->customer_id() ?? 0;
+        
         if (isset($fileInfo['playtime_seconds']))
         {
             $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
         }
-        
+
+        if (!empty($fileInfo['id3v2']['APIC'])) {
+            $imageData = $fileInfo['id3v2']['APIC'][0]['data']; // Album art data
+            // Save the image to a file
+            $params['picture'] = $this->mediaRepo->images_dir.str_replace(['.mp3','.wav'], '.png', $file);
+            $outputImagePath = $_SERVER['DOCUMENT_ROOT'].$params['picture'];
+            file_put_contents($outputImagePath, $imageData);
+        }
 
         $save = $this->repo->store($params);
 
@@ -478,7 +468,7 @@ class MediaItemController extends CustomController
         if ($settings['default_storage'] == 'google')
         {
             $service = new GoogleStorageService();
-            $upload = $service->uploadFileToGCS($_SERVER['DOCUMENT_ROOT'].$filePath, $filePath);
+            $upload = $service->uploadFileToGCS($filePath);
             // ($generateWave && $upload) ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
         }
 

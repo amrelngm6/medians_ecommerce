@@ -32,9 +32,9 @@ class GoogleStorageService extends CustomController
      * @param $filePath String ( Full path ) 
      * @param $destination String  ( Path )
      */
-    function uploadFileToGCS($filePath, $destination) {
+    function uploadFileToGCS($filePath) {
 
-        $destination = str_replace($_SERVER['DOCUMENT_ROOT'], '', $destination);
+        $destination = str_replace($_SERVER['DOCUMENT_ROOT'], '', $filePath);
 
         // Get the bucket
         $bucket = $this->client->bucket($this->bucketName);

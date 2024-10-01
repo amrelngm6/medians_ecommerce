@@ -275,7 +275,7 @@ class AudiobookController extends CustomController
         if ($settings['default_storage'] == 'google')
         {
             $service = new GoogleStorageService();
-            $upload = $service->uploadFileToGCS($_SERVER['DOCUMENT_ROOT'].$filePath, $filePath);
+            $upload = $service->uploadFileToGCS($filePath);
             $upload ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
         }
 
