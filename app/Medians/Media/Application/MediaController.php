@@ -117,7 +117,7 @@ class MediaController extends CustomController
 			readfile($_SERVER['DOCUMENT_ROOT'].$filepath);
 
 		} else {
-			echo $_SERVER['DOCUMENT_ROOT'].$filepath;
+			// echo $_SERVER['DOCUMENT_ROOT'].$filepath;
 		} 
 	}
 
