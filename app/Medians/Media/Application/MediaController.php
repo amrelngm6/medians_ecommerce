@@ -415,6 +415,15 @@ class MediaController extends CustomController
 	}
 	
 	function isDirectAccess() {
+		
+		$this->app = new \config\APP;
+		$settings = $this->app->SystemSetting();
+
+		if (!empty($settings['direct_link_streaming']))
+		{
+			return;
+		}
+
 		// Check the user-agent
 		$range = $_SERVER['HTTP_RANGE'] ?? '';
 		$referer = $_SERVER['HTTP_REFERER'] ?? '';
