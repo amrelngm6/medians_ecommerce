@@ -134,12 +134,20 @@ class MediaRepository
 
 		$this->setDir($type);
 
-		$this->validate($type, $file->guessExtension());
+		$ext = $file->guessExtension();
+
+		if ($ext === 'bin') {
+			if ($mimeType === 'audio/mpeg' || $mimeType === 'audio/mp3') {
+				$ext = 'mp3'; // Force extension to 'mp3'
+			}
+		}
+
+		$this->validate($type, $ext);
 
         $originalFilename = $customName ? rand(9999,999999) : pathinfo( $file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slug($originalFilename);
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-		// $store = MediaUpload::addItem($this->_dir.$fileName, $type);
+		$store = MediaUpload::addItem($this->_dir.$fileName, $type);
 
         try {
             $move = $file->move($this->dir, $fileName);
