@@ -89,18 +89,9 @@ class SiteSettingsController extends CustomController
 				[ 'key'=> "instagram_link", 'title'=> translate('Instagram link'), 'fillable'=> true, 'column_type'=>'text' ],
 			],
 			
-			'options'=> [	
-				[ 'key'=> "allow_guest_checkout", 'title'=> translate('Allow Guest Checkout'), 'help_text'=>translate('Allow guests to complete checkout without signup'), 'fillable'=> true, 'column_type'=>'checkbox' ],
-			],
-			
-			'streaming'=> [	
-				[ 'key'=> "station_media_chunk", 'title'=> translate('Station Streaming Chunk limit'), 'help_text'=>translate('Limit in seconds to chunk the audio files for streaming at the Player'), 'fillable'=> true, 'column_type'=>'number' ],
-				[ 'key'=> "station_interval", 'title'=> translate('Station Streaming Interval'), 'help_text'=>translate('Time in seconds to Check for the active audio files for stations streaming, This option recommeded to be accurated with streaming media duration average'), 'fillable'=> true, 'column_type'=>'number' ],
-			],
-			
 			'layout_options'=> [	
 				[ 'key'=> "show_newsletter_form", 'title'=> translate('Show newsletter at footer'), 'help_text'=>translate('Show newsletter form at footer to allow users to subscribe'), 'fillable'=> true, 'column_type'=>'checkbox' ],
-				[ 'key'=> "view_items_limit", 'title'=> translate('Category page products limit'), 'help_text'=>translate('Show x products at category page as first load and each page'), 'fillable'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "view_items_limit", 'title'=> translate('Loading items limit'), 'help_text'=>translate('Show x items as first load at frontend pages'), 'fillable'=> true, 'column_type'=>'number' ],
 			],
 					
         ];
