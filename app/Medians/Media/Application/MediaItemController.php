@@ -511,10 +511,10 @@ class MediaItemController extends CustomController
             foreach ($files as $key => $value) {
                 if ($value) {
                     $picture = $this->mediaRepo->upload($value);
+                    $params['picture'] = $this->mediaRepo->_dir.$picture;
                 }
             }   
             
-            $params['picture'] = $this->mediaRepo->_dir.$picture;
             
             $item = $this->repo->find($params['media_id']);
             
