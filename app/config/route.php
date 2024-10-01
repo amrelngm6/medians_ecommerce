@@ -41,15 +41,6 @@ RouteHandler::get('/customer/reset-password-code', \Medians\Auth\Application\Cus
 RouteHandler::post('/', \Medians\Auth\Application\AuthService::class.'@userLogin');
 
 
-/**
- * Mobile API requests authorized & non-authorized  
-*/
-RouteHandler::post('/mobile_api/login', \Medians\MobileAPIController::class.'@login');
-RouteHandler::post('/mobile_api/create', \Medians\MobileAPIController::class.'@create');
-RouteHandler::post('/mobile_api/update', \Medians\MobileAPIController::class.'@update');
-RouteHandler::post('/mobile_api/delete', \Medians\MobileAPIController::class.'@delete');
-RouteHandler::post('/mobile_api', \Medians\MobileAPIController::class.'@handle');
-
 // Get requests
 RouteHandler::get('/mobile_api/(:all)', \Medians\MobileAPIController::class.'@handle');
 /**
@@ -58,32 +49,48 @@ RouteHandler::get('/mobile_api/(:all)', \Medians\MobileAPIController::class.'@ha
 RouteHandler::get('/search', \Medians\Pages\Application\PageController::class.'@search');
 RouteHandler::get('/upload', \Medians\Media\Application\MediaItemController::class.'@upload_page');
 RouteHandler::get('/media/edit/(:all)', \Medians\Media\Application\MediaItemController::class.'@edit_media');
+
+/** Audiobooks pages */
 RouteHandler::get('/upload/audiobook', \Medians\Media\Application\AudiobookController::class.'@audiobook_upload_page');
 RouteHandler::get('/audiobook/edit/(:all)', \Medians\Media\Application\AudiobookController::class.'@edit_audiobook');
 RouteHandler::get('/audiobook/edit_chapters/(:all)', \Medians\Media\Application\AudiobookController::class.'@edit_chapters');
-RouteHandler::get('/track/(:all)', \Medians\Media\Application\MediaItemController::class.'@audio_page');
-RouteHandler::get('/discover', \Medians\Media\Application\MediaItemController::class.'@discover');
 RouteHandler::get('/discover/audiobook', \Medians\Media\Application\AudiobookController::class.'@discover');
 RouteHandler::get('/audiobook/(:all)', \Medians\Media\Application\AudiobookController::class.'@book_page');
-RouteHandler::get('/channels', \Medians\Channels\Application\ChannelController::class.'@channels');
-RouteHandler::get('/playlists', \Medians\Playlists\Application\PlaylistController::class.'@playlists');
-RouteHandler::get('/likes', \Medians\Media\Application\MediaItemController::class.'@likes');
-RouteHandler::get('/genres', \Medians\Media\Application\MediaItemController::class.'@genres');
+RouteHandler::get('/track/(:all)', \Medians\Media\Application\MediaItemController::class.'@audio_page');
+
+/** Videos pages */
+RouteHandler::get('/upload/video', \Medians\Media\Application\VideoController::class.'@upload_page');
+RouteHandler::get('/video/edit/(:all)', \Medians\Media\Application\VideoController::class.'@edit_video');
+RouteHandler::get('/discover/video', \Medians\Media\Application\VideoController::class.'@discover');
+RouteHandler::get('/video/(:all)', \Medians\Media\Application\VideoController::class.'@video_page');
+
+/** Search pages */
 RouteHandler::get('/search/audio', \Medians\Media\Application\MediaItemController::class.'@search');
 RouteHandler::get('/search/audiobook', \Medians\Media\Application\AudiobookController::class.'@search');
 RouteHandler::get('/search/artist', \Medians\Channels\Application\ChannelController::class.'@search');
 RouteHandler::get('/search/playlist', \Medians\Playlists\Application\PlaylistController::class.'@search');
 RouteHandler::get('/search/station', \Medians\Stations\Application\StationController::class.'@search');
+
+/** Studio pages */
 RouteHandler::get('/studio', \Medians\Media\Application\MediaItemController::class.'@studio');
 RouteHandler::get('/studio/media', \Medians\Media\Application\MediaItemController::class.'@studio_media');
 RouteHandler::get('/studio/playlists', \Medians\Media\Application\MediaItemController::class.'@studio_playlists');
 RouteHandler::get('/studio/audio_books', \Medians\Media\Application\AudiobookController::class.'@studio_audiobooks');
 RouteHandler::get('/studio/stations', \Medians\Stations\Application\StationController::class.'@studio');
 RouteHandler::get('/studio/profile', \Medians\Customers\Application\CustomerController::class.'@edit_profile');
+
+RouteHandler::get('/discover', \Medians\Media\Application\MediaItemController::class.'@discover');
+RouteHandler::get('/likes', \Medians\Media\Application\MediaItemController::class.'@likes');
+RouteHandler::get('/genres', \Medians\Media\Application\MediaItemController::class.'@genres');
 RouteHandler::get('/genre/(:all)', \Medians\Media\Application\MediaItemController::class.'@genre');
 RouteHandler::get('/book_genre/(:all)', \Medians\Media\Application\AudiobookController::class.'@genre');
+RouteHandler::get('/channels', \Medians\Channels\Application\ChannelController::class.'@channels');
+RouteHandler::get('/artists', \Medians\Channels\Application\ChannelController::class.'@channels');
 RouteHandler::get('/artist/(:all)', \Medians\Customers\Application\CustomerController::class.'@artist');
+RouteHandler::get('/playlists', \Medians\Playlists\Application\PlaylistController::class.'@playlists');
 RouteHandler::get('/playlist/(:all)', \Medians\Playlists\Application\PlaylistController::class.'@playlist');
+
+/** Stations pages */
 RouteHandler::get('/stations', \Medians\Stations\Application\StationController::class.'@stations');
 RouteHandler::get('/stations/manage/(:all)', \Medians\Stations\Application\StationController::class.'@calendar');
 RouteHandler::get('/station_json/(:all)', \Medians\Stations\Application\StationController::class.'@station_json');
@@ -97,8 +104,6 @@ RouteHandler::get('/customer/confirm_account', \Medians\Auth\Application\Custome
 RouteHandler::get('/customer/reset_password', \Medians\Auth\Application\CustomerAuthService::class.'@resetPasswordPage');
 RouteHandler::get('/customer/dashboard', \Medians\Media\Application\MediaItemController::class.'@studio');
 RouteHandler::get('/customer/orders', \Medians\Customers\Application\CustomerController::class.'@orders');
-RouteHandler::get('/order/(:all)', \Medians\Orders\Application\OrderController::class.'@orderPage');
-RouteHandler::get('/stores-locations', \Medians\Branches\Application\BranchController::class.'@list');
 
 
 // POST Requests
@@ -116,6 +121,17 @@ RouteHandler::post('/customer/reset-password-code', \Medians\Auth\Application\Cu
  * Load sub-pages
  */
 RouteHandler::get('/page/(:all)', \Medians\Pages\Application\PageController::class.'@page'); 
+
+
+
+/**
+ * Mobile API requests authorized & non-authorized  
+*/
+RouteHandler::post('/mobile_api/login', \Medians\MobileAPIController::class.'@login');
+RouteHandler::post('/mobile_api/create', \Medians\MobileAPIController::class.'@create');
+RouteHandler::post('/mobile_api/update', \Medians\MobileAPIController::class.'@update');
+RouteHandler::post('/mobile_api/delete', \Medians\MobileAPIController::class.'@delete');
+RouteHandler::post('/mobile_api', \Medians\MobileAPIController::class.'@handle');
 
 /**
 * Restricted access requests 

@@ -91,6 +91,10 @@ class FrontAPIController extends CustomController
 				case 'Audiobook.create':
 					return printResponse((new Media\Application\AudiobookController())->store());
 					break;
+
+				case 'Video.upload':
+					return printResponse((new Media\Application\VideoController())->upload());
+					break;
 	
 				case 'HelpMessageComment.create':
 					$return =  (new Help\Application\HelpMessageController())->storeComment(); 

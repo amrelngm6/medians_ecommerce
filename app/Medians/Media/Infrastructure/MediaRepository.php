@@ -47,6 +47,10 @@ class MediaRepository
 				$this->_dir = $this->audio_dir;
 				break;
 							
+			case 'video':
+				$this->_dir = $this->videos_dir;
+				break;
+							
 			default:
 				$this->_dir = $this->images_dir;
 				break;
@@ -120,6 +124,10 @@ class MediaRepository
 
 			case 'audio':
 				return ['mp3', 'wav', 'oog']; 
+				break;
+			
+			case 'video':
+				return ['mp4', 'ogg', 'wmv', 'avi', 'mov']; 
 				break;
 			
 			default:

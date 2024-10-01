@@ -240,7 +240,7 @@ class MediaItemController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
-        $params['type'] = 'video';
+        $params['type'] = 'audio';
         $list = $this->repo->getWithFilter($params);
         
 		try 
@@ -431,7 +431,7 @@ class MediaItemController extends CustomController
                 }
             }
             
-            return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"media/edit/$save->media_id");
+            return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"/media/edit/$save->media_id");
 
         } catch (\Throwable $th) {
         	throw new \Exception("Error Processing Request ".$th->getMessage(), 1);

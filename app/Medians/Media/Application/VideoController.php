@@ -47,7 +47,7 @@ class VideoController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'type' => 'video',
-                'layout' => isset($this->app->customer->customer_id) ? 'upload-video' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'videos/upload' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -209,6 +209,7 @@ class VideoController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['type'] = 'video';
         $list = $this->repo->getWithFilter($params);
         
 		try 
@@ -239,6 +240,7 @@ class VideoController extends CustomController
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
         $params['likes'] = true;
+        $params['type'] = 'video';
         $params['customer_id'] = $this->app->customer->customer_id ?? 0;
         $list = $this->repo->getWithFilter($params);
         
@@ -271,7 +273,7 @@ class VideoController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'genres' => $this->categoryRepo->getGenres(),
-                'layout' => 'genres'
+                'layout' => 'videos/genres'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -351,7 +353,7 @@ class VideoController extends CustomController
                 'genre_type' => 'genres',
                 'model_type' => 'MediaItem',
                 'genres' => $this->categoryRepo->getGenres(),
-                'layout' => isset($this->app->customer->customer_id) ? 'media-edit' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'videos/edit' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -389,7 +391,7 @@ class VideoController extends CustomController
                 foreach ($this->app->request()->files as $key => $value) {
                     if ($value) {
 
-                        $file = $this->mediaRepo->upload($value, 'audio', true);
+                        $file = $this->mediaRepo->upload($value, 'video', true);
                         
                         $params['name'] = $value->getClientOriginalName();
                         $params['description'] = $value->getClientOriginalName();
@@ -399,7 +401,7 @@ class VideoController extends CustomController
                 }
             }
             
-            return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"media/edit/$save->media_id");
+            return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"/video/edit/$save->media_id");
 
         } catch (\Throwable $th) {
         	throw new \Exception("Error Processing Request ".$th->getMessage(), 1);
@@ -413,43 +415,15 @@ class VideoController extends CustomController
     {
         try {
             
-
-            $getID3 = new getID3;
-            // Analyze file
-            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
-
-            $params['files'] = [ ['type'=> 'audio', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ];
+            $params['files'] = [ ['type'=> 'video', 'title' => $params['name'] ?? '', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ];
             $params['author_id'] = $this->app->customer_id() ?? 0;
             
-            if (isset($fileInfo['playtime_seconds']))
-            {
-                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-            }
-
-            if (isset($fileInfo['tags']['id3v2']))
-            {
-                $params['name'] = $fileInfo['tags']['id3v2']['title'][0] ?? 'Unknown Title';
-                $params['description'] = $fileInfo['tags']['id3v2']['comment'][0] ?? 'No Description';
-            }
-
-            if (!empty($fileInfo['id3v2']['APIC'])) {
-                $imageData = $fileInfo['id3v2']['APIC'][0]['data']; // Album art data
-                // Save the image to a file
-                $params['picture'] = $this->mediaRepo->images_dir.str_replace(['.mp3','.wav'], '.png', (str_replace(['/uploads/audio','/tmp'], '', $filePath)));
-                $outputImagePath = $_SERVER['DOCUMENT_ROOT'].$params['picture'];
-                file_put_contents($outputImagePath, $imageData);
-            }
-
-
             $save = $this->repo->store($params);
-
-            // $generateWave = $this->generateWave($filePath);
 
             if ($settings['default_storage'] == 'google')
             {
                 $service = new GoogleStorageService();
                 $upload = $service->uploadFileToGCS($filePath);
-                // ($generateWave && $upload) ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
             }
 
             return $save;
@@ -463,23 +437,6 @@ class VideoController extends CustomController
 
 
 
-    public function generateWave($file)
-    {
-
-		$settings = $this->app->SystemSetting();
-
-        $ffmpeg = $settings['ffmpeg_path'];
-        // $ffmpeg = 'ffmpeg';
-        $filePath = $_SERVER['DOCUMENT_ROOT']. $file;
-        $outputPath = $_SERVER['DOCUMENT_ROOT']. str_replace(['mp3','wav','ogg'], 'png', $file);
-
-        $shell = file_exists($outputPath) ? $outputPath : shell_exec($ffmpeg.' -i '.$filePath.' -filter_complex "showwavespic=s=1024x200:colors=yellow|blue|green" -frames:v 1  '.$outputPath.' ');
-        return $shell;
-    }
-
-
-    
-
 	public function update()
 	{
 		$this->app = new \config\APP;
@@ -489,27 +446,7 @@ class VideoController extends CustomController
 		
         try {
 
-            $files = $this->app->request()->files;
-
-            foreach ($files as $key => $value) {
-                if ($value) {
-                    $picture = $this->mediaRepo->upload($value);
-                    $params['picture'] = $this->mediaRepo->_dir.$picture;
-                }
-            }   
-            
-            
             $item = $this->repo->find($params['media_id']);
-            $params['name'] = sanitizeInput($params['name'], true);
-            
-            $getID3 = new getID3;
-
-            // Analyze file
-            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $item->main_file->path);
-
-            if (isset($fileInfo['playtime_seconds'])) {
-                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-            }
         
             if ($this->repo->update($params))
             {
@@ -530,7 +467,7 @@ class VideoController extends CustomController
 		
         try {
 
-            if ($this->repo->delete($params['category_id']))
+            if ($this->repo->delete($params['media_id']))
             {
                 return array('success'=>1, 'result'=>translate('Deleted'), 'reload'=>1);
             }
@@ -540,16 +477,5 @@ class VideoController extends CustomController
         }
 	}
 
-
-    /**
-     * Check if customer session is valid
-     */
-    public function checkSession($customer)
-    {
-        if (empty($customer->customer_id))
-            $this->app->redirect('/customer/login');
-    }
-
-    
 
 }
