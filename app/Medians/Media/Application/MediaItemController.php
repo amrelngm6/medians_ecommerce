@@ -456,6 +456,12 @@ class MediaItemController extends CustomController
                 $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
             }
 
+            if (isset($fileInfo['tags']['id3v2']))
+            {
+                $params['name'] = $fileInfo['tags']['id3v2']['title'][0] ?? 'Unknown Title';
+                $params['descriptiondescription'] = $fileInfo['tags']['id3v2']['comment'][0] ?? 'No Description';
+            }
+
             if (!empty($fileInfo['id3v2']['APIC'])) {
                 $imageData = $fileInfo['id3v2']['APIC'][0]['data']; // Album art data
                 // Save the image to a file
