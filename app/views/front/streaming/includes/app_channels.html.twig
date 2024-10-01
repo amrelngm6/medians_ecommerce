@@ -13,7 +13,7 @@
                                         <div class="hs__arrows flex gap-4"><a class="arrow disabled arrow-prev"></a><a class="arrow arrow-next"></a></div>
                                     </div>
                                 </div>
-                                <hr class="dark:opacity-0" />
+                                <hr class="dark:opacity-0 my-4" />
 
                                 
                                 <div class="animated-border-card">
@@ -59,22 +59,6 @@
                                     </div>
                                     <div class="blob"></div>
                                 </div>
-                                <div class="relative overflow-hidden rounded-full py-4  flex  min-h-40">
-                                    <div class="scroll-transition absolute left-0 top-0  flex gap-2 w-full " style="width:max-content">
-                                        {% for artist in artists  %}
-                                        
-                                        <div class="min-h-[180px] w-auto  hover:text-orange-500 p-4 text-center flex gap-4">
-                                            <img class="rounded-full w-20 h-20" src="/uploads/img/60x60.png" />
-                                            <p>
-                                                <a class="font-semibold text-lg pt-4 block">{{artist.name}}</a>
-                                                <span class="flex gap-2 text-gray-500"> 20</span>
-                                                <span class="flex gap-2  text-gray-500">$% 90</span>
-                                            </p>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <p class="py-2"><a class="text-primary transition hover:text-orange-500" href="/artists">{{lang.translate('More artists')}}</a></p>
                             </div>
                         </div>
                     </div>
