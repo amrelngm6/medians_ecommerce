@@ -308,8 +308,7 @@ class AudiobookController extends CustomController
 
         if (isset($fileInfo['tags']['id3v2']))
         {
-            $params['name'] = $fileInfo['tags']['id3v2']['title'][0] ?? 'Unknown Title';
-            $params['description'] = $fileInfo['tags']['id3v2']['comment'][0] ?? 'No Description';
+            $file['title'] = $fileInfo['tags']['id3v2']['title'][0] ?? 'Unknown Title';
         }
 
         $mediaController = new MediaItemController();
