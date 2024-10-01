@@ -363,7 +363,7 @@ class MediaItemController extends CustomController
 
         $item = $this->repo->find($media_id);
 
-        $filePath = $this->mediaRepo->audio_dir.$item->main_file->path;
+        $filePath = $item->main_file->path;
         $ext = explode('.', $filePath);
         if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.end($ext), '.png', $filePath))) 
         {
@@ -472,7 +472,7 @@ class MediaItemController extends CustomController
 
             $save = $this->repo->store($params);
 
-            // $generateWave = $this->generateWave($filePath);
+            $generateWave = $this->generateWave($filePath);
 
             if ($settings['default_storage'] == 'google')
             {
