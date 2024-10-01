@@ -399,6 +399,7 @@ class MediaItemController extends CustomController
         
         $request = $this->app->request();
         $params = $this->app->params();
+		$settings = $this->app->SystemSetting();
         
         if (!empty($params['link']))
         {
