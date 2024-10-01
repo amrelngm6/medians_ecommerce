@@ -43,7 +43,7 @@ class StorageSettingsController extends CustomController
 		return [
             
 			'basic'=> [	
-				[ 'key'=> "ffmpeg_path", 'title'=> translate('FFMPEG Path'), 'help_text'=>translate('Use (ffmpeg) if already installed or add Full path ').$_SERVER['DOCUMENT_ROOT'], 'fillable'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "ffmpeg_path", 'title'=> translate('FFMPEG Path'), 'help_text'=>translate('Use (ffmpeg) if already installed or add Full path ').$_SERVER['DOCUMENT_ROOT'], 'fillable'=> true, 'column_type'=>'text' ],
                 
 				[ 'key'=> "default_storage", 'title'=> translate('Default Storage'), 'help_text'=> translate('The default storage location for media files'),
                     'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 'column_key' => 'default_storage',
