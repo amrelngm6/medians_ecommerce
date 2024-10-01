@@ -417,7 +417,7 @@ class MediaItemController extends CustomController
                 $params = [];
                 $params['name'] = $value->getClientOriginalName();
                 $params['description'] = $value->getClientOriginalName();
-                $params['files'] = [ ['type'=> 'audio', 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
+                $params['files'] = [ ['type'=> 'audio', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $this->mediaRepo->_dir.$file] ];
                 $params['author_id'] = $this->app->customer_id() ?? 0;
                 if (isset($fileInfo['playtime_seconds']))
                 {
@@ -454,7 +454,7 @@ class MediaItemController extends CustomController
 
         $params['name'] = '';
         $params['description'] = '';
-        $params['files'] = [ ['type'=> 'audio', 'storage'=> $settings['default_storage'], 'path'=> $filePath] ];
+        $params['files'] = [ ['type'=> 'audio', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ];
         $params['author_id'] = $this->app->customer_id() ?? 0;
         if (isset($fileInfo['playtime_seconds']))
         {
