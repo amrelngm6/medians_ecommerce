@@ -257,18 +257,27 @@ class AudiobookController extends CustomController
 		foreach ($this->app->request()->files as $key => $value) {
 		
             $file = $this->mediaRepo->upload($value, 'audio', true);
-    
+            
+            $filePath = $this->mediaRepo->_dir.$file;
+
             $getID3 = new getID3;
 
             // Analyze file
-            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->_dir.$file);
+            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
 
-            $fileArray = [ 'type'=> 'audio', 'title' => $value->getClientOriginalName(), 'storage'=> 'local', 'path'=> $this->mediaRepo->_dir.$file];
+            $fileArray = [ 'type'=> 'audio', 'title' => $value->getClientOriginalName(), 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath];
 
             $update = $this->repo->storeFile($fileArray, $item);
 
             $mediaController->generateWave($file);
 		}
+
+        if ($settings['default_storage'] == 'google')
+        {
+            $service = new GoogleStorageService();
+            $upload = $service->uploadFileToGCS($_SERVER['DOCUMENT_ROOT'].$filePath, $filePath);
+            unlink($_SERVER['DOCUMENT_ROOT'].$filePath);
+        }
 
         return array('success'=>1, 'result'=>translate('Uploaded'), 'reload'=>1);
 	}
