@@ -285,8 +285,8 @@ function playStyles() {
 	
 	document.getElementById('app-cover').classList.remove('hidden') 
 	document.getElementById('album-name').innerHTML = audioObject.name ?? (audioObject.title ?? ''); 
-	document.getElementById('track-name').innerHTML = audioObject.artist ? audioObject.artist.name : ''; 
-	document.getElementById('track-poster').src = audioObject.picture ?? ''; 
+	document.getElementById('track-name').innerHTML = audioObject.artist ?? ''; 
+	document.getElementById('track-poster').src = '/stream?thumbnail=100&image='+ audioObject.poster ?? ''; 
 	document.getElementById('track-poster').classList.add('active') 
 	document.getElementById('player-track').classList.add('active') 
 
