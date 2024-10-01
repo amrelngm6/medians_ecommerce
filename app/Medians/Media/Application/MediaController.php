@@ -411,8 +411,8 @@ class MediaController extends CustomController
 	
 		fclose($fm);
 		exit;
-		
 	}
+	
 	
 	function isDirectAccess() {
 		
