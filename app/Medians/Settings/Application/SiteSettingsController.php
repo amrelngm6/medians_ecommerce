@@ -90,8 +90,8 @@ class SiteSettingsController extends CustomController
 			],
 			
 			'layout_options'=> [	
-				[ 'key'=> "show_newsletter_form", 'title'=> translate('Show newsletter at footer'), 'help_text'=>translate('Show newsletter form at footer to allow users to subscribe'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "view_items_limit", 'title'=> translate('Loading items limit'), 'help_text'=>translate('Show x items as first load at frontend pages'), 'fillable'=> true, 'column_type'=>'number' ],
+				// [ 'key'=> "show_newsletter_form", 'title'=> translate('Show newsletter at footer'), 'help_text'=>translate('Show newsletter form at footer to allow users to subscribe'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 			],
 					
         ];
