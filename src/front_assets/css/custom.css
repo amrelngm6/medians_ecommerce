@@ -851,6 +851,7 @@ UP
   
 }
 
+.dark .pCard_on .pCard_down,
 .dark .pCard_on  .pCard_up {
   box-shadow: 0 0 30px rgba(0,0,0,.3);
 }
