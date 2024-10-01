@@ -253,7 +253,7 @@ class AudiobookController extends CustomController
         
         try 
         {
-
+            $item = $this->repo->find($params['media_id']);
             
             if (!empty($params['link']))
             {
@@ -265,7 +265,6 @@ class AudiobookController extends CustomController
             } else {
 
                     
-                $item = $this->repo->find($params['media_id']);
 
                 foreach ($this->app->request()->files as $key => $value) {
                 
