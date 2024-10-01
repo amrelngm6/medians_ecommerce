@@ -326,7 +326,7 @@ class VideoController extends CustomController
     /**
      * Edit info page for frontend
      */
-    public function edit_media($media_id)
+    public function edit_video($media_id)
     {
 		$this->app->customer_auth();
 
@@ -336,14 +336,6 @@ class VideoController extends CustomController
 
         if (empty($item->main_file->path))
             return Page404();
-
-
-        $filePath = $item->main_file->path;
-        $ext = explode('.', $filePath);
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.end($ext), '.png', $filePath))) 
-        {
-            $generateWave = $this->generateWave( $filePath );
-        }
 
 		try {
 
