@@ -470,9 +470,9 @@ class MediaItemController extends CustomController
         {
             $service = new GoogleStorageService();
             $upload = $service->uploadFileToGCS($_SERVER['DOCUMENT_ROOT'].$filePath, $filePath);
+            $upload ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
         }
 
-        $upload ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
 
 	}
 
