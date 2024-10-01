@@ -138,9 +138,7 @@ class MediaRepository
 
 		$mimeType = $file->getMimeType();
 		if ($ext === 'bin' && $mimeType === 'application/octet-stream' ) {
-			if ($mimeType === 'audio/mpeg' || $mimeType === 'audio/mp3') {
-				$ext = 'mp3'; // Force extension to 'mp3'
-			}
+			$ext = 'mp3'; // Force extension to 'mp3'
 		}
 
 		$this->validate($type, $ext);
