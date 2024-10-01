@@ -269,7 +269,7 @@ class AudiobookController extends CustomController
 
             $update = $this->repo->storeFile($fileArray, $item);
 
-            $mediaController->generateWave($file);
+            $mediaController->generateWave($filePath);
 		}
 
         if ($settings['default_storage'] == 'google')
