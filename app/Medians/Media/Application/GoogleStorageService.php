@@ -45,7 +45,7 @@ class GoogleStorageService extends CustomController
             'name' => $destination // The destination in the bucket
         ]);
 
-        return "$this->bucketName$destination";
+        return "$this->bucketName"."$destination";
     }
 
 
