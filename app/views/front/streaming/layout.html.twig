@@ -2,61 +2,6 @@
 
 <div class=" w-full">
 
-<style>
-.auto-carousel {
-  display: flex;
-  overflow: hidden; /* Hide overflowing items */
-  width: 100%; /* Set the width of the container */
-  height: 200px; /* Adjust height to fit content */
-  position: relative;
-}
-
-/* Carousel track that moves the items */
-.carousel-track {
-  display: flex;
-  width: 500%; /* 5 items, so 500% */
-  animation: scroll 25s infinite;
-}
-.carousel-track[data-duration="5"] {
-  animation: scroll 25s infinite;
-}
-
-.carousel-track[data-duration="10"] {
-  animation: scroll 50s infinite;
-}
-.carousel-track[data-duration="3"] {
-  animation: scroll 15s infinite;
-}
-.carousel-track[data-duration="4"] {
-  animation: scroll 20s infinite;
-}
-.carousel-track[data-duration="1"] {
-  animation: scroll 5s infinite;
-}
-
-/* Each item in the carousel */
-.carousel-track > div {
-  flex: 1 0 100%; /* Each item takes up 100% of the container width */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f4f4f4;
-  border: 1px solid #ddd;
-  font-size: 2rem;
-}
-@keyframes scroll {
-  0% { transform: translateX(0); }
-  20% { transform: translateX(0); }
-  25% { transform: translateX(-100%); }
-  45% { transform: translateX(-100%); }
-  50% { transform: translateX(-200%); }
-  70% { transform: translateX(-200%); }
-  75% { transform: translateX(-300%); }
-  95% { transform: translateX(-300%); }
-  100% { transform: translateX(-400%); }
-}
-
-</style>
     <div class="w-full flex gap gap-2" id="main-container" x-data="{}">
         
         <div  class="lg:fixed bg-white dark:bg-gray-900 h-screen">

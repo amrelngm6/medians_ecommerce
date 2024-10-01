@@ -5,10 +5,13 @@
                         </div>
 
                         <div class="min-w-64  relative  mb-4">
-                            <div class="relative p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-md  overflow-hidden ">
+                            <div class="relative p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-md  overflow-hidden hs__wrapper" data-count="1">
                                 <div class="w-full  border-1 text-primary ">
                                     <div class="w-full text-xl font-bold tracking-wide dark:text-gray-400"> {{lang.translate('Top Authors')}}</div>
-                                    <p class="text-gray-500 py-2">{{lang.translate('Trends of this month')}}</p>
+                            
+                                    <div class=" absolute flex float-right gap-4 pt-3 right-0 text-primary top-5 w-20 ">
+                                        <div class="hs__arrows flex gap-4"><a class="arrow disabled arrow-prev"></a><a class="arrow arrow-next"></a></div>
+                                    </div>
                                 </div>
                                 <hr class="dark:opacity-0" />
 
@@ -16,42 +19,54 @@
                                 <div class="animated-border-card">
                                     <div class="bg">
                                     
-                                        <div class="auto-carousel">
-                                            <div class="carousel-track" data-duration="5">
-                                        {% for channel in channels  %}
+                                        <div >
+                                    
+                                            <ul class="hs" >
+                                            
+                                                {% for artist in channels  %}
+                                                <li class="hs__item "> 
 
-                                            <div class="w-40 mx-auto bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg">
-                                                <div class="border-b px-4 pb-6">
-                                                    <div class="text-center my-4">
-                                                        <img class="h-20 w-20 rounded-full border-4 border-white dark:border-gray-800 mx-auto my-4"
-                                                            src="https://randomuser.me/api/portraits/women/21.jpg" alt="">
-                                                        <div class="py-2">
-                                                            <h3 class="font-bold text-md text-gray-800 dark:text-white mb-1">Cait Genevieve</h3>
+                                                    <div class="w-full mx-auto bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg">
+                                                        <div class="border-b px-4 pb-6">
+                                                            <div class="text-center ">
+                                                                <img class="h-20 w-20 rounded-full border-4 border-white dark:border-gray-800 mx-auto my-4"
+                                                                    src="/stream?thumbnail=100&image={{artist.picture_name}}" alt="">
+                                                                <div class="py-2">
+                                                                    <a href="/artist/{{artist.customer_id}}" class="ajax-load font-bold text-md text-gray-800 dark:text-white mb-1">{{artist.name}}</h3>
+                                                                </div>
+                                                            </div>
+                                                            <ul class="w-full text-gray-700 flex items-center justify-around">
+                                                                <li class="w-full flex flex-col items-center justify-around">
+                                                                    <img src="/src/front_assets/svg/audiobook-tab.svg" class="w-6" />
+                                                                    <div>{{artist.audiobooks|length}}</div>
+                                                                </li>
+                                                                <li class="w-full flex flex-col items-center justify-between">
+                                                                    <img src="/src/front_assets/svg/audio-tab.svg" class="w-8" />
+                                                                    <div>{{artist.audio_items|length}}</div>
+                                                                </li>
+                                                                <li class="w-full flex flex-col items-center justify-around">
+                                                                    <img src="/src/front_assets/svg/user-tab.svg" class="w-6" />
+                                                                    <div>{{artist.followers|length}}</div>
+                                                                </li>
+                                                            </ul>
                                                         </div>
                                                     </div>
-                                                    <div class="flex gap-2 px-2">
-                                                        <button
-                                                            class="flex-1 rounded-full bg-blue-600 dark:bg-blue-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
-                                                            Follow
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                        
-                                            </div>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
                                         </div>
+                                        
                                     </div>
                                     <div class="blob"></div>
                                 </div>
                                 <div class="relative overflow-hidden rounded-full py-4  flex  min-h-40">
                                     <div class="scroll-transition absolute left-0 top-0  flex gap-2 w-full " style="width:max-content">
-                                        {% for channel in channels  %}
+                                        {% for artist in artists  %}
                                         
                                         <div class="min-h-[180px] w-auto  hover:text-orange-500 p-4 text-center flex gap-4">
                                             <img class="rounded-full w-20 h-20" src="/uploads/img/60x60.png" />
                                             <p>
-                                                <a class="font-semibold text-lg pt-4 block">{{channel.name}}</a>
+                                                <a class="font-semibold text-lg pt-4 block">{{artist.name}}</a>
                                                 <span class="flex gap-2 text-gray-500"> 20</span>
                                                 <span class="flex gap-2  text-gray-500">$% 90</span>
                                             </p>
@@ -59,7 +74,7 @@
                                         {% endfor %}
                                     </div>
                                 </div>
-                                <p class="py-2"><a class="text-primary transition hover:text-orange-500" href="/channels">{{lang.translate('More channels')}}</a></p>
+                                <p class="py-2"><a class="text-primary transition hover:text-orange-500" href="/artists">{{lang.translate('More artists')}}</a></p>
                             </div>
                         </div>
                     </div>
