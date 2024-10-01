@@ -425,6 +425,14 @@ class MediaItemController extends CustomController
                     $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
                 }
                 
+                if (!empty($fileInfo['id3v2']['APIC'])) {
+                    $imageData = $fileInfo['id3v2']['APIC'][0]['data']; // Album art data
+                    // Save the image to a file
+                    $params['picture'] = $this->mediaRepo->images_dir.str_replace(['.mp3','.wav'], '.png', $file);
+                    $outputImagePath = $_SERVER['DOCUMENT_ROOT'].$params['picture'];
+                    file_put_contents($outputImagePath, $imageData);
+                }
+
                 $save = $this->repo->store($params);
 
                 $this->generateWave( $this->mediaRepo->_dir.$file);
