@@ -122,7 +122,7 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 	index = parseInt(player.attr('data-index'))
 	if (player.hasClass('start-player')) {
 		audioObject = list[index] ?? {};
-		filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
+		filename = audioObject.file ?? audioObject.filename;
 		audioInfo = player.find('.slide__audio-player');
 		audio = mainAudio[0];
 		audio.src = '/stream_audio?audio='+ filename;
@@ -147,7 +147,7 @@ jQuery(document).on('click', '.start-single-player', function (i, el) {
 	index = player.attr('data-index')
 	if (player.hasClass('start-single-player')) {
 		audioObject = list[index];
-		filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
+		filename = audioObject.file ?? audioObject.filename;
 		audioInfo = player.find('.slide__audio-player');
 		audio = mainAudio[0];
 		audio.src = '/stream_audio?audio='+ filename;
@@ -226,7 +226,7 @@ function moveItem(array, fromIndex, direction) {
 function handleFile()
 {
 	audioObject = list[index] ?? {};
-	filename = audioObject.main_file ? audioObject.main_file.filename : audioObject.filename;
+	filename = audioObject.file ?? audioObject.filename;
 	player = jQuery('#media-'+(audioObject.media_file_id ?? audioObject.media_id));
 	audioInfo = player.find('.slide__audio-player');
 	audio.src = '/stream_audio?audio='+ filename;
