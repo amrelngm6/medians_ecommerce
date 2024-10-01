@@ -483,9 +483,11 @@ class MediaItemController extends CustomController
     public function generateWave($file)
     {
 
-        $ffmpeg = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg';
+		$settings = $this->app->SystemSetting();
+
+        $ffmpeg = $settings['ffmpeg_path'];
         // $ffmpeg = 'ffmpeg';
-        $filePath = $_SERVER['DOCUMENT_ROOT'].  $file;
+        $filePath = $_SERVER['DOCUMENT_ROOT']. $file;
         $outputPath = $_SERVER['DOCUMENT_ROOT']. str_replace(['mp3','wav','ogg'], 'png', $file);
 
         $shell = file_exists($outputPath) ? $outputPath : shell_exec($ffmpeg.' -i '.$filePath.' -filter_complex "showwavespic=s=1024x200:colors=yellow|blue|green" -frames:v 1  '.$outputPath.' ');
