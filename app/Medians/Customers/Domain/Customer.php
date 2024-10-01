@@ -81,12 +81,12 @@ class Customer extends CustomModel
 
 	public function audiobooks() 
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audiobook');	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audiobook')->orderBy('media_id', 'DESC');	
 	}
 
 	public function audio_items() 
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audio');	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audio')->orderBy('media_id', 'DESC');	
 	}
 
 	public function playlists() 
