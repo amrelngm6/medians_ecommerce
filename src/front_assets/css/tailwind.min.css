@@ -3549,6 +3549,11 @@ video {
   color: rgb(209 213 219 / var(--tw-text-opacity));
 }
 
+.dark\:hover\:text-orange-400:hover:is(.dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(251 146 60 / var(--tw-text-opacity));
+}
+
 .dark\:hover\:text-orange-600:hover:is(.dark *) {
   --tw-text-opacity: 1;
   color: rgb(234 88 12 / var(--tw-text-opacity));

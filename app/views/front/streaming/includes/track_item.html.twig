@@ -8,8 +8,8 @@
                                         {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
                                     </div>
                                     <div class="px-1 relative p-1 truncate"> 
-                                        <a href="/track/{{media_item.media_id}}" class="ajax-load relative text-opacity-75 text-sm tracking-tight font-semibold truncate">{{media_item.name}} </a>
-                                        <a href="/artist/{{media_item.author_id}}" class="ajax-load block relative text-gray-500 text-opacity-75 text-sm  tracking-tight">{{media_item.artist.name}}</a>
+                                        <a href="/track/{{media_item.media_id}}" class="ajax-load relative text-opacity-75 text-sm tracking-tight font-semibold truncate  dark:hover:text-orange-400 hover:text-orange-400">{{media_item.name}} </a>
+                                        <a href="/artist/{{media_item.author_id}}" class="ajax-load block relative text-gray-500 text-opacity-75 text-sm  tracking-tight  dark:hover:text-orange-400 hover:text-orange-400">{{media_item.artist.name}}</a>
                                     </div>
                                 </div>
                             </div>
