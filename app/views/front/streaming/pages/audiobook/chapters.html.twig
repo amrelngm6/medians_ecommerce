@@ -82,8 +82,8 @@
                                                 
                                             </div>  
                                             
-                                            <div class="relative  w-full"  > 
-                                                <img :id="'wave-'+chapter.media_file_id" class="w-full left-0 top-0 bottom-0 my-auto absolute " :src="'/stream?thumbnail=1000&dir=audio'+(chapter.storage == 'local' ? '' : '/tmp')+'&image='+chapter.wave" />
+                                            <div class="relative  w-full"  >
+                                                <img :id="'wave-'+chapter.media_file_id" class="w-full left-0 top-0 bottom-0 my-auto absolute " :src="'/stream?thumbnail=1000&dir=audio'+(chapter.path.includes('/tmp') ? '/tmp' : '')+'&image='+chapter.wave" />
                                                 <div :id="'wave-overlay'+chapter.media_file_id"  class="absolute w-full h-full top-0 right-0 opacity-50 dark:bg-gray-900 bg-white z-50 duration-150 transition transition-all"> </div>
                                             </div>    
                                         </div>

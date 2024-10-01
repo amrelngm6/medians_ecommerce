@@ -6,7 +6,7 @@
                                     {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/player-circle.html.twig' %}
                                 </div>
                                 <div class="relative h-28 w-full"  > 
-                                    <img id="wave-{{item.media_id}}" class="w-full left-0 top-0 bottom-0 my-auto absolute " src="/stream?thumbnail=1000&dir=audio{{item.main_file.storage == 'local' ? '' : '/tmp'}}&image={{item.main_file.wave}}" />
+                                    <img id="wave-{{item.media_id}}" class="w-full left-0 top-0 bottom-0 my-auto absolute " src="/stream?thumbnail=1000&dir=audio{{'/tmp' in item.main_file.path ? '/tmp' : ''}}&image={{item.main_file.wave}}" />
                                     <div id="wave-overlay{{item.media_id}}"  class="absolute w-full h-full top-0 right-0 opacity-50 dark:bg-gray-900 bg-white z-50 duration-150 transition transition-all"> </div>
                                 </div>
                             </div>
