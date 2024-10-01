@@ -377,9 +377,7 @@ function initAudioPlayer() {
 		circle.attr('stroke-dashoffset', totalLength);
 		document.getElementById('album-art').classList.remove('active') 
 
-		let indx = player.attr('data-index'); 
-		let media = list[indx+1] ?? {};
-		jQuery('#media-'+media.media_id)[0].click()
+		jQuery('#player-next').click()
 
 	});
 
