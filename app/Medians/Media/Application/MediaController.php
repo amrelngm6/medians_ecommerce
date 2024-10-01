@@ -131,7 +131,7 @@ class MediaController extends CustomController
 
 		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/' . $this->app->request()->get('audio'))) {
 			$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
-		} elseif (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/' . $this->app->request()->get('audio')))
+		} else
 		{
 			$filepath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
 		}
@@ -141,7 +141,6 @@ class MediaController extends CustomController
 		if (isset($item->main_file->storage) && $item->main_file->storage == 'google')
 		{
 			$service = new GoogleStorageService();
-			$filepath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
 			
 			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($filePath).'.mp3';
 
