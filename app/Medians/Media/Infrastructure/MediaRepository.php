@@ -139,7 +139,7 @@ class MediaRepository
         $originalFilename = $customName ? rand(9999,999999) : pathinfo( $file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slug($originalFilename);
         $fileName = $safeFilename.'-'.uniqid().'.'.$file->guessExtension();
-		$store = MediaUpload::addItem($this->_dir.$fileName, $type);
+		// $store = MediaUpload::addItem($this->_dir.$fileName, $type);
 
         try {
             $move = $file->move($this->dir, $fileName);

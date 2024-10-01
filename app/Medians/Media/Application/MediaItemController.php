@@ -397,34 +397,37 @@ class MediaItemController extends CustomController
 
 		$this->app = new \config\APP;
         
-        $request = $this->app->request();
         $params = $this->app->params();
 		$settings = $this->app->SystemSetting();
         
-        if (!empty($params['link']))
-        {
-            
-            $params['name'] = '';
-            $params['description'] = '';
-            $tempFilePath = '/uploads/audio/tmp/'.md5($params['link']).'.mp3';
-			file_put_contents($_SERVER['DOCUMENT_ROOT'].$tempFilePath, fopen($params['link'], 'r'));
-            $save = $this->store($params, $tempFilePath);
-        } else {
-                
-            foreach ($request->files as $key => $value) {
-                $file = $this->mediaRepo->upload($value, 'audio', true);
-                
-                $params['name'] = $value->getClientOriginalName();
-                $params['description'] = $value->getClientOriginalName();
-                
-                $save = $this->repo->store($params, $this->mediaRepo->_dir.$file);
-
-                $this->generateWave( $this->mediaRepo->_dir.$file);
-            }
-        }
-
-
         try {
+                
+            if (!empty($params['link']))
+            {
+                
+                $params['name'] = '';
+                $params['description'] = '';
+                $tempFilePath = '/uploads/audio/tmp/'.md5($params['link']).'.mp3';
+                file_put_contents($_SERVER['DOCUMENT_ROOT'].$tempFilePath, fopen($params['link'], 'r'));
+                $save = $this->store($params, $tempFilePath);
+
+            } else {
+                    
+                foreach ($this->app->request()->files as $key => $value) {
+                    if ($value) {
+
+                        $file = $this->mediaRepo->upload($value, 'audio', true);
+                        
+                        $params['name'] = $value->getClientOriginalName();
+                        $params['description'] = $value->getClientOriginalName();
+                        
+                        $save = $this->store($params, $this->mediaRepo->_dir.$file);
+        
+                        // $this->generateWave( $this->mediaRepo->_dir.$file);
+
+                    }
+                }
+            }
             
             return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"media/edit/$save->media_id");
 
@@ -439,7 +442,7 @@ class MediaItemController extends CustomController
     public function store($params, $filePath)
     {
 
-		$settings = $this->app->SystemSetting();
+        $settings = $this->app->SystemSetting();
 
         $getID3 = new getID3;
         // Analyze file
@@ -456,14 +459,14 @@ class MediaItemController extends CustomController
         if (!empty($fileInfo['id3v2']['APIC'])) {
             $imageData = $fileInfo['id3v2']['APIC'][0]['data']; // Album art data
             // Save the image to a file
-            $params['picture'] = $this->mediaRepo->images_dir.str_replace(['.mp3','.wav'], '.png', $file);
+            $params['picture'] = $this->mediaRepo->images_dir.str_replace(['.mp3','.wav'], '.png', $filePath);
             $outputImagePath = $_SERVER['DOCUMENT_ROOT'].$params['picture'];
             file_put_contents($outputImagePath, $imageData);
         }
 
         $save = $this->repo->store($params);
 
-        $generateWave = $this->generateWave($filePath);
+        // $generateWave = $this->generateWave($filePath);
 
         if ($settings['default_storage'] == 'google')
         {
