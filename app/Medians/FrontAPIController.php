@@ -53,6 +53,10 @@ class FrontAPIController extends CustomController
 				return (new Comments\Application\CommentController)->load_stream_comments();
 				break;
 				
+			case 'load-video-screenshots':
+				return (new Media\Application\VideoController)->load_screenshots();
+				break;
+				
 		}
 
 		$return = isset($controller) ? $controller->find($this->app->request()->get('id')) : $return;

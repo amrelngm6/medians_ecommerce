@@ -337,6 +337,11 @@ class VideoController extends CustomController
         if (empty($item->main_file->path))
             return Page404();
 
+
+        // $videoPath = $_SERVER['DOCUMENT_ROOT'].$item->main_file->path;
+        // $outputDir = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->videos_dir. 'screenshots/';
+        // $list = $this->generateScreenshots($videoPath, $outputDir);
+
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
@@ -344,7 +349,34 @@ class VideoController extends CustomController
                 'item' => $item,
                 'genre_type' => 'genres',
                 'model_type' => 'MediaItem',
+                // 'list' => $list,
                 'genres' => $this->categoryRepo->getGenres(),
+                'layout' => isset($this->app->customer->customer_id) ? 'videos/edit' : 'signin'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+    public function load_screenshots()
+    {
+		$this->app->customer_auth();
+
+		$settings = $this->app->SystemSetting();
+
+		$params = $this->app->params();
+
+        $item = $this->repo->find($params['media_id']);
+
+        if (empty($item->main_file->path))
+            return Page404();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/includes/layout.html.twig', [
+                'app' => $this->app,
+                'list' => $list,
                 'layout' => isset($this->app->customer->customer_id) ? 'videos/edit' : 'signin'
             ], 'output'));
             
@@ -438,13 +470,6 @@ class VideoController extends CustomController
 		
         try {
             
-
-            $videoPath = $_SERVER['DOCUMENT_ROOT'].$item->main_file->path;
-            $outputDir = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->videos_dir. 'screenshots/';
-            $this->generateScreenshots($videoPath, $outputDir);
-
-            $item = $this->repo->find($params['media_id']);
-        
             if ($this->repo->update($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
@@ -495,9 +520,9 @@ class VideoController extends CustomController
             $time = $i * $interval;
     
             // Format time into hh:mm:ss for ffmpeg
-            $formattedTime = gmdate("H:i:s", $time);
+            $formattedTime = gmdate("H:i:s", intval($time));
     
-            $outputFile = $outputDir . "/screenshot_" . $i . ".jpg";
+            $items[$i] = $outputFile = $outputDir . "/screenshot_" . $i . "_" . $i . ".jpg";
     
             // Command to capture screenshot at the specific time
             $command = "ffmpeg -ss $formattedTime -i " . escapeshellarg($videoPath) . " -vframes 1 -q:v 2 " . escapeshellarg($outputFile) . " 2>&1";
@@ -505,6 +530,8 @@ class VideoController extends CustomController
             // Execute the command
             shell_exec($command);
         }
+
+        return $items;
     }
 
     function getVideoDuration($videoPath) {
