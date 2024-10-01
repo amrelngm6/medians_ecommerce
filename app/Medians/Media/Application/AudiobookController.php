@@ -301,7 +301,7 @@ class AudiobookController extends CustomController
         $getID3 = new getID3;
         // Analyze file
 
-        $file = ['type'=> 'audio', 'title' => $title ?? 'Chapter', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ;
+        $file = ['type'=> 'audio', 'title' => sanitizeInput($title) ?? 'Chapter', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ;
         $params['author_id'] = $this->app->customer_id() ?? 0;
         
         $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
@@ -386,7 +386,7 @@ class AudiobookController extends CustomController
             }
             
             $item = $this->repo->find($params['media_id']);
-            
+            $params['name'] = sanitizeInput($params['name']);
             $getID3 = new getID3;
             // Analyze file
             $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $item->main_file->path);
