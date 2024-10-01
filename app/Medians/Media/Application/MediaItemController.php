@@ -472,7 +472,7 @@ class MediaItemController extends CustomController
 
             $save = $this->repo->store($params);
 
-            $generateWave = $this->generateWave($filePath);
+            // $generateWave = $this->generateWave($filePath);
 
             if ($settings['default_storage'] == 'google')
             {
