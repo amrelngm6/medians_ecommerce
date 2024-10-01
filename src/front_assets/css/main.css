@@ -179,6 +179,9 @@
     top: -60px;
     box-shadow: 0 0 0 4px #fff7f7, 0 30px 50px -15px #afb7c1;
   }
+  .dark #album-art.active {
+    box-shadow: 0 0 0 4px #303e53, 0 30px 50px -15px #111827;
+  }
   
   #album-art:before {
     content: "";
