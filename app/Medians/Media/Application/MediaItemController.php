@@ -502,6 +502,8 @@ class MediaItemController extends CustomController
         $filePath = $_SERVER['DOCUMENT_ROOT']. $file;
         $outputPath = $_SERVER['DOCUMENT_ROOT']. str_replace(['mp3','wav','ogg'], 'png', $file);
 
+        echo $ffmpeg.' -i '.$filePath.' -filter_complex "showwavespic=s=1024x200:colors=yellow|blue|green" -frames:v 1  '.$outputPath.' ';
+
         $shell = file_exists($outputPath) ? $outputPath : shell_exec($ffmpeg.' -i '.$filePath.' -filter_complex "showwavespic=s=1024x200:colors=yellow|blue|green" -frames:v 1  '.$outputPath.' ');
         return $shell;
     }
