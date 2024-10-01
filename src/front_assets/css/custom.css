@@ -1187,6 +1187,9 @@ Down
 [data-count="4"] .hs__item {
   flex-basis: calc(100% / 4 - (10px * 2) - (20px / 4));
 }
+[data-count="5"] .hs__item {
+  flex-basis: calc(100% / 5 - (10px * 2) - (20px / 4));
+}
 @media only screen and (max-width: 990px) {
   .hs__item {
     flex-basis: calc(100% / 1 - (10px * 2) - (20px / 3));
@@ -1195,6 +1198,9 @@ Down
     flex-basis: calc(100% / 1 - (10px * 2) - (20px / 3));
   }
   [data-count="4"] .hs__item {
+    flex-basis: calc(100% / 2 - (10px * 2) - (20px / 3));
+  }  
+  [data-count="5"] .hs__item {
     flex-basis: calc(100% / 2 - (10px * 2) - (20px / 3));
   }  
 
