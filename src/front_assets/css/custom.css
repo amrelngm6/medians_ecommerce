@@ -4,20 +4,27 @@
 }
 
 /* Track */
+::-webkit-scrollbar-track 
+{
+  background: #ddd; 
+}
 .dark ::-webkit-scrollbar-track {
   background: #111827; 
   border-radius: 20px;
 }
  
 /* Handle */
+::-webkit-scrollbar-thumb {
+  background: #aaa; 
+}
 .dark ::-webkit-scrollbar-thumb {
-  background: #303e53; 
+  background: #333; 
   border-radius: 20px;
 
 }
 
 /* Handle on hover */
-.dark ::-webkit-scrollbar-thumb:hover {
+ ::-webkit-scrollbar-thumb:hover {
   background: rgb(159, 169, 193, .8); 
 }
 
