@@ -465,13 +465,13 @@ class MediaItemController extends CustomController
 
         $save = $this->repo->store($params);
 
-        $this->generateWave(str_replace('/uploads/audio/', '',  $filePath));
+        $generateWave = $this->generateWave(str_replace('/uploads/audio/', '',  $filePath));
 
         if ($settings['default_storage'] == 'google')
         {
             $service = new GoogleStorageService();
             $upload = $service->uploadFileToGCS($_SERVER['DOCUMENT_ROOT'].$filePath, $filePath);
-            $upload ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
+            ($generateWave && $upload) ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
         }
 
         return $save;
