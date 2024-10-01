@@ -423,6 +423,7 @@ class MediaController extends CustomController
 		{
 			return;
 		}
+		return;
 
 
 		// Check the user-agent
