@@ -88,7 +88,6 @@
   #track-length {
     /* color: transparent; */
     font-size: 14px;
-    background-color: #ffe8ee;
     border-radius: 10px;
     transition: 0.3s ease all;
   }
@@ -157,7 +156,12 @@
     border-radius: 15px;
     z-index: 2;
   }
-  
+  .dark #station-player-content ,
+  .dark #station-player-track, 
+  .dark #player-track,
+  .dark #player-content {    
+    background-color: #111827;
+  }
   #album-art {
     position: absolute;
     top: -40px;
@@ -278,7 +282,6 @@
     /* width: 26px;
     height: 26px; */
     padding: 4px 20px;
-    background-color: #fff;
     border-radius: 6px;
     cursor: pointer;
   }
