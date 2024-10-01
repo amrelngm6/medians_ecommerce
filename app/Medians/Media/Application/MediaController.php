@@ -418,12 +418,14 @@ class MediaController extends CustomController
 		
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
-		return;
 
 		if (!empty($settings['direct_link_streaming']))
 		{
 			return;
 		}
+
+		echo 1;
+		return;
 
 		// Check the user-agent
 		$range = $_SERVER['HTTP_RANGE'] ?? '';
