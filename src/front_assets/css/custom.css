@@ -1772,7 +1772,6 @@ Animated borders Card
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 15px 30px #bebebe, -0px -15px 30px #ffffff;
 }
 
 .animated-border-card .bg {
