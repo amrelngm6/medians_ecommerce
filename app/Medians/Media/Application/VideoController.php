@@ -8,10 +8,9 @@ use Medians\Media\Infrastructure\MediaRepository;
 use Medians\Media\Infrastructure\MediaItemRepository;
 use Medians\Categories\Infrastructure\CategoryRepository;
 use Medians\Customers\Infrastructure\CustomerRepository;
-use Medians\Playlists\Infrastructure\PlaylistRepository;
 
 
-class MediaItemController extends CustomController 
+class VideoController extends CustomController 
 {
 
 	protected $app;
@@ -21,7 +20,6 @@ class MediaItemController extends CustomController
 	protected $mediaRepo;
 	protected $categoryRepo;
 	protected $customerRepo;
-	protected $playlistRepo;
 
 	function __construct()
 	{
@@ -30,7 +28,6 @@ class MediaItemController extends CustomController
 		$this->mediaRepo = new MediaRepository;
 		$this->categoryRepo = new CategoryRepository;
 		$this->customerRepo = new CustomerRepository;
-		$this->playlistRepo = new PlaylistRepository;
 	}
 
 
@@ -49,8 +46,8 @@ class MediaItemController extends CustomController
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-                'type' => 'audio',
-                'layout' => isset($this->app->customer->customer_id) ? 'upload-audio' : 'signin'
+                'type' => 'video',
+                'layout' => isset($this->app->customer->customer_id) ? 'upload-video' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -64,7 +61,7 @@ class MediaItemController extends CustomController
     /**
      * Audio page for frontend
      */
-    public function audio_page($media_id)
+    public function video_page($media_id)
     {
 		$settings = $this->app->SystemSetting();
 
@@ -76,7 +73,7 @@ class MediaItemController extends CustomController
                 'app' => $this->app,
                 'item' => $item,
                 'genres' => $this->categoryRepo->getGenres(),
-                'layout' => 'audio_page'
+                'layout' => 'video_page'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -118,11 +115,9 @@ class MediaItemController extends CustomController
         $customer = $this->app->customer_auth();
         $params = $this->app->params();
         
-        // $this->checkSession($customer);
-
         $params['limit'] = $settings['view_items_limit'] ?? null;
         $params['author_id'] = $customer->customer_id ?? 0;
-        $params['type'] = 'audio';
+        $params['type'] = 'video';
         $list = $this->repo->getWithFilter($params);
 
 		try 
@@ -141,32 +136,6 @@ class MediaItemController extends CustomController
     
     
     /**
-     * Studio media page for frontend
-     */
-    public function studio_playlists()
-    {
-		$settings = $this->app->SystemSetting();
-
-        $customer = $this->app->customer_auth();
-        
-        $this->checkSession($customer);
-
-		try 
-        {
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
-                'app' => $this->app,
-				'items' => $this->playlistRepo->getByCustomer($customer->customer_id),
-                'layout' => isset($this->app->customer->customer_id) ? 'studio_playlists' : 'signin'
-            ], 'output'));
-            
-		} catch (\Exception $e) {
-			throw new \Exception($e->getMessage(), 1);
-		}
-    }
-    
-
-    
-    /**
      * Discover page for frontend
      */
     public function discover()
@@ -176,7 +145,7 @@ class MediaItemController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
-        $params['type'] = 'audio';
+        $params['type'] = 'video';
         $list = $this->repo->getWithFilter($params);
 
         
@@ -191,7 +160,7 @@ class MediaItemController extends CustomController
                 'list' => $list,
                 'channels' => $channels,
                 'genres' => $this->categoryRepo->getGenres(),
-                'layout' => 'discover'
+                'layout' => 'videos/discover'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -211,7 +180,7 @@ class MediaItemController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
-        $params['type'] = 'audio';
+        $params['type'] = 'video';
         $list = $this->repo->getWithFilter($params);
         
 		try 
@@ -221,7 +190,7 @@ class MediaItemController extends CustomController
                 'list' => $list,
                 'genres' => $this->categoryRepo->getGenres(),
                 'layout' => 'search/search',
-                'sub_layout' => 'audio',
+                'sub_layout' => 'video',
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -240,7 +209,6 @@ class MediaItemController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
-        $params['type'] = 'video';
         $list = $this->repo->getWithFilter($params);
         
 		try 
