@@ -851,6 +851,9 @@ UP
   
 }
 
+.dark .pCard_on  .pCard_up {
+  box-shadow: 0 0 30px rgba(0,0,0,.3);
+}
 .pCard_on  .pCard_up {
   height: 100px;
   box-shadow: 0 0 30px #CFD8DC;
@@ -945,6 +948,10 @@ UP
 Down
 ****************/
 
+.dark .pCard_card,
+.dark .pCard_card .pCard_down {
+  background-color: #111827;
+}
 .pCard_card .pCard_down {
   background-color: #fff;
   position: absolute;
