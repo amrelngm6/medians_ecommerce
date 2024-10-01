@@ -1787,6 +1787,9 @@ Animated borders Card
   outline: 2px solid white;
 }
 
+.dark .animated-border-card .bg {
+  outline-color: #1f2937;
+}
 .animated-border-card .blob {
   position: absolute;
   z-index: 1;
