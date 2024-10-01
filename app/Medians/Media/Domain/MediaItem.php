@@ -34,7 +34,7 @@ class MediaItem extends CustomModel
 		'created_by',
 	];
 
-	public $appends = ['field', 'picture_name'];
+	public $appends = ['field', 'picture_name', 'player_object'];
 
 	
 	public function getPictureNameAttribute() 
@@ -46,6 +46,16 @@ class MediaItem extends CustomModel
 	public function getFieldAttribute() 
 	{
 		return !empty($this->custom_fields) ? array_column($this->custom_fields->toArray(), 'value', 'code') : [];
+	}
+
+	public function getPlayerObjectAttribute() 
+	{
+		// return [
+		// 	'title' => $this->name,
+		// 	'filename' => $this->main_file->filename,
+		// 	'artist' => $this->artist->name,
+		// 	'poster' => $this->picture_name,
+		// ];
 	}
 
 	public function getContentLangsAttribute()

@@ -363,6 +363,10 @@ class MediaItemController extends CustomController
 
         $item = $this->repo->find($media_id);
 
+        if (empty($item->main_file->path))
+            return Page404();
+
+
         $filePath = $item->main_file->path;
         $ext = explode('.', $filePath);
         if (!file_exists($_SERVER['DOCUMENT_ROOT'].str_replace('.'.end($ext), '.png', $filePath))) 
