@@ -1107,10 +1107,6 @@ video {
   margin-left: 1rem;
 }
 
-.ml-48 {
-  margin-left: 12rem;
-}
-
 .ml-6 {
   margin-left: 1.5rem;
 }
@@ -2556,6 +2552,10 @@ video {
 
 .ps-3 {
   padding-inline-start: 0.75rem;
+}
+
+.ps-5 {
+  padding-inline-start: 1.25rem;
 }
 
 .pt-0 {
