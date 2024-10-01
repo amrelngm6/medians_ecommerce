@@ -19,6 +19,17 @@
                     <div></div>
                 </div>
                 
+                <div  class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm" id="station-popup-or">
+                    <nav class="flex min-w-[240px] flex-col gap-1 p-1.5" >
+                        <span class="text-center">OR</span>
+                    </nav>
+                </div>
+                
+                <div class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
+                    <nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="item-link-nav">
+                        <input placeholder="{{lang.translate('Add MP3 Link directly')}}" name="params[media_path]" onclick="(function(){ return jQuery('#link-station-submit-button').removeClass('hidden'), jQuery('#new-station-item, #station-popup-or, #station-find-track-form').addClass('hidden'); })()" type="text"  data-form="new-item-link-form" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
+                    </nav>
+                </div>
                 <button class=" dark:text-gray-400 float-right inline-block px-6 py-2 rounded-2xl border transition hover:border-orange-600 border-orange-300">{{lang.translate('Next')}}</button>
                 
             </form>

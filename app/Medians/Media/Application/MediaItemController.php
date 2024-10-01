@@ -60,29 +60,6 @@ class MediaItemController extends CustomController
 
 
     
-    /**
-     * Upload Audio Book page for frontend
-     */
-    public function audiobook_upload_page()
-    {
-		$settings = $this->app->SystemSetting();
-
-        $this->app->customer_auth();
-
-		try {
-
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
-                'app' => $this->app,
-                'type' => 'audiobook',
-                'layout' => isset($this->app->customer->customer_id) ? 'upload-audiobook' : 'signin'
-            ], 'output'));
-            
-		} catch (\Exception $e) {
-			throw new \Exception($e->getMessage(), 1);
-		}
-    }
-
-
     
     /**
      * Audio page for frontend
