@@ -79,26 +79,6 @@ class Category extends CustomModel
 		return $this->hasMany(Category::class, 'parent_id', 'category_id');
 	}
 
-	public function products()
-	{
-		return $this->hasMany(Products\Product::class, 'category_id', 'category_id');
-	}
-
-	public function colors()
-	{
-		return Products\ProductColor::groupBy('value')->get();
-	}
-
-	public function sizes()
-	{
-		return Products\ProductSize::groupBy('value')->get();
-	}
-
-	public function brands()
-	{
-		return Products\ProductField::with('brand')->groupBy('brand_id')->get();
-	}
-
 	public function langs() 
 	{
 		return $this->morphMany(Content::class , 'item')->groupBy('lang');	
