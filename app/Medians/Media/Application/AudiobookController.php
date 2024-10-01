@@ -164,7 +164,7 @@ class AudiobookController extends CustomController
                 'genre_type' => 'book_genres',
                 'model_type' => 'audiobook',
                 'genres' => $this->categoryRepo->getBookGenres(),
-                'layout' => isset($this->app->customer->customer_id) ? 'upload-step2' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'media-edit' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {

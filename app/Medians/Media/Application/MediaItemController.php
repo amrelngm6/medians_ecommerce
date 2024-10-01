@@ -378,7 +378,7 @@ class MediaItemController extends CustomController
                 'genre_type' => 'genres',
                 'model_type' => 'MediaItem',
                 'genres' => $this->categoryRepo->getGenres(),
-                'layout' => isset($this->app->customer->customer_id) ? 'upload-step2' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'media-edit' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
