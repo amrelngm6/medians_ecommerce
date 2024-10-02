@@ -391,9 +391,9 @@ class VideoController extends CustomController
      */
     public function downloadRemoteFile($tempFileFullPath, $link)
     {
-        file_put_contents($tempFileFullPath, fopen($link, 'r'));
+        $save = file_put_contents($tempFileFullPath, fopen($link, 'r'));
 
-        if (file_exists($tempFileFullPath) ) 
+        if ($save && file_exists($tempFileFullPath) ) 
         {
             if (filesize($tempFileFullPath) > 1) {
                 return true;
@@ -401,9 +401,9 @@ class VideoController extends CustomController
         }
 
         
-        file_put_contents($tempFileFullPath, file_get_contents($link));
+        $save = file_put_contents($tempFileFullPath, file_get_contents($link));
 
-        if (file_exists($tempFileFullPath) ) 
+        if ($save && file_exists($tempFileFullPath) ) 
         {
             if (filesize($tempFileFullPath) > 1) {
                 return true;
