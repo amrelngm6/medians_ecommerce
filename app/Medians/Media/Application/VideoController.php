@@ -522,7 +522,6 @@ class VideoController extends CustomController
         $duration = $this->getVideoDuration($videoPath);
         
         if ($duration <= 0) {
-            echo $this->reencodeVideo($videoPath);
             $duration = $this->getVideoDuration($this->reencodeVideo($videoPath) ?? $videoPath);
         }
     
@@ -585,7 +584,7 @@ class VideoController extends CustomController
             return $outputVideoPath;
 
         $command = "ffmpeg -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
-        
+        echo $command;
         // Execute the command
         $run = shell_exec($command);
         
