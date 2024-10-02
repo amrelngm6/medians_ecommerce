@@ -412,7 +412,7 @@ class VideoController extends CustomController
 
                 if (file_exists($tempFileFullPath) ) 
                 {
-                    if (filesize($tempFileFullPath) > 0)
+                    if (filesize($tempFileFullPath) > 1)
                     {
                         $save = $this->store($params, $tempFilePath, $settings);
                     } else {
