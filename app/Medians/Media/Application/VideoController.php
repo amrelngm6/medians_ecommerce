@@ -411,33 +411,21 @@ class VideoController extends CustomController
         }
 
 
-        // Initialize cURL session
-        $ch = curl_init($link);
+        // Initialize a cURL session to fetch the video stream
+        $ch = curl_init($videoUrl);
 
-        // Open the file in write mode
-        $fp = fopen($tempFileFullPath, 'wb');
-
-        if ($fp === false) {
-            die("Failed to open file for writing.");
-        }
-        
-        // Set options for cURL
-        curl_setopt($ch, CURLOPT_FILE, $fp); // Write output to the file
+        // Tell cURL to return the transfer as a string instead of outputting it directly
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36'); // Set User-Agent
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return response instead of outputting directly
-        curl_setopt($ch, CURLOPT_HEADER, false); // Exclude headers from output
-        
-        // Execute cURL session
+
+        // Set headers to match a browser request
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36',
+            'Referer: https://www.facebook.com/',
+        ]);
+
+        // Execute the cURL session
         $response = curl_exec($ch);
-        
-        if ($response === false) {
-            die("cURL error: " . curl_error($ch));
-        }
-        
-        // Close cURL session and file
-        curl_close($ch);
-        fclose($fp);
 
         $filesize = filesize($tempFileFullPath);
         $filesize < 100 ? unlink($tempFileFullPath)   : null;
