@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Recorder and Uploader</title>
+    <link rel="stylesheet" href="/src/front_assets/css/tailwind.min.css" />
+    <script src="/src/front_assets/js/jquery.min.js"></script>
+
+</head>
+<body>
+    
+    
+    <video id="my-video" class="" controls crossorigin="anonymous">
+        <source
+        src="/uploads/videos/7947392-hd_1920_1080_30fps.mp4"
+        type="video/webm" />
+        <source
+        src="/uploads/videos/7947392-hd_1920_1080_30fps.mp4"
+        type="video/mp4" />
+    </video>
+    <figure id="videoContainer">
+        <canvas id="my-canvas"  ></canvas>
+    </figure> 
+          
+        <div id="video-controls" class="flex gap-2" data-state="hidden">
+            <button class="play-video" id="play" type="button" data-state="play">Play</button>
+            <button class="pause-video" id="pause" type="button" data-state="pause">Pause</button>
+            <button id="stop" type="button" data-state="stop">Stop</button>
+            <div class="progress">
+              <progress id="progress" value="0" min="0" step="1" max="">
+                <span id="progress-bar"></span>
+              </progress>
+            </div>
+            <span id="video-duration"></span>
+            <button id="mute" type="button" ></button>
+            <button id="mute" type="button" data-state="mute">Mute/Unmute</button>
+            <button id="volinc" type="button" data-state="volup">Vol+</button>
+            <button id="voldec" type="button" data-state="voldown">Vol-</button>
+            <button id="fs" class="fullscreen" type="button" data-state="go-fullscreen">Fullscreen</button>
+        </div>
+    </figure> 
+    <div id="res"></div>
+    <script>
+// var myVideo = document.createElement("video");
+var myVideo = document.getElementById("my-video");
+
+const processor = {
+  timerCallback() {
+    if (myVideo.paused || myVideo.ended) {
+      return;
+    }
+    this.computeFrame();
+    setTimeout(() => {
+      this.timerCallback();
+    }, 16); // roughly 60 frames per second
+  },
+
+  doLoad() {
+    this.c1 = document.getElementById("my-canvas");
+    this.ctx1 = this.c1.getContext("2d");
+
+
+    /** On time update */
+    myVideo.addEventListener(
+        "timeupdate",
+        () => {
+            
+            jQuery('#res').html(myVideo.currentTime)
+            progress.value = myVideo.currentTime;
+        })
+        
+    /** On Play video */
+    myVideo.addEventListener(
+      "loadedmetadata",
+      () => {
+            jQuery('#video-duration').html(myVideo.duration)
+
+          progress.setAttribute("max", myVideo.duration);
+      },
+      false,
+    );
+        
+    /** On Play video */
+    myVideo.addEventListener(
+      "play",
+      () => {
+        this.width = this.c1.width = myVideo.getBoundingClientRect().width;
+        this.height = this.c1.height = myVideo.getBoundingClientRect().height;
+        this.timerCallback();
+      },
+      false,
+    );
+
+
+
+    /** On change current time */
+    progress.addEventListener( "click" , (e) => {
+
+        console.log(myVideo.seekable)
+        console.log(myVideo.seekable.length)
+        // const rect = progress.getBoundingClientRect();
+        // const pos = (e.pageX - rect.left) / progress.offsetWidth;
+        // // myVideo.currentTime = pos * myVideo.duration;
+        // myVideo.currentTime = 3.10;
+        // myVideo.play()
+    });
+
+    
+  },
+
+  computeFrame() {
+    this.ctx1.drawImage(myVideo, 0, 0, this.width, this.height);
+    const frame = this.ctx1.getImageData(0, 0, this.width, this.height);
+    const l = frame.data.length / 4;
+
+    for (let i = 0; i < l; i++) {
+      const grey =
+        (frame.data[i * 4 + 0] +
+          frame.data[i * 4 + 1] +
+          frame.data[i * 4 + 2]) /
+        3;
+
+    //   frame.data[i * 4 + 0] = grey;
+    //   frame.data[i * 4 + 1] = grey;
+    //   frame.data[i * 4 + 2] = grey;
+    }
+    this.ctx1.putImageData(frame, 0, 0);
+
+    return;
+  },
+};
+
+const playpause = document.createElement("playpause");
+
+window.addEventListener('load', function(){
+
+    if (myVideo.canPlayType("video/mp4")) {
+        myVideo.setAttribute("src", "/uploads/videos/tmp/1f7f86521930ada5853d02c97d79602a.mp4");
+        processor.doLoad();
+    }
+
+    // myVideo.width = 480;
+    // myVideo.height = 600;
+
+})
+
+jQuery(document).on('click', '.pause-video', function(){
+    myVideo.pause()
+})
+jQuery(document).on('click', '.play-video', function(){
+    myVideo.play()
+})
+jQuery(document).on('click', '.fullscreen', function(){
+    
+    // The document is not in fullscreen mode
+    videoContainer.requestFullscreen();
+    setFullscreenData(true);
+    myVideo.play()
+})
+    </script>
+</body>
+</html>
