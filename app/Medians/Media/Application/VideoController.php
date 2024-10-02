@@ -578,13 +578,16 @@ class VideoController extends CustomController
     
 
     function reencodeVideo($inputVideoPath) {
+
+        $settings = $this->app->SystemSetting();
+
         // FFmpeg command to re-encode the video
         $outputVideoPath = str_replace('/tmp', '', $inputVideoPath);
         if (file_exists($outputVideoPath))
             return $outputVideoPath;
 
-        $command = "ffmpeg -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
-        echo $command;
+        $command = $settings['ffmpeg_path']." -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
+
         // Execute the command
         $run = shell_exec($command);
         
