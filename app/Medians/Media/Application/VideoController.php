@@ -520,6 +520,10 @@ class VideoController extends CustomController
         $path_arr = explode('/', $videoPath);
         $fileName = str_replace(['.mp4', '.ogg', '.wmv'], '.jpg', end($path_arr));
         $duration = $this->getVideoDuration($videoPath);
+        
+        if ($duration <= 0) {
+            $duration = $this->reencodeVideo($videoPath) ?? $this->getVideoDuration($videoPath);
+        }
     
         if ($duration <= 0) {
             die("Unable to get video duration.");
@@ -577,13 +581,16 @@ class VideoController extends CustomController
     function reencodeVideo($inputVideoPath) {
         // FFmpeg command to re-encode the video
         $outputVideoPath = str_replace(['.mp4', '.ogg', '.wmv', '.avi'], '_.mp4', $inputVideoPath);
+        if (file_exists($outputVideoPath))
+            return $outputVideoPath;
+
         $command = "ffmpeg -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
         
         // Execute the command
         shell_exec($command);
         
         // Check if the re-encoded file was created successfully
-        return file_exists($outputVideoPath) && filesize($outputVideoPath) > 0;
+        return file_exists($outputVideoPath) && filesize($outputVideoPath) > 0 ? $outputVideoPath : null;
     }
 
 }
