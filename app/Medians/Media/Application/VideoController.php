@@ -561,7 +561,6 @@ class VideoController extends CustomController
 
     function getVideoDuration($videoPath) {
         $command = "ffmpeg -i " . escapeshellarg($videoPath) . " 2>&1";
-        echo $command;
         $output = shell_exec($command);
     
         preg_match('/Duration: (\d+):(\d+):(\d+\.\d+)/', $output, $matches);
