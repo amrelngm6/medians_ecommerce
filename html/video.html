@@ -11,18 +11,22 @@
 <body>
     
     
-    <video id="my-video" class="" controls crossorigin="anonymous">
-        <source
-        src="/uploads/videos/7947392-hd_1920_1080_30fps.mp4"
-        type="video/webm" />
-        <source
-        src="/uploads/videos/7947392-hd_1920_1080_30fps.mp4"
-        type="video/mp4" />
-    </video>
     <figure id="videoContainer">
-        <canvas id="my-canvas"  ></canvas>
-    </figure> 
+        <video id="my-video" class=""  crossorigin="anonymous">
+            <source
+            src="/uploads/videos/7947392-hd_1920_1080_30fps.mp4"
+            type="video/webm" />
+            <source
+            src="/uploads/videos/7947392-hd_1920_1080_30fps.mp4"
+            type="video/mp4" />
+        </video>
+        <canvas id="videoCanvas" ondragstart="isDragging = true" width="300" height="300" style="bottom: 0;" class="fixed z-10 " ></canvas>
           
+  <!-- Custom controls -->
+  <div id="customControls">
+    <button id="pauseBtn">❚❚</button>  <!-- Custom Pause Button -->
+    <button id="nextBtn">⏭</button>   <!-- Custom Next Button -->
+  </div>
         <div id="video-controls" class="flex gap-2" data-state="hidden">
             <button class="play-video" id="play" type="button" data-state="play">Play</button>
             <button class="pause-video" id="pause" type="button" data-state="pause">Pause</button>
@@ -57,9 +61,8 @@ const processor = {
   },
 
   doLoad() {
-    this.c1 = document.getElementById("my-canvas");
+    this.c1 = document.getElementById("videoCanvas");
     this.ctx1 = this.c1.getContext("2d");
-
 
     /** On time update */
     myVideo.addEventListener(
@@ -85,8 +88,8 @@ const processor = {
     myVideo.addEventListener(
       "play",
       () => {
-        this.width = this.c1.width = myVideo.getBoundingClientRect().width;
-        this.height = this.c1.height = myVideo.getBoundingClientRect().height;
+        this.width = 300;
+        this.height =  200;
         this.timerCallback();
       },
       false,
@@ -106,6 +109,53 @@ const processor = {
         myVideo.play()
     });
 
+
+
+
+    let isDragging = false;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    videoCanvas.addEventListener('mousedown', function (e) {
+        isDragging = true;
+        videoCanvas.style.cursor = 'grabbing';
+
+        // Calculate offset position to handle dragging smoothly
+        offsetX = e.clientX - videoCanvas.getBoundingClientRect().left;
+        offsetY = e.clientY - videoCanvas.getBoundingClientRect().top;
+    });
+
+    // Function to stop dragging
+    window.addEventListener('mouseup', function () {
+        isDragging = false;
+        videoCanvas.style.cursor = 'grab';
+    });
+
+    videoCanvas.addEventListener('ondragstart', function(){
+        console.log('drag')
+        isDragging = true;
+        videoCanvas.style.cursor = 'grabbing';
+    })
+    
+    
+    // Function to drag the canvas
+    window.addEventListener('mousemove', function (e) {
+        if (isDragging) {
+            // Calculate the new position
+            const left = e.clientX - offsetX;
+            const top = e.clientY - offsetY;
+
+            // Update canvas position
+            videoCanvas.style.left = `${left}px`;
+            videoCanvas.style.top = `${top + 10}px`;
+
+            // Set the position to absolute once dragging starts
+            videoCanvas.style.position = 'fixed';
+            videoCanvas.style.transform = 'none';
+        }
+    });
+
+    
     
   },
 
@@ -159,5 +209,49 @@ jQuery(document).on('click', '.fullscreen', function(){
     myVideo.play()
 })
     </script>
+
+
+
+
+
+<style>
+:fullscreen #videoContainer {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* Custom controls styling */
+:fullscreen #customControls {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+}
+
+:fullscreen #customControls button {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 0 10px;
+  border-radius: 5px;
+}
+
+/* Show controls on hover */
+#videoContainer:hover #customControls {
+  display: flex;
+}
+
+/* Make sure the video fits the entire screen in fullscreen */
+:fullscreen video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+</style>
 </body>
 </html>
