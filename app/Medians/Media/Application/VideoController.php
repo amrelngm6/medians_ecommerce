@@ -410,7 +410,7 @@ class VideoController extends CustomController
             }
         }
 
-        throw new \Exception("File is invalid", 1);
+        throw new \Exception("File size is ".filesize($tempFileFullPath), 1);
         
     } 
 
