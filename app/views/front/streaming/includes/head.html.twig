@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{item.content.seo_title ? item.content.seo_title : (item.content ? item.content.title : 'Quatre for Office Furniture, Obline Ecommerce Store')}}</title>
-    <meta name="description" content="{{item.content.seo_desc ? item.content.seo_desc : 'Quatre for Office Furniture, Obline Ecommerce Store.'}}">
+    <title>{{item.content.seo_title ? item.content.seo_title : (item.content ? item.content.title : app.SystemSetting.sitename)}}</title>
+    <meta name="description" content="{{item.content.seo_desc ? item.content.seo_desc : app.SystemSetting.sitename}}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="canonical" href="{{app.request.uri}}">
  
