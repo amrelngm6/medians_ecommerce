@@ -340,7 +340,7 @@ class VideoController extends CustomController
 
         $videoPath = $_SERVER['DOCUMENT_ROOT'].$item->main_file->path;
         $outputDir = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->videos_dir. 'screenshots/';
-        $list = $this->generateScreenshots($videoPath, $outputDir);
+        $list = $this->generateScreenshots($videoPath, $outputDir, $settings);
 
 		try {
 
@@ -515,14 +515,14 @@ class VideoController extends CustomController
 	}
 
 
-    function generateScreenshots($videoPath, $outputDir, $screenshotCount = 10) {
+    function generateScreenshots($videoPath, $outputDir, $settings, $screenshotCount = 10 ) {
 
         $path_arr = explode('/', $videoPath);
         $fileName = str_replace(['.mp4', '.ogg', '.wmv'], '.jpg', end($path_arr));
-        $duration = $this->getVideoDuration($videoPath);
+        $duration = $this->getVideoDuration($videoPath, $settings);
         
         if ($duration <= 0) {
-            $duration = $this->getVideoDuration($this->reencodeVideo($videoPath) ?? $videoPath);
+            $duration = $this->getVideoDuration($this->reencodeVideo($videoPath) ?? $videoPath, $settings);
         }
     
         if ($duration <= 0) {
@@ -559,9 +559,8 @@ class VideoController extends CustomController
         return $items;
     }
 
-    function getVideoDuration($videoPath) {
+    function getVideoDuration($videoPath, $settings) {
         
-        $settings = $this->app->SystemSetting();
         $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
 
         $command = "$ffmpeg -i " . escapeshellarg($videoPath) . " 2>&1";
