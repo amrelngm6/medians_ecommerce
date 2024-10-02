@@ -522,7 +522,7 @@ class VideoController extends CustomController
         $duration = $this->getVideoDuration($videoPath);
         
         if ($duration <= 0) {
-            $duration = $this->reencodeVideo($videoPath) ?? $this->getVideoDuration($videoPath);
+            $duration = $this->getVideoDuration($this->reencodeVideo($videoPath) ?? $videoPath);
         }
     
         if ($duration <= 0) {
