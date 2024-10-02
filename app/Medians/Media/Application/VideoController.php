@@ -520,6 +520,7 @@ class VideoController extends CustomController
         $path_arr = explode('/', $videoPath);
         $fileName = str_replace(['.mp4', '.ogg', '.wmv'], '.jpg', end($path_arr));
         $duration = $this->getVideoDuration($videoPath, $settings);
+        $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
         
         if ($duration <= 0) {
             $duration = $this->getVideoDuration($this->reencodeVideo($videoPath) ?? $videoPath, $settings);
@@ -546,7 +547,7 @@ class VideoController extends CustomController
             $outputFile = $outputDir . "screenshot_" . $i . "_" . $fileName;
             
             // Command to capture screenshot at the specific time
-            $command = "ffmpeg -ss $formattedTime -i " . escapeshellarg($videoPath) . " -vframes 1 -q:v 2 " . escapeshellarg($outputFile) . " 2>&1";
+            $command = "$ffmpeg -ss $formattedTime -i " . escapeshellarg($videoPath) . " -vframes 1 -q:v 2 " . escapeshellarg($outputFile) . " 2>&1";
     
             // Execute the command
             file_exists($outputFile) ? null : shell_exec($command);
