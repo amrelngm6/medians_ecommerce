@@ -406,7 +406,7 @@ class VideoController extends CustomController
                 
                 $params['name'] = '';
                 $params['description'] = '';
-                $tempFilePath = '/uploads/audio/tmp/'.md5($params['link']).'.mp3';
+                $tempFilePath = '/uploads/videos/tmp/'.md5($params['link']).'.mp4';
                 file_put_contents($_SERVER['DOCUMENT_ROOT'].$tempFilePath, fopen($params['link'], 'r'));
                 $save = $this->store($params, $tempFilePath, $settings);
 
@@ -439,6 +439,21 @@ class VideoController extends CustomController
     {
         try {
             
+            $getID3 = new getID3;
+            // Analyze file
+            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
+            
+            if (isset($fileInfo['playtime_seconds']))
+            {
+                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+            }
+
+            if (isset($fileInfo['tags']['id3v2']))
+            {
+                $params['name'] = $fileInfo['tags']['id3v2']['title'][0] ?? ($params['name'] ?? 'Unknown Title');
+                $params['description'] = $fileInfo['tags']['id3v2']['comment'][0] ?? ($params['name'] ?? 'No Description');
+            }
+
             $params['files'] = [ ['type'=> 'video', 'title' => $params['name'] ?? '', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ];
             $params['author_id'] = $this->app->customer_id() ?? 0;
             
@@ -526,7 +541,6 @@ class VideoController extends CustomController
     
             $outputFile = $outputDir . "screenshot_" . $i . "_" . $fileName;
             
-
             // Command to capture screenshot at the specific time
             $command = "ffmpeg -ss $formattedTime -i " . escapeshellarg($videoPath) . " -vframes 1 -q:v 2 " . escapeshellarg($outputFile) . " 2>&1";
     
