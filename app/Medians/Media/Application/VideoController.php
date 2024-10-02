@@ -386,6 +386,33 @@ class VideoController extends CustomController
     }
 
 
+    /**
+     * Download & Validate from URL
+     */
+    public function downloadRemoteFile($tempFileFullPath, $link)
+    {
+        file_put_contents($tempFileFullPath, fopen($link, 'r'));
+
+        if (file_exists($tempFileFullPath) ) 
+        {
+            if (filesize($tempFileFullPath) > 1) {
+                return true;
+            }
+        }
+
+        
+        file_put_contents($tempFileFullPath, file_get_contents($link));
+
+        if (file_exists($tempFileFullPath) ) 
+        {
+            if (filesize($tempFileFullPath) > 1) {
+                return true;
+            }
+        }
+
+        throw new \Exception("File is invalid", 1);
+        
+    } 
 
 
     /**
@@ -408,19 +435,11 @@ class VideoController extends CustomController
                 $params['description'] = '';
                 $tempFilePath = '/uploads/videos/tmp/'.md5($params['link']).'.mp4';
                 $tempFileFullPath = $_SERVER['DOCUMENT_ROOT'].$tempFilePath;
-                file_put_contents($tempFileFullPath, fopen($params['link'], 'r'));
-
-                if (file_exists($tempFileFullPath) ) 
+                
+                if ($this->downloadRemoteFile($tempFileFullPath, $params['link']) ) 
                 {
-                    if (filesize($tempFileFullPath) > 1)
-                    {
-                        $save = $this->store($params, $tempFilePath, $settings);
-                    } else {
-                        unlink($tempFileFullPath);
-                        throw new \Exception("File is not valid", 1);
-                    }
+                    $save = $this->store($params, $tempFilePath, $settings);
                 }
-
 
             } else {
                     
