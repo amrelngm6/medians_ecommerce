@@ -99,11 +99,11 @@ const processor = {
 
         console.log(myVideo.seekable)
         console.log(myVideo.seekable.length)
-        // const rect = progress.getBoundingClientRect();
-        // const pos = (e.pageX - rect.left) / progress.offsetWidth;
-        // // myVideo.currentTime = pos * myVideo.duration;
+        const rect = progress.getBoundingClientRect();
+        const pos = (e.pageX - rect.left) / progress.offsetWidth;
+        myVideo.currentTime = pos * myVideo.duration;
         // myVideo.currentTime = 3.10;
-        // myVideo.play()
+        myVideo.play()
     });
 
     
