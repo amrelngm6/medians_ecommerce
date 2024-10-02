@@ -4,8 +4,8 @@
 
 	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0">
 		<video id="my-video" class="hidden" crossorigin="anonymous">
-			<source src="{{media.main_file.path}}" type="video/webm"/>
-			<source src="{{media.main_file.path}}" type="video/mp4"/>
+			<source src="{{item.main_file.path}}" type="video/webm"/>
+			<source src="{{item.main_file.path}}" type="video/mp4"/>
 		</video>
 		<canvas id="videoCanvas" ondragstart="isDragging = true" width="300" height="300" style="bottom: 0;" class="hidden fixed z-10 "></canvas>
 
