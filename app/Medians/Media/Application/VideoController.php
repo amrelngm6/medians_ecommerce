@@ -580,7 +580,7 @@ class VideoController extends CustomController
 
     function reencodeVideo($inputVideoPath) {
         // FFmpeg command to re-encode the video
-        $outputVideoPath = str_replace(['.mp4', '.ogg', '.wmv', '.avi'], '_.mp4', $inputVideoPath);
+        $outputVideoPath = str_replace('/tmp', '', $inputVideoPath);
         if (file_exists($outputVideoPath))
             return $outputVideoPath;
 
