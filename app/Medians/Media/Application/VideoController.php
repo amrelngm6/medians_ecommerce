@@ -410,6 +410,24 @@ class VideoController extends CustomController
             }
         }
 
+
+        // Initialize cURL session
+        $ch = curl_init($link);
+
+        // Open the file in write mode
+        $fp = fopen($tempFileFullPath, 'wb');
+
+        // Set options for cURL
+        curl_setopt($ch, CURLOPT_FILE, $fp); // Write output to the file
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects if any
+
+        // Execute cURL session
+        curl_exec($ch);
+
+        // Close cURL session and file
+        curl_close($ch);
+        fclose($fp);
+
         throw new \Exception("File size is ".filesize($tempFileFullPath), 1);
         
     } 
