@@ -2,14 +2,14 @@
 	<img style="z-index:-1" src="/stream?thumbnail=1600&image={{item.picture_name}}" class=" "/>
 
 
-	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0">
+	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0 pt-20">
 		<video id="my-video" class="hidden" crossorigin="anonymous">
 			<source src="{{item.main_file.path}}" type="video/webm"/>
 			<source src="{{item.main_file.path}}" type="video/mp4"/>
 		</video>
 		<canvas id="videoCanvas" ondragstart="isDragging = true" width="300" height="300" style="bottom: 0;" class="hidden fixed z-10 "></canvas>
 
-		<div id="video-controls" class="flex gap-2 pt-10" data-state="hidden">
+		<div id="video-controls" class="flex gap-2 pt-20" data-state="hidden">
 			<button class="play-video" id="play" type="button" data-state="play"><img src="/src/front_assets/svg/video-play.svg" class="w-4"/></button>
 			<button class="pause-video" id="pause" type="button" data-state="pause"><img src="/src/front_assets/svg/video-pause.svg" class="w-4"/></button>
 			<div id="res"></div>
