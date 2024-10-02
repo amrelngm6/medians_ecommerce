@@ -73,7 +73,7 @@ class VideoController extends CustomController
                 'app' => $this->app,
                 'item' => $item,
                 'genres' => $this->categoryRepo->getGenres(),
-                'layout' => 'video_page'
+                'layout' => 'videos/page'
             ], 'output'));
             
 		} catch (\Exception $e) {
