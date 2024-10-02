@@ -587,7 +587,7 @@ class VideoController extends CustomController
         $command = "ffmpeg -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
         
         // Execute the command
-        shell_exec($command);
+        $run = shell_exec($command);
         
         // Check if the re-encoded file was created successfully
         return file_exists($outputVideoPath) && filesize($outputVideoPath) > 0 ? $outputVideoPath : null;
