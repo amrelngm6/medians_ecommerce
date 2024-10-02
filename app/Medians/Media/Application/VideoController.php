@@ -560,7 +560,11 @@ class VideoController extends CustomController
     }
 
     function getVideoDuration($videoPath) {
-        $command = "ffmpeg -i " . escapeshellarg($videoPath) . " 2>&1";
+        
+        $settings = $this->app->SystemSetting();
+        $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
+
+        $command = "$ffmpeg -i " . escapeshellarg($videoPath) . " 2>&1";
         $output = shell_exec($command);
     
         preg_match('/Duration: (\d+):(\d+):(\d+\.\d+)/', $output, $matches);
@@ -580,13 +584,14 @@ class VideoController extends CustomController
     function reencodeVideo($inputVideoPath) {
 
         $settings = $this->app->SystemSetting();
+        $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
 
         // FFmpeg command to re-encode the video
         $outputVideoPath = str_replace('/tmp', '', $inputVideoPath);
         if (file_exists($outputVideoPath))
             return $outputVideoPath;
 
-        $command = $settings['ffmpeg_path']." -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
+        $command = "$ffmpeg -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
 
         // Execute the command
         $run = shell_exec($command);
