@@ -627,7 +627,7 @@ class VideoController extends CustomController
             return ($hours * 3600) + ($minutes * 60) + $seconds;
         }
     
-        return 0;  // Return 0 if unable to get the duration
+        return 0; 
     }
     
 
