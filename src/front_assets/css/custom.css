@@ -4,9 +4,13 @@
 }
 
 /* Track */
-::-webkit-scrollbar-track 
+::-webkit-scrollbar-track,
+progress::-webkit-progress-bar 
 {
   background: #ddd; 
+}
+progress::-webkit-progress-value {
+  background: rgb(17, 24, 39, .5); 
 }
 .dark ::-webkit-scrollbar-track {
   background: #111827; 

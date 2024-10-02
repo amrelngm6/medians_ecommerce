@@ -407,8 +407,20 @@ class VideoController extends CustomController
                 $params['name'] = '';
                 $params['description'] = '';
                 $tempFilePath = '/uploads/videos/tmp/'.md5($params['link']).'.mp4';
-                file_put_contents($_SERVER['DOCUMENT_ROOT'].$tempFilePath, fopen($params['link'], 'r'));
-                $save = $this->store($params, $tempFilePath, $settings);
+                $tempFileFullPath = $_SERVER['DOCUMENT_ROOT'].$tempFilePath;
+                file_put_contents($tempFileFullPath, fopen($params['link'], 'r'));
+
+                if (file_exists($tempFileFullPath) ) 
+                {
+                    if (filesize($tempFileFullPath) > 0)
+                    {
+                        $save = $this->store($params, $tempFilePath, $settings);
+                    } else {
+                        unlink($tempFileFullPath);
+                        throw new \Exception("File is not valid", 1);
+                    }
+                }
+
 
             } else {
                     
