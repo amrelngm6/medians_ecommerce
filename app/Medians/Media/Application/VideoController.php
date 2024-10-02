@@ -576,7 +576,7 @@ class VideoController extends CustomController
 
     function reencodeVideo($inputVideoPath) {
         // FFmpeg command to re-encode the video
-        $outputVideoPath = str_replace(['.mp4', 'ogg', 'wmv', 'avi'], '.mp4', $inputVideoPath);
+        $outputVideoPath = str_replace(['.mp4', '.ogg', '.wmv', '.avi'], '_.mp4', $inputVideoPath);
         $command = "ffmpeg -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
         
         // Execute the command
