@@ -17,6 +17,14 @@
                     <div class="grid-cols-2 grid gap-10">
                         <div class="text-primary w-full block">
                             <input name="params[name]" placeholder="{{lang.translate('Video Name')}} *" value="{{item.name}}" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
+                        </div>         
+                        <div class="text-primary w-full block">
+                            <select id="genres" multiple data-multi-select class="multi-select"  name="params[selected_genres]" >
+                                {% for genre in genres %}
+                                <option value="{{genre.category_id}}">{{genre.name}}</option>
+                                {% endfor  %}
+                            </select>
+                            <inputplaceholder="{{lang.translate('Video Name')}} *" value="{{item.name}}" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
                         </div>                       
                     </div>
                     
@@ -53,6 +61,8 @@
 
             <script>
             $(function() {
+                document.querySelectorAll('[data-multi-select]').forEach(select => new MultiSelect(select));
+
                 {# loadSection('/front_api?type=load-video-screenshots&params[media_id]={{item.media_id}}', 'screenshots-container') #}
             })
             </script>
