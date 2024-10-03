@@ -392,8 +392,7 @@ class VideoController extends CustomController
 
         $filesize = filesize($tempFileFullPath);
         $filesize < 100 ? unlink($tempFileFullPath)   : null;
-        $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : null;
-
+        return $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : true;
     } 
 
 
