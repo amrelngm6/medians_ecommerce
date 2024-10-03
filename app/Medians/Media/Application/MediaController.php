@@ -294,11 +294,6 @@ class MediaController extends CustomController
 		{
 			$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/tmp/' . $video;
 		}
-
-
-		if (!file_exists($filePath)) {
-		}
-
 		
 
 		if (!file_exists($filePath)) {
