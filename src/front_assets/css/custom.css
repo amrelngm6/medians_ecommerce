@@ -2120,6 +2120,7 @@ Video Player
     display: flex;
     gap: 10px;
     background: linear-gradient(0deg, rgba(0, 13, 36, 0.8519782913165266) 0%, rgba(0, 13, 36, 0) 100%);
+    opacity: 0;
 
     /* transform: translateX(-50%); */
 }
@@ -2127,6 +2128,7 @@ Video Player
 /* Show controls on hover */
 :fullscreen #videoContainer:hover #video-controls {
     display: flex;
+    opacity: 1;
 }
 
 /* Make sure the video fits the entire screen in fullscreen */
