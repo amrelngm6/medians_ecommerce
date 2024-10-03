@@ -294,6 +294,7 @@ const playpause = document.createElement("playpause");
 window.addEventListener('load', function(){
 
     if (myVideo.canPlayType("video/mp4")) {
+        myVideo.setAttribute("src", "{{item.main_file.path}}");
         processor.doLoad();
     }
 
