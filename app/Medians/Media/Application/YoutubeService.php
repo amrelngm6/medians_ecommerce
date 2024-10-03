@@ -47,6 +47,7 @@ class YoutubeService extends CustomController
 
             // Access the video details
             $videoDetails = $response['items'][0];
+            print_r($videoDetails);
             
             // Print video details
             echo 'Title: ' . $videoDetails['snippet']['title'] . PHP_EOL;
