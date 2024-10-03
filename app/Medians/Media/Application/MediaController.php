@@ -276,7 +276,7 @@ class MediaController extends CustomController
 	}
 
 
-	function streamVideo($startTimeInSeconds = 0, $streamDuration = 20) {
+	function streamVideo($startTimeInSeconds = 0, $duration = 20) {
 
 		$this->isDirectAccess();
 
@@ -301,7 +301,7 @@ class MediaController extends CustomController
 		// Analyze the file using getID3 for duration and bitrate
 		$getID3 = new \getID3;
 		$fileInfo = $getID3->analyze($filePath);
-	
+		
 		// Get total duration and bitrate
 		$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;
 		$bitRate = !empty($fileInfo['bitrate']) ? $fileInfo['bitrate'] : 0; // Bitrate in bits per second
