@@ -392,7 +392,8 @@ class VideoController extends CustomController
         
         // Close cURL session and file
         
-        $save = file_put_contents($tempFileFullPath, $response);
+        // $save = file_put_contents($tempFileFullPath, $response);
+        echo $response;
         
         curl_close($ch);
         
