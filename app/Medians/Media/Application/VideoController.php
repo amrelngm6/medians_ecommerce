@@ -89,8 +89,8 @@ class VideoController extends CustomController
 
     public function downloadYoutube($videoInfo)
     {
-        $youtube = new \YouTube\YouTubeStreamer();
-        print_r($youtube->stream($videoInfo->streamingData->formats[0]->url));
+    //     $youtube = new \YouTube\YouTubeStreamer();
+    //     print_r($youtube->stream($videoInfo->streamingData->formats[0]->url));
         
     }
 
