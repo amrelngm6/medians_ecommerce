@@ -2022,7 +2022,6 @@ Videos Box with colored Border
 
   .package  .img {
     width: 100%;
-    height: 50%;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     background: linear-gradient(#e66465, #9198e5);
