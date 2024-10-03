@@ -59,6 +59,32 @@ class VideoController extends CustomController
     
     
     /**
+     * Import Video file from external link
+     */
+    public function import_page()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $this->app->customer_auth();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'type' => 'video',
+                'layout' => isset($this->app->customer->customer_id) ? 'import' : 'signin',
+                'sub_layout' => 'videos/import',
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
+
+    
+    
+    /**
      * Audio page for frontend
      */
     public function video_page($media_id)

@@ -49,6 +49,8 @@ RouteHandler::get('/mobile_api/(:all)', \Medians\MobileAPIController::class.'@ha
 RouteHandler::get('/search', \Medians\Pages\Application\PageController::class.'@search');
 RouteHandler::get('/upload', \Medians\Media\Application\MediaItemController::class.'@upload_page');
 RouteHandler::get('/media/edit/(:all)', \Medians\Media\Application\MediaItemController::class.'@edit_media');
+RouteHandler::get('/import/audio', \Medians\Media\Application\MediaItemController::class.'@import_page');
+RouteHandler::get('/track/(:all)', \Medians\Media\Application\MediaItemController::class.'@audio_page');
 
 /** Audiobooks pages */
 RouteHandler::get('/upload/audiobook', \Medians\Media\Application\AudiobookController::class.'@audiobook_upload_page');
@@ -56,10 +58,11 @@ RouteHandler::get('/audiobook/edit/(:all)', \Medians\Media\Application\Audiobook
 RouteHandler::get('/audiobook/edit_chapters/(:all)', \Medians\Media\Application\AudiobookController::class.'@edit_chapters');
 RouteHandler::get('/discover/audiobook', \Medians\Media\Application\AudiobookController::class.'@discover');
 RouteHandler::get('/audiobook/(:all)', \Medians\Media\Application\AudiobookController::class.'@book_page');
-RouteHandler::get('/track/(:all)', \Medians\Media\Application\MediaItemController::class.'@audio_page');
+RouteHandler::get('/import/audiobook', \Medians\Media\Application\AudiobookController::class.'@import_page');
 
 /** Videos pages */
 RouteHandler::get('/upload/video', \Medians\Media\Application\VideoController::class.'@upload_page');
+RouteHandler::get('/import/video', \Medians\Media\Application\VideoController::class.'@import_page');
 RouteHandler::get('/video/edit/(:all)', \Medians\Media\Application\VideoController::class.'@edit_video');
 RouteHandler::get('/discover/video', \Medians\Media\Application\VideoController::class.'@discover');
 RouteHandler::get('/video/(:all)', \Medians\Media\Application\VideoController::class.'@video_page');

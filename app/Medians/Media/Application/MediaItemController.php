@@ -59,6 +59,30 @@ class MediaItemController extends CustomController
     }
 
 
+    /**
+     * Import Audio file from external link
+     */
+    public function import_page()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $this->app->customer_auth();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'type' => 'audio',
+                'layout' => isset($this->app->customer->customer_id) ? 'import' : 'signin',
+                'sub_layout' => 'videos/import',
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
+
     
     
     /**
@@ -76,7 +100,7 @@ class MediaItemController extends CustomController
                 'app' => $this->app,
                 'item' => $item,
                 'genres' => $this->categoryRepo->getGenres(),
-                'layout' => 'audio_page'
+                'layout' => 'audio/page'
             ], 'output'));
             
 		} catch (\Exception $e) {
