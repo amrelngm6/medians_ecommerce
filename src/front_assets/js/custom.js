@@ -39,7 +39,9 @@ document.getElementById('station-player-audio').addEventListener("change", funct
 }) ;	
 
 jQuery(document).on('click', '.start-station', function (i, el) {
-	audio.pause()
+
+	audio ? audio.pause() : null
+
 	jQuery('#station-player-audio').val(getCookie('volume'))
 	jQuery('#station-player-pause-button').addClass('active')
 	jQuery('#station-app-cover').removeClass('hidden')
@@ -116,7 +118,7 @@ async function loadStation(stationId, play = true)
 
 jQuery(document).on('click', '.start-player', function (i, el) {
 	jQuery('#station-app-cover').addClass('hidden')
-	audio.pause()
+	audio ? audio.pause() : null
 	player = jQuery(this);
 	list = JSON.parse(player.attr('data-list'))
 	index = parseInt(player.attr('data-index'))
