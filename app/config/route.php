@@ -222,8 +222,8 @@ if(!empty($app->auth()))
     /**
     * @return VideoGenres
     */
-    RouteHandler::get('/admin/video_genres', Medians\Categories\Application\BookGenreController::class.'@index');
-    RouteHandler::get('/admin/video_genres/(:all)', Medians\Categories\Application\BookGenreController::class.'@genre');
+    RouteHandler::get('/admin/video_genres', Medians\Categories\Application\VideoGenreController::class.'@index');
+    RouteHandler::get('/admin/video_genres/(:all)', Medians\Categories\Application\VideoGenreController::class.'@genre');
 
     /**
     * @return Moods
