@@ -110,7 +110,7 @@ class VideoController extends CustomController
             
             $youtube = new YoutubeService($settings['youtube_api']);
             // $youtube->video_info($params['video_id'] ?? 'e3QZ39fy2pA');
-            $videoInfo = json_decode($this->getVideoInfo('e3QZ39fy2pA'));
+            $videoInfo = json_decode($this->getVideoInfo('6vgyeRfML1E'));
             $process = $youtube->processVideo($videoInfo->streamingData->adaptiveFormats, $videoInfo->streamingData->formats );
             print_r( $process );
             print_r( $videoInfo );
