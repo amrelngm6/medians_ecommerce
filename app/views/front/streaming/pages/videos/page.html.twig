@@ -112,7 +112,8 @@ const processor = {
     myVideo.addEventListener(
       "loadedmetadata",
       () => {
-        jQuery(videoCanvas).removeClass('hidden')
+        	
+			//jQuery(videoCanvas).removeClass('hidden')
 
             jQuery('#video-duration').html(convertToTime(myVideo.duration))
 
@@ -179,7 +180,7 @@ const processor = {
     let offsetX = 0;
     let offsetY = 0;
 
-    videoCanvas.addEventListener('mousedown', function (e) {
+    {# videoCanvas.addEventListener('mousedown', function (e) {
         isDragging = true;
         videoCanvas.style.cursor = 'grabbing';
 
@@ -188,17 +189,17 @@ const processor = {
         offsetY = e.clientY - videoCanvas.getBoundingClientRect().top;
     });
 
+    videoCanvas.addEventListener('ondragstart', function(){
+        isDragging = true;
+        videoCanvas.style.cursor = 'grabbing';
+    }) #}
+    
     // Function to stop dragging
     window.addEventListener('mouseup', function () {
         isDragging = false;
         videoCanvas.style.cursor = 'grab';
     });
 
-    videoCanvas.addEventListener('ondragstart', function(){
-        isDragging = true;
-        videoCanvas.style.cursor = 'grabbing';
-    })
-    
     
     // Function to drag the canvas
     window.addEventListener('mousemove', function (e) {
