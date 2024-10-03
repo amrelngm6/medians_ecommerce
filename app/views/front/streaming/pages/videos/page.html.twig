@@ -178,6 +178,19 @@ const processor = {
       },
       false,
     );
+        
+    /** On Play video */
+    myVideo.addEventListener(
+      "click",
+      () => {
+
+        if (myVideo.paused) 
+			myVideo.play()
+		else 	
+			myVideo.pause()
+      },
+      false,
+    );
 
 
 
