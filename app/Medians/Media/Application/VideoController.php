@@ -370,9 +370,10 @@ class VideoController extends CustomController
     public function downloadRemoteFile($tempFileFullPath, $link)
     {
         
-        
+        $videoUrl = 'https://rr1---sn-ax8xaj5ggpxg-q5jz.googlevideo.com/videoplayback?expire=1727984645&ei=pZ_-ZvPCF9Wy9fwP0dfsoAg&ip=202.181.16.165&id=o-ABCjPEfgxvgYZ2aEy8KjxpRBF0jjf7pkMG94qCpBM_jj&itag=18&source=youtube&requiressl=yes&xpc=EgVo2aDSNQ%3D%3D&mh=rR&mm=31%2C29&mn=sn-ax8xaj5ggpxg-q5jz%2Csn-h5576nsy&ms=au%2Crdu&mv=m&mvi=1&pl=24&initcwndbps=610000&bui=AXLXGFSYnKcKX0WqcDlQJpOJkrDKRNI61eqa-DnK-aQZmSrNAYAE-CeUTnV0WHtKZ3vPWd24rq8p6CCo&spc=54MbxYT5ADLLq4kBCo659dI6Q4nDSx6Ob4FXfH_6F_8RWp4GRBa5&vprv=1&svpuc=1&mime=video%2Fmp4&ns=U9sqtG4Mcv00JGHqNZVESB8Q&rqh=1&cnr=14&ratebypass=yes&dur=1690.505&lmt=1726025334408138&mt=1727962615&fvip=4&fexp=51300760&c=WEB_CREATOR&sefc=1&txp=5438434&n=lm_cB7o9pGSFig&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cbui%2Cspc%2Cvprv%2Csvpuc%2Cmime%2Cns%2Crqh%2Ccnr%2Cratebypass%2Cdur%2Clmt&sig=AJfQdSswRQIgceXynTtuI732fy8FB998u53szNemLQtjtqn4RrfjS3sCIQCLwBSw60bFArREDKR9rFLP7MaOXmV50Brp2FEJRKWYrw%3D%3D&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=ACJ0pHgwRQIhALCjY0maxiOD6e5FOBVAL-64lCeS3inxnMviGj39u039AiBmoEazo5Qn2MwF0r3N5zsrtlPLLqmY79z9opr8ZXp0ZQ%3D%3D&title=%D9%85%D8%B3%D9%84%D8%B3%D9%84%20%D8%A7%D9%84%D9%83%D8%A8%D9%8A%D8%B1%20%D8%A3%D9%88%D9%8A%20%D8%A7%D9%84%D8%AC%D8%B2%D8%A1%20%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A%20%7C%20%D8%A7%D9%84%D8%AD%D9%84%D9%82%D8%A9%20%D8%A7%D9%84%D8%AE%D8%A7%D9%85%D8%B3%D8%A9%20%D8%B9%D8%B4%D8%B1%20-%20(15)%20Episode%20%7C%20%D8%A3%D8%AD%D9%85%D8%AF%20%D9%85%D9%83%D9%8A';
+
         // Initialize a cURL session to fetch the video stream
-        $ch = curl_init($link);
+        $ch = curl_init($videoUrl);
 
         // Tell cURL to return the transfer as a string instead of outputting it directly
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -387,16 +388,36 @@ class VideoController extends CustomController
         // Execute the cURL session
         $response = curl_exec($ch);
 
+        // file_put_contents('./b.mp4', $response);
 
 
-        $save = file_put_contents('a.mp4', $response);
+        // return;
+
+        
+        // // Initialize a cURL session to fetch the video stream
+        // $ch = curl_init($link);
+
+        // // Tell cURL to return the transfer as a string instead of outputting it directly
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
+
+        // // Set headers to match a browser request
+        // curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        //     'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36',
+        //     'Referer: https://www.facebook.com/',
+        // ]);
+
+        // // Execute the cURL session
+        // $response = curl_exec($ch);
+
+        $save = file_put_contents($tempFileFullPath, $response);
         if ($save)
         {
             $filesize = filesize($tempFileFullPath);
             // $filesize < 100 ? unlink($tempFileFullPath)   : null;
             $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : null;
         }
-
+        
         return;
 
         
