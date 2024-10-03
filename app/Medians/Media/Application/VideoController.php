@@ -83,7 +83,6 @@ class VideoController extends CustomController
         }
         curl_close($ch);
         return $result;
-    
     }
 
 
@@ -99,44 +98,6 @@ class VideoController extends CustomController
      */
     public function import_page()
     {
-
-
-        try {
-                
-            $settings = $this->app->SystemSetting();
-            $params = $this->app->params();
-            
-            $this->app->customer_auth();
-            
-            $youtube = new YoutubeService($settings['youtube_api']);
-            // $youtube->video_info($params['video_id'] ?? 'e3QZ39fy2pA');
-            $videoInfo = json_decode($this->getVideoInfo('6vgyeRfML1E'));
-            $process = $youtube->processVideo($videoInfo->streamingData->adaptiveFormats, $videoInfo->streamingData->formats );
-            print_r( $process );
-            print_r( $videoInfo );
-        
-            return;
-            $youtube = new YouTubeDownloader();
-
-            $downloadOptions = $youtube->getDownloadLinks("https://www.youtube.com/watch?v=6vgyeRfML1E");
-            
-            if ($downloadOptions->getAllFormats()) {
-                echo $downloadOptions->getFirstCombinedFormat()->url;
-            } else {
-                print_r($videoInfo);
-                // $this->downloadYoutube($videoInfo);
-
-                echo 'No links found';
-            }
-        
-        } catch (YouTubeException $e) {
-            echo 'Something went wrong: ' . $e->getMessage();
-        }
-
-        // print_r($videoInfo);
-
-
-        return ;
 
 		try {
 

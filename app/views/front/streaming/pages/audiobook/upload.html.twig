@@ -33,23 +33,18 @@
                         <div class="text-primary w-full block">
                             <input name="params[name]" placeholder="{{lang.translate('Book Name')}} *" x-model="title" value="{{item.name}}" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
                         </div>
-                        <div class="text-primary w-full block relative">
-                            <span class="w-6 absolute my-2 mx-4 left-[90%] right-[90%]"><img src="/src/front_assets/svg/down.svg" /></span>
-                            <input placeholder="Genres" class="active-parent cursor-pointer py-2 px-4 w-full rounded-2xl dark:bg-gray-900 dark:border-gray-700 bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
-                            <div class="show-active active-child hidden rounded-2xl w-full top-10 absolute bg-white dark:bg-gray-900 p-4 ">
-                                <template x-for="genre in genres">
-                                        <span    class="cursor-pointer block"  x-on:click="selected_genres.push(genre)" x-text="genre.name"></span>
-                                </template>
-                            </div>
-                            <template x-for="(genre, i) in selected_genres">
-                                <template x-if="selected_genres != null"  >
-                                    <span class="mt-2 text-xs rounded-full py-1 px-2 bg-gray-300 text-gray-800  gap-2 inline-block">    
-                                        <span class="flex gap-2" ><span x-text="genre.name"></span> <img x-on:click=" selected_genres.splice(i, 1)" src="/src/front_assets/svg/close.svg" /></span> 
-                                        <input type="hidden" name="params[selected_genres][]" x-model="genre.category_id" />
-                                    </span> 
-                                </template>
-                            </template>
-                        </div>                        
+                        
+                        <div class="text-primary dark:text-gray-400 w-full block ">
+                            <select id="genres" multiple data-multi-select class="multi-select"  name="selected_genres"  data-placeholder="{{lang.translate('Select genres')}}" >
+                                {% for genre in genres %}
+                                <option 
+                                {% if genre.category_id in item.genres|column('category_id') %} 
+                                selected 
+                                {% endif %}  
+                                value="{{genre.category_id}}">{{genre.name}}</option>
+                                {% endfor  %}
+                            </select>
+                        </div>                           
                     </div>
                     
                     <div class="text-primary w-full block my-6">
@@ -65,4 +60,9 @@
          
     </div>
 </div>
-    
+
+<script>
+$(function() {
+    document.querySelectorAll('[data-multi-select]').forEach(select => new MultiSelect(select));
+})
+</script>
