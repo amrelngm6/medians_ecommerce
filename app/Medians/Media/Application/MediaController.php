@@ -205,7 +205,7 @@ class MediaController extends CustomController
 		} 
 	}
 
-	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60, $duration = 0) {
+	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60, $totalDuration = 0) {
 		
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
@@ -216,7 +216,7 @@ class MediaController extends CustomController
 		$getID3 = new \getID3;
 		$fileInfo = $getID3->analyze($filePath);
 	
-		$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;
+		$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $totalDuration;
 		$bitRate = $fileInfo['bitrate']; // Bitrate in bits per second
 		
 		$streamDuration = $streamDuration > 0 ? $streamDuration : ($totalDuration - $startTimeInSeconds);
@@ -298,7 +298,9 @@ class MediaController extends CustomController
 			header("HTTP/1.0 404 Not Found");
 			return;
 		}
-	
+		
+		return $this->streamAudioFromTimeRange($filePath, 0, null);
+
 		// Analyze the file using getID3 for duration and bitrate
 		$getID3 = new \getID3;
 		$fileInfo = $getID3->analyze($filePath);
