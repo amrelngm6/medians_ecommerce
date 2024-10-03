@@ -400,7 +400,7 @@ class VideoController extends CustomController
 
         // Close the cURL session
         curl_close($ch);
-
+        exit;
         return;
 
         // Initialize a cURL session to fetch the video stream
