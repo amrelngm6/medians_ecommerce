@@ -231,20 +231,17 @@ class MediaController extends CustomController
 			return;
 		}
 	
-		echo $startByte. ' 
-		';
-		echo $endByte. ' 
-		';
-		echo $totalDuration. ' 
-		';
-		echo $bitRate. ' 
-		';
-		echo $streamDuration.' 
-		';
+		// echo $startByte. ' 
+		// ';
+		// echo $endByte. ' 
+		// ';
+		// echo $totalDuration. ' 
+		// ';
+		// echo $bitRate. ' 
+		// ';
+		// echo $streamDuration.' 
+		// ';
 		
-		$contentLength = $endByte - $startByte;
-		
-		echo $contentLength;
 		
 
 		// return;
@@ -258,15 +255,15 @@ class MediaController extends CustomController
 		$contentLength = $endByte - $startByte;
 		$contentRange = (($startByte-$endByte) / filesize($filePath));
 		$mimeType = !empty($fileInfo['mime_type']) ? $fileInfo['mime_type'] : "audio/mpeg";
-		echo $contentRange;
-		echo $mimeType;
-		return;
-		// header("Content-Type: $mimeType");
-		// header("Accept-Ranges: bytes");
-		// header("Content-Length: " . $contentLength);
-		// header("Content-Range: bytes $startByte-$endByte/" . filesize($filePath));
-		// header("X-Pad: avoid browser bug");
-		// header("Cache-Control: no-cache");
+		// echo $contentRange;
+		// echo $mimeType;
+		// return;
+		header("Content-Type: $mimeType");
+		header("Accept-Ranges: bytes");
+		header("Content-Length: " . $contentLength);
+		header("Content-Range: bytes $contentRange");
+		header("X-Pad: avoid browser bug");
+		header("Cache-Control: no-cache");
 	
 		// Stream the file
 		$bufferSize = 8192;
