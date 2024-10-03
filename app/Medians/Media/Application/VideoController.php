@@ -113,15 +113,17 @@ class VideoController extends CustomController
             // $process = $youtube->processVideo($params['video_id'] ?? 'e3QZ39fy2pA');
             
             $videoInfo = json_decode($this->getVideoInfo('e3QZ39fy2pA'));
-            $this->downloadYoutube($videoInfo);
         
             $youtube = new YouTubeDownloader();
 
-            $downloadOptions = $youtube->getDownloadLinks("https://www.youtube.com/watch?v=e3QZ39fy2pA");
+            $downloadOptions = $youtube->getDownloadLinks("https://www.youtube.com/watch?v=6vgyeRfML1E");
             
             if ($downloadOptions->getAllFormats()) {
                 echo $downloadOptions->getFirstCombinedFormat()->url;
             } else {
+                print_r($videoInfo);
+                // $this->downloadYoutube($videoInfo);
+
                 echo 'No links found';
             }
         
