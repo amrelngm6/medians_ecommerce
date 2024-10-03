@@ -386,12 +386,14 @@ class VideoController extends CustomController
         // Execute the cURL session
         $response = curl_exec($ch);
 
-        file_put_contents($tempFileFullPath, $response);
-        
-        $filesize = filesize($tempFileFullPath);
-        // $filesize < 100 ? unlink($tempFileFullPath)   : null;
-        $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : null;
-        
+        $save = file_put_contents($tempFileFullPath, $response);
+        if ($save)
+        {
+            $filesize = filesize($tempFileFullPath);
+            // $filesize < 100 ? unlink($tempFileFullPath)   : null;
+            $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : null;
+        }
+
         return;
 
         // Initialize a cURL session to fetch the video stream
