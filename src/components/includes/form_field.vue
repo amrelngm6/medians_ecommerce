@@ -34,7 +34,7 @@
 
         <input v-if="column.multiple && column.data && column.column_type == 'select'" type="hidden" v-for="selected in  item[column.column_key]" :name="'params['+(column.column_key)+'][]'" :value="selected[column.column_key]" />
 
-        <select @change="changed(column.data ? column.data[column.data.findIndex(e => e[column.key] == item[column.key])] : e[column.key])" :required="column.required" :disabled="column.disabled" v-if="!column.multiple && column.data && column.column_type == 'select'" v-model="item[column.key]"  :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid"   :placeholder="column.title">
+        <select @change="changed(column.data ? column.data[column.data.findIndex(e => e[column.key] == item[column.key])] : e[column.key])" :required="column.required" :disabled="column.disabled" v-if="!column.multiple && column.data && column.column_type == 'select'" v-model="item[column.key]"  :name="handleName(column)" :type="column.column_type" class="form-control form-control-solid border-gray-400 border-1 border"   :placeholder="column.title">
             <option value="0"  v-if="!column.required" v-text="translate('select') +' '+ column.title"></option>
             <option v-for="option in column.data" :value="option[ column.column_key ? column.column_key : column.key]" v-text="option[column.text_key]"></option>
         </select>
