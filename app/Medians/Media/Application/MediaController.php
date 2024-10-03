@@ -258,14 +258,15 @@ class MediaController extends CustomController
 		// echo $contentRange + 1;
 		// echo $mimeType;
 		// return;
-		header("Content-Type: $mimeType");
-		header("Accept-Ranges: bytes");
-		header("Content-Length: " . $contentLength);
-		header("Content-Range: bytes $contentRange");
-		header("X-Pad: avoid browser bug");
-		header("Cache-Control: no-cache");
 		try {
 
+			header("Content-Type: $mimeType");
+			header("Accept-Ranges: bytes");
+			header("Content-Length: " . $contentLength);
+			header("Content-Range: bytes $contentRange");
+			header("X-Pad: avoid browser bug");
+			header("Cache-Control: no-cache");
+			
 			// Stream the file
 			$bufferSize = 8192;
 			$bytesSent = 0;
