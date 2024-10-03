@@ -211,6 +211,7 @@ class PageController extends CustomController
 			$page->addView();
 			$params = [];
 			$params['limit'] = 12;
+			$params['type'] = 'audio';
 
             return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'page' => $page,
