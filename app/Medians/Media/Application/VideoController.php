@@ -370,6 +370,7 @@ class VideoController extends CustomController
     public function downloadRemoteFile($tempFileFullPath, $link)
     {
         
+        
         // Initialize a cURL session to fetch the video stream
         $ch = curl_init($link);
 
@@ -385,6 +386,8 @@ class VideoController extends CustomController
 
         // Execute the cURL session
         $response = curl_exec($ch);
+
+
 
         $save = file_put_contents($tempFileFullPath, $response);
         if ($save)
@@ -396,32 +399,6 @@ class VideoController extends CustomController
 
         return;
 
-        // Initialize a cURL session to fetch the video stream
-        $ch = curl_init($link);
-
-        // Tell cURL to return the transfer as a string instead of outputting it directly
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-
-        // Set headers to match a browser request
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36',
-            'Referer: https://www.facebook.com/',
-        ]);
-
-        // Execute the cURL session
-        $response = curl_exec($ch);
-        
-        if ($response === false) {
-            die("cURL error: " . curl_error($ch));
-        }
-        
-        // Close cURL session and file
-        
-        // $save = file_put_contents($tempFileFullPath, $response);
-        echo $response;
-        
-        curl_close($ch);
         
         // $save = file_put_contents($tempFileFullPath, fopen($link, 'r'));
 
@@ -490,6 +467,7 @@ class VideoController extends CustomController
                 }
             }
             
+            return array('success'=>1, 'result'=>translate('Uploaded'));
             return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"/video/edit/$save->media_id");
 
         } catch (\Throwable $th) {
