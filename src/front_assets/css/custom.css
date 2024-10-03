@@ -2142,6 +2142,11 @@ Multi-select
     overflow-y: auto;
     overflow-x: hidden;
   }
+    
+  .dark  .multi-select .multi-select-options {
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+  }
+
   .multi-select .multi-select-options::-webkit-scrollbar {
     width: 5px;
   }
@@ -2216,7 +2221,7 @@ Multi-select
     flex-wrap: wrap;
     box-sizing: border-box;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 15px;
     cursor: pointer;
     display: flex;
     align-items: center;
