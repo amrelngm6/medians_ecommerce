@@ -367,27 +367,11 @@ class YoutubeService {
 		}
 	}
 
-    public function processVideo($vid) {
-        parse_str(file_get_contents("https://youtube.com/get_video_info?video_id=".$vid),$info);
-
-
-        $playabilityJson = json_decode($info['player_response']);
-        $formats = $playabilityJson->streamingData->formats;
-        $adaptiveFormats = $playabilityJson->streamingData->adaptiveFormats;
-
-        //Checking playable or not
-        $IsPlayable = $playabilityJson->playabilityStatus->status;
-
-        //writing to log file
-        if(strtolower($IsPlayable) != 'ok') {
-            $log = date("c")." ".$info['player_response']."\n";
-            file_put_contents('./video.log', $log, FILE_APPEND);
-        }
-
+    public function processVideo($adaptiveFormats, $formats) {
+        
         $result = array();
 
-        if(!empty($info) && $info['status'] == 'ok' && strtolower($IsPlayable) == 'ok') {
-            $i=0;
+
             foreach($adaptiveFormats as $stream) {
 
                 $streamUrl = $stream->url;
@@ -420,17 +404,12 @@ class YoutubeService {
                 $j++;
             }
             $result['videos'] = array(
-                'info'=>$info,
                 'adapativeFormats'=>$videoOptions,
                 'formats'=>$videoOptionsOrg
             );
             
             
             return $result;
-        }
-        else {
-            return $info;
-        }
     }
 
     
