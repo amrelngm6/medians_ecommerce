@@ -270,7 +270,7 @@ jQuery(document).on('click', '#video-volume', function(){
 })
 jQuery(document).on('click', '.fullscreen', function(){
     if (!window.screenTop && !window.screenY) {
-		setFullscreenData(false);
+		exitFullscreen();
 	} else {
 		// The document is not in fullscreen mode
 		videoContainer.requestFullscreen();
