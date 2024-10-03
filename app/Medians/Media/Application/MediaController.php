@@ -232,7 +232,14 @@ class MediaController extends CustomController
 		';
 		echo $bitRate. ' 
 		';
-		echo $streamDuration;
+		echo $streamDuration.' 
+		';
+		
+		$contentLength = $endByte - $startByte;
+		
+		echo $contentLength;
+		
+
 		return;
 		// Open the file
 		$fm = @fopen($filePath, 'rb');
