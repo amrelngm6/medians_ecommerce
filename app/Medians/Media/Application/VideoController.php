@@ -9,6 +9,11 @@ use Medians\Media\Infrastructure\MediaItemRepository;
 use Medians\Categories\Infrastructure\CategoryRepository;
 use Medians\Customers\Infrastructure\CustomerRepository;
 
+use YouTube\YouTubeDownloader;
+use YouTube\YouTubeStreamer;
+use YouTube\Exception\YouTubeException;
+
+
 
 class VideoController extends CustomController 
 {
@@ -58,19 +63,73 @@ class VideoController extends CustomController
 
 
     
+    function getVideoInfo($video_id){
+
+        $ch = curl_init();
     
+        curl_setopt($ch, CURLOPT_URL, 'https://www.youtube.com/youtubei/v1/player?key=AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, '{  "context": {    "client": {      "hl": "en",      "clientName": "WEB",      "clientVersion": "2.20210721.00.00",      "clientFormFactor": "UNKNOWN_FORM_FACTOR",   "clientScreen": "WATCH",      "mainAppWebInfo": {        "graftUrl": "/watch?v='.$video_id.'",           }    },    "user": {      "lockedSafetyMode": false    },    "request": {      "useSsl": true,      "internalExperimentFlags": [],      "consistencyTokenJars": []    }  },  "videoId": "'.$video_id.'",  "playbackContext": {    "contentPlaybackContext": {        "vis": 0,      "splay": false,      "autoCaptionsDefaultOn": false,      "autonavState": "STATE_NONE",      "html5Preference": "HTML5_PREF_WANTS",      "lactMilliseconds": "-1"    }  },  "racyCheckOk": false,  "contentCheckOk": false}');
+        curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+    
+        $headers = array();
+        $headers[] = 'Content-Type: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    
+        $result = curl_exec($ch);
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+        curl_close($ch);
+        return $result;
+    
+    }
+
+
+    public function downloadYoutube($videoInfo)
+    {
+        $youtube = new \YouTube\YouTubeStreamer();
+        print_r($youtube->stream($videoInfo->streamingData->formats[0]->url));
+        
+    }
+
     /**
      * Import Video file from external link
      */
     public function import_page()
     {
+
+        $youtube = new YouTubeDownloader();
+
+        try {
+            $downloadOptions = $youtube->getDownloadLinks("https://www.youtube.com/watch?v=e3QZ39fy2pA");
+            
+            if ($downloadOptions->getAllFormats()) {
+                echo $downloadOptions->getFirstCombinedFormat()->url;
+            } else {
+                echo 'No links found';
+            }
+        
+        } catch (YouTubeException $e) {
+            echo 'Something went wrong: ' . $e->getMessage();
+        }
+
 		$settings = $this->app->SystemSetting();
 		$params = $this->app->params();
-
+        
         $this->app->customer_auth();
-
+        
         $youtube = new YoutubeService($settings['youtube_api']);
-        $youtube->checkVideo($params['video_id']);
+        // $youtube->video_info($params['video_id'] ?? 'e3QZ39fy2pA');
+        // $process = $youtube->processVideo($params['video_id'] ?? 'e3QZ39fy2pA');
+        
+        $videoInfo = json_decode($this->getVideoInfo('e3QZ39fy2pA'));
+        $this->downloadYoutube($videoInfo);
+        // print_r($videoInfo);
+
+
+        return ;
 
 		try {
 
