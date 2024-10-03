@@ -239,7 +239,8 @@ class MediaController extends CustomController
 		fseek($fm, $startByte);
 	
 		$contentLength = $endByte - $startByte;
-		header("Content-Type: audio/mpeg");
+		$mimeType = !empty($fileInfo['mime_type']) ? $fileInfo['mime_type'] : "audio/mpeg";
+		header("Content-Type: $mimeType");
 		header("Accept-Ranges: bytes");
 		header("Content-Length: " . $contentLength);
 		header("Content-Range: bytes $startByte-$endByte/" . filesize($filePath));
