@@ -438,7 +438,6 @@ class VideoController extends CustomController
                 }
             }
             
-            return array('success'=>1, 'result'=>translate('Uploaded'));
             return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"/video/edit/$save->media_id");
 
         } catch (\Throwable $th) {
