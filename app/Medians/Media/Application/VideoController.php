@@ -72,7 +72,7 @@ class VideoController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item' => $item,
-                'genres' => $this->categoryRepo->getGenres(),
+                'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => 'videos/page'
             ], 'output'));
             
@@ -137,7 +137,7 @@ class VideoController extends CustomController
                 'app' => $this->app,
                 'list' => $list,
                 'channels' => $channels,
-                'genres' => $this->categoryRepo->getGenres(),
+                'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => 'videos/discover'
             ], 'output'));
             
@@ -166,7 +166,7 @@ class VideoController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'list' => $list,
-                'genres' => $this->categoryRepo->getGenres(),
+                'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => 'search/search',
                 'sub_layout' => 'video',
             ], 'output'));
@@ -195,7 +195,7 @@ class VideoController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/pages/popup-list.html.twig', [
                 'app' => $this->app,
                 'list' => $list,
-                'genres' => $this->categoryRepo->getGenres(),
+                'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => 'popup-list',
             ], 'output'));
             
@@ -227,7 +227,7 @@ class VideoController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'list' => $list,
-                'genres' => $this->categoryRepo->getGenres(),
+                'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => isset($this->app->customer->customer_id) ? 'likes' : 'signin'
             ], 'output'));
             
@@ -250,7 +250,7 @@ class VideoController extends CustomController
         {
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-                'genres' => $this->categoryRepo->getGenres(),
+                'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => 'videos/genres'
             ], 'output'));
             
@@ -284,7 +284,7 @@ class VideoController extends CustomController
                 'app' => $this->app,
                 'item' => $item,
                 'list' => $list,
-                'genres' => $this->categoryRepo->getGenres(),
+                'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => 'genre'
             ], 'output'));
             
@@ -328,7 +328,7 @@ class VideoController extends CustomController
                 'genre_type' => 'genres',
                 'model_type' => 'MediaItem',
                 'list' => $list,
-                'genres' => $this->categoryRepo->getGenres(),
+                'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => isset($this->app->customer->customer_id) ? 'videos/edit' : 'signin'
             ], 'output'));
             
