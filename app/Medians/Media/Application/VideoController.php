@@ -384,11 +384,18 @@ class VideoController extends CustomController
         
         // Set options for cURL
         curl_setopt($ch, CURLOPT_FILE, $fp); // Write output to the file
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36'); // Set User-Agent
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return response instead of outputting directly
-        curl_setopt($ch, CURLOPT_HEADER, false); // Exclude headers from output
+        // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
+        // curl_setopt($ch, CURLOPT_HEADER, false); // Exclude headers from output
         
+        // Tell cURL to return the transfer as a string instead of outputting it directly
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
+
+        // Set headers to match a browser request
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36',
+            'Referer: https://www.facebook.com/',
+        ]);
         // Execute cURL session
         $response = curl_exec($ch);
         
