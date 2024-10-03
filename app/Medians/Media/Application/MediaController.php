@@ -264,20 +264,25 @@ class MediaController extends CustomController
 		header("Content-Range: bytes $contentRange");
 		header("X-Pad: avoid browser bug");
 		header("Cache-Control: no-cache");
-	
-		// Stream the file
-		$bufferSize = 8192;
-		$bytesSent = 0;
-		while (!feof($fm) && ($bytesSent < $contentLength)) {
-			$buffer = fread($fm, $bufferSize);
-			echo $buffer;
-			flush();
-			$bytesSent += strlen($buffer);
-	
-			// Stop when we have sent enough bytes for the specified duration
-			if ($bytesSent >= $contentLength) {
-				break;
+		try {
+
+			// Stream the file
+			$bufferSize = 8192;
+			$bytesSent = 0;
+			while (!feof($fm) && ($bytesSent < $contentLength)) {
+				$buffer = fread($fm, $bufferSize);
+				echo $buffer;
+				flush();
+				$bytesSent += strlen($buffer);
+		
+				// Stop when we have sent enough bytes for the specified duration
+				if ($bytesSent >= $contentLength) {
+					break;
+				}
 			}
+		} catch (\Throwable $th) {
+			print_r($th->getMessage());
+			//throw $th;
 		}
 	
 		fclose($fm);
