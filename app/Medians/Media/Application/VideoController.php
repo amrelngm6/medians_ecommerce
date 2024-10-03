@@ -386,22 +386,12 @@ class VideoController extends CustomController
         // Execute the cURL session
         $response = curl_exec($ch);
 
-        // If cURL fails, display an error message
-        if(curl_errno($ch)) {
-            echo 'Error: ' . curl_error($ch);
-        } else {
-            // Send proper headers to allow streaming
-            // header('Content-Type: video/mp4');
-            // header('Content-Length: ' . strlen($response));
-
-            // Stream the video content
-            echo $response;
-            echo '$response';
-        }
-
-        // Close the cURL session
-        curl_close($ch);
-        exit;
+        file_put_contents($tempFileFullPath, $response);
+        
+        $filesize = filesize($tempFileFullPath);
+        // $filesize < 100 ? unlink($tempFileFullPath)   : null;
+        $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : null;
+        
         return;
 
         // Initialize a cURL session to fetch the video stream
