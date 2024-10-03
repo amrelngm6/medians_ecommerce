@@ -372,6 +372,8 @@ class VideoController extends CustomController
         
         $videoUrl = $_POST['params']['link'];
 
+        echo $videoUrl;
+        return;
         // Initialize a cURL session to fetch the video stream
         $ch = curl_init($videoUrl);
 
