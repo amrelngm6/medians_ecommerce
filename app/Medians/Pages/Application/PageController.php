@@ -212,11 +212,17 @@ class PageController extends CustomController
 			$params = [];
 			$params['limit'] = 8;
 			$params['type'] = 'audio';
+			$audioList = $mediaItemRepo->getWithFilter($params);
+			
+			$params['limit'] = 8;
+			$params['type'] = 'video';
+			$videoList = $mediaItemRepo->getWithFilter($params);
 
             return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'page' => $page,
                 'app' => $this->app,
-				'explore_items' => $mediaItemRepo->getWithFilter($params),
+				'explore_items' => $audioList,
+				'videos_items' => $videoList,
 				'genres' => $categoryRepo->getGenres(),
 				'channels' => $customerRepo->get(),
 				'layout' => 'app'
