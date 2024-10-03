@@ -57,6 +57,11 @@ class StorageSettingsController extends CustomController
 				[ 'key'=> "station_interval", 'title'=> translate('Station Streaming Interval'), 'help_text'=>translate('Time in seconds to Check for the active audio files for stations streaming, This option recommeded to be accurated with streaming media duration average'), 'fillable'=> true, 'column_type'=>'number' ],
 			],
 			
+
+            'import videos'=> [	
+				[ 'key'=> "youtube_api", 'title'=> translate('YouTube API'), 'help_text'=>translate(''), 'fillable'=> true, 'column_type'=>'text' ],
+			],
+			
 	
         ];
 	}

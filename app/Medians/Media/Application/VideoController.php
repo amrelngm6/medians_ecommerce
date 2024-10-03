@@ -47,7 +47,8 @@ class VideoController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'type' => 'video',
-                'layout' => isset($this->app->customer->customer_id) ? 'videos/upload' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'upload' : 'signin',
+                'sub_layout' =>  'videos/upload',
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -67,6 +68,9 @@ class VideoController extends CustomController
 
         $this->app->customer_auth();
 
+        $youtube = new YoutubeService($settings['youtube_api']);
+        $youtube->checkVideo($params['video_id']);
+        
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
