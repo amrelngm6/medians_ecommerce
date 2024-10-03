@@ -429,7 +429,7 @@ class YoutubeService {
             return $result;
         }
         else {
-            return;
+            return $info;
         }
     }
 
