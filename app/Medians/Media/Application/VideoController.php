@@ -385,6 +385,39 @@ class VideoController extends CustomController
 
         // Execute the cURL session
         $response = curl_exec($ch);
+
+        // If cURL fails, display an error message
+        if(curl_errno($ch)) {
+            echo 'Error: ' . curl_error($ch);
+        } else {
+            // Send proper headers to allow streaming
+            header('Content-Type: video/mp4');
+            header('Content-Length: ' . strlen($response));
+
+            // Stream the video content
+            echo $response;
+        }
+
+        // Close the cURL session
+        curl_close($ch);
+
+        return;
+
+        // Initialize a cURL session to fetch the video stream
+        $ch = curl_init($link);
+
+        // Tell cURL to return the transfer as a string instead of outputting it directly
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
+
+        // Set headers to match a browser request
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36',
+            'Referer: https://www.facebook.com/',
+        ]);
+
+        // Execute the cURL session
+        $response = curl_exec($ch);
         
         if ($response === false) {
             die("cURL error: " . curl_error($ch));
