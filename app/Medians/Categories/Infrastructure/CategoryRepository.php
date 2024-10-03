@@ -4,6 +4,7 @@ namespace Medians\Categories\Infrastructure;
 
 use Medians\Categories\Domain\Category;
 use Medians\Categories\Domain\BookGenre;
+use Medians\Categories\Domain\VideoGenre;
 use Medians\Categories\Domain\Genre;
 use Medians\Categories\Domain\Mood;
 use Medians\Blog\Domain\Blog;
@@ -46,6 +47,15 @@ class CategoryRepository
 		return Category::where('model', null)->limit($limit)->get();
 	}
 
+	public function categories($model)
+	{
+		return Category::where('model', $model)->get();
+	}
+
+
+	/**
+	 * Media Genres
+	 */
 	public function getAllGenres( $limit = 100)
 	{
 		return Genre::where('model', Genre::class)->limit($limit)->get();
@@ -55,8 +65,18 @@ class CategoryRepository
 	{
 		return Genre::where('status', 'on')->where('model', Genre::class)->limit($limit)->get();
 	}
-
 	
+	public function getGenreByPrefix( $prefix )
+	{
+		return Genre::where('status', 'on')->whereHas('langs', function($q) use ($prefix) {
+			$q->where('prefix', $prefix);
+		})->where('model', Genre::class)->first();
+	}
+
+
+	/**
+	 * Books genres
+	 */
 	public function getAllBookGenres( $limit = 100)
 	{
 		return BookGenre::where('model', BookGenre::class)->limit($limit)->get();
@@ -67,29 +87,45 @@ class CategoryRepository
 		return BookGenre::where('status', 'on')->where('model', BookGenre::class)->limit($limit)->get();
 	}
 
-	public function getGenreByPrefix( $prefix )
-	{
-		return Genre::where('status', 'on')->whereHas('langs', function($q) use ($prefix) {
-			$q->where('prefix', $prefix);
-		})->where('model', Genre::class)->first();
-	}
-
 	public function getBookGenreByPrefix( $prefix )
 	{
 		return BookGenre::where('status', 'on')->whereHas('langs', function($q) use ($prefix) {
 			$q->where('prefix', $prefix);
 		})->where('model', BookGenre::class)->first();
 	}
+	
 
+	
+	/**
+	 * Video genres
+	 */
+	public function getAllVideoGenres( $limit = 100)
+	{
+		return VideoGenre::where('model', VideoGenre::class)->limit($limit)->get();
+	}
+
+	public function getVideoGenres( $limit = 100)
+	{
+		return VideoGenre::where('status', 'on')->where('model', VideoGenre::class)->limit($limit)->get();
+	}
+
+	public function getVideoGenreByPrefix( $prefix )
+	{
+		return VideoGenre::where('status', 'on')->whereHas('langs', function($q) use ($prefix) {
+			$q->where('prefix', $prefix);
+		})->where('model', VideoGenre::class)->first();
+	}
+
+
+
+	/**
+	 * Moods as Genre
+	 */
 	public function getAllMoods( $limit = 100)
 	{
 		return Mood::where('model', Mood::class)->limit($limit)->get();
 	}
 
-	public function categories($model)
-	{
-		return Category::where('model', $model)->get();
-	}
 
 
 
