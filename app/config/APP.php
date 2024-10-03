@@ -313,6 +313,7 @@ class APP
 			[
 				array('permission'=>'MediaGenres.index', 'title'=>translate('Genres'),  'icon'=>'truck', 'link'=>'admin/genres', 'component'=>'categories'),
 				array('permission'=>'BookGenres.index', 'title'=>translate('Book Genres'),  'icon'=>'truck', 'link'=>'admin/book_genres', 'component'=>'categories'),
+				array('permission'=>'VideoGenres.index', 'title'=>translate('Video Genres'),  'icon'=>'truck', 'link'=>'admin/video_genres', 'component'=>'categories'),
 			]
 			),
 			
