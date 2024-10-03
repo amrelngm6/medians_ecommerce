@@ -6,7 +6,7 @@
 			<source src="{{item.main_file.path}}" type="video/webm"/>
 			<source src="{{item.main_file.path}}" type="video/mp4"/>
 		</video>
-		<canvas id="videoCanvas" ondragstart="isDragging = true" width="300" height="300" style="bottom: 0; z-index: 9999" class="hidden fixed z-10 "></canvas>
+		{# <canvas id="videoCanvas" ondragstart="isDragging = true" width="300" height="300" style="bottom: 0; z-index: 9999" class="hidden fixed z-10 "></canvas> #}
 
 		<div id="video-controls" class="flex px-6 gap-4 text-gray-400" data-state="hidden">
 			<button class="play-video" id="play" type="button" data-state="play"><img src="/src/front_assets/svg/video-play.svg" class="w-4"/></button>
@@ -143,8 +143,8 @@ const processor = {
   },
 
   doLoad() {
-    this.c1 = document.getElementById("videoCanvas");
-    this.ctx1 = this.c1.getContext("2d");
+    {# this.c1 = document.getElementById("videoCanvas"); #}
+    {# this.ctx1 = this.c1.getContext("2d"); #}
 
     /** On time update */
     myVideo.addEventListener(
@@ -178,7 +178,7 @@ const processor = {
 
         this.width = 300;
         this.height =  200;
-        this.timerCallback();
+        {# this.timerCallback(); #}
 		jQuery('#video-overlay').fadeOut(200)
       },
       false,
