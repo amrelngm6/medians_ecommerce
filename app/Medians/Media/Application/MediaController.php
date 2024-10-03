@@ -302,8 +302,10 @@ class MediaController extends CustomController
 		} else {
 
 			$croppedMedia = str_replace('.', "${startTimeInSeconds}_${streamDuration}.", $filePath);
-			$croppedFilePath  = $this->repo->cropWithFfmpeg( $filePath, $croppedMedia, $startDuration, $streamDuration  , $settings); 
+			$croppedFilePath  = $this->repo->cropWithFfmpeg( $filePath, $croppedMedia, $startTimeInSeconds, $streamDuration  , $settings); 
 			if ($croppedFilePath) {
+				$startTimeInSeconds = 0;
+				$streamDuration = 0;
 				$filePath = $croppedFilePath;
 			}
 
