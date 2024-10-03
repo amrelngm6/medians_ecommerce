@@ -391,8 +391,8 @@ class VideoController extends CustomController
             echo 'Error: ' . curl_error($ch);
         } else {
             // Send proper headers to allow streaming
-            header('Content-Type: video/mp4');
-            header('Content-Length: ' . strlen($response));
+            // header('Content-Type: video/mp4');
+            // header('Content-Length: ' . strlen($response));
 
             // Stream the video content
             echo $response;
