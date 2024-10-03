@@ -34,7 +34,7 @@ class YoutubeService extends CustomController
     function checkVideo($filePath) {
 
         // Create a YouTube service object
-        $youtube = new \Google_Service_YouTube($client);
+        $youtube = new \Google_Service_YouTube($this->client);
 
         // The video ID you want details for
         $videoId = 'e3QZ39fy2pA';
@@ -55,9 +55,9 @@ class YoutubeService extends CustomController
             echo 'Views: ' . $videoDetails['statistics']['viewCount'] . PHP_EOL;
             echo 'Likes: ' . $videoDetails['statistics']['likeCount'] . PHP_EOL;
 
-        } catch (Google_Service_Exception $e) {
+        } catch (\Google_Service_Exception $e) {
             echo 'A service error occurred: ' . htmlspecialchars($e->getMessage());
-        } catch (Google_Exception $e) {
+        } catch (\Google_Exception $e) {
             echo 'An client error occurred: ' . htmlspecialchars($e->getMessage());
         }
     }
