@@ -257,12 +257,12 @@ class MediaController extends CustomController
 	
 		$contentLength = $endByte - $startByte;
 		$mimeType = !empty($fileInfo['mime_type']) ? $fileInfo['mime_type'] : "audio/mpeg";
-		header("Content-Type: $mimeType");
-		header("Accept-Ranges: bytes");
-		header("Content-Length: " . $contentLength);
-		header("Content-Range: bytes $startByte-$endByte/" . filesize($filePath));
-		header("X-Pad: avoid browser bug");
-		header("Cache-Control: no-cache");
+		// header("Content-Type: $mimeType");
+		// header("Accept-Ranges: bytes");
+		// header("Content-Length: " . $contentLength);
+		// header("Content-Range: bytes $startByte-$endByte/" . filesize($filePath));
+		// header("X-Pad: avoid browser bug");
+		// header("Cache-Control: no-cache");
 	
 		// Stream the file
 		$bufferSize = 8192;
