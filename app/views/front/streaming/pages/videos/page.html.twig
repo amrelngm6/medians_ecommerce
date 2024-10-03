@@ -11,7 +11,7 @@
 		<div id="video-controls" class="flex gap-2 text-gray-400" data-state="hidden">
 			<button class="play-video" id="play" type="button" data-state="play"><img src="/src/front_assets/svg/video-play.svg" class="w-4"/></button>
 			<button class="pause-video" id="pause" type="button" data-state="pause"><img src="/src/front_assets/svg/video-pause.svg" class="w-4"/></button>
-			<div id="res"></div>
+			<div id="current-time"></div>
 			<div class="progress w-full">
 				<progress id="progress" class="bg-gray-800 w-full rounded-2xl overflow-hidden " value="0" min="0" step="1" max="">
 					<span id="progress-bar"></span>
@@ -151,8 +151,9 @@ const processor = {
         "timeupdate",
         () => {
             
-            jQuery('#video-duration').html(convertToTime(myVideo.currentTime))
+            jQuery('#current-time').html(convertToTime(myVideo.currentTime))
             progress.value = myVideo.currentTime;
+
         })
         
     /** On Play video */
@@ -172,6 +173,7 @@ const processor = {
     myVideo.addEventListener(
       "play",
       () => {
+		jQuery('#video-duration').html(convertToTime(myVideo.duration))
         this.width = 300;
         this.height =  200;
         this.timerCallback();
