@@ -151,7 +151,7 @@ const processor = {
         "timeupdate",
         () => {
             
-            jQuery('#res').html(convertToTime(myVideo.currentTime))
+            jQuery('#video-duration').html(convertToTime(myVideo.currentTime))
             progress.value = myVideo.currentTime;
         })
         
