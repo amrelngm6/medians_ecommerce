@@ -84,28 +84,6 @@ class VideoController extends CustomController
     
 
     /**
-     * Studio page for frontend
-     */
-    public function studio()
-    {
-		$settings = $this->app->SystemSetting();
-
-        $customer = $this->app->customer_auth();
-        
-		try 
-        {
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
-                'app' => $this->app,
-                'customer' => $customer,
-                'layout' => isset($this->app->customer->customer_id) ? 'studio' : 'signin'
-            ], 'output'));
-            
-		} catch (\Exception $e) {
-			throw new \Exception($e->getMessage(), 1);
-		}
-    }
-    
-    /**
      * Studio media page for frontend
      */
     public function studio_media()
@@ -126,7 +104,7 @@ class VideoController extends CustomController
                 'app' => $this->app,
                 'customer' => $customer,
                 'list' => $list,
-                'layout' => isset($this->app->customer->customer_id) ? 'studio_media' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'videos/studio' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
