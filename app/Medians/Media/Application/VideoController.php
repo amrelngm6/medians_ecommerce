@@ -497,6 +497,8 @@ class VideoController extends CustomController
 		
         try {
             
+            $params['selected_genres'] = $this->app->request()->get('selected_genres');
+
             if ($this->repo->update($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0);
