@@ -175,7 +175,7 @@ const processor = {
         this.width = 300;
         this.height =  200;
         this.timerCallback();
-		jQuery('#video-overlay').addClass('hidden')
+		jQuery('#video-overlay').css('visivility', 'hidden').slow()
       },
       false,
     );
@@ -184,7 +184,7 @@ const processor = {
     myVideo.addEventListener(
       "pause",
       () => {
-		jQuery('#video-overlay').removeClass('hidden')
+		jQuery('#video-overlay').css('visivility', 'visible').slow()
       },
       false,
     );
