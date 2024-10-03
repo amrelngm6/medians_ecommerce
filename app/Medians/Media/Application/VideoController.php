@@ -371,7 +371,7 @@ class VideoController extends CustomController
     {
         
         // Initialize a cURL session to fetch the video stream
-        $ch = curl_init($videoUrl);
+        $ch = curl_init($link);
 
         // Tell cURL to return the transfer as a string instead of outputting it directly
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
