@@ -278,7 +278,7 @@ class MediaController extends CustomController
 	}
 
 
-	function streamVideo($startTimeInSeconds = 0, $duration = 20) {
+	function streamVideo() {
 
 		$this->isDirectAccess();
 
@@ -300,12 +300,59 @@ class MediaController extends CustomController
 			return;
 		}
 		
-		return $this->streamAudioFromTimeRange($filePath, $startTimeInSeconds, $streamDuration);
+		// return $this->streamAudioFromTimeRange($filePath, $startTimeInSeconds, $streamDuration);
 
 		// Analyze the file using getID3 for duration and bitrate
 		$getID3 = new \getID3;
 		$fileInfo = $getID3->analyze($filePath);
+
+
+		$fileSize = filesize($filePath);
+
+		// Get total video duration in seconds
+		$totalVideoDuration = $fileInfo['playtime_seconds'];
 		
+		// Calculate the bitrate (bytes per second)
+		$bytesPerSecond = $fileSize / $totalVideoDuration;
+
+		// Calculate the start and end byte range
+		$startByte = intval($startSecond * $bytesPerSecond);
+		$endByte = intval(($startSecond + $duration) * $bytesPerSecond);
+
+		// Ensure the byte range is within the file size
+		if ($startByte >= $fileSize) {
+			header("HTTP/1.1 416 Requested Range Not Satisfiable");
+			header("Content-Range: bytes */$fileSize");
+			exit;
+		}
+		if ($endByte > $fileSize) {
+			$endByte = $fileSize - 1;
+		}
+
+		// Set headers for partial content
+		header("HTTP/1.1 206 Partial Content");
+		header("Content-Type: video/mp4"); // Adjust MIME type if necessary
+		header("Content-Length: " . ($endByte - $startByte + 1));
+		header("Content-Range: bytes $startByte-$endByte/$fileSize");
+
+		// Open the file and stream the requested portion
+		$file = fopen($filePath, 'rb');
+		fseek($file, $startByte);
+
+		// Stream the requested range in chunks
+		$bufferSize = 8192; // 8KB buffer size
+		while (!feof($file) && ($pos = ftell($file)) <= $endByte) {
+			if ($pos + $bufferSize > $endByte) {
+				$bufferSize = $endByte - $pos + 1;
+			}
+			echo fread($file, $bufferSize);
+			flush(); // Make sure the content is sent to the client
+		}
+
+		fclose($file);
+
+		return;
+
 		// Get total duration and bitrate
 		$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;
 		$bitRate = !empty($fileInfo['bitrate']) ? $fileInfo['bitrate'] : 0; // Bitrate in bits per second
