@@ -212,7 +212,8 @@ class MediaRepository
 	public function convertAudioWithFfmpeg($filepath, $output)
 	{
 		$ffmpeg = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg';
-		return shell_exec("$ffmpeg -i $filepath $output");
+		$run = shell_exec("$ffmpeg -i $filepath $output");
+		return file_exists($output) ? $output : null;
 	}
 
     public static function slug($value)
