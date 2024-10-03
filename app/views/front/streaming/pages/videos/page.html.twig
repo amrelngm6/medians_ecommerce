@@ -315,11 +315,13 @@ jQuery(document).on('click', '#video-volume', function(){
     myVideo.volume = jQuery(this).val()
 })
 jQuery(document).on('click', '.fullscreen', function(){
-    
-    // The document is not in fullscreen mode
-    videoContainer.requestFullscreen();
-    setFullscreenData(true);
-    myVideo.play()
+    if (!window.screenTop && !window.screenY) {
+		setFullscreenData(false);
+	} else {
+		// The document is not in fullscreen mode
+		videoContainer.requestFullscreen();
+		setFullscreenData(true);
+	}
 })
 
 jQuery(document).on('dblclick', '#videoCanvas', function(){
