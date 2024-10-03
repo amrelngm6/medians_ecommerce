@@ -31,7 +31,7 @@
 <div class=" w-full h-40 absolute top-0 left-0 gradient-overlay" style="z-index:1; "></div>
 
 {% set customer = app.customer_auth() %}
-<div class=" w-full  relative">
+<div class=" w-full  relative" id="video-overlay">
 	<div class="absolute lg:bottom-40 lg:left-40 left-10 bottom-10  z-10 w-2/3 text-gray-100 dark:text-gray-400">
 		<h1 class="lg:text-6xl text-4xl text-white">{{item.name}}</h1>
 
@@ -175,6 +175,16 @@ const processor = {
         this.width = 300;
         this.height =  200;
         this.timerCallback();
+		jQuery('#video-overlay').addClass('hidden')
+      },
+      false,
+    );
+        
+    /** On Pause video */
+    myVideo.addEventListener(
+      "pause",
+      () => {
+		jQuery('#video-overlay').removeClass('hidden')
       },
       false,
     );
