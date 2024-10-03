@@ -36,9 +36,10 @@
                         
                         <div class="text-primary dark:text-gray-400 w-full block ">
                             <select id="genres" multiple data-multi-select class="multi-select"  name="selected_genres"  data-placeholder="{{lang.translate('Select genres')}}" >
+                                
                                 {% for genre in genres %}
                                 <option 
-                                {% if genre.category_id in item.genres|column('category_id') %} 
+                                {% if item.genres and genre.category_id in item.genres|column('category_id') %} 
                                 selected 
                                 {% endif %}  
                                 value="{{genre.category_id}}">{{genre.name}}</option>
