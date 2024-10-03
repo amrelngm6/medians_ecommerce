@@ -285,7 +285,12 @@ class MediaController extends CustomController
 		$startTimeInSeconds = $this->app->request()->get('s');
 		$streamDuration = $this->app->request()->get('d');
 
-		$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/'.$video;
+		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/videos/' . $video)) {
+			$filepath = '/uploads/videos/' . $video;
+		} else
+		{
+			$filepath = '/uploads/videos/tmp/' . $video;
+		}
 
 
 		if (!file_exists($filePath)) {
