@@ -282,13 +282,15 @@ class MediaController extends CustomController
 					break;
 				}
 			}
+			
+			fclose($fm);
+			exit;
+			
 		} catch (\Throwable $th) {
 			print_r($th->getMessage());
 			//throw $th;
 		}
 	
-		fclose($fm);
-		exit;
 	}
 	
 	public function stream_external($fileUrl, $tmpFilePath, $startTimeInSeconds = 0, $streamDuration = 60)
