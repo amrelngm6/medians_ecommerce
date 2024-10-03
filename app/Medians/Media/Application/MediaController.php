@@ -224,6 +224,13 @@ class MediaController extends CustomController
 		$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileInfo['filesize']);
 		$endByte = (int)(($streamDuration / $totalDuration) * $fileInfo['filesize']) + $startByte;
 		
+		// Open the file
+		$fm = @fopen($filePath, 'rb');
+		if (!$fm) {
+			header("HTTP/1.0 505 Internal server error");
+			return;
+		}
+	
 		echo $startByte. ' 
 		';
 		echo $endByte. ' 
@@ -241,13 +248,6 @@ class MediaController extends CustomController
 		
 
 		return;
-		// Open the file
-		$fm = @fopen($filePath, 'rb');
-		if (!$fm) {
-			header("HTTP/1.0 505 Internal server error");
-			return;
-		}
-	
 		// Prevent session blocking
 		session_write_close();
 		ignore_user_abort(true); // Continue streaming even if the user disconnects
