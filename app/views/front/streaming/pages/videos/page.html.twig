@@ -279,8 +279,13 @@ jQuery(document).on('click', '.fullscreen', function(){
 })
 
 jQuery(document).on('dblclick', '#videoCanvas,video', function(){
-    videoContainer.requestFullscreen();
-    setFullscreenData(true);
+     if (!window.screenTop && !window.screenY) {
+		exitFullscreen();
+	} else {
+		// The document is not in fullscreen mode
+		videoContainer.requestFullscreen();
+		setFullscreenData(true);
+	}
 } )
 })
     </script>
