@@ -81,7 +81,8 @@ class AudiobookController extends CustomController
                 'app' => $this->app,
                 'type' => 'audiobook',
                 'genres' => $this->categoryRepo->getBookGenres(),
-                'layout' => isset($this->app->customer->customer_id) ? 'audiobook/upload' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'upload' : 'signin',
+                'sub_layout' =>  'audio/upload',
             ], 'output'));
             
 		} catch (\Exception $e) {

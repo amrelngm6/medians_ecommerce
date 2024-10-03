@@ -50,7 +50,8 @@ class MediaItemController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'type' => 'audio',
-                'layout' => isset($this->app->customer->customer_id) ? 'upload-audio' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'upload' : 'signin',
+                'sub_layout' =>  'audio/upload',
             ], 'output'));
             
 		} catch (\Exception $e) {
