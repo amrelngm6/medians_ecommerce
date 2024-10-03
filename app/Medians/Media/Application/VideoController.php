@@ -369,41 +369,55 @@ class VideoController extends CustomController
      */
     public function downloadRemoteFile($tempFileFullPath, $link)
     {
-        $save = file_put_contents($tempFileFullPath, fopen($link, 'r'));
 
-        if ($save && file_exists($tempFileFullPath) ) 
-        {
-            if (filesize($tempFileFullPath) > 1) {
-                return true;
-            }
+
+       
+        // Initialize cURL session
+        $ch = curl_init($link);
+
+        // Open the file in write mode
+        $fp = fopen($tempFileFullPath, 'wb');
+
+        if ($fp === false) {
+            die("Failed to open file for writing.");
         }
-
         
-        $save = file_put_contents($tempFileFullPath, file_get_contents($link));
-
-        if ($save && file_exists($tempFileFullPath) ) 
-        {
-            if (filesize($tempFileFullPath) > 1) {
-                return true;
-            }
-        }
-
-
-        // Initialize a cURL session to fetch the video stream
-        $ch = curl_init($videoUrl);
-
-        // Tell cURL to return the transfer as a string instead of outputting it directly
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // Set options for cURL
+        curl_setopt($ch, CURLOPT_FILE, $fp); // Write output to the file
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-
-        // Set headers to match a browser request
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36',
-            'Referer: https://www.facebook.com/',
-        ]);
-
-        // Execute the cURL session
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36'); // Set User-Agent
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Return response instead of outputting directly
+        curl_setopt($ch, CURLOPT_HEADER, false); // Exclude headers from output
+        
+        // Execute cURL session
         $response = curl_exec($ch);
+        
+        if ($response === false) {
+            die("cURL error: " . curl_error($ch));
+        }
+        
+        // Close cURL session and file
+        curl_close($ch);
+        fclose($fp);
+        
+        // $save = file_put_contents($tempFileFullPath, fopen($link, 'r'));
+
+        // if ($save && file_exists($tempFileFullPath) ) 
+        // {
+        //     if (filesize($tempFileFullPath) > 1) {
+        //         return true;
+        //     }
+        // }
+
+        // $save = file_put_contents($tempFileFullPath, file_get_contents($link));
+
+        // if ($save && file_exists($tempFileFullPath) ) 
+        // {
+        //     if (filesize($tempFileFullPath) > 1) {
+        //         return true;
+        //     }
+        // }
+        
 
         $filesize = filesize($tempFileFullPath);
         $filesize < 100 ? unlink($tempFileFullPath)   : null;
