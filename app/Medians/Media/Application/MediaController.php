@@ -316,7 +316,7 @@ class MediaController extends CustomController
 			return;
 		}
 		
-		return $this->streamAudioFromTimeRange($filePath, 10, 10);
+		return $this->streamAudioFromTimeRange($filePath, $startTimeInSeconds, $streamDuration);
 
 		// Analyze the file using getID3 for duration and bitrate
 		$getID3 = new \getID3;
