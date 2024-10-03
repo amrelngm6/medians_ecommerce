@@ -1,9 +1,8 @@
 <div class=" w-full  lg:h-screen gradient-top-overlay" style="min-height: 300px">
-	<img style="z-index:-1" src="/stream?thumbnail=1600&image={{item.picture_name}}" class=" "/>
 
 
 	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
-		<video id="my-video" class="" crossorigin="anonymous">
+		<video id="my-video" class="w-full" crossorigin="anonymous" style="max-height: calc(100vh - 35px)">
 			<source src="{{item.main_file.path}}" type="video/webm"/>
 			<source src="{{item.main_file.path}}" type="video/mp4"/>
 		</video>
