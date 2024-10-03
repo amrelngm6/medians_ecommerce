@@ -2083,7 +2083,7 @@ Multi-select
     user-select: none;
   }
   .multi-select .multi-select-header {
-    border: 1px solid #dee2e6;
+    border: 1px solid #374151;
     padding: 7px 30px 7px 12px;
     overflow: hidden;
     gap: 7px;
@@ -2216,7 +2216,7 @@ Multi-select
     flex-wrap: wrap;
     box-sizing: border-box;
     align-items: center;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
