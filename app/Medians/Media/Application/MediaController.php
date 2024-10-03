@@ -283,6 +283,7 @@ class MediaController extends CustomController
 		// $this->isDirectAccess();
 
 		$this->app = new \config\APP;
+		$settings = $this->app->SystemSetting();
 		$video = $this->app->request()->get('video');
 		$startTimeInSeconds = $this->app->request()->get('s');
 		$streamDuration = $this->app->request()->get('d');
@@ -306,7 +307,7 @@ class MediaController extends CustomController
 		} else {
 
 			$croppedMedia = str_replace('.', "${startTimeInSeconds}_${streamDuration}.", $filePath);
-			$croppedFilePath  = $this->repo->convertAudioWithFfmpeg( $filePath, $croppedMedia); 
+			$croppedFilePath  = $this->repo->cropWithFfmpeg( $filePath, $croppedMedia, $startDuration, $streamDuration  , $settings); 
 			if ($croppedFilePath) {
 				$filePath = $croppedFilePath;
 			}

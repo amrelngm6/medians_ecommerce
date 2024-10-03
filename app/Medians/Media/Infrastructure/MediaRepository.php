@@ -216,6 +216,13 @@ class MediaRepository
 		return file_exists($output) ? $output : null;
 	}
 
+	public function cropWithFfmpeg($filepath, $output, $start = '00', $duration = 60, $settings)
+	{
+		$ffmpeg = $settings['ffmpeg_path'];
+		$run = shell_exec("$ffmpeg -ss $start -i $filepath -t $duration -c copy $output");
+		return file_exists($output) ? $output : null;
+	}
+
     public static function slug($value)
     {
     	return str_replace(['&',' ','@', '!','#','(',')','+','?'], '_', $value);
