@@ -396,6 +396,7 @@ class VideoController extends CustomController
 
             // Stream the video content
             echo $response;
+            echo '$response';
         }
 
         // Close the cURL session
