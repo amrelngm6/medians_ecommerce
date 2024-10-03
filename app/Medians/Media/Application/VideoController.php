@@ -65,12 +65,13 @@ class VideoController extends CustomController
     public function import_page()
     {
 		$settings = $this->app->SystemSetting();
+		$params = $this->app->params();
 
         $this->app->customer_auth();
 
         $youtube = new YoutubeService($settings['youtube_api']);
         $youtube->checkVideo($params['video_id']);
-        
+
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
