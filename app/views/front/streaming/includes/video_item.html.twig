@@ -1,34 +1,22 @@
-                                        <div class="overflow-hidden lg:mx-0 mx-auto  dark:text-gray-400  transition hover:text-orange-500 lg:w-full  relative p-2 py-3 rounded-2xl">
-                                            <div class="  gap-1 flex py-4 ">
-                                                <div class="slide__audio js-audio start-player" id="video-{{media_item.media_id}}">
-                                                    <div class="slide__audio-player"></div>
-                                                </div>
-                                                <div class="px-1 relative p-1 truncate">
-                                                    <a href="/video/{{media_item.media_id}}" class="ajax-load relative text-opacity-75 text-sm tracking-tight font-semibold truncate  dark:hover:text-orange-400 hover:text-orange-400">{{media_item.name}}
-                                                    </a>
-                                                    <a href="/artist/{{media_item.author_id}}" class="ajax-load block relative text-gray-500 text-opacity-75 text-sm  tracking-tight  dark:hover:text-orange-400 hover:text-orange-400">{{media_item.artist.name}}</a>
-                                                </div>
-                                            </div>
-                                        </div>
 
-                                        <div class="package bg-white dark:bg-gray-800">
-                                            <div class="img">
+                                        <div class="package bg-white dark:bg-gray-800 show-child">
+                                            <div class="img  h-40" style="background: url(/stream?thumbnail=300&dir=videos/screenshots&image={{media_item.picture_name}})">
+
                                                 <div class="save">
-                                                    <a href="/video/{{media_item.media_id}}" class="ajax-load "><img class="lg:mx-0 mx-auto rounded-2xl shadow transition hover:shadow-lg  transition hover:shadow-lg w-48 h-48" width="300" height="300" src="/stream?thumbnail=300&dir=videos/screenshots&image={{media_item.picture_name}}"/></a>
+                                                    <p class="span"><img src="/src/front_assets/svg/videos.svg" class="w-6 dark:brightness-200" /></p>
                                                 </div>
                                             </div>
 
-                                            <div class="text">
+                                            <div class="text ">
                                                 <a href="/video/{{media_item.media_id}}" class="ajax-load h3 text-base pb-2">
                                                     {{media_item.name}}
                                                 </a>
-                                                <p class="p text-xs font-normal">
+                                                <p class="p text-xs font-normal flex gap-4">
                                                     <a href="/artist/{{media_item.author_id}}" class="ajax-load block relative text-gray-500 text-opacity-75 text-sm  tracking-tight  dark:hover:text-orange-400 hover:text-orange-400">{{media_item.artist.name}}</a>
-                                                    {{media_item.viewscount()}}{{lang.translate('Views')}} - 40 min
+                                                    <span class="pt-1">{{media_item.viewscount()}}{{lang.translate('Views')}} - 40 min</span>
                                                 </p>
 
-                                                <div class="icon-box">
-                                                    <p class="span"><img src="/src/front_assets/svg/videos.svg" class="w-6 dark:brightness-200" /></p>
+                                                <div class="icon-box show-on-hover">
                                                 </div>
                                             </div>
                                         </div>
