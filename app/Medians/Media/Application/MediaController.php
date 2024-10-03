@@ -129,6 +129,7 @@ class MediaController extends CustomController
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
 		$startTime = $this->app->request()->get('s') ?? 0;
+		$startDuration = $this->app->request()->get('d') ?? 0;
 
 		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/' . $this->app->request()->get('audio'))) {
 			$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
@@ -155,7 +156,7 @@ class MediaController extends CustomController
 		if ($item)
 			$item->addView();
 
-		return  $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'] . $filepath, $startTime, 0);
+		return  $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'] . $filepath, $startTime, $startDuration);
 
 	}
 
