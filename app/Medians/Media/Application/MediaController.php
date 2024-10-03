@@ -223,15 +223,7 @@ class MediaController extends CustomController
 		// Calculate byte offset for the start time
 		$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileInfo['filesize']);
 		$endByte = (int)(($streamDuration / $totalDuration) * $fileInfo['filesize']) + $startByte;
-		
-		echo $startByte. ' 
-		';
-		echo $endByte. ' 
-		';
-		echo $bitRate. ' 
-		';
-		echo $streamDuration;
-		return;
+	
 		// Open the file
 		$fm = @fopen($filePath, 'rb');
 		if (!$fm) {
@@ -307,7 +299,7 @@ class MediaController extends CustomController
 			return;
 		}
 		
-		return $this->streamAudioFromTimeRange($filePath, 0, 10);
+		return $this->streamAudioFromTimeRange($filePath, $startTimeInSeconds, $streamDuration);
 
 		// Analyze the file using getID3 for duration and bitrate
 		$getID3 = new \getID3;
