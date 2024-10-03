@@ -271,6 +271,7 @@ class MediaController extends CustomController
 		$bytesSent = 0;
 		while (!feof($fm) && ($bytesSent < $contentLength)) {
 			$buffer = fread($fm, $bufferSize);
+			echo $buffer;
 			flush();
 			$bytesSent += strlen($buffer);
 	
