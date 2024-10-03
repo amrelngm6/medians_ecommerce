@@ -19,7 +19,7 @@
                             <input name="params[name]" placeholder="{{lang.translate('Video Name')}} *" value="{{item.name}}" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-orange-300  border-gray-200" />
                         </div>         
                         <div class="text-primary w-full block">
-                            <select id="genres" multiple data-multi-select class="multi-select"  name="params[selected_genres]" >
+                            <select id="genres" multiple data-multi-select class="multi-select"  name="genres"  data-placeholder="{{lang.translate('Select genres')}}" >
                                 {% for genre in genres %}
                                 <option value="{{genre.category_id}}">{{genre.name}}</option>
                                 {% endfor  %}

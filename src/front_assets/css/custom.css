@@ -2162,7 +2162,7 @@ Multi-select
     margin-right: 14px;
     height: 16px;
     width: 16px;
-    border: 1px solid #ced4da;
+    border: 1px solid #374151;
     border-radius: 4px;
   }
   .multi-select .multi-select-options .multi-select-option .multi-select-option-text, .multi-select .multi-select-options .multi-select-all .multi-select-option-text {
@@ -2176,8 +2176,8 @@ Multi-select
     line-height: 20px;
   }
   .multi-select .multi-select-options .multi-select-option.multi-select-selected .multi-select-option-radio, .multi-select .multi-select-options .multi-select-all.multi-select-selected .multi-select-option-radio {
-    border-color: #40c979;
-    background-color: #40c979;
+    border-color: #303e53;
+    background-color: #303e53;
   }
   .multi-select .multi-select-options .multi-select-option.multi-select-selected .multi-select-option-radio::after, .multi-select .multi-select-options .multi-select-all.multi-select-selected .multi-select-option-radio::after {
     content: "";
@@ -2185,7 +2185,7 @@ Multi-select
     width: 3px;
     height: 7px;
     margin: 0.12em 0 0 0.27em;
-    border: solid #fff;
+    border: solid #374151;
     border-width: 0 0.15em 0.15em 0;
     transform: rotate(45deg);
   }
@@ -2196,12 +2196,12 @@ Multi-select
     background-color: #f3f4f7;
   }
   .multi-select .multi-select-options .multi-select-all {
-    border-bottom: 1px solid #f1f3f5;
+    border-bottom: 1px solid #374151;
     border-radius: 0;
   }
   .multi-select .multi-select-options .multi-select-search {
     padding: 7px 10px;
-    border: 1px solid #dee2e6;
+    border: 1px solid #374151;
     border-radius: 5px;
     margin: 10px 10px 5px 10px;
     width: 100%;
