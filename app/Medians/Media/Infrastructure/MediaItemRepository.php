@@ -79,7 +79,7 @@ class MediaItemRepository
 				$model = $model->where('name', 'LIKE', '%'.$params['title'].'%');
 			}
 
-			if (!empty($params['type']) && in_array($params['type'], ['audio', 'audiobook','course']))
+			if (!empty($params['type']) && in_array($params['type'], ['audio', 'audiobook','video', 'course']))
 			{
 				$model = $model->where('type', $params['type']);
 			}
