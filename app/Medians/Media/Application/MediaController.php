@@ -247,7 +247,7 @@ class MediaController extends CustomController
 		echo $contentLength;
 		
 
-		return;
+		// return;
 		// Prevent session blocking
 		session_write_close();
 		ignore_user_abort(true); // Continue streaming even if the user disconnects
