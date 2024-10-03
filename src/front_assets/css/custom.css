@@ -44,6 +44,10 @@ body {
     color: #2E3271;
 }
 
+.dark .text-primary {
+    color: #9ca3af;
+}
+
 .sidebar li:hover img:not(.active-icon),
 .sidebar img.active-icon
 /* .active img */
