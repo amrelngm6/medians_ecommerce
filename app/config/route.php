@@ -85,6 +85,7 @@ RouteHandler::get('/likes', \Medians\Media\Application\MediaItemController::clas
 RouteHandler::get('/genres', \Medians\Media\Application\MediaItemController::class.'@genres');
 RouteHandler::get('/genre/(:all)', \Medians\Media\Application\MediaItemController::class.'@genre');
 RouteHandler::get('/book_genre/(:all)', \Medians\Media\Application\AudiobookController::class.'@genre');
+RouteHandler::get('/video_genre/(:all)', \Medians\Media\Application\VideoController::class.'@genre');
 RouteHandler::get('/channels', \Medians\Channels\Application\ChannelController::class.'@channels');
 RouteHandler::get('/artists', \Medians\Channels\Application\ChannelController::class.'@channels');
 RouteHandler::get('/artist/(:all)', \Medians\Customers\Application\CustomerController::class.'@artist');
@@ -217,6 +218,12 @@ if(!empty($app->auth()))
     */
     RouteHandler::get('/admin/book_genres', Medians\Categories\Application\BookGenreController::class.'@index');
     RouteHandler::get('/admin/book_genres/(:all)', Medians\Categories\Application\BookGenreController::class.'@genre');
+
+    /**
+    * @return VideoGenres
+    */
+    RouteHandler::get('/admin/video_genres', Medians\Categories\Application\BookGenreController::class.'@index');
+    RouteHandler::get('/admin/video_genres/(:all)', Medians\Categories\Application\BookGenreController::class.'@genre');
 
     /**
     * @return Moods
