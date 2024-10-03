@@ -222,7 +222,7 @@ class PageController extends CustomController
                 'page' => $page,
                 'app' => $this->app,
 				'explore_items' => $audioList,
-				'videos_items' => $videoList,
+				'video_items' => $videoList,
 				'genres' => $categoryRepo->getGenres(),
 				'channels' => $customerRepo->get(),
 				'layout' => 'app'
