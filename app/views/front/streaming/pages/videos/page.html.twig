@@ -324,10 +324,9 @@ jQuery(document).on('click', '.fullscreen', function(){
 	}
 })
 
-jQuery(document).on('dblclick', '#videoCanvas', function(){
+jQuery(document).on('dblclick', '#videoCanvas,video', function(){
     videoContainer.requestFullscreen();
     setFullscreenData(true);
-    myVideo.play()
 } )
 })
     </script>
