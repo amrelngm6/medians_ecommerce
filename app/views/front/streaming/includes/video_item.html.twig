@@ -12,7 +12,7 @@
                                                     {{media_item.name}}
                                                 </a>
                                                 <p class="p text-xs font-normal flex gap-4">
-                                                    <a href="/artist/{{media_item.author_id}}" class="ajax-load w-full block relative text-gray-500 text-opacity-75 text-sm  tracking-tight  dark:hover:text-orange-400 hover:text-orange-400">{{media_item.artist.name}}</a>
+                                                    <a href="/artist/{{media_item.author_id}}" {{media_item.name}} class="truncate ajax-load w-full block relative text-gray-500 text-opacity-75 text-sm  tracking-tight  dark:hover:text-orange-400 hover:text-orange-400">{{media_item.artist.name}}</a>
                                                     <span class="flex-none pt-1">{{media_item.viewscount()}} {{lang.translate('Views')}} - {{media_item.field.duration|date("i:s")}}</span>
                                                 </p>
 
