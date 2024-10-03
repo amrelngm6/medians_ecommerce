@@ -103,6 +103,19 @@ class VideoController extends CustomController
         $youtube = new YouTubeDownloader();
 
         try {
+            
+		$settings = $this->app->SystemSetting();
+		$params = $this->app->params();
+        
+        $this->app->customer_auth();
+        
+        $youtube = new YoutubeService($settings['youtube_api']);
+        // $youtube->video_info($params['video_id'] ?? 'e3QZ39fy2pA');
+        // $process = $youtube->processVideo($params['video_id'] ?? 'e3QZ39fy2pA');
+        
+        $videoInfo = json_decode($this->getVideoInfo('e3QZ39fy2pA'));
+        $this->downloadYoutube($videoInfo);
+        
             $downloadOptions = $youtube->getDownloadLinks("https://www.youtube.com/watch?v=e3QZ39fy2pA");
             
             if ($downloadOptions->getAllFormats()) {
@@ -115,17 +128,6 @@ class VideoController extends CustomController
             echo 'Something went wrong: ' . $e->getMessage();
         }
 
-		$settings = $this->app->SystemSetting();
-		$params = $this->app->params();
-        
-        $this->app->customer_auth();
-        
-        $youtube = new YoutubeService($settings['youtube_api']);
-        // $youtube->video_info($params['video_id'] ?? 'e3QZ39fy2pA');
-        // $process = $youtube->processVideo($params['video_id'] ?? 'e3QZ39fy2pA');
-        
-        $videoInfo = json_decode($this->getVideoInfo('e3QZ39fy2pA'));
-        $this->downloadYoutube($videoInfo);
         // print_r($videoInfo);
 
 
