@@ -385,6 +385,7 @@ class AudiobookController extends CustomController
                 }
             }
             
+            
             $item = $this->repo->find($params['media_id']);
             $params['name'] = sanitizeInput($params['name']);
             $getID3 = new getID3;
@@ -396,6 +397,7 @@ class AudiobookController extends CustomController
             
             // $params['author_id'] = $this->app->customer_auth()->customer_id ?? 0;
                 
+            $params['selected_genres'] = $this->app->request()->get('selected_genres');
 
             if ($this->repo->update($params))
             {

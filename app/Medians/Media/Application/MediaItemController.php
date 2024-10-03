@@ -543,6 +543,8 @@ class MediaItemController extends CustomController
                 $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
             }
         
+            $params['selected_genres'] = $this->app->request()->get('selected_genres');
+        
             if ($this->repo->update($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
