@@ -100,22 +100,23 @@ class VideoController extends CustomController
     public function import_page()
     {
 
-        $youtube = new YouTubeDownloader();
 
         try {
+                
+            $settings = $this->app->SystemSetting();
+            $params = $this->app->params();
             
-		$settings = $this->app->SystemSetting();
-		$params = $this->app->params();
+            $this->app->customer_auth();
+            
+            $youtube = new YoutubeService($settings['youtube_api']);
+            // $youtube->video_info($params['video_id'] ?? 'e3QZ39fy2pA');
+            // $process = $youtube->processVideo($params['video_id'] ?? 'e3QZ39fy2pA');
+            
+            $videoInfo = json_decode($this->getVideoInfo('e3QZ39fy2pA'));
+            $this->downloadYoutube($videoInfo);
         
-        $this->app->customer_auth();
-        
-        $youtube = new YoutubeService($settings['youtube_api']);
-        // $youtube->video_info($params['video_id'] ?? 'e3QZ39fy2pA');
-        // $process = $youtube->processVideo($params['video_id'] ?? 'e3QZ39fy2pA');
-        
-        $videoInfo = json_decode($this->getVideoInfo('e3QZ39fy2pA'));
-        $this->downloadYoutube($videoInfo);
-        
+            $youtube = new YouTubeDownloader();
+
             $downloadOptions = $youtube->getDownloadLinks("https://www.youtube.com/watch?v=e3QZ39fy2pA");
             
             if ($downloadOptions->getAllFormats()) {
