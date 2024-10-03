@@ -224,6 +224,14 @@ class MediaController extends CustomController
 		$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileInfo['filesize']);
 		$endByte = (int)(($streamDuration / $totalDuration) * $fileInfo['filesize']) + $startByte;
 		
+		echo $startByte. ' 
+		';
+		echo $endByte. ' 
+		';
+		echo $bitRate. ' 
+		';
+		echo $streamDuration;
+		return;
 		// Open the file
 		$fm = @fopen($filePath, 'rb');
 		if (!$fm) {
@@ -231,20 +239,6 @@ class MediaController extends CustomController
 			return;
 		}
 	
-		// echo $startByte. ' 
-		// ';
-		// echo $endByte. ' 
-		// ';
-		// echo $totalDuration. ' 
-		// ';
-		// echo $bitRate. ' 
-		// ';
-		// echo $streamDuration.' 
-		// ';
-		
-		
-
-		// return;
 		// Prevent session blocking
 		session_write_close();
 		ignore_user_abort(true); // Continue streaming even if the user disconnects
@@ -253,44 +247,31 @@ class MediaController extends CustomController
 		fseek($fm, $startByte);
 	
 		$contentLength = $endByte - $startByte;
-		$contentRange = ($streamDuration / $fileInfo['filesize']);
 		$mimeType = !empty($fileInfo['mime_type']) ? $fileInfo['mime_type'] : "audio/mpeg";
-		// echo $contentRange + 1;
-		// echo $mimeType;
-		// return;
-		try {
-
-			header("Content-Type: $mimeType");
-			header("Accept-Ranges: bytes");
-			header("Content-Length: " . $contentLength);
-			header("Content-Range: bytes $contentRange");
-			header("X-Pad: avoid browser bug");
-			header("Cache-Control: no-cache");
-			header("HTTP/1.1 206 Partial Content");
-
-			// Stream the file
-			$bufferSize = 8192;
-			$bytesSent = 0;
-			while (!feof($fm) && ($bytesSent < $contentLength)) {
-				$buffer = fread($fm, $bufferSize);
-				echo $buffer;
-				flush();
-				$bytesSent += strlen($buffer);
-		
-				// Stop when we have sent enough bytes for the specified duration
-				if ($bytesSent >= $contentLength) {
-					break;
-				}
+		header("Content-Type: $mimeType");
+		header("Accept-Ranges: bytes");
+		header("Content-Length: " . $contentLength);
+		header("Content-Range: bytes $startByte-$endByte/" . filesize($filePath));
+		header("X-Pad: avoid browser bug");
+		header("Cache-Control: no-cache");
+	
+		// Stream the file
+		$bufferSize = 8192;
+		$bytesSent = 0;
+		while (!feof($fm) && ($bytesSent < $contentLength)) {
+			$buffer = fread($fm, $bufferSize);
+			echo $buffer;
+			flush();
+			$bytesSent += strlen($buffer);
+	
+			// Stop when we have sent enough bytes for the specified duration
+			if ($bytesSent >= $contentLength) {
+				break;
 			}
-			
-			fclose($fm);
-			exit;
-			
-		} catch (\Throwable $th) {
-			print_r($th->getMessage());
-			//throw $th;
 		}
 	
+		fclose($fm);
+		exit;
 	}
 	
 	public function stream_external($fileUrl, $tmpFilePath, $startTimeInSeconds = 0, $streamDuration = 60)
@@ -326,7 +307,7 @@ class MediaController extends CustomController
 			return;
 		}
 		
-		return $this->streamAudioFromTimeRange($filePath, $startTimeInSeconds, $streamDuration);
+		return $this->streamAudioFromTimeRange($filePath, 0, 10);
 
 		// Analyze the file using getID3 for duration and bitrate
 		$getID3 = new \getID3;
