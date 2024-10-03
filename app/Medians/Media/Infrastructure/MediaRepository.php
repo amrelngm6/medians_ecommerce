@@ -216,7 +216,7 @@ class MediaRepository
 		return file_exists($output) ? $output : null;
 	}
 
-	public function cropWithFfmpeg($filepath, $output, $start = '00', $duration = 60, $settings)
+	public function cropWithFfmpeg($filepath, $output, $start = '00', $duration = 60, $settings = null)
 	{
 		if (file_exists($output))
 			return $output;

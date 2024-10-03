@@ -603,3 +603,234 @@ window.addEventListener('popstate', function (e) {
 		loadPage(e.target.location.pathname)
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Video player
+ */
+
+
+$(function(){
+    // var myVideo = document.createElement("video");
+	var myVideo = document.getElementById("my-video");
+	const processor = {
+	timerCallback(loadSidePreview = null) {
+		if (myVideo.paused || myVideo.ended || !loadSidePreview)   {
+		return;
+		}
+		this.computeFrame();
+		setTimeout(() => {
+		this.timerCallback(loadSidePreview);
+		}, 16); // roughly 60 frames per second
+	},
+
+	doLoad(loadSidePreview = null) {
+		this.c1 = document.getElementById("videoCanvas");
+		
+		this.ctx1 = this.c1.getContext("2d"); 
+
+		/** On time update */
+		myVideo.addEventListener(
+			"timeupdate",
+			() => {
+				
+				jQuery('#current-time').html(convertToTime(myVideo.currentTime))
+				progress.value = myVideo.currentTime;
+
+			})
+			
+		/** On Play video */
+		myVideo.addEventListener(
+		"loadedmetadata",
+		() => {
+				
+				if (loadSidePreview)
+				{
+					jQuery(videoCanvas).removeClass('hidden')
+				}
+
+				jQuery('#video-duration').html(convertToTime(myVideo.duration))
+
+			progress.setAttribute("max", myVideo.duration);
+		},
+		false,
+		);
+			
+		/** On Play video */
+		myVideo.addEventListener(
+		"play",
+		() => {
+			jQuery('#video-duration').html(convertToTime(myVideo.duration))
+			progress.setAttribute("max", myVideo.duration);
+
+			this.width = 300;
+			this.height =  200;
+			
+			this.timerCallback(loadSidePreview);
+			jQuery('#video-overlay').fadeOut(200)
+			videoContainer.style.zIndex = 999
+		},
+		false,
+		);
+			
+		/** On Pause video */
+		myVideo.addEventListener(
+		"pause",
+		() => {
+			jQuery('#video-overlay').fadeIn(200)
+			videoContainer.style.zIndex = 0
+		},
+		false,
+		);
+			
+		/** On Play video */
+		myVideo.addEventListener(
+		"click",
+		() => {
+
+			if (myVideo.paused) 
+				myVideo.play()
+			else 	
+				myVideo.pause()
+		},
+		false,
+		);
+
+
+
+		/** On change current time */
+		progress.addEventListener( "click" , (e) => {
+
+			const rect = progress.getBoundingClientRect();
+			const pos = (e.pageX - rect.left) / progress.offsetWidth;
+			myVideo.currentTime = pos * myVideo.duration;
+			// myVideo.currentTime = 3.10;
+			myVideo.play()
+		});
+
+
+
+
+		let isDragging = false;
+		let offsetX = 0;
+		let offsetY = 0;
+
+		videoCanvas.addEventListener('mousedown', function (e) {
+			isDragging = true;
+			videoCanvas.style.cursor = 'grabbing';
+
+			// Calculate offset position to handle dragging smoothly
+			offsetX = e.clientX - videoCanvas.getBoundingClientRect().left;
+			offsetY = e.clientY - videoCanvas.getBoundingClientRect().top;
+		});
+
+		videoCanvas.addEventListener('ondragstart', function(){
+			isDragging = true;
+			videoCanvas.style.cursor = 'grabbing';
+		}) 
+		
+		// Function to stop dragging
+		window.addEventListener('mouseup', function () {
+			isDragging = false;
+			videoCanvas.style.cursor = 'grab';
+		});
+		
+		// Function to drag the canvas
+		window.addEventListener('mousemove', function (e) {
+			if (isDragging) {
+				// Calculate the new position
+				const left = e.clientX - offsetX;
+				const top = e.clientY - offsetY;
+
+				// Update canvas position
+				videoCanvas.style.left = `${left}px`;
+				videoCanvas.style.top = `${top + 10}px`;
+
+				// Set the position to absolute once dragging starts
+				videoCanvas.style.position = 'fixed';
+				videoCanvas.style.transform = 'none';
+			}
+		});
+
+		
+		
+	},
+
+	computeFrame() {
+		this.ctx1.drawImage(myVideo, 0, 0, this.width, this.height);
+		const frame = this.ctx1.getImageData(0, 0, this.width, this.height);
+		const l = frame.data.length / 4;
+
+		for (let i = 0; i < l; i++) {
+		const grey =
+			(frame.data[i * 4 + 0] +
+			frame.data[i * 4 + 1] +
+			frame.data[i * 4 + 2]) /
+			3;
+		}
+		this.ctx1.putImageData(frame, 0, 0);
+
+		return;
+	},
+	};
+
+	// window.addEventListener('load', function(){
+	// 	if (myVideo.canPlayType("video/mp4")) {
+	// 		myVideo.setAttribute("src", "{{item.main_file.path}}");
+	// 		processor.doLoad();
+	// 	}
+	// })
+
+	jQuery(document).on('click', '.video-side-popup', function(){
+		if (myVideo.canPlayType("video/mp4")) {
+			myVideo.setAttribute("src", jQuery(this).data('path'));
+			processor.doLoad(true);
+			myVideo.play()
+			
+		}
+		console.log(jQuery(this).data('path'))
+	})
+	jQuery(document).on('click', '.pause-video', function(){
+		myVideo.pause()
+	})
+	jQuery(document).on('click', '.play-video', function(){
+		jQuery('#video-overlay').fadeOut(200)
+		myVideo.play()
+	})
+
+	jQuery(document).on('click', '#video-volume', function(){
+		myVideo.volume = jQuery(this).val()
+	})
+	jQuery(document).on('click', '.fullscreen', function(){
+
+		return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
+			? document.exitFullscreen()
+			: videoContainer.requestFullscreen();
+	})
+
+	jQuery(document).on('dblclick', '#videoCanvas,video', function(){
+			return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
+			? document.exitFullscreen()
+			: videoContainer.requestFullscreen();
+	})
+})
