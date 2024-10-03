@@ -223,7 +223,17 @@ class MediaController extends CustomController
 		// Calculate byte offset for the start time
 		$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileInfo['filesize']);
 		$endByte = (int)(($streamDuration / $totalDuration) * $fileInfo['filesize']) + $startByte;
-	
+		
+		echo $startByte. ' 
+		';
+		echo $endByte. ' 
+		';
+		echo $totalDuration. ' 
+		';
+		echo $bitRate. ' 
+		';
+		echo $streamDuration;
+		return;
 		// Open the file
 		$fm = @fopen($filePath, 'rb');
 		if (!$fm) {
