@@ -149,6 +149,10 @@ class APIController extends CustomController
 					$return = (new Categories\Application\BookGenreController)->store();
 					break;
 					
+				case 'VideoGenre.create':
+					$return = (new Categories\Application\VideoGenreController)->store();
+					break;
+					
 				case 'Category.create':
 					$return = (new Categories\Application\GenreController)->store();
 					break;
@@ -299,6 +303,10 @@ class APIController extends CustomController
 
 			case 'BookGenre.update':
 				$controller = new Categories\Application\BookGenreController;
+				break;
+
+			case 'VideoGenre.update':
+				$controller = new Categories\Application\VideoGenreController;
 				break;
 
 			case 'Mood.update':
@@ -527,6 +535,10 @@ class APIController extends CustomController
 			
 				case 'BookGenre.delete':
 					return response((new Categories\Application\BookGenreController())->delete());
+					break;
+
+				case 'VideoGenre.delete':
+					return response((new Categories\Application\VideoGenreController())->delete());
 					break;
 					
 				case 'Mood.delete':
