@@ -175,7 +175,7 @@ const processor = {
         this.width = 300;
         this.height =  200;
         this.timerCallback();
-		jQuery('#video-overlay').css('visibility', 'hidden').animate({opacity: 0}, 200)
+		jQuery('#video-overlay').fadeOut(200)
       },
       false,
     );
@@ -184,7 +184,7 @@ const processor = {
     myVideo.addEventListener(
       "pause",
       () => {
-		jQuery('#video-overlay').css('visibility', 'visible').animate({opacity: 0}, 200)
+		jQuery('#video-overlay').fadeIn(200)
       },
       false,
     );
@@ -207,8 +207,6 @@ const processor = {
     /** On change current time */
     progress.addEventListener( "click" , (e) => {
 
-        console.log(myVideo.seekable)
-        console.log(myVideo.seekable.length)
         const rect = progress.getBoundingClientRect();
         const pos = (e.pageX - rect.left) / progress.offsetWidth;
         myVideo.currentTime = pos * myVideo.duration;
@@ -239,7 +237,6 @@ const processor = {
     });
 
     videoCanvas.addEventListener('ondragstart', function(){
-        console.log('drag')
         isDragging = true;
         videoCanvas.style.cursor = 'grabbing';
     })
