@@ -192,14 +192,14 @@ const processor = {
     videoCanvas.addEventListener('ondragstart', function(){
         isDragging = true;
         videoCanvas.style.cursor = 'grabbing';
-    }) #}
+    }) 
     
     // Function to stop dragging
     window.addEventListener('mouseup', function () {
         isDragging = false;
         videoCanvas.style.cursor = 'grab';
     });
-
+	#}
     
     // Function to drag the canvas
     window.addEventListener('mousemove', function (e) {
