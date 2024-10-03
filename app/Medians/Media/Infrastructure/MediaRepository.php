@@ -218,6 +218,9 @@ class MediaRepository
 
 	public function cropWithFfmpeg($filepath, $output, $start = '00', $duration = 60, $settings)
 	{
+		if (file_exists($output))
+			return $output;
+
 		$ffmpeg = $settings['ffmpeg_path'];
 		$run = shell_exec("$ffmpeg -ss $start -i $filepath -t $duration -c copy $output");
 		return file_exists($output) ? $output : null;
