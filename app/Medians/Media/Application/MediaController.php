@@ -259,6 +259,8 @@ class MediaController extends CustomController
 		$contentRange = (($startByte-$endByte) / filesize($filePath));
 		$mimeType = !empty($fileInfo['mime_type']) ? $fileInfo['mime_type'] : "audio/mpeg";
 		echo $contentRange;
+		echo $mimeType;
+		return;
 		// header("Content-Type: $mimeType");
 		// header("Accept-Ranges: bytes");
 		// header("Content-Length: " . $contentLength);
