@@ -388,62 +388,12 @@ class VideoController extends CustomController
         // Execute the cURL session
         $response = curl_exec($ch);
 
-        // file_put_contents('./b.mp4', $response);
-
-
-        // return;
-
-        
-        // // Initialize a cURL session to fetch the video stream
-        // $ch = curl_init($link);
-
-        // // Tell cURL to return the transfer as a string instead of outputting it directly
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-
-        // // Set headers to match a browser request
-        // curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        //     'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36',
-        //     'Referer: https://www.facebook.com/',
-        // ]);
-
-        // // Execute the cURL session
-        // $response = curl_exec($ch);
-
         $save = file_put_contents($tempFileFullPath, $response);
-        if ($save)
-        {
-            $filesize = filesize($tempFileFullPath);
-            // $filesize < 100 ? unlink($tempFileFullPath)   : null;
-            $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : null;
-        }
-        
-        return;
-
-        
-        // $save = file_put_contents($tempFileFullPath, fopen($link, 'r'));
-
-        // if ($save && file_exists($tempFileFullPath) ) 
-        // {
-        //     if (filesize($tempFileFullPath) > 1) {
-        //         return true;
-        //     }
-        // }
-
-        // $save = file_put_contents($tempFileFullPath, file_get_contents($link));
-
-        // if ($save && file_exists($tempFileFullPath) ) 
-        // {
-        //     if (filesize($tempFileFullPath) > 1) {
-        //         return true;
-        //     }
-        // }
-        
 
         $filesize = filesize($tempFileFullPath);
-        // $filesize < 100 ? unlink($tempFileFullPath)   : null;
+        $filesize < 100 ? unlink($tempFileFullPath)   : null;
         $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : null;
-        
+
     } 
 
 
