@@ -280,7 +280,7 @@ class MediaController extends CustomController
 
 	function streamVideo() {
 
-		$this->isDirectAccess();
+		// $this->isDirectAccess();
 
 		$this->app = new \config\APP;
 		$video = $this->app->request()->get('video');
