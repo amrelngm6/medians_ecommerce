@@ -655,7 +655,7 @@ $(function(){
 	var playFrame;
 	const processor = {
 	timerCallback(myVideo) {
-		if (!playFrame )   {
+		if (!playFrame || myVideo.ended )   {
 			return;
 		}
 		this.computeFrame(myVideo);
@@ -774,8 +774,8 @@ $(function(){
 				var difference = parseInt((b - a) / 1000);
 
 				myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId+'#t='+difference);
-				processor.doLoad(myVideo);
 				myVideo.currentTime = difference;
+				processor.doLoad(myVideo);
 				myVideo.play()
 				
 			}
