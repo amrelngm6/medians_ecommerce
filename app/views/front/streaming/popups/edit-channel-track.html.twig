@@ -24,14 +24,14 @@
 							<input type="hidden" name="type" value="ChannelMedia.update"/>
 							<input type="hidden" name="params[channel_id]"  value="{{item.channel_id}}"/>
 							<input type="hidden" value="{{item.channel_media_id}}" name="params[channel_media_id]"  />
-							<div class="w-full p-6 mt-4 relative flex w-96 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
+							<div class="w-full p-6 mt-4 relative flex w-96 overflow-auto flex-col rounded-lg border border-slate-200 bg-white dark:border-gray-900-200 dark:bg-gray-800 shadow-sm">
                             {% if item.media_id < 1 %}
                                 <span class="py-2 block">{{lang.translate('External link')}} </span>
                                 <input  type="text"  value="{{item.media_path}}"  disabled class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-2 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Search for media items')}}" required/>
                                 <span class="py-2 block">{{lang.translate('title')}} </span>
                                 <input name="params[title]" type="text"  value="{{item.title}}"  class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-2 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Search for media items')}}" required/>
                             {% endif %}
-								<div class="w-full p-6 mt-4 relative flex w-96 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm" >
+								<div class="w-full p-6 mt-4 relative flex w-96 overflow-auto flex-col rounded-lg border border-slate-200 bg-white  dark:border-gray-900-200 dark:bg-gray-800 shadow-sm" >
 									<span class=" py-2 block">{{lang.translate('Date')}} / {{lang.translate('Start time')}} </span>
 									<div class="w-full flex gap-2">
 										<input name="params[date]"  type="date" value="{{item.date}}" id="channelRecordDate" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-2 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Start date')}}" required/>
@@ -41,10 +41,10 @@
 							</div>
 							<div class="text-center w-full py-2 flex  gap-2">
 
-								<a href="/front_api/delete?type=ChannelMedia.delete&params[channel_media_id]={{item.channel_media_id}}" data-confirm="{{lang.translate('Are you sure')}}" date-confirm-text="{{lang.translate('Delete this media from channel')}}" class="ajax-link mx-auto mt-2 group relative h-12 w-12 overflow-hidden rounded-lg bg-white text-lg shadow">
+								<a href="/front_api/delete?type=ChannelMedia.delete&params[channel_media_id]={{item.channel_media_id}}" data-confirm="{{lang.translate('Are you sure')}}" date-confirm-text="{{lang.translate('Delete this media from channel')}}" class="ajax-link mx-auto mt-2 group relative h-12 w-12 overflow-hidden rounded-lg bg-white  dark:border-gray-900-200 dark:bg-gray-800 text-lg shadow">
 									<img class="p-3" src="/src/front_assets/svg/delete.svg">
 								</a>
-                                <button type="submit" onclick="(function(){ return setTimeout(function(){calendar.refetchEvents()},2000)})()" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
+                                <button type="submit" onclick="(function(){ return setTimeout(function(){calendar.refetchEvents()},2000)})()" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white  dark:border-gray-900-200 dark:bg-gray-800 text-lg shadow">
 									<div class="absolute inset-0 w-3 bg-purple-800 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
 									<span class="relative text-black group-hover:text-white">{{lang.translate('Send')}}</span>
 								</button>
