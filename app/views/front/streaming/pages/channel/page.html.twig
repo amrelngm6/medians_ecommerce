@@ -139,7 +139,7 @@ $(function()  {
             .then(data => {
                 sourceBuffer.appendBuffer(data);
                 return new Promise(resolve => {
-                    sourceBuffer.addEventListener('updateend', resolve, { once: true });
+                    sourceBuffer.addEventListener('updateend', resolve, { once: false });
                 });
             });
     }
