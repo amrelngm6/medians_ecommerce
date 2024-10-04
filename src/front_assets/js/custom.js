@@ -829,14 +829,15 @@ $(function(){
 		myVideo.volume = jQuery(this).val()
 	})
 	jQuery(document).on('click', '.fullscreen', function(){
-
+		videoContainer = document.getElementById('videoContainer');
 		return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
 			? document.exitFullscreen()
 			: videoContainer.requestFullscreen();
 	})
 
 	jQuery(document).on('dblclick', '#videoCanvas,video', function(){
-			return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
+		videoContainer = document.getElementById('videoContainer');
+		return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
 			? document.exitFullscreen()
 			: videoContainer.requestFullscreen();
 	})
