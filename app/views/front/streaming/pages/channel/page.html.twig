@@ -3,8 +3,8 @@
 
 	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
 		<video id="my-video" class="w-full h-screen" autoplay poster="/stream?thumbnail=1000&image={{item.picture_name}}" crossorigin="anonymous" >
-			<source src="/stream_channel?channel_id={{item.channel_id}}#t=300" type="video/webm"/>
-			<source src="/stream_channel?channel_id={{item.channel_id}}#t=300" type="video/mp4"/>
+			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/webm"/>
+			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/mp4"/>
 		</video>
 
 		<div id="video-controls" class="flex px-6 gap-4 text-gray-400 absolute bottom-0 left-0 w-full gradient-top-overlay pt-10" data-state="hidden">
