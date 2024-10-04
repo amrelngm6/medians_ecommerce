@@ -631,7 +631,6 @@ window.addEventListener('popstate', function (e) {
 
 
 $(function(){
-    var myVideo = document.createElement("video");
 	var myVideo;
 	const processor = {
 	timerCallback(loadSidePreview = null) {
@@ -694,7 +693,7 @@ $(function(){
 		);
 			
 		/** On Pause video */
-		jQ.addEventListener(
+		myVideo.addEventListener(
 		"pause",
 		() => {
 			jQuery('#video-overlay').fadeIn(200)
@@ -806,7 +805,6 @@ $(function(){
 		jQuery('#video-overlay').fadeOut(200)
 		myVideo.play()
 		
-    	myVideo = document.getElementById("footer-video");
 		if (myVideo.canPlayType("video/mp4")) {
 			myVideo.setAttribute("src", jQuery(this).data('path'));
 			processor.doLoad(true);
