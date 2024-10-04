@@ -102,14 +102,6 @@ class ChannelMediaController extends CustomController
 			$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
 			$getID3 = new getID3;
 			
-			$fileInfo = $getID3->analyze($filePath);
-
-            if (isset($fileInfo['playtime_seconds'])) {
-                $params['duration'] = round($fileInfo['playtime_seconds'], 0);
-				$params['bitrate'] = $fileInfo['bitrate'];
-				$params['filesize'] = $fileInfo['filesize'];
-			}
-
 			if (substr($params['media_path'], 0, 4) == 'http' ) {
 				$videoController = new \Medians\Media\Application\VideoController;
                 $media_path = '/uploads/videos/tmp/'.md5($params['media_path']).'.mp4';
@@ -119,8 +111,26 @@ class ChannelMediaController extends CustomController
 					$filePath = $tempFilePath;
 					$output = str_replace('.mp4', '_encoded.mp4', $tempFilePath);
 					$params['media_path'] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->createFragmentsFile($filePath, $output));
-					
+							
+					$fileInfo = $getID3->analyze($filePath);
+
+					if (isset($fileInfo['playtime_seconds'])) {
+						$params['duration'] = round($fileInfo['playtime_seconds'], 0);
+						$params['bitrate'] = $fileInfo['bitrate'];
+						$params['filesize'] = $fileInfo['filesize'];
+					}
+
 				}
+			} else {
+					
+				$fileInfo = $getID3->analyze($filePath);
+
+				if (isset($fileInfo['playtime_seconds'])) {
+					$params['duration'] = round($fileInfo['playtime_seconds'], 0);
+					$params['bitrate'] = $fileInfo['bitrate'];
+					$params['filesize'] = $fileInfo['filesize'];
+				}
+
 			}
 
 				
