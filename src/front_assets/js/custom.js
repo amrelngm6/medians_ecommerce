@@ -834,7 +834,7 @@ $(function(){
 
 
 	/** On change current time */
-	jQuery(document).on('dblclick', 'progress', (e) => {
+	jQuery(document).on('click', 'progress', (e) => {
 		let progress = document.getElementById('progress')
 		const rect = progress.getBoundingClientRect();
 		const pos = (e.pageX - rect.left) / progress.offsetWidth;
