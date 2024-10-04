@@ -98,7 +98,7 @@ $(function()  {
         var b = new Date();  // Current time
         startPosition = parseInt((b - a) / 1000);  // Calculate the start position in seconds
 
-        const videoUrl = '/stream_channel?channel_id=' + activeChannel.channel_id;
+        const videoUrl = '/stream_channel?channel_id=' + activeChannel.channel_id + '&hash='+Math.random();
 
         if (mediaSource) {
             if (mediaSource.readyState === 'open') {
@@ -108,7 +108,7 @@ $(function()  {
         }
 
         mediaSource = new MediaSource();
-        {# channelPlayer.src = URL.createObjectURL(mediaSource); #}
+        channelPlayer.src = URL.createObjectURL(mediaSource);
 
         mediaSource.addEventListener('sourceopen', function() {
             isSourceOpen = true;
