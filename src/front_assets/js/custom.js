@@ -658,13 +658,14 @@ $(function(){
 		return;
 		}
 		this.computeFrame();
-		jQuery('#videoCanvas').removeClass('hidden')
 		setTimeout(() => {
 		this.timerCallback(loadSidePreview);
 		}, 16); // roughly 60 frames per second
 	},
 
 	doLoad() {
+		jQuery('#videoCanvas').removeClass('hidden')
+
 		this.c1 = document.getElementById("videoCanvas");
 		
 		this.ctx1 = this.c1.getContext("2d"); 
@@ -673,24 +674,24 @@ $(function(){
 		let offsetX = 0;
 		let offsetY = 0;
 
-		this.cl.addEventListener('mousedown', function (e) {
+		videoCanvas.addEventListener('mousedown', function (e) {
 			isDragging = true;
-			this.cl.style.cursor = 'grabbing';
+			videoCanvas.style.cursor = 'grabbing';
 
 			// Calculate offset position to handle dragging smoothly
-			offsetX = e.clientX - this.cl.getBoundingClientRect().left;
-			offsetY = e.clientY - this.cl.getBoundingClientRect().top;
+			offsetX = e.clientX - videoCanvas.getBoundingClientRect().left;
+			offsetY = e.clientY - videoCanvas.getBoundingClientRect().top;
 		});
 
-		this.cl.addEventListener('ondragstart', function(){
+		videoCanvas.addEventListener('ondragstart', function(){
 			isDragging = true;
-			this.cl.style.cursor = 'grabbing';
+			videoCanvas.style.cursor = 'grabbing';
 		}) 
 		
 		// Function to stop dragging
 		window.addEventListener('mouseup', function () {
 			isDragging = false;
-			this.cl.style.cursor = 'grab';
+			videoCanvas.style.cursor = 'grab';
 		});
 		
 		// Function to drag the canvas
@@ -701,12 +702,12 @@ $(function(){
 				const top = e.clientY - offsetY;
 
 				// Update canvas position
-				this.cl.style.left = `${left}px`;
-				this.cl.style.top = `${top + 10}px`;
+				videoCanvas.style.left = `${left}px`;
+				videoCanvas.style.top = `${top + 10}px`;
 
 				// Set the position to absolute once dragging starts
-				this.cl.style.position = 'fixed';
-				this.cl.style.transform = 'none';
+				videoCanvas.style.position = 'fixed';
+				videoCanvas.style.transform = 'none';
 			}
 		});
 
