@@ -67,18 +67,21 @@
 // var lastId;
 $(function()  {
 
-    const videoPlayer = document.getElementById('videoPlayer');
+    const channelPlayer = document.getElementById('channelPlayer');
     const bufferingIndicator = document.getElementById('bufferingIndicator');
     let mediaSource;
     let sourceBuffer;
     let isSourceOpen = false;
 
-    function fetchCurrentVideoInfo() {
-        fetch(`/channel_json/{{item.channel_id}}`)
+    function fetchCurrentVideoInfo(channelId) {
+
+        fetch(`/channel_json/`+channelId)
             .then(response => response.json())
             .then(data => {
                 if (data) {
-                    loadVideoPartially(data.active_item);
+                    activeChannel = data
+                    activeChannelMedia = data.active_item
+                    loadVideoPartially();
                 } else {
                     console.log('No video currently playing');
                 }
@@ -86,25 +89,30 @@ $(function()  {
             .catch(error => console.error('Error:', error));
     }
 
-    function loadVideoPartially(media) {
+    function loadVideoPartially() {
         
-        var a = new Date(media.start);
+        if (!activeChannelMedia) {
+            console.log('empty' )
+            return ;
+        }
+
+        var a = new Date(activeChannelMedia.start);
         var b = new Date();
         var startPosition = parseInt((b - a) / 1000);
         var startPosition = parseInt(((b - a) / 1000) - 3600);
         // var startPosition = 130;
 
-        const videoUrl = '/stream_channel?channel_id={{item.channel_id}}';
+        const videoUrl = '/stream_channel?channel_id='+activeChannel.channel_id;
         
         if (mediaSource) {
             if (mediaSource.readyState === 'open') {
                 mediaSource.endOfStream();
             }
-            URL.revokeObjectURL(videoPlayer.src);
+            URL.revokeObjectURL(channelPlayer.src);
         }
 
         mediaSource = new MediaSource();
-        videoPlayer.src = URL.createObjectURL(mediaSource);
+        channelPlayer.src = URL.createObjectURL(mediaSource);
 
         mediaSource.addEventListener('sourceopen', function() {
             isSourceOpen = true;
@@ -112,16 +120,16 @@ $(function()  {
             sourceBuffer.mode = 'segments';
             
             fetchInitSegment(videoUrl).then(() => {
-                videoPlayer.currentTime = startPosition;
+                channelPlayer.currentTime = startPosition;
             });
 
-            videoPlayer.addEventListener('seeking', onSeeking);
+            channelPlayer.addEventListener('seeking', onSeeking);
         });
 
         mediaSource.addEventListener('sourceended', function() {
             isSourceOpen = false;
         });
-        videoPlayer.play()
+        channelPlayer.play()
     }
 
     function fetchInitSegment(url) {
@@ -136,8 +144,8 @@ $(function()  {
     }
 
     function onSeeking() {
-        const currentTime = videoPlayer.currentTime;
-        const buffered = videoPlayer.buffered;
+        const currentTime = channelPlayer.currentTime;
+        const buffered = channelPlayer.buffered;
 
         if (isTimeBuffered(currentTime, buffered)) {
             return;
@@ -145,7 +153,7 @@ $(function()  {
 
         bufferingIndicator.style.display = 'block';
         abortCurrentRequests();
-        fetchSegmentAtTime(videoPlayer.currentTime);
+        fetchSegmentAtTime(channelPlayer.currentTime);
     }
 
     function isTimeBuffered(time, buffered) {
@@ -166,7 +174,7 @@ $(function()  {
         // This is a simplified version
         const estimatedByteOffset = Math.floor(time * 1000000); // Very rough estimate
         
-        fetch(videoPlayer.src, {
+        fetch(channelPlayer.src, {
             headers: { 'Range': `bytes=${estimatedByteOffset}-` }
         })
         .then(response => response.arrayBuffer())
@@ -181,7 +189,7 @@ $(function()  {
     }
 
     // Fetch Channel info when the page loads
-    fetchCurrentVideoInfo({{channel.channel_id}});
+    fetchCurrentVideoInfo({{item.channel_id}});
 
     
     window.navigation.addEventListener("navigate", (event) => {
@@ -193,7 +201,7 @@ $(function()  {
     var stationCommentsInterval = setInterval(async function(){
 
         // Periodically check for updates (e.g., every 5 minutes)
-        fetchCurrentVideoInfo({{channel.channel_id}});
+        fetchCurrentVideoInfo({{item.channel_id}});
 	}, stationIntervalAmount > 1  ? (stationIntervalAmount * 1000) : 60000);
 
 });
