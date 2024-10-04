@@ -789,39 +789,21 @@ $(function(){
 		myVideo.addEventListener(
 			"timeupdate",
 			() => {
-				alert(1)
 				jQuery('#current-time-page').html(convertToTime(myVideo.currentTime))
-				progress.value = myVideo.currentTime;
+				jQuery('#videoContainer progress').val(myVideo.currentTime);
 
 			})
 			
-		/** On Play video */
-		myVideo.addEventListener(
-		"loadedmetadata",
-		() => {
-				
-				if (loadSidePreview)
-				{
-					jQuery(videoCanvas).removeClass('hidden')
-				}
-
-		},
-		false,
-		);
 			
 		/** On Play video */
 		myVideo.addEventListener(
 		"play",
 		() => {
-			jQuery('#video-duration').html(convertToTime(myVideo.duration))
-			progress.setAttribute("max", myVideo.duration);
-
-			this.width = 300;
-			this.height =  200;
+			jQuery('#video-duration-page').html(convertToTime(myVideo.duration))
+			jQuery('#videoContainer progress').attr("max", myVideo.duration);
 			
-			this.timerCallback(loadSidePreview);
 			jQuery('#video-overlay').fadeOut(200)
-			videoContainer.style.zIndex = 999
+			jQuery('#videoContainer').css('z-index',  999)
 		},
 		false,
 		);
