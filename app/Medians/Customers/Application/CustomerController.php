@@ -153,24 +153,57 @@ class CustomerController extends CustomController
         }
 	}
 
+    
+    /**
+     * Channels list page for frontend
+     */
+    public function channels()
+    {
+		$this->app = new \config\APP;
 
-	/**
-	 * Find customer by mobile
-	 * 
-	 * @param String
-	 * 
-	 * @return JSON
-	 */
-	public function search($text)
-	{
-		$data = $this->repo->search($text);
+		$settings = $this->app->SystemSetting();
 
+		try {
 
-		echo json_encode(array('success'=>1, 'result'=> $data->toArray()));
-
-	}  
-
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'channels' => $this->repo->get(),
+                'layout' => 'channels'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
 	
+    
+    /**
+     * search Channels list page for frontend
+     */
+    public function search()
+    {
+		$this->app = new \config\APP;
+
+		$settings = $this->app->SystemSetting();
+
+        $params = $this->app->params();
+        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $list = $this->repo->getWithFilter($params);
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'list' => $list,
+                'layout' => 'search/search',
+                'sub_layout' => 'artist',
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
 	    /**
      * Artist page for frontend
      */

@@ -70,7 +70,7 @@ RouteHandler::get('/video/(:all)', \Medians\Media\Application\VideoController::c
 /** Search pages */
 RouteHandler::get('/search/audio', \Medians\Media\Application\MediaItemController::class.'@search');
 RouteHandler::get('/search/audiobook', \Medians\Media\Application\AudiobookController::class.'@search');
-RouteHandler::get('/search/artist', \Medians\Channels\Application\ChannelController::class.'@search');
+RouteHandler::get('/search/artist', \Medians\Customers\Application\CustomerController::class.'@search');
 RouteHandler::get('/search/playlist', \Medians\Playlists\Application\PlaylistController::class.'@search');
 RouteHandler::get('/search/station', \Medians\Stations\Application\StationController::class.'@search');
 
@@ -89,8 +89,7 @@ RouteHandler::get('/genres', \Medians\Media\Application\MediaItemController::cla
 RouteHandler::get('/genre/(:all)', \Medians\Media\Application\MediaItemController::class.'@genre');
 RouteHandler::get('/book_genre/(:all)', \Medians\Media\Application\AudiobookController::class.'@genre');
 RouteHandler::get('/video_genre/(:all)', \Medians\Media\Application\VideoController::class.'@genre');
-RouteHandler::get('/channels', \Medians\Channels\Application\ChannelController::class.'@channels');
-RouteHandler::get('/artists', \Medians\Channels\Application\ChannelController::class.'@channels');
+RouteHandler::get('/artists', \Medians\Customers\Application\CustomerController::class.'@channels');
 RouteHandler::get('/artist/(:all)', \Medians\Customers\Application\CustomerController::class.'@artist');
 RouteHandler::get('/playlists', \Medians\Playlists\Application\PlaylistController::class.'@playlists');
 RouteHandler::get('/playlist/(:all)', \Medians\Playlists\Application\PlaylistController::class.'@playlist');
