@@ -694,7 +694,7 @@ $(function(){
 		);
 			
 		/** On Pause video */
-		myVideo.addEventListener(
+		jQ.addEventListener(
 		"pause",
 		() => {
 			jQuery('#video-overlay').fadeIn(200)
@@ -704,17 +704,16 @@ $(function(){
 		);
 			
 		/** On Play video */
-		myVideo.addEventListener(
+		jQuery(document).on(
 		"click",
-		() => {
+		"video",
+		function() {
 
 			if (myVideo.paused) 
 				myVideo.play()
 			else 	
 				myVideo.pause()
-		},
-		false,
-		);
+		});
 
 
 
