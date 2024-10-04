@@ -811,10 +811,11 @@ $(function(){
 	/** On Play video */
 	jQuery(document).on( "click", "video", function() {
 
-		if (myVideo.paused) 
+		if (myVideo.paused) {
 			myVideo.play()
-		else 	
+		} else {
 			myVideo.pause()
+		} 	
 	});
 
 	jQuery(document).on('click', '#video-volume', function(){
