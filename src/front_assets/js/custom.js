@@ -738,14 +738,6 @@ $(function(){
 		return;
 	},
 	};
-
-	// window.addEventListener('load', function(){
-	// 	if (myVideo.canPlayType("video/mp4")) {
-	// 		myVideo.setAttribute("src", "{{item.main_file.path}}");
-	// 		processor.doLoad();
-	// 	}
-	// })
-
 	
 	jQuery(document).on('click', '.video-side-popup', function(){
     	myVideo = document.getElementById("footer-video");
@@ -774,11 +766,10 @@ $(function(){
 				var b = new Date();
 				var difference = parseInt((b - a) / 1000);
 
-				myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId+'#t='+difference);
+				myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId);
 				myVideo.currentTime = difference;
 				processor.doLoad(myVideo);
 				myVideo.play()
-				
 			}
 	
 			jQuery(this).attr('disabled', false)
@@ -881,3 +872,17 @@ $(function(){
 		);
 	}
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+

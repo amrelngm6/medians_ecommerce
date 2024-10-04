@@ -249,8 +249,8 @@ class MediaController extends CustomController
 		// Check if the file is stored locally
 		if (substr($filePath, 0 , 4) == '/upl' &&  file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
-			return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath);
-			// return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $channelMedia->duration);
+			// return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath);
+			return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $channelMedia->duration);
 		} 
 	}
 
@@ -454,7 +454,7 @@ class MediaController extends CustomController
 		// Get total duration and bitrate
 		$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;
 		$bitRate = !empty($fileInfo['bitrate']) ? $fileInfo['bitrate'] : 0; // Bitrate in bits per second
-		$fileSize = $fileInfo['filesize']; // File size in bytes
+		$fileSize = filesize($filePath); // File size in bytes
 	
 		$streamDuration = $duration > 0 ? $duration : ($totalDuration - $startTimeInSeconds);
 

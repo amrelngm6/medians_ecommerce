@@ -1,21 +1,23 @@
 <div class=" w-full  lg:h-screen gradient-top-overlay" style="min-height: 300px; max-height: calc(100vh - 70px)">
 
 
-	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
-		<video id="videoPlayer" class="w-full h-screen" autoplay poster="/stream?thumbnail=1000&image={{item.picture_name}}" crossorigin="anonymous" >
+	<figure id="channelContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
+		<video id="channelPlayer" class="w-full h-screen" autoplay poster="/stream?thumbnail=1000&image={{item.picture_name}}" crossorigin="anonymous" >
 			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/webm"/>
 			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/mp4"/>
 		</video>
 
-		<div id="video-controls" class="flex px-6 gap-4 text-gray-400 absolute bottom-0 left-0 w-full gradient-top-overlay pt-10" data-state="hidden">
-			<button class="play-video brightness-200" id="play" type="button" data-state="play"><img src="/src/front_assets/svg/video-play.svg" class="w-4 brightness-200"/></button>
-			<button class="pause-video brightness-200" style="display:none" id="pause" type="button" data-state="pause"><img src="/src/front_assets/svg/video-pause.svg" class="w-4 brightness-200"/></button>
-            <div class="w-full">
-			<div class="volume relative show-child ">
-				<button class="brightness-200" id="mute" type="button" style="padding-top: 5px" data-state="mute"><img src="/src/front_assets/svg/video-volume.svg" class="w-4 brightness-200"/></button>
-				<input type="range" id="video-volume" min="0" step=".1" max="1" class="show-on-hover absolute bottom-0 h-2 left-1 w-20" style="transform-origin: left; transform: rotate(270deg);"/>
-			</div>
-			<button id="fs" class="fullscreen " id="pause" type="button" data-state="go-fullscreen"><img src="/src/front_assets/svg/fullscreen.svg" class="w-4 brightness-200"/></button>
+		<div id="channel-controls" class="flex px-6 gap-4 text-gray-400 absolute bottom-0 left-0 w-full gradient-top-overlay pt-10" data-state="hidden">
+			<button class="play-channel brightness-200 w-full" id="play" type="button" data-state="play"><img src="/src/front_assets/svg/video-play.svg" class="w-4 brightness-200"/></button>
+			<button class="pause-channel brightness-200 w-full" style="display:none" id="pause" type="button" data-state="pause"><img src="/src/front_assets/svg/video-pause.svg" class="w-4 brightness-200"/></button>
+
+            <div class="flex gap-4 flex-end">
+                <div class="volume relative show-child flex-none">
+                    <button class="brightness-200" id="mute" type="button" style="padding-top: 5px" data-state="mute"><img src="/src/front_assets/svg/video-volume.svg" class="w-4 brightness-200"/></button>
+                    <input type="range" id="channel-volume" min="0" step=".1" max="1" class="show-on-hover absolute bottom-0 h-2 left-1 w-20" style="transform-origin: left; transform: rotate(270deg);"/>
+                </div>
+                <button id="fs" class="fullscreen " id="pause" type="button" data-state="go-fullscreen"><img src="/src/front_assets/svg/fullscreen.svg" class="w-4 brightness-200"/></button>
+            </div>
 		</div>
 	</figure>
 
@@ -63,8 +65,7 @@
 
 <script  type="text/javascript">
 // var lastId;
-$(function() 
-{
+$(function()  {
 
     const videoPlayer = document.getElementById('videoPlayer');
     const bufferingIndicator = document.getElementById('bufferingIndicator');
@@ -93,7 +94,7 @@ $(function()
         var startPosition = parseInt(((b - a) / 1000) - 3600);
         // var startPosition = 130;
 
-        const videoUrl = '/stream_video?video=' +media.filename;
+        const videoUrl = '/stream_channel?channel_id={{item.channel_id}}';
         
         if (mediaSource) {
             if (mediaSource.readyState === 'open') {
@@ -193,8 +194,7 @@ $(function()
 
         // Periodically check for updates (e.g., every 5 minutes)
         fetchCurrentVideoInfo({{channel.channel_id}});
-	}, 30000);
-	{# }, stationIntervalAmount > 1  ? (stationIntervalAmount * 1000) : 5000); #}
+	}, stationIntervalAmount > 1  ? (stationIntervalAmount * 1000) : 60000);
 
 });
 </script>
