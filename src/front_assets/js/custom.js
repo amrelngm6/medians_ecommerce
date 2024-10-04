@@ -811,9 +811,9 @@ $(function(){
 	/** On Play video */
 	jQuery(document).on( "click", "video", function() {
 		if (myVideo.paused) {
-			myVideo.play()
+			console.log('myVideo.play()')
 		} else {
-			myVideo.pause()
+			console.log('myVideo.pause()')
 		} 	
 	});
 
