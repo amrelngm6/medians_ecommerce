@@ -93,7 +93,7 @@ $(function()  {
     }
 
     function loadVideoPartially() {
-        
+
         if (!activeChannelMedia ) {
             console.log('empty');
             return;
@@ -151,7 +151,7 @@ $(function()  {
     }
 
     // Fetch a specific segment at a given time
-    function fetchSegmentAtTime(time) {
+    function fetchSegmentAtTime(time, finalLoad = false) {
         const estimatedByteOffset = Math.floor(time * 1000000); // Rough estimate
         const chunkSize = 1024 * 1024; // 1 MB chunks
 
@@ -167,6 +167,7 @@ $(function()  {
         .catch(error => {
             console.error('Error fetching video segment:', error);
             bufferingIndicator.style.display = 'none';
+            finalLoad ? '' :  fetchSegmentAtTime(time, finalLoad)
         });
     }
 
