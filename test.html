@@ -29,16 +29,20 @@
 
         function loadVideoPartially(media) {
             console.log(media)
-            const videoUrl = `/videos/${videoId}.mp4`;
+            
+            var a = new Date(media.start);
+            var b = new Date();
+            var difference = parseInt((b - a) / 1000);
+            const videoUrl = '/test.php?v='+media.media.filepath.filename;
             const mediaSource = new MediaSource();
             videoPlayer.src = URL.createObjectURL(mediaSource);
 
             mediaSource.addEventListener('sourceopen', function() {
                 const sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
-                fetchVideoChunk(videoUrl, startPosition, sourceBuffer);
+                fetchVideoChunk(videoUrl, difference, sourceBuffer);
             });
 
-            videoPlayer.currentTime = startPosition;
+            videoPlayer.currentTime = difference;
         }
 
         function fetchVideoChunk(url, startByte, sourceBuffer, chunkSize = 1024 * 1024) {
