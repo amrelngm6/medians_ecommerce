@@ -101,6 +101,15 @@ class ChannelMediaController extends CustomController
             
 			$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
 			$getID3 = new getID3;
+			
+			$fileInfo = $getID3->analyze($filePath);
+
+            if (isset($fileInfo['playtime_seconds'])) {
+                $params['duration'] = round($fileInfo['playtime_seconds'], 0);
+				$params['bitrate'] = $fileInfo['bitrate'];
+				$params['filesize'] = $fileInfo['filesize'];
+			}
+
 			if (substr($params['media_path'], 0, 4) == 'http' ) {
 				$videoController = new \Medians\Media\Application\VideoController;
                 $media_path = '/uploads/videos/tmp/'.md5($params['media_path']).'.mp4';
@@ -114,15 +123,12 @@ class ChannelMediaController extends CustomController
 				}
 			}
 
-			$fileInfo = $getID3->analyze($filePath);
-
-            if (isset($fileInfo['playtime_seconds'])) {
-                $params['duration'] = round($fileInfo['playtime_seconds'], 0);
-				$params['bitrate'] = $fileInfo['bitrate'];
-				$params['filesize'] = $fileInfo['filesize'];
+				
+			if ( isset($output) && file_exists($output))
+			{
+				unlink($filePath);
 			}
 
-			
 
 			$returnData = (!empty($this->repo->store_item($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
@@ -242,11 +248,6 @@ class ChannelMediaController extends CustomController
 		$newEncodedFile = $settings['ffmpeg_path'] . " -i $input -c:v copy -c:a copy -movflags +faststart  $output";
 
 		$run = shell_exec($newEncodedFile);
-
-		if (file_exists($output))
-		{
-			unlink($input);
-		}
 
 		return file_exists($output) ? $output : $input;
 	} 
