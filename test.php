@@ -5,23 +5,23 @@ require 'vendor/autoload.php';
 // Path to the video file
 $file = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/87937-66fc71a2b4bf0.mp4';
 
+$startTime = isset($_GET['start']) ? floatval($_GET['start']) : 5;
 
-$startTime = isset($_GET['start']) ? floatval($_GET['start']) : 10.05; // Get start time from query parameter
+if (!file_exists($file)) {
+    die('File not found');
+}
 
-// Use FFmpeg to get the byte position for the start time
-$ffprobeCommand = "ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 \"$file\"";
-$duration = floatval(shell_exec($ffprobeCommand));
-
-$seekCommand = "ffmpeg -v error -i \"$file\" -c copy -f rawvideo -seek_timestamp 1 -ss $startTime -to " . ($startTime + 0.1) . " -f null - 2>&1 | grep 'pos=' | cut -d '=' -f 2";
-$bytePosition = intval(shell_exec($seekCommand));
-echo $seekCommand;
-
-echo $bytePosition;
-return;
 $fileSize = filesize($file);
 
-$start = $bytePosition;
+// Use FFmpeg to get the byte position for the start time
+$ffmpegCommand = "ffmpeg -v error -ss {$startTime} -i \"{$file}\" -c copy -f mp4 -y -bsf:a aac_adtstoasc -movflags faststart+frag_keyframe+empty_moov -f null - 2>&1 | grep -oP '(?<=muxing overhead: )[0-9.]+%'";
+$muxingOverhead = floatval(str_replace('%', '', shell_exec($ffmpegCommand))) / 100;
+
+$startByte = intval($fileSize * ($startTime / getDuration($file)) * (1 - $muxingOverhead));
+
+$start = $startByte;
 $end = $fileSize - 1;
+$length = $end - $start + 1;
 
 // Handle range requests
 if (isset($_SERVER['HTTP_RANGE'])) {
@@ -30,29 +30,38 @@ if (isset($_SERVER['HTTP_RANGE'])) {
     $end = (isset(explode('-', $ranges[1])[1]) && is_numeric(explode('-', $ranges[1])[1])) 
         ? intval(explode('-', $ranges[1])[1]) 
         : $fileSize - 1;
+    $length = $end - $start + 1;
+    header('HTTP/1.1 206 Partial Content');
+} else {
+    header('HTTP/1.1 200 OK');
 }
 
 // Set headers
 header("Content-Type: video/mp4");
 header("Accept-Ranges: bytes");
-header("Content-Length: " . ($end - $start + 1));
+header("Content-Length: $length");
 header("Content-Range: bytes $start-$end/$fileSize");
 header("Content-Disposition: inline; filename=\"" . basename($file) . "\"");
 
 // Open the file
 $fp = fopen($file, 'rb');
 
-// Seek to the requested start position
+// Seek to the start position
 fseek($fp, $start);
 
 // Output the file data
-$bufferSize = 1024 * 16;
-while (!feof($fp) && ($p = ftell($fp)) <= $end) {
-    if ($p + $bufferSize > $end) {
-        $bufferSize = $end - $p + 1;
-    }
-    echo fread($fp, $bufferSize);
+$buffer = 1024 * 8;
+$totalRead = 0;
+while (!feof($fp) && $totalRead < $length) {
+    $readSize = min($buffer, $length - $totalRead);
+    echo fread($fp, $readSize);
+    $totalRead += $readSize;
     flush();
 }
 
 fclose($fp);
+
+function getDuration($file) {
+    $ffprobeCommand = "ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 \"{$file}\"";
+    return floatval(shell_exec($ffprobeCommand));
+}
