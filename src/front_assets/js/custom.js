@@ -757,8 +757,6 @@ $(function(){
 		{
 			activeChannelMedia = activeChannel.active_item;
 		}
-		console.log(activeChannel);
-		return;
 
 		if (myVideo.canPlayType("video/mp4")) {
 			myVideo.setAttribute("src", jQuery(this).data('path'));

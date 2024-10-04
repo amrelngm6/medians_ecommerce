@@ -206,6 +206,53 @@ class MediaController extends CustomController
 		} 
 	}
 
+
+
+	public function stream_channel()
+	{
+		// $this->isDirectAccess();
+		
+		$this->app = new \config\APP;
+		$settings = $this->app->SystemSetting();
+		$channelId = $this->app->request()->get('channel_id');
+		
+		$channelRepo = new \Medians\Channels\Infrastructure\ChannelRepository; 
+		$channel = $channelRepo->find($channelId);
+
+		try {
+			$channelMedia = $channel->activeItem;
+			
+			if (empty($channelMedia->start_at))
+				return;
+
+
+			$targetTime = new \DateTime($channelMedia->start_at);
+			$currentTime = new \DateTime();
+
+			$interval = $targetTime->diff($currentTime);
+			$startTime = ($interval->h * 3600) + ($interval->i * 60) + $interval->s;
+				
+			$filePath =  isset($channelMedia->media->main_file->path) ? ($channelMedia->media->main_file->path) : $channelMedia->media_path;
+
+		} catch (\Throwable $th) {
+		}
+
+		// Check if the streaming media is external link
+		if (substr($filePath, 0 , 4) == 'http' &&  empty($channelMedia->media)) {
+
+			// Stream External files
+			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($filePath).'.mp3';
+			return $this->stream_external($filePath, $tmpFilePath, $startTime, $settings['station_media_chunk'] ?? 60);
+		} 
+		
+
+		// Check if the file is stored locally
+		if (substr($filePath, 0 , 4) == '/upl' &&  file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
+		{
+			return $this->streamVideoFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, 0, 0, 0);
+		} 
+	}
+
 	public function streamAudioFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60, $totalDuration = 0) {
 		
 		if (!file_exists($filePath)) {
@@ -267,7 +314,7 @@ class MediaController extends CustomController
 		exit;
 	}
 	
-	public function streamVideoFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 60, $totalDuration = 0) {
+	public function streamVideoFromTimeRange($filePath, $startTimeInSeconds = 0, $streamDuration = 0, $totalDuration = 0) {
 
 		// Check if the file exists
 		if (!file_exists($filePath)) {

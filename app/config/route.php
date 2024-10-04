@@ -428,6 +428,7 @@ RouteHandler::get('/stream', \Medians\Media\Application\MediaController::class.'
 RouteHandler::get('/stream_audio', \Medians\Media\Application\MediaController::class.'@stream_audio'); 
 RouteHandler::get('/stream_video', \Medians\Media\Application\MediaController::class.'@streamVideo'); 
 RouteHandler::get('/stream_station', \Medians\Media\Application\MediaController::class.'@stream_station'); 
+RouteHandler::get('/stream_channel', \Medians\Media\Application\MediaController::class.'@stream_channel'); 
 RouteHandler::get('/stream_external', \Medians\Media\Application\MediaController::class.'@stream_external'); 
 
 /**
