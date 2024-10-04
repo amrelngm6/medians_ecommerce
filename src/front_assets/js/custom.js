@@ -815,14 +815,13 @@ $(function(){
 
 	/** On Play video */
 	jQuery(document).on( "click", "#videoContainer", function() {
+    	myVideo = document.getElementById('my-video' );
 		if (myVideo.paused) {
 			jQuery('#video-overlay').fadeOut(200)
-			console.log(myVideo.src)
 			myVideo.play()
 
-			console.log('myVideo.play()')
 		} else {
-			console.log('myVideo.pause()')
+			myVideo.pause()
 		} 	
 	});
 
