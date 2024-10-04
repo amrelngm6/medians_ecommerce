@@ -65,8 +65,8 @@
 
 <script  type="text/javascript">
 // var lastId;
-$(function()  {
 
+$(function()  {
     const channelPlayer = document.getElementById('channelPlayer');
     const bufferingIndicator = document.getElementById('bufferingIndicator');
     let mediaSource;
@@ -74,13 +74,12 @@ $(function()  {
     let isSourceOpen = false;
 
     function fetchCurrentVideoInfo(channelId) {
-
-        fetch(`/channel_json/`+channelId)
+        fetch(`/channel_json/` + channelId)
             .then(response => response.json())
             .then(data => {
                 if (data) {
-                    activeChannel = data
-                    activeChannelMedia = data.active_item
+                    activeChannel = data;
+                    activeChannelMedia = data.active_item;
                     loadVideoPartially();
                 } else {
                     console.log('No video currently playing');
@@ -90,19 +89,17 @@ $(function()  {
     }
 
     function loadVideoPartially() {
-        
         if (!activeChannelMedia) {
-            console.log('empty' )
-            return ;
+            console.log('empty');
+            return;
         }
 
         var a = new Date(activeChannelMedia.start);
         var b = new Date();
         var startPosition = parseInt((b - a) / 1000);
-        // var startPosition = 130;
 
-        const videoUrl = '/stream_channel?channel_id='+activeChannel.channel_id;
-        
+        const videoUrl = '/stream_channel?channel_id=' + activeChannel.channel_id;
+
         if (mediaSource) {
             if (mediaSource.readyState === 'open') {
                 mediaSource.endOfStream();
@@ -117,9 +114,10 @@ $(function()  {
             isSourceOpen = true;
             sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
             sourceBuffer.mode = 'segments';
-            
+
             fetchInitSegment(videoUrl).then(() => {
                 channelPlayer.currentTime = startPosition;
+                preloadNextSegment(startPosition);  // Preload next segment
             });
 
             channelPlayer.addEventListener('seeking', onSeeking);
@@ -128,13 +126,15 @@ $(function()  {
         mediaSource.addEventListener('sourceended', function() {
             isSourceOpen = false;
         });
-        setTimeout(function(){
-    		channelPlayer.play()
-        }, 500)
+
+        setTimeout(function() {
+            channelPlayer.play();
+        }, 500);
     }
 
+    // Fetch initial segment (first part of the video)
     function fetchInitSegment(url) {
-        return fetch(url, { headers: { 'Range': 'bytes=0-' } })
+        return fetchWithRetry(url, { headers: { 'Range': 'bytes=0-' } })
             .then(response => response.arrayBuffer())
             .then(data => {
                 sourceBuffer.appendBuffer(data);
@@ -144,6 +144,33 @@ $(function()  {
             });
     }
 
+    // Fetch a specific segment at a given time
+    function fetchSegmentAtTime(time) {
+        const estimatedByteOffset = Math.floor(time * 1000000); // Rough estimate
+        const chunkSize = 1024 * 1024; // 1 MB chunks
+
+        fetchWithRetry(channelPlayer.src, {
+            headers: { 'Range': `bytes=${estimatedByteOffset}-${estimatedByteOffset + chunkSize - 1}` }
+        })
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            sourceBuffer.appendBuffer(data);
+            bufferingIndicator.style.display = 'none';
+            preloadNextSegment(time);  // Preload the next segment for smoother playback
+        })
+        .catch(error => {
+            console.error('Error fetching video segment:', error);
+            bufferingIndicator.style.display = 'none';
+        });
+    }
+
+    // Preload the next segment (buffers video in advance)
+    function preloadNextSegment(time) {
+        const nextTime = time + 5; // Preload 5 seconds ahead
+        fetchSegmentAtTime(nextTime);
+    }
+
+    // Handle seeking event (when the user scrubs to a different time)
     function onSeeking() {
         const currentTime = channelPlayer.currentTime;
         const buffered = channelPlayer.buffered;
@@ -153,10 +180,11 @@ $(function()  {
         }
 
         bufferingIndicator.style.display = 'block';
-        abortCurrentRequests();
+        abortCurrentRequests(); // Optionally abort any in-progress fetch requests
         fetchSegmentAtTime(channelPlayer.currentTime);
     }
 
+    // Check if a specific time is already buffered
     function isTimeBuffered(time, buffered) {
         for (let i = 0; i < buffered.length; i++) {
             if (time >= buffered.start(i) && time <= buffered.end(i)) {
@@ -166,44 +194,38 @@ $(function()  {
         return false;
     }
 
+    // Optional: Abort any ongoing fetch requests (not implemented)
     function abortCurrentRequests() {
-        // Implement logic to abort any ongoing fetch requests
+        // Implement logic to abort any ongoing fetch requests if needed
     }
 
-    function fetchSegmentAtTime(time) {
-        // In a real implementation, you would calculate the byte range for the segment containing 'time'
-        // This is a simplified version
-        const estimatedByteOffset = Math.floor(time * 1000000); // Very rough estimate
-        
-        fetch(channelPlayer.src, {
-            headers: { 'Range': `bytes=${estimatedByteOffset}-` }
-        })
-        .then(response => response.arrayBuffer())
-        .then(data => {
-            sourceBuffer.appendBuffer(data);
-            bufferingIndicator.style.display = 'none';
-        })
-        .catch(error => {
-            console.error('Error fetching video segment:', error);
-            bufferingIndicator.style.display = 'none';
+    // Retry fetch in case of network failures, up to a specified number of retries
+    function fetchWithRetry(url, options = {}, retries = 3) {
+        return fetch(url, options).catch(error => {
+            if (retries > 0) {
+                console.warn(`Retrying... ${retries} attempts left`);
+                return fetchWithRetry(url, options, retries - 1);
+            } else {
+                throw error;
+            }
         });
     }
 
     // Fetch Channel info when the page loads
     fetchCurrentVideoInfo({{item.channel_id}});
 
-    
+    // Refresh video information at intervals
     window.navigation.addEventListener("navigate", (event) => {
-        clearInterval(stationCommentsInterval)
-        window.navigation.removeEventListener("navigate", function(){})
-    })
+        clearInterval(stationCommentsInterval);
+        window.navigation.removeEventListener("navigate", function(){});
+    });
 
     let stationIntervalAmount = jQuery('#startions-interval').val();
-    var stationCommentsInterval = setInterval(async function(){
-
+    var stationCommentsInterval = setInterval(async function() {
         // Periodically check for updates (e.g., every 5 minutes)
         fetchCurrentVideoInfo({{item.channel_id}});
-	}, stationIntervalAmount > 1  ? (stationIntervalAmount * 1000) : 60000);
+    }, stationIntervalAmount > 1 ? (stationIntervalAmount * 1000) : 60000);
 
 });
+
 </script>
