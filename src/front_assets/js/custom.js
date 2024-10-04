@@ -653,20 +653,20 @@ window.addEventListener('popstate', function (e) {
 $(function(){
 	var myVideo;
 	const processor = {
-	timerCallback(loadSidePreview = null) {
+	timerCallback(myVideo) {
 		if (myVideo.paused || myVideo.ended )   {
 		return;
 		}
-		this.computeFrame();
+		this.computeFrame(myVideo);
 		setTimeout(() => {
-		this.timerCallback(loadSidePreview);
+		this.timerCallback(myVideo);
 		}, 16); // roughly 60 frames per second
 	},
 
-	doLoad() {
+	doLoad(myVideo) {
 		jQuery('#videoCanvas').removeClass('hidden')
 
-		this.timerCallback(true)
+		this.timerCallback(myVideo)
         this.width = 300;
         this.height =  200;
 		this.c1 = document.getElementById("videoCanvas");
@@ -748,7 +748,7 @@ $(function(){
     	myVideo = document.getElementById("footer-video");
 		if (myVideo.canPlayType("video/mp4")) {
 			myVideo.setAttribute("src", jQuery(this).data('path'));
-			processor.doLoad(true);
+			processor.doLoad(myVideo);
 			myVideo.play()
 			
 		}
