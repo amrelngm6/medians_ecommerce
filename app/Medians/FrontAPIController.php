@@ -155,7 +155,15 @@ class FrontAPIController extends CustomController
 				case 'StationMedia.create_record':
 					$return = (new Stations\Application\StationMediaController)->store_record();
 					break;
-		
+
+				case 'Channel.create':
+					$return = (new Channels\Application\ChannelController)->store();
+					break;
+						
+				case 'ChannelMedia.create':
+					$return = (new Channels\Application\ChannelMediaController)->store();
+					break;
+	
 			}
 
 			return printResponse(json_encode($return));
@@ -216,10 +224,7 @@ class FrontAPIController extends CustomController
 				return printResponse((new Media\Application\AudiobookController)->update_chapters());
 				break;
 			
-			case 'StationMedia.update':
-				$controller = new Stations\Application\StationMediaController;
-				break;
-			
+
 			case 'Comment.update':
 				$controller = new Comments\Application\CommentController;
 				break;
@@ -228,6 +233,10 @@ class FrontAPIController extends CustomController
 				$controller = new Stations\Application\StationController;
 				break;
 
+			case 'StationMedia.update':
+				$controller = new Stations\Application\StationMediaController;
+				break;
+				
 
 
 		}
@@ -292,6 +301,10 @@ class FrontAPIController extends CustomController
 				
 				case 'StationMedia.delete':
 					return printResponse((new Stations\Application\StationMediaController())->delete());
+					break;
+				
+				case 'MediaItem.delete':
+					return printResponse((new Media\Application\MediaItemController())->delete());
 					break;
 				
 			
