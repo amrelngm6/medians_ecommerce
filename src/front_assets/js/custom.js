@@ -774,15 +774,13 @@ $(function(){
 		if (video.paused) {
 			jQuery('#video-overlay').fadeOut(200)
 			video.play()
-			jQuery('.play-video').fadeOut(200)
-			jQuery('.pause-video').fadeIn(200)
+			jQuery('#videoContainer .play-video').hide().parent().find('.pause-video').fadeIn(200)
 		} else {
-			jQuery('.pause-video').fadeOut(200)
-			jQuery('.play-video').fadeIn(200)
+			jQuery('#videoContainer .pause-video').hide().parent().find('.play-video').fadeIn(200)
 			video.pause()
 		} 	
-		jQuery('#video-duration').html(convertToTime(video.duration))
-		jQuery('progress').setAttribute("max", video.duration);
+		jQuery('#video-duration-page').html(convertToTime(video.duration))
+		jQuery('#videoContainer progress').setAttribute("max", video.duration);
 
 		
 		/** On time update */
