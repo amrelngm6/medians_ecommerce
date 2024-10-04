@@ -779,6 +779,7 @@ $(function(){
 			jQuery('#videoContainer .play-video').hide().parent().find('.pause-video').fadeIn(200)
 		} else {
 			jQuery('#videoContainer .pause-video').hide().parent().find('.play-video').fadeIn(200)
+			jQuery('#video-overlay').fadeIn(200)
 			myVideo.pause()
 		} 	
 		jQuery('#video-duration-page').html(convertToTime(myVideo.duration))
