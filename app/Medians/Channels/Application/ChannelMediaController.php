@@ -102,13 +102,16 @@ class ChannelMediaController extends CustomController
 			$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
 			$getID3 = new getID3;
 			if (substr($params['media_path'], 0, 4) == 'http' ) {
-				
+				$videoController = new \Medians\Media\Application\VideoController;
                 $media_path = '/uploads/videos/tmp/'.md5($params['media_path']).'.mp4';
 				$tempFilePath = $_SERVER['DOCUMENT_ROOT'].$media_path;
-				file_put_contents($tempFilePath, fopen($params['media_path'], 'r'));
+				if ($videoController->downloadRemoteFile($tempFilePath, $_POST['params']['media_path']))
+				{
+					$outputFile = str_replace('.mp4', '_encoded.mp4', $filePath);
+					$params['media_path'] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->createFragmentsFile($tempFilePath, $outputFile));
+				}
+				// file_put_contents($tempFilePath, fopen($params['media_path'], 'r'));
 				$filePath = $tempFilePath;
-				$outputFile = str_replace('.mp4', '_encoded.mp4', $filePath);
-				$params['media_path'] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->createFragmentsFile($filePath, $outputFile));
 
 			} else {
 				$outputFile = str_replace('.mp4', '_encoded.mp4', $filePath);

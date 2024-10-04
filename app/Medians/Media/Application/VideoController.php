@@ -428,7 +428,7 @@ class VideoController extends CustomController
     public function downloadRemoteFile($tempFileFullPath, $link)
     {
         
-        $videoUrl = $_POST['params']['link'];
+        $videoUrl = $link;
 
         // Initialize a cURL session to fetch the video stream
         $ch = curl_init($videoUrl);
@@ -475,7 +475,7 @@ class VideoController extends CustomController
                 $tempFilePath = '/uploads/videos/tmp/'.md5($params['link']).'.mp4';
                 $tempFileFullPath = $_SERVER['DOCUMENT_ROOT'].$tempFilePath;
                 
-                if ($this->downloadRemoteFile($tempFileFullPath, $params['link']) ) 
+                if ($this->downloadRemoteFile($tempFileFullPath, $_POST['params']['link']) ) 
                 {
                     $save = $this->store($params, $tempFilePath, $settings);
                 }
