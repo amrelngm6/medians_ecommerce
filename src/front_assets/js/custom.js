@@ -632,7 +632,7 @@ window.addEventListener('popstate', function (e) {
 
 $(function(){
     // var myVideo = document.createElement("video");
-	var myVideo = document.getElementById("my-video");
+	var myVideo;
 	const processor = {
 	timerCallback(loadSidePreview = null) {
 		if (myVideo.paused || myVideo.ended || !loadSidePreview)   {
@@ -802,6 +802,7 @@ $(function(){
 	// })
 
 	jQuery(document).on('click', '.video-side-popup', function(){
+    	myVideo = document.createElement("footer-video");
 		if (myVideo.canPlayType("video/mp4")) {
 			myVideo.setAttribute("src", jQuery(this).data('path'));
 			processor.doLoad(true);
@@ -814,6 +815,7 @@ $(function(){
 		myVideo.pause()
 	})
 	jQuery(document).on('click', '.play-video', function(){
+    	myVideo = document.createElement('my-video' );
 		jQuery('#video-overlay').fadeOut(200)
 		myVideo.play()
 	})
