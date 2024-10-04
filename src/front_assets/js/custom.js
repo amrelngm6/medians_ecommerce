@@ -797,7 +797,6 @@ $(function(){
 			myVideo.play()
 			
 		}
-		console.log(jQuery(this).data('path'))
 	})
 	jQuery(document).on('click', '.pause-video', function(){
 		myVideo.pause()
@@ -806,11 +805,23 @@ $(function(){
     	myVideo = document.getElementById('my-video' );
 		jQuery('#video-overlay').fadeOut(200)
 		myVideo.play()
+		
+    	myVideo = document.getElementById("footer-video");
+		if (myVideo.canPlayType("video/mp4")) {
+			myVideo.setAttribute("src", jQuery(this).data('path'));
+			processor.doLoad(true);
+			myVideo.play()
+			
+		}
 	})
 
 	/** On Play video */
-	jQuery(document).on( "click", "video", function() {
+	jQuery(document).on( "click", "#videoContainer", function() {
 		if (myVideo.paused) {
+			jQuery('#video-overlay').fadeOut(200)
+			console.log(myVideo.src)
+			myVideo.play()
+
 			console.log('myVideo.play()')
 		} else {
 			console.log('myVideo.pause()')

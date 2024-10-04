@@ -2,7 +2,7 @@
 
 
 	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
-		<video id="my-video" class="w-full h-screen" crossorigin="anonymous" >
+		<video id="my-video" class="w-full h-screen" poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{media_item.picture_name}}" crossorigin="anonymous" >
 			<source src="{{item.main_file.path}}" type="video/webm"/>
 			<source src="{{item.main_file.path}}" type="video/mp4"/>
 		</video>
