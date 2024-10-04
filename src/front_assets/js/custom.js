@@ -775,6 +775,7 @@ $(function(){
 
 				myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId+'#t='+difference);
 				processor.doLoad(myVideo);
+				myVideo.currentTime = difference;
 				myVideo.play()
 				
 			}
