@@ -2090,6 +2090,9 @@ Video Player
     display: none;
 }
 
+:fullscreen video.hidden {
+    display: block !important;
+}
 :fullscreen #videoCanvas {
     display: none;
 }
