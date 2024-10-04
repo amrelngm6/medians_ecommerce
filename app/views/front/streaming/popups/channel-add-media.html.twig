@@ -25,7 +25,7 @@
 													<path d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 												</svg>
 											</div>
-											<input rel="nofollow" onclick="(function(){ return jQuery('#new-channel-link-item').addClass('hidden'), jQuery('#new-channel-item').removeClass('hidden');})()" name="params[title]" type="text" id="voice-search" data-element="search-result-popup" data-form="new-item-form" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Search for media items')}}" required/>
+											<input placeholder="{{lang.translate('Search for videos')}}"  rel="nofollow" onclick="(function(){ return jQuery('#new-channel-link-item').addClass('hidden'), jQuery('#new-channel-item').removeClass('hidden');})()" name="params[title]" type="text" id="voice-search" data-element="search-result-popup" data-form="new-item-form" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
 											<span class="cursor-pointer absolute inset-y-0 end-0 flex items-center pe-3">
 												{% include 'views/front/streaming/popups/speech-to-text.html.twig' %}
 											</span>
@@ -41,13 +41,13 @@
 							<input type="hidden" name="params[start_at]" value="" id="linkChannelMediaStart"/>
 							<input type="hidden" name="params[date]" value="" id="linkChannelMediaStartDate"/>
 
-							<div  class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm" id="channel-popup-or">
+							<div  class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 dark:border-gray-800 bg-white dark:bg-gray-800 shadow-sm" id="channel-popup-or">
 								<nav class="flex min-w-[240px] flex-col gap-1 p-1.5" >
 									<span class="text-center">OR</span>
 								</nav>
 							</div>
 							
-							<div class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
+							<div class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white bg-white dark:bg-gray-800 bg-white dark:border-gray-800 shadow-sm">
 								<nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="item-link-nav">
 									<input placeholder="{{lang.translate('Add MP3 Link directly')}}" name="params[media_path]" onclick="(function(){ return jQuery('#link-channel-submit-button').removeClass('hidden'), jQuery('#new-channel-item, #channel-popup-or, #channel-find-track-form').addClass('hidden'); })()" type="text"  data-form="new-item-link-form" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
 								</nav>
@@ -70,7 +70,7 @@
 							<input type="hidden" name="params[start_at]" value="" id="channelMediaStart"/>
 							<input type="hidden" name="params[date]" value="" id="channelMediaStartDate"/>
 
-							<div class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm">
+							<div class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white dark:bg-gray-800 shadow-sm">
 								<nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="search-result-popup"></nav>
 							</div>
 							<div class="text-center w-full py-2">
@@ -80,22 +80,7 @@
 								</button>
 							</div>
 						</form>
-						<div class="h-10"></div>
 					
-						<div  class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white shadow-sm" id="channel-popup-or">
-							<nav class="flex min-w-[240px] flex-col gap-1 p-1.5" >
-								<span class="text-center">OR</span>
-							</nav>
-						</div>
-						
-						<div onclick="(function(){ jQuery('#channel-record-popup').removeClass('hidden'),  jQuery('#find-track-popup').addClass('hidden')})()" class="cursor-pointer mt-4 p-2 relative flex text-lg w-40 text-center mx-auto max-h-64 overflow-auto  rounded-lg border border-slate-200 bg-white shadow-sm">
-							<span>{{lang.translate('Record a voice')}} </span>
-							<span id="button" class="p-1" onclick="toggleStartStop()">
-								<svg class="w-4 h-4 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 16 20">
-									<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7v3a5.006 5.006 0 0 1-5 5H6a5.006 5.006 0 0 1-5-5V7m7 9v3m-3 0h6M7 1h2a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3Z"/>
-								</svg>
-							</span>
-						</div>
 					</div>
 					
 				</div>
