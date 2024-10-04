@@ -814,7 +814,7 @@ $(function(){
 	})
 
 	/** On Play video */
-	jQuery(document).on( "click", "#videoContainer", function() {
+	jQuery(document).on( "click", "video", function() {
     	myVideo = document.getElementById('my-video' );
 		if (myVideo.paused) {
 			jQuery('#video-overlay').fadeOut(200)
