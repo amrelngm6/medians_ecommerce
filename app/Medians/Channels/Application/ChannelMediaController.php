@@ -228,6 +228,9 @@ class ChannelMediaController extends CustomController
 
 	public function createFragmentsFile($input, $output)
 	{
+		if (file_exists($output))
+			return $output;
+
 		$settings = $this->app->SystemSetting();
 		
 		$newEncodedFile = $settings['ffmpeg_path'] . " -i $input -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k  -movflags +faststart+frag_keyframe+empty_moov+default_base_moof  -f mp4 -segment_time 10 -reset_timestamps 1  $output";
