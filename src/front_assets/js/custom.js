@@ -703,17 +703,6 @@ $(function(){
 		false,
 		);
 			
-		/** On Play video */
-		jQuery(document).on(
-		"click",
-		"video",
-		function() {
-
-			if (myVideo.paused) 
-				myVideo.play()
-			else 	
-				myVideo.pause()
-		});
 
 
 
@@ -818,6 +807,15 @@ $(function(){
 		jQuery('#video-overlay').fadeOut(200)
 		myVideo.play()
 	})
+
+	/** On Play video */
+	jQuery(document).on( "click", "video", function() {
+
+		if (myVideo.paused) 
+			myVideo.play()
+		else 	
+			myVideo.pause()
+	});
 
 	jQuery(document).on('click', '#video-volume', function(){
 		myVideo.volume = jQuery(this).val()
