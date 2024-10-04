@@ -27,11 +27,17 @@ class ChannelMedia extends CustomModel
 		'sort'
 	];
 
-	public $appends = ['id', 'start', 'end'];
+	public $appends = ['id', 'start' , 'filename', 'end'];
 
 	public function getIdAttribute()
 	{
 		return $this->channel_media_id;
+	}
+
+	public function getFilenameAttribute() 
+	{
+		$e = explode('/', $this->media_path);
+		return end($e);
 	}
 
 	public function getPictureAttribute()

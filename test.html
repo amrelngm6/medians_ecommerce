@@ -6,7 +6,7 @@
     <title>TV Channel Player with Controlled Chunk Loading</title>
 </head>
 <body>
-    <video id="videoPlayer" controls>
+    <video id="videoPlayer" autoplay controls>
         Your browser does not support the video tag.
     </video>
     <div id="bufferingIndicator" style="display: none;">Buffering...</div>
@@ -14,14 +14,10 @@
     <script>
         const videoPlayer = document.getElementById('videoPlayer');
         const bufferingIndicator = document.getElementById('bufferingIndicator');
-        const channelId = 1; // Replace with the desired channel ID
+        const channelId = 2; // Replace with the desired channel ID
         let mediaSource;
         let sourceBuffer;
         let isSourceOpen = false;
-        let isFetching = false;
-        let currentVideoUrl = '';
-        let totalSize = 0;
-        let loadedBytes = 0;
 
         function fetchCurrentVideoInfo() {
             fetch(`/channel_json/`+channelId)
@@ -42,9 +38,9 @@
             var b = new Date();
             var startPosition = parseInt((b - a) / 1000);
             var startPosition = parseInt(((b - a) / 1000) - 3600);
+            // var startPosition = 130;
 
             const videoUrl = media.media_path;
-            currentVideoUrl = videoUrl;
             
             if (mediaSource) {
                 if (mediaSource.readyState === 'open') {
@@ -59,92 +55,81 @@
             mediaSource.addEventListener('sourceopen', function() {
                 isSourceOpen = true;
                 sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
-                sourceBuffer.addEventListener('updateend', function() {
-                    if (mediaSource.readyState === 'open' && !isFetching) {
-                        fetchNextChunk();
-                    }
+                sourceBuffer.mode = 'segments';
+                
+                fetchInitSegment(videoUrl).then(() => {
+                    videoPlayer.currentTime = startPosition;
                 });
-                fetchVideoChunk(videoUrl, 0, true);
+
+                videoPlayer.addEventListener('seeking', onSeeking);
             });
 
             mediaSource.addEventListener('sourceended', function() {
                 isSourceOpen = false;
             });
-
-            videoPlayer.currentTime = startPosition;
+            videoPlayer.play()
         }
 
-        function fetchVideoChunk(url, startByte, isFirstChunk = false, chunkSize = 1024 * 1024) {
-            if (!isSourceOpen || isFetching) {
+        function fetchInitSegment(url) {
+            return fetch(url, { headers: { 'Range': 'bytes=0-' } })
+                .then(response => response.arrayBuffer())
+                .then(data => {
+                    sourceBuffer.appendBuffer(data);
+                    return new Promise(resolve => {
+                        sourceBuffer.addEventListener('updateend', resolve, { once: true });
+                    });
+                });
+        }
+
+        function onSeeking() {
+            const currentTime = videoPlayer.currentTime;
+            const buffered = videoPlayer.buffered;
+
+            if (isTimeBuffered(currentTime, buffered)) {
                 return;
             }
 
-            isFetching = true;
             bufferingIndicator.style.display = 'block';
+            abortCurrentRequests();
+            fetchSegmentAtTime(videoPlayer.currentTime);
+        }
 
-            fetch(url, {
-                headers: {
-                    'Range': `bytes=${startByte}-${startByte + chunkSize - 1}`
+        function isTimeBuffered(time, buffered) {
+            for (let i = 0; i < buffered.length; i++) {
+                if (time >= buffered.start(i) && time <= buffered.end(i)) {
+                    return true;
                 }
+            }
+            return false;
+        }
+
+        function abortCurrentRequests() {
+            // Implement logic to abort any ongoing fetch requests
+        }
+
+        function fetchSegmentAtTime(time) {
+            // In a real implementation, you would calculate the byte range for the segment containing 'time'
+            // This is a simplified version
+            const estimatedByteOffset = Math.floor(time * 1000000); // Very rough estimate
+            
+            fetch(videoPlayer.src, {
+                headers: { 'Range': `bytes=${estimatedByteOffset}-` }
             })
-            .then(response => {
-                if (isFirstChunk) {
-                    const rangeHeader = response.headers.get('Content-Range');
-                    if (rangeHeader) {
-                        totalSize = parseInt(rangeHeader.split('/')[1], 10);
-                    }
-                }
-                return response.arrayBuffer();
-            })
+            .then(response => response.arrayBuffer())
             .then(data => {
-                if (isSourceOpen && !sourceBuffer.updating) {
-                    try {
-                        sourceBuffer.appendBuffer(data);
-                        loadedBytes += data.byteLength;
-                        if (videoPlayer.readyState >= 3) { // HAVE_FUTURE_DATA or higher
-                            videoPlayer.play();
-                            bufferingIndicator.style.display = 'none';
-                        }
-                    } catch (e) {
-                        console.error('Error appending buffer:', e);
-                        if (e.name === 'QuotaExceededError') {
-                            // Remove some data to free up buffer space
-                            const currentTime = videoPlayer.currentTime;
-                            sourceBuffer.remove(0, currentTime - 30); // Keep 30 seconds in buffer
-                        }
-                    }
-                }
-                isFetching = false;
+                sourceBuffer.appendBuffer(data);
+                bufferingIndicator.style.display = 'none';
             })
             .catch(error => {
-                console.error('Error fetching video chunk:', error);
-                isFetching = false;
+                console.error('Error fetching video segment:', error);
                 bufferingIndicator.style.display = 'none';
             });
         }
-
-        function fetchNextChunk() {
-            if (loadedBytes < totalSize) {
-                fetchVideoChunk(currentVideoUrl, loadedBytes);
-            } else {
-                console.log('Video fully loaded');
-                bufferingIndicator.style.display = 'none';
-            }
-        }
-
-        videoPlayer.addEventListener('waiting', function() {
-            bufferingIndicator.style.display = 'block';
-        });
-
-        videoPlayer.addEventListener('canplay', function() {
-            bufferingIndicator.style.display = 'none';
-        });
 
         // Fetch video info when the page loads
         fetchCurrentVideoInfo();
 
         // Periodically check for updates (e.g., every 5 minutes)
         setInterval(fetchCurrentVideoInfo, 5 * 60 * 1000);
-    </script>
-</body>
-</html>
+
+        </script>

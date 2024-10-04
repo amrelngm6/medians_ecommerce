@@ -249,7 +249,7 @@ class MediaController extends CustomController
 		// Check if the file is stored locally
 		if (substr($filePath, 0 , 4) == '/upl' &&  file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
-			return $this->streamVideoFromTimeRange($_SERVER['DOCUMENT_ROOT'].$filePath, 0, 0, 0);
+			return $this->stream_video($_SERVER['DOCUMENT_ROOT'].$filePath, 0, 0, 0);
 		} 
 	}
 
@@ -428,8 +428,7 @@ class MediaController extends CustomController
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
 		$video = $this->app->request()->get('video');
-		$startTimeInSeconds = $this->app->request()->get('s') ?? 0;
-		$streamDuration = $this->app->request()->get('d') ?? null;
+		$startTimeInSeconds = 0;
 
 		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/videos/' . $video)) {
 			$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/' . $video;
@@ -438,8 +437,8 @@ class MediaController extends CustomController
 			$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/tmp/' . $video;
 		}
 
-		return $this->streamVideoFromTimeRange($filePath, $startTimeInSeconds, $streamDuration);
-		
+		$item = $this->mediaRepo->findByFile( str_replace($_SERVER['DOCUMENT_ROOT'], '', $filePath));
+		$streamDuration = $item->field['duration'];
 
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
