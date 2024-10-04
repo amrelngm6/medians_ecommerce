@@ -652,21 +652,21 @@ window.addEventListener('popstate', function (e) {
 
 $(function(){
 	var myVideo;
+	var playFrame;
 	const processor = {
 	timerCallback(myVideo) {
-		if (myVideo.paused || myVideo.ended )   {
-			console.log('err')
-		return;
+		if (!playFrame )   {
+			return;
 		}
 		this.computeFrame(myVideo);
 		setTimeout(() => {
-		this.timerCallback(myVideo);
+			playFrame ? this.timerCallback(myVideo) : '';
 		}, 16); // roughly 60 frames per second
 	},
 
 	doLoad(myVideo) {
 		jQuery('#videoCanvas').removeClass('hidden')
-
+		playFrame = true;
 		this.timerCallback(myVideo)
         this.width = 300;
         this.height =  200;
