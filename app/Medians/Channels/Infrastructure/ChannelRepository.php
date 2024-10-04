@@ -23,8 +23,8 @@ class ChannelRepository
 		
 		$now = date('H:i:s');
 		$date = date('Y-m-d');
-		$now = date('H:i:s', strtotime("+1 Hours"));
-		$date = date('Y-m-d', strtotime("+1 Hours"));
+		// $now = date('H:i:s', strtotime("+1 Hours"));
+		// $date = date('Y-m-d', strtotime("+1 Hours"));
 		return Channel::with('items')->with(['activeItem'=> function($q) use ($now, $date) {
 			return $q->where('date', $date)->whereRaw("? BETWEEN `start_at` AND DATE_ADD(`start_at`, INTERVAL `duration` SECOND)", [$now])->orderBy('start_at', 'DESC')->orderBy('duration', 'ASC');
 		}])->withCount('likes')->find($id);
