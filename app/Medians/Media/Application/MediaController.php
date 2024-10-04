@@ -249,7 +249,8 @@ class MediaController extends CustomController
 		// Check if the file is stored locally
 		if (substr($filePath, 0 , 4) == '/upl' &&  file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
-			return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $channelMedia->duration);
+			return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath);
+			// return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $channelMedia->duration);
 		} 
 	}
 
