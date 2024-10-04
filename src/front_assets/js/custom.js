@@ -749,35 +749,35 @@ $(function(){
 		}
 	})
 
-	jQuery(document).on('click', '.start-channel', async function(){
-		jQuery(this).attr('disabled', true)
-    	try {
-			myVideo = document.getElementById("footer-video");
-			let channelId = jQuery(this).attr('data-channel');
-			await loadChannelJson(channelId);
+	// jQuery(document).on('click', '.start-channel', async function(){
+		// jQuery(this).attr('disabled', true)
+    	// try {
+		// 	myVideo = document.getElementById("footer-video");
+		// 	let channelId = jQuery(this).attr('data-channel');
+		// 	await loadChannelJson(channelId);
 
-			if (activeChannel && activeChannel.active_item)
-			{
-				activeChannelMedia = activeChannel.active_item;
-			}
+		// 	if (activeChannel && activeChannel.active_item)
+		// 	{
+		// 		activeChannelMedia = activeChannel.active_item;
+		// 	}
 
-			if (myVideo.canPlayType("video/mp4")) {
-				var a = new Date(activeChannelMedia.start);
-				var b = new Date();
-				var difference = parseInt((b - a) / 1000);
+		// 	if (myVideo.canPlayType("video/mp4")) {
+		// 		var a = new Date(activeChannelMedia.start);
+		// 		var b = new Date();
+		// 		var difference = parseInt((b - a) / 1000);
 
-				myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId);
-				myVideo.currentTime = difference;
-				processor.doLoad(myVideo);
-				myVideo.play()
-			}
+		// 		myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId);
+		// 		myVideo.currentTime = difference;
+		// 		processor.doLoad(myVideo);
+		// 		myVideo.play()
+		// 	}
 	
-			jQuery(this).attr('disabled', false)
+		// 	jQuery(this).attr('disabled', false)
 
-		} catch (error) {
-			jQuery(this).attr('disabled', false)
-		}
-	})
+		// } catch (error) {
+		// 	jQuery(this).attr('disabled', false)
+		// }
+	// })
 
 	jQuery(document).on('click', '.pause-video', function(){
     	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
