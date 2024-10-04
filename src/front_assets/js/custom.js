@@ -658,6 +658,7 @@ $(function(){
 		return;
 		}
 		this.computeFrame();
+		jQuery('#videoCanvas').removeClass('hidden')
 		setTimeout(() => {
 		this.timerCallback(loadSidePreview);
 		}, 16); // roughly 60 frames per second
