@@ -1,8 +1,7 @@
-                        {% for artist in channels.items %}
+                        {% for channel in channels.items %}
                                 <div class="slide dark:bg-gray-900 dark:text-gray-400  transition hover:text-orange-500 dark:hover:text-orange-400 w-full  relative p-2 py-3 shadow-md rounded-3xl text-center bg-white">
-                                    <a href="/artist/{{artist.customer_id}}" class="ajax-load "> <img class=" rounded-full shadow-md transition hover:shadow-lg  mx-auto w-40 h-40" src="/stream?thumbnail=100&image={{artist.picture_name}}" /></a>
-                                    <a href="/artist/{{artist.customer_id}}" class="ajax-load lg:text-base text-xs block px-1 lg:font-semibold pt-4 pb-1 "> {{artist.name}}</a>
-                                    <span class="px-1 relative text-gray-500 text-opacity-75 lg:text-sm text-xs font-normal  tracking-tight">{{lang.translate('Followers')}}:  {{artist.followers|length}}</span>
-                                    <span class="px-1 relative text-gray-500 text-opacity-75 lg:text-sm text-xs font-normal  tracking-tight">{{lang.translate('Items')}}:  {{artist.audio_items|length}}</span>
+                                    <a href="/channel/{{channel.channel_id}}" class="ajax-load "> <img class=" rounded-full shadow-md transition hover:shadow-lg  mx-auto w-40 h-40" src="/stream?thumbnail=100&image={{channel.picture_name}}" /></a>
+                                    <span class="px-1 relative text-gray-500 text-opacity-75 lg:text-sm text-xs font-normal  tracking-tight">{{lang.translate('Likes')}}:  {{channel.likes|length}}</span>
+                                    <span class="px-1 relative text-gray-500 text-opacity-75 lg:text-sm text-xs font-normal  tracking-tight">{{lang.translate('Comments')}}:  {{channel.comments|length}}</span>
                                 </div>  
                         {% endfor %}
