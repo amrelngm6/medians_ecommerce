@@ -810,7 +810,6 @@ $(function(){
 
 	/** On Play video */
 	jQuery(document).on( "click", "video", function() {
-
 		if (myVideo.paused) {
 			myVideo.play()
 		} else {
