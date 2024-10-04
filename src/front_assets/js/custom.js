@@ -631,7 +631,7 @@ window.addEventListener('popstate', function (e) {
 
 
 $(function(){
-    // var myVideo = document.createElement("video");
+    var myVideo = document.createElement("video");
 	var myVideo;
 	const processor = {
 	timerCallback(loadSidePreview = null) {
