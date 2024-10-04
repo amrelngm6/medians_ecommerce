@@ -443,16 +443,6 @@ class MediaController extends CustomController
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
 			return;
-		} else {
-
-			$croppedMedia = str_replace('.', "{$startTimeInSeconds}_{$streamDuration}.", $filePath);
-			$croppedFilePath  = $this->repo->cropWithFfmpeg( $filePath, $croppedMedia, $startTimeInSeconds, $streamDuration  , $settings); 
-			if ($croppedFilePath) {
-				$startTimeInSeconds = 0;
-				$streamDuration = 0;
-				$filePath = $croppedFilePath;
-			}
-
 		}
 		
 		// Analyze the file using getID3 for duration and bitrate
