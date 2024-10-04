@@ -751,7 +751,8 @@ $(function(){
 
 	jQuery(document).on('click', '.start-channel', async function(){
     	myVideo = document.getElementById("footer-video");
-		await loadChannelJson(jQuery(this).attr('data-channel'));
+		let channelId = jQuery(this).attr('data-channel');
+		await loadChannelJson(channelId);
 
 		if (activeChannel && activeChannel.active_item)
 		{
@@ -759,7 +760,13 @@ $(function(){
 		}
 
 		if (myVideo.canPlayType("video/mp4")) {
-			myVideo.setAttribute("src", jQuery(this).data('path'));
+			var a = new Date();
+			alert("Wait a few seconds, then click OK");
+
+			var b = new Date();
+			var difference = (b - a) / 1000;
+
+			myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId+'?t='+difference);
 			processor.doLoad(true);
 			myVideo.play()
 			
