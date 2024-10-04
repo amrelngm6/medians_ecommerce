@@ -751,7 +751,7 @@ $(function(){
 
 	jQuery(document).on('click', '.start-channel', async function(){
     	myVideo = document.getElementById("footer-video");
-		await loadChannelJson(jQuery(this).data('channel'));
+		await loadChannelJson(jQuery(this).attr('data-channel'));
 		console.log(activeChannel);
 		return;
 
