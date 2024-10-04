@@ -428,6 +428,11 @@ class VideoController extends CustomController
     public function downloadRemoteFile($tempFileFullPath, $link)
     {
         
+        if (file_exists($tempFileFullPath))
+        {
+            return $tempFileFullPath;
+        }
+
         $videoUrl = $link;
 
         // Initialize a cURL session to fetch the video stream
