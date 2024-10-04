@@ -721,8 +721,6 @@ $(function(){
 	},
 
 	computeFrame(myVideo) {
-		console.log(this.height)
-		console.log(this.width)
 		this.ctx1.drawImage(myVideo, 0, 0, this.width, this.height);
 		const frame = this.ctx1.getImageData(0, 0, this.width, this.height);
 		const l = frame.data.length / 4;
