@@ -666,6 +666,7 @@ $(function(){
 	doLoad() {
 		jQuery('#videoCanvas').removeClass('hidden')
 
+		this.timerCallback(true)
         this.width = 300;
         this.height =  200;
 		this.c1 = document.getElementById("videoCanvas");
