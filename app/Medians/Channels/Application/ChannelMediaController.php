@@ -126,7 +126,7 @@ class ChannelMediaController extends CustomController
 				
 			if ( isset($output) && file_exists($output))
 			{
-				unlink($filePath);
+				// unlink($filePath);
 			}
 
 
