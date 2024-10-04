@@ -250,6 +250,14 @@ class FrontAPIController extends CustomController
 				$controller = new Stations\Application\StationMediaController;
 				break;
 				
+			case 'Channel.update':
+				$controller = new Channels\Application\ChannelController;
+				break;
+
+			case 'ChannelMedia.update':
+				$controller = new Channels\Application\ChannelMediaController;
+				break;
+				
 
 
 		}
