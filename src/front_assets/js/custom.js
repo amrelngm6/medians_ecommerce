@@ -814,7 +814,7 @@ $(function(){
 		"pause",
 		() => {
 			jQuery('#video-overlay').fadeIn(200)
-			videoContainer.style.zIndex = 0
+			jQuery('#videoContainer').css('z-index',  0)
 		},
 		false,
 		);
