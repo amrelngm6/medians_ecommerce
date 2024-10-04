@@ -23,6 +23,8 @@ class ChannelMedia extends CustomModel
 		'title',
 		'start_at',
 		'duration',
+		'bitrate',
+		'filesize',
 		'date',
 		'sort'
 	];

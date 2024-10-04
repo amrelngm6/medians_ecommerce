@@ -108,20 +108,16 @@ class ChannelMediaController extends CustomController
 				if ($videoController->downloadRemoteFile($tempFilePath, $_POST['params']['media_path']))
 				{
 					$filePath = $tempFilePath;
-					$outputFile = str_replace('.mp4', '_encoded.mp4', $filePath);
-					$params['media_path'] = $_POST['params']['media_path'];
-					// $params['media_path'] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->createFragmentsFile($tempFilePath, $outputFile));
+					$params['media_path'] = $media_path;
 				}
-
-			} else {
-				$outputFile = str_replace('.mp4', '_encoded.mp4', $filePath);
-				$params['media_path'] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->createFragmentsFile($filePath, $outputFile));
 			}
 
 			$fileInfo = $getID3->analyze($filePath);
 
             if (isset($fileInfo['playtime_seconds'])) {
                 $params['duration'] = round($fileInfo['playtime_seconds'], 0);
+				$params['bitrate'] = $fileInfo['bitrate'];
+				$params['filesize'] = $fileInfo['filesize'];
 			}
 
 			

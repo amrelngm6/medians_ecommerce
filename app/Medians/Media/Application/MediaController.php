@@ -241,8 +241,8 @@ class MediaController extends CustomController
 		if (substr($filePath, 0 , 4) == 'http' &&  empty($channelMedia->media)) {
 
 			// Stream External files
-			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/audio/tmp/'.md5($filePath).'.mp3';
-			return $this->stream_external($filePath, $tmpFilePath, $startTime, $settings['station_media_chunk'] ?? 60);
+			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/tmp/'.md5($filePath).'.mp4';
+			return $this->streamVideo($tmpFilePath, $channelMedia);
 		} 
 		
 
@@ -250,7 +250,7 @@ class MediaController extends CustomController
 		if (substr($filePath, 0 , 4) == '/upl' &&  file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
 			// return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath);
-			return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $channelMedia->duration);
+			return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $channelMedia);
 		} 
 	}
 
@@ -421,7 +421,7 @@ class MediaController extends CustomController
 	}
 	
 	
-	function streamVideo($filePath = null, $duration = null) {
+	function streamVideo($filePath, $item) {
 		
 
 		$this->app = new \config\APP;
@@ -438,24 +438,18 @@ class MediaController extends CustomController
 			}
 		}
 
-		$item = $this->mediaRepo->findByFile( str_replace($_SERVER['DOCUMENT_ROOT'], '', $filePath));
-		$duration = $duration ?? $item->field['duration'];
+		$totalDuration = $item->duration ?? ($item->field['duration'] ?? 0);
+		$bitRate = $item->bitRate ?? ($item->field['bitRate'] ?? 0);
+		$fileSize = $item->fileSize ?? ($item->field['fileSize'] ?? 0);
 		
-
+		print_r($filePath);
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
 			return;
 		}
 		
 		// Analyze the file using getID3 for duration and bitrate
-		$getID3 = new \getID3;
-		$fileInfo = $getID3->analyze($filePath);
-		
 		// Get total duration and bitrate
-		$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;
-		$bitRate = !empty($fileInfo['bitrate']) ? $fileInfo['bitrate'] : 0; // Bitrate in bits per second
-		$fileSize = filesize($filePath); // File size in bytes
-	
 		$streamDuration = $duration > 0 ? $duration : ($totalDuration - $startTimeInSeconds);
 
 		// Calculate byte offset for the start and end time based on the stream duration
