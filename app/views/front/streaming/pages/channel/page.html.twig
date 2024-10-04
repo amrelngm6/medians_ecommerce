@@ -108,7 +108,7 @@ $(function()  {
         }
 
         mediaSource = new MediaSource();
-        channelPlayer.src = URL.createObjectURL(mediaSource);
+        channelPlayer.src = videoUrl;
 
         mediaSource.addEventListener('sourceopen', function() {
             isSourceOpen = true;
