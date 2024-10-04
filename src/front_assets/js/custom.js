@@ -802,7 +802,7 @@ $(function(){
 	// })
 
 	jQuery(document).on('click', '.video-side-popup', function(){
-    	myVideo = document.createElement("footer-video");
+    	myVideo = document.getElementById("footer-video");
 		if (myVideo.canPlayType("video/mp4")) {
 			myVideo.setAttribute("src", jQuery(this).data('path'));
 			processor.doLoad(true);
@@ -815,7 +815,7 @@ $(function(){
 		myVideo.pause()
 	})
 	jQuery(document).on('click', '.play-video', function(){
-    	myVideo = document.createElement('my-video' );
+    	myVideo = document.getElementById('my-video' );
 		jQuery('#video-overlay').fadeOut(200)
 		myVideo.play()
 	})
