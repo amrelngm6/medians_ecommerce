@@ -665,11 +665,8 @@ $(function(){
 	},
 
 	doLoad(myVideo) {
-		jQuery('#videoCanvas').removeClass('hidden')
+        jQuery(videoCanvas).removeClass('hidden')
 		playFrame = true;
-		this.timerCallback(myVideo)
-        this.width = 300;
-        this.height =  200;
 		this.c1 = document.getElementById("videoCanvas");
 		
 		this.ctx1 = this.c1.getContext("2d"); 
@@ -717,10 +714,15 @@ $(function(){
 
 		
 		
+        this.width = 300;
+        this.height =  200;
+		this.timerCallback(myVideo)
+
 	},
 
 	computeFrame(myVideo) {
-		console.log(myVideo)
+		console.log(this.height)
+		console.log(this.width)
 		this.ctx1.drawImage(myVideo, 0, 0, this.width, this.height);
 		const frame = this.ctx1.getImageData(0, 0, this.width, this.height);
 		const l = frame.data.length / 4;
@@ -774,7 +776,7 @@ $(function(){
 			var difference = (b - a) / 1;
 
 			myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId+'#t='+difference);
-			processor.doLoad(true);
+			processor.doLoad(myVideo);
 			myVideo.play()
 			
 		}
