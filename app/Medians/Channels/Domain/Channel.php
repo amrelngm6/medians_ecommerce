@@ -4,8 +4,8 @@ namespace Medians\Channels\Domain;
 
 use Shared\dbaser\CustomModel;
 
-use Medians\Devices\Domain\Device;
-use Medians\Products\Domain\Product;
+use Medians\Likes\Domain\Like;
+use Medians\Comments\Domain\Comment;
 
 class Channel extends CustomModel
 {
@@ -35,7 +35,28 @@ class Channel extends CustomModel
 
 	public function items()
 	{
-		return $this->morphTo();	
+		return $this->hasMany(StationMedia::class, 'station_id', 'station_id')->with('media');	
 	}
+
+	public function activeItem()
+	{
+		return $this->hasOne(StationMedia::class, 'station_id', 'station_id')->with('media');	
+	}
+
+	public function likes()
+	{
+		return $this->morphMany(Like::class, 'item');	
+	}
+
+	public function comments()
+	{
+		return $this->morphMany(Comment::class, 'item')->orderBy('comment_id', 'DESC');	
+	}
+
+	public function liked($customer_id) 
+	{
+		return $this->morphOne(Like::class , 'item')->where('customer_id', $customer_id);	
+	}
+	
 
 }

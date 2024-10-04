@@ -102,6 +102,14 @@ RouteHandler::get('/stations/create', \Medians\Stations\Application\StationContr
 RouteHandler::get('/stations/edit/(:all)', \Medians\Stations\Application\StationController::class.'@station_edit');
 RouteHandler::get('/station/(:all)', \Medians\Stations\Application\StationController::class.'@station');
 
+/** Channels pages */
+RouteHandler::get('/channels', \Medians\Channels\Application\ChannelController::class.'@channels');
+RouteHandler::get('/channels/manage/(:all)', \Medians\Channels\Application\ChannelController::class.'@calendar');
+RouteHandler::get('/channel_json/(:all)', \Medians\Channels\Application\ChannelController::class.'@channel_json');
+RouteHandler::get('/channels/create', \Medians\Channels\Application\ChannelController::class.'@channel_upload_page');
+RouteHandler::get('/channels/edit/(:all)', \Medians\Channels\Application\ChannelController::class.'@channel_edit');
+RouteHandler::get('/channel/(:all)', \Medians\Channels\Application\ChannelController::class.'@channel');
+
 RouteHandler::get('/customer/login', \Medians\Auth\Application\CustomerAuthService::class.'@loginPage');
 RouteHandler::get('/customer/signup', \Medians\Auth\Application\CustomerAuthService::class.'@signupPage');
 RouteHandler::get('/customer/confirm_account', \Medians\Auth\Application\CustomerAuthService::class.'@otp');

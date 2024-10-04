@@ -1,25 +1,25 @@
 <?php
 
-namespace Medians\Stations\Domain;
+namespace Medians\Channels\Domain;
 
 use Shared\dbaser\CustomModel;
 use Medians\Media\Domain\MediaItem;
 
 
-class StationMedia extends CustomModel
+class ChannelMedia extends CustomModel
 {
 
 	/*
 	/ @var String
 	*/
-	protected $table = 'station_media';
+	protected $table = 'channel_media';
 
-    protected $primaryKey = 'station_media_id';
+    protected $primaryKey = 'channel_media_id';
 
 	public $fillable = [
 		'media_id',
 		'media_path',
-		'station_id',
+		'channel_id',
 		'title',
 		'start_at',
 		'duration',
@@ -31,12 +31,12 @@ class StationMedia extends CustomModel
 
 	public function getIdAttribute()
 	{
-		return $this->station_media_id;
+		return $this->channel_media_id;
 	}
 
 	public function getPictureAttribute()
 	{
-		return isset($this->media->picture) ? $this->media->picture : $this->station->picture;
+		return isset($this->media->picture) ? $this->media->picture : $this->channel->picture;
 	}
 	
 	public function getStartAttribute()
