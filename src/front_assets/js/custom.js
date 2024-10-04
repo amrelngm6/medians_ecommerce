@@ -655,6 +655,7 @@ $(function(){
 	const processor = {
 	timerCallback(myVideo) {
 		if (myVideo.paused || myVideo.ended )   {
+			console.log('err')
 		return;
 		}
 		this.computeFrame(myVideo);
