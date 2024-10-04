@@ -249,7 +249,7 @@ class MediaController extends CustomController
 		// Check if the file is stored locally
 		if (substr($filePath, 0 , 4) == '/upl' &&  file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
-			return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath);
+			return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $channelMedia->duration);
 		} 
 	}
 
@@ -420,7 +420,7 @@ class MediaController extends CustomController
 	}
 	
 	
-	function streamVideo($filePath = null) {
+	function streamVideo($filePath = null, $duration = null) {
 		
 
 		$this->app = new \config\APP;
@@ -438,7 +438,7 @@ class MediaController extends CustomController
 		}
 
 		$item = $this->mediaRepo->findByFile( str_replace($_SERVER['DOCUMENT_ROOT'], '', $filePath));
-		$duration = $item->field['duration'];
+		$duration = $duration ?? $item->field['duration'];
 		
 
 		if (!file_exists($filePath)) {
@@ -448,7 +448,7 @@ class MediaController extends CustomController
 		
 		// Analyze the file using getID3 for duration and bitrate
 		$getID3 = new \getID3;
-		$fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT'].'/uploads\videos/790725-66fff8f789848.mp4');
+		$fileInfo = $getID3->analyze($filePath);
 		
 		// Get total duration and bitrate
 		$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;

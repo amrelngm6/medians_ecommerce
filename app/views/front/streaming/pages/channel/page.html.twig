@@ -2,7 +2,7 @@
 
 
 	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
-		<video id="my-video" class="w-full h-screen" autoplay poster="/stream?thumbnail=1000&image={{item.picture_name}}" crossorigin="anonymous" >
+		<video id="videoPlayer" class="w-full h-screen" autoplay poster="/stream?thumbnail=1000&image={{item.picture_name}}" crossorigin="anonymous" >
 			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/webm"/>
 			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/mp4"/>
 		</video>
@@ -181,6 +181,20 @@ $(function()
 
     // Fetch Channel info when the page loads
     fetchCurrentVideoInfo({{channel.channel_id}});
+
+    
+    window.navigation.addEventListener("navigate", (event) => {
+        clearInterval(stationCommentsInterval)
+        window.navigation.removeEventListener("navigate", function(){})
+    })
+
+    let stationIntervalAmount = jQuery('#startions-interval').val();
+    var stationCommentsInterval = setInterval(async function(){
+
+        // Periodically check for updates (e.g., every 5 minutes)
+        fetchCurrentVideoInfo({{channel.channel_id}});
+	}, 5000);
+	{# }, stationIntervalAmount > 1  ? (stationIntervalAmount * 1000) : 5000); #}
 
 });
 </script>
