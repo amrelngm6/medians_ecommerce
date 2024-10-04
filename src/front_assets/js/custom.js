@@ -766,7 +766,7 @@ $(function(){
 			alert("Wait a few seconds, then click OK");
 
 			var b = new Date();
-			var difference = (b - a) / 1000;
+			var difference = (b - a) / 1;
 
 			myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId+'#t='+difference);
 			processor.doLoad(true);
