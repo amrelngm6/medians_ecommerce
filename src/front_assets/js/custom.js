@@ -656,6 +656,7 @@ $(function(){
 	const processor = {
 	timerCallback(myVideo) {
 		if (!playFrame || myVideo.ended )   {
+			playFrame = null;
 			return;
 		}
 		this.computeFrame(myVideo);
