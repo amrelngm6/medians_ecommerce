@@ -768,7 +768,7 @@ $(function(){
 			var b = new Date();
 			var difference = (b - a) / 1000;
 
-			myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId+'?t='+difference);
+			myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId+'#t='+difference);
 			processor.doLoad(true);
 			myVideo.play()
 			
