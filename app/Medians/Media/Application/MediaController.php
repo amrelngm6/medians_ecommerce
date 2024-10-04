@@ -249,7 +249,7 @@ class MediaController extends CustomController
 		// Check if the file is stored locally
 		if (substr($filePath, 0 , 4) == '/upl' &&  file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
-			return $this->stream_video($_SERVER['DOCUMENT_ROOT'].$filePath, 0, 0, 0);
+			return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath);
 		} 
 	}
 
@@ -420,25 +420,26 @@ class MediaController extends CustomController
 	}
 	
 	
-	function streamVideo() {
+	function streamVideo($filePath = null) {
 		
-		// $this->isDirectAccess();
-
 
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
 		$video = $this->app->request()->get('video');
 		$startTimeInSeconds = 0;
 
-		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/videos/' . $video)) {
-			$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/' . $video;
-		} else
+		if (!$filePath)
 		{
-			$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/tmp/' . $video;
+			if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/videos/' . $video)) {
+				$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/' . $video;
+			} else {
+				$filePath = $_SERVER['DOCUMENT_ROOT'].'/uploads/videos/tmp/' . $video;
+			}
 		}
 
 		$item = $this->mediaRepo->findByFile( str_replace($_SERVER['DOCUMENT_ROOT'], '', $filePath));
-		$streamDuration = $item->field['duration'];
+		$duration = $item->field['duration'];
+		
 
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
@@ -447,14 +448,14 @@ class MediaController extends CustomController
 		
 		// Analyze the file using getID3 for duration and bitrate
 		$getID3 = new \getID3;
-		$fileInfo = $getID3->analyze($filePath);
-
+		$fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT'].'/uploads\videos/790725-66fff8f789848.mp4');
+		
 		// Get total duration and bitrate
 		$totalDuration = !empty($fileInfo['playtime_seconds']) ? $fileInfo['playtime_seconds'] : $duration;
 		$bitRate = !empty($fileInfo['bitrate']) ? $fileInfo['bitrate'] : 0; // Bitrate in bits per second
 		$fileSize = $fileInfo['filesize']; // File size in bytes
 	
-		$streamDuration = $streamDuration > 0 ? $streamDuration : ($totalDuration - $startTimeInSeconds);
+		$streamDuration = $duration > 0 ? $duration : ($totalDuration - $startTimeInSeconds);
 
 		// Calculate byte offset for the start and end time based on the stream duration
 		$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileSize);
@@ -466,7 +467,7 @@ class MediaController extends CustomController
 			header("HTTP/1.0 505 Internal server error");
 			return;
 		}
-	
+		
 		// Prevent session blocking and allow streaming after user disconnect
 		session_write_close();
 		ignore_user_abort(true); // Continue streaming even if the user disconnects
