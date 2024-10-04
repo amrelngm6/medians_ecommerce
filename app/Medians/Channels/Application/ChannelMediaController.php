@@ -109,9 +109,9 @@ class ChannelMediaController extends CustomController
 				{
 					$filePath = $tempFilePath;
 					$outputFile = str_replace('.mp4', '_encoded.mp4', $filePath);
-					$params['media_path'] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->createFragmentsFile($tempFilePath, $outputFile));
+					$params['media_path'] = $_POST['params']['media_path'];
+					// $params['media_path'] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->createFragmentsFile($tempFilePath, $outputFile));
 				}
-				// file_put_contents($tempFilePath, fopen($params['media_path'], 'r'));
 
 			} else {
 				$outputFile = str_replace('.mp4', '_encoded.mp4', $filePath);
