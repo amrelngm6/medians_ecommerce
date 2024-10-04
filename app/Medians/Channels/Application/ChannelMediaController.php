@@ -243,6 +243,11 @@ class ChannelMediaController extends CustomController
 
 		$run = shell_exec($newEncodedFile);
 
+		if (file_exists($output))
+		{
+			unlink($input);
+		}
+
 		return file_exists($output) ? $output : $input;
 	} 
 
