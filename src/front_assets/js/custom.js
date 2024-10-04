@@ -767,8 +767,8 @@ $(function(){
 		}
 
 		if (myVideo.canPlayType("video/mp4")) {
-			var a = new Date();
-			var b = new Date(activeChannelMedia.start);
+			var a = new Date(activeChannelMedia.start);
+			var b = new Date();
 			var difference = parseInt((b - a) / 1000);
 
 			myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId+'#t='+difference);
