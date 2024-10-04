@@ -108,7 +108,7 @@ $(function()  {
         }
 
         mediaSource = new MediaSource();
-        channelPlayer.src = URL.createObjectURL(mediaSource);
+        {# channelPlayer.src = URL.createObjectURL(mediaSource); #}
 
         mediaSource.addEventListener('sourceopen', function() {
             isSourceOpen = true;
@@ -128,6 +128,7 @@ $(function()  {
         });
 
         setTimeout(function() {
+            channelPlayer.currentTime = startPosition ?? 0
             channelPlayer.play();  // Start playback after a short delay
         }, 500);
     }
