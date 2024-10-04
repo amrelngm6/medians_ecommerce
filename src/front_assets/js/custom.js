@@ -738,6 +738,7 @@ $(function(){
 	// 	}
 	// })
 
+	
 	jQuery(document).on('click', '.video-side-popup', function(){
     	myVideo = document.getElementById("footer-video");
 		if (myVideo.canPlayType("video/mp4")) {
@@ -747,6 +748,21 @@ $(function(){
 			
 		}
 	})
+
+	jQuery(document).on('click', '.start-channel', async function(){
+    	myVideo = document.getElementById("footer-video");
+		await loadChannelJson(jQuery(this).data('channel'));
+		console.log(activeChannel);
+		return;
+
+		if (myVideo.canPlayType("video/mp4")) {
+			myVideo.setAttribute("src", jQuery(this).data('path'));
+			processor.doLoad(true);
+			myVideo.play()
+			
+		}
+	})
+
 	jQuery(document).on('click', '.pause-video', function(){
     	myVideo = document.getElementById('my-video' );
 		playVideo(myVideo)
