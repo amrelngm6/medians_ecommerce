@@ -780,33 +780,34 @@ $(function(){
 	})
 
 	jQuery(document).on('click', '.pause-video', function(){
-    	myVideo = document.getElementById('my-video' );
+    	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
 		playVideo(myVideo)
 	})
 	jQuery(document).on('click', '.play-video', function(){
-    	myVideo = document.getElementById('my-video' );
+    	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
 		playVideo(myVideo)
 	})
 
 	/** On Play video */
 	jQuery(document).on( "click", "video", function() {
-		myVideo = document.getElementById('my-video' );
+		myVideo = document.getElementById(jQuery(this).attr('id') );
 		playVideo(myVideo)
 		
 	});
 
 	jQuery(document).on('click', '#video-volume', function(){
+    	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
 		myVideo.volume = jQuery(this).val()
 	})
 	jQuery(document).on('click', '.fullscreen', function(){
-		videoContainer = document.getElementById('videoContainer');
+		videoContainer = document.getElementById(jQuery(this).attr('data-container'));
 		return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
 			? document.exitFullscreen()
 			: videoContainer.requestFullscreen();
 	})
 
 	jQuery(document).on('dblclick', '#videoCanvas,video', function(){
-		videoContainer = document.getElementById('videoContainer');
+		videoContainer = document.getElementById(jQuery(this).attr('data-container'));
 		return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
 			? document.exitFullscreen()
 			: videoContainer.requestFullscreen();
@@ -823,7 +824,9 @@ $(function(){
 	});
 
 	function playVideo(myVideo)
-	{
+	{	
+		if (!myVideo)
+			return;
 
 		if (myVideo.paused) {
 			jQuery('#video-overlay').fadeOut(200)
