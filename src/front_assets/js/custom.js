@@ -643,67 +643,10 @@ $(function(){
 		}, 16); // roughly 60 frames per second
 	},
 
-	doLoad(loadSidePreview = null) {
+	doLoad() {
 		this.c1 = document.getElementById("videoCanvas");
 		
 		this.ctx1 = this.c1.getContext("2d"); 
-
-		/** On time update */
-		myVideo.addEventListener(
-			"timeupdate",
-			() => {
-				
-				jQuery('#current-time').html(convertToTime(myVideo.currentTime))
-				progress.value = myVideo.currentTime;
-
-			})
-			
-		/** On Play video */
-		myVideo.addEventListener(
-		"loadedmetadata",
-		() => {
-				
-				if (loadSidePreview)
-				{
-					jQuery(videoCanvas).removeClass('hidden')
-				}
-
-		},
-		false,
-		);
-			
-		/** On Play video */
-		myVideo.addEventListener(
-		"play",
-		() => {
-			jQuery('#video-duration').html(convertToTime(myVideo.duration))
-			progress.setAttribute("max", myVideo.duration);
-
-			this.width = 300;
-			this.height =  200;
-			
-			this.timerCallback(loadSidePreview);
-			jQuery('#video-overlay').fadeOut(200)
-			videoContainer.style.zIndex = 999
-		},
-		false,
-		);
-			
-		/** On Pause video */
-		myVideo.addEventListener(
-		"pause",
-		() => {
-			jQuery('#video-overlay').fadeIn(200)
-			videoContainer.style.zIndex = 0
-		},
-		false,
-		);
-			
-
-
-
-
-
 
 		let isDragging = false;
 		let offsetX = 0;
@@ -831,13 +774,66 @@ $(function(){
 		if (video.paused) {
 			jQuery('#video-overlay').fadeOut(200)
 			video.play()
+			jQuery('.play-video').fadeOut(200)
 			jQuery('.pause-video').fadeIn(200)
 		} else {
 			jQuery('.pause-video').fadeOut(200)
+			jQuery('.play-video').fadeIn(200)
 			video.pause()
 		} 	
 		jQuery('#video-duration').html(convertToTime(video.duration))
 		jQuery('progress').setAttribute("max", video.duration);
 
+		
+		/** On time update */
+		video.addEventListener(
+			"timeupdate",
+			() => {
+				
+				jQuery('#current-time-page').html(convertToTime(video.currentTime))
+				progress.value = video.currentTime;
+
+			})
+			
+		/** On Play video */
+		video.addEventListener(
+		"loadedmetadata",
+		() => {
+				
+				if (loadSidePreview)
+				{
+					jQuery(videoCanvas).removeClass('hidden')
+				}
+
+		},
+		false,
+		);
+			
+		/** On Play video */
+		video.addEventListener(
+		"play",
+		() => {
+			jQuery('#video-duration').html(convertToTime(video.duration))
+			progress.setAttribute("max", video.duration);
+
+			this.width = 300;
+			this.height =  200;
+			
+			this.timerCallback(loadSidePreview);
+			jQuery('#video-overlay').fadeOut(200)
+			videoContainer.style.zIndex = 999
+		},
+		false,
+		);
+			
+		/** On Pause video */
+		video.addEventListener(
+		"pause",
+		() => {
+			jQuery('#video-overlay').fadeIn(200)
+			videoContainer.style.zIndex = 0
+		},
+		false,
+		);
 	}
 })
