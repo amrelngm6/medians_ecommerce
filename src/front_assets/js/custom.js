@@ -668,9 +668,6 @@ $(function(){
 					jQuery(videoCanvas).removeClass('hidden')
 				}
 
-				jQuery('#video-duration').html(convertToTime(myVideo.duration))
-
-			progress.setAttribute("max", myVideo.duration);
 		},
 		false,
 		);
@@ -792,27 +789,14 @@ $(function(){
 	})
 	jQuery(document).on('click', '.play-video', function(){
     	myVideo = document.getElementById('my-video' );
-		jQuery('#video-overlay').fadeOut(200)
-		myVideo.play()
-		
-		if (myVideo.canPlayType("video/mp4")) {
-			myVideo.setAttribute("src", jQuery(this).data('path'));
-			processor.doLoad(true);
-			myVideo.play()
-			
-		}
+		playVideo(myVideo)
 	})
 
 	/** On Play video */
 	jQuery(document).on( "click", "video", function() {
-    	myVideo = document.getElementById('my-video' );
-		if (myVideo.paused) {
-			jQuery('#video-overlay').fadeOut(200)
-			myVideo.play()
-
-		} else {
-			myVideo.pause()
-		} 	
+		myVideo = document.getElementById('my-video' );
+		playVideo(myVideo)
+		
 	});
 
 	jQuery(document).on('click', '#video-volume', function(){
@@ -842,4 +826,18 @@ $(function(){
 		myVideo.play()
 	});
 
+	function playVideo(video)
+	{
+		if (video.paused) {
+			jQuery('#video-overlay').fadeOut(200)
+			video.play()
+			jQuery('.pause-video').fadeIn(200)
+		} else {
+			jQuery('.pause-video').fadeOut(200)
+			video.pause()
+		} 	
+		jQuery('#video-duration').html(convertToTime(video.duration))
+		jQuery('progress').setAttribute("max", video.duration);
+
+	}
 })
