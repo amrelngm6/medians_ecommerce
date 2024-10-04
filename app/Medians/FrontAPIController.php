@@ -49,6 +49,15 @@ class FrontAPIController extends CustomController
 				return (new Stations\Application\StationMediaController)->json_media();
 				break;
 				
+				
+			case 'channel-media-popup':
+				return (new Channels\Application\ChannelMediaController)->media_popup();
+				break;
+				
+			case 'channel-media-json':
+				return (new Channels\Application\ChannelMediaController)->json_media();
+				break;
+				
 			case 'comments-list':
 				return (new Comments\Application\CommentController)->load_stream_comments();
 				break;

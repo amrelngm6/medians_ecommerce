@@ -35,12 +35,12 @@ class Channel extends CustomModel
 
 	public function items()
 	{
-		return $this->hasMany(StationMedia::class, 'station_id', 'station_id')->with('media');	
+		return $this->hasMany(ChannelMedia::class, 'channel_id', 'channel_id')->with('media');	
 	}
 
 	public function activeItem()
 	{
-		return $this->hasOne(StationMedia::class, 'station_id', 'station_id')->with('media');	
+		return $this->hasOne(ChannelMedia::class, 'channel_id', 'channel_id')->with('media');	
 	}
 
 	public function likes()

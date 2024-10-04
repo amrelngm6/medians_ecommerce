@@ -25,7 +25,7 @@ function runSlide()
 
 var mainAudio = jQuery('audio');
 
-var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename, activeStation, activeStationMedia, stationInterval;
+var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename, activeStation, activeChannel, activeStationMedia, stationInterval;
 
 
 document.getElementById('player-audio').addEventListener("change", function(event) {
@@ -64,6 +64,15 @@ async function loadStationJson(stationId)
 	activeStation = JSON.parse(response)
 
 	return activeStation;
+}
+
+async function loadChannelJson(channelId)
+{
+	const response  = await $.get('/channel_json/'+channelId);
+
+	activeChannel = JSON.parse(response)
+
+	return activeChannel;
 }
 
 var streamingStatus;
@@ -115,6 +124,17 @@ async function loadStation(stationId, play = true)
 	jQuery('#station-track-poster').attr( 'src', (activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.picture : activeStation.picture);
 
 }
+
+
+async function loadChannel(stationId, play = true)
+{
+	// const chunkTimerVal  = jQuery('#station_media_chunk').val() > 5 ? (jQuery('#station_media_chunk').val() - 5) : 55 ;
+	// const chunkTimer  = chunkTimerVal > 1 ? chunkTimerVal : 58 ;
+	
+	activeChannel = await loadStationJson(stationId);
+	
+}
+
 
 jQuery(document).on('click', '.start-player', function (i, el) {
 	jQuery('#station-app-cover').addClass('hidden')

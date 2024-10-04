@@ -1,14 +1,14 @@
 <?php
 
-namespace Medians\Stations\Application;
+namespace Medians\Channels\Application;
 
-use Medians\Stations\Infrastructure\StationRepository;
+use Medians\Channels\Infrastructure\ChannelRepository;
 use Medians\Media\Infrastructure\MediaRepository;
 
 use Shared\dbaser\CustomController;
 use getID3;
 
-class StationMediaController extends CustomController
+class ChannelMediaController extends CustomController
 {
 
 	/**
@@ -25,7 +25,7 @@ class StationMediaController extends CustomController
 
 	function __construct()
 	{
-		$this->repo = new StationRepository();
+		$this->repo = new ChannelRepository();
 		$this->mediaRepo = new MediaRepository();
 	}
 
@@ -38,7 +38,7 @@ class StationMediaController extends CustomController
 	public function columns( ) 
 	{
 		return [
-            [ 'value'=> "station_id", 'text'=> "#"],
+            [ 'value'=> "channel_id", 'text'=> "#"],
             [ 'value'=> "name", 'text'=> translate('name'), 'sortable'=> true ],
             [ 'value'=> "items_count", 'text'=> translate('Items'),  ],
             [ 'value'=> "customer.name", 'text'=> translate('Customer'),  ],
@@ -57,7 +57,7 @@ class StationMediaController extends CustomController
 	{
 
 		return [
-            [ 'key'=> "station_id", 'title'=> "#", 'column_type'=>'hidden'],
+            [ 'key'=> "channel_id", 'title'=> "#", 'column_type'=>'hidden'],
 			[ 'key'=> "name", 'title'=> translate('name'), 'disabled'=>true,  'fillable'=> true, 'column_type'=>'text' ],
 			[ 'key'=> "email", 'title'=> translate('Email'), 'disabled'=>true,  'fillable'=> true, 'column_type'=>'email' ],
 			[ 'key'=> "comment", 'title'=> translate('Comment'), 'disabled'=>true,  'fillable'=> true, 'column_type'=>'text' ],
@@ -77,12 +77,12 @@ class StationMediaController extends CustomController
 	{
 	    return render('data_table', [
 	        'load_vue' => true,
-	        'title' => translate('Stations'),
+	        'title' => translate('Channels'),
 	        'items' => $this->repo->get(100),
 	        'columns' => $this->columns(),
 	        'fillable' => $this->fillable(),
-			'object_name'=> 'Station',
-			'object_key'=> 'station_id',
+			'object_name'=> 'Channel',
+			'object_key'=> 'channel_id',
 	    ]);
 	}
 
@@ -200,7 +200,7 @@ class StationMediaController extends CustomController
 		
         try {
 
-            if ($this->repo->deleteItem($params['station_media_id']))
+            if ($this->repo->deleteItem($params['channel_media_id']))
             {
                 return array('success'=>1, 'result'=>translate('Deleted'), 'reload'=>1);
             }
@@ -226,8 +226,8 @@ class StationMediaController extends CustomController
 
 		try {
 
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/popups/edit-station-track.html.twig', [
-				'item' => $this->repo->findItem($params['station_media_id'])
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/popups/edit-channel-track.html.twig', [
+				'item' => $this->repo->findItem($params['channel_media_id'])
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -238,7 +238,7 @@ class StationMediaController extends CustomController
     
 
     /**
-     * Station JSON for frontend
+     * Channel JSON for frontend
      */
     public function json_media()
     {
@@ -248,12 +248,12 @@ class StationMediaController extends CustomController
 
         $params = $this->app->params();
 
-        $station = $this->repo->find($params['station_id']);
+        $channel = $this->repo->find($params['channel_id']);
 
 		try {
 
             return render('', 
-				$station->items,
+				$channel->items,
             );
             
 		} catch (\Exception $e) {

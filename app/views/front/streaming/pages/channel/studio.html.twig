@@ -6,8 +6,8 @@
 
 		<div class="box">
 			<div class="box-header with-border">
-				<h4 class="box-title text-2xl">{{('Stations')}}</h4>
-				<p class="text-fade">{{('List of created stations')}}</p>
+				<h4 class="box-title text-2xl">{{('Channels')}}</h4>
+				<p class="text-fade">{{('List of created Channels')}}</p>
 			</div>
             <hr class="my-6" />
 			<div class="box-body pt-0">
@@ -33,7 +33,7 @@
 									</div>
 								</td>
 								<td class="px-2 ">
-									<a href="/station/{{item.station}}" class="ajax-load text-dark font-weight-600 text-primary font-size-16">{{item.name}}</a>
+									<a href="/channel/{{item.channel_id}}" class="ajax-load text-dark font-weight-600 text-primary font-size-16">{{item.name}}</a>
 								</td>
 								<td>
 									<span class="text-fade block">
@@ -47,12 +47,12 @@
 									<span class="text-fade block">{{item.comments|length}}</span>
 								</td>
 								<td class="text-right py-4">
-									<a href="/stations/manage/{{item.station_id}}" class="ajax-load waves-effect waves-light btn btn-primary rounded-full ">
+									<a href="/channels/manage/{{item.channel_id}}" class="ajax-load waves-effect waves-light btn btn-primary rounded-full ">
 										<img src="/src/front_assets/svg/edit-2.svg" class="w-5" />
 									</a>
 								</td>
 								<td class="text-right py-4">
-									<a href="/stations/edit/{{item.station_id}}" class="ajax-load waves-effect waves-light btn btn-primary rounded-full ">
+									<a href="/channels/edit/{{item.channel_id}}" class="ajax-load waves-effect waves-light btn btn-primary rounded-full ">
 										<img src="/src/front_assets/svg/edit-2.svg" class="w-5" />
 									</a>
 								</td>
