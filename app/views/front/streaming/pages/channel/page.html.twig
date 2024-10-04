@@ -231,7 +231,7 @@ $(function()  {
     let stationIntervalAmount = jQuery('#startions-interval').val();
     var stationCommentsInterval = setInterval(async function() {
         // Periodically check for updates (e.g., every 5 minutes)
-        fetchCurrentVideoInfo({{item.channel_id}});
+        {# fetchCurrentVideoInfo({{item.channel_id}}); #}
     }, stationIntervalAmount > 1 ? (stationIntervalAmount * 1000) : 60000);
 
 });
