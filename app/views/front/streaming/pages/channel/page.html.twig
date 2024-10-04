@@ -98,7 +98,7 @@ $(function()  {
         var b = new Date();  // Current time
         startPosition = parseInt((b - a) / 1000);  // Calculate the start position in seconds
 
-        const videoUrl = '/stream_channel?channel_id=' + activeChannel.channel_id + '&hash='+Math.random();
+        const videoUrl = '/stream_channel?channel_id=' + activeChannel.channel_id;
 
         if (mediaSource) {
             if (mediaSource.readyState === 'open') {
