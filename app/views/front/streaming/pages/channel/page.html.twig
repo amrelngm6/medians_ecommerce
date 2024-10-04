@@ -93,6 +93,7 @@ $(function()  {
     }
 
     function loadVideoPartially() {
+        
         if (!activeChannelMedia ) {
             console.log('empty');
             return;
@@ -132,6 +133,7 @@ $(function()  {
         });
 
         setTimeout(function() {
+            channelPlayer.currentTime = startPosition;
             channelPlayer.play();
         }, 500);
     }
