@@ -41,6 +41,10 @@ class FrontAPIController extends CustomController
 				return (new Media\Application\MediaItemController)->search_popup();
 				break;
 				
+			case 'load-videos-list':
+				return (new Media\Application\VideoController)->search_popup();
+				break;
+				
 			case 'station-media-popup':
 				return (new Stations\Application\StationMediaController)->media_popup();
 				break;
