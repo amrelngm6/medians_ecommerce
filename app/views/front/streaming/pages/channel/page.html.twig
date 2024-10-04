@@ -65,26 +65,22 @@
 
 <script  type="text/javascript">
 // var lastId;
-
 $(function()  {
     const channelPlayer = document.getElementById('channelPlayer');
     const bufferingIndicator = document.getElementById('bufferingIndicator');
     let mediaSource;
     let sourceBuffer;
     let isSourceOpen = false;
+    let startPosition = 0; // Variable to hold the calculated start time
 
     function fetchCurrentVideoInfo(channelId) {
         fetch(`/channel_json/` + channelId)
             .then(response => response.json())
             .then(data => {
-                if (data && data.active_item) {
-                    if (activeChannelMedia && data.active_item.filename == activeChannelMedia.filename)
-                    {
-                        return;
-                    }
+                if (data) {
                     activeChannel = data;
                     activeChannelMedia = data.active_item;
-                    loadVideoPartially();
+                    loadVideoPartially();  // Start loading video
                 } else {
                     console.log('No video currently playing');
                 }
@@ -93,14 +89,14 @@ $(function()  {
     }
 
     function loadVideoPartially() {
-        if (!activeChannelMedia ) {
-            console.log('empty');
+        if (!activeChannelMedia) {
+            console.log('No active media');
             return;
         }
 
-        var a = new Date(activeChannelMedia.start);
-        var b = new Date();
-        var startPosition = parseInt((b - a) / 1000);
+        var a = new Date(activeChannelMedia.start);  // When the media started
+        var b = new Date();  // Current time
+        startPosition = parseInt((b - a) / 1000);  // Calculate the start position in seconds
 
         const videoUrl = '/stream_channel?channel_id=' + activeChannel.channel_id;
 
@@ -108,7 +104,7 @@ $(function()  {
             if (mediaSource.readyState === 'open') {
                 mediaSource.endOfStream();
             }
-            URL.revokeObjectURL(channelPlayer.src);
+            URL.revokeObjectURL(channelPlayer.src);  // Revoke previous source
         }
 
         mediaSource = new MediaSource();
@@ -120,11 +116,11 @@ $(function()  {
             sourceBuffer.mode = 'segments';
 
             fetchInitSegment(videoUrl).then(() => {
-                channelPlayer.currentTime = startPosition;
-                preloadNextSegment(startPosition);  // Preload next segment
+                channelPlayer.currentTime = startPosition;  // Set the correct start time
+                preloadNextSegment(startPosition);  // Preload the next segment
             });
 
-            channelPlayer.addEventListener('seeking', onSeeking);
+            channelPlayer.addEventListener('seeking', onSeeking);  // Handle seeking
         });
 
         mediaSource.addEventListener('sourceended', function() {
@@ -132,26 +128,26 @@ $(function()  {
         });
 
         setTimeout(function() {
-            channelPlayer.play();
+            channelPlayer.play();  // Start playback after a short delay
         }, 500);
     }
 
-    // Fetch initial segment (first part of the video)
+    // Fetch the initial segment (first part of the video)
     function fetchInitSegment(url) {
         return fetchWithRetry(url, { headers: { 'Range': 'bytes=0-' } })
             .then(response => response.arrayBuffer())
             .then(data => {
                 sourceBuffer.appendBuffer(data);
                 return new Promise(resolve => {
-                    sourceBuffer.addEventListener('updateend', resolve, { once: false });
+                    sourceBuffer.addEventListener('updateend', resolve, { once: true });
                 });
             });
     }
 
-    // Fetch a specific segment at a given time
+    // Fetch a specific segment at the given time
     function fetchSegmentAtTime(time) {
-        const estimatedByteOffset = Math.floor(time * 1000000); // Rough estimate
-        const chunkSize = 1024 * 1024; // 1 MB chunks
+        const estimatedByteOffset = Math.floor(time * 1000000);  // Rough estimate for byte range
+        const chunkSize = 1024 * 1024;  // 1 MB chunk size
 
         fetchWithRetry(channelPlayer.src, {
             headers: { 'Range': `bytes=${estimatedByteOffset}-${estimatedByteOffset + chunkSize - 1}` }
@@ -160,7 +156,7 @@ $(function()  {
         .then(data => {
             sourceBuffer.appendBuffer(data);
             bufferingIndicator.style.display = 'none';
-            preloadNextSegment(time);  // Preload the next segment for smoother playback
+            preloadNextSegment(time);  // Preload the next segment
         })
         .catch(error => {
             console.error('Error fetching video segment:', error);
@@ -168,13 +164,13 @@ $(function()  {
         });
     }
 
-    // Preload the next segment (buffers video in advance)
+    // Preload the next segment for smoother playback
     function preloadNextSegment(time) {
-        const nextTime = time + 5; // Preload 5 seconds ahead
+        const nextTime = time + 5;  // Preload 5 seconds ahead
         fetchSegmentAtTime(nextTime);
     }
 
-    // Handle seeking event (when the user scrubs to a different time)
+    // Handle the seeking event (user scrubs to a different time)
     function onSeeking() {
         const currentTime = channelPlayer.currentTime;
         const buffered = channelPlayer.buffered;
@@ -184,11 +180,11 @@ $(function()  {
         }
 
         bufferingIndicator.style.display = 'block';
-        abortCurrentRequests(); // Optionally abort any in-progress fetch requests
-        fetchSegmentAtTime(channelPlayer.currentTime);
+        abortCurrentRequests();  // Optionally abort any ongoing fetch requests
+        fetchSegmentAtTime(currentTime);  // Fetch segment for the new time
     }
 
-    // Check if a specific time is already buffered
+    // Check if the current time is already buffered
     function isTimeBuffered(time, buffered) {
         for (let i = 0; i < buffered.length; i++) {
             if (time >= buffered.start(i) && time <= buffered.end(i)) {
@@ -198,12 +194,12 @@ $(function()  {
         return false;
     }
 
-    // Optional: Abort any ongoing fetch requests (not implemented)
+    // Optional: Abort any ongoing fetch requests (implementation required)
     function abortCurrentRequests() {
-        // Implement logic to abort any ongoing fetch requests if needed
+        // Implement logic to abort ongoing fetch requests if necessary
     }
 
-    // Retry fetch in case of network failures, up to a specified number of retries
+    // Retry logic for fetching segments with a maximum number of retries
     function fetchWithRetry(url, options = {}, retries = 3) {
         return fetch(url, options).catch(error => {
             if (retries > 0) {
@@ -215,10 +211,10 @@ $(function()  {
         });
     }
 
-    // Fetch Channel info when the page loads
+    // Fetch channel info and start the process when the page loads
     fetchCurrentVideoInfo({{item.channel_id}});
 
-    // Refresh video information at intervals
+    // Periodically check for updates (refresh video information at intervals)
     window.navigation.addEventListener("navigate", (event) => {
         clearInterval(stationCommentsInterval);
         window.navigation.removeEventListener("navigate", function(){});
