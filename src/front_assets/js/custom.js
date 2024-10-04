@@ -672,24 +672,24 @@ $(function(){
 		let offsetX = 0;
 		let offsetY = 0;
 
-		videoCanvas.addEventListener('mousedown', function (e) {
+		this.cl.addEventListener('mousedown', function (e) {
 			isDragging = true;
-			videoCanvas.style.cursor = 'grabbing';
+			this.cl.style.cursor = 'grabbing';
 
 			// Calculate offset position to handle dragging smoothly
-			offsetX = e.clientX - videoCanvas.getBoundingClientRect().left;
-			offsetY = e.clientY - videoCanvas.getBoundingClientRect().top;
+			offsetX = e.clientX - this.cl.getBoundingClientRect().left;
+			offsetY = e.clientY - this.cl.getBoundingClientRect().top;
 		});
 
-		videoCanvas.addEventListener('ondragstart', function(){
+		this.cl.addEventListener('ondragstart', function(){
 			isDragging = true;
-			videoCanvas.style.cursor = 'grabbing';
+			this.cl.style.cursor = 'grabbing';
 		}) 
 		
 		// Function to stop dragging
 		window.addEventListener('mouseup', function () {
 			isDragging = false;
-			videoCanvas.style.cursor = 'grab';
+			this.cl.style.cursor = 'grab';
 		});
 		
 		// Function to drag the canvas
@@ -700,12 +700,12 @@ $(function(){
 				const top = e.clientY - offsetY;
 
 				// Update canvas position
-				videoCanvas.style.left = `${left}px`;
-				videoCanvas.style.top = `${top + 10}px`;
+				this.cl.style.left = `${left}px`;
+				this.cl.style.top = `${top + 10}px`;
 
 				// Set the position to absolute once dragging starts
-				videoCanvas.style.position = 'fixed';
-				videoCanvas.style.transform = 'none';
+				this.cl.style.position = 'fixed';
+				this.cl.style.transform = 'none';
 			}
 		});
 
