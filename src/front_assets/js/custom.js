@@ -728,7 +728,8 @@ $(function(){
 		}
 	})
 	jQuery(document).on('click', '.pause-video', function(){
-		myVideo.pause()
+    	myVideo = document.getElementById('my-video' );
+		playVideo(myVideo)
 	})
 	jQuery(document).on('click', '.play-video', function(){
     	myVideo = document.getElementById('my-video' );
@@ -769,32 +770,33 @@ $(function(){
 		myVideo.play()
 	});
 
-	function playVideo(video)
+	function playVideo(myVideo)
 	{
-		if (video.paused) {
+
+		if (myVideo.paused) {
 			jQuery('#video-overlay').fadeOut(200)
-			video.play()
+			myVideo.play()
 			jQuery('#videoContainer .play-video').hide().parent().find('.pause-video').fadeIn(200)
 		} else {
 			jQuery('#videoContainer .pause-video').hide().parent().find('.play-video').fadeIn(200)
-			video.pause()
+			myVideo.pause()
 		} 	
-		jQuery('#video-duration-page').html(convertToTime(video.duration))
-		jQuery('#videoContainer progress').setAttribute("max", video.duration);
+		jQuery('#video-duration-page').html(convertToTime(myVideo.duration))
+		jQuery('#videoContainer progress').attr("max", myVideo.duration);
 
 		
 		/** On time update */
-		video.addEventListener(
+		myVideo.addEventListener(
 			"timeupdate",
 			() => {
-				
-				jQuery('#current-time-page').html(convertToTime(video.currentTime))
-				progress.value = video.currentTime;
+				alert(1)
+				jQuery('#current-time-page').html(convertToTime(myVideo.currentTime))
+				progress.value = myVideo.currentTime;
 
 			})
 			
 		/** On Play video */
-		video.addEventListener(
+		myVideo.addEventListener(
 		"loadedmetadata",
 		() => {
 				
@@ -808,11 +810,11 @@ $(function(){
 		);
 			
 		/** On Play video */
-		video.addEventListener(
+		myVideo.addEventListener(
 		"play",
 		() => {
-			jQuery('#video-duration').html(convertToTime(video.duration))
-			progress.setAttribute("max", video.duration);
+			jQuery('#video-duration').html(convertToTime(myVideo.duration))
+			progress.setAttribute("max", myVideo.duration);
 
 			this.width = 300;
 			this.height =  200;
@@ -825,7 +827,7 @@ $(function(){
 		);
 			
 		/** On Pause video */
-		video.addEventListener(
+		myVideo.addEventListener(
 		"pause",
 		() => {
 			jQuery('#video-overlay').fadeIn(200)
