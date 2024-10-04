@@ -99,7 +99,6 @@ $(function()  {
         var a = new Date(activeChannelMedia.start);
         var b = new Date();
         var startPosition = parseInt((b - a) / 1000);
-        var startPosition = parseInt(((b - a) / 1000) - 3600);
         // var startPosition = 130;
 
         const videoUrl = '/stream_channel?channel_id='+activeChannel.channel_id;
