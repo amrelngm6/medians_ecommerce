@@ -654,7 +654,7 @@ $(function(){
 	var myVideo;
 	const processor = {
 	timerCallback(loadSidePreview = null) {
-		if (myVideo.paused || myVideo.ended || !loadSidePreview)   {
+		if (myVideo.paused || myVideo.ended )   {
 		return;
 		}
 		this.computeFrame();
