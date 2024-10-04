@@ -1,6 +1,5 @@
 <?php
 
-require 'vendor/autoload.php';
 
 // Path to the video file
 $file = $_SERVER['DOCUMENT_ROOT']."/uploads/videos/{$_GET['v']}";
@@ -49,16 +48,5 @@ function servePartialContent($filePath) {
     while(!feof($fm) && $cur <= $end && (connection_status() == 0)) {
         print fread($fm, min(1024 * 16, ($end - $cur + 1)));
         $cur += 1024 * 16;
-    }
-}
-
-// Usage
-$videoId = $_GET['id'] ?? null;
-if ($videoId) {
-    $filePath = "/path/to/videos/{$videoId}.mp4";
-    if (file_exists($filePath)) {
-        servePartialContent($filePath);
-    } else {
-        header("HTTP/1.1 404 Not Found");
     }
 }

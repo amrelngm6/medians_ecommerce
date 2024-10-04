@@ -3,16 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TV Channel Player with Partial Loading</title>
+    <title>TV Channel Player with Controlled Chunk Loading</title>
 </head>
 <body>
     <video id="videoPlayer" controls>
         Your browser does not support the video tag.
     </video>
+    <div id="bufferingIndicator" style="display: none;">Buffering...</div>
 
     <script>
         const videoPlayer = document.getElementById('videoPlayer');
+        const bufferingIndicator = document.getElementById('bufferingIndicator');
         const channelId = 1; // Replace with the desired channel ID
+        let mediaSource;
+        let sourceBuffer;
+        let isSourceOpen = false;
+        let isFetching = false;
+        let currentVideoUrl = '';
+        let totalSize = 0;
+        let loadedBytes = 0;
 
         function fetchCurrentVideoInfo() {
             fetch(`/channel_json/`+channelId)
@@ -28,40 +37,108 @@
         }
 
         function loadVideoPartially(media) {
-            console.log(media)
             
             var a = new Date(media.start);
             var b = new Date();
-            var difference = parseInt((b - a) / 1000);
-            const videoUrl = '/test.php?v='+media.media.filepath.filename;
-            const mediaSource = new MediaSource();
+            var startPosition = parseInt((b - a) / 1000);
+            var startPosition = parseInt(((b - a) / 1000) - 3600);
+
+            const videoUrl = media.media_path;
+            currentVideoUrl = videoUrl;
+            
+            if (mediaSource) {
+                if (mediaSource.readyState === 'open') {
+                    mediaSource.endOfStream();
+                }
+                URL.revokeObjectURL(videoPlayer.src);
+            }
+
+            mediaSource = new MediaSource();
             videoPlayer.src = URL.createObjectURL(mediaSource);
 
             mediaSource.addEventListener('sourceopen', function() {
-                const sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
-                fetchVideoChunk(videoUrl, difference, sourceBuffer);
+                isSourceOpen = true;
+                sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
+                sourceBuffer.addEventListener('updateend', function() {
+                    if (mediaSource.readyState === 'open' && !isFetching) {
+                        fetchNextChunk();
+                    }
+                });
+                fetchVideoChunk(videoUrl, 0, true);
             });
 
-            videoPlayer.currentTime = difference;
+            mediaSource.addEventListener('sourceended', function() {
+                isSourceOpen = false;
+            });
+
+            videoPlayer.currentTime = startPosition;
         }
 
-        function fetchVideoChunk(url, startByte, sourceBuffer, chunkSize = 1024 * 1024) {
+        function fetchVideoChunk(url, startByte, isFirstChunk = false, chunkSize = 1024 * 1024) {
+            if (!isSourceOpen || isFetching) {
+                return;
+            }
+
+            isFetching = true;
+            bufferingIndicator.style.display = 'block';
+
             fetch(url, {
                 headers: {
                     'Range': `bytes=${startByte}-${startByte + chunkSize - 1}`
                 }
             })
-            .then(response => response.arrayBuffer())
-            .then(data => {
-                sourceBuffer.appendBuffer(data);
-                if (videoPlayer.readyState >= 3) { // HAVE_FUTURE_DATA or higher
-                    videoPlayer.play();
+            .then(response => {
+                if (isFirstChunk) {
+                    const rangeHeader = response.headers.get('Content-Range');
+                    if (rangeHeader) {
+                        totalSize = parseInt(rangeHeader.split('/')[1], 10);
+                    }
                 }
-                // Fetch next chunk
-                fetchVideoChunk(url, startByte + chunkSize, sourceBuffer, chunkSize);
+                return response.arrayBuffer();
             })
-            .catch(error => console.error('Error fetching video chunk:', error));
+            .then(data => {
+                if (isSourceOpen && !sourceBuffer.updating) {
+                    try {
+                        sourceBuffer.appendBuffer(data);
+                        loadedBytes += data.byteLength;
+                        if (videoPlayer.readyState >= 3) { // HAVE_FUTURE_DATA or higher
+                            videoPlayer.play();
+                            bufferingIndicator.style.display = 'none';
+                        }
+                    } catch (e) {
+                        console.error('Error appending buffer:', e);
+                        if (e.name === 'QuotaExceededError') {
+                            // Remove some data to free up buffer space
+                            const currentTime = videoPlayer.currentTime;
+                            sourceBuffer.remove(0, currentTime - 30); // Keep 30 seconds in buffer
+                        }
+                    }
+                }
+                isFetching = false;
+            })
+            .catch(error => {
+                console.error('Error fetching video chunk:', error);
+                isFetching = false;
+                bufferingIndicator.style.display = 'none';
+            });
         }
+
+        function fetchNextChunk() {
+            if (loadedBytes < totalSize) {
+                fetchVideoChunk(currentVideoUrl, loadedBytes);
+            } else {
+                console.log('Video fully loaded');
+                bufferingIndicator.style.display = 'none';
+            }
+        }
+
+        videoPlayer.addEventListener('waiting', function() {
+            bufferingIndicator.style.display = 'block';
+        });
+
+        videoPlayer.addEventListener('canplay', function() {
+            bufferingIndicator.style.display = 'none';
+        });
 
         // Fetch video info when the page loads
         fetchCurrentVideoInfo();
