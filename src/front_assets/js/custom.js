@@ -25,7 +25,7 @@ function runSlide()
 
 var mainAudio = jQuery('audio');
 
-var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename, activeStation, activeChannel, activeStationMedia, stationInterval;
+var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename, activeChannel, activeChannelMedia, activeStation, activeStationMedia, stationInterval;
 
 
 document.getElementById('player-audio').addEventListener("change", function(event) {
@@ -752,6 +752,11 @@ $(function(){
 	jQuery(document).on('click', '.start-channel', async function(){
     	myVideo = document.getElementById("footer-video");
 		await loadChannelJson(jQuery(this).attr('data-channel'));
+
+		if (activeChannel && activeChannel.active_item)
+		{
+			activeChannelMedia = activeChannel.active_item;
+		}
 		console.log(activeChannel);
 		return;
 
