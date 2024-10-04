@@ -108,7 +108,9 @@ class ChannelMediaController extends CustomController
 				if ($videoController->downloadRemoteFile($tempFilePath, $_POST['params']['media_path']))
 				{
 					$filePath = $tempFilePath;
-					$params['media_path'] = $media_path;
+					$output = str_replace('.mp4', '_encoded.mp4', $tempFilePath);
+					$params['media_path'] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->createFragmentsFile($filePath, $output));
+					
 				}
 			}
 
@@ -143,6 +145,7 @@ class ChannelMediaController extends CustomController
 
         try {
 
+			
             if ($this->repo->update_item($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0);
@@ -235,7 +238,8 @@ class ChannelMediaController extends CustomController
 
 		$settings = $this->app->SystemSetting();
 		
-		$newEncodedFile = $settings['ffmpeg_path'] . " -i $input -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k  -movflags +faststart+frag_keyframe+empty_moov+default_base_moof  -f mp4 -segment_time 10 -reset_timestamps 1  $output";
+		// $newEncodedFile = $settings['ffmpeg_path'] . " -i $input -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k  -movflags +faststart+frag_keyframe+empty_moov+default_base_moof  -f mp4 -segment_time 10 -reset_timestamps 1  $output";
+		$newEncodedFile = $settings['ffmpeg_path'] . " -i $input -c:v copy -c:a copy -movflags +faststart  $output";
 
 		$run = shell_exec($newEncodedFile);
 

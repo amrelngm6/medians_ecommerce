@@ -5,6 +5,7 @@ use Shared\dbaser\CustomController;
 
 use Medians\Media\Infrastructure\MediaRepository;
 use Medians\Media\Infrastructure\MediaItemRepository;
+use Medians\Media\Application\VideoStream;
 
 use getID3;
 
@@ -249,8 +250,12 @@ class MediaController extends CustomController
 		// Check if the file is stored locally
 		if (substr($filePath, 0 , 4) == '/upl' &&  file_exists($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
+			$vs = new VideoStream($_SERVER['DOCUMENT_ROOT'].$filePath);
+			$vs->start();
+			return;
+			return $this->directstreamVideo($_SERVER['DOCUMENT_ROOT'].$filePath);
 			// return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath);
-			return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $channelMedia);
+			// return $this->directstreamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $channelMedia);
 		} 
 	}
 
@@ -440,17 +445,16 @@ class MediaController extends CustomController
 
 		$totalDuration = $item->duration ?? ($item->field['duration'] ?? 0);
 		$bitRate = $item->bitRate ?? ($item->field['bitRate'] ?? 0);
-		$fileSize = $item->fileSize ?? ($item->field['fileSize'] ?? 0);
 		
-		print_r($filePath);
 		if (!file_exists($filePath)) {
 			header("HTTP/1.0 404 Not Found");
 			return;
 		}
+		$fileSize = filesize($filePath);
 		
 		// Analyze the file using getID3 for duration and bitrate
 		// Get total duration and bitrate
-		$streamDuration = $duration > 0 ? $duration : ($totalDuration - $startTimeInSeconds);
+		$streamDuration = ($totalDuration - $startTimeInSeconds);
 
 		// Calculate byte offset for the start and end time based on the stream duration
 		$startByte = (int)(($startTimeInSeconds / $totalDuration) * $fileSize);
@@ -465,15 +469,15 @@ class MediaController extends CustomController
 		
 		// Prevent session blocking and allow streaming after user disconnect
 		session_write_close();
-		ignore_user_abort(true); // Continue streaming even if the user disconnects
+		// ignore_user_abort(true); // Continue streaming even if the user disconnects
 	
 		// Seek to the start byte
 		fseek($fm, $startByte);
 	
 		$contentLength = $endByte - $startByte;
-	
+		
 		// Set appropriate headers for video content
-		$mimeType = !empty($fileInfo['mime_type']) ? $fileInfo['mime_type'] : "video/mp4";
+		$mimeType = "video/mp4";
 		header("Content-Type: $mimeType");
 		header("Accept-Ranges: bytes");
 		header("Content-Length: " . $contentLength);
@@ -500,7 +504,7 @@ class MediaController extends CustomController
 		exit;
 	}
 	
-	
+
 	function isDirectAccess() {
 		
 		$this->app = new \config\APP;
