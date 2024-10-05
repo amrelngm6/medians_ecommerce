@@ -2,51 +2,53 @@
 
 
 // Path to the video file
-$file = $_SERVER['DOCUMENT_ROOT']."/uploads/videos/{$_GET['v']}";
+// $file = $_SERVER['DOCUMENT_ROOT']."/uploads/videos/{$_GET['v']}";
 
-servePartialContent($file);
+$apiKey = "AIzaSyAO_FJ2SlqU8Q4STEHLGCilw_Y9_11qcW8";
+$videoUrl = "https://www.youtube.com/watch?v=KNNKNrm6CbM";
+preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $videoUrl, $match);
+$youtubeVideoId = $match[1];
+$videoMeta = json_decode(getYoutubeVideoMeta($youtubeVideoId, $apiKey));
+$videoTitle = $videoMeta->videoDetails->title;
+$videoFormats = $videoMeta->streamingData->formats;
+print_r($videoMeta->streamingData);
+foreach ($videoFormats as $videoFormat) {
+    $url = $videoFormat->url;
+    if ($videoFormat->mimeType)
+        $mimeType = explode(";", explode("/", $videoFormat->mimeType)[1])[0];
+    else
+        $mimeType = "mp4";
+    ?>
+<a
+    href="video-downloader.php?link=<?php echo urlencode($url)?>&title=<?php echo urlencode($videoTitle)?>&type=<?php echo $mimeType; ?>">
+    Download Video</a>
+<?php
+}
 
-function servePartialContent($filePath) {
-    $size = filesize($filePath);
-    $time = date('r');
-
-    $fm = @fopen($filePath, 'rb');
-    if (!$fm) {
-        header("HTTP/1.1 505 Internal server error");
-        return;
+function getYoutubeVideoMeta($videoId, $key)
+{
+    $ch = curl_init();
+    $curlUrl = 'https://www.youtube.com/youtubei/v1/player?key=' . $key;
+    curl_setopt($ch, CURLOPT_URL, $curlUrl);
+    curl_setopt($ch, CURLOPT_ENCODING, 'gzip, deflate');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    $curlOptions = '{"context": {"client": {"hl": "en","clientName": "WEB",
+        "clientVersion": "2.20210721.00.00","clientFormFactor": "UNKNOWN_FORM_FACTOR","clientScreen": "WATCH",
+        "mainAppWebInfo": {"graftUrl": "/watch?v=' . $videoId . '",}},"user": {"lockedSafetyMode": false},
+        "request": {"useSsl": true,"internalExperimentFlags": [],"consistencyTokenJars": []}},
+        "videoId": "' . $videoId . '",  "playbackContext": {"contentPlaybackContext":
+        {"vis": 0,"splay": false,"autoCaptionsDefaultOn": false,
+        "autonavState": "STATE_NONE","html5Preference": "HTML5_PREF_WANTS","lactMilliseconds": "-1"}},
+        "racyCheckOk": false,  "contentCheckOk": false}';
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $curlOptions);
+    $headers = array();
+    $headers[] = 'Content-Type: application/json';
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    $curlResult = curl_exec($ch);
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
     }
-
-    $begin = 0;
-    $end = $size - 1;
-
-    if (isset($_SERVER['HTTP_RANGE'])) {
-        if (preg_match('/bytes=\h*(\d+)-(\d*)[\D.*]?/i', $_SERVER['HTTP_RANGE'], $matches)) {
-            $begin = intval($matches[1]);
-            if (!empty($matches[2])) {
-                $end = intval($matches[2]);
-            }
-        }
-    }
-
-    if ($begin > 0 || $end < ($size - 1)) {
-        header('HTTP/1.1 206 Partial Content');
-    } else {
-        header('HTTP/1.1 200 OK');
-    }
-
-    header("Content-Type: video/mp4");
-    header('Accept-Ranges: bytes');
-    header('Content-Length:' . ($end - $begin + 1));
-    header("Content-Range: bytes $begin-$end/$size");
-    header("Content-Disposition: inline;");
-    header("Content-Transfer-Encoding: binary\n");
-    header("Last-Modified: $time");
-
-    $cur = $begin;
-    fseek($fm, $begin, 0);
-
-    while(!feof($fm) && $cur <= $end && (connection_status() == 0)) {
-        print fread($fm, min(1024 * 16, ($end - $cur + 1)));
-        $cur += 1024 * 16;
-    }
+    curl_close($ch);
+    return $curlResult;
 }

@@ -99,6 +99,7 @@ $(function()  {
                     jQuery('#channelContainer').css('background-size',  'cover')
                     jQuery('#channelPlayer').fadeOut(200)
                     console.log('No video currently playing');
+                    channelPlayer.pause()
                 }
             })
             .catch(error => console.error('Error:', error));
