@@ -77,7 +77,11 @@ $(function()  {
         fetch(`/channel_json/` + channelId)
             .then(response => response.json())
             .then(data => {
-                if (data) {
+                if (data && data.active_item) {
+                    if (activeChannelMedia && data.active_item.channel_media_id == activeChannelMedia.channel_media_id)
+                    {
+                        return;
+                    }
                     activeChannel = data;
                     activeChannelMedia = data.active_item;
                     loadVideoPartially();  // Start loading video
