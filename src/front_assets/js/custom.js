@@ -832,10 +832,12 @@ $(function(){
 			jQuery('#video-overlay').fadeOut(200)
 			myVideo.play()
 			jQuery('#videoContainer .play-video').hide().parent().find('.pause-video').fadeIn(200)
+			jQuery('#channelContainer').css('z-index',  50)
 		} else {
 			jQuery('#videoContainer .pause-video').hide().parent().find('.play-video').fadeIn(200)
 			jQuery('#video-overlay').fadeIn(200)
 			myVideo.pause()
+			jQuery('#channelContainer').css('z-index',  0)
 		} 	
 		jQuery('#video-duration-page').html(convertToTime(myVideo.duration))
 		jQuery('#videoContainer progress').attr("max", myVideo.duration);
