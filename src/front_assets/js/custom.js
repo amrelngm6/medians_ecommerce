@@ -777,11 +777,11 @@ $(function(){
 		// }
 	// })
 
-	jQuery(document).on('click', '.pause-video', function(){
+	jQuery(document).on('click', '.pause-video, .pause-channel', function(){
     	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
 		playVideo(myVideo)
 	})
-	jQuery(document).on('click', '.play-video', function(){
+	jQuery(document).on('click', '.play-video, .play-channel', function(){
     	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
 		playVideo(myVideo)
 	})
