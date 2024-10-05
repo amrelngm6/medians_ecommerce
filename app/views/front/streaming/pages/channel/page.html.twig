@@ -89,8 +89,8 @@ $(function()  {
                     if (activeChannelMedia.channel_media_id)
                     {
                         jQuery('#video-overlay').fadeOut(200)
-                        jQuery('#play-channel').fadeOut(200)
-                        jQuery('#pause-channel').fadeIn(200)
+                        jQuery('.play-channel').fadeOut(200)
+                        jQuery('.pause-channel').fadeIn(200)
                         jQuery('#channelContainer').css('z-index',  50)
                     }
                     jQuery('#channelContainer').css('background-image',  'url(/uploads/videos/live.webp)')
@@ -105,8 +105,8 @@ $(function()  {
                     jQuery('#channelContainer').css('background-position',  'center center')
                     jQuery('#channelContainer').css('background-size',  'cover')
                     jQuery('#channelPlayer').fadeOut(200)
-                    jQuery('#pause-channel').fadeOut(200)
-                    jQuery('#play-channel').fadeIn(200)
+                    jQuery('.pause-channel').fadeOut(200)
+                    jQuery('.play-channel').fadeIn(200)
                     jQuery('#channelContainer').css('z-index',  0)
                     console.log('No video currently playing');
                     channelPlayer.pause()
