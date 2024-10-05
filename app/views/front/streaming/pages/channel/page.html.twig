@@ -1,7 +1,7 @@
 <div class=" w-full  lg:h-screen gradient-top-overlay" style="min-height: 300px; max-height: calc(100vh - 70px)">
 
 
-	<figure id="channelContainer" class="w-full  shadow-xl absolute top-0 left-0 " style="">
+	<figure id="channelContainer" class="w-full  shadow-xl absolute top-0 left-0 h-screen" style="">
 		<video id="channelPlayer" data-container="channelContainer" class="w-full h-screen"  poster="/stream?thumbnail=1000&image={{item.picture_name}}" crossorigin="anonymous" >
 			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/webm"/>
 			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/mp4"/>
@@ -90,7 +90,7 @@ $(function()  {
                         jQuery('#video-overlay').fadeOut(200)
                         jQuery('#channelContainer').css('z-index',  50)
                     }
-                    jQuery('#channelContainer').css('background',  'transparent')
+                    jQuery('#channelContainer').css('background-image',  'url(/uploads/videos/live.webp)')
                     jQuery('#channelPlayer').fadeIn(200)
 
                 } else {
