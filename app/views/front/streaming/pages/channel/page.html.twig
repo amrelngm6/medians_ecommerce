@@ -94,10 +94,12 @@ $(function()  {
                     jQuery('#channelPlayer').fadeIn(200)
 
                 } else {
+        			jQuery('#video-overlay').fadeIn(200)
                     jQuery('#channelContainer').css('background-image',  'url(/uploads/videos/offline.webp)')
                     jQuery('#channelContainer').css('background-position',  'center center')
                     jQuery('#channelContainer').css('background-size',  'cover')
                     jQuery('#channelPlayer').fadeOut(200)
+                    jQuery('#channelContainer').css('z-index',  0)
                     console.log('No video currently playing');
                     channelPlayer.pause()
                 }
