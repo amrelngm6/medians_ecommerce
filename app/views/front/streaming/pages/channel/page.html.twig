@@ -94,7 +94,8 @@ $(function()  {
                     jQuery('#channelContainer').css('background-image',  'url(/uploads/videos/live.webp)')
                     jQuery('#channelPlayer').fadeIn(200)
                     channelPlayer.play()
-                    jQuery('#channel-volume').val(getCookie('volume'))
+                	channelPlayer.volume = getCookie('volume')
+
                 } else {
         			jQuery('#video-overlay').fadeIn(200)
                     jQuery('#channelContainer').css('background-image',  'url(/uploads/videos/offline.webp)')
