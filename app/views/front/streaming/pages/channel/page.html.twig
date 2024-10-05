@@ -89,8 +89,9 @@ $(function()  {
                     {
                         jQuery('#video-overlay').fadeOut(200)
                         jQuery('#channelContainer').css('z-index',  50)
-                        jQuery('#channelContainer').css('background-image',  'transparent')
                     }
+                    jQuery('#channelContainer').css('background',  'transparent')
+
                 } else {
                     jQuery('#channelContainer').css('background-image',  'url(/uploads/videos/offline.webp)')
                     console.log('No video currently playing');
