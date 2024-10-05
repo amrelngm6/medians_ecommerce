@@ -1,7 +1,7 @@
 <div class=" w-full  lg:h-screen gradient-top-overlay" style="min-height: 300px; max-height: calc(100vh - 70px)">
 
 
-	<figure id="channelContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
+	<figure id="channelContainer" class="w-full  shadow-xl absolute top-0 left-0 " style="background: url(/uploads/videos/offline.webp) center center; background-size:cover">
 		<video id="channelPlayer" data-container="channelContainer" class="w-full h-screen" autoplay poster="/stream?thumbnail=1000&image={{item.picture_name}}" crossorigin="anonymous" >
 			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/webm"/>
 			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/mp4"/>
@@ -85,6 +85,11 @@ $(function()  {
                     activeChannel = data;
                     activeChannelMedia = data.active_item;
                     loadVideoPartially();  // Start loading video
+                    if (activeChannelMedia.channel_media_id)
+                    {
+                        jQuery('#video-overlay').fadeOut(200)
+                        jQuery('#channelContainer').css('z-index',  50)
+                    }
                 } else {
                     console.log('No video currently playing');
                 }
@@ -94,7 +99,6 @@ $(function()  {
 
     function loadVideoPartially() {
         if (!activeChannelMedia) {
-            console.log('No active media');
             return;
         }
 

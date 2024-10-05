@@ -646,10 +646,8 @@ window.addEventListener('popstate', function (e) {
 
 
 /**
- * Video player
+ * Video Picture-in-picture player
  */
-
-
 $(function(){
 	var myVideo;
 	var playFrame;
@@ -829,9 +827,9 @@ $(function(){
 			return;
 
 		if (myVideo.paused) {
-			jQuery('#video-overlay').fadeOut(200)
 			myVideo.play()
 			jQuery('#videoContainer .play-video').hide().parent().find('.pause-video').fadeIn(200)
+			jQuery('#video-overlay').fadeOut(200)
 			jQuery('#channelContainer').css('z-index',  50)
 		} else {
 			jQuery('#videoContainer .pause-video').hide().parent().find('.play-video').fadeIn(200)
