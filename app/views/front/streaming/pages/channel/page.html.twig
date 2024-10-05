@@ -91,13 +91,13 @@ $(function()  {
                         jQuery('#channelContainer').css('z-index',  50)
                     }
                     jQuery('#channelContainer').css('background',  'transparent')
-                    jQuery('#channelPlayer').fadeOut(200)
+                    jQuery('#channelPlayer').fadeIn(200)
 
                 } else {
                     jQuery('#channelContainer').css('background-image',  'url(/uploads/videos/offline.webp)')
                     jQuery('#channelContainer').css('background-position',  'center center')
                     jQuery('#channelContainer').css('background-size',  'cover')
-                    jQuery('#channelPlayer').fadeIn(200)
+                    jQuery('#channelPlayer').fadeOut(200)
                     console.log('No video currently playing');
                 }
             })
