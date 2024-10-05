@@ -793,7 +793,7 @@ $(function(){
 		
 	});
 
-	jQuery(document).on('click', '#video-volume, #channel-volume', function(){
+	jQuery(document).on('change', '#video-volume, #channel-volume', function(){
     	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
 		myVideo.volume = jQuery(this).val()
 	})
