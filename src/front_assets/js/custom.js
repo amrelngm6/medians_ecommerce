@@ -796,6 +796,7 @@ $(function(){
 	jQuery(document).on('change', '#video-volume, #channel-volume', function(){
     	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
 		myVideo.volume = jQuery(this).val()
+		setCookie('volume', myVideo.volume, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 	})
 	jQuery(document).on('click', '.fullscreen', function(){
 		videoContainer = document.getElementById(jQuery(this).attr('data-container'));

@@ -72,6 +72,7 @@ $(function()  {
     let sourceBuffer;
     let isSourceOpen = false;
     let startPosition = 0; // Variable to hold the calculated start time
+    ; // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 
     function fetchCurrentVideoInfo(channelId) {
         fetch(`/channel_json/` + channelId)
@@ -93,7 +94,7 @@ $(function()  {
                     jQuery('#channelContainer').css('background-image',  'url(/uploads/videos/live.webp)')
                     jQuery('#channelPlayer').fadeIn(200)
                     channelPlayer.play()
-
+                    jQuery('#channel-volume').val(getCookie('volume'))
                 } else {
         			jQuery('#video-overlay').fadeIn(200)
                     jQuery('#channelContainer').css('background-image',  'url(/uploads/videos/offline.webp)')
