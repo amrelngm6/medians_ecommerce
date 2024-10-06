@@ -1,74 +1,57 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const video = document.getElementById('mainVideo');
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    const markStartBtn = document.getElementById('markStartBtn');
-    const markEndBtn = document.getElementById('markEndBtn');
-    const createShortBtn = document.getElementById('createShortBtn');
-    const screenshotStrip = document.getElementById('screenshotStrip');
+const videoPlayer = document.getElementById('video-player');
+        const timelineContainer = document.getElementById('timeline-thumbnails');
+        const timelineCursor = document.getElementById('timeline-cursor');
+        const timeRange = document.getElementById('time-range');
+        const thumbnailCount = 10;
+        const thumbnailWidth = 142;
+        const thumbnailHeight = 80;
 
-    let startTime = 0;
-    let endTime = 0;
+        videoPlayer.addEventListener('loadedmetadata', () => {
+            generateThumbnails();
+            setInterval(updateCursorPosition, 100);
+        });
 
-    // Play / Pause
-    playPauseBtn.addEventListener('click', function() {
-        if (video.paused) {
-            video.play();
-        } else {
-            video.pause();
-        }
-    });
-
-    // Mark Start
-    markStartBtn.addEventListener('click', function() {
-        startTime = video.currentTime;
-        console.log(`Start marked at: ${startTime}`);
-    });
-
-    // Mark End
-    markEndBtn.addEventListener('click', function() {
-        endTime = video.currentTime;
-        console.log(`End marked at: ${endTime}`);
-    });
-
-    // Create Short - logic to create a clip between start and end
-    createShortBtn.addEventListener('click', function() {
-        if (startTime && endTime && startTime < endTime) {
-            console.log(`Creating short from ${startTime} to ${endTime}`);
-            // Implement your short creation logic here
-        } else {
-            alert('Please mark valid start and end times.');
-        }
-    });
-
-    // Generate thumbnails for timeline
-    video.addEventListener('loadeddata', function() {
-        const duration = video.duration;
-        const thumbnailInterval = Math.floor(duration / 20); // Generate 10 screenshots
-
-        var i = 1
-        setInterval(function(){
-            if (i > 20)
-            {
-                return;
+        function generateThumbnails() {
+            const duration = videoPlayer.duration;
+            for (let i = 0; i < thumbnailCount; i++) {
+                const thumbnailTime = (duration / thumbnailCount) * i;
+                const thumbnail = createThumbnail(thumbnailTime);
+                timelineContainer.appendChild(thumbnail);
             }
+        }
 
-            i++;
-            captureScreenshot(video, i * thumbnailInterval);
-        }, 500);
-    });
+        function createThumbnail(time) {
+            const canvas = document.createElement('canvas');
+            canvas.width = thumbnailWidth;
+            canvas.height = thumbnailHeight;
+            canvas.className = 'thumbnail';
 
-    function captureScreenshot(videoElement, time) {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
+            const ctx = canvas.getContext('2d');
+            videoPlayer.currentTime = time;
 
-        videoElement.currentTime = time;
-        videoElement.addEventListener('seeked', function() {
-            canvas.width = videoElement.videoWidth;
-            canvas.height = videoElement.videoHeight;
-            context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-            const img = new Image();
-            img.src = canvas.toDataURL();
-            screenshotStrip.appendChild(img);
-        }, { once: true });
-    }
-});
+            videoPlayer.onseeked = () => {
+                ctx.drawImage(videoPlayer, 0, 0, thumbnailWidth, thumbnailHeight);
+                videoPlayer.onseeked = null;
+            };
+
+            return canvas;
+        }
+
+        function updateCursorPosition() {
+            const progress = videoPlayer.currentTime / videoPlayer.duration;
+            const position = progress * (thumbnailWidth * thumbnailCount);
+            timelineCursor.style.left = `${position}px`;
+            timeRange.value = progress * 100;
+        }
+
+        timelineContainer.addEventListener('click', (e) => {
+            const rect = timelineContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const progress = x / (thumbnailWidth * thumbnailCount);
+            videoPlayer.currentTime = progress * videoPlayer.duration;
+        });
+
+        timeRange.addEventListener('input', () => {
+            const progress = timeRange.value / 100;
+            videoPlayer.currentTime = progress * videoPlayer.duration;
+        });

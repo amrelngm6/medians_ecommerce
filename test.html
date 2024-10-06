@@ -3,36 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Editor</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Pro Short Creator - Video Editor</title>
+    
 </head>
 <body>
-    <div class="video-editor">
-        <header class="editor-header">
-            <h1>Video Editor - Create Shorts</h1>
-        </header>
-
-        <div class="editor-main">
-            <div class="video-player">
-                <video id="mainVideo" controls>
+    <div class="container">
+        <div class="top-bar">
+            <h1>Pro Short Creator</h1>
+        </div>
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="sidebar-icon"></div>
+                <div class="sidebar-icon"></div>
+                <div class="sidebar-icon"></div>
+                <div class="sidebar-icon"></div>
+            </div>
+            <div class="video-container">
+                <div class="video-preview">
+                    <video id="video-player" width="100%" height="100%" controls>
                     <source src="/uploads/videos/tmp/a2cde9475fa4c9ce2a34c2b322ec31c4.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div class="editing-panel">
+                    <h2>Editing Tools</h2>
+                    <button class="button">Trim</button>
+                    <button class="button">Effects</button>
+                    <button class="button">Text</button>
+                    <button class="button">Audio</button>
+                    <h3>Time Range</h3>
+                    <input type="range" id="time-range" class="time-range" min="0" max="100" value="0">
+                    <button class="button">Export Short</button>
+                </div>
             </div>
-
-            <div class="controls">
-                <button id="playPauseBtn">Play/Pause</button>
-                <button id="markStartBtn">Mark Start</button>
-                <button id="markEndBtn">Mark End</button>
-                <button id="createShortBtn">Create Short</button>
-            </div>
-
-            <div class="timeline">
-                <div id="screenshotStrip"></div> <!-- Will hold screenshots -->
+        </div>
+        <div class="timeline">
+            <div class="timeline-track">
+                <div class="timeline-thumbnails" id="timeline-thumbnails"></div>
+                <div class="timeline-cursor" id="timeline-cursor"></div>
             </div>
         </div>
     </div>
 
+    <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </body>
 </html>
