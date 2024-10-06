@@ -46,7 +46,7 @@ class ShortVideoController extends CustomController
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-                'type' => 'video',
+                'type' => 'short_video',
                 'layout' => isset($this->app->customer->customer_id) ? 'shorts/upload' : 'signin',
             ], 'output'));
             
@@ -98,7 +98,7 @@ class ShortVideoController extends CustomController
         
         $params['limit'] = $settings['view_items_limit'] ?? null;
         $params['author_id'] = $customer->customer_id ?? 0;
-        $params['type'] = 'video';
+        $params['type'] = 'short_video';
         $list = $this->repo->getWithFilter($params);
 
 		try 
@@ -155,7 +155,7 @@ class ShortVideoController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
-        $params['type'] = 'video';
+        $params['type'] = 'short_video';
         $list = $this->repo->getWithFilter($params);
         
 		try 
@@ -165,7 +165,7 @@ class ShortVideoController extends CustomController
                 'list' => $list,
                 'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => 'search/search',
-                'sub_layout' => 'video',
+                'sub_layout' => 'short',
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -184,7 +184,7 @@ class ShortVideoController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
-        $params['type'] = 'video';
+        $params['type'] = 'short_video';
         $list = $this->repo->getWithFilter($params);
         
 		try 
@@ -215,7 +215,7 @@ class ShortVideoController extends CustomController
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
         $params['likes'] = true;
-        $params['type'] = 'video';
+        $params['type'] = 'short_video';
         $params['customer_id'] = $this->app->customer->customer_id ?? 0;
         $list = $this->repo->getWithFilter($params);
         

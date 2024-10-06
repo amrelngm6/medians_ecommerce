@@ -77,6 +77,8 @@ RouteHandler::get('/short/(:all)', \Medians\Media\Application\ShortVideoControll
 /** Search pages */
 RouteHandler::get('/search/audio', \Medians\Media\Application\MediaItemController::class.'@search');
 RouteHandler::get('/search/audiobook', \Medians\Media\Application\AudiobookController::class.'@search');
+RouteHandler::get('/search/video', \Medians\Media\Application\VideoController::class.'@search');
+RouteHandler::get('/search/short', \Medians\Media\Application\ShortVideoController::class.'@search');
 RouteHandler::get('/search/artist', \Medians\Customers\Application\CustomerController::class.'@search');
 RouteHandler::get('/search/playlist', \Medians\Playlists\Application\PlaylistController::class.'@search');
 RouteHandler::get('/search/station', \Medians\Stations\Application\StationController::class.'@search');
