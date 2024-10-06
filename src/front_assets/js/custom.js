@@ -789,7 +789,10 @@ $(function(){
 	/** On Play video */
 	jQuery(document).on( "click", "video", function() {
 		myVideo = document.getElementById(jQuery(this).attr('id') );
-		playVideo(myVideo)
+		dataContainer = jQuery(this).attr('data-container');
+		if (dataContainer) {
+			playVideo(myVideo)
+		}
 		
 	});
 
