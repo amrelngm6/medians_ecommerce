@@ -823,6 +823,7 @@ $(function(){
 		let progress = document.getElementById('progress')
 		const rect = progress.getBoundingClientRect();
 		const pos = (e.pageX - rect.left) / progress.offsetWidth;
+		myVideo = document.getElementById(e.target.dataset.player);
 		myVideo.currentTime = pos * myVideo.duration;
 		myVideo.play()
 	});
@@ -832,14 +833,16 @@ $(function(){
 		if (!myVideo)
 			return;
 
+		
+
 		if (myVideo.paused) {
 			myVideo.play()
-			jQuery('#videoContainer .play-video').hide().parent().find('.pause-video').fadeIn(200)
+			jQuery(`#${myVideo.dataset.container} .play-video`).hide().parent().find('.pause-video').fadeIn(200)
 			jQuery('#channelContainer .play-channel').hide().parent().find('.pause-channel').fadeIn(200)
 			jQuery('#video-overlay').fadeOut(200)
 			jQuery('#channelContainer').css('z-index',  50)
 		} else {
-			jQuery('#videoContainer .pause-video').hide().parent().find('.play-video').fadeIn(200)
+			jQuery(`#${myVideo.dataset.container} .pause-video`).hide().parent().find('.play-video').fadeIn(200)
 			jQuery('#channelContainer .pause-channel').hide().parent().find('.play-channel').fadeIn(200)
 			jQuery('#video-overlay').fadeIn(200)
 			myVideo.pause()
@@ -853,8 +856,8 @@ $(function(){
 		myVideo.addEventListener(
 			"timeupdate",
 			() => {
-				jQuery('#current-time-page').html(convertToTime(myVideo.currentTime))
-				jQuery('#videoContainer progress').val(myVideo.currentTime);
+				jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
+				jQuery(`#${myVideo.dataset.container} progress`).val(myVideo.currentTime);
 
 			})
 			
@@ -863,11 +866,11 @@ $(function(){
 		myVideo.addEventListener(
 		"play",
 		() => {
-			jQuery('#video-duration-page').html(convertToTime(myVideo.duration))
-			jQuery('#videoContainer progress').attr("max", myVideo.duration);
+			jQuery(`${myVideo.dataset.container} #video-duration-page`).html(convertToTime(myVideo.duration))
+			jQuery(`${myVideo.dataset.container} progress`).attr("max", myVideo.duration);
 			
 			jQuery('#video-overlay').fadeOut(200)
-			jQuery('#videoContainer').css('z-index',  999)
+			jQuery(`${myVideo.dataset.container}`).css('z-index',  999)
 		},
 		false,
 		);
@@ -877,7 +880,7 @@ $(function(){
 		"pause",
 		() => {
 			jQuery('#video-overlay').fadeIn(200)
-			jQuery('#videoContainer').css('z-index',  0)
+			jQuery(`${myVideo.dataset.container}`).css('z-index',  0)
 		},
 		false,
 		);
