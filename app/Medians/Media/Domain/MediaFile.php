@@ -53,6 +53,7 @@ class MediaFile extends CustomModel
 	{
 		$filename = $this->filename;
 		return [
+			'media_file_id' => $this->media_file_id,
 			'media_id' => $this->media_id,
 			'file' => $this->filename,
 			'title' => $this->title ?? '',

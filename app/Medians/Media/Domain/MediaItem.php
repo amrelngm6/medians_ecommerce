@@ -52,6 +52,7 @@ class MediaItem extends CustomModel
 	{
 		$filename = !empty($this->filepath) ? explode('/', $this->filepath->path) : '';
 		return [
+			'media_file_id' => $this->media_file_id,
 			'media_id' => $this->media_id,
 			'title' => $this->name,
 			'file' => $filename ? end($filename) : '',

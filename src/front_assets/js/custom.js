@@ -272,8 +272,8 @@ function runAudio()
 		let $this = $(this);
 		let $elem = $this.closest('.js-audio');
 		
-		updateAudio(e.handle.value, $elem);
 		$this.addClass('active');
+		updateAudio(e.handle.value, $elem);
 	});
 
 	
@@ -339,11 +339,6 @@ function initAudioPlayer() {
 		getCircle = circle.get(0),
 		totalLength = getCircle.getTotalLength();
 
-	circle.attr({
-		'stroke-dasharray': totalLength,
-		'stroke-dashoffset': totalLength,
-	});
-
 	mainAudio.on('loadedmetadata', function() {
 		const duration = audio.duration;
 		if (isFinite(duration)) {
@@ -366,8 +361,18 @@ function initAudioPlayer() {
 		}
 	});
 
-	mainAudio.on('timeupdate', (e) => {
+	circle.attr({
+		'stroke-dasharray': totalLength,
+	});
 
+	mainAudio.on('timeupdate', (e) => {
+		circle = jQuery('#seekbar-'+audioInfo.attr('data-id'))
+		circle.attr({
+			'stroke-dasharray': totalLength,
+		});
+		console.log(circle)
+		console.log(audioInfo.attr('data-id'))
+		console.log(audioInfo)
 		let currentTime = audio.currentTime,
 		maxduration = audio.duration,
 		calc = totalLength - (currentTime / maxduration * totalLength);
