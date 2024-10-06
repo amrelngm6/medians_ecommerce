@@ -253,6 +253,11 @@ $(function()  {
         fetchCurrentVideoInfo({{item.channel_id}});
     }, stationIntervalAmount > 1 ? (stationIntervalAmount * 1000) : 60000);
 
+    jQuery(document).on('click', 'a', function(){
+        channelPlayer.pause()
+        channelPlayer.src = ''
+    })
+
 });
 
 </script>
