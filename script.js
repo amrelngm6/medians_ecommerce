@@ -22,7 +22,7 @@ const videoPlayer = document.getElementById('video-player');
             const thumbnail = createThumbnail(thumbnailTime);
             timelineContainer.appendChild(thumbnail);
             
-            setTimeout(updateCursorPosition(i+1), 1000);
+            setTimeout(generateThumbnails(i+1), 1000);
             
         }
 
