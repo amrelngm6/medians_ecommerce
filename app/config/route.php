@@ -67,6 +67,13 @@ RouteHandler::get('/video/edit/(:all)', \Medians\Media\Application\VideoControll
 RouteHandler::get('/discover/video', \Medians\Media\Application\VideoController::class.'@discover');
 RouteHandler::get('/video/(:all)', \Medians\Media\Application\VideoController::class.'@video_page');
 
+/** Short Videos pages */
+RouteHandler::get('/shorts/create', \Medians\Media\Application\ShortVideoController::class.'@upload_page');
+RouteHandler::get('/generate/short/(:all)', \Medians\Media\Application\ShortVideoController::class.'@generate_page');
+RouteHandler::get('/short/edit/(:all)', \Medians\Media\Application\ShortVideoController::class.'@edit_video');
+RouteHandler::get('/discover/short', \Medians\Media\Application\ShortVideoController::class.'@discover');
+RouteHandler::get('/short/(:all)', \Medians\Media\Application\ShortVideoController::class.'@video_page');
+
 /** Search pages */
 RouteHandler::get('/search/audio', \Medians\Media\Application\MediaItemController::class.'@search');
 RouteHandler::get('/search/audiobook', \Medians\Media\Application\AudiobookController::class.'@search');
@@ -78,6 +85,7 @@ RouteHandler::get('/search/station', \Medians\Stations\Application\StationContro
 RouteHandler::get('/studio', \Medians\Media\Application\MediaItemController::class.'@studio');
 RouteHandler::get('/studio/media', \Medians\Media\Application\MediaItemController::class.'@studio_media');
 RouteHandler::get('/studio/videos', \Medians\Media\Application\VideoController::class.'@studio_media');
+RouteHandler::get('/studio/short_videos', \Medians\Media\Application\ShortVideoController::class.'@studio_media');
 RouteHandler::get('/studio/playlists', \Medians\Media\Application\MediaItemController::class.'@studio_playlists');
 RouteHandler::get('/studio/audio_books', \Medians\Media\Application\AudiobookController::class.'@studio_audiobooks');
 RouteHandler::get('/studio/stations', \Medians\Stations\Application\StationController::class.'@studio');
@@ -90,6 +98,7 @@ RouteHandler::get('/genres', \Medians\Media\Application\MediaItemController::cla
 RouteHandler::get('/genre/(:all)', \Medians\Media\Application\MediaItemController::class.'@genre');
 RouteHandler::get('/book_genre/(:all)', \Medians\Media\Application\AudiobookController::class.'@genre');
 RouteHandler::get('/video_genre/(:all)', \Medians\Media\Application\VideoController::class.'@genre');
+RouteHandler::get('/short_video_genre/(:all)', \Medians\Media\Application\ShortVideoController::class.'@genre');
 RouteHandler::get('/artists', \Medians\Customers\Application\CustomerController::class.'@channels');
 RouteHandler::get('/artist/(:all)', \Medians\Customers\Application\CustomerController::class.'@artist');
 RouteHandler::get('/playlists', \Medians\Playlists\Application\PlaylistController::class.'@playlists');

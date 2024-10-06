@@ -177,6 +177,10 @@ class FrontAPIController extends CustomController
 					$return = (new Channels\Application\ChannelMediaController)->store();
 					break;
 	
+				case 'ShortVideo.create':
+					$return = (new Media\Application\ShortVideoController)->store();
+					break;
+	
 			}
 
 			return printResponse(json_encode($return));

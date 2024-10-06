@@ -1,0 +1,79 @@
+<div class=" w-full  lg:h-screen gradient-top-overlay" style="min-height: 300px; max-height: calc(100vh - 70px)">
+
+
+	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
+		<video id="my-video" class="w-full h-screen" autoplay poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous" >
+			<source src="{{item.main_file.path}}#t=300" type="video/webm"/>
+			<source src="{{item.main_file.path}}#t=300" type="video/mp4"/>
+		</video>
+
+		<div id="video-controls" class="flex px-6 gap-4 text-gray-400 absolute bottom-0 left-0 w-full gradient-top-overlay pt-10" data-state="hidden">
+			<button class="play-video brightness-200" id="play" type="button" data-state="play"><img src="/src/front_assets/svg/video-play.svg" class="w-4 brightness-200"/></button>
+			<button class="pause-video brightness-200" style="display:none" id="pause" type="button" data-state="pause"><img src="/src/front_assets/svg/video-pause.svg" class="w-4 brightness-200"/></button>
+			<div id="current-time-page"></div>
+			<div class="progress w-full">
+				<progress id="progress" class="cursor-pointer bg-gray-800 w-full rounded-2xl overflow-hidden " value="0" min="0" step="1" max="">
+					<span id="progress-bar"></span>
+				</progress>
+			</div>
+			<span id="video-duration-page"></span>
+			<div class="volume relative show-child ">
+				<button class="brightness-200" id="mute" type="button" style="padding-top: 5px" data-state="mute"><img src="/src/front_assets/svg/video-volume.svg" class="w-4 brightness-200"/></button>
+				<input type="range" id="video-volume" min="0" step=".1" max="1" class="show-on-hover absolute bottom-0 h-2 left-1 w-20" style="transform-origin: left; transform: rotate(270deg);"/>
+			</div>
+			<button id="fs" class="fullscreen " id="pause" type="button" data-state="go-fullscreen"><img src="/src/front_assets/svg/fullscreen.svg" class="w-4 brightness-200"/></button>
+		</div>
+	</figure>
+
+</div>
+<div class=" w-full h-40 absolute top-0 left-0 gradient-overlay" style="z-index:1; "></div>
+
+{% set customer = app.customer_auth() %}
+<div class=" w-full  relative" id="video-overlay">
+	<div class="absolute lg:bottom-40 lg:left-40 left-10 bottom-10  z-10 w-2/3 text-gray-100 dark:text-gray-400">
+		<h1 class="lg:text-4xl text-2xl text-white overflow-hidden">{{item.name}}</h1>
+
+		{% if item.customer_id == customer.customer_id %}
+			<div class="{{ following == null ? '' : ' hidden'}} float-right" x-on:click="jQuery('#heart-{{item.customer_id}}').addClass('hidden'); jQuery('#unheart-{{item.customer_id}}').removeClass('hidden')" id="heart-{{item.customer_id}}">
+				<a href="/studio" class="ajax-load hover:border-orange-300 hover:text-orange-300 border  border border-4 border-white rounded-full py-2 px-6">
+					<span>{{lang.translate('Edit')}}</span>
+				</a>
+			</div>
+		{% else  %}
+			{% set liked = item.liked(customer.customer_id).count() %}
+			<div class="{{ liked == null ? '' : ' hidden'}} float-right" x-on:click="jQuery('#heart-{{item.media_id}}').addClass('hidden'); jQuery('#unheart-{{item.media_id}}').removeClass('hidden')" id="heart-{{item.media_id}}">
+				<a href="/front_api/create?type=Like.media&params[item_id]={{item.media_id}}" data-params="{item_id: {{item.media_id}} }" class="ajax-link hover:border-orange-300 hover:text-orange-300 border border-4 border-white rounded-full py-2 px-6">
+					<span>{{lang.translate('Like')}}</span>
+				</a>
+			</div>
+
+			<div class="{{ liked == null ? 'hidden' : '' }} float-right" x-on:click="jQuery('#unheart-{{item.media_id}}').addClass('hidden'); jQuery('#heart-{{item.media_id}}').removeClass('hidden')" id="unheart-{{item.media_id}}">
+				<a href="/front_api/create?type=Like.media&params[item_id]={{item.media_id}}" data-params="{item_id: {{item.media_id}} }" class="ajax-link hover:border-orange-300 hover:text-orange-300 border border-4 border-white rounded-full py-2 px-6">
+					<span>{{lang.translate('Unlike')}}</span>
+				</a>
+			</div>
+		{% endif %}
+
+		<div class="w-full flex gap-4 ">
+
+			<span class="text-sm text-gray-100">{{lang.translate('Likes')}} : {{item.likes|length}} </span>
+			<span class="text-sm text-gray-100">{{lang.translate('Comments')}} : {{item.comments|length}} </span>
+			<span x-on:click="jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
+
+		</div>
+
+	</div>
+</div>
+<div class="pb-4  h-full overflow-hidden rounded-2xl" x-data="{is_slide: 'slide'}">
+
+	<div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
+
+		<span class="block pt-10 text-sm text-gray-500">{{lang.translate('About')}}</span>
+		<div class="text-primary overflow-auto" style="max-height: 400px;">
+			<div class="dark:text-gray-400 py-4">{{item.field.about|raw| nl2br  }}</div>
+		</div>
+
+	</div>
+
+</div>
+

@@ -10,7 +10,7 @@ use Medians\Categories\Infrastructure\CategoryRepository;
 use Medians\Customers\Infrastructure\CustomerRepository;
 
 
-class VideoController extends CustomController 
+class ShortVideoController extends CustomController 
 {
 
 	protected $app;
@@ -47,8 +47,7 @@ class VideoController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'type' => 'video',
-                'layout' => isset($this->app->customer->customer_id) ? 'upload' : 'signin',
-                'sub_layout' =>  'videos/upload',
+                'layout' => isset($this->app->customer->customer_id) ? 'shorts/upload' : 'signin',
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -58,27 +57,6 @@ class VideoController extends CustomController
 
 
     
-
-
-    /**
-     * Import Video file from external link
-     */
-    public function import_page()
-    {
-
-		try {
-
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
-                'app' => $this->app,
-                'type' => 'video',
-                'layout' => isset($this->app->customer->customer_id) ? 'import' : 'signin',
-                'sub_layout' => 'videos/import',
-            ], 'output'));
-            
-		} catch (\Exception $e) {
-			throw new \Exception($e->getMessage(), 1);
-		}
-    }
 
 
     
@@ -98,7 +76,7 @@ class VideoController extends CustomController
                 'app' => $this->app,
                 'item' => $item,
                 'genres' => $this->categoryRepo->getVideoGenres(),
-                'layout' => 'videos/page'
+                'layout' => 'shorts/page'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -129,7 +107,7 @@ class VideoController extends CustomController
                 'app' => $this->app,
                 'customer' => $customer,
                 'list' => $list,
-                'layout' => isset($this->app->customer->customer_id) ? 'videos/studio' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'shorts/studio' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -163,7 +141,7 @@ class VideoController extends CustomController
                 'video_items' => $list,
                 'channels' => $channels,
                 'genres' => $this->categoryRepo->getVideoGenres(),
-                'layout' => 'videos/discover'
+                'layout' => 'shorts/discover'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -276,7 +254,7 @@ class VideoController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'genres' => $this->categoryRepo->getVideoGenres(),
-                'layout' => 'videos/genres'
+                'layout' => 'shorts/genres'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -337,24 +315,17 @@ class VideoController extends CustomController
 
         $item = $this->repo->find($media_id);
 
-        if (empty($item->main_file->path))
-            return Page404();
+        // if (empty($item->main_file->path))
+        //     return Page404();
 
-
-        $videoPath = $_SERVER['DOCUMENT_ROOT'].$item->main_file->path;
-        $outputDir = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->videos_dir. 'screenshots/';
-        $list = $this->generateScreenshots($videoPath, $outputDir, $settings);
 
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item' => $item,
-                'genre_type' => 'genres',
-                'model_type' => 'MediaItem',
-                'list' => $list,
                 'genres' => $this->categoryRepo->getVideoGenres(),
-                'layout' => isset($this->app->customer->customer_id) ? 'videos/edit' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'shorts/short-editor' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -380,7 +351,7 @@ class VideoController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/includes/layout.html.twig', [
                 'app' => $this->app,
                 'list' => $list,
-                'layout' => isset($this->app->customer->customer_id) ? 'videos/edit' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'shorts/edit' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -444,7 +415,7 @@ class VideoController extends CustomController
                 
                 $params['name'] = '';
                 $params['description'] = '';
-                $tempFilePath = '/uploads/videos/tmp/'.md5($params['link']).'.mp4';
+                $tempFilePath = '/uploads/shorts/tmp/'.md5($params['link']).'.mp4';
                 $tempFileFullPath = $_SERVER['DOCUMENT_ROOT'].$tempFilePath;
                 
                 if ($this->downloadRemoteFile($tempFileFullPath, $_POST['params']['link']) ) 
@@ -477,39 +448,30 @@ class VideoController extends CustomController
 
 
 
-    public function store($params, $filePath, $settings)
+    public function store()
     {
         try {
+                
+            $this->app = new \config\APP;
+
+            $params = $this->app->params();
+		    
+            $settings = $this->app->SystemSetting();
             
-            $getID3 = new getID3;
-            // Analyze file
-            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
+            $item = $this->repo->find($params['media_id']);
+
+            $params['name'] = $item->name;
+            $params['description'] = $item->description;
+            $params['picture'] = $item->picture;
+            $params['author_id'] = $item->author_id;
+            $params['type'] = 'short_video';
+            $params['files'] = [ ['type'=> 'short_video', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $params['media_path']] ];
             
-            if (isset($fileInfo['playtime_seconds']))
+            if ($save = $this->repo->store($params))
             {
-                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-                $params['field']['bitrate'] = $fileInfo['bitrate'];
-                $params['field']['filesize'] = $fileInfo['filesize'];
+                return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"/short/edit/$save->media_id");
             }
 
-            if (isset($fileInfo['tags']['id3v2']))
-            {
-                $params['name'] = $fileInfo['tags']['id3v2']['title'][0] ?? ($params['name'] ?? 'Unknown Title');
-                $params['description'] = $fileInfo['tags']['id3v2']['comment'][0] ?? ($params['name'] ?? 'No Description');
-            }
-
-            $params['files'] = [ ['type'=> 'video', 'title' => $params['name'] ?? '', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ];
-            $params['author_id'] = $this->app->customer_id() ?? 0;
-            
-            $save = $this->repo->store($params);
-
-            if ($settings['default_storage'] == 'google')
-            {
-                $service = new GoogleStorageService();
-                $upload = $service->uploadFileToGCS($filePath);
-            }
-
-            return $save;
 
         } catch (\Throwable $th) {
             throw new \Exception("Error Processing Request ".$th->getMessage(), 1);

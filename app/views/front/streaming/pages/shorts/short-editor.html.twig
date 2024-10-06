@@ -1,0 +1,126 @@
+<div class="container">
+	
+	<div class="main-content">
+		
+		<div class="video-container w-full">
+			<div class="video-preview w-full">
+				<video id="video-player" width="100%" height="100%" controls>
+					<source src="/stream_video?video={{item.main_file.filename}}" type="video/mp4">
+					Your browser does not support the video tag.
+				</video>
+
+
+				<!-- progress bar -->
+				<div class="progress">
+					<div class="progress-bar progress-bar-primary progress-bar-striped" id="cut-left" style="width: 0%">
+						<span class="sr-only"></span>
+					</div>
+					<div class="progress-bar progress-bar-success progress-bar-striped active" id="played" style="width: 0%">
+						<span class="sr-only"></span>
+					</div>
+					<div class="progress-bar progress-bar-warning progress-bar-striped" id="toPlay" style="width: 100%">
+						<span class="sr-only"></span>
+					</div>
+					<div class="progress-bar progress-bar-primary progress-bar-striped" id="cut-right" style="width: 0%">
+						<span class="sr-only"></span>
+					</div>
+				</div>
+
+				<!-- 2. The IONrangeSlider container -->
+				<div class="timeline p-4 overflow-hidden relative dark:bg-gray-900 mt-20" style="">
+					<div id="range"></div>
+				</div>
+			</div>
+			<div class="editing-panel bg-gray-100 dark:bg-gray-900 text-primary w-full text-sm  ">
+
+				<div class="z-20 rounded-2xl w-full  bg-white dark:bg-gray-900 dark:text-gray-400 p-4 ">
+				
+					<nav class="flex min-w-[240px]  gap-4 pt-4" >
+						<span class="text-lg">{{lang.translate('Current Media')}} </span>
+						<span  onclick="(function () { return  jQuery('#new-item-form').removeClass('hidden'), jQuery('#selected-label').addClass('hidden'); })(); return false;  " class="cursor-pointer pt-1 dark:text-gray-100">{{lang.translate('Change')}} </span>
+					</nav>
+					<label id="selected-label"  role="button" class="text-slate-800 flex gap-2 w-full items-center rounded-md p-3 transition-all dark:hover:bg-gray-600 hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
+						<div class="mr-4 grid place-items-center"><img alt="candice" src="{{item.picture}}" class="relative inline-block h-12 w-12 !rounded-full object-cover object-center"></div>
+						<div style="max-width:68%" >
+							<h6 class="truncate text-slate-800 dark:text-gray-400 font-medium">{{item.name}}</h6>
+							<p class="text-slate-500 dark:text-gray-400 text-sm">{{item.artist.name}}</p>
+						</div>
+					</label>
+					<form action="/front_api" class="flex items-center max-w-lg mx-auto ajax-form hidden pt-4" id="new-item-form">
+						<input type="hidden" name="type" value="load-videos-list"/>
+						<label for="voice-search" class="sr-only">{{lang.translate('Search')}}</label>
+						<div class="relative w-full">
+							<div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+								<svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 21 21">
+									<path d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</div>
+							<input placeholder="{{lang.translate('Search for videos')}}"   onclick="(function(){ return jQuery('#new-channel-link-item').addClass('hidden'),  jQuery('#new-channel-item,#link-station-submit-button, #media-result-box').removeClass('hidden');})()" name="params[title]" type="text" id="voice-search" data-element="search-result-popup" data-form="new-item-form" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required/>
+							<span class="cursor-pointer absolute inset-y-0 end-0 flex items-center pe-3">
+								{% include 'views/front/streaming/popups/speech-to-text.html.twig' %}
+							</span>
+						</div>
+					</form>
+				</div>
+
+				<form action="/front_api/create" class=" max-w-lg mx-auto ajax-form" id="new-station-link-item">
+					<input type="hidden" name="type" value="ShortVideo.create"/>
+					<input type="hidden" name="params[media_id]" value="{{station.media_id}}"/>
+
+					<div id="media-result-box" class="hidden mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-sm">
+						<nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="search-result-popup"></nav>
+					</div>
+{# 				
+					<nav class="flex min-w-[240px] flex-col gap-1 pt-4" >
+						<span class="">{{lang.translate('Media title')}}</span>
+					</nav>
+						 #}
+					<div class="mt-4 relative flex w-96 max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-sm">
+						{# <nav class="flex min-w-[240px] flex-col gap-1 p-1.5" id="item-link-nav">
+							<input placeholder="{{lang.translate('Media Title')}}" name="params[title]" onclick="(function(){ return jQuery('#link-station-submit-button').removeClass('hidden'), jQuery('#new-station-item, #station-popup-or, station-find-track-form').addClass('hidden'); })()" type="text"  data-form="new-item-link-form" class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required/>
+						</nav>
+						 #}
+						<div class="text-center w-full py-2 hidden" id="link-station-submit-button">
+							<button type="submit" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
+								<div class="absolute inset-0 w-3 bg-purple-800 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+								<span class="relative text-black group-hover:text-white">{{lang.translate('Set Media')}}</span>
+							</button>
+						</div>
+					</div>
+				</form>
+				<div class="w-full  flex gap-2 text-center py-4">
+					<div class="panel panel-info w-full" >
+						<div class="panel-heading ">
+							<h3 class="panel-title">Current Time</h3>
+						</div>
+						<div class="panel-body text-gray-300 dark:text-gray-300">
+							<div id="curTime"></div>
+						</div>
+					</div>
+
+					<div class="panel panel-info w-full">
+						<div class="panel-heading">
+							<h3 class="panel-title">Duration</h3>
+						</div>
+						<div class="panel-body text-gray-300 dark:text-gray-300">
+							<div id="finalDuration" ></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	
+	<div class="timeline bg-gray-100 dark:bg-gray-900 p-4  overflow-x-auto">
+
+		<div class="timeline-track">
+			<div class="timeline-thumbnails " id="timeline-thumbnails"></div>
+			<div class="timeline-cursor" id="timeline-cursor"></div>
+		</div>
+	</div>
+</div>
+
+
+{% include 'views/front/' ~ template ~'/scripts/short_generator_script.html.twig' %}
+{% include 'views/front/' ~ template ~'/scripts/short_generator_styles.html.twig' %}

@@ -1,3 +1,5 @@
+<script>
+
 $(function () {
     const videoPlayer = document.getElementById('video-player');
     const timelineContainer = document.getElementById('timeline-thumbnails');
@@ -11,7 +13,6 @@ $(function () {
     videoPlayer.addEventListener('loadedmetadata', () => {
         generateThumbnails();
         setInterval(updateCursorPosition, 100);
-        createFilterThumbnails();
 
     });
     
@@ -210,37 +211,5 @@ $(function () {
 
 
 
-    /**
-     * Filters
-     */
-    
-    // const filterPreview = document.getElementById('filter-preview');
-    // const filters = [
-    //     { name: 'None', ffmpegFilter: '' },
-    //     { name: 'Sepia', ffmpegFilter: 'colorchannelmixer=.393:.769:.189:0:.349:.686:.168:0:.272:.534:.131' },
-    //     { name: 'Black & White', ffmpegFilter: 'colorchannelmixer=.3:.4:.3:0:.3:.4:.3:0:.3:.4:.3' },
-    //     { name: 'Vintage', ffmpegFilter: 'curves=vintage' },
-    //     { name: 'Vignette', ffmpegFilter: 'vignette=PI/4' },
-    //     { name: 'Sharpen', ffmpegFilter: 'unsharp=5:5:1:5:5:0' }
-    // ];
-
-    // function createFilterThumbnails() {
-    //     filters.forEach(filter => {
-    //         const thumbnail = document.createElement('div');
-    //         thumbnail.className = 'filter-thumbnail';
-    //         thumbnail.textContent = filter.name;
-    //         thumbnail.addEventListener('click', () => applyFilter(filter));
-    //         filterPreview.appendChild(thumbnail);
-    //     });
-    // }
-
-    // function applyFilter(filter) {
-    //     console.log(`Applying filter: ${filter.name}`);
-    //     console.log(`FFmpeg filter command: ${filter.ffmpegFilter}`);
-    //     // Here you would typically send a request to your server to apply the filter using FFmpeg
-    //     // For this example, we'll just update the UI to show which filter is selected
-    //     document.querySelectorAll('.filter-thumbnail').forEach(thumb => thumb.classList.remove('active'));
-    //     event.target.classList.add('active');
-    // }
-
 });
+</script>

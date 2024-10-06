@@ -63,6 +63,16 @@
                             </a>
                         </li>
                         
+                        <li class="w-full " id="uploadShort">
+                            <a href="/shorts/create" title="{{lang.translate('Create shorts')}}"  class="w-full flex gap gap-4  ajax-load  ">
+                                <span class="min-w-8  text-center relative my-2">
+                                    <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
+                                    <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
+                                        width="18" />
+                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create Short video')}}</span>
+                            </a>
+                        </li>
+                        
                         <li class="w-full " id="uploadStation">
                             <a href="/stations/create" title="{{lang.translate('Create station')}}"  class="w-full flex gap gap-4  ajax-load  ">
                                 <span class="min-w-8  text-center relative my-2">
@@ -82,6 +92,7 @@
                                 </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create channel')}}</span>
                             </a>
                         </li>
+
 
                         <li class="w-full " id="create-playlist">
                             <a title="{{lang.translate('Create Playlists')}}" href="#!" x-on:click="jQuery('#create-playlist-popup').removeClass('hidden')" class="w-full flex gap gap-4   ">
