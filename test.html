@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pro Short Creator - Video Editor</title>
-    
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.js"></script>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.css">
+
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
-    <div class="container">
+
+    <div class="container ">
         <div class="top-bar">
             <h1>Pro Short Creator</h1>
         </div>
@@ -18,49 +31,72 @@
                 <div class="sidebar-icon"></div>
                 <div class="sidebar-icon"></div>
             </div>
-            <div class="video-container">
+            <div class="video-container  relative">
                 <div class="video-preview">
                     <video id="video-player" width="100%" height="100%" controls>
-                    <source src="/stream_video?video=4dc81044c407ebe8601117f6ffb37fb2.mp4" type="video/mp4">
+                        <source src="/stream_video?video=4dc81044c407ebe8601117f6ffb37fb2.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
+
+
+      <!-- progress bar -->
+      <div class="progress">
+        <div class="progress-bar progress-bar-primary progress-bar-striped" id="cut-left" style="width: 0%">
+          <span class="sr-only"></span>
+        </div>
+        <div class="progress-bar progress-bar-success progress-bar-striped active" id="played" style="width: 0%">
+          <span class="sr-only"></span>
+        </div>
+        <div class="progress-bar progress-bar-warning progress-bar-striped" id="toPlay" style="width: 100%">
+          <span class="sr-only"></span>
+        </div>
+        <div class="progress-bar progress-bar-primary progress-bar-striped" id="cut-right" style="width: 0%">
+          <span class="sr-only"></span>
+        </div>
+      </div>
+
+      <!-- 2. The IONrangeSlider container -->
+      <div id="range" class="absolute w-full" style="position: absolute;
+      width: 100%;
+      bottom: -20px;
+  "></div>
+      <div id="value-input"></div>
+      <div id="value-span"></div>
                 </div>
                 <div class="editing-panel">
-                    <h2>Editing Tools</h2>
+
+                    <h3>Cut This Video</h3>
                     <div class="panel panel-info" style="margin-top:30px;">
                         <div class="panel-heading">
-                          <h3 class="panel-title">Current Time</h3>
+                            <h3 class="panel-title">Current Time</h3>
                         </div>
                         <div class="panel-body">
-                          <div id="curTime" style="font-size:20px;">
-                          </div>
+                            <div id="curTime" style="font-size:20px;">
+                            </div>
                         </div>
-                      </div>
-                    
-                      <div class="panel panel-info">
-                        <div class="panel-heading">
-                          <h3 class="panel-title">Select Quality</h3>
-                        </div>
-                        <div class="panel-body">
-                          <div class="dropdown" id="dropdown" style="font-size:20px;">
-                            <!-- dropdown here -->
-                          </div>
-                        </div>
-                      </div>
-                    
-                      <div class="panel panel-info">
-                        <div class="panel-heading">
-                          <h3 class="panel-title">Cutted duration</h3>
-                        </div>
-                        <div class="panel-body">
-                          <div id="finalDuration" style="font-size:20px;">
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                    <h3>Time Range</h3>
-                    <input type="range" id="time-range" class="time-range" min="0" max="100" value="0">
-                    <button class="button">Export Short</button>
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Select Quality</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="dropdown" id="dropdown" style="font-size:20px;">
+                                <!-- dropdown here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Cutted duration</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="finalDuration" style="font-size:20px;">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -72,7 +108,6 @@
         </div>
     </div>
 
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 </body>
+
 </html>

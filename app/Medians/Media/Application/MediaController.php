@@ -253,9 +253,6 @@ class MediaController extends CustomController
 			$vs = new VideoStream($_SERVER['DOCUMENT_ROOT'].$filePath);
 			$vs->start();
 			return;
-			return $this->directstreamVideo($_SERVER['DOCUMENT_ROOT'].$filePath);
-			// return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath);
-			// return $this->directstreamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $channelMedia);
 		} 
 	}
 
@@ -334,23 +331,25 @@ class MediaController extends CustomController
 	
 	function stream_video() {
 
-		$this->isDirectAccess();
+		// $this->isDirectAccess();
 
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
 		$startTime = $this->app->request()->get('s') ?? 0;
 		$startDuration = $this->app->request()->get('d') ?? 0;
 
-		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/' . $this->app->request()->get('audio'))) {
-			$filePath = '/uploads/audio/' . $this->app->request()->get('audio');
+		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/videos/' . $this->app->request()->get('video'))) {
+			$filePath = '/uploads/videos/' . $this->app->request()->get('video');
 		} else
 		{
-			$filePath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
+			$filePath = '/uploads/videos/tmp/' . $this->app->request()->get('video');
 		}
 
 		$item = $this->mediaRepo->findByFile($filePath);
-
-		return $this->streamVideo($filePath, $item);
+		$vs = new VideoStream($_SERVER['DOCUMENT_ROOT'].$filePath);
+		$vs->start();
+		return;
+		// return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $item);
 	}
 
 	function streamVideo($filePath, $item) {
