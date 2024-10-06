@@ -6,7 +6,7 @@
 
 		<div class="box">
 			<div class="box-header with-border">
-				<h4 class="box-title text-2xl">{{('Media List')}}</h4>
+				<h4 class="box-title text-2xl">{{('Videos List')}}</h4>
 				<p class="text-fade">{{('List of uploaded media items')}}</p>
 			</div>
             <hr class="my-6" />
@@ -20,7 +20,7 @@
 								<th style="min-width: 100px">{{lang.translate('Likes')}}</th>
 								<th style="min-width: 100px">{{lang.translate('Views')}}</th>
 								<th style="min-width: 100px">{{lang.translate('Comments')}}</th>
-								<th class="text-right py-8 min-h-20" >{{lang.translate('Edit')}}</th>
+								<th class="text-right py-8 min-h-20" >{{lang.translate('Actions')}}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -36,18 +36,23 @@
 								</td>
 								<td>
 									<span class="text-fade block">
-										{{item.likes|length}}
+										{{item.likescount()}}
 									</span>
 								</td>
 								<td>
-									<span class="text-fade block">{{item.views|length}}</span>
+									<span class="text-fade block">{{item.viewscount()}}</span>
 								</td>
 								<td>
-									<span class="text-fade block">{{item.comments|length}}</span>
+									<span class="text-fade block">{{item.commentscount()}}</span>
 								</td>
-								<td class="text-right py-4">
-									<a href="/video/edit/{{item.media_id}}" class="ajax-load waves-effect waves-light btn btn-primary rounded-full ">
-										<img src="/src/front_assets/svg/edit-2.svg" class="w-5" />
+								<td class="text-right py-4 flex gap-6">
+									<a href="/video/edit/{{item.media_id}}" class="ajax-load relative waves-effect waves-light btn btn-primary rounded-full ">
+										<span class="tooltiptext left text-xs">{{lang.translate('Edit')}}</span>
+										<img src="/src/front_assets/svg/edit-2.svg" class="w-5 dark:brightness-200" />
+									</a>
+									<a href="/front_api/delete?type=MediaItem.delete&params[media_id]={{item.media_id}}" data-confirm="{{lang.translate('Are you sure')}}" date-confirm-text="{{lang.translate('Delete this media from channel')}}" class="ajax-link mx-auto group relative   text-lg shadow">
+										<span class="tooltiptext left text-xs">{{lang.translate('Delete')}}</span>
+										<img src="/src/front_assets/svg/delete-white.svg" class="w-5 dark:brightness-200" />
 									</a>
 								</td>
 							</tr>

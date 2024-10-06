@@ -589,7 +589,16 @@ class MediaItemController extends CustomController
 		
         try {
 
-            if ($this->repo->delete($params['category_id']))
+            $customer = $this->app->customer_auth();
+
+            $item = $this->repo->find($params['media_id']);
+            
+            if ($item->author_id != $customer->customer_id)
+            {
+                return array('error'=>1, 'result'=>translate('Not allowed'), 'reload'=>1);
+            }
+
+            if ($item->author_id == $customer->customer_id && $this->repo->delete($params['media_id']))
             {
                 return array('success'=>1, 'result'=>translate('Deleted'), 'reload'=>1);
             }

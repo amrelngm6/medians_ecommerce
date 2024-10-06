@@ -201,7 +201,8 @@ class MediaItemRepository
 			$delete = $item->delete();
 
 			if ($delete){
-				$this->storeContent(null, $id, $item->model);
+				CustomField::where('model_type', MediaItem::class)->where('model_id', $id)->delete();
+				$this->clearMediaFiles($id);
 			}
 
 			return true;

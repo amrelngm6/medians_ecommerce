@@ -721,10 +721,6 @@ video {
   right: 1rem;
 }
 
-.right-6 {
-  right: 1.5rem;
-}
-
 .right-\[-30px\] {
   right: -30px;
 }
@@ -3931,6 +3927,10 @@ video {
 
   .lg\:relative {
     position: relative;
+  }
+
+  .lg\:bottom-20 {
+    bottom: 5rem;
   }
 
   .lg\:bottom-40 {
