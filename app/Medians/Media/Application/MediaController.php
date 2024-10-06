@@ -212,7 +212,7 @@ class MediaController extends CustomController
 
 	public function stream_channel()
 	{
-		// $this->isDirectAccess();
+		$this->isDirectAccess();
 		
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
@@ -332,7 +332,7 @@ class MediaController extends CustomController
 	
 	function stream_video() {
 
-		// $this->isDirectAccess();
+		$this->isDirectAccess();
 
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
@@ -355,7 +355,7 @@ class MediaController extends CustomController
 
 	function stream_short_video() {
 
-		// $this->isDirectAccess();
+		$this->isDirectAccess();
 
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
