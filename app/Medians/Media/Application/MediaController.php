@@ -366,7 +366,6 @@ class MediaController extends CustomController
 		}
 
 		$item = $this->mediaRepo->findByFile($filePath);
-		$item->addView();
 		$vs = new VideoStream($_SERVER['DOCUMENT_ROOT'].$filePath);
 		$vs->start();
 		return;

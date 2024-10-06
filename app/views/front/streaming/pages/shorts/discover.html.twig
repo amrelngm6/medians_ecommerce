@@ -5,107 +5,115 @@
     </div>
 
 </div>
-    <script>
-        const shortVideoContainer = document.getElementById('shortVideoContainer');
-        const videoData = [
-            {% for item in video_items.items %}
-            { id: '{{item.media_id}}', likes: '{{item.likescount()}}',views: '{{item.viewscount()}}', liked: '{{item.liked(app.customer.customer_id).first()}}', src: '/stream_short_video?video={{item.player_object.file}}', poster: '/stream?thumbnail=1600&dir=videos/screenshots&image={{item.player_object.poster}}', username: '{{item.player_object.artist}}', avatar: '/stream?thumbnail=100&image={{item.artist.picture_name}}', title: '{{item.player_object.title}}', description: "{{item.description|trim}}" },
-            {% endfor %}
-        ];
+<script>
+$(function(){
+    
+    const shortVideoContainer = document.getElementById('shortVideoContainer');
+    const videoData = [
+        {% for item in video_items.items %}
+        {{item.addView()}}
+        { id: '{{item.media_id}}', likes: '{{item.likescount()}}', comments: '{{item.commentscount()}}', views: '{{item.viewscount()}}', liked: '{{item.liked(app.customer.customer_id).first()}}', src: '/stream_short_video?video={{item.player_object.file}}', poster: '/stream?thumbnail=1600&dir=videos/screenshots&image={{item.player_object.poster}}', username: '{{item.player_object.artist}}', avatar: '/stream?thumbnail=100&image={{item.artist.picture_name}}', title: '{{item.player_object.title}}', description: "{{item.description|trim}}" },
+        {% endfor %}
+    ];
 
-        function createVideoElement(data) {
-            const videoItem = document.createElement('div');
-            videoItem.className = 'video-item';
-            
-            const backgroundBlur = document.createElement('div');
-            backgroundBlur.className = 'background-blur';
-            backgroundBlur.style.backgroundImage = `url(${data.poster})`;
+    function createVideoElement(data) {
+        const videoItem = document.createElement('div');
+        videoItem.className = 'video-item';
+        
+        const backgroundBlur = document.createElement('div');
+        backgroundBlur.className = 'background-blur';
+        backgroundBlur.style.backgroundImage = `url(${data.poster})`;
 
-            const contentWrapper = document.createElement('div');
-            contentWrapper.className = 'content-wrapper lg:flex block';
+        const contentWrapper = document.createElement('div');
+        contentWrapper.className = 'content-wrapper lg:flex block';
 
-            const userInfo = document.createElement('div');
-            userInfo.className = 'user-info absolute bottom-0 left-0 lg:relative text-gray-600 dark:text-white ';
-            userInfo.innerHTML = `
-                <div class="user-profile">
-                    <img src="${data.avatar}" alt="User Avatar" class="user-avatar">
-                    <span class="username">${data.username}</span>
-                </div>
-                <div class="video-info">
-                    <h2 class="video-title">${data.title}</h2>
-                    <p class="video-description">${data.description}</p>
-                </div>
-                <div class="absolute block bottom-0 lg:left-4 right-0 py-10 w-full flex gap-6" >
-                    <a href="/front_api/create?type=Like.media&params[item_id]=${data.id}" data-params="{item_id: ${data.id} }" class="ajax-link cursor-pointer text-sm text-gray-100 flex gap-2 pt-10">
-                        <img class="`+ (data.liked ? 'hidden' : '')+` w-5" x-on:click="jQuery('#heart-${data.id}').addClass('hidden'); jQuery('#unheart-${data.id}').removeClass('hidden'); jQuery('#likes-count-${data.id}').text(parseInt(jQuery('#likes-count-${data.id}').text()) + 1);" id="heart-${data.id}" src="/src/front_assets/svg/white-heart.svg">
-                        <img class="`+ (!data.liked ? 'hidden' : '')+` w-5" x-on:click="jQuery('#unheart-${data.id}').addClass('hidden'); jQuery('#heart-${data.id}').removeClass('hidden'); jQuery('#likes-count-${data.id}').text(parseInt(jQuery('#likes-count-${data.id}').text()) - 1);" id="unheart-${data.id}" src="/src/front_assets/svg/blank-heart.svg">
-                        <span id="likes-count-${data.id}">${data.likes}</span>
-                    </a>
-                    <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 pt-10">
-                        <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg" />
-                        <span id="views-count-${data.id}">${data.views}</span>
-                    </a>
-                </div>
-            `;
+        const userInfo = document.createElement('div');
+        userInfo.className = 'user-info absolute bottom-0 left-0 lg:relative text-gray-600 dark:text-white ';
+        userInfo.innerHTML = `
+            <div class="user-profile">
+                <img src="${data.avatar}" alt="User Avatar" class="user-avatar">
+                <span class="username">${data.username}</span>
+            </div>
+            <div class="video-info">
+                <a href="/short/${data.id}" class="ajax-load video-title">${data.title}</a>
+                <p class="video-description">${data.description}</p>
+            </div>
+            <div class="absolute block bottom-0  lg:left-4 right-10 py-10 lg:w-full flex gap-6" >
+                <a href="/front_api/create?type=Like.media&params[item_id]=${data.id}" data-params="{item_id: ${data.id} }" class="ajax-link cursor-pointer text-sm text-gray-100 flex gap-2 pt-10">
+                    <img class="`+ (data.liked ? 'hidden' : '')+` w-5" x-on:click="jQuery('#heart-${data.id}').addClass('hidden'); jQuery('#unheart-${data.id}').removeClass('hidden'); jQuery('#likes-count-${data.id}').text(parseInt(jQuery('#likes-count-${data.id}').text()) + 1);" id="heart-${data.id}" src="/src/front_assets/svg/white-heart.svg">
+                    <img class="`+ (!data.liked ? 'hidden' : '')+` w-5" x-on:click="jQuery('#unheart-${data.id}').addClass('hidden'); jQuery('#heart-${data.id}').removeClass('hidden'); jQuery('#likes-count-${data.id}').text(parseInt(jQuery('#likes-count-${data.id}').text()) - 1);" id="unheart-${data.id}" src="/src/front_assets/svg/blank-heart.svg">
+                    <span id="likes-count-${data.id}">${data.likes}</span>
+                </a>
+                <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 pt-10">
+                    <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg" />
+                    <span id="views-count-${data.id}">${data.views}</span>
+                </span>
+                <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 pt-10">
+                    <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg" />
+                    <span id="views-comments-${data.id}">${data.comments}</span>
+                </span>
+            </div>
+        `;
 
-            const videoWrapper = document.createElement('div');
-            videoWrapper.className = 'video-wrapper lg:p-4';
+        const videoWrapper = document.createElement('div');
+        videoWrapper.className = 'video-wrapper lg:p-4';
 
-            const video = document.createElement('video');
-            video.src = data.src;
-            video.poster = data.poster;
-            video.className = 'rounded-lg lg:p-4 pr-4';
-            video.controls = false;
-            video.autoplay = true;
+        const video = document.createElement('video');
+        video.src = data.src;
+        video.poster = data.poster;
+        video.className = 'rounded-lg lg:p-4 pr-4';
+        video.controls = false;
+        video.autoplay = true;
 
-            const actionButtons = document.createElement('div');
-            actionButtons.className = 'action-buttons';
-            actionButtons.innerHTML = `
-            
-            `;
+        const actionButtons = document.createElement('div');
+        actionButtons.className = 'action-buttons';
+        actionButtons.innerHTML = `
+        
+        `;
 
-            videoWrapper.appendChild(video);
-            contentWrapper.appendChild(userInfo);
-            contentWrapper.appendChild(videoWrapper);
-            videoItem.appendChild(backgroundBlur);
-            videoItem.appendChild(contentWrapper);
-            videoItem.appendChild(actionButtons);
+        videoWrapper.appendChild(video);
+        contentWrapper.appendChild(userInfo);
+        contentWrapper.appendChild(videoWrapper);
+        videoItem.appendChild(backgroundBlur);
+        videoItem.appendChild(contentWrapper);
+        videoItem.appendChild(actionButtons);
 
-            return videoItem;
-        }
+        return videoItem;
+    }
 
-        function loadVideos() {
-            videoData.forEach((data, i) => {
-                const videoElement = createVideoElement(data);
-                shortVideoContainer.appendChild(videoElement);
-            });
-        }
-
-        function handleIntersection(entries) {
-            entries.forEach((entry, i) => {
-              if (entry.isIntersecting) {
-                    entry.target.className ='video-item active'
-                    const video = entry.target.querySelector('video');
-                    video.play();
-                } else {
-                    entry.target.className ='video-item'
-                    const video = entry.target.querySelector('video');
-                    video.pause();
-                }
-            });
-        }
-
-        loadVideos();
-
-        const observer = new IntersectionObserver(handleIntersection, {
-            root: null,
-            threshold: 0.5
+    function loadVideos() {
+        videoData.forEach((data, i) => {
+            const videoElement = createVideoElement(data);
+            shortVideoContainer.appendChild(videoElement);
         });
+    }
 
-        document.querySelectorAll('.video-item').forEach(item => {
-            observer.observe(item);
+    function handleIntersection(entries) {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                entry.target.className ='video-item active'
+                const video = entry.target.querySelector('video');
+                video.play();
+            } else {
+                entry.target.className ='video-item'
+                const video = entry.target.querySelector('video');
+                video.pause();
+            }
         });
-    </script>
+    }
+
+    loadVideos();
+
+    const observer = new IntersectionObserver(handleIntersection, {
+        root: null,
+        threshold: 0.5
+    });
+
+    document.querySelectorAll('.video-item').forEach(item => {
+        observer.observe(item);
+    });
+})
+</script>
 	 <style>
 
         .shorts .short-video-container {
