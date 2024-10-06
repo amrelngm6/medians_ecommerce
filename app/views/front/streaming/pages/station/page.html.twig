@@ -39,11 +39,11 @@
 
                         <div class="container mx-auto mb-10">
                         {% set station = item %}
-                        {% include 'views/front/' ~ template ~ '/includes/station-stream-block.html.twig' %}
+                        {% include 'views/front/' ~ template ~ '/pages/station/station-stream-block.html.twig' %}
                         </div>
                         <div class="max-h-[200px] overflow-auto flex" style="flex-direction: column-reverse;" id="comments-list">
                             {% set comments = station.comments %}
-                            {% include 'views/front/' ~ template ~ '/includes/station-comment-block.html.twig' %}
+                            {% include 'views/front/' ~ template ~ '/pages/station/station-comment-block.html.twig' %}
                         </div>
                         <label for="chat" class="sr-only">{{lang.translate('Your comment')}}</label>
                         <form action="/front_api/create" id="comment-station" class="ajax-form w-full " data-element="comments-list" data-prepend="true" >

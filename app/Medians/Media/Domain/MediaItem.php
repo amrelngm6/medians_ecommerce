@@ -181,6 +181,11 @@ class MediaItem extends CustomModel
 		return $this->morphMany(Comment::class , 'item')->count();	
 	}
 	
+	public function likescount() 
+	{
+		return $this->morphMany(Like::class , 'item')->count();	
+	}
+
 	public function plays() 
 	{
 		return $this->morphMany(View::class , 'item');	
@@ -191,11 +196,6 @@ class MediaItem extends CustomModel
 		return $this->morphMany(Like::class , 'item');	
 	}
 	
-	public function likescount() 
-	{
-		return $this->morphMany(Like::class , 'item')->count();	
-	}
-
 	public function liked($customer_id) 
 	{
 		return $this->morphOne(Like::class , 'item')->where('customer_id', $customer_id);	

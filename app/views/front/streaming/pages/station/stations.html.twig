@@ -3,7 +3,7 @@
                     <h2 class="dark:text-gray-400 text-2xl py-4">{{lang.translate('Top Stations')}}</h2>
                     <div id="channel-list"  class="w-full  grid grid-cols-2 py-4 gap-4" >
                         {% for station in items  %}
-                        {% include 'views/front/' ~ template ~ '/includes/station-block.html.twig' %}
+                        {% include 'views/front/' ~ template ~ '/pages/station/station-block.html.twig' %}
                         {% endfor %}
                     </div>
                 </div>

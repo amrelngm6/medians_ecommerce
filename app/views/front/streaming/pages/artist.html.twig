@@ -194,7 +194,7 @@
                     {% set list = {'items' : item.stations} %}
                     {% for station in list.items %}
                     <li class="hs__item"> 
-                        {% include 'views/front/' ~ template ~ '/includes/station-block.html.twig' %}
+                        {% include 'views/front/' ~ template ~ '/pages/station/station-block.html.twig' %}
                     </li>
     				{% endfor %}    
                 </ul>

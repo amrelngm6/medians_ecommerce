@@ -390,9 +390,13 @@ class ChannelController extends CustomController
 
 		try {
 
+			$item = $this->repo->find($channel_id);
+
+			$item->addView();
+			
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-				'item' => $this->repo->find($channel_id),
+				'item' => $item,
                 'layout' => 'channel/page'
             ], 'output'));
             

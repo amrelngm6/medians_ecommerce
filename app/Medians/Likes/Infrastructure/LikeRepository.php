@@ -6,6 +6,7 @@ use Medians\Likes\Domain\Like;
 use Medians\Media\Domain\MediaItem;
 use Medians\Playlists\Domain\Playlist;
 use Medians\Stations\Domain\Station;
+use Medians\Channels\Domain\Channel;
 
 class LikeRepository 
 {
@@ -43,6 +44,11 @@ class LikeRepository
 	public function checkLikedStation($item_id, $customer_id)
 	{
 		return Like::where('item_id', $item_id)->where('item_type', Station::class)->where('customer_id', $customer_id)->first();
+	}
+
+	public function checkLikedChannel($item_id, $customer_id)
+	{
+		return Like::where('item_id', $item_id)->where('item_type', Channel::class)->where('customer_id', $customer_id)->first();
 	}
 
 
@@ -100,6 +106,17 @@ class LikeRepository
 	{
 
 		$data['item_type'] = Station::class;
+
+		return $this->store($data);
+    }
+    	
+
+	/**
+	* Save item to database
+	*/
+	public function store_channel($data) 
+	{
+		$data['item_type'] = Channel::class;
 
 		return $this->store($data);
     }
@@ -167,6 +184,24 @@ class LikeRepository
 		try {
 			
 			return $this->checkLikedStation($params['item_id'], $customer_id)->delete();
+
+		} catch (\Exception $e) {
+
+			throw new \Exception("Error Processing Request " . $e->getMessage(), 1);
+			
+		}
+	}
+
+	/**
+	* Delete item to database
+	*
+	* @Returns Boolen
+	*/
+	public function deleteChannel($params, $customer_id) 
+	{
+		try {
+			
+			return $this->checkLikedChannel($params['item_id'], $customer_id)->delete();
 
 		} catch (\Exception $e) {
 

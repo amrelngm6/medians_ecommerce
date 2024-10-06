@@ -148,6 +148,10 @@ class FrontAPIController extends CustomController
 				case 'Like.station':
 					$return = (new Likes\Application\LikeController)->likeStation();
 					break;
+
+				case 'Like.channel':
+					$return = (new Likes\Application\LikeController)->likeChannel();
+					break;
 		
 				case 'Comment.create':
 					return (new Comments\Application\CommentController)->store();

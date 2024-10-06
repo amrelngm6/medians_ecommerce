@@ -6,6 +6,8 @@ use Shared\dbaser\CustomModel;
 
 use Medians\Likes\Domain\Like;
 use Medians\Comments\Domain\Comment;
+use Medians\Views\Domain\View;
+use Medians\Customers\Domain\Customer;
 
 class Channel extends CustomModel
 {
@@ -49,6 +51,11 @@ class Channel extends CustomModel
 		return $this->hasOne(ChannelMedia::class, 'channel_id', 'channel_id')->with('media');	
 	}
 
+	public function customer()
+	{
+		return $this->hasOne(Customer::class, 'customer_id', 'customer_id');	
+	}
+
 	public function likes()
 	{
 		return $this->morphMany(Like::class, 'item');	
@@ -64,5 +71,20 @@ class Channel extends CustomModel
 		return $this->morphOne(Like::class , 'item')->where('customer_id', $customer_id);	
 	}
 	
+	public function viewscount() 
+	{
+		return $this->morphMany(View::class , 'item')->sum('times');	
+	}
+	
+	public function commentscount() 
+	{
+		return $this->morphMany(Comment::class , 'item')->count();	
+	}
+	
+	public function likescount() 
+	{
+		return $this->morphMany(Like::class , 'item')->count();	
+	}
+
 
 }

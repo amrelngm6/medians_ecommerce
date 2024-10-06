@@ -6,6 +6,7 @@ use Shared\dbaser\CustomModel;
 
 use Medians\Likes\Domain\Like;
 use Medians\Comments\Domain\Comment;
+use Medians\Customers\Domain\Customer;
 
 class Station extends CustomModel
 {
@@ -48,6 +49,11 @@ class Station extends CustomModel
 	{
 		// return $this->hasOne(StationMedia::class, 'station_id', 'station_id')->with('media')->where('start_at', '<=', date('H:i:s'))->orderBy('start_at', 'DESC');	
 		return $this->hasOne(StationMedia::class, 'station_id', 'station_id')->with('media');	
+	}
+
+	public function customer()
+	{
+		return $this->hasOne(Customer::class, 'customer_id', 'customer_id');	
 	}
 
 	public function likes()
