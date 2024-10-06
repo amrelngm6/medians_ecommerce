@@ -2,7 +2,7 @@
         const timelineContainer = document.getElementById('timeline-thumbnails');
         const timelineCursor = document.getElementById('timeline-cursor');
         const timeRange = document.getElementById('time-range');
-        const thumbnailCount = 10;
+        const thumbnailCount = 20;
         const thumbnailWidth = 142;
         const thumbnailHeight = 80;
 
@@ -36,7 +36,6 @@
                     ctx.drawImage(videoPlayer, 0, 0, thumbnailWidth, thumbnailHeight);
                     videoPlayer.onseeked = null;
                     setTimeout(function(){
-
                         resolve(canvas);
                     }, 1000)
                 };
