@@ -87,26 +87,26 @@ class MediaController extends CustomController
 	public function stream()
 	{
 		$this->app = new \config\APP;
-		$filepath = $this->app->request()->get('image');
+		$filePath = $this->app->request()->get('image');
 		$isThumbnail = $this->app->request()->get('thumbnail');
 		$h = $this->app->request()->get('h');
 		$folder = $this->app->request()->get('dir') ?? 'images';
 
 		if (!empty($folder))
 		{
-			$filepath = '/uploads/'.$folder.'/'.$filepath;
+			$filePath = '/uploads/'.$folder.'/'.$filePath;
 		}
 
 		if (!empty($isThumbnail))
 		{
-			$resized = $this->repo->resize($filepath, $isThumbnail, $h > 0 ? $h : '-1');
-			$filepath = is_file($_SERVER['DOCUMENT_ROOT'].$resized) ? $resized : $filepath;
+			$resized = $this->repo->resize($filePath, $isThumbnail, $h > 0 ? $h : '-1');
+			$filePath = is_file($_SERVER['DOCUMENT_ROOT'].$resized) ? $resized : $filePath;
 		}
 
-		if (is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
+		if (is_file($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
 
-			$ext = explode('.', $filepath);
+			$ext = explode('.', $filePath);
 			// Set the caching headers
 			$expires = 60 * 60 * 24 * 7; // 1 week (in seconds)
 			header("Cache-Control: public, max-age=$expires");
@@ -115,10 +115,10 @@ class MediaController extends CustomController
 			// Serve the CSS file
 			$extension = "image/".end($ext);
 			header("Content-Type: $extension");
-			readfile($_SERVER['DOCUMENT_ROOT'].$filepath);
+			readfile($_SERVER['DOCUMENT_ROOT'].$filePath);
 
 		} else {
-			// echo $_SERVER['DOCUMENT_ROOT'].$filepath;
+			// echo $_SERVER['DOCUMENT_ROOT'].$filePath;
 		} 
 	}
 
@@ -133,31 +133,31 @@ class MediaController extends CustomController
 		$startDuration = $this->app->request()->get('d') ?? 0;
 
 		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/' . $this->app->request()->get('audio'))) {
-			$filepath = '/uploads/audio/' . $this->app->request()->get('audio');
+			$filePath = '/uploads/audio/' . $this->app->request()->get('audio');
 		} else
 		{
-			$filepath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
+			$filePath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
 		}
 
-		$item = $this->mediaRepo->findByFile($filepath);
+		$item = $this->mediaRepo->findByFile($filePath);
 
 		if (isset($item->main_file->storage) && $item->main_file->storage == 'google')
 		{
 			$service = new GoogleStorageService();
 			
-			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'] . $filepath;
+			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'] . $filePath;
 
 
 			return file_exists($tmpFilePath) 
 			? $this->streamAudioFromTimeRange($tmpFilePath, $startTime, 0)
 			: $this->stream_external($service->generateSignedUrl($item->main_file->path), $tmpFilePath, $startTime, 0);
-			// $upload = file_exists($_SERVER['DOCUMENT_ROOT'] . $filepath) ? null : file_put_contents($_SERVER['DOCUMENT_ROOT'] . $filepath, file_get_contents($service->generateSignedUrl($item->main_file->path)));
+			// $upload = file_exists($_SERVER['DOCUMENT_ROOT'] . $filePath) ? null : file_put_contents($_SERVER['DOCUMENT_ROOT'] . $filePath, file_get_contents($service->generateSignedUrl($item->main_file->path)));
 		}
 
 		if ($item)
 			$item->addView();
 
-		return  $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'] . $filepath, $startTime, $startDuration);
+		return  $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'] . $filePath, $startTime, $startDuration);
 
 	}
 
@@ -332,6 +332,27 @@ class MediaController extends CustomController
 	}
 	
 	
+	function stream_video() {
+
+		$this->isDirectAccess();
+
+		$this->app = new \config\APP;
+		$settings = $this->app->SystemSetting();
+		$startTime = $this->app->request()->get('s') ?? 0;
+		$startDuration = $this->app->request()->get('d') ?? 0;
+
+		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/' . $this->app->request()->get('audio'))) {
+			$filePath = '/uploads/audio/' . $this->app->request()->get('audio');
+		} else
+		{
+			$filePath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
+		}
+
+		$item = $this->mediaRepo->findByFile($filePath);
+
+		return $this->streamVideo($filePath, $item);
+	}
+
 	function streamVideo($filePath, $item) {
 		
 
@@ -447,9 +468,9 @@ class MediaController extends CustomController
 	public function assets()
 	{
 		$this->app = new \config\APP;
-		$filepath = $this->app->request()->get('asset');
+		$filePath = $this->app->request()->get('asset');
 
-		if (!strpos($filepath, '..') && is_file($_SERVER['DOCUMENT_ROOT'].$filepath))
+		if (!strpos($filePath, '..') && is_file($_SERVER['DOCUMENT_ROOT'].$filePath))
 		{
 			// Set the caching headers
 			$expires = 60 * 60 * 24 * 7; // 1 week (in seconds)
@@ -460,7 +481,7 @@ class MediaController extends CustomController
 
 			// Serve the CSS file
 			header("Content-Type: $type");
-			readfile($_SERVER['DOCUMENT_ROOT'].$filepath);
+			readfile($_SERVER['DOCUMENT_ROOT'].$filePath);
 		} 
 	}
 
