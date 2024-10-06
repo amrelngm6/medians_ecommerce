@@ -1,4 +1,4 @@
-const videoPlayer = document.getElementById('video-player');
+        const videoPlayer = document.getElementById('video-player');
         const timelineContainer = document.getElementById('timeline-thumbnails');
         const timelineCursor = document.getElementById('timeline-cursor');
         const timeRange = document.getElementById('time-range');
@@ -8,39 +8,36 @@ const videoPlayer = document.getElementById('video-player');
 
         videoPlayer.addEventListener('loadedmetadata', () => {
             generateThumbnails();
-            setInterval(updateCursorPosition, 1000);
+            setInterval(updateCursorPosition, 100);
         });
 
-        function generateThumbnails(i = 0) {
+        async function generateThumbnails() {
             const duration = videoPlayer.duration;
-            const thumbnailTime = (duration / thumbnailCount) * i;
-            if (thumbnailTime > duration)
-            {
-                return;
+            const interval = duration / thumbnailCount;
+
+            for (let i = 0; i < thumbnailCount; i++) {
+                const thumbnailTime = interval * i;
+                const thumbnail = await createThumbnail(thumbnailTime);
+                timelineContainer.appendChild(thumbnail);
             }
-            
-            const thumbnail = createThumbnail(thumbnailTime);
-            timelineContainer.appendChild(thumbnail);
-            
-            setTimeout(generateThumbnails(i+1), 1000);
-            
         }
 
         function createThumbnail(time) {
-            const canvas = document.createElement('canvas');
-            canvas.width = thumbnailWidth;
-            canvas.height = thumbnailHeight;
-            canvas.className = 'thumbnail';
+            return new Promise((resolve) => {
+                const canvas = document.createElement('canvas');
+                canvas.width = thumbnailWidth;
+                canvas.height = thumbnailHeight;
+                canvas.className = 'thumbnail';
 
-            const ctx = canvas.getContext('2d');
-            videoPlayer.currentTime = time;
-
-            videoPlayer.onseeked = () => {
-                ctx.drawImage(videoPlayer, 0, 0, thumbnailWidth, thumbnailHeight);
-                videoPlayer.onseeked = null;
-            };
-
-            return canvas;
+                const ctx = canvas.getContext('2d');
+                
+                videoPlayer.currentTime = time;
+                videoPlayer.onseeked = () => {
+                    ctx.drawImage(videoPlayer, 0, 0, thumbnailWidth, thumbnailHeight);
+                    videoPlayer.onseeked = null;
+                    resolve(canvas);
+                };
+            });
         }
 
         function updateCursorPosition() {
