@@ -8,7 +8,7 @@ const videoPlayer = document.getElementById('video-player');
 
         videoPlayer.addEventListener('loadedmetadata', () => {
             generateThumbnails();
-            setInterval(updateCursorPosition, 100);
+            setInterval(updateCursorPosition, 1000);
         });
 
         function generateThumbnails() {
