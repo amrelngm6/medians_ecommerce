@@ -3,133 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TV Channel Player with Controlled Chunk Loading</title>
+    <title>Video Editor</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <video id="videoPlayer" autoplay controls>
-        Your browser does not support the video tag.
-    </video>
-    <div id="bufferingIndicator" style="display: none;">Buffering...</div>
+    <div class="video-editor">
+        <header class="editor-header">
+            <h1>Video Editor - Create Shorts</h1>
+        </header>
 
-    <script>
-        const videoPlayer = document.getElementById('videoPlayer');
-        const bufferingIndicator = document.getElementById('bufferingIndicator');
-        const channelId = 2; // Replace with the desired channel ID
-        let mediaSource;
-        let sourceBuffer;
-        let isSourceOpen = false;
+        <div class="editor-main">
+            <div class="video-player">
+                <video id="mainVideo" controls>
+                    <source src="/uploads/videos/tmp/a2cde9475fa4c9ce2a34c2b322ec31c4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
 
-        function fetchCurrentVideoInfo() {
-            fetch(`/channel_json/`+channelId)
-                .then(response => response.json())
-                .then(data => {
-                    if (data) {
-                        loadVideoPartially(data.active_item);
-                    } else {
-                        console.log('No video currently playing');
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        }
+            <div class="controls">
+                <button id="playPauseBtn">Play/Pause</button>
+                <button id="markStartBtn">Mark Start</button>
+                <button id="markEndBtn">Mark End</button>
+                <button id="createShortBtn">Create Short</button>
+            </div>
 
-        function loadVideoPartially(media) {
-            
-            var a = new Date(media.start);
-            var b = new Date();
-            var startPosition = parseInt((b - a) / 1000);
-            var startPosition = parseInt(((b - a) / 1000) - 3600);
-            // var startPosition = 130;
+            <div class="timeline">
+                <div id="screenshotStrip"></div> <!-- Will hold screenshots -->
+            </div>
+        </div>
+    </div>
 
-            const videoUrl = '/stream_channel?channel_id='+channelId;
-            
-            if (mediaSource) {
-                if (mediaSource.readyState === 'open') {
-                    mediaSource.endOfStream();
-                }
-                URL.revokeObjectURL(videoPlayer.src);
-            }
-
-            mediaSource = new MediaSource();
-            videoPlayer.src = URL.createObjectURL(mediaSource);
-
-            mediaSource.addEventListener('sourceopen', function() {
-                isSourceOpen = true;
-                sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
-                sourceBuffer.mode = 'segments';
-                
-                fetchInitSegment(videoUrl).then(() => {
-                    videoPlayer.currentTime = startPosition;
-                });
-
-                videoPlayer.addEventListener('seeking', onSeeking);
-            });
-
-            mediaSource.addEventListener('sourceended', function() {
-                isSourceOpen = false;
-            });
-            videoPlayer.play()
-        }
-
-        function fetchInitSegment(url) {
-            return fetch(url, { headers: { 'Range': 'bytes=0-' } })
-                .then(response => response.arrayBuffer())
-                .then(data => {
-                    sourceBuffer.appendBuffer(data);
-                    return new Promise(resolve => {
-                        sourceBuffer.addEventListener('updateend', resolve, { once: true });
-                    });
-                });
-        }
-
-        function onSeeking() {
-            const currentTime = videoPlayer.currentTime;
-            const buffered = videoPlayer.buffered;
-
-            if (isTimeBuffered(currentTime, buffered)) {
-                return;
-            }
-
-            bufferingIndicator.style.display = 'block';
-            abortCurrentRequests();
-            fetchSegmentAtTime(videoPlayer.currentTime);
-        }
-
-        function isTimeBuffered(time, buffered) {
-            for (let i = 0; i < buffered.length; i++) {
-                if (time >= buffered.start(i) && time <= buffered.end(i)) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        function abortCurrentRequests() {
-            // Implement logic to abort any ongoing fetch requests
-        }
-
-        function fetchSegmentAtTime(time) {
-            // In a real implementation, you would calculate the byte range for the segment containing 'time'
-            // This is a simplified version
-            const estimatedByteOffset = Math.floor(time * 1000000); // Very rough estimate
-            
-            fetch(videoPlayer.src, {
-                headers: { 'Range': `bytes=${estimatedByteOffset}-` }
-            })
-            .then(response => response.arrayBuffer())
-            .then(data => {
-                sourceBuffer.appendBuffer(data);
-                bufferingIndicator.style.display = 'none';
-            })
-            .catch(error => {
-                console.error('Error fetching video segment:', error);
-                bufferingIndicator.style.display = 'none';
-            });
-        }
-
-        // Fetch video info when the page loads
-        fetchCurrentVideoInfo();
-
-        // Periodically check for updates (e.g., every 5 minutes)
-        setInterval(fetchCurrentVideoInfo, 5 * 60 * 1000);
-
-        </script>
+    <script src="script.js"></script>
+</body>
+</html>
