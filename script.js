@@ -35,7 +35,10 @@
                 videoPlayer.onseeked = () => {
                     ctx.drawImage(videoPlayer, 0, 0, thumbnailWidth, thumbnailHeight);
                     videoPlayer.onseeked = null;
-                    resolve(canvas);
+                    setTimeout(function(){
+
+                        resolve(canvas);
+                    }, 1000)
                 };
             });
         }
