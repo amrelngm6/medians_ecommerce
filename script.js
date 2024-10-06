@@ -11,7 +11,8 @@ $(function () {
     videoPlayer.addEventListener('loadedmetadata', () => {
         generateThumbnails();
         setInterval(updateCursorPosition, 100);
-        
+        createFilterThumbnails();
+
     });
     
     async function generateThumbnails() {
@@ -26,6 +27,7 @@ $(function () {
         
         setIONrangeSlider();
         checkDomainAndStop();
+        videoPlayer.currentTime = 0
     }
 
     function createThumbnail(time) {
@@ -92,11 +94,14 @@ $(function () {
         noUiSlider.create(rangeSlider, {
             start: [0, duration], // Handle start position
             step: 1, // Slider moves in increments of '1'
-            margin: 10, // Handles must be more than '3' apart
-            limit: 60, // Handles must be more than '3' apart
+            margin: 10, 
+            limit: 60, 
             connect: true, // Display a colored bar between the handles
             behaviour: 'tap-drag', // Move handle on tap, bar is draggable
             // tooltips: true,
+            
+            keyboardSupport: true,      // Default true
+            keyboardDefaultStep: 5,     // Default 10
             range: { // Slider can select '0' to 'duration'
                 'min': 0,
                 'max': duration
@@ -196,5 +201,46 @@ $(function () {
         return time;
     }
 
+
+
+
+
+
+
+
+
+
+    /**
+     * Filters
+     */
+    
+    const filterPreview = document.getElementById('filter-preview');
+    const filters = [
+        { name: 'None', ffmpegFilter: '' },
+        { name: 'Sepia', ffmpegFilter: 'colorchannelmixer=.393:.769:.189:0:.349:.686:.168:0:.272:.534:.131' },
+        { name: 'Black & White', ffmpegFilter: 'colorchannelmixer=.3:.4:.3:0:.3:.4:.3:0:.3:.4:.3' },
+        { name: 'Vintage', ffmpegFilter: 'curves=vintage' },
+        { name: 'Vignette', ffmpegFilter: 'vignette=PI/4' },
+        { name: 'Sharpen', ffmpegFilter: 'unsharp=5:5:1:5:5:0' }
+    ];
+
+    function createFilterThumbnails() {
+        filters.forEach(filter => {
+            const thumbnail = document.createElement('div');
+            thumbnail.className = 'filter-thumbnail';
+            thumbnail.textContent = filter.name;
+            thumbnail.addEventListener('click', () => applyFilter(filter));
+            filterPreview.appendChild(thumbnail);
+        });
+    }
+
+    function applyFilter(filter) {
+        console.log(`Applying filter: ${filter.name}`);
+        console.log(`FFmpeg filter command: ${filter.ffmpegFilter}`);
+        // Here you would typically send a request to your server to apply the filter using FFmpeg
+        // For this example, we'll just update the UI to show which filter is selected
+        document.querySelectorAll('.filter-thumbnail').forEach(thumb => thumb.classList.remove('active'));
+        event.target.classList.add('active');
+    }
 
 });
