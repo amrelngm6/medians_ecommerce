@@ -20,7 +20,7 @@
 
 <body>
 
-    <div class="container ">
+    <div class="container">
         <div class="top-bar">
             <h1>Pro Short Creator</h1>
         </div>
@@ -31,7 +31,7 @@
                 <div class="sidebar-icon"></div>
                 <div class="sidebar-icon"></div>
             </div>
-            <div class="video-container  relative">
+            <div class="video-container">
                 <div class="video-preview">
                     <video id="video-player" width="100%" height="100%" controls>
                         <source src="/stream_video?video=4dc81044c407ebe8601117f6ffb37fb2.mp4" type="video/mp4">
@@ -56,12 +56,6 @@
       </div>
 
       <!-- 2. The IONrangeSlider container -->
-      <div id="range" class="absolute w-full" style="position: absolute;
-      width: 100%;
-      bottom: -20px;
-  "></div>
-      <div id="value-input"></div>
-      <div id="value-span"></div>
                 </div>
                 <div class="editing-panel">
 
@@ -100,10 +94,14 @@
                 </div>
             </div>
         </div>
-        <div class="timeline">
-            <div class="timeline-track">
-                <div class="timeline-thumbnails" id="timeline-thumbnails"></div>
-                <div class="timeline-cursor" id="timeline-cursor"></div>
+        <div class="">
+            <div id="range"></div>
+            <div class="timeline">
+
+                <div class="timeline-track">
+                    <div class="timeline-thumbnails" id="timeline-thumbnails"></div>
+                    <div class="timeline-cursor" id="timeline-cursor"></div>
+                </div>
             </div>
         </div>
     </div>

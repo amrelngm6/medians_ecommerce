@@ -96,7 +96,7 @@ $(function () {
             limit: 60, // Handles must be more than '3' apart
             connect: true, // Display a colored bar between the handles
             behaviour: 'tap-drag', // Move handle on tap, bar is draggable
-            tooltips: true,
+            // tooltips: true,
             range: { // Slider can select '0' to 'duration'
                 'min': 0,
                 'max': duration

@@ -221,10 +221,7 @@
         text-align: center;
     }
     #range {
-        opacity: 0;
-    }
-    .video-preview:hover #range {
-        opacity: 1;
+        
     }
     #range .noUi-base {}
 
