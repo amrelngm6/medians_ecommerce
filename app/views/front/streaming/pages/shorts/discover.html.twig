@@ -1,16 +1,15 @@
 <div class="shorts">
 
-    <div class="video-container" id="videoContainer">
+    <div class="short-video-container lg:ml-20 pr-4" id="shortVideoContainer">
         <!-- Video items will be dynamically inserted here -->
     </div>
 
 </div>
     <script>
-        const videoContainer = document.getElementById('videoContainer');
+        const shortVideoContainer = document.getElementById('shortVideoContainer');
         const videoData = [
             {% for item in video_items.items %}
-
-            { src: '/stream_short_video?video={{item.player_object.file}}', poster: '/stream?thumbnail=1600&dir=videos/screenshots&image={{item.player_object.poster}}', username: '@user4', avatar: '/api/placeholder/50/50', title: '{{item.player_object.title}}', description: "{{item.description|trim}}" },
+            { id: '{{item.media_id}}', likes: '{{item.likescount()}}',views: '{{item.viewscount()}}', liked: '{{item.liked(app.customer.customer_id).first()}}', src: '/stream_short_video?video={{item.player_object.file}}', poster: '/stream?thumbnail=1600&dir=videos/screenshots&image={{item.player_object.poster}}', username: '{{item.player_object.artist}}', avatar: '/stream?thumbnail=100&image={{item.artist.picture_name}}', title: '{{item.player_object.title}}', description: "{{item.description|trim}}" },
             {% endfor %}
         ];
 
@@ -26,7 +25,7 @@
             contentWrapper.className = 'content-wrapper lg:flex block';
 
             const userInfo = document.createElement('div');
-            userInfo.className = 'user-info absolute bottom-0 left-0 lg:relative ';
+            userInfo.className = 'user-info absolute bottom-0 left-0 lg:relative text-gray-600 dark:text-white ';
             userInfo.innerHTML = `
                 <div class="user-profile">
                     <img src="${data.avatar}" alt="User Avatar" class="user-avatar">
@@ -36,24 +35,33 @@
                     <h2 class="video-title">${data.title}</h2>
                     <p class="video-description">${data.description}</p>
                 </div>
+                <div class="absolute block bottom-0 lg:left-4 right-0 py-10 w-full flex gap-6" >
+                    <a href="/front_api/create?type=Like.media&params[item_id]=${data.id}" data-params="{item_id: ${data.id} }" class="ajax-link cursor-pointer text-sm text-gray-100 flex gap-2 pt-10">
+                        <img class="`+ (data.liked ? 'hidden' : '')+` w-5" x-on:click="jQuery('#heart-${data.id}').addClass('hidden'); jQuery('#unheart-${data.id}').removeClass('hidden'); jQuery('#likes-count-${data.id}').text(parseInt(jQuery('#likes-count-${data.id}').text()) + 1);" id="heart-${data.id}" src="/src/front_assets/svg/white-heart.svg">
+                        <img class="`+ (!data.liked ? 'hidden' : '')+` w-5" x-on:click="jQuery('#unheart-${data.id}').addClass('hidden'); jQuery('#heart-${data.id}').removeClass('hidden'); jQuery('#likes-count-${data.id}').text(parseInt(jQuery('#likes-count-${data.id}').text()) - 1);" id="unheart-${data.id}" src="/src/front_assets/svg/blank-heart.svg">
+                        <span id="likes-count-${data.id}">${data.likes}</span>
+                    </a>
+                    <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 pt-10">
+                        <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg" />
+                        <span id="views-count-${data.id}">${data.views}</span>
+                    </a>
+                </div>
             `;
 
             const videoWrapper = document.createElement('div');
-            videoWrapper.className = 'video-wrapper p-4';
+            videoWrapper.className = 'video-wrapper lg:p-4';
 
             const video = document.createElement('video');
             video.src = data.src;
             video.poster = data.poster;
-            video.className = 'rounded-lg p-4';
+            video.className = 'rounded-lg lg:p-4 pr-4';
             video.controls = false;
             video.autoplay = true;
 
             const actionButtons = document.createElement('div');
             actionButtons.className = 'action-buttons';
             actionButtons.innerHTML = `
-                <button class="action-button"><img src="/api/placeholder/20/20" alt="Like"></button>
-                <button class="action-button"><img src="/api/placeholder/20/20" alt="Comment"></button>
-                <button class="action-button"><img src="/api/placeholder/20/20" alt="Share"></button>
+            
             `;
 
             videoWrapper.appendChild(video);
@@ -69,7 +77,7 @@
         function loadVideos() {
             videoData.forEach((data, i) => {
                 const videoElement = createVideoElement(data);
-                videoContainer.appendChild(videoElement);
+                shortVideoContainer.appendChild(videoElement);
             });
         }
 
@@ -100,9 +108,9 @@
     </script>
 	 <style>
 
-        .shorts .video-container {
+        .shorts .short-video-container {
             position: fixed;
-			margin-left:230px;
+            margin-left: 230px;
             top: 0;
             left: 0;
             width: 100%;
@@ -110,7 +118,14 @@
             overflow-y: scroll;
             scroll-snap-type: y mandatory;
         }
-        
+        @media (max-width: 767px) {
+            .shorts .short-video-container { margin-left: 40px}
+            body .shorts .user-info { width: 100%; padding:20px 20px 50px 20px}
+            body .shorts .user-info::before {
+                width: 110%;
+                left: -25px;
+            }
+        }
 		.shorts .video-item {
             position: relative;
             width: 100%;
@@ -229,4 +244,22 @@
             width: 20px;
             height: 20px;
         }
+        
+        .shorts .user-info::before {
+            content: " ";
+            background: white;
+            display: block;
+            filter: blur(10px) brightness(.3);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: .5;
+            left: 0;
+            top: 0;
+        }
+        .dark .shorts .user-info::before {
+            background: #111827;
+        }
+
     </style>
