@@ -78,6 +78,10 @@ $(function(){
         videoItem.appendChild(contentWrapper);
         videoItem.appendChild(actionButtons);
 
+        jQuery(document).on('click', 'a', function(){
+            video.pause()
+            video.src =  '';
+        })
         return videoItem;
     }
 
@@ -113,9 +117,6 @@ $(function(){
         observer.observe(item);
     });
     
-    jQuery(document).on('click', 'a', function(){
-        jQuery('video').pause().attr('src', '');
-    })
 
 })
 </script>
