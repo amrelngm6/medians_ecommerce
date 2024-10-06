@@ -114,6 +114,19 @@ $(function(){
             jQuery(`#progress[data-player=${video.id}]`).val( video.currentTime )
             jQuery(`#${videoWrapper.id} #current-time-page`).html( convertToTime(video.currentTime))
         }, false);
+        
+        // place a listener on it
+        video.addEventListener( "play", function () {
+            // retrieve dimensions
+            jQuery(`#${videoWrapper.id} .play-video`).fadeOut( 200 )
+            jQuery(`#${videoWrapper.id} .pause-video`).fadeIn( 200 )
+        }, false);
+
+        video.addEventListener( "pause", function () {
+            // retrieve dimensions
+            jQuery(`#${videoWrapper.id} .pause-video`).fadeOut( 200 )
+            jQuery(`#${videoWrapper.id} .play-video`).fadeIn( 200 )
+        }, false);
 
 
         jQuery(document).on('click', 'a', function(){
