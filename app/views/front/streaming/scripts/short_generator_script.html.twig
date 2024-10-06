@@ -160,9 +160,13 @@ $(function () {
 
         var curTime = player.currentTime;
         document.getElementById('curTime').innerHTML = toHHMMSS(curTime.toString()) + " / " + toHHMMSS(duration.toString());
+        document.getElementById('shortVideoStart').value = toHHMMSS(fromOld.toString());
+        document.getElementById('shortVideoEnd').value = toHHMMSS((toOld).toString());
         var result = toHHMMSS((toOld - fromOld).toString());
         if (result != "NaN:NaN:NaN") {
             document.getElementById('finalDuration').innerHTML = result;
+            document.getElementById('shortVideoDuration').value = result;
+            
         }
         if (curTime < fromOld) {
             player.currentTime = fromOld;

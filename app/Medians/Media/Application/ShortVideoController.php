@@ -497,6 +497,7 @@ class ShortVideoController extends CustomController
 
             // $params['description'] = $params['description'];
             // $params['picture'] = $params['picture'];
+            $this->main_file = $this->reencodeVideo($item->main_file->path, $params['start'], $params['end']);
             $params['files'] = [ ['type'=> 'short_video', 'storage'=> 'local', 'path'=> $params['media_path']] ];
             
             if ($this->repo->update($params))
@@ -529,83 +530,18 @@ class ShortVideoController extends CustomController
 	}
 
 
-    function generateScreenshots($videoPath, $outputDir, $settings, $screenshotCount = 10 ) {
-
-        $path_arr = explode('/', $videoPath);
-        $fileName = str_replace(['.mp4', '.ogg', '.wmv'], '.jpg', end($path_arr));
-        $duration = $this->getVideoDuration($videoPath, $settings);
-        $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
-        
-        if ($duration <= 0) {
-            $duration = $this->getVideoDuration($this->reencodeVideo($videoPath) ?? $videoPath, $settings);
-        }
     
-        if ($duration <= 0) {
-            die("Unable to get video duration.");
-        }
     
-        // Create output directory if it doesn't exist
-        if (!file_exists($outputDir)) {
-            mkdir($outputDir, 0777, true);
-        }
-    
-        // Calculate interval between each screenshot (every 10% of the duration)
-        $interval = $duration / $screenshotCount;
-    
-        for ($i = 1; $i <= $screenshotCount; $i++) {
-            $time = $i * $interval;
-    
-            // Format time into hh:mm:ss for ffmpeg
-            $formattedTime = gmdate("H:i:s", intval($time));
-    
-            $outputFile = $outputDir . "screenshot_" . $i . "_" . $fileName;
-            
-            // Command to capture screenshot at the specific time
-            $command = "$ffmpeg -ss $formattedTime -i " . escapeshellarg($videoPath) . " -vframes 1 -q:v 2 " . escapeshellarg($outputFile) . " 2>&1";
-    
-            // Execute the command
-            file_exists($outputFile) ? null : shell_exec($command);
-            if (file_exists($outputFile))
-            {
-                $items[$i] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $outputFile);
-            }
-        }
-
-        return $items;
-    }
-
-    function getVideoDuration($videoPath, $settings) {
-        
-        $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
-
-        $command = "$ffmpeg -i " . escapeshellarg($videoPath) . " 2>&1";
-        $output = shell_exec($command);
-    
-        preg_match('/Duration: (\d+):(\d+):(\d+\.\d+)/', $output, $matches);
-        
-        if (!empty($matches)) {
-            $hours = $matches[1];
-            $minutes = $matches[2];
-            $seconds = $matches[3];
-            
-            return ($hours * 3600) + ($minutes * 60) + $seconds;
-        }
-    
-        return 0; 
-    }
-    
-
-    function reencodeVideo($inputVideoPath) {
+    function reencodeVideo($inputVideoPath, $from, $to) {
 
         $settings = $this->app->SystemSetting();
         $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
 
         // FFmpeg command to re-encode the video
-        $outputVideoPath = str_replace('/tmp', '', $inputVideoPath);
         if (file_exists($outputVideoPath))
             return $outputVideoPath;
 
-        $command = "$ffmpeg -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
+        $command = "$ffmpeg -ss 00:$from -to 00:$to  -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
 
         // Execute the command
         $run = shell_exec($command);
