@@ -1,12 +1,232 @@
-<div class="py-4 px-2 w-full">
+<div class="shorts">
 
-
-    {% include 'views/front/' ~ template ~ '/includes/home_videos.html.twig' %}
-
-    <div class="w-full relative  rounded-lg ">
-        <div class="w-full ">
-            {% include 'views/front/' ~ template ~ '/includes/pagination.html.twig' %}
-        </div>
+    <div class="video-container" id="videoContainer">
+        <!-- Video items will be dynamically inserted here -->
     </div>
-	<div class="h-10"></div>
+
 </div>
+    <script>
+        const videoContainer = document.getElementById('videoContainer');
+        const videoData = [
+            {% for item in video_items.items %}
+
+            { src: '/stream_short_video?video={{item.player_object.file}}', poster: '/stream?thumbnail=1600&dir=videos/screenshots&image={{item.player_object.poster}}', username: '@user4', avatar: '/api/placeholder/50/50', title: '{{item.player_object.title}}', description: "{{item.description|trim}}" },
+            {% endfor %}
+        ];
+
+        function createVideoElement(data) {
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-item';
+            
+            const backgroundBlur = document.createElement('div');
+            backgroundBlur.className = 'background-blur';
+            backgroundBlur.style.backgroundImage = `url(${data.poster})`;
+
+            const contentWrapper = document.createElement('div');
+            contentWrapper.className = 'content-wrapper lg:flex block';
+
+            const userInfo = document.createElement('div');
+            userInfo.className = 'user-info absolute bottom-0 left-0 lg:relative ';
+            userInfo.innerHTML = `
+                <div class="user-profile">
+                    <img src="${data.avatar}" alt="User Avatar" class="user-avatar">
+                    <span class="username">${data.username}</span>
+                </div>
+                <div class="video-info">
+                    <h2 class="video-title">${data.title}</h2>
+                    <p class="video-description">${data.description}</p>
+                </div>
+            `;
+
+            const videoWrapper = document.createElement('div');
+            videoWrapper.className = 'video-wrapper p-4';
+
+            const video = document.createElement('video');
+            video.src = data.src;
+            video.poster = data.poster;
+            video.className = 'rounded-lg p-4';
+            video.controls = false;
+            video.autoplay = true;
+
+            const actionButtons = document.createElement('div');
+            actionButtons.className = 'action-buttons';
+            actionButtons.innerHTML = `
+                <button class="action-button"><img src="/api/placeholder/20/20" alt="Like"></button>
+                <button class="action-button"><img src="/api/placeholder/20/20" alt="Comment"></button>
+                <button class="action-button"><img src="/api/placeholder/20/20" alt="Share"></button>
+            `;
+
+            videoWrapper.appendChild(video);
+            contentWrapper.appendChild(userInfo);
+            contentWrapper.appendChild(videoWrapper);
+            videoItem.appendChild(backgroundBlur);
+            videoItem.appendChild(contentWrapper);
+            videoItem.appendChild(actionButtons);
+
+            return videoItem;
+        }
+
+        function loadVideos() {
+            videoData.forEach((data, i) => {
+                const videoElement = createVideoElement(data);
+                videoContainer.appendChild(videoElement);
+            });
+        }
+
+        function handleIntersection(entries) {
+            entries.forEach((entry, i) => {
+              if (entry.isIntersecting) {
+                    entry.target.className ='video-item active'
+                    const video = entry.target.querySelector('video');
+                    video.play();
+                } else {
+                    entry.target.className ='video-item'
+                    const video = entry.target.querySelector('video');
+                    video.pause();
+                }
+            });
+        }
+
+        loadVideos();
+
+        const observer = new IntersectionObserver(handleIntersection, {
+            root: null,
+            threshold: 0.5
+        });
+
+        document.querySelectorAll('.video-item').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+	 <style>
+
+        .shorts .video-container {
+            position: fixed;
+			margin-left:230px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+        
+		.shorts .video-item {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+          }
+        .shorts .background-blur {
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 150%;
+            height: 150%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(50px);
+            opacity: 1;
+        }
+        .shorts .active .background-blur {
+            animation: blur 3s ease 0s ;
+            -webkit-animation: blur 3s ease 0s ;
+            -moz-animation: blur 3s ease 0s ;
+        }
+        
+        @keyframes blur {
+          0% {
+            
+            -webkit-filter: blur(0px);
+            -moz-filter: blur(0px);
+            -o-filter: blur(0px);
+            -ms-filter: blur(0px);
+          }
+          100% {
+            -webkit-filter: blur(50px);
+            -moz-filter: blur(50px);
+            -o-filter: blur(50px);
+            -ms-filter: blur(50px);
+          }
+        }
+
+
+
+        .shorts .content-wrapper {
+            width: 100%;
+            height: 80%;
+            z-index: 1;
+        }
+        .shorts .user-info {
+            width: 300px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .shorts .user-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .shorts .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .shorts .username {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .shorts .video-info {
+            margin-top: 20px;
+        }
+        .shorts .video-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .shorts .video-description {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .shorts .video-wrapper {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .shorts video {
+            max-width: 100%;
+            max-height: 100%;
+            /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); */
+        }
+        .shorts .action-buttons {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .shorts .action-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        .shorts .action-button img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>

@@ -1,100 +1,246 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TV Channel Player with Controlled Chunk Loading</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desktop Short Video Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            overflow: hidden;
+        }
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+        .video-item {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+          }
+        .background-blur {
+            position: absolute;
+            top: -100px;
+            left: -100px;
+            width: 150%;
+            height: 150%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(50px);
+            opacity: 1;
+        }
+        .active .background-blur {
+            animation: blur 3s ease 0s ;
+            -webkit-animation: blur 3s ease 0s ;
+            -moz-animation: blur 3s ease 0s ;
+        }
+        
+        @keyframes blur {
+          0% {
+            
+            -webkit-filter: blur(0px);
+            -moz-filter: blur(0px);
+            -o-filter: blur(0px);
+            -ms-filter: blur(0px);
+          }
+          100% {
+            -webkit-filter: blur(50px);
+            -moz-filter: blur(50px);
+            -o-filter: blur(50px);
+            -ms-filter: blur(50px);
+          }
+        }
 
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.js"></script>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/8.5.1/nouislider.min.css">
-  <script src="script1.js"></script>
-
+        .content-wrapper {
+            width: 100%;
+            height: 80%;
+            z-index: 1;
+        }
+        .user-info {
+            width: 300px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        .user-profile {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .username {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .video-info {
+            margin-top: 20px;
+        }
+        .video-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .video-description {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        .video-wrapper {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        video {
+            max-width: 100%;
+            max-height: 100%;
+            /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); */
+        }
+        .action-buttons {
+            position: absolute;
+            right: 20px;
+            bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .action-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            cursor: pointer;
+        }
+        .action-button img {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
 </head>
-
 <body>
-
-
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-  <div class="row">
-    <div class="col-md-3 text-center">
-      <hr>
-      <h3>Cut This Video</h3>
-      <div class="panel panel-info" style="margin-top:30px;">
-        <div class="panel-heading">
-          <h3 class="panel-title">Current Time</h3>
-        </div>
-        <div class="panel-body">
-          <div id="curTime" style="font-size:20px;">
-          </div>
-        </div>
-      </div>
-
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h3 class="panel-title">Select Quality</h3>
-        </div>
-        <div class="panel-body">
-          <div class="dropdown" id="dropdown" style="font-size:20px;">
-            <!-- dropdown here -->
-          </div>
-        </div>
-      </div>
-
-      <div class="panel panel-info">
-        <div class="panel-heading">
-          <h3 class="panel-title">Cutted duration</h3>
-        </div>
-        <div class="panel-body">
-          <div id="finalDuration" style="font-size:20px;">
-          </div>
-        </div>
-      </div>
+    <div class="video-container" id="videoContainer">
+        <!-- Video items will be dynamically inserted here -->
     </div>
 
+    <script>
+        const videoContainer = document.getElementById('videoContainer');
+        const videoData = [
+            { src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', poster: 'https://fastly.picsum.photos/id/802/1080/1350.jpg?hmac=LpmmJuv4lUzpAlVvVv2giI1SyvQ9qsOcWF9DnzhaAWQ', username: '@user1', avatar: '/api/placeholder/50/50', title: 'Amazing Adventure', description: 'Join me on this incredible journey through the wilderness. #adventure #nature' },
+            { src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4', poster: 'https://fastly.picsum.photos/id/584/1080/1350.jpg?hmac=kma2DxrvhkUf0eqpbub4qWW1gTg2H03UGaPFfNr5FZQ', username: '@user2', avatar: '/api/placeholder/50/50', title: 'City Lights', description: 'Exploring the vibrant nightlife of the big city. #citylife #nightout' },
+            { src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4', poster: 'https://fastly.picsum.photos/id/182/1080/1350.jpg?hmac=E4bYCaLP2bnvFG9bXggQLVj0065hTnUPvKjE9cMmOM0', username: '@user3', avatar: '/api/placeholder/50/50', title: 'Cooking Masterclass', description: 'Learn how to make the perfect pasta from scratch! #cooking #foodie' },
+            { src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4', poster: 'https://fastly.picsum.photos/id/428/1080/1350.jpg?hmac=uunLmgGXp3GY3gI1goEDZ2hNRDBy0du4NlVIPFQz2wo', username: '@user4', avatar: '/api/placeholder/50/50', title: 'Extreme Sports', description: 'Pushing the limits with this insane parkour run! #extremesports #parkour' },
+            { src: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4', poster: 'https://fastly.picsum.photos/id/428/1080/1350.jpg?hmac=uunLmgGXp3GY3gI1goEDZ2hNRDBy0du4NlVIPFQz2wo', username: '@user5', avatar: '/api/placeholder/50/50', title: 'Tech Review', description: 'Unboxing and reviewing the latest smartphone. Is it worth the hype? #tech #review' }
+        ];
 
-    <!-- player -->
-    <div class="col-md-6 text-center" style="padding-top:30px;">
+        function createVideoElement(data) {
+            const videoItem = document.createElement('div');
+            videoItem.className = 'video-item';
+            
+            const backgroundBlur = document.createElement('div');
+            backgroundBlur.className = 'background-blur';
+            backgroundBlur.style.backgroundImage = `url(${data.poster})`;
 
-      <div class="embed-responsive embed-responsive-16by9">
-        <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-        <div id="player" class="embed-responsive-item">
+            const contentWrapper = document.createElement('div');
+            contentWrapper.className = 'content-wrapper lg:flex block';
 
-          <video id="video-player" width="100%" height="100%" controls>
-            <source src="/stream_video?video=4dc81044c407ebe8601117f6ffb37fb2.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
+            const userInfo = document.createElement('div');
+            userInfo.className = 'user-info';
+            userInfo.innerHTML = `
+                <div class="user-profile">
+                    <img src="${data.avatar}" alt="User Avatar" class="user-avatar">
+                    <span class="username">${data.username}</span>
+                </div>
+                <div class="absolute bottom-0 left-0 lg:relative user-info">
+                    <h2 class="video-title">${data.title}</h2>
+                    <p class="video-description">${data.description}</p>
+                </div>
+            `;
 
-      <!-- progress bar -->
-      <div class="progress">
-        <div class="progress-bar progress-bar-primary progress-bar-striped" id="cut-left" style="width: 0%">
-          <span class="sr-only"></span>
-        </div>
-        <div class="progress-bar progress-bar-success progress-bar-striped active" id="played" style="width: 0%">
-          <span class="sr-only"></span>
-        </div>
-        <div class="progress-bar progress-bar-warning progress-bar-striped" id="toPlay" style="width: 100%">
-          <span class="sr-only"></span>
-        </div>
-        <div class="progress-bar progress-bar-primary progress-bar-striped" id="cut-right" style="width: 0%">
-          <span class="sr-only"></span>
-        </div>
-      </div>
+            const videoWrapper = document.createElement('div');
+            videoWrapper.className = 'video-wrapper p-4';
 
-      <!-- 2. The IONrangeSlider container -->
-      <div id="range"></div>
-      <div id="value-input"></div>
-      <div id="value-span"></div>
-    </div>
-  </div> <!-- endRow -->
+            const video = document.createElement('video');
+            video.src = data.src;
+            video.poster = data.poster;
+            video.className = 'rounded-lg p-4';
+            video.controls = true;
 
+            const actionButtons = document.createElement('div');
+            actionButtons.className = 'action-buttons';
+            actionButtons.innerHTML = `
+                <button class="action-button"><img src="/api/placeholder/20/20" alt="Like"></button>
+                <button class="action-button"><img src="/api/placeholder/20/20" alt="Comment"></button>
+                <button class="action-button"><img src="/api/placeholder/20/20" alt="Share"></button>
+            `;
+
+            videoWrapper.appendChild(video);
+            contentWrapper.appendChild(userInfo);
+            contentWrapper.appendChild(videoWrapper);
+            videoItem.appendChild(backgroundBlur);
+            videoItem.appendChild(contentWrapper);
+            videoItem.appendChild(actionButtons);
+
+            return videoItem;
+        }
+
+        function loadVideos() {
+            videoData.forEach((data, i) => {
+                const videoElement = createVideoElement(data);
+                videoContainer.appendChild(videoElement);
+            });
+        }
+
+        function handleIntersection(entries) {
+            entries.forEach((entry, i) => {
+              if (entry.isIntersecting) {
+                    entry.target.className ='video-item active'
+                    const video = entry.target.querySelector('video');
+                    video.play();
+                } else {
+                    entry.target.className ='video-item'
+                    const video = entry.target.querySelector('video');
+                    video.pause();
+                }
+            });
+        }
+
+        loadVideos();
+
+        const observer = new IntersectionObserver(handleIntersection, {
+            root: null,
+            threshold: 0.5
+        });
+
+        document.querySelectorAll('.video-item').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
 </body>
-
 </html>

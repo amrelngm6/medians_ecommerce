@@ -126,20 +126,14 @@ class ShortVideoController extends CustomController
         $params = $this->app->params();
 
         $params['limit'] = $settings['view_items_limit'] ?? null;
-        $params['type'] = 'video';
+        $params['type'] = 'short_video';
         $list = $this->repo->getWithFilter($params);
 
-        
-        $artistRepo = new \Medians\Customers\Infrastructure\CustomerRepository;
-        $query['limit'] = $settings['view_items_limit'] ?? null;
-        $channels = $artistRepo->getWithFilter($query);
-        
 		try 
         {
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'video_items' => $list,
-                'channels' => $channels,
                 'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => 'shorts/discover'
             ], 'output'));
