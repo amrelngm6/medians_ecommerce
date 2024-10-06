@@ -11,13 +11,19 @@ const videoPlayer = document.getElementById('video-player');
             setInterval(updateCursorPosition, 1000);
         });
 
-        function generateThumbnails() {
+        function generateThumbnails(i = 0) {
             const duration = videoPlayer.duration;
-            for (let i = 0; i < thumbnailCount; i++) {
-                const thumbnailTime = (duration / thumbnailCount) * i;
-                const thumbnail = createThumbnail(thumbnailTime);
-                timelineContainer.appendChild(thumbnail);
+            const thumbnailTime = (duration / thumbnailCount) * i;
+            if (thumbnailTime > duration)
+            {
+                return;
             }
+            
+            const thumbnail = createThumbnail(thumbnailTime);
+            timelineContainer.appendChild(thumbnail);
+            
+            setTimeout(updateCursorPosition(i+1), 1000);
+            
         }
 
         function createThumbnail(time) {
