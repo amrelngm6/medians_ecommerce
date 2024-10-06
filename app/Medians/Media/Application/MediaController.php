@@ -352,6 +352,26 @@ class MediaController extends CustomController
 		// return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $item);
 	}
 
+	function stream_short_video() {
+
+		// $this->isDirectAccess();
+
+		$this->app = new \config\APP;
+		$settings = $this->app->SystemSetting();
+		$startTime = $this->app->request()->get('s') ?? 0;
+		$startDuration = $this->app->request()->get('d') ?? 0;
+
+		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/videos/shorts/' . $this->app->request()->get('video'))) {
+			$filePath = '/uploads/videos/shorts/' . $this->app->request()->get('video');
+		}
+
+		$item = $this->mediaRepo->findByFile($filePath);
+		$vs = new VideoStream($_SERVER['DOCUMENT_ROOT'].$filePath);
+		$vs->start();
+		return;
+		// return $this->streamVideo($_SERVER['DOCUMENT_ROOT'].$filePath, $item);
+	}
+
 	function streamVideo($filePath, $item) {
 		
 

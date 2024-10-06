@@ -266,6 +266,10 @@ class FrontAPIController extends CustomController
 				$controller = new Media\Application\ShortVideoController;
 				break;
 				
+			case 'ShortVideo.update_video':
+				return printResponse((new Media\Application\ShortVideoController)->update_video());
+				break;
+				
 
 
 		}

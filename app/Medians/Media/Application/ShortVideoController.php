@@ -307,6 +307,43 @@ class ShortVideoController extends CustomController
     /**
      * Edit info page for frontend
      */
+    public function edit($media_id)
+    {
+		$this->app->customer_auth();
+
+		$settings = $this->app->SystemSetting();
+
+        $item = $this->repo->find($media_id);
+
+        if (empty($item->main_file->path))
+            return Page404();
+
+
+		try {
+
+            $videoPath = $_SERVER['DOCUMENT_ROOT'].$item->main_file->path;
+            $outputDir = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->videos_dir. 'screenshots/';
+            $VideoController = new VideoController();
+            $list = $VideoController->generateScreenshots($videoPath, $outputDir, $settings);
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'item' => $item,
+                'list' => $list,
+                'genres' => $this->categoryRepo->getVideoGenres(),
+                'layout' => isset($this->app->customer->customer_id) ? 'shorts/edit' : 'signin'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+
+
+    /**
+     * Edit / Cut Video at frontend
+     */
     public function edit_video($media_id)
     {
 		$this->app->customer_auth();
@@ -315,8 +352,13 @@ class ShortVideoController extends CustomController
 
         $item = $this->repo->find($media_id);
 
-        // if (empty($item->main_file->path))
-        //     return Page404();
+        if (empty($item->main_file->path))
+            return Page404();
+
+        if (isset($item->field['video_generated']))
+        {
+            return $this->edit($media_id);
+        }
 
 
 		try {
@@ -333,69 +375,6 @@ class ShortVideoController extends CustomController
 		}
     }
     
-    public function load_screenshots()
-    {
-		$this->app->customer_auth();
-
-		$settings = $this->app->SystemSetting();
-
-		$params = $this->app->params();
-
-        $item = $this->repo->find($params['media_id']);
-
-        if (empty($item->main_file->path))
-            return Page404();
-
-		try {
-
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/includes/layout.html.twig', [
-                'app' => $this->app,
-                'list' => $list,
-                'layout' => isset($this->app->customer->customer_id) ? 'shorts/edit' : 'signin'
-            ], 'output'));
-            
-		} catch (\Exception $e) {
-			throw new \Exception($e->getMessage(), 1);
-		}
-    }
-
-
-    /**
-     * Download & Validate from URL
-     */
-    public function downloadRemoteFile($tempFileFullPath, $link)
-    {
-        
-        if (file_exists($tempFileFullPath))
-        {
-            return $tempFileFullPath;
-        }
-
-        $videoUrl = $link;
-
-        // Initialize a cURL session to fetch the video stream
-        $ch = curl_init($videoUrl);
-
-        // Tell cURL to return the transfer as a string instead of outputting it directly
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true); // Follow redirects
-
-        // Set headers to match a browser request
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36',
-            'Referer: https://www.facebook.com/',
-        ]);
-
-        // Execute the cURL session
-        $response = curl_exec($ch);
-
-        $save = file_put_contents($tempFileFullPath, $response);
-
-        $filesize = filesize($tempFileFullPath);
-        $filesize < 100 ? unlink($tempFileFullPath)   : null;
-        return $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : true;
-    } 
-
 
     /**
      * Submit Upload Media page
@@ -495,12 +474,40 @@ class ShortVideoController extends CustomController
             
             $item = $this->repo->find($params['media_id']);
 
-            // $params['description'] = $params['description'];
-            // $params['picture'] = $params['picture'];
-            $this->main_file = $this->reencodeVideo($item->main_file->path, $params['start'], $params['end']);
             $params['files'] = [ ['type'=> 'short_video', 'storage'=> 'local', 'path'=> $params['media_path']] ];
             
-            if ($this->repo->update($params))
+            $this->repo->clearMediaFiles($item->media_id) ;
+
+            if ( $this->repo->update($params))
+            {
+                return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
+            }
+
+        } catch (\Exception $e) {
+        	throw new \Exception("Error Processing Request " .$e->getMessage(), 1);
+        }
+	}
+
+    
+
+	public function update_video()
+	{
+		$this->app = new \config\APP;
+
+        $params = $this->app->params();
+        $settings = $this->app->SystemSetting();
+
+        try {
+            
+            $item = $this->repo->find($params['media_id']);
+
+            $videoFile = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->reencodeVideo($_SERVER['DOCUMENT_ROOT'] .$item->main_file->path, $params['start'], $params['end']));
+            $params['files'] = [ ['type'=> 'short_video', 'storage'=> 'local', 'path'=> $videoFile] ];
+            $params['field'] = [ 'video_generated'=> '1' ];
+
+            $clearMedia = $this->repo->clearMediaFiles($item->media_id);
+
+            if ( $this->repo->update($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
             }
@@ -537,7 +544,8 @@ class ShortVideoController extends CustomController
         $settings = $this->app->SystemSetting();
         $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
 
-        $outputVideoPath = strpos($inputVideoPath, '/tmp') ? str_replace('/tmp', '/shorts', $inputVideoPath) : str_replace('/videos', '/videos/shorts', $inputVideoPath);
+        $n = str_replace(':', '', $fron.$to);
+        $outputVideoPath = strpos($inputVideoPath, '/tmp') ? str_replace('/tmp/', '/shorts/'.$n, $inputVideoPath) : str_replace('/videos/', '/videos/shorts/'.$n, $inputVideoPath);
 
         // FFmpeg command to re-encode the video
         if (file_exists($outputVideoPath))
