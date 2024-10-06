@@ -81,6 +81,7 @@ $(function()  {
                 if (data && data.active_item) {
                     if (activeChannelMedia && data.active_item.channel_media_id == activeChannelMedia.channel_media_id)
                     {
+                        console.log('Same')
                         return;
                     }
                     activeChannel = data;
