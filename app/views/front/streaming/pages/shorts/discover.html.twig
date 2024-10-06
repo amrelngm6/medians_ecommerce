@@ -112,6 +112,11 @@ $(function(){
     document.querySelectorAll('.video-item').forEach(item => {
         observer.observe(item);
     });
+    
+    jQuery(document).on('click', 'a', function(){
+        jQuery('video').pause().attr('src', '');
+    })
+
 })
 </script>
 	 <style>

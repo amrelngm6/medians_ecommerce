@@ -72,7 +72,6 @@ $(function()  {
     let sourceBuffer;
     let isSourceOpen = false;
     let startPosition = 0; // Variable to hold the calculated start time
-    ; // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 
     function fetchCurrentVideoInfo(channelId) {
         fetch(`/channel_json/` + channelId)
@@ -233,7 +232,6 @@ $(function()  {
     function fetchWithRetry(url, options = {}, retries = 3) {
         return fetch(url, options).catch(error => {
             if (retries > 0) {
-                console.warn(`Retrying... ${retries} attempts left`);
                 return fetchWithRetry(url, options, retries - 1);
             } else {
                 throw error;
