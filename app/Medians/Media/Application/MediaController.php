@@ -125,7 +125,7 @@ class MediaController extends CustomController
 	public function stream_audio()
 	{
 
-		// $this->isDirectAccess();
+		$this->isDirectAccess();
 
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
@@ -474,6 +474,7 @@ class MediaController extends CustomController
 
 		// // Check if there's a referrer (usually means it's embedded in an HTML page)
 		if ($srcFetchSite != 'same-origin') {
+			print_r($_SERVER);
 			exit; // Assume direct access
 		}
 	
