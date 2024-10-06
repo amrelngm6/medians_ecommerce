@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Generate thumbnails for timeline
     video.addEventListener('loadeddata', function() {
         const duration = video.duration;
-        const thumbnailInterval = Math.floor(duration / 10); // Generate 10 screenshots
+        const thumbnailInterval = Math.floor(duration / 20); // Generate 10 screenshots
 
         var i = 1
         setInterval(function(){
@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
             i++;
             captureScreenshot(video, i * thumbnailInterval);
-        }, 1000);
+        }, 500);
     });
 
     function captureScreenshot(videoElement, time) {
