@@ -5,6 +5,7 @@
 
     <div class="w-full relative  rounded-lg ">
         <div class="w-full ">
+            {% set list = video_items %}
             {% include 'views/front/' ~ template ~ '/includes/pagination.html.twig' %}
         </div>
     </div>
