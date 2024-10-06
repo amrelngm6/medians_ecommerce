@@ -282,6 +282,14 @@ class MediaItemRepository
 	}
 
 	/**
+	* Clear media files from database
+	*/
+	public function clearMediaFiles($media_id) 
+	{
+		return MediaFile::where('media_id', $media_id)->delete();
+	}
+
+	/**
 	* Save related items to database
 	*/
 	public function storeChapters($data, $item) 
@@ -290,7 +298,7 @@ class MediaItemRepository
 		if ($data['media_file_id'])
 		{
 	
-			MediaFile::where('media_id', $item->media_id)->delete();
+			$clear = $this->deleteMediaFiles($item->media_id);
 
 			foreach ($data['media_file_id'] as $key => $value)
 			{

@@ -474,7 +474,9 @@ class ShortVideoController extends CustomController
 
 
         } catch (\Throwable $th) {
-            throw new \Exception("Error Processing Request ".$th->getMessage(), 1);
+        	throw new \Exception(translate('Select media first'), 1);
+
+            // throw new \Exception("Error Processing Request ".$th->getMessage(), 1);
             
         }
 
@@ -487,12 +489,16 @@ class ShortVideoController extends CustomController
 		$this->app = new \config\APP;
 
         $params = $this->app->params();
-        $item = $this->repo->find($params['media_id']);
+        $settings = $this->app->SystemSetting();
 		
         try {
             
-            $params['selected_genres'] = $this->app->request()->get('selected_genres');
+            $item = $this->repo->find($params['media_id']);
 
+            // $params['description'] = $params['description'];
+            // $params['picture'] = $params['picture'];
+            $params['files'] = [ ['type'=> 'short_video', 'storage'=> 'local', 'path'=> $params['media_path']] ];
+            
             if ($this->repo->update($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);

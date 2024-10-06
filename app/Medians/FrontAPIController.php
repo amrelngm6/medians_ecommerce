@@ -261,6 +261,10 @@ class FrontAPIController extends CustomController
 			case 'ChannelMedia.update':
 				$controller = new Channels\Application\ChannelMediaController;
 				break;
+
+			case 'ShortVideo.update':
+				$controller = new Media\Application\ShortVideoController;
+				break;
 				
 
 
