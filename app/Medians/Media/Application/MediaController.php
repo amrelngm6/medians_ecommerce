@@ -125,7 +125,7 @@ class MediaController extends CustomController
 	public function stream_audio()
 	{
 
-		$this->isDirectAccess();
+		// $this->isDirectAccess();
 
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
@@ -156,6 +156,7 @@ class MediaController extends CustomController
 
 		if ($item)
 			$item->addView();
+
 
 		return  $this->streamAudioFromTimeRange($_SERVER['DOCUMENT_ROOT'] . $filePath, $startTime, $startDuration);
 

@@ -431,6 +431,14 @@ function initAudioPlayer() {
 	
 	});
 
+	jQuery(document).on('click', '#s-area', function(){
+		const imageElement = document.getElementById('s-area');
+		const imageRect = imageElement.getBoundingClientRect(); // Get image position and size
+		const clickX = event.clientX - imageRect.left; // Calculate X position relative to the image
+		
+		var percentage = (clickX / imageElement.clientWidth) * 100;
+		audio.currentTime = (percentage / 100) * audio.duration;
+	})
 	
 }
 
@@ -472,17 +480,6 @@ function includeFiles(file, id)
 	xhr.open("GET", "includes/"+file+".html", true);
 	xhr.send();
 }
-
-// includeFiles('header', 'main-header');
-// includeFiles('sidebar', 'sidebar');
-// includeFiles('playing', 'side-playing');
-// includeFiles('authors_list', 'top-authors');
-// includeFiles('channel_list', 'channel_list');
-// includeFiles('genres_list', 'top-charts');
-// includeFiles('tracks-list', 'tracks-list');
-// includeFiles('public-playlists', 'public-playlists');
-// includeFiles('playlist-items', 'playlist-items-list');
-// includeFiles('playlist-items', 'playlist-items-list2');
 
 
 

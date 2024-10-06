@@ -487,7 +487,7 @@ class AudiobookController extends CustomController
     
     
     /**
-     * Discover page for frontend
+     * Search page for frontend
      */
     public function search()
     {

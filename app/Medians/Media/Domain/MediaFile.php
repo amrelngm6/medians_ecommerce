@@ -24,7 +24,7 @@ class MediaFile extends CustomModel
 		'sort',
 	];
 
-	public $appends = ['wave', 'filename', 'picture'];
+	public $appends = ['wave', 'filename', 'picture', 'player_object'];
 
 	public function getWaveAttribute() 
 	{
@@ -49,5 +49,17 @@ class MediaFile extends CustomModel
 		return $this->hasOne(MediaItem::class , 'media_id', 'media_id');	
 	}
 	
+	public function getPlayerObjectAttribute() 
+	{
+		$filename = $this->filename;
+		return [
+			'media_id' => $this->media_id,
+			'file' => $this->filename,
+			'title' => $this->media->name ?? '',
+			'artist' => isset($this->media->artist) ? $this->media->artist->name : '',
+			'poster' => $this->media->picture_name ?? '',
+		];
+	}
+
 
 }
