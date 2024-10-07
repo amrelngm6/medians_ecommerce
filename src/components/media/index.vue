@@ -87,7 +87,7 @@ const form_field = defineAsyncComponent(() =>
 );
 
 import tooltip from '@/components/includes/tooltip.vue';
-const media_wizard = defineAsyncComponent(() => import('@/components/medias/media_wizard.vue') );
+const media_wizard = defineAsyncComponent(() => import('@/components/media/media_wizard.vue') );
 
 
 export default 
@@ -100,7 +100,7 @@ export default
         form_field,
         tooltip
     },
-    name:'Medias',
+    name:'Media',
     setup(props) {
 
         const url =  props.conf.url+props.path+'?load=json';
