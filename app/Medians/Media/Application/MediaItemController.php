@@ -65,7 +65,7 @@ class MediaItemController extends CustomController
 	    return render('media', [
 	        'load_vue' => true,
 	        'title' => translate('Audio items'),
-	        'items' => $this->repo->get(100),
+	        'items' => $this->repo->getByType('audio'),
 	        'columns' => $this->columns(),
 			'object_name'=> 'MediaItem',
 			'object_key'=> 'media_id',
