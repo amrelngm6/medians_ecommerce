@@ -59,15 +59,17 @@
 									<a href="/audiobook/edit_chapters/{{item.media_id}}" class="ajax-load hover:text-orange-500" >{{lang.translate('Manage')}}</a>
 								</td>
 								
-								<td class="text-center py-4 flex ">
-									<a href="/audiobook/edit/{{item.media_id}}" class="ajax-load waves-effect waves-light mx-auto btn btn-primary rounded-full relative">
-										<span class="tooltiptext left text-xs">{{lang.translate('Edit')}}</span>
-										<img src="/src/front_assets/svg/edit-2.svg" class="w-5 dark:brightness-200" />
-									</a>
-									<a href="/front_api/delete?type=MediaItem.delete&params[media_id]={{item.media_id}}" data-confirm="{{lang.translate('Are you sure')}}" date-confirm-text="{{lang.translate('Delete this media')}}" class="ajax-link mx-auto group relative   text-lg shadow">
-										<span class="tooltiptext left text-xs">{{lang.translate('Delete')}}</span>
-										<img src="/src/front_assets/svg/delete-white.svg" class="w-5 dark:brightness-200" />
-									</a>
+								<td class="text-center py-4  ">
+									<div class="flex w-full">
+										<a href="/audiobook/edit/{{item.media_id}}" class="ajax-load waves-effect waves-light mx-auto btn btn-primary rounded-full relative">
+											<span class="tooltiptext left text-xs">{{lang.translate('Edit')}}</span>
+											<img src="/src/front_assets/svg/edit-2.svg" class="w-5 dark:brightness-200" />
+										</a>
+										<a href="/front_api/delete?type=MediaItem.delete&params[media_id]={{item.media_id}}" data-confirm="{{lang.translate('Are you sure')}}" date-confirm-text="{{lang.translate('Delete this media')}}" class="ajax-link mx-auto group relative   text-lg shadow">
+											<span class="tooltiptext left text-xs">{{lang.translate('Delete')}}</span>
+											<img src="/src/front_assets/svg/delete-white.svg" class="w-5 dark:brightness-200" />
+										</a>
+									</div>
 								</td>
 							</tr>
                             {% endfor %}
