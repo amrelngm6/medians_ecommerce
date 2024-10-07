@@ -538,7 +538,7 @@ class ShortVideoController extends CustomController
         $settings = $this->app->SystemSetting();
         $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
 
-        $n = str_replace(':', '', $fron.$to);
+        $n = str_replace(':', '', $from.$to);
         $outputVideoPath = strpos($inputVideoPath, '/tmp') ? str_replace('/tmp/', '/shorts/'.$n, $inputVideoPath) : str_replace('/videos/', '/videos/shorts/'.$n, $inputVideoPath);
 
         // FFmpeg command to re-encode the video
