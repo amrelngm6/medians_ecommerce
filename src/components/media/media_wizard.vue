@@ -47,12 +47,15 @@
                                         class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-4 fw-bold" v-text="formatCustomTime(activeItem.created_at, 'MMMM DD, Y - HH:mm a')"></div>
+                                            <div class="fs-4 fw-bold"
+                                                v-text="formatCustomTime(activeItem.created_at, 'MMMM DD, Y - HH:mm a')">
+                                            </div>
                                         </div>
                                         <!--end::Number-->
 
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500" v-text="translate('Upload Date')"></div>
+                                        <div class="fw-semibold fs-6 text-gray-500" v-text="translate('Upload Date')">
+                                        </div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
@@ -86,7 +89,8 @@
                                         <!--end::Number-->
 
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500" v-text="translate('Comments')"></div>
+                                        <div class="fw-semibold fs-6 text-gray-500" v-text="translate('Comments')">
+                                        </div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
@@ -96,13 +100,16 @@
                                 <!--begin::Users-->
                                 <div class="symbol-group symbol-hover mb-3">
                                     <!--begin::User-->
-                                    <div class="symbol symbol-35px symbol-circle" v-for="comment in activeItem.comments">
+                                    <div class="symbol symbol-35px symbol-circle"
+                                        v-for="comment in activeItem.comments">
                                         <img alt="Pic" v-if="activeItem.picture" :src="activeItem.picture">
-                                        <span v-if="!activeItem.picture"  class="symbol-label bg-info text-inverse-info fw-bold" v-text="activeItem.name.substring(0,1)"></span>
+                                        <span v-if="!activeItem.picture"
+                                            class="symbol-label bg-info text-inverse-info fw-bold"
+                                            v-text="activeItem.name.substring(0, 1)"></span>
                                     </div>
 
                                     <!--begin::All users-->
-                                    <a href="#" class="symbol symbol-35px symbol-circle" >
+                                    <a href="#" class="symbol symbol-35px symbol-circle">
                                         <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bold"> +1</span>
                                     </a>
                                     <!--end::All users-->
@@ -121,8 +128,8 @@
                     <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
                         <!--begin::Nav item-->
                         <li class="nav-item" v-for="tab in tabs">
-                                <a class="nav-link text-active-primary py-5 me-6" @click="activeTab = tab"
-                                    :class="tab == activeTab ? 'active' : ''" href="javascript:;" v-text="tab"></a>
+                            <a class="nav-link text-active-primary py-5 me-6" @click="activeTab = tab"
+                                :class="tab == activeTab ? 'active' : ''" href="javascript:;" v-text="tab"></a>
                         </li>
                         <!--end::Nav item-->
                     </ul>
@@ -131,18 +138,48 @@
             </div>
 
 
-            <div class=" card w-full py-10">
+            <div class=" card w-full py-10" v-if="activeTab == 'Info'">
                 <div class="w-full stepper stepper-links ">
-                    <div class="stepper-nav justify-content-center py-2 ">
-                        <div class="stepper-item " v-for="row in fillable" @click="activeTab = row">
-                            <h3 :class="activeTab == row ? 'text-danger border-danger' : 'text-gray-400 border-transparent'"
-                                class="cursor-pointer pb-3 px-2 stepper-title text-md border-b "
-                                v-text="translate(row)"></h3>
+                    <div class="card-header cursor-pointer">
+                        <!--begin::Card title-->
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold m-0" v-text="translate('Profile Details')"></h3>
                         </div>
+                        <!--end::Card title-->
                     </div>
                     <div class="w-full">
                         <div class="card-body pt-0">
+                            <div class="card-body p-9">
+                                <!--begin::Row-->
+                                <div class="row mb-7">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Full Name')"></label>
+                                    <!--end::Label-->
 
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <span class="fw-bold fs-6 text-gray-800" v-text="activeItem.name"></span>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Row-->
+
+                                <!--begin::Input group-->
+                                <div class="row mb-7">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Description')"></label>
+                                    <!--end::Label-->
+
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.description"></span>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+
+
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -199,7 +236,7 @@ export default
             const activeTab = ref('Info');
             const content = ref({});
             const fillable = ref(['Info']);
-            const tabs = ref([translate('General'), translate('Pricing'),  translate('Attributes'), translate('Advanced'), translate('Images'), translate('SEO') ,translate('Stats')]);
+            const tabs = ref([translate('General'), translate('Pricing'), translate('Attributes'), translate('Advanced'), translate('Images'), translate('SEO'), translate('Stats')]);
 
             if (props.item) {
                 activeItem.value = props.item
