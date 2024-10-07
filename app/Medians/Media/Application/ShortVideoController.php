@@ -497,12 +497,10 @@ class ShortVideoController extends CustomController
             $cuttedFile = $this->cutVideo($_SERVER['DOCUMENT_ROOT'] .$item->main_file->path, $params['start'], $params['end']);
             $videoFile = str_replace($_SERVER['DOCUMENT_ROOT'], '', $cuttedFile);
             $params['files'] = [ ['type'=> 'short_video', 'storage'=> 'local', 'path'=> $videoFile] ];
-            $params['field'] = [ 'video_generated'=> '1' ];
+            $params['field'] = [ 'video_generated'=> '1', 'duration' =>  (strtotime($params['duration']) - strtotime('TODAY')) ];
             
             $params = $this->appendFileInfo($params, $cuttedFile);
             
-            print_r($params);
-            return;
             $clearMedia = $this->repo->clearMediaFiles($item->media_id);
 
             if ( $this->repo->update($params))
