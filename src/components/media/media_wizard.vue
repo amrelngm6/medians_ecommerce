@@ -64,7 +64,7 @@
                                         <div class="d-flex align-items-center">
                                             <i class="ki-duotone ki-arrow-down fs-3 text-danger me-2"><span
                                                     class="path1"></span><span class="path2"></span></i>
-                                            <div class="fs-4 fw-bold counted" v-text="activeItem.viewscount"></div>
+                                            <div class="fs-4 fw-bold counted" v-text="activeItem.views_count"></div>
                                         </div>
                                         <!--end::Number-->
 
@@ -81,7 +81,7 @@
                                         <div class="d-flex align-items-center">
                                             <i class="ki-duotone ki-arrow-up fs-3 text-success me-2"><span
                                                     class="path1"></span><span class="path2"></span></i>
-                                            <div class="fs-4 fw-bold counted" v-text="activeItem.commentscount"></div>
+                                            <div class="fs-4 fw-bold counted" v-text="activeItem.comments_count"></div>
                                         </div>
                                         <!--end::Number-->
 
@@ -398,6 +398,7 @@ export default
                 activeItem,
                 activeTab,
                 translate,
+                formatCustomTime,
                 back
             };
         },
