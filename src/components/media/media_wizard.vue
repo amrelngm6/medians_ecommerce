@@ -120,52 +120,9 @@
                     <!--begin::Nav-->
                     <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
                         <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary py-5 me-6 "
-                                href="/metronic8/demo1/apps/projects/project.html">
-                                Overview </a>
-                        </li>
-                        <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary py-5 me-6 "
-                                href="/metronic8/demo1/apps/projects/targets.html">
-                                Targets </a>
-                        </li>
-                        <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary py-5 me-6 "
-                                href="/metronic8/demo1/apps/projects/budget.html">
-                                Budget </a>
-                        </li>
-                        <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary py-5 me-6 "
-                                href="/metronic8/demo1/apps/projects/users.html">
-                                Users </a>
-                        </li>
-                        <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary py-5 me-6 "
-                                href="/metronic8/demo1/apps/projects/files.html">
-                                Files </a>
-                        </li>
-                        <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary py-5 me-6 "
-                                href="/metronic8/demo1/apps/projects/activity.html">
-                                Activity </a>
-                        </li>
-                        <!--end::Nav item-->
-                        <!--begin::Nav item-->
-                        <li class="nav-item">
-                            <a class="nav-link text-active-primary py-5 me-6 active"
-                                href="/metronic8/demo1/apps/projects/settings.html">
-                                Settings </a>
+                        <li class="nav-item" v-for="tab in tabs">
+                                <a class="nav-link text-active-primary py-5 me-6" @click="activeTab = tab"
+                                    :class="tab == activeTab ? 'active' : ''" href="javascript:;" v-text="tab"></a>
                         </li>
                         <!--end::Nav item-->
                     </ul>
@@ -299,6 +256,7 @@ export default
             const activeTab = ref('Info');
             const content = ref({});
             const fillable = ref(['Info']);
+            const tabs = ref([translate('General'), translate('Pricing'),  translate('Attributes'), translate('Advanced'), translate('Images'), translate('SEO') ,translate('Stats')]);
 
             if (props.item) {
                 activeItem.value = props.item
@@ -335,6 +293,7 @@ export default
             const showModal = ref(false);
 
             return {
+                tabs,
                 fields,
                 showModal,
                 switchField,
