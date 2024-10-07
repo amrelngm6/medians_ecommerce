@@ -58,9 +58,9 @@ class StationController extends CustomController
 	        'title' => translate('Stations'),
 	        'items' => $this->repo->get(),
 	        'columns' => $this->columns(),
-	        'fillable' => $this->fillable(),
 			'object_name'=> 'Station',
 			'object_key'=> 'station_id',
+			'no_create'=> true,
 	    ]);
 	}
 
