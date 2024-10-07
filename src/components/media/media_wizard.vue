@@ -31,129 +31,6 @@
                                     <!--end::Description-->
                                 </div>
                                 <!--end::Details-->
-
-                                <!--begin::Actions-->
-                                <div class="d-flex mb-4">
-                                    <a href="#" class="btn btn-sm btn-bg-light btn-active-color-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_users_search">Add User</a>
-
-                                    <a href="#" class="btn btn-sm btn-primary me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_new_target">Add Target</a>
-
-                                    <!--begin::Menu-->
-                                    <div class="me-0">
-                                        <button class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                            <i class="ki-solid ki-dots-horizontal fs-2x"></i>                            </button>
-                                        
-            <!--begin::Menu 3-->
-            <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-semibold w-200px py-3" data-kt-menu="true">
-                <!--begin::Heading-->
-                <div class="menu-item px-3">
-                    <div class="menu-content text-muted pb-2 px-3 fs-7 text-uppercase">
-                        Payments
-                    </div>
-                </div>
-                <!--end::Heading-->
-
-                <!--begin::Menu item-->
-                <div class="menu-item px-3">
-                    <a href="#" class="menu-link px-3">
-                        Create Invoice
-                    </a>
-                </div>
-                <!--end::Menu item-->
-
-                <!--begin::Menu item-->
-                <div class="menu-item px-3">
-                    <a href="#" class="menu-link flex-stack px-3">
-                        Create Payment
-
-                        <span class="ms-2" data-bs-toggle="tooltip" aria-label="Specify a target name for future usage and reference" data-bs-original-title="Specify a target name for future usage and reference" data-kt-initialized="1">
-                            <i class="ki-duotone ki-information fs-6"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>            </span>
-                    </a>
-                </div>
-                <!--end::Menu item-->
-
-                <!--begin::Menu item-->
-                <div class="menu-item px-3">
-                    <a href="#" class="menu-link px-3">
-                        Generate Bill
-                    </a>
-                </div>
-                <!--end::Menu item-->
-
-                <!--begin::Menu item-->
-                <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">
-                    <a href="#" class="menu-link px-3">
-                        <span class="menu-title">Subscription</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-
-                    <!--begin::Menu sub-->
-                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-3">
-                            <a href="#" class="menu-link px-3">
-                                Plans
-                            </a>
-                        </div>
-                        <!--end::Menu item-->
-
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-3">
-                            <a href="#" class="menu-link px-3">
-                                Billing
-                            </a>
-                        </div>
-                        <!--end::Menu item-->
-
-                        <!--begin::Menu item-->            
-                        <div class="menu-item px-3">
-                            <a href="#" class="menu-link px-3">
-                                Statements
-                            </a>
-                        </div>
-                        <!--end::Menu item-->
-                        
-                        <!--begin::Menu separator-->
-                        <div class="separator my-2"></div>
-                        <!--end::Menu separator-->
-
-                        <!--begin::Menu item-->            
-                        <div class="menu-item px-3">
-                            <div class="menu-content px-3">
-                                <!--begin::Switch-->      
-                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                    <!--begin::Input-->   
-                                    <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications">
-                                    <!--end::Input-->   
-
-                                    <!--end::Label-->   
-                                    <span class="form-check-label text-muted fs-6">
-                                        Recuring
-                                    </span>
-                                    <!--end::Label-->   
-                                </label>
-                                <!--end::Switch-->   
-                            </div>
-                        </div>
-                        <!--end::Menu item-->
-                    </div>
-                    <!--end::Menu sub-->
-                </div>
-                <!--end::Menu item-->
-
-                <!--begin::Menu item-->
-                <div class="menu-item px-3 my-1">
-                    <a href="#" class="menu-link px-3">
-                        Settings
-                    </a>
-                </div>
-                <!--end::Menu item-->
-            </div>
-            <!--end::Menu 3-->
-                                    </div>
-                                    <!--end::Menu-->
-                                </div>
-                                <!--end::Actions-->
                             </div>
                             <!--end::Head-->
 
@@ -214,17 +91,17 @@
                                         <!--end::User-->
                                                                 <!--begin::User-->
                                         <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" aria-label="Michael Eberon" data-bs-original-title="Michael Eberon" data-kt-initialized="1">
-                                                                                <img alt="Pic" src="/metronic8/demo1/assets/media/avatars/300-11.jpg">
+                                                                                <img alt="Pic" :src="activeItem.picture">
                                                                         </div>
                                         <!--end::User-->
                                                                 <!--begin::User-->
                                         <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" aria-label="Michelle Swanston" data-bs-original-title="Michelle Swanston" data-kt-initialized="1">
-                                                                                <img alt="Pic" src="/metronic8/demo1/assets/media/avatars/300-7.jpg">
+                                                                                <img alt="Pic" :src="activeItem.picture">
                                                                         </div>
                                         <!--end::User-->
                                                                 <!--begin::User-->
                                         <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" aria-label="Francis Mitcham" data-bs-original-title="Francis Mitcham" data-kt-initialized="1">
-                                                                                <img alt="Pic" src="/metronic8/demo1/assets/media/avatars/300-20.jpg">
+                                                                                <img alt="Pic" :src="activeItem.picture">
                                                                         </div>
                                         <!--end::User-->
                                                                 <!--begin::User-->
@@ -234,7 +111,7 @@
                                         <!--end::User-->
                                                                 <!--begin::User-->
                                         <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" aria-label="Melody Macy" data-bs-original-title="Melody Macy" data-kt-initialized="1">
-                                                                                <img alt="Pic" src="/metronic8/demo1/assets/media/avatars/300-2.jpg">
+                                                                                <img alt="Pic" :src="activeItem.picture">
                                                                         </div>
                                         <!--end::User-->
                                                                 <!--begin::User-->
@@ -244,7 +121,7 @@
                                         <!--end::User-->
                                                                 <!--begin::User-->
                                         <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" aria-label="Barry Walter" data-bs-original-title="Barry Walter" data-kt-initialized="1">
-                                                                                <img alt="Pic" src="/metronic8/demo1/assets/media/avatars/300-12.jpg">
+                                                                                <img alt="Pic" :src="activeItem.picture">
                                                                         </div>
                                         <!--end::User-->
                                     
