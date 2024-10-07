@@ -501,6 +501,8 @@ class ShortVideoController extends CustomController
             
             $params = $this->appendFileInfo($params, $cuttedFile);
             
+            print_r($params);
+            return;
             $clearMedia = $this->repo->clearMediaFiles($item->media_id);
 
             if ( $this->repo->update($params))
