@@ -93,7 +93,6 @@ const notifications_events = defineAsyncComponent(() => import('@/components/not
 export default {
     name: 'app',
     components: {
-        products,
         categories,
         data_table,
         SideMenu,
