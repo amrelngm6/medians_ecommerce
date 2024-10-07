@@ -46,7 +46,7 @@ class StationRepository
 
 	public function get($limit = 1000)
 	{
-		return Station::withCount('likes')->withCount('items')->with('items')->limit($limit)->get();
+		return Station::withCount('likes', 'items')->with('items')->limit($limit)->get();
 	}
 
 	public function getTop($limit = 1000)
