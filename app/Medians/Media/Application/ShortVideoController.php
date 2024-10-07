@@ -548,7 +548,7 @@ class ShortVideoController extends CustomController
         // $to = strlen($to) == 5 ? ('00:'.$to) : $to;
 
         // $command = "$ffmpeg -ss $from -i " . escapeshellarg($inputVideoPath) . " -to $to -c copy " . escapeshellarg($outputVideoPath) . " ";
-        $command = "$ffmpeg -ss $from -i " . escapeshellarg($inputVideoPath) . " -t $duration -c copy " . escapeshellarg($outputVideoPath) . " ";
+        $command = "$ffmpeg -i " . escapeshellarg($inputVideoPath) . "  -ss $from -t $duration -c:v copy -c:a copy " . escapeshellarg($outputVideoPath) . " ";
 
         // FFmpeg command to re-encode the video
         if (file_exists($outputVideoPath))
