@@ -547,7 +547,7 @@ class ShortVideoController extends CustomController
         $from = strlen($from) == 5 ? ('00:'.$from) : $from;
         $to = strlen($to) == 5 ? ('00:'.$to) : $to;
 
-        $command = "$ffmpeg -ss $from -i " . escapeshellarg($inputVideoPath) . " -t $to -c copy " . escapeshellarg($outputVideoPath) . " ";
+        $command = "$ffmpeg -ss $from -i " . escapeshellarg($inputVideoPath) . " -to $to -c copy " . escapeshellarg($outputVideoPath) . " ";
         // $command = "$ffmpeg -ss 00:$from -to 00:$to  -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
 
         // Execute the command
