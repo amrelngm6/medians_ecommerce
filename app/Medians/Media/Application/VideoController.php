@@ -203,7 +203,7 @@ class VideoController extends CustomController
     
     
     /**
-     * Discover page for frontend
+     * Search popoup list for frontend
      */
     public function search_popup()
     {
@@ -222,6 +222,37 @@ class VideoController extends CustomController
                 'list' => $list,
                 'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => 'popup-list',
+                'sub_layout' => 'videos/popup-videos-list',
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+    
+    
+    /**
+     * Search popoup list for frontend
+     */
+    public function search_popup_checkbox()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $params = $this->app->params();
+
+        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['type'] = 'video';
+        $list = $this->repo->getWithFilter($params);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/pages/popup-list.html.twig', [
+                'app' => $this->app,
+                'list' => $list,
+                'genres' => $this->categoryRepo->getVideoGenres(),
+                'layout' => 'videos/popup-list',
+                'sub_layout' => 'videos/popup-videos-list-checkbox',
             ], 'output'));
             
 		} catch (\Exception $e) {

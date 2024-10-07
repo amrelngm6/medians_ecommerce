@@ -84,6 +84,7 @@
     <script>
 
 var calendar;
+var selected_media = [];
 
 $(function() {
 
@@ -105,6 +106,7 @@ $(function() {
             slotDuration: '00:30:00', // Time slots every 30 minutes
             allDaySlot: false, // Disable all-day slot
             editable: true,
+            selectable: true,
             droppable: true, 
             nowIndicator: true,
             scrollTime: '{{now}}',
@@ -141,7 +143,22 @@ $(function() {
                 jQuery('#editChannelMediaName').text(info.event.title)
                 jQuery('#edit-channel-track-popup').toggleClass('hidden')
             },
-            
+            select: function(info) {
+                console.log(info)
+                // let link = '/front_api?type=channel-media-popup&params[channel_id]={{channel.channel_id}}&params[channel_media_id]='+ info.event.id;
+                // loadSection(link, 'editChannelPopupContent')
+                // let props = info.event.extendedProps;
+                
+                jQuery('#edit-channel-range-popup').toggleClass('hidden')
+                jQuery('#channel-range-start').val(info.startStr.substr(11, 8))
+                jQuery('#channel-range-end').val(info.endStr.substr(11, 8))
+                jQuery('#channel-range-time').html(info.startStr.substr(11, 8) + ' | ' + info.endStr.substr(11, 8))
+
+                var x = new Date(info.startStr);
+                let seconds = Math.abs(x.getTime() - (new Date(info.endStr)).getTime())/1000;
+                jQuery('#channel-range-duration').html(toHHMMSS(seconds))
+                
+            },
             eventMouseEnter: function(info) {
                 let props = info.event.extendedProps;
                 jQuery('#eventHoverPopupName').text(info.event.title)
@@ -219,13 +236,17 @@ $(function() {
             console.log(_t.value)
             updateSlotDuration(_t.value, calendar)
             calendar.scrollToTime( "{{'now'| date('H:i:00')}}");
-
         })
         calendar.scrollToTime( "{{'now'| date('H:i:00')}}");
+
+        jQuery(document).on('click', 'label', function(){
+            console.log(selected_media)
+        })
 });
 
     </script>
 
 
     {% include 'views/front/' ~ template ~ '/popups/channel-add-media.html.twig' %}
-    {% include 'views/front/' ~ template ~ '/popups/channel-calendar.html.twig' %}
+    {% include 'views/front/' ~ template ~ '/pages/channel/channel-calendar.html.twig' %}
+    {% include 'views/front/' ~ template ~ '/pages/channel/channel-range-popup.html.twig' %}

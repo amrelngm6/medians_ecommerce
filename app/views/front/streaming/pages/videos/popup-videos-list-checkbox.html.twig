@@ -1,0 +1,27 @@
+
+
+                                            <label id="video-list-{{item.media_id}}" onclick="(function () { 
+                                                jQuery('#video-list-{{item.media_id}}').remove()
+                                                {# let time =  #}
+                                                {# jQuery('#item-playing-duration-{{item.media_id}}').html('') #}
+                                                jQuery('#selected_media_list').append(jQuery('#selected-box-{{item.media_id}}').html())
+                                             })()  " role="button" class="text-slate-800 flex gap-2 w-full items-center rounded-md p-3 transition-all dark:hover:bg-gray-600 hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
+                                                <div class="mr-4 grid place-items-center"><img alt="candice" src="{{item.picture}}" class="relative inline-block h-12 w-12 !rounded-full object-cover object-center"></div>
+                                                <div style="max-width:68%" >
+                                                    <h6 class="truncate text-slate-800 dark:text-gray-400 font-medium">{{item.name}}</h6>
+                                                    <p class="text-slate-500 dark:text-gray-400 text-sm">{{item.artist.name}}</p>
+                                                </div>
+                                            </label>
+                                            <div id="selected-box-{{item.media_id}}" class="hidden"> 
+                                                <div class="w-full  flex gap-2 text-center py-4">
+                                                    <div class="panel panel-info w-full" >
+                                                        <div class="panel-body text-gray-300 dark:text-gray-300">
+                                                        {{item.name}}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="panel panel-info w-full">
+                                                        <div class="panel-body text-gray-300 dark:text-gray-300" id="item-playing-duration-{{item.media_id}}">{{item.field.duration}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
