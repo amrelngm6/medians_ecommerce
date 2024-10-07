@@ -214,7 +214,11 @@ class ChannelRepository
 	{
 		try {
 			
-			return Channel::find($id)->delete();
+			$delete = Channel::find($id)->delete();
+
+			$deleteItems = ChannelMedia::where('channel_id', $id)->delete();
+
+			return $delete;
 
 		} catch (\Exception $e) {
 

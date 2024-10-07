@@ -213,7 +213,12 @@ class StationRepository
 	{
 		try {
 			
-			return Station::find($id)->delete();
+			$delete = Station::find($id)->delete();
+
+			$deleteItems = StationMedia::where('station_id', $id)->delete();
+
+			return $delete;
+			
 
 		} catch (\Exception $e) {
 

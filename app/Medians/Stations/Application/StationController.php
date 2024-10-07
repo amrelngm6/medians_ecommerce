@@ -230,6 +230,14 @@ class StationController extends CustomController
 		
         try {
 
+			$item  = $this->repo->find($station_id);
+
+			// Handle customer Session
+        	$this->app->customer_auth();
+
+			// Validate item authorization
+			$this->validateDelete($item);
+
             if ($this->repo->delete($params['station_id']))
             {
                 return array('success'=>1, 'result'=>translate('Deleted'), 'reload'=>1);
@@ -265,10 +273,16 @@ class StationController extends CustomController
 
 	}
 
+	public function validateDelete($item) 
+	{
+		if ($item->customer_id != $this->app->customer->customer_id)
+		{
+        	throw new \Exception(translate('Not Allowed'), 1);
+		}
+	}
+
 	public function validate($params) 
 	{
-
-
 		if (empty($params['name']))
 		{
         	throw new \Exception(translate('NAME_EMPTY'), 1);
@@ -278,7 +292,6 @@ class StationController extends CustomController
 		{
         	throw new \Exception(translate('Login first'), 1);
 		}
-
 	}
 
     /**

@@ -230,6 +230,14 @@ class ChannelController extends CustomController
 		
         try {
 
+			$item  = $this->repo->find($station_id);
+
+			// Handle customer Session
+        	$this->app->customer_auth();
+
+			// Validate item authorization
+			$this->validateDelete($item);
+
             if ($this->repo->delete($params['channel_id']))
             {
                 return array('success'=>1, 'result'=>translate('Deleted'), 'reload'=>1);
@@ -393,7 +401,7 @@ class ChannelController extends CustomController
 			$item = $this->repo->find($channel_id);
 
 			$item->addView();
-			
+
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
 				'item' => $item,

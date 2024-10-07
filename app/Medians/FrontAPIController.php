@@ -214,11 +214,6 @@ class FrontAPIController extends CustomController
 		switch ($request->get('type')) 
 		{
 			
-				
-			case 'HelpMessage.update':
-				$controller =  new Help\Application\HelpMessageController;
-				break;
-
 			case 'Subscriber.update':
 				$controller = new Newsletters\Application\SubscriberController;
 				break;
@@ -282,8 +277,6 @@ class FrontAPIController extends CustomController
 				return printResponse((new Media\Application\ShortVideoController)->update_video());
 				break;
 				
-
-
 		}
 
 		return printResponse(isset($controller) ? json_encode($controller->update()) : []);
@@ -315,22 +308,6 @@ class FrontAPIController extends CustomController
 					return printResponse((new Newsletters\Application\SubscriberController())->delete());
 					break;
 			
-				case 'Cart.delete':
-					return printResponse((new Cart\Application\CartController())->delete());
-					break;
-			
-				case 'Wishlist.delete':
-					return printResponse((new Cart\Application\WishlistController())->delete());
-					break;
-
-				case 'Compare.delete':
-					return printResponse((new Cart\Application\CompareController())->delete());
-					break;
-
-				case 'Review.delete':
-					return printResponse((new Reviews\Application\ReviewController())->delete());
-					break;
-
 				case 'Comment.delete':
 					return printResponse((new Comments\Application\CommentController())->delete());
 					break;
@@ -342,7 +319,6 @@ class FrontAPIController extends CustomController
 				case 'PlaylistItem.delete':
 					return printResponse((new Playlists\Application\PlaylistController())->deleteItem());
 					break;
-				
 				
 				case 'StationMedia.delete':
 					return printResponse((new Stations\Application\StationMediaController())->delete());
@@ -356,6 +332,14 @@ class FrontAPIController extends CustomController
 					return printResponse((new Media\Application\MediaItemController())->delete());
 					break;
 				
+				case 'Station.delete':
+					return printResponse((new Stations\Application\StationController())->delete());
+					break;
+			
+				case 'Channel.delete':
+					return printResponse((new Channels\Application\ChannelController())->delete());
+					break;
+	
 			
 			}
 
