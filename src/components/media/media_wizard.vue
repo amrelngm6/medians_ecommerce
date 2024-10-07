@@ -97,63 +97,13 @@
                                 <div class="symbol-group symbol-hover mb-3">
                                     <!--begin::User-->
                                     <div class="symbol symbol-35px symbol-circle" v-for="comment in activeItem.comments">
-                                        <span class="symbol-label bg-warning text-inverse-warning fw-bold">A</span>
+                                        <img alt="Pic" v-if="activeItem.picture" :src="activeItem.picture">
+                                        <span v-if="!activeItem.picture"  class="symbol-label bg-info text-inverse-info fw-bold" v-text=""></span>
                                     </div>
-                                    <!--end::User-->
-                                    <!--begin::User-->
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-                                        aria-label="Michael Eberon" data-bs-original-title="Michael Eberon"
-                                        data-kt-initialized="1">
-                                        <img alt="Pic" :src="activeItem.picture">
-                                    </div>
-                                    <!--end::User-->
-                                    <!--begin::User-->
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-                                        aria-label="Michelle Swanston" data-bs-original-title="Michelle Swanston"
-                                        data-kt-initialized="1">
-                                        <img alt="Pic" :src="activeItem.picture">
-                                    </div>
-                                    <!--end::User-->
-                                    <!--begin::User-->
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-                                        aria-label="Francis Mitcham" data-bs-original-title="Francis Mitcham"
-                                        data-kt-initialized="1">
-                                        <img alt="Pic" :src="activeItem.picture">
-                                    </div>
-                                    <!--end::User-->
-                                    <!--begin::User-->
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-                                        data-bs-original-title="Susan Redwood" data-kt-initialized="1">
-                                        <span class="symbol-label bg-primary text-inverse-primary fw-bold">S</span>
-                                    </div>
-                                    <!--end::User-->
-                                    <!--begin::User-->
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-                                        aria-label="Melody Macy" data-bs-original-title="Melody Macy"
-                                        data-kt-initialized="1">
-                                        <img alt="Pic" :src="activeItem.picture">
-                                    </div>
-                                    <!--end::User-->
-                                    <!--begin::User-->
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-                                        data-bs-original-title="Perry Matthew" data-kt-initialized="1">
-                                        <span class="symbol-label bg-info text-inverse-info fw-bold">P</span>
-                                    </div>
-                                    <!--end::User-->
-                                    <!--begin::User-->
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-                                        aria-label="Barry Walter" data-bs-original-title="Barry Walter"
-                                        data-kt-initialized="1">
-                                        <img alt="Pic" :src="activeItem.picture">
-                                    </div>
-                                    <!--end::User-->
 
                                     <!--begin::All users-->
-                                    <a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal"
-                                        data-bs-target="#kt_modal_view_users">
-                                        <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bold"
-                                            data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                            data-bs-original-title="View more users" data-kt-initialized="1">+42</span>
+                                    <a href="#" class="symbol symbol-35px symbol-circle" >
+                                        <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bold"> +1</span>
                                     </a>
                                     <!--end::All users-->
                                 </div>
