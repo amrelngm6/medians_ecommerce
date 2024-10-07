@@ -96,8 +96,7 @@
                                 <!--begin::Users-->
                                 <div class="symbol-group symbol-hover mb-3">
                                     <!--begin::User-->
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-                                        data-bs-original-title="Alan Warden" data-kt-initialized="1">
+                                    <div class="symbol symbol-35px symbol-circle" v-for="comment in activeItem.comments">
                                         <span class="symbol-label bg-warning text-inverse-warning fw-bold">A</span>
                                     </div>
                                     <!--end::User-->
