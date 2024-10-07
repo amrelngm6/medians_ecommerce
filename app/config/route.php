@@ -311,6 +311,9 @@ if(!empty($app->auth()))
     /** @return channels */
     RouteHandler::get('/admin/channels', Medians\Channels\Application\ChannelController::class.'@index');
 
+    /** @return Playlist */
+    RouteHandler::get('/admin/playlists', Medians\Playlists\Application\PlaylistController::class.'@index');
+
     /** @return Audio */
     RouteHandler::get('/admin/audio', Medians\Media\Application\MediaItemController::class.'@index');
 

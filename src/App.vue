@@ -76,8 +76,6 @@ const menus = defineAsyncComponent(() => import('@/components/menus.vue') );
 
 const media = defineAsyncComponent(() => import('@/components/media/index.vue') );
 
-const csv_import = defineAsyncComponent(() => import('@/components/products/csv-import.vue') );
-
 const hooks = defineAsyncComponent(() => import('@/components/hooks/index.vue') );
 
 const plugins = defineAsyncComponent(() => import('@/components/plugins/index.vue') );
@@ -118,7 +116,6 @@ export default {
         plugins,
         hooks,
         payment_methods,
-        csv_import,
         media,
         blog,
         translate,
