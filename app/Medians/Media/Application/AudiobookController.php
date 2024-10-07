@@ -62,7 +62,7 @@ class AudiobookController extends CustomController
 	 */ 
 	public function index(  ) 
 	{
-	    return render('data_table', [
+	    return render('media', [
 	        'load_vue' => true,
 	        'title' => translate('Audiobooks'),
 	        'items' => $this->repo->get('audiobook'),

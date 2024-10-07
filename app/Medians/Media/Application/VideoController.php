@@ -60,7 +60,7 @@ class VideoController extends CustomController
 	 */ 
 	public function index(  ) 
 	{
-	    return render('data_table', [
+	    return render('media', [
 	        'load_vue' => true,
 	        'title' => translate('Videos'),
 	        'items' => $this->repo->getByType('video'),

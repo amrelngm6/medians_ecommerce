@@ -59,7 +59,7 @@ class ShortVideoController extends CustomController
 	 */ 
 	public function index(  ) 
 	{
-	    return render('data_table', [
+	    return render('media', [
 	        'load_vue' => true,
 	        'title' => translate('Short videos'),
 	        'items' => $this->repo->getByType('short_video'),
