@@ -2123,7 +2123,7 @@ Video Player
 }
 
 :fullscreen #video-controls {
-    padding: 5px;
+    padding: 15px;
     color: #f30;
     position: absolute;
     bottom: 0px !important;
