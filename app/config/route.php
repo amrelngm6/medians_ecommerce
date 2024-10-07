@@ -271,17 +271,8 @@ if(!empty($app->auth()))
     /** @return help messages */
     RouteHandler::get('/admin/help_messages', Medians\Help\Application\HelpMessageController::class.'@index');
 
-    /** @return events */
-    RouteHandler::get('/admin/events', Medians\Events\Application\EventController::class.'@index');
-
-    /** @return packages */
-    RouteHandler::get('/admin/packages', Medians\Packages\Application\PackageController::class.'@index');
-
-    /** @return payment methods */
-    RouteHandler::get('/admin/payment_methods', Medians\PaymentMethods\Application\PaymentMethodController::class.'@index');
-
     /** @return Get-started */
-    RouteHandler::get('/admin/get_started', Medians\Users\Application\GetStartedController::class.'@get_started');
+    // RouteHandler::get('/admin/get_started', Medians\Users\Application\GetStartedController::class.'@get_started');
 
 
     /**
@@ -297,12 +288,6 @@ if(!empty($app->auth()))
 
     /** @return reviews */
     RouteHandler::get('/admin/reviews', Medians\Reviews\Application\ReviewController::class.'@index');
-
-    /** @return Orders */
-    RouteHandler::get('/admin/orders', Medians\Orders\Application\OrderController::class.'@index');
-
-    /** @return invoice */
-    RouteHandler::get('/admin/invoices', \Medians\Invoices\Application\InvoiceController::class.'@index');
 
 
     /** @return Hooks */
@@ -320,15 +305,18 @@ if(!empty($app->auth()))
     RouteHandler::get('/admin/blog', \Medians\Blog\Application\BlogController::class.'@index');
     RouteHandler::get('/admin/blog/(:all)', Medians\Blog\Application\BlogController::class.'@article');
 
+    /** @return stations */
+    RouteHandler::get('/admin/stations', Medians\Stations\Application\StationController::class.'@index');
 
-    /**
-     * Master requests
-     * The next reuests available only 
-     * if the user is Master 
-     * has role_id = 1
-     */ 
-    if ($app->auth()->role_id != 1)
-        return $app->run();
+    /** @return Audio */
+    RouteHandler::get('/admin/audio', Medians\Media\Application\MediaItemController::class.'@index');
+
+    /** @return Audiobooks */
+    RouteHandler::get('/admin/audio', Medians\Media\Application\MediaItemController::class.'@index');
+    RouteHandler::get('/admin/audiobooks', Medians\Media\Application\AudiobookController::class.'@index');
+    RouteHandler::get('/admin/videos', Medians\Media\Application\VideoController::class.'@index');
+    RouteHandler::get('/admin/shorts', Medians\Media\Application\ShortVideoController::class.'@index');
+
 
     /**
     * @return System settings
@@ -338,16 +326,6 @@ if(!empty($app->auth()))
     RouteHandler::get('/admin/storage_settings', \Medians\Settings\Application\StorageSettingsController::class.'@index');
 
     /**
-    * @return AppSettings
-    */
-    RouteHandler::get('/admin/app_settings', \Medians\Settings\Application\AppSettingsController::class.'@index');
-
-    /**
-    * @return AppSettings
-    */
-    RouteHandler::get('/admin/parent_app_settings', \Medians\Settings\Application\AppSettingsController::class.'@parent_index');
-
-    /**
     * @return Notifications events 
     */
     RouteHandler::get('/admin/notifications_events', \Medians\Notifications\Application\NotificationEventController::class.'@index');
@@ -355,8 +333,6 @@ if(!empty($app->auth()))
     /** @return roles */
     RouteHandler::get('/admin/roles', Medians\Roles\Application\RoleController::class.'@index');
 
-    /** @return Payments */
-    RouteHandler::get('/admin/payments', Medians\Payments\Application\PaymentController::class.'@index');
 
     /** @return Business Languages */
     RouteHandler::get('/admin/languages', Medians\Languages\Application\LanguageController::class.'@index');
@@ -370,20 +346,11 @@ if(!empty($app->auth()))
     /** @return Contact Forms */
     RouteHandler::get('/admin/contact_forms', Medians\Forms\Application\ContactFormController::class.'@index');
 
-    /** @return Contact Forms */
+    /** @return menus Forms */
     RouteHandler::get('/admin/menus', \Medians\Menus\Application\MenuController::class.'@index');
     
     /** @return Email templates */
     RouteHandler::get('/admin/email_templates', \Medians\Templates\Application\EmailTemplateController::class.'@index');
-
-    /** @return countries */
-    RouteHandler::get('/admin/countries', Medians\Locations\Application\CountryController::class.'@index');
-
-    /** @return cities */
-    RouteHandler::get('/admin/cities', Medians\Locations\Application\CityController::class.'@index');
-
-    /** @return states */
-    RouteHandler::get('/admin/states', Medians\Locations\Application\StateController::class.'@index');
 
     /** @return Templates */
     RouteHandler::get('/admin/templates', Medians\Templates\Application\WebTemplateController::class.'@index');

@@ -301,19 +301,29 @@ class APP
 			
 			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'data_table'),
 			
-			array('title'=>translate('Marketing'),  'icon'=>'send', 'link'=>'#newsletters', 'sub'=>
+			array('title'=>translate('Media'),  'icon'=>'send', 'link'=>'#newsletters', 'sub'=>
 			[
-				array('permission'=>'Newsletters.index', 'title'=>translate('newsletters'),  'icon'=>'truck', 'link'=>'admin/newsletters', 'component'=>'data_table'),
-				array('permission'=>'Subscribers.index', 'title'=>translate('Subscribers'),  'icon'=>'truck', 'link'=>'admin/newsletter_subscribers', 'component'=>'data_table'),
-				array('permission'=>'EmailTemplate.index', 'title'=>translate('Email Templates'),  'icon'=>'tag', 'link'=>'admin/email_templates', 'component'=>'email_templates'),
+				array('permission'=>'Audio.index', 'title'=>translate('Music'),  'icon'=>'truck', 'link'=>'admin/audio', 'component'=>'data_table'),
+				array('permission'=>'Audiobooks.index', 'title'=>translate('Audiobooks'),  'icon'=>'tag', 'link'=>'admin/audiobooks', 'component'=>'email_templates'),
+				array('permission'=>'Videos.index', 'title'=>translate('Videos'),  'icon'=>'truck', 'link'=>'admin/videos', 'component'=>'data_table'),
+				array('permission'=>'Sorts.index', 'title'=>translate('Short Videos'),  'icon'=>'tag', 'link'=>'admin/shorts', 'component'=>'email_templates'),
 			]
 			),
+			
 			
 			array('title'=>translate('Categories'),  'icon'=>'send', 'link'=>'#genres', 'sub'=>
 			[
 				array('permission'=>'MediaGenres.index', 'title'=>translate('Genres'),  'icon'=>'truck', 'link'=>'admin/genres', 'component'=>'categories'),
 				array('permission'=>'BookGenres.index', 'title'=>translate('Book Genres'),  'icon'=>'truck', 'link'=>'admin/book_genres', 'component'=>'categories'),
 				array('permission'=>'VideoGenres.index', 'title'=>translate('Video Genres'),  'icon'=>'truck', 'link'=>'admin/video_genres', 'component'=>'categories'),
+			]
+			),
+			
+			array('title'=>translate('Marketing'),  'icon'=>'send', 'link'=>'#newsletters', 'sub'=>
+			[
+				array('permission'=>'Newsletters.index', 'title'=>translate('newsletters'),  'icon'=>'truck', 'link'=>'admin/newsletters', 'component'=>'data_table'),
+				array('permission'=>'Subscribers.index', 'title'=>translate('Subscribers'),  'icon'=>'truck', 'link'=>'admin/newsletter_subscribers', 'component'=>'data_table'),
+				array('permission'=>'EmailTemplate.index', 'title'=>translate('Email Templates'),  'icon'=>'tag', 'link'=>'admin/email_templates', 'component'=>'email_templates'),
 			]
 			),
 			

@@ -41,13 +41,9 @@ class MediaItemRepository
 
 	public function get($limit = 100)
 	{
-		return MediaItem::with('main_file')->where('model', null)->limit($limit)->get();
+		return MediaItem::with('main_file')->where('type', 'audio')->limit($limit)->get();
 	}
 
-	public function categories($model)
-	{
-		return MediaItem::where('model', $model)->get();
-	}
 
 
 	/**

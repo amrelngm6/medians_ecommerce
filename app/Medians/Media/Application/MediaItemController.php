@@ -35,6 +35,45 @@ class MediaItemController extends CustomController
 
 
     
+	/**
+	 * Columns list to view at DataTable 
+	 *  
+	 */ 
+	public function columns( ) 
+	{
+		return [
+            [ 'value'=> "media_id", 'text'=> "#"],
+            [ 'value'=> "name", 'text'=> translate('name'), 'sortable'=> true ],
+            [ 'value'=> "picture", 'text'=> translate('picture'), 'sortable'=> true ],
+            [ 'value'=> "artist.name", 'text'=> translate('Artist'),  ],
+            [ 'value'=> "field.duration", 'text'=> translate('Duration'),  ],
+            [ 'value'=> "edit", 'text'=> translate('edit')  ],
+            [ 'value'=> "delete", 'text'=> translate('delete')  ],
+        ];
+	}
+
+
+	/**
+	 * Admin index items
+	 * 
+	 * @param Silex\Application $app
+	 * @param \Twig\Environment $twig
+	 * 
+	 */ 
+	public function index(  ) 
+	{
+	    return render('data_table', [
+	        'load_vue' => true,
+	        'title' => translate('Audio items'),
+	        'items' => $this->repo->get(100),
+	        'columns' => $this->columns(),
+	        // 'fillable' => $this->fillable(),
+			'object_name'=> 'MediaItem',
+			'object_key'=> 'media_id',
+			'no_create'=> true,
+	    ]);
+	}
+
     
     /**
      * Upload Audio page for frontend
