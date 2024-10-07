@@ -2129,7 +2129,7 @@ Video Player
     bottom: 0px;
     left: 0;
     right: 0;
-    width: 100vw;
+    width: 100vw !important;
     display: flex;
     gap: 10px;
     background: linear-gradient(0deg, rgba(0, 13, 36, 0.8519782913165266) 0%, rgba(0, 13, 36, 0) 100%);
