@@ -450,12 +450,10 @@ class VideoController extends CustomController
         $response = curl_exec($ch);
 
         $save = file_put_contents($tempFileFullPath, $response);
-        if ($save)
-        {
-            $filesize = filesize($tempFileFullPath);
-            $filesize < 100 ? unlink($tempFileFullPath)   : null;
-            return $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : true;
-        }
+        
+        $filesize = filesize($tempFileFullPath);
+        $filesize < 100 ? unlink($tempFileFullPath)   : null;
+        return $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : true;
     } 
 
 
