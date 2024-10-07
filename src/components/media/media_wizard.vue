@@ -152,29 +152,36 @@
                             <div class="card-body p-9">
                                 <!--begin::Row-->
                                 <div class="row mb-7">
-                                    <!--begin::Label-->
                                     <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Full Name')"></label>
-                                    <!--end::Label-->
-
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8">
-                                        <span class="fw-bold fs-6 text-gray-800" v-text="activeItem.name"></span>
-                                    </div>
-                                    <!--end::Col-->
+                                    <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800" v-text="activeItem.name"></span></div>
                                 </div>
                                 <!--end::Row-->
 
                                 <!--begin::Input group-->
                                 <div class="row mb-7">
-                                    <!--begin::Label-->
                                     <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Description')"></label>
-                                    <!--end::Label-->
+                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.description"></span></div>
+                                </div>
+                                <!--end::Input group-->
 
-                                    <!--begin::Col-->
-                                    <div class="col-lg-8 fv-row">
-                                        <span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.description"></span>
-                                    </div>
-                                    <!--end::Col-->
+                                <!--begin::Input group-->
+                                <div class="row mb-7">
+                                    <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Duration')"></label>
+                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.field.duration ?? '0'"></span></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="row mb-7">
+                                    <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Filesize')"></label>
+                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.field.filesize ?? '0'"></span></div>
+                                </div>
+                                <!--end::Input group-->
+
+                                <!--begin::Input group-->
+                                <div class="row mb-7">
+                                    <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Bitrate')"></label>
+                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.field.bitrate ?? '0'"></span></div>
                                 </div>
                                 <!--end::Input group-->
 
