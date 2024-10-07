@@ -278,7 +278,7 @@ class ChannelMediaController extends CustomController
 		
 		// $newEncodedFile = $settings['ffmpeg_path'] . " -i $input -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k  -movflags +faststart+frag_keyframe+empty_moov+default_base_moof  -f mp4 -segment_time 10 -reset_timestamps 1  $output";
 		$newEncodedFile = $settings['ffmpeg_path'] . " -i $input -c:v copy -c:a copy -movflags +faststart  $output";
-
+		
 		$run = shell_exec($newEncodedFile);
 
 		return file_exists($output) ? $output : $input;

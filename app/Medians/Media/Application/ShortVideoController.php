@@ -495,7 +495,7 @@ class ShortVideoController extends CustomController
             
             $item = $this->repo->find($params['media_id']);
 
-            $videoFile = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->reencodeVideo($_SERVER['DOCUMENT_ROOT'] .$item->main_file->path, $params['start'], $params['end']));
+            $videoFile = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->cutVideo($_SERVER['DOCUMENT_ROOT'] .$item->main_file->path, $params['start'], $params['end']));
             $params['files'] = [ ['type'=> 'short_video', 'storage'=> 'local', 'path'=> $videoFile] ];
             $params['field'] = [ 'video_generated'=> '1' ];
 
@@ -533,7 +533,7 @@ class ShortVideoController extends CustomController
 
     
     
-    function reencodeVideo($inputVideoPath, $from, $to) {
+    function cutVideo($inputVideoPath, $from, $to) {
 
         $settings = $this->app->SystemSetting();
         $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
@@ -545,7 +545,10 @@ class ShortVideoController extends CustomController
         if (file_exists($outputVideoPath))
             return $outputVideoPath;
 
-        $command = "$ffmpeg -ss 00:$from -to 00:$to  -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
+        $from = strlen($from) == 5 ? ('00:'.$from) : $from;
+        $to = strlen($to) == 5 ? ('00:'.$to) : $to;
+        $command = "$ffmpeg -ss $from -i " . escapeshellarg($inputVideoPath) . " -to $to -c copy " . escapeshellarg($outputVideoPath) . " ";
+        // $command = "$ffmpeg -ss 00:$from -to 00:$to  -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
 
         // Execute the command
         $run = shell_exec($command);
