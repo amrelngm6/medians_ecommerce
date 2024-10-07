@@ -452,6 +452,11 @@ class VideoController extends CustomController
         $save = file_put_contents($tempFileFullPath, $response);
         
         $filesize = filesize($tempFileFullPath);
+        if ($filesize < 100) 
+        {
+            $save = file_put_contents($tempFileFullPath, fopen($link, 'r'));
+        }
+        $filesize = filesize($tempFileFullPath);
         $filesize < 100 ? unlink($tempFileFullPath)   : null;
         return $filesize < 100 ? throw new \Exception("File size is ".$filesize, 1) : true;
     } 
