@@ -145,7 +145,6 @@ class ChannelMediaController extends CustomController
 			$params = $this->app->params();
 			foreach ($params['selected']['media_id'] as $key => $value) 
 			{
-				$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
 				$newParams = [];
 				$newParams['channel_id'] = $params['channel_id'];
 				$newParams['date'] = $params['date'];
@@ -156,7 +155,8 @@ class ChannelMediaController extends CustomController
 				$newParams['filesize'] = $params['selected']['filesize'][$key];
 				$newParams['start_at'] = $params['selected']['start_at'][$key];
 				$newParams['title'] = $params['selected']['title'][$key];
-				
+
+				$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
 				$newParams = $this->appendFileInfo($newParams, $filePath); 
 
 				$save = $this->repo->store_item($newParams);
