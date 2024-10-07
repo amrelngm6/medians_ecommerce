@@ -447,11 +447,20 @@ function initAudioPlayer() {
 	
 }
 
+/**
+ * Convert Date to time
+ * @param {*} val  
+ */
+function dateToTime(d)
+{
+	return (d.getHours() > 9 ? d.getHours() : '0'+d.getHours() ) +':'+ (d.getMinutes() > 9 ? d.getMinutes() : '0'+d.getMinutes() ) + ':' + (d.getSeconds() > 9 ? d.getSeconds() : '0'+d.getSeconds() );
+}
+
 
 /*
-	converts String to hh:mm:ss or mm:ss
-	*/
-	function toHHMMSS(val) {
+converts String to hh:mm:ss or mm:ss
+*/
+function toHHMMSS(val) {
 	var sec_num = parseInt(val, 10);
 	var hours = Math.floor(sec_num / 3600);
 	var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
@@ -475,17 +484,7 @@ function initAudioPlayer() {
 
 
 function convertToTime(num) {
-    if (typeof num !== 'number' || num < 0) {
-      return "00:00";
-    }
-  
-    const hours = Math.floor(num / 60);
-    const minutes = Math.floor(num % 60);
-  
-    const hoursText = hours < 10 ? `0${hours}` : `${hours}`;
-    const minutesText = minutes < 10 ? `0${minutes}` : `${minutes}`;
-  
-    return `${hoursText}:${minutesText}`;
+	return toHHMMSS(num);
 }
 
 

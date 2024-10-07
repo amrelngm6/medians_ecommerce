@@ -100,7 +100,6 @@ class ChannelMediaController extends CustomController
         	$this->app->customer_auth();
             
 			$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
-			$getID3 = new getID3;
 			
 			if (substr($params['media_path'], 0, 4) == 'http' ) {
 				$videoController = new \Medians\Media\Application\VideoController;
@@ -112,33 +111,12 @@ class ChannelMediaController extends CustomController
 					$output = str_replace('.mp4', '_encoded.mp4', $tempFilePath);
 					$params['media_path'] = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->createFragmentsFile($filePath, $output));
 							
-					$fileInfo = $getID3->analyze($filePath);
-
-					if (isset($fileInfo['playtime_seconds'])) {
-						$params['duration'] = round($fileInfo['playtime_seconds'], 0);
-						$params['bitrate'] = $fileInfo['bitrate'];
-						$params['filesize'] = $fileInfo['filesize'];
-					}
-
+					$params = $this->appendFileInfo($params, $filePath); 
 				}
+
 			} else {
-					
-				$fileInfo = $getID3->analyze($filePath);
-
-				if (isset($fileInfo['playtime_seconds'])) {
-					$params['duration'] = round($fileInfo['playtime_seconds'], 0);
-					$params['bitrate'] = $fileInfo['bitrate'];
-					$params['filesize'] = $fileInfo['filesize'];
-				}
-
+				$params = $this->appendFileInfo($params, $filePath); 
 			}
-
-				
-			if ( isset($output) && file_exists($output))
-			{
-				// unlink($filePath);
-			}
-
 
 			$returnData = (!empty($this->repo->store_item($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
@@ -150,6 +128,55 @@ class ChannelMediaController extends CustomController
 
 		return $returnData;
 	}
+	
+
+
+	
+	public function bulk_store() 
+	{
+
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+
+        try {	
+
+        	$this->app->customer_auth();
+			$params = $this->app->params();
+			foreach ($params['selected']['media_id'] as $key => $value) 
+			{
+				$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
+				$newParams = [];
+				$newParams['channel_id'] = $params['channel_id'];
+				$newParams['date'] = $params['date'];
+				$newParams['media_id'] = $params['selected']['media_id'][$key];
+				$newParams['media_path'] = $params['selected']['media_path'][$key];
+				$newParams['duration'] = $params['selected']['duration'][$key];
+				$newParams['bitrate'] = $params['selected']['bitrate'][$key];
+				$newParams['filesize'] = $params['selected']['filesize'][$key];
+				$newParams['start_at'] = $params['selected']['start_at'][$key];
+
+				$newParams['title'] = $params['selected']['title'][$key];
+				
+				// $newParams = $this->appendFileInfo($params, $filePath); 
+
+				print_r($newParams);
+			}
+
+			return;
+
+			$returnData = (!empty($this->repo->store_item($params))) 
+            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            : array('success'=>0, 'result'=>'Error', 'error'=>1);
+
+        } catch (\Exception $e) {
+        	return array('result'=>$e->getMessage(), 'error'=>1);
+        }
+
+		return $returnData;
+	}
+	
+
 
 
 	public function update()
@@ -160,14 +187,12 @@ class ChannelMediaController extends CustomController
 		$params = $this->app->params();
 
         try {
-
 			
             if ($this->repo->update_item($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0);
             }
         
-
         } catch (\Exception $e) {
         	throw new \Exception("Error Processing Request", 1);
         	
@@ -261,6 +286,26 @@ class ChannelMediaController extends CustomController
 
 		return file_exists($output) ? $output : $input;
 	} 
+
+
+	/** 
+	 * Analyze file and get info
+	 */
+	public function appendFileInfo($params, $filePath)
+	{
+		$getID3 = new getID3;
+
+		$getID3->analyze($filePath);
+
+		if (isset($fileInfo['playtime_seconds'])) {
+			$params['duration'] = round($fileInfo['playtime_seconds'], 0);
+			$params['bitrate'] = $fileInfo['bitrate'];
+			$params['filesize'] = $fileInfo['filesize'];
+		}
+
+		return $params;
+	}
+
 
 	
 }

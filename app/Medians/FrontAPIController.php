@@ -185,6 +185,10 @@ class FrontAPIController extends CustomController
 					$return = (new Channels\Application\ChannelMediaController)->store();
 					break;
 	
+				case 'ChannelMedia.bulk_create':
+					$return = (new Channels\Application\ChannelMediaController)->bulk_store();
+					break;
+	
 				case 'ShortVideo.create':
 					$return = (new Media\Application\ShortVideoController)->store();
 					break;

@@ -13,30 +13,29 @@
 					</div>
 					<div class="lg:flex w-full gap-10 " >
 						<div class="w-96">
-							<div class="w-full  flex gap-2 text-center py-4">
+							<div class="w-full  flex gap-2  py-4">
 								<div class="panel panel-info w-full" >
 									<div class="panel-heading ">
-										<h3 class="panel-title">{{lang.translate('Item')}}</h3>
+										<h3 class="panel-title">{{lang.translate('Video')}} / {{lang.translate('Time')}}</h3>
 									</div>
 									<div class="panel-body text-gray-300 dark:text-gray-300">
 										<div id="curTime"></div>
 									</div>
 								</div>
+							</div>
+							
+							<form action="/front_api/create" class=" w-full ajax-form" id="new-range-item">
+								<input type="hidden" name="type" value="ChannelMedia.bulk_create"/>
 
-								<div class="panel panel-info w-full">
-									<div class="panel-heading">
-										<h3 class="panel-title">{{lang.translate('Time')}}</h3>
-									</div>
-									<div class="panel-body text-gray-300 dark:text-gray-300">
-										<div id="finalDuration" ></div>
-									</div>
-								</div>
-							</div>
-							<input type="hidden" id="channel-range-start" />
-							<input type="hidden" id="channel-range-end" />
-							<div id="selected_media_list" class="w-full">
-								
-							</div>
+								<input type="hidden" name="params[date]" id="channel-range-date" />
+								<input type="hidden" id="channel-range-start" />
+								<input type="hidden" id="channel-range-end" />
+								<input type="hidden" id="channel-range-selected-duration" value="0" />
+
+								<div id="selected_media_list" class="w-full max-h-80 overflow-y-auto"></div>
+
+								<input type="hidden" name="params[channel_id]" value="{{channel.channel_id}}"/>
+							</form>
 
 						</div>
 						<div class="block w-full " >
@@ -88,48 +87,33 @@
 
 								<div class="panel panel-info w-full flex gap-6" >
 									<div class="panel-heading">
-										<h3 class="panel-title">{{lang.translate('Duration')}}</h3>
+										<h3 class="panel-title">{{lang.translate('Total Duration')}}</h3>
 									</div>
 									<div class="panel-body text-gray-300 dark:text-gray-300">
 										<div id="channel-range-duration" ></div>
 									</div>
 								</div>
-							</div>
-						
-							<form action="/front_api/update" class=" max-w-lg mx-auto ajax-form" id="new-range-item">
-								<input type="hidden" name="type" value="ShortVideo.update"/>
 
+								<div class="panel panel-info w-full flex gap-6" >
+									<div class="panel-heading">
+										<h3 class="panel-title">{{lang.translate('Selected duration')}}</h3>
+									</div>
+									<div class="panel-body text-gray-300 dark:text-gray-300">
+										<div id="channel-range-selected-duration-text" ></div>
+									</div>
+								</div>
 								<div class="mt-4 relative flex max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-sm">
 									<div class="text-center w-full py-2 hidden" id="range-item-submit-button">
-										<button type="submit" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
+										<button onclick="(function(){ return jQuery('form#new-range-item').submit(); })()" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
 											<div class="absolute inset-0 w-3 bg-purple-800 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-											<span class="relative text-black group-hover:text-white">{{lang.translate('Update')}}</span>
+											<span class="relative text-black group-hover:text-white">{{lang.translate('Save')}}</span>
 										</button>
 									</div>
 								</div>
-								<input type="hidden" name="params[media_id]" value="{{item.media_id}}"/>
-							</form>
+							</div>
+						
 						</div>
 
-					</div>
-					<div class="hidden md:block">
-						<div class="flex justify-start gap-6 items-center">
-							<div class="text-xs">{{lang.translate('Available on')}}</div>
-							<div>
-								<span title="Android App" data-testid="loginRedirectAndroidStore" class="cursor-pointer">
-									<span>
-										<img src="/src/front_assets/svg/google-play.svg"/>
-									</span>
-								</span>
-							</div>
-							<div>
-								<span data-testid="loginRedirectIOSStore" title="IOS App" class="cursor-pointer">
-									<span>
-										<img src="/src/front_assets/svg/apple-store.svg"/>
-									</span>
-								</span>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
