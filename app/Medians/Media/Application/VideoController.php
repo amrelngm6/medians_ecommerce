@@ -664,7 +664,7 @@ class VideoController extends CustomController
         $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
 
         // FFmpeg command to re-encode the video
-        $outputVideoPath = str_replace('/tmp', '', $inputVideoPath);
+        $outputVideoPath = str_replace('/tmp', 'encoded_', str_replace('/shorts/', '/shorts/encoded_', $inputVideoPath));
         if (file_exists($outputVideoPath))
             return $outputVideoPath;
 
