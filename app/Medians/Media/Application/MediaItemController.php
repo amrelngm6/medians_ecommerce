@@ -62,7 +62,7 @@ class MediaItemController extends CustomController
 	 */ 
 	public function index(  ) 
 	{
-	    return render('data_table', [
+	    return render('media', [
 	        'load_vue' => true,
 	        'title' => translate('Audio items'),
 	        'items' => $this->repo->get(100),

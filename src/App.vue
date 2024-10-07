@@ -74,7 +74,7 @@ const contact_forms = defineAsyncComponent(() => import('@/components/contact_fo
 
 const menus = defineAsyncComponent(() => import('@/components/menus.vue') );
 
-const products = defineAsyncComponent(() => import('@/components/products/index.vue') );
+const media = defineAsyncComponent(() => import('@/components/media/index.vue') );
 
 const csv_import = defineAsyncComponent(() => import('@/components/products/csv-import.vue') );
 
@@ -120,6 +120,7 @@ export default {
         hooks,
         payment_methods,
         csv_import,
+        media,
         blog,
         translate,
         'help_messages':HelpMessages,
