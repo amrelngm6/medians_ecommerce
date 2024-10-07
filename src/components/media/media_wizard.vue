@@ -47,7 +47,7 @@
                                         class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-4 fw-bold" v-text="activeItem.created_at"></div>
+                                            <div class="fs-4 fw-bold" v-text="formatCustomTime(activeItem.created_at, 'M d, Y - H:i')"></div>
                                         </div>
                                         <!--end::Number-->
 
@@ -312,7 +312,7 @@ import 'vue3-easy-data-table/dist/style.css';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 
 import { defineAsyncComponent, ref } from 'vue';
-import { translate, getProgressWidth, handleRequest, deleteByKey, showAlert, handleAccess, getPositionAddress, findPlaces, getPlaceDetails } from '@/utils.vue';
+import { translate, getProgressWidth, handleRequest, formatCustomTime, showAlert, handleAccess, getPositionAddress, findPlaces, getPlaceDetails } from '@/utils.vue';
 
 const SideFormCreate = defineAsyncComponent(() =>
     import('@/components/includes/side-form-create.vue')
