@@ -497,7 +497,8 @@ class ShortVideoController extends CustomController
             $videoFile = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->cutVideo($_SERVER['DOCUMENT_ROOT'] .$item->main_file->path, $params['start'], $params['end']));
             $params['files'] = [ ['type'=> 'short_video', 'storage'=> 'local', 'path'=> $videoFile] ];
             $params['field'] = [ 'video_generated'=> '1' ];
-
+            return;
+            
             $clearMedia = $this->repo->clearMediaFiles($item->media_id);
 
             if ( $this->repo->update($params))
@@ -549,10 +550,12 @@ class ShortVideoController extends CustomController
 
         $command = "$ffmpeg -ss $from -i " . escapeshellarg($inputVideoPath) . " -to $to -c copy " . escapeshellarg($outputVideoPath) . " ";
         // $command = "$ffmpeg -ss 00:$from -to 00:$to  -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
-
+        echo $command;
+        return;
         // Execute the command
         $run = shell_exec($command);
         
+
         // Check if the re-encoded file was created successfully
         return file_exists($outputVideoPath) && filesize($outputVideoPath) > 0 ? $outputVideoPath : null;
         // return file_exists($outputVideoPath) && filesize($outputVideoPath) > 0 ? (new VideoController)->reencodeVideo($outputVideoPath) : null;
