@@ -2126,7 +2126,7 @@ Video Player
     padding: 5px;
     color: #f30;
     position: absolute;
-    bottom: 0px;
+    bottom: 0px !important;
     left: 0;
     right: 0;
     width: 100vw !important;
