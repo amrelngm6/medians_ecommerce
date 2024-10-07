@@ -4,7 +4,7 @@
         <div  v-if="content " class=" w-full relative">
             
             <div class=" " v-if="showWizard ">
-                <product_wizard :currency="currency" :langs="langs" @callback="()=> {activeItem = null; showWizard = false}" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.product_id ? activeItem.product_id : 'new')" :system_setting="system_setting" :setting="setting"  />
+                <media_wizard :currency="currency" :langs="langs" @callback="()=> {activeItem = null; showWizard = false}" :conf="conf" :auth="auth" :item="activeItem" :path="path+'/'+(activeItem.media_id ? activeItem.media_id : 'new')" :system_setting="system_setting" :setting="setting"  />
             </div>
 
             <main class=" flex-1 overflow-x-hidden overflow-y-auto  w-full relative" v-if="content.items && !showWizard">
@@ -28,7 +28,7 @@
                             </div>
                         </div>
     
-                        <a href="javascript:;" v-if="!showWizard" class="uppercase p-2 mx-2 text-center text-white w-32 rounded-lg bg-danger" @click="addProductWizard" v-text="translate('add_new')"></a>
+                        <a href="javascript:;" v-if="!showWizard" class="uppercase p-2 mx-2 text-center text-white w-32 rounded-lg bg-danger" @click="addMediaWizard" v-text="translate('add_new')"></a>
 
                     </div>
                     <datatabble 
@@ -87,20 +87,20 @@ const form_field = defineAsyncComponent(() =>
 );
 
 import tooltip from '@/components/includes/tooltip.vue';
-const product_wizard = defineAsyncComponent(() => import('@/components/products/product_wizard.vue') );
+const media_wizard = defineAsyncComponent(() => import('@/components/medias/media_wizard.vue') );
 
 
 export default 
 {
     components:{
         'datatabble': Vue3EasyDataTable,
-        product_wizard,
+        media_wizard,
         delete_icon,
         car_icon,
         form_field,
         tooltip
     },
-    name:'Products',
+    name:'Medias',
     setup(props) {
 
         const url =  props.conf.url+props.path+'?load=json';
@@ -129,7 +129,7 @@ export default
         load();
 
 
-        const addProductWizard = () => 
+        const addMediaWizard = () => 
         {
             activeItem.value = {};
             showWizard.value = true;
@@ -156,7 +156,7 @@ export default
                     break;  
 
                 case 'delete':
-                    deleteByKey('product_id', data, 'Product.delete');
+                    deleteByKey('media_id', data, 'MediaItem.delete');
                     break;  
 
                     
@@ -183,7 +183,7 @@ export default
             translate,
             showWizard,
             closeSide,
-            addProductWizard,
+            addMediaWizard,
             handleAction,
         };
     },
