@@ -89,11 +89,10 @@ $(function () {
      */
     var fromOld = 0;
     var toOld = duration;
-    console.log(duration)
     function setIONrangeSlider() {
+    console.log(duration)
         
         let limit = (duration > 60000) ? ( duration * .10 ) : 120;
-        alert(limit)
 
         noUiSlider.create(rangeSlider, {
             start: [0, duration], // Handle start position
