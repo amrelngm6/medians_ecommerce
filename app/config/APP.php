@@ -301,7 +301,7 @@ class APP
 			
 			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'data_table'),
 			
-			array('title'=>translate('Media'),  'icon'=>'send', 'link'=>'#newsletters', 'sub'=>
+			array('title'=>translate('Media'),  'icon'=>'music', 'link'=>'#media', 'sub'=>
 			[
 				array('permission'=>'Audio.index', 'title'=>translate('Music'),  'icon'=>'truck', 'link'=>'admin/audio', 'component'=>'data_table'),
 				array('permission'=>'Audiobooks.index', 'title'=>translate('Audiobooks'),  'icon'=>'tag', 'link'=>'admin/audiobooks', 'component'=>'data_table'),
@@ -311,7 +311,15 @@ class APP
 			),
 			
 			
-			array('title'=>translate('Categories'),  'icon'=>'send', 'link'=>'#genres', 'sub'=>
+			array('title'=>translate('Streaming'),  'icon'=>'headphones', 'link'=>'#streaming', 'sub'=>
+			[
+				array('permission'=>'Stations.index', 'title'=>translate('Stations'),  'icon'=>'truck', 'link'=>'admin/stations', 'component'=>'data_table'),
+				array('permission'=>'Channels.index', 'title'=>translate('Channels'),  'icon'=>'tag', 'link'=>'admin/channels', 'component'=>'data_table'),
+			]
+			),
+			
+			
+			array('title'=>translate('Categories'),  'icon'=>'list', 'link'=>'#genres', 'sub'=>
 			[
 				array('permission'=>'MediaGenres.index', 'title'=>translate('Genres'),  'icon'=>'truck', 'link'=>'admin/genres', 'component'=>'categories'),
 				array('permission'=>'BookGenres.index', 'title'=>translate('Book Genres'),  'icon'=>'truck', 'link'=>'admin/book_genres', 'component'=>'categories'),

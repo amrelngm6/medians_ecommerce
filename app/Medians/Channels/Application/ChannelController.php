@@ -36,7 +36,7 @@ class ChannelController extends CustomController
 		return [
             [ 'value'=> "channel_id", 'text'=> "#"],
             [ 'value'=> "name", 'text'=> translate('name'), 'sortable'=> true ],
-            [ 'value'=> "items_count", 'text'=> translate('Items'),  ],
+            [ 'value'=> "picture", 'text'=> translate('picture') ],
             [ 'value'=> "customer.name", 'text'=> translate('Customer'),  ],
             [ 'value'=> "edit", 'text'=> translate('edit')  ],
             [ 'value'=> "delete", 'text'=> translate('delete')  ],
@@ -44,23 +44,6 @@ class ChannelController extends CustomController
 	}
 
 
-
-	/**
-	 * Columns list to view at DataTable 
-	 *  
-	 */ 
-	public function fillable( ) 
-	{
-
-		return [
-            [ 'key'=> "channel_id", 'title'=> "#", 'column_type'=>'hidden'],
-			[ 'key'=> "name", 'title'=> translate('name'), 'disabled'=>true,  'fillable'=> true, 'column_type'=>'text' ],
-			[ 'key'=> "email", 'title'=> translate('Email'), 'disabled'=>true,  'fillable'=> true, 'column_type'=>'email' ],
-			[ 'key'=> "comment", 'title'=> translate('Comment'), 'disabled'=>true,  'fillable'=> true, 'column_type'=>'text' ],
-			[ 'key'=> "rate", 'title'=> translate('Rating'),  'fillable'=> true, 'column_type'=>'number' ],
-			[ 'key'=> "status", 'title'=> translate('status'),  'fillable'=> true, 'column_type'=>'checkbox' ],
-        ];
-	}
 
 	/**
 	 * Admin index items
@@ -74,11 +57,11 @@ class ChannelController extends CustomController
 	    return render('data_table', [
 	        'load_vue' => true,
 	        'title' => translate('Channels'),
-	        'items' => $this->repo->get(100),
+	        'items' => $this->repo->get(),
 	        'columns' => $this->columns(),
-	        'fillable' => $this->fillable(),
 			'object_name'=> 'Channel',
 			'object_key'=> 'channel_id',
+			'no_create'=> true,
 	    ]);
 	}
 

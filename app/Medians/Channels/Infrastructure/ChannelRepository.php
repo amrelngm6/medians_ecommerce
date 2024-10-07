@@ -47,7 +47,7 @@ class ChannelRepository
 
 	public function get($limit = 1000)
 	{
-		return Channel::withCount('likes')->with('items')->limit($limit)->get();
+		return Channel::withCount('likes')->withCount('items')->with('items')->limit($limit)->get();
 	}
 
 	public function getTop($limit = 1000)
