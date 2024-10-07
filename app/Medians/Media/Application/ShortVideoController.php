@@ -492,7 +492,7 @@ class ShortVideoController extends CustomController
         $settings = $this->app->SystemSetting();
 
         try {
-            
+            return;
             $item = $this->repo->find($params['media_id']);
 
             $videoFile = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->cutVideo($_SERVER['DOCUMENT_ROOT'] .$item->main_file->path, $params['start'], $params['end']));
