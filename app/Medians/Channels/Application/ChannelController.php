@@ -230,7 +230,7 @@ class ChannelController extends CustomController
 		
         try {
 
-			$item  = $this->repo->find($station_id);
+			$item  = $this->repo->find($params['channel_id']);
 
 			// Handle customer Session
         	$this->app->customer_auth();

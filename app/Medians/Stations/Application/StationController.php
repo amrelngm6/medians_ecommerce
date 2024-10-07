@@ -230,7 +230,7 @@ class StationController extends CustomController
 		
         try {
 
-			$item  = $this->repo->find($station_id);
+			$item  = $this->repo->find($params['station_id']);
 
 			// Handle customer Session
         	$this->app->customer_auth();
@@ -271,14 +271,6 @@ class StationController extends CustomController
         	
         }
 
-	}
-
-	public function validateDelete($item) 
-	{
-		if ($item->customer_id != $this->app->customer->customer_id)
-		{
-        	throw new \Exception(translate('Not Allowed'), 1);
-		}
 	}
 
 	public function validate($params) 
