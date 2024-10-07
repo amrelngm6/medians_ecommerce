@@ -155,17 +155,14 @@ class ChannelMediaController extends CustomController
 				$newParams['bitrate'] = $params['selected']['bitrate'][$key];
 				$newParams['filesize'] = $params['selected']['filesize'][$key];
 				$newParams['start_at'] = $params['selected']['start_at'][$key];
-
 				$newParams['title'] = $params['selected']['title'][$key];
 				
-				// $newParams = $this->appendFileInfo($params, $filePath); 
+				$newParams = $this->appendFileInfo($newParams, $filePath); 
 
-				print_r($newParams);
+				$save = $this->repo->store_item($newParams);
 			}
 
-			return;
-
-			$returnData = (!empty($this->repo->store_item($params))) 
+			$returnData = ($save) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
 
