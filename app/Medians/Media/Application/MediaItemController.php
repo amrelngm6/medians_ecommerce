@@ -67,7 +67,6 @@ class MediaItemController extends CustomController
 	        'title' => translate('Audio items'),
 	        'items' => $this->repo->get(100),
 	        'columns' => $this->columns(),
-	        // 'fillable' => $this->fillable(),
 			'object_name'=> 'MediaItem',
 			'object_key'=> 'media_id',
 			'no_create'=> true,
