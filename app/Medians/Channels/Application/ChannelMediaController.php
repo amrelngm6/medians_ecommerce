@@ -156,7 +156,7 @@ class ChannelMediaController extends CustomController
 				$newParams['start_at'] = $params['selected']['start_at'][$key];
 				$newParams['title'] = $params['selected']['title'][$key];
 
-				$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
+				$filePath = $_SERVER['DOCUMENT_ROOT']. $newParams['media_path'];
 				$newParams = $this->appendFileInfo($newParams, $filePath); 
 
 				$save = $this->repo->store_item($newParams);

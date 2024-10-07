@@ -92,7 +92,7 @@ $(function () {
     function setIONrangeSlider() {
     console.log(duration)
         
-        let limit = (duration > 60000) ? ( duration * .10 ) : 120;
+        let limit = (duration > 3600) ? ( duration * .05 ) : 120;
 
         noUiSlider.create(rangeSlider, {
             start: [0, duration], // Handle start position
