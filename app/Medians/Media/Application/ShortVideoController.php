@@ -494,9 +494,12 @@ class ShortVideoController extends CustomController
         try {
             $item = $this->repo->find($params['media_id']);
 
-            $videoFile = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->cutVideo($_SERVER['DOCUMENT_ROOT'] .$item->main_file->path, $params['start'], $params['end']));
+            $cuttedFile = $this->cutVideo($_SERVER['DOCUMENT_ROOT'] .$item->main_file->path, $params['start'], $params['end']);
+            $videoFile = str_replace($_SERVER['DOCUMENT_ROOT'], '', $cuttedFile);
             $params['files'] = [ ['type'=> 'short_video', 'storage'=> 'local', 'path'=> $videoFile] ];
             $params['field'] = [ 'video_generated'=> '1' ];
+            
+            $params = $this->appendFileInfo($params, $cuttedFile);
             
             $clearMedia = $this->repo->clearMediaFiles($item->media_id);
 
@@ -559,4 +562,25 @@ class ShortVideoController extends CustomController
         // return file_exists($outputVideoPath) && filesize($outputVideoPath) > 0 ? (new VideoController)->reencodeVideo($outputVideoPath) : null;
     }
 
+    
+	/** 
+	 * Analyze file and get info
+	 */
+	public function appendFileInfo($params, $filePath)
+	{
+		$getID3 = new getID3;
+
+		$getID3->analyze($filePath);
+
+		if (isset($fileInfo['playtime_seconds'])) {
+			$params['duration'] = round($fileInfo['playtime_seconds'], 0);
+			$params['bitrate'] = $fileInfo['bitrate'];
+			$params['filesize'] = $fileInfo['filesize'];
+		}
+
+		return $params;
+	}
+
+
+    
 }
