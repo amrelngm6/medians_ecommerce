@@ -141,66 +141,9 @@
                         </div>
                     </div>
                     <div class="w-full">
-                        <form :action="'/api/' + (activeItem.translation_id > 0 ? 'update' : 'create')"
-                            v-if="activeTab == 'Info'" :key="activeTab">
-                            <input type="hidden" name="type"
-                                :value="activeItem.translation_id > 0 ? 'Translation.update' : 'Translation.create'" />
-                            <input type="hidden" name="params[code]" :value="activeItem.code ?? ''" />
-                            <input type="hidden" name="params[translation_id]"
-                                :value="activeItem.translation_id ?? ''" />
-                            <div class="card-body pt-0">
-                                <div class="settings-form">
-                                    <div class="max-w-xl mb-6 mx-auto">
+                        <div class="card-body pt-0">
 
-                                        <div
-                                            class="notice d-flex bg-blue-100 rounded border-primary border border-dashed rounded-3 p-6">
-                                            <div class="d-flex flex-stack flex-grow-1 ">
-                                                <div class=" fw-semibold">
-                                                    <h4 class="text-gray-900 fw-bold"
-                                                        v-text="translate('Translate the code')"></h4>
-                                                    <div class="fs-6 text-gray-700 "
-                                                        v-text="translate('Translate the word into the available languages')">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="max-w-xl mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
-                                                :for="'input' + i" v-text="translate('Code')"></label>
-                                            <input :disabled="true" autocomplete="off"
-                                                class="form-control form-control-solid"
-                                                :placeholder="translate('Generated from english translation')"
-                                                v-model="activeItem.code">
-                                        </div>
-
-                                        <hr class="opacity-10 my-4" />
-                                        <div class="w-full mb-6 " v-if="languages">
-                                            <div class="w-full mb-6 mx-auto flex gap-4"
-                                                v-for="(language, key) in languages">
-                                                <label v-if="languages[key]"
-                                                    class="flex gap-4 cursor-pointer w-full col-form-label required fw-semibold fs-6">
-                                                    <img class="rounded-full w-10 h-10" :src="language.icon" />
-                                                    <p v-text="language.name" class="fw-bold fs-4"></p>
-                                                </label>
-
-                                                <input autocomplete="off" class="form-control form-control-solid"
-                                                    :placeholder="translate('Translate into') + ' ' + translate(language.name)"
-                                                    :name="'params[translation][' + language.language_code + ']'"
-                                                    v-model="fields[language.language_code]">
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <p class="text-center mt-10"><button
-                                    class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger"
-                                    v-text="translate('Submit')"></button></p>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
