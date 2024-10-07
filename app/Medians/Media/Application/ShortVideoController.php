@@ -501,6 +501,8 @@ class ShortVideoController extends CustomController
             
             $params = $this->appendFileInfo($params, $cuttedFile);
             
+            print_r($params);
+            return;
             $clearMedia = $this->repo->clearMediaFiles($item->media_id);
 
             if ( $this->repo->update($params))
@@ -543,14 +545,17 @@ class ShortVideoController extends CustomController
         $n = str_replace(':', '', $from.$to);
         $outputVideoPath = strpos($inputVideoPath, '/tmp') ? str_replace('/tmp/', '/shorts/'.$n, $inputVideoPath) : str_replace('/videos/', '/videos/shorts/'.$n, $inputVideoPath);
 
-        // FFmpeg command to re-encode the video
-        if (file_exists($outputVideoPath))
-            return $outputVideoPath;
-
         $from = strlen($from) == 5 ? ('00:'.$from) : $from;
         $to = strlen($to) == 5 ? ('00:'.$to) : $to;
 
         $command = "$ffmpeg -ss $from -i " . escapeshellarg($inputVideoPath) . " -to $to -c copy " . escapeshellarg($outputVideoPath) . " ";
+
+        echo $command;
+
+        // FFmpeg command to re-encode the video
+        if (file_exists($outputVideoPath))
+            return $outputVideoPath;
+
         // $command = "$ffmpeg -ss 00:$from -to 00:$to  -i " . escapeshellarg($inputVideoPath) . " -c:v libx264 -preset fast -crf 22 -c:a aac -b:a 128k " . escapeshellarg($outputVideoPath) . " 2>&1";
 
         // Execute the command
