@@ -167,7 +167,7 @@
                                 <!--begin::Input group-->
                                 <div class="row mb-7">
                                     <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Duration')"></label>
-                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.field.duration ?? '0'"></span></div>
+                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.field.duration ? formatCustomTime(activeItem.field.duration, 'HH:mm:ss') : '0'"></span></div>
                                 </div>
                                 <!--end::Input group-->
 
