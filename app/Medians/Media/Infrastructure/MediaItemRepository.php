@@ -46,7 +46,10 @@ class MediaItemRepository
 
 	public function getByType($type = 'audio', $limit = 1000)
 	{
-		return MediaItem::withCount('likes', 'comments', 'views')->with('main_file', 'comments')->where('type', $type)->limit($limit)->get();
+		return MediaItem::withCount('likes', 'comments', 'views')->with('main_file')->with(['comments' => function($q) {
+			return $q->with('customer');
+		}])
+		->where('type', $type)->limit($limit)->get();
 	}
 
 
