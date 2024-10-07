@@ -17,10 +17,8 @@
 							<tr class="py-4 text-left">
 								<th style="width: 50px">{{lang.translate('Title')}}</th>
 								<th style="min-width: 200px"></th>
-								<th style="min-width: 100px">{{lang.translate('Likes')}}</th>
-								<th style="min-width: 100px">{{lang.translate('Views')}}</th>
-								<th style="min-width: 100px">{{lang.translate('Comments')}}</th>
-								<th class="text-right py-8 min-h-20" >{{lang.translate('Actions')}}</th>
+								<th style="min-width: 100px">{{lang.translate('Stats')}}</th>
+								<th class="text-ceneter py-8 min-h-20" >{{lang.translate('Actions')}}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -35,22 +33,30 @@
 									<a href="/video/{{item.media_id}}" class="ajax-load text-dark font-weight-600 text-primary font-size-16">{{item.name}}</a>
 								</td>
 								<td>
-									<span class="text-fade block">
-										{{item.likescount()}}
-									</span>
-								</td>
-								<td>
-									<span class="text-fade block">{{item.viewscount()}}</span>
-								</td>
-								<td>
-									<span class="text-fade block">{{item.commentscount()}}</span>
+									<div class="text-sm text-gray-100 flex gap-2 ">
+										<span class=" cursor-pointer text-sm text-gray-100 flex gap-2 relative">
+											<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'white' : 'blank'}}-heart.svg" />
+											<span id="views-count">{{item.likescount()}}</span>
+											<span class="tooltiptext left text-xs">{{lang.translate('Likes')}}</span>
+										</span>
+										<span class=" cursor-pointer text-sm text-gray-100 flex gap-2 relative">
+											<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg" />
+											<span id="views-count">{{item.viewscount()}}</span>
+											<span class="tooltiptext left text-xs">{{lang.translate('Views')}}</span>
+										</span>
+										<span class=" cursor-pointer text-sm text-gray-100 flex gap-2 relative">
+											<span class="tooltiptext left text-xs">{{lang.translate('Comments')}}</span>
+											<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg" />
+											<span id="comments-">{{item.commentscount()}}</span>
+										</span>
+									</div>
 								</td>
 								<td class="text-right py-4 flex gap-6">
 									<a href="/video/edit/{{item.media_id}}" class="ajax-load relative waves-effect waves-light btn btn-primary rounded-full ">
 										<span class="tooltiptext left text-xs">{{lang.translate('Edit')}}</span>
 										<img src="/src/front_assets/svg/edit-2.svg" class="w-5 dark:brightness-200" />
 									</a>
-									<a href="/front_api/delete?type=MediaItem.delete&params[media_id]={{item.media_id}}" data-confirm="{{lang.translate('Are you sure')}}" date-confirm-text="{{lang.translate('Delete this media from channel')}}" class="ajax-link mx-auto group relative   text-lg shadow">
+									<a href="/front_api/delete?type=MediaItem.delete&params[media_id]={{item.media_id}}" data-confirm="{{lang.translate('Are you sure')}}" date-confirm-text="{{lang.translate('Delete this media')}}" class="ajax-link mx-auto group relative   text-lg shadow">
 										<span class="tooltiptext left text-xs">{{lang.translate('Delete')}}</span>
 										<img src="/src/front_assets/svg/delete-white.svg" class="w-5 dark:brightness-200" />
 									</a>

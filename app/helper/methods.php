@@ -165,8 +165,9 @@ function Page404()
 {
     $app = new \config\APP;
     $settings = $app->SystemSetting();
-    echo $app->template()->render('views/front/'.$settings['template'].'/error.html.twig', [
+    echo $app->template()->render('views/front/error.html.twig', [
         'title' => 'Page not found',
+        'template'  => $setting['template'] ?? 'default',
         'app' => $app
     ]);
 }

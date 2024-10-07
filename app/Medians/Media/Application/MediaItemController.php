@@ -156,7 +156,7 @@ class MediaItemController extends CustomController
                 'app' => $this->app,
                 'customer' => $customer,
                 'list' => $list,
-                'layout' => isset($this->app->customer->customer_id) ? 'studio_media' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'audio/studio' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
