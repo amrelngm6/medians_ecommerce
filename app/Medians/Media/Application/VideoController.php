@@ -63,7 +63,7 @@ class VideoController extends CustomController
 	    return render('data_table', [
 	        'load_vue' => true,
 	        'title' => translate('Videos'),
-	        'items' => $this->repo->get(100),
+	        'items' => $this->repo->getByType('video'),
 	        'columns' => $this->columns(),
 			'object_name'=> 'MediaItem',
 			'object_key'=> 'media_id',

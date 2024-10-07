@@ -65,7 +65,7 @@ class AudiobookController extends CustomController
 	    return render('data_table', [
 	        'load_vue' => true,
 	        'title' => translate('Audiobooks'),
-	        'items' => $this->repo->get(100),
+	        'items' => $this->repo->get('audiobook'),
 	        'columns' => $this->columns(),
 			'object_name'=> 'MediaItem',
 			'object_key'=> 'media_id',

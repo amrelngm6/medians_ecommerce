@@ -44,6 +44,11 @@ class MediaItemRepository
 		return MediaItem::with('main_file')->where('type', 'audio')->limit($limit)->get();
 	}
 
+	public function getByType($type = 'audio', $limit = 1000)
+	{
+		return MediaItem::with('main_file')->where('type', $type)->limit($limit)->get();
+	}
+
 
 
 	/**
@@ -75,7 +80,7 @@ class MediaItemRepository
 				$model = $model->where('name', 'LIKE', '%'.$params['title'].'%');
 			}
 
-			if (!empty($params['type']) && in_array($params['type'], ['audio', 'audiobook','video', 'course', 'short_video']))
+			if (!empty($params['type']) && in_array($params['type'], ['audio', 'audiobook','video', 'short_video']))
 			{
 				$model = $model->where('type', $params['type']);
 			}
