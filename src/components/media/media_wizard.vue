@@ -167,7 +167,7 @@
                                 <!--begin::Input group-->
                                 <div class="row mb-7">
                                     <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Duration')"></label>
-                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.field.duration ? formatCustomTime(activeItem.field.duration, 'HH:mm:ss') : '0'"></span></div>
+                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.field.duration ? toHHMMSS(activeItem.field.duration) : '0'"></span></div>
                                 </div>
                                 <!--end::Input group-->
 
@@ -205,19 +205,12 @@ import 'vue3-easy-data-table/dist/style.css';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 
 import { defineAsyncComponent, ref } from 'vue';
-import { translate, getProgressWidth, handleRequest, formatCustomTime, showAlert, handleAccess, getPositionAddress, findPlaces, getPlaceDetails } from '@/utils.vue';
-
-const SideFormCreate = defineAsyncComponent(() =>
-    import('@/components/includes/side-form-create.vue')
-);
-
-const SideFormUpdate = defineAsyncComponent(() =>
-    import('@/components/includes/side-form-update.vue')
-);
+import { translate, getProgressWidth, handleRequest, formatCustomTime, toHHMMSS, handleAccess } from '@/utils.vue';
 
 const form_field = defineAsyncComponent(() =>
     import('@/components/includes/form_field.vue')
 );
+
 import field from '@/components/includes/Field.vue';
 
 export default
@@ -225,8 +218,6 @@ export default
         components: {
             'vue-medialibrary-field': field,
             'datatabble': Vue3EasyDataTable,
-            SideFormCreate,
-            SideFormUpdate,
             close_icon,
             delete_icon,
             car_icon,
