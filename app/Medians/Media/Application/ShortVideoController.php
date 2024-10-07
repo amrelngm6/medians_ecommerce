@@ -494,7 +494,7 @@ class ShortVideoController extends CustomController
         try {
             $item = $this->repo->find($params['media_id']);
 
-            $cuttedFile = $this->cutVideo($_SERVER['DOCUMENT_ROOT'] .$item->main_file->path, $params['start'], $params['end']);
+            $cuttedFile = $this->cutVideo($_SERVER['DOCUMENT_ROOT'] .$item->main_file->path, $params['start'], $params['end'], $params['duration']);
             $videoFile = str_replace($_SERVER['DOCUMENT_ROOT'], '', $cuttedFile);
             $params['files'] = [ ['type'=> 'short_video', 'storage'=> 'local', 'path'=> $videoFile] ];
             $params['field'] = [ 'video_generated'=> '1', 'duration' =>  (strtotime($params['duration']) - strtotime('TODAY')) ];
@@ -535,7 +535,7 @@ class ShortVideoController extends CustomController
 
     
     
-    function cutVideo($inputVideoPath, $from, $to) {
+    function cutVideo($inputVideoPath, $from, $to, $duration = null) {
 
         $settings = $this->app->SystemSetting();
         $ffmpeg = $settings['ffmpeg_path'] ?? 'ffmpeg';
@@ -544,9 +544,11 @@ class ShortVideoController extends CustomController
         $outputVideoPath = strpos($inputVideoPath, '/tmp') ? str_replace('/tmp/', '/shorts/'.$n, $inputVideoPath) : str_replace('/videos/', '/videos/shorts/'.$n, $inputVideoPath);
 
         $from = strlen($from) == 5 ? ('00:'.$from) : $from;
-        $to = strlen($to) == 5 ? ('00:'.$to) : $to;
+        $duration = '00:'.$duration;
+        // $to = strlen($to) == 5 ? ('00:'.$to) : $to;
 
-        $command = "$ffmpeg -ss $from -i " . escapeshellarg($inputVideoPath) . " -to $to -c copy " . escapeshellarg($outputVideoPath) . " ";
+        // $command = "$ffmpeg -ss $from -i " . escapeshellarg($inputVideoPath) . " -to $to -c copy " . escapeshellarg($outputVideoPath) . " ";
+        $command = "$ffmpeg -ss $from -i " . escapeshellarg($inputVideoPath) . " -t $duration -c copy " . escapeshellarg($outputVideoPath) . " ";
 
         // FFmpeg command to re-encode the video
         if (file_exists($outputVideoPath))
