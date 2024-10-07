@@ -276,6 +276,7 @@ export default
                 showModal,
                 switchField,
                 addField,
+                toHHMMSS,
                 activeField,
                 progressWidth,
                 showEditSide,
