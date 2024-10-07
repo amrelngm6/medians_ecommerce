@@ -554,7 +554,8 @@ class ShortVideoController extends CustomController
         $run = shell_exec($command);
         
         // Check if the re-encoded file was created successfully
-        return file_exists($outputVideoPath) && filesize($outputVideoPath) > 0 ? (new VideoController)->reencodeVideo($outputVideoPath) : null;
+        return file_exists($outputVideoPath) && filesize($outputVideoPath) > 0 ? $outputVideoPath : null;
+        // return file_exists($outputVideoPath) && filesize($outputVideoPath) > 0 ? (new VideoController)->reencodeVideo($outputVideoPath) : null;
     }
 
 }
