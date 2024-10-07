@@ -292,7 +292,7 @@ class ChannelMediaController extends CustomController
 	{
 		$getID3 = new getID3;
 
-		$getID3->analyze($filePath);
+		$fileInfo = $getID3->analyze($filePath);
 
 		if (isset($fileInfo['playtime_seconds'])) {
 			$params['duration'] = round($fileInfo['playtime_seconds'], 0);
