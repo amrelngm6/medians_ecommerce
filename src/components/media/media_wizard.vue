@@ -98,7 +98,7 @@
                                     <!--begin::User-->
                                     <div class="symbol symbol-35px symbol-circle" v-for="comment in activeItem.comments">
                                         <img alt="Pic" v-if="activeItem.picture" :src="activeItem.picture">
-                                        <span v-if="!activeItem.picture"  class="symbol-label bg-info text-inverse-info fw-bold" v-text=""></span>
+                                        <span v-if="!activeItem.picture"  class="symbol-label bg-info text-inverse-info fw-bold" v-text="activeItem.name.substring(0,1)"></span>
                                     </div>
 
                                     <!--begin::All users-->
