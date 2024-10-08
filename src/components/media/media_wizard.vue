@@ -254,11 +254,9 @@
 
                             <!--begin::Card footer-->
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                <button id="kt_account_deactivate_account_submit" type="submit"  class="btn btn-danger fw-semibold" v-text="translate('Delete')"></button>
+                                <a id="kt_account_deactivate_account_submit" @click="removeMedia" class="btn btn-danger fw-semibold" v-text="translate('Delete')"></a>
                             </div>
                             <!--end::Card footer-->
-
-                            <input type="hidden">
                         </form>
                         <!--end::Form-->
                     </div>
@@ -335,7 +333,7 @@ import 'vue3-easy-data-table/dist/style.css';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 
 import { defineAsyncComponent, ref } from 'vue';
-import { translate, getProgressWidth, handleRequest, formatCustomTime, toHHMMSS, handleAccess } from '@/utils.vue';
+import { translate, getProgressWidth, customConfirm, formatCustomTime, toHHMMSS, deleteByKey } from '@/utils.vue';
 
 const form_field = defineAsyncComponent(() =>
     import('@/components/includes/form_field.vue')
@@ -375,6 +373,19 @@ export default
                 emit('callback');
             }
 
+            const removeMedia = () => {
+
+                return deleteByKey('media_id', activeItem, 'MediaItem')
+                customConfirm(translate('Are you sure'))
+                .then((e) => {
+                    console.log(e)
+                    if (e) {
+                        item.stock_updated = stockType;
+                        saveItemStock(item)
+                    }
+                })
+            }
+
             const progressWidth = () => {
                 let requiredData = ['name', 'description', 'double_cost_month', 'double_cost_quarter', 'double_cost_year', 'status'];
 
@@ -397,10 +408,13 @@ export default
                 showModal.value = true
             }
 
+            
+
             const activeField = ref(0);
             const showModal = ref(false);
 
             return {
+                removeMedia,
                 tabs,
                 fields,
                 showModal,

@@ -112,7 +112,7 @@ export function customConfirm(message) {
   });
 }
 
-export function deleteByKey(itemKey, itemValue, type) {
+export function deleteByKey(itemKey, item, type) {
     
     
     customConfirm(translate('confirm_delete'))
@@ -120,7 +120,7 @@ export function deleteByKey(itemKey, itemValue, type) {
         if (result) {
             var params = new URLSearchParams();
             params.append('type', type)
-            params.append('params['+itemKey+']', itemValue[itemKey])
+            params.append('params['+itemKey+']', item[itemKey])
             handleRequest(params, '/api/delete').then(response => {
                 showAlert(response.result);
                 setTimeout(() => {
