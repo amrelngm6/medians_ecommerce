@@ -50,7 +50,7 @@ RouteHandler::get('/search', \Medians\Pages\Application\PageController::class.'@
 RouteHandler::get('/upload', \Medians\Media\Application\MediaItemController::class.'@upload_page');
 RouteHandler::get('/media/edit/(:all)', \Medians\Media\Application\MediaItemController::class.'@edit_media');
 RouteHandler::get('/import/audio', \Medians\Media\Application\MediaItemController::class.'@import_page');
-RouteHandler::get('/track/(:all)', \Medians\Media\Application\MediaItemController::class.'@audio_page');
+RouteHandler::get('/audio/(:all)', \Medians\Media\Application\MediaItemController::class.'@audio_page');
 
 /** Audiobooks pages */
 RouteHandler::get('/upload/audiobook', \Medians\Media\Application\AudiobookController::class.'@audiobook_upload_page');
