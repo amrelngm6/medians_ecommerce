@@ -50,9 +50,9 @@
                         <template #item-path="item">
                             <a v-if="item.lang_content" :href="conf.url+item.lang_content.prefix" target="_blank" class="w-8 h-8 rounded-full" v-text="item.lang_content.prefix" ></a>
                         </template>
-                        <template #item-edit="item">
-                            <button v-if="!item.not_editable" class="p-2  hover:text-gray-600 text-purple" @click="handleAction('edit', item)">
-                                <vue-feather class="w-5" type="edit"></vue-feather>
+                        <template #item-info="item">
+                            <button v-if="!item.not_editable" class="p-2  hover:text-gray-600 text-purple" @click="handleAction('info', item)">
+                                <vue-feather class="w-5" type="info"></vue-feather>
                             </button>
                         </template>
                         <template #item-delete="item">
@@ -148,7 +148,7 @@ export default
                 case 'view':
                     break;
 
-                case 'edit':
+                case 'info':
                     activeItem.value = data;
                     showWizard.value = true
                     break;  
