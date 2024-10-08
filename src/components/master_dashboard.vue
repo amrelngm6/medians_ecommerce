@@ -120,19 +120,19 @@
                             </h3>
                             <ul class="absolute flex-none fs-6 fw-semibold gap-2 mb-8 mt-6 nav nav-custom nav-line-tabs nav-line-tabs-2x nav-tabs px-2 right-0" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a @click="videos = content.top_videos" class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
+                                    <a @click="content.videos = content.top_videos" class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
                                         <span v-text="translate('Top')"></span>
                                     </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a @click="videos = content.latest_videos" class="align-items-center d-flex hover:bg-gray-100 pb-4  px-2 text-active-primary" href="javascript:;" >
+                                    <a @click="content.videos = content.latest_videos" class="align-items-center d-flex hover:bg-gray-100 pb-4  px-2 text-active-primary" href="javascript:;" >
                                         <span v-text="translate('New')"></span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="card-body pt-3" v-if="content.latest_videos">
-                            <div class="d-flex align-items-sm-center mb-7" v-for="videoItem in content.latest_videos">
+                        <div class="card-body pt-3" v-if="content.videos">
+                            <div class="d-flex align-items-sm-center mb-7" v-for="videoItem in content.videos">
                                 <div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2">
                                     <img :src="videoItem.picture" class="w-10 h-10 rounded-full" />
                                     <div class="w-2/3 flex-grow-1 me-2">
