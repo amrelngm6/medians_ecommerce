@@ -384,7 +384,6 @@ export default
             }
 
             const switchField = (field, key) => {
-                console.log(field, key)
                 activeField.value = key;
                 showModal.value = true
             }

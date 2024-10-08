@@ -521,8 +521,8 @@ class APIController extends CustomController
 					return response((new Blog\Application\BlogController())->delete());
 					break;
 			
-				case 'ProductStock.delete':
-					return response((new Products\Application\ProductStockController())->delete());
+				case 'MediaItem.delete':
+					return response((new Media\Application\MediaItemController())->delete());
 					break;
 			
 				case 'EmailTemplate.delete':

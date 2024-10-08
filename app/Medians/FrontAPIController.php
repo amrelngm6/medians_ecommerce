@@ -329,7 +329,7 @@ class FrontAPIController extends CustomController
 					break;
 				
 				case 'MediaItem.delete':
-					return printResponse((new Media\Application\MediaItemController())->delete());
+					return printResponse((new Media\Application\MediaItemController())->deleteByAuthor());
 					break;
 				
 				case 'Station.delete':

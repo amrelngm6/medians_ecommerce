@@ -627,6 +627,34 @@ class MediaItemController extends CustomController
 		
         try {
 
+            $user = $this->app->auth();
+
+            $item = $this->repo->find($params['media_id']);
+            
+            if (!$user->id)
+            {
+                return array('error'=>1, 'result'=>translate('Not allowed'), 'reload'=>1);
+            }
+
+            if ($this->repo->delete($params['media_id']))
+            {
+                return array('success'=>1, 'result'=>translate('Deleted'), 'reload'=>1);
+            }
+
+        } catch (Exception $e) {
+        	throw new \Exception("Error Processing Request", 1);
+        }
+	}
+
+
+	public function deleteByAuthor() 
+	{
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+		
+        try {
+
             $customer = $this->app->customer_auth();
 
             $item = $this->repo->find($params['media_id']);
