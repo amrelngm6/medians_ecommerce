@@ -107,47 +107,22 @@
                         </div>
                     </div>
 
-                    <div class="hidden card mb-0 min-w-350px">
-                        <div class="w-full p-4">
-                            <div class="w-full flex gap-2 pt-4">
-                                <h4 class="w-full ml-4" v-text="translate('Latest Videos')"></h4>
-                            </div>
-                            <p class="text-gray-500 px-4 " v-text="translate('Latest uploaded Video items')"></p>
+                    <div class="card  w-full card-xl-stretch mb-xl-8">
+                        <div class="card-header align-items-center border-0 mt-4">
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="fw-bold text-gray-900" v-text="translate('Latest Videos')"></span>
+                                <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Video items')"></span>
+                            </h3>
                         </div>
                         <div class="w-full px-8">
-                            <div class="w-full" v-if="content">   
-                                <div class="w-full ">       
-                                    <div class="table-responsive">
-                                        <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
-                                            <thead>
-                                                <tr class="fs-7 fw-bold text-gray-500 border-bottom-0">                                    
-                                                    <th class="ps-0 w-50px" v-text="translate('Item')"></th>
-                                                    <th class=""></th>
-                                                    <th class="text-end min-w-50px" v-text="translate('QTY')"></th>
-                                                    <th class="pe-0 text-end min-w-50px" v-text="translate('Total Price')"></th>
-                                                </tr>
-                                            </thead>
-                                            <!--end::Table head-->
-
-                                            <!--begin::Table body-->
-                                            <tbody>
-                                                <tr v-for="orderItem in content.latest_order_items">
-                                                    <td>                                             
-                                                        <img v-if="orderItem && orderItem.item" :src="orderItem.item.picture" class="w-50px ms-n1" alt="">                                                
-                                                    </td>
-                                                    <td class="ps-0">
-                                                        <span class="text-gray-800 fw-bold text-hover-primary mb-1 fs-6 text-start pe-0" v-if="orderItem && orderItem.item && orderItem.item.lang_content" v-text="orderItem.item.lang_content.title"></span>
-                                                        <span class="text-gray-500 fw-semibold fs-7 d-block text-start ps-0" v-text="translate(orderItem.status)"></span>
-                                                    </td>
-                                                    <td>                                            
-                                                        <span class="text-gray-800 fw-bold d-block fs-6 ps-0 text-end" v-text="orderItem.quantity"></span>
-                                                    </td>
-                                                    <td class="text-end pe-0">
-                                                        <span class="text-gray-800 fw-bold d-block fs-6" v-text="orderItem.total_amount"></span>
-                                                    </td>
-                                                </tr>                                     
-                                            </tbody>
-                                        </table>
+                               
+                            <div class="card-body pt-3" v-if="content.latest_audio">
+                                <div class="d-flex align-items-sm-center mb-7" v-for="audioItem in content.latest_audio">
+                                    <div class="d-flex flex-row-fluid flex-wrap align-items-center">
+                                        <div class="flex-grow-1 me-2">
+                                            <a href="#!" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="audioItem.name"></a>
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="audioItem.views_count"></span> </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
