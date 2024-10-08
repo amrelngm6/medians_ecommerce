@@ -226,7 +226,7 @@ class StationMediaController extends CustomController
 
 		try {
 
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/popups/edit-station-track.html.twig', [
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/popups/station-edit-track.html.twig', [
 				'item' => $this->repo->findItem($params['station_media_id'])
             ], 'output'));
             
