@@ -125,6 +125,7 @@ class DashboardController extends CustomController
         $data['latest_visits'] = View::totalViews($this->start, $this->end)->with('item')->orderBy('updated_at', 'desc')->limit(5)->get();
         $data['top_visits'] = View::totalViews($this->start, $this->end)->with('item')->orderBy('times', 'desc')->limit(5)->get();
         $data['total_visits'] = View::totalViews($this->start, $this->end)->sum('times');
+        $data['total_media_views'] = View::totalViews($this->start, $this->end)->where('item_type', $mediaItem::class)->sum('times');
 
 
         // $data['top_products'] = $this->ProductRepository;

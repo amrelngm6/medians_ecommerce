@@ -31,9 +31,11 @@
                                 <span class="fs-6 fw-bolder text-gray-800 d-block mb-2"
                                     v-text="translate('Total media views')"></span>
                                 <div class="symbol-group symbol-hover flex-nowrap">
-                                    <div class="symbol symbol-35px symbol-circle" v-for="media in content.top_media">
+                                    <div @mouseover="media.showTip = true" @mouseleave="media.showTip = false" class="relative symbol symbol-35px symbol-circle" v-for="media in content.top_media">
                                         <img alt="Pic" :src="media.picture">
-                                    </div>
+                                        <tooltip v-if="item.showTip" :key="item.showTip" :title="item.time" ></tooltip></div>
+                                        
+                                        
                                 </div>
                             </div>
                         </div>
@@ -197,6 +199,7 @@ import dashboard_center_squares from '@/components/includes/dashboard_center_squ
 import clean_charts from '@/components/includes/clean_charts.vue';
 import line_charts from '@/components/includes/line_charts.vue';
 import { translate, handleGetRequest, formatDateTime, formatCustomTime } from '@/utils.vue';
+import tooltip from '@/components/includes/tooltip.vue';
 
 import { AgChartsVue } from 'ag-charts-vue3';
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
@@ -213,6 +216,7 @@ export default
             dashboard_pie_chart,
             AgChartsVue,
             VueTailwindDatepicker,
+            tooltip,
             // MapChart,
         },
         name: 'categories',
