@@ -550,12 +550,12 @@ export default
         };
 
         const setVideosTab = (type) => {
-            content.value.videos = content[type+'_videos']; 
+            content.value.videos = content.value[type+'_videos']; 
             content.value.videos_tab = type;
         }
 
         const setAudiobooksTab = (type) => {
-            content.value.audiobooks = content[type+'_audiobooks']; 
+            content.value.audiobooks = content.value[type+'_audiobooks']; 
             content.value.audiobooks_tab = type;
         }
 
