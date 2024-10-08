@@ -122,6 +122,9 @@ RouteHandler::get('/channels/create', \Medians\Channels\Application\ChannelContr
 RouteHandler::get('/channels/edit/(:all)', \Medians\Channels\Application\ChannelController::class.'@channel_edit');
 RouteHandler::get('/channel/(:all)', \Medians\Channels\Application\ChannelController::class.'@channel');
 
+/** Blog pages */
+RouteHandler::get('/blog', \Medians\Blog\Application\BlogController::class.'@list');
+
 RouteHandler::get('/customer/login', \Medians\Auth\Application\CustomerAuthService::class.'@loginPage');
 RouteHandler::get('/customer/signup', \Medians\Auth\Application\CustomerAuthService::class.'@signupPage');
 RouteHandler::get('/customer/confirm_account', \Medians\Auth\Application\CustomerAuthService::class.'@otp');

@@ -222,11 +222,12 @@ class BlogController extends CustomController
 			$settings = $this->app->SystemSetting();
 
 		    // return  render('login', [
-			return render('views/front/'.($settings['template'] ?? 'default').'/blog.html.twig', [
+			return render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
 		        'first_item' => $this->repo->getFeatured(1),
 		        'search_items' => $request->get('search') ?  $this->repo->search($request, 10) : [],
 		        'search_text' => $request->get('search'),
 		        'items' => $this->repo->getFront(4),
+		        'layout' => 'blog/blog',
 
 		    ]);
 
