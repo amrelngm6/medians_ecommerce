@@ -120,12 +120,12 @@
                             </h3>
                             <ul class="absolute flex-none fs-6 fw-semibold gap-2 mb-8 mt-6 nav nav-custom nav-line-tabs nav-line-tabs-2x nav-tabs px-2 right-0" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a @click="videos = content.top_videos" class="nav-link text-active-primary d-flex align-items-center pb-4" href="javascript:;" >
+                                    <a @click="videos = content.top_videos" class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
                                         <span v-text="translate('Top')"></span>
                                     </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a @click="videos = content.latest_videos" class="nav-link text-active-primary d-flex align-items-center pb-4" href="javascript:;" >
+                                    <a @click="videos = content.latest_videos" class="align-items-center d-flex hover:bg-gray-100 pb-4  px-2 text-active-primary" href="javascript:;" >
                                         <span v-text="translate('New')"></span>
                                     </a>
                                 </li>
