@@ -101,7 +101,11 @@
                                     <img :src="audioItem.picture" class="w-10 h-10 rounded-full" />
                                     <div class="w-2/3 flex-grow-1 me-2">
                                         <a :href="'/audio/'+audioItem.media_id" target="_blank"  class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="audioItem.name"></a>
-                                        <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="audioItem.views_count"></span> </span>
+                                        <div class="flex w-full gap-4">
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="audioItem.views_count"></span> </span>
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="message-square" class="w-4" /> <span v-text="audioItem.comments_count"></span> </span>
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="heart" class="w-4" /> <span v-text="audioItem.likes_count"></span> </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
