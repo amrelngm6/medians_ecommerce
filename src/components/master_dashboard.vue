@@ -127,62 +127,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card w-full lg:mb-0">
-                        <div class="card card-flush h-xl-100  w-full">
-                            <div class="card-header pt-7">
-                                <h3 class="card-title align-items-start flex-column">
-                                    <span class="card-label fw-bold text-gray-800" v-text="translate('Product Orders')"></span>
-                                    <span class="text-gray-500 mt-1 fw-semibold fs-6" v-text="translate('Latest orders from customers')"></span>
-                                </h3>
-                                <div class="card-toolbar">
-                                    <div class="d-flex flex-stack flex-wrap gap-4">
-                                        <div class="d-flex align-items-center fw-bold">
-                                            <div class="text-gray-500 fs-7 me-2" v-text="translate('Status')"></div>
-                                            <select v-model="orderStatus" :required="true" class="form-select form-select-transparent text-gray-900 fs-7 lh-1 fw-bold py-0 ps-3 w-auto"
-                                                data-control="select2" data-hide-search="true" data-dropdown-css-class="w-150px"
-                                                data-placeholder="Select an option" data-kt-table-widget-4="filter_status">
-                                                <option value="0" v-text="translate('Show All')"></option>
-                                                <option value="new" v-text="translate('New')"></option>
-                                                <option value="completed" v-text="translate('Completed')"></option>
-                                                <option value="cancelled" v-text="translate('Cancelled')"></option>
-                                            </select>
-                                        </div>
+                    
+                    <div class="card  w-full card-xl-stretch mb-xl-8">
+                        <div class="card-header align-items-center border-0 mt-4">
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="fw-bold text-gray-900" v-text="translate('Latest Audiobooks')"></span>
+                                <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Audiobooks items')"></span>
+                            </h3>
+                        </div>
+                        <div class="card-body pt-3" v-if="content.latest_audiobooks">
+                            <div class="d-flex align-items-sm-center mb-7" v-for="audiobookItem in content.latest_audiobooks">
+                                <div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2">
+                                    <img :src="audiobookItem.picture" class="w-10 h-10 rounded-full" />
+                                    <div class="w-2/3 flex-grow-1 me-2">
+                                        <a href="#!" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="audiobookItem.name"></a>
+                                        <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="audiobookItem.views_count"></span> </span>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card-body pt-8">
-                                <table class="table align-middle table-row-dashed fs-6 gy-3" id="kt_table_widget_4_table">
-                                    <thead>
-                                        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                            <th class="min-w-100px" v-text="translate('Order ID')"></th>
-                                            <th class="text-end min-w-100px" v-text="translate('Date')"></th>
-                                            <th class="text-end min-w-125px" v-text="translate('Customer')"></th>
-                                            <th class="text-end min-w-125px" v-text="translate('Total')"></th>
-                                            <th class="text-end min-w-125px" v-text="translate('Status')"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="fw-bold text-gray-600" v-if="content.latest_orders">
-                                        
-                                        <tr v-for="order in content.latest_orders.map(e=> (orderStatus == 0 || e.status == orderStatus) ? e : null).filter(e => e)" >
-                                            <td>
-                                                <span v-if="order" class="text-gray-800 text-hover-primary" v-text="'#'+order.order_id"></span>
-                                            </td>
-                                            
-                                            <td class="text-end" v-text="order ? order.date : ''"></td>
-                                            
-                                            <td class="text-end">
-                                                <span class="text-gray-600 text-hover-primary" v-if="order && order.customer" v-text="order.customer.name"></span>
-                                            </td>
-                                            
-                                            <td class="text-end" v-text="order ? order.total_amount : ''"> </td>
-                                            
-                                            <td class="text-end">
-                                                <span v-if="order" v-text="translate(order.status)" :class="orderStatusClass(order.status)" class="badge py-3 px-4 fs-7 "></span>
-                                            </td>
-                                            
-                                        </tr>
-                                    </tbody>
-                                </table>
                             </div>
                         </div>
                     </div>
