@@ -88,86 +88,33 @@
                 </div>
                 
                 <div class="w-full lg:flex gap gap-6 pb-6">
-                    <div class="card  w-full card-xl-stretch mb-xl-8">
-                        <div class="card-header align-items-center border-0 mt-4">
-                            <h3 class="card-title align-items-start flex-column">
-                                <span class="fw-bold text-gray-900" v-text="translate('Latest Audio')"></span>
-                                <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Audio items')"></span>
-                            </h3>
-                        </div>
-                        <div class="card-body pt-3" v-if="content.latest_audio">
-                            <div class="d-flex align-items-sm-center mb-7" v-for="audioItem in content.latest_audio">
-                                <div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2">
-                                    <img :src="audioItem.picture" class="w-10 h-10 rounded-full" />
-                                    <div class="w-2/3 flex-grow-1 me-2">
-                                        <a :href="'/audio/'+audioItem.media_id" target="_blank"  class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="audioItem.name"></a>
-                                        <div class="flex w-full gap-4">
-                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="audioItem.views_count"></span> </span>
-                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="message-square" class="w-4" /> <span v-text="audioItem.comments_count"></span> </span>
-                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="heart" class="w-4" /> <span v-text="audioItem.likes_count"></span> </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card  w-full card-xl-stretch mb-xl-8">
-                        <div class="card-header align-items-center border-0 mt-4 flex">
-                            <h3 class="card-title align-items-start flex-column w-full">
-                                <span class="fw-bold text-gray-900" v-text="translate('Latest Videos')"></span>
-                                <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Video items')"></span>
-                            </h3>
-                            <ul class="absolute flex-none fs-6 fw-semibold gap-2 mb-8 mt-6 nav nav-custom nav-line-tabs nav-line-tabs-2x nav-tabs px-2 right-0" role="tablist">
-                                <li class="nav-item" role="presentation"  v-for="type in ['top', 'new']">
-                                    <a @click="setVideosTab(type)" :class="content.videos_tab == type ? 'border-blue-600 border-b' : '' "  class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
-                                        <span v-text="translate(type)"></span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="card-body pt-3" v-if="content.videos">
-                            <div class="d-flex align-items-sm-center mb-7" v-for="videoItem in content.videos">
-                                <div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2">
-                                    <img :src="videoItem.picture" class="w-10 h-10 rounded-full" />
-                                    <div class="w-2/3 flex-grow-1 me-2">
-                                        <a :href="'/video/'+videoItem.media_id" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="videoItem.name"></a>
-                                        <div class="flex w-full gap-4">
-                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="videoItem.views_count"></span> </span>
-                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="message-square" class="w-4" /> <span v-text="videoItem.comments_count"></span> </span>
-                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="heart" class="w-4" /> <span v-text="videoItem.likes_count"></span> </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     
-                    <div class="card  w-full card-xl-stretch mb-xl-8">
+                    
+                    <div class="card  w-full card-xl-stretch mb-xl-8" v-for="media in ['audio', 'videos', 'audiobooks']">
                         <div class="card-header align-items-center border-0 mt-4">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="fw-bold text-gray-900" v-text="translate('Latest Audiobooks')"></span>
-                                <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Audiobooks items')"></span>
+                                <span class="fw-bold text-gray-900" v-text="translate('Latest '+media)"></span>
+                                <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded '+media+' items')"></span>
                             </h3>
                             
                             <ul class="absolute flex-none fs-6 fw-semibold gap-2 mb-8 mt-6 nav nav-custom nav-line-tabs nav-line-tabs-2x nav-tabs px-2 right-0" role="tablist">
                                 <li class="nav-item" role="presentation"  v-for="type in ['top', 'new']">
-                                    <a @click="setAudiobooksTab(type)" :class="content.audiobooks_tab == type ? 'border-blue-600 border-b' : '' "  class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
+                                    <a @click="setMediaTab(type)" :class="content[media+'_tab'] == type ? 'border-blue-600 border-b' : '' "  class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
                                         <span v-text="translate(type)"></span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="card-body pt-3" v-if="content.latest_audiobooks">
-                            <div class="d-flex align-items-sm-center mb-7" v-for="audiobookItem in content.latest_audiobooks">
+                        <div class="card-body pt-3" v-if="content[media]">
+                            <div class="d-flex align-items-sm-center mb-7" v-for="mediaItem in content[media]">
                                 <div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2">
-                                    <img :src="audiobookItem.picture" class="w-10 h-10 rounded-full" />
+                                    <img :src="mediaItem.picture" class="w-10 h-10 rounded-full" />
                                     <div class="w-2/3 flex-grow-1 me-2">
-                                        <a :href="'/audiobook/'+audiobookItem.media_id" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="audiobookItem.name"></a>
+                                        <a :href="'/audiobook/'+mediaItem.media_id" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="mediaItem.name"></a>
                                         <div class="flex w-full gap-4">
-                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="audiobookItem.views_count"></span> </span>
-                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="message-square" class="w-4" /> <span v-text="audiobookItem.comments_count"></span> </span>
-                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="heart" class="w-4" /> <span v-text="audiobookItem.likes_count"></span> </span>
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="mediaItem.views_sum_times"></span> </span>
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="message-square" class="w-4" /> <span v-text="mediaItem.comments_count"></span> </span>
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="heart" class="w-4" /> <span v-text="mediaItem.likes_count"></span> </span>
                                         </div>
                                     </div>
                                 </div>
@@ -557,9 +504,9 @@ export default
             content.value.videos_tab = type;
         }
 
-        const setAudiobooksTab = (type) => {
-            content.value.audiobooks = content.value[type+'_audiobooks']; 
-            content.value.audiobooks_tab = type;
+        const setMediaTab = (sortType, mediaType) => {
+            content.value[mediaType] = content.value[sortType+'_'+mediaType]; 
+            content.value[mediaType+'_tab']  = sortType;
         }
 
         
@@ -588,7 +535,7 @@ export default
             dateValue,
             formatter,
             setVideosTab,
-            setAudiobooksTab,
+            setMediaTab,
             
         }
     },
