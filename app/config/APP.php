@@ -303,10 +303,10 @@ class APP
 			
 			array('title'=>translate('Media'),  'icon'=>'music', 'link'=>'#media', 'sub'=>
 			[
-				array('permission'=>'Audio.index', 'title'=>translate('Music'),  'icon'=>'truck', 'link'=>'admin/audio', 'component'=>'data_table'),
-				array('permission'=>'Audiobooks.index', 'title'=>translate('Audiobooks'),  'icon'=>'tag', 'link'=>'admin/audiobooks', 'component'=>'data_table'),
-				array('permission'=>'Videos.index', 'title'=>translate('Videos'),  'icon'=>'truck', 'link'=>'admin/videos', 'component'=>'data_table'),
-				array('permission'=>'Sorts.index', 'title'=>translate('Short Videos'),  'icon'=>'tag', 'link'=>'admin/shorts', 'component'=>'data_table'),
+				array('permission'=>'Audio.index', 'title'=>translate('Music'),  'icon'=>'truck', 'link'=>'admin/audio', 'component'=>'media'),
+				array('permission'=>'Audiobooks.index', 'title'=>translate('Audiobooks'),  'icon'=>'tag', 'link'=>'admin/audiobooks', 'component'=>'media'),
+				array('permission'=>'Videos.index', 'title'=>translate('Videos'),  'icon'=>'truck', 'link'=>'admin/videos', 'component'=>'media'),
+				array('permission'=>'Sorts.index', 'title'=>translate('Short Videos'),  'icon'=>'tag', 'link'=>'admin/shorts', 'component'=>'media'),
 			]
 			),
 			
