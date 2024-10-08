@@ -536,7 +536,7 @@ export default
         };
 
         const setVideosTab = (type) => {
-            content.value.videos = content[type+'_videos']; 
+            // content.value.videos = content[type+'_videos']; 
             content.value.videos_tab = type;
         }
 
