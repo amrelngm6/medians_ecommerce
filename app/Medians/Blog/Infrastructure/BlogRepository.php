@@ -160,8 +160,8 @@ class BlogRepository
     	$Object->update($dataArray);
 
     	// Store languages content
-		$this->storeContent(json_decode($data['content_langs'], true), $Object->id);
-
+    	isset($data['content_langs']) ? $this->storeContent(json_decode($data['content_langs'], true), $Object->id) : '';
+		
     	// Store Custom fields
     	isset($data['field']) ? $this->storeCustomFields($data['field'], $Object->id) : '';
 
