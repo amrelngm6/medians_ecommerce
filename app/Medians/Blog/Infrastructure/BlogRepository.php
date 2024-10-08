@@ -235,7 +235,6 @@ class BlogRepository
 				$fields['item_id'] = $id;	
 				$fields['lang'] = $key;	
 				$fields['prefix'] = isset($value['prefix']) ? Content::generatePrefix($value['prefix']) : Content::generatePrefix($value['title']);	
-				$fields['created_by'] = $this->app->auth()->id;
 
 				$Model = Content::firstOrCreate($fields);
 			}
