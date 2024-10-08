@@ -3,7 +3,7 @@
         <div class=" w-full relative">
 
             <close_icon class="absolute top-4 right-4 z-10 cursor-pointer" @click="back" />
-            <div class="card mb-9">
+            <div class="card mb-9 shadow-sm">
                 <div class="card-body pt-9 pb-0">
                     <!--begin::Details-->
                     <div class="d-flex flex-wrap flex-sm-nowrap mb-6">
@@ -139,7 +139,7 @@
 
             <div v-if="activeTab == 'Info'">
 
-                <div class=" card w-full py-10">
+                <div class=" card w-full py-10 shadow-sm">
                     <div class="w-full stepper stepper-links ">
                         <div class="card-header cursor-pointer">
                             <!--begin::Card title-->
@@ -195,7 +195,7 @@
                     </div>
                 </div>
 
-                <div class="card  ">
+                <div class="card shadow-sm ">
 
                     <!--begin::Card header-->
                     <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
