@@ -375,7 +375,7 @@ export default
 
             const removeMedia = () => {
 
-                return deleteByKey('media_id', activeItem, 'MediaItem')
+                return deleteByKey('media_id', activeItem.value, 'MediaItem')
                 customConfirm(translate('Are you sure'))
                 .then((e) => {
                     console.log(e)

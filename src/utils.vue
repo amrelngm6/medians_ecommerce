@@ -115,7 +115,7 @@ export function customConfirm(message) {
 export function deleteByKey(itemKey, item, type) {
     
     
-    customConfirm(translate('confirm_delete'))
+    customConfirm(translate('Confirm delete'))
     .then((result) => {
         if (result) {
             var params = new URLSearchParams();
