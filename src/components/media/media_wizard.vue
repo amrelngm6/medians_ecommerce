@@ -148,55 +148,123 @@
                     </div>
                     <div class="w-full">
                         <div class="card-body pt-0">
-                            <div class="card-body p-9">
-                                <!--begin::Row-->
-                                <div class="row mb-7">
-                                    <label class="col-lg-4 fw-semibold text-muted"
-                                        v-text="translate('Full Name')"></label>
-                                    <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
-                                            v-text="activeItem.name"></span></div>
-                                </div>
-                                <!--end::Row-->
+                            <!--begin::Row-->
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Full Name')"></label>
+                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                        v-text="activeItem.name"></span></div>
+                            </div>
+                            <!--end::Row-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-7">
-                                    <label class="col-lg-4 fw-semibold text-muted"
-                                        v-text="translate('Description')"></label>
-                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
-                                            v-text="activeItem.description"></span></div>
-                                </div>
-                                <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-semibold text-muted"
+                                    v-text="translate('Description')"></label>
+                                <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
+                                        v-text="activeItem.description"></span></div>
+                            </div>
+                            <!--end::Input group-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-7">
-                                    <label class="col-lg-4 fw-semibold text-muted"
-                                        v-text="translate('Duration')"></label>
-                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
-                                            v-text="activeItem.field.duration ? toHHMMSS(activeItem.field.duration) : '0'"></span>
+                            <!--begin::Input group-->
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Duration')"></label>
+                                <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
+                                        v-text="activeItem.field.duration ? toHHMMSS(activeItem.field.duration) : '0'"></span>
+                                </div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Filesize')"></label>
+                                <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
+                                        v-text="activeItem.field.filesize ?? '0'"></span></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Bitrate')"></label>
+                                <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
+                                        v-text="activeItem.field.bitrate ?? '0'"></span></div>
+                            </div>
+                            <!--end::Input group-->
+
+                            <div class="card  ">
+
+                                <!--begin::Card header-->
+                                <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
+                                    data-bs-target="#kt_account_deactivate" aria-expanded="true"
+                                    aria-controls="kt_account_deactivate">
+                                    <div class="card-title m-0">
+                                        <h3 class="fw-bold m-0">Deactivate Account</h3>
                                     </div>
                                 </div>
-                                <!--end::Input group-->
+                                <!--end::Card header-->
 
-                                <!--begin::Input group-->
-                                <div class="row mb-7">
-                                    <label class="col-lg-4 fw-semibold text-muted"
-                                        v-text="translate('Filesize')"></label>
-                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
-                                            v-text="activeItem.field.filesize ?? '0'"></span></div>
+                                <!--begin::Content-->
+                                <div id="kt_account_settings_deactivate" class="collapse show">
+                                    <!--begin::Form-->
+                                    <form id="kt_account_deactivate_form"
+                                        class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+
+                                        <!--begin::Card body-->
+                                        <div class="card-body border-top p-9">
+
+                                            <!--begin::Notice-->
+                                            <div
+                                                class="notice d-flex bg-light-warning rounded border-warning border border-dashed mb-9 p-6">
+                                                <!--begin::Icon-->
+                                                <i class="ki-outline ki-information fs-2tx text-warning me-4"></i>
+                                                <!--end::Icon-->
+
+                                                <!--begin::Wrapper-->
+                                                <div class="d-flex flex-stack flex-grow-1 ">
+                                                    <!--begin::Content-->
+                                                    <div class=" fw-semibold">
+                                                        <h4 class="text-gray-900 fw-bold">You Are Deactivating Your
+                                                            Account</h4>
+
+                                                        <div class="fs-6 text-gray-700 ">For extra security, this
+                                                            requires you to confirm your email or phone number when you
+                                                            reset yousignr password. <br><a class="fw-bold"
+                                                                href="#">Learn more</a></div>
+                                                    </div>
+                                                    <!--end::Content-->
+
+                                                </div>
+                                                <!--end::Wrapper-->
+                                            </div>
+                                            <!--end::Notice-->
+
+                                            <!--begin::Form input row-->
+                                            <div class="form-check form-check-solid fv-row fv-plugins-icon-container">
+                                                <input name="deactivate" class="form-check-input" type="checkbox"
+                                                    value="" id="deactivate">
+                                                <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate">I
+                                                    confirm my account deactivation</label>
+                                                <div
+                                                    class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                                                </div>
+                                            </div>
+                                            <!--end::Form input row-->
+                                        </div>
+                                        <!--end::Card body-->
+
+                                        <!--begin::Card footer-->
+                                        <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                            <button id="kt_account_deactivate_account_submit" type="submit"
+                                                class="btn btn-danger fw-semibold">Deactivate Account</button>
+                                        </div>
+                                        <!--end::Card footer-->
+
+                                        <input type="hidden">
+                                    </form>
+                                    <!--end::Form-->
                                 </div>
-                                <!--end::Input group-->
-
-                                <!--begin::Input group-->
-                                <div class="row mb-7">
-                                    <label class="col-lg-4 fw-semibold text-muted"
-                                        v-text="translate('Bitrate')"></label>
-                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
-                                            v-text="activeItem.field.bitrate ?? '0'"></span></div>
-                                </div>
-                                <!--end::Input group-->
-
-
+                                <!--end::Content-->
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -217,11 +285,11 @@
                             <div class="card-body p-9">
 
                                 <div class="timeline timeline-border-dashed">
-                                    <div class="timeline-item" 
-                                        v-for="comment in activeItem.comments">
+                                    <div class="timeline-item" v-for="comment in activeItem.comments">
                                         <div class="timeline-line"></div>
                                         <div class="timeline-icon me-4">
-                                            <img class="w-12 h-12 rounded-full" :src="comment.customer.picture ?? ''" alt="img">
+                                            <img class="w-12 h-12 rounded-full" :src="comment.customer.picture ?? ''"
+                                                alt="img">
                                         </div>
                                         <div class="timeline-content mb-10 mt-n2">
                                             <!--begin::Timeline heading-->
@@ -232,12 +300,16 @@
 
                                                 <!--begin::Description-->
                                                 <div class="d-flex align-items-center mt-1 fs-6 gap-2 ">
-                                                    <div class="symbol symbol-circle symbol-25px" >
-                                                        <vue-feather class="w-5 pt-2" type="message-square p-1" ></vue-feather>
+                                                    <div class="symbol symbol-circle symbol-25px">
+                                                        <vue-feather class="w-5 pt-2"
+                                                            type="message-square p-1"></vue-feather>
                                                     </div>
-                                                    <div class="text-muted me-2 fs-7 fw-bold" v-text="comment.customer.name ?? ''"></div>
+                                                    <div class="text-muted me-2 fs-7 fw-bold"
+                                                        v-text="comment.customer.name ?? ''"></div>
                                                     |
-                                                    <div class="text-muted me-2 fs-7" v-text="formatCustomTime(comment.created_at, 'MMMM DD, Y - HH:mm a')"></div>
+                                                    <div class="text-muted me-2 fs-7"
+                                                        v-text="formatCustomTime(comment.created_at, 'MMMM DD, Y - HH:mm a')">
+                                                    </div>
                                                 </div>
                                                 <!--end::Description-->
                                             </div>
