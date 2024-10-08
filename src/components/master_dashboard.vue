@@ -71,8 +71,8 @@
                         </div>
                         
                         <div class="relative overflow-hidden">
-                            <dashboard_card_white  icon="/uploads/img/booking-paid.png" classes="bg-info pb-30" text_class="fs-4 text-white" value_class="text-white"  :title="translate('New Products')" :value="content.products_count"></dashboard_card_white>
-                            <line_charts class="absolute bottom-0 w-full mb-8"  v-if="content.orders_charts" type="bar" :key="content" :data="getChartData(content.products_charts, 'label', 'y')" />
+                            <dashboard_card_white  icon="/uploads/img/booking-paid.png" classes="bg-info pb-30" text_class="fs-4 text-white" value_class="text-white"  :title="translate('Videos')" :value="content.video_count"></dashboard_card_white>
+                            <line_charts class="absolute bottom-0 w-full mb-8"  v-if="content.video_charts" type="bar" :key="content" :data="getChartData(content.video_charts, 'label', 'y')" />
                         </div>
                         
                         <div class="relative overflow-hidden">
