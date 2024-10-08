@@ -313,6 +313,7 @@ class MediaItemController extends CustomController
                 'list' => $list,
                 'genres' => $this->categoryRepo->getGenres(),
                 'layout' => 'popup-list',
+                'sub_layout' => 'videos/popup-videos-list',
             ], 'output'));
             
 		} catch (\Exception $e) {
