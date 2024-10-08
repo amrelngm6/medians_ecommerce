@@ -230,7 +230,7 @@ export default
             const load = (path) => {
                 handleGetRequest(path).then(response => {
                     content.value = JSON.parse(JSON.stringify(response));
-                    setCharts(JSON.parse(JSON.stringify(response)))
+                    setDataTabs(JSON.parse(JSON.stringify(response)))
                 });
             }
 
@@ -277,7 +277,7 @@ export default
             /**
              * Set charts based on their values type
              */
-            const setCharts = async (data) => {
+            const setDataTabs = async (data) => {
 
                 if (data) {
                     content.value.videos_tab = 'new'
@@ -371,7 +371,7 @@ export default
             const handleSelectedDate = (event) => {
                 handleGetRequest(props.conf.url + props.path + '?start_date=' + event.startDate + '&end_date=' + event.endDate + '&load=json').then(response => {
                     content.value = JSON.parse(JSON.stringify(response))
-                    setCharts(content);
+                    setDataTabs(content);
                 });
             }
 
