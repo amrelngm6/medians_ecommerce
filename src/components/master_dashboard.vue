@@ -442,7 +442,7 @@ export default
                 datasets: [
                 {
                     label: translate('Views'),
-                    backgroundColor: views.map((e, i) => colors.value[2]),
+                    backgroundColor: views.map((e, i) => colors.value[1]),
                     data: views.map((e, i) => e.y),
                 },
                 {
@@ -452,7 +452,7 @@ export default
                 },
                 {
                     label: translate('Likes'),
-                    backgroundColor: likes.map((e, i) => colors.value[4]),
+                    backgroundColor: likes.map((e, i) => colors.value[2]),
                     data: likes.map((e, i) => e.y),
                 },
                 ],
