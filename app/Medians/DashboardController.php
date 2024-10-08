@@ -5,6 +5,8 @@ namespace Medians;
 use \Shared\dbaser\CustomController;
 
 use Medians\Views\Domain\View;
+use Medians\Likes\Domain\Like;
+use Medians\Comments\Domain\Comment;
 
 class DashboardController extends CustomController
 {

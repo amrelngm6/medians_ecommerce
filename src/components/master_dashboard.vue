@@ -438,22 +438,22 @@ export default
             
             // Line charts for sales in last days 
             return  {
-                labels: orders.map((e) => e.label),
+                labels: views.map((e) => e.label),
                 datasets: [
                 {
-                    label: translate('views'),
+                    label: translate('Views'),
                     backgroundColor: views.map((e, i) => colors.value[2]),
-                    data: views.map((e, i) => e.total_amount),
+                    data: views.map((e, i) => e.y),
                 },
                 {
-                    label: translate('Paid Invoices'),
-                    backgroundColor: invoices.map((e, i) => colors.value[3]),
-                    data: invoices.map((e, i) => e.total_amount),
+                    label: translate('Comments'),
+                    backgroundColor: comments.map((e, i) => colors.value[3]),
+                    data: comments.map((e, i) => e.y),
                 },
                 {
-                    label: translate('Paid Invoices'),
-                    backgroundColor: invoices.map((e, i) => colors.value[3]),
-                    data: invoices.map((e, i) => e.total_amount),
+                    label: translate('Likes'),
+                    backgroundColor: invoices.map((e, i) => colors.value[4]),
+                    data: invoices.map((e, i) => e.y),
                 },
                 ],
             };
