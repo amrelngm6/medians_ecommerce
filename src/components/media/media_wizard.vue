@@ -109,7 +109,7 @@
 
                                     <!--begin::All users-->
                                     <a href="#" class="symbol symbol-35px symbol-circle">
-                                        <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bold" v-text="activeItem.comments_count"></span>
+                                        <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bold" v-text="activeItem.comments_count > 10 ? (activeItem.comments_count - 10) : '+'"></span>
                                     </a>
                                     <!--end::All users-->
                                 </div>
