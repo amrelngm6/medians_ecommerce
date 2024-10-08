@@ -119,13 +119,13 @@
                                 <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Video items')"></span>
                             </h3>
                             <ul class="absolute flex-none fs-6 fw-semibold gap-2 mb-8 mt-6 nav nav-custom nav-line-tabs nav-line-tabs-2x nav-tabs px-2 right-0" role="tablist">
-                                <li class="nav-item" role="presentation">
-                                    <a @click="content.videos = content.top_videos" class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
+                                <li class="nav-item" role="presentation" >
+                                    <a @click="content.videos = content.top_videos, content.videos_tab = 'top'" :class="content.videos_tab == 'top' ? 'border-blue-600 border-b' : '' "  class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
                                         <span v-text="translate('Top')"></span>
                                     </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <a @click="content.videos = content.latest_videos" class="align-items-center d-flex hover:bg-gray-100 pb-4  px-2 text-active-primary" href="javascript:;" >
+                                    <a @click="content.videos = content.latest_videos, content.videos_tab = 'new'" :class="content.videos_tab == 'new' ? 'border-blue-600 border-b' : '' "   class="align-items-center d-flex hover:bg-gray-100 pb-4  px-2 text-active-primary" href="javascript:;" >
                                         <span v-text="translate('New')"></span>
                                     </a>
                                 </li>
@@ -317,6 +317,7 @@ import {translate, handleGetRequest, formatDateTime, formatCustomTime} from '@/u
 
 import { AgChartsVue } from 'ag-charts-vue3';
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
+import { content } from '../../tailwind.config';
 
 export default 
 {
