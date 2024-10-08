@@ -412,8 +412,11 @@ export default
 
             if (data)
             {
+                content.value.videos_tab = 'new'
                 content.value.videos = data.new_videos
+                content.value.audio_tab = 'new'
                 content.value.audio = data.new_audio
+                content.value.audiobooks_tab = 'new'
                 content.value.audiobooks = data.new_audiobooks
                 
                 try {
