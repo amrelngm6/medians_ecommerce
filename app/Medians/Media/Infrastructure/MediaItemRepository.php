@@ -53,6 +53,10 @@ class MediaItemRepository
 	}
 
 
+	public function eventsByDate($params)
+	{
+		return MediaItem::whereBetween('created_at', [$params['start'], $params['end']]);
+	}
 
 	/**
 	 * Load items with filters

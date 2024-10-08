@@ -217,7 +217,7 @@ class CommentController extends CustomController
 
 		try {
 
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/includes/station-comment-block.html.twig', [
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/includes/comment-block.html.twig', [
 				'comments' => $comments
             ], 'output'));
             
