@@ -222,6 +222,35 @@ class LikeController extends CustomController
 		return $returnData;
 	}
 
+	public function likeArticle() 
+	{
+
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+
+        try {	
+			
+        	$this->validate($params);
+			
+			$params['customer_id'] = $this->app->customer->customer_id;
+
+			if (!empty($this->repo->checklikedArticle($params['item_id'], $params['customer_id']))) 
+			{
+				return $this->deleteArticle($params);
+			}
+
+            $returnData = (!empty($this->repo->store_article($params))) 
+            ? array('success'=>1, 'result'=>translate('Thanks for like'), 'reload'=>0)
+            : array('success'=>0, 'result'=>'Error', 'error'=>1);
+
+        } catch (\Exception $e) {
+        	return array('result'=>$e->getMessage(), 'error'=>1);
+        }
+
+		return $returnData;
+	}
+
 
 
 	public function update()
@@ -241,7 +270,8 @@ class LikeController extends CustomController
         
 
         } catch (\Exception $e) {
-        	throw new \Exception("Error Processing Request", 1);
+        	throw new \Exception($e->getMessage(), 1);
+
         	
         }
 
@@ -259,7 +289,8 @@ class LikeController extends CustomController
             }
             
         } catch (Exception $e) {
-        	throw new \Exception("Error Processing Request", 1);
+        	throw new \Exception($e->getMessage(), 1);
+
         }
 	}
 
@@ -274,7 +305,8 @@ class LikeController extends CustomController
             }
             
         } catch (Exception $e) {
-        	throw new \Exception("Error Processing Request", 1);
+        	throw new \Exception($e->getMessage(), 1);
+
         }
 	}
 
@@ -289,7 +321,8 @@ class LikeController extends CustomController
             }
             
         } catch (Exception $e) {
-        	throw new \Exception("Error Processing Request", 1);
+        	throw new \Exception($e->getMessage(), 1);
+
         }
 	}
 
@@ -304,7 +337,24 @@ class LikeController extends CustomController
             }
             
         } catch (Exception $e) {
-        	throw new \Exception("Error Processing Request", 1);
+        	throw new \Exception($e->getMessage(), 1);
+
+        }
+	}
+	
+
+	public function deleteArticle($params) 
+	{
+
+        try {
+			
+            if ($this->repo->deleteArticle($params, $this->app->customer->customer_id))
+            {
+                return array('success'=>1, 'result'=>translate('Removed from likes'), 'reload'=>0);
+            }
+            
+        } catch (Exception $e) {
+        	throw new \Exception($e->getMessage(), 1);
         }
 	}
 
