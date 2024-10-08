@@ -9,22 +9,22 @@
                             <img src="/stream?thumbnail=800&image={{item.picture_name}}"  class="absolute bg-img left-0 top-0" />
                             <div class=" w-full overflow-hidden rounded-2xl text-white mx-auto text-center relative z-10 ">
                                 <img src="/stream?thumbnail=300&image={{item.picture_name}}"  class="w-40 h-40 lg:w-56 lg:h-56 rounded-full shadow-xl" />
-                                <div class="p-8 text-left ">
+                                <div class="py-8 text-left ">
                                     <span>{{lang.translate('Article')}}</span>
                                     <h1 class="lg:text-4xl text-2xl ">{{item.name}}</h1>
                                     
                                     <div class="gap-4 py-2">
-                                        <span class="w-full block text-sm text-gray-100">{{lang.translate('Author')}} : {{item.user.name}}</span>
-                                        <span class="w-full block text-sm text-gray-100">{{lang.translate('Date')}} : {{item.created_at|date('M d, Y | H:i a')}}</span>
+                                        <span class="w-full block text-sm text-gray-100 py-1">{{lang.translate('Author')}} : {{item.user.name}}</span>
+                                        <span class="w-full block text-sm text-gray-100 py-1">{{lang.translate('Date')}} : {{item.created_at|date('M d, Y')}}</span>
                                     </div>
                                     <hr class="opacity-20 my-2" />
                                     <div class="w-full flex gap-2">
                                     
                                         {% set liked = item.liked(customer.customer_id).count() %}
                                         <div class="text-sm text-gray-100 flex gap-">
-                                            <a href="/front_api/create?type=Like.article&params[item_id]={{item.article_id}}" data-params="{item_id: {{item.article_id}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
-                                                <img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{item.article_id}}').addClass('hidden'); jQuery('#unheart-{{item.article_id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-{{item.article_id}}" src="/src/front_assets/svg/blank-heart.svg">
-                                                <img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{item.article_id}}').addClass('hidden'); jQuery('#heart-{{item.article_id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{item.article_id}}" src="/src/front_assets/svg/white-heart.svg">
+                                            <a href="/front_api/create?type=Like.article&params[item_id]={{item.id}}" data-params="{item_id: {{item.id}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
+                                                <img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{item.id}}').addClass('hidden'); jQuery('#unheart-{{item.id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-{{item.id}}" src="/src/front_assets/svg/blank-heart.svg">
+                                                <img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{item.id}}').addClass('hidden'); jQuery('#heart-{{item.id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{item.id}}" src="/src/front_assets/svg/white-heart.svg">
                                             </a>
                                             <span id="likes-count">{{item.likescount()}}</span>
                                         </div>
@@ -52,6 +52,25 @@
                             <div class="my-10 " ></div>
                             <div class="pb-20 ">
                                 {{item.lang_content.content|raw}}
+                            </div>
+                            
+                            <div class="w-full 	my-10 relative text-primary pb-10" id="latest-comments">
+                                <h2 class="text-2xl font-semibold dark:text-gray-400">{{lang.translate('Fans commented')}} <a href="javascript:;" x-on:click="jQuery('#comments-form').toggleClass('hidden')" class="float-right text-base font-normal">{{lang.translate('Add your comment')}}</a></h3>
+                                <div class="my-4 " ></div>
+                                <div id="tracks-list" class=" overflow-auto  ">
+                                    <div class="w-full mx-auto hidden" id="comments-form" >
+                                        {% set id = item.id %}
+                                        {% set comments = item.comments %}
+                                        {% include 'views/front/' ~ template ~ '/includes/comment-form.html.twig' %}
+                                    </div>
+                                    {% if item.comments|length > 0 %}
+                                    <div class="w-full mx-auto">
+                                        {% include 'views/front/' ~ template ~ '/includes/comments.html.twig'%}
+                                    </div>
+                                    {% endif  %}
+                                </div>
+                                <div class="my-10 " ></div>
+                                <div class="z-10 absolute bottom-0 bg-gradient-to-b from-transparent dark:to-gray-900 to-white w-full h-20"></div>
                             </div>
                             <div class="z-10 absolute bottom-0 bg-gradient-to-b from-transparent dark:to-gray-900 to-white w-full h-20"></div>
                         </div>
