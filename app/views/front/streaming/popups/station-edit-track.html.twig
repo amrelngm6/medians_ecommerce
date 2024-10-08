@@ -41,7 +41,7 @@
 							</div>
 							<div class="text-center w-full py-2 flex  gap-2">
 
-								<a href="/front_api/delete?type=StationMedia.delete&params[station_media_id]={{item.station_media_id}}" data-confirm="{{lang.translate('Are you sure')}}" date-confirm-text="{{lang.translate('Delete this media from station')}}" class="ajax-link bg-white border dark:bg-gray-900 dark:border-gray-700 group h-12 mt-2 mx-auto overflow-hidden relative rounded-lg shadow text-lg w-12">
+								<a href="/front_api/delete?type=StationMedia.delete&params[station_media_id]={{item.station_media_id}}" data-confirm="{{lang.translate('Are you sure')}}" date-confirm-text="{{lang.translate('Delete this media from station')}}" class="ajax-link bg-white border dark:bg-gray-900 dark:border-gray-700 group h-12 mt-2 mx-auto overflow-hidden relative rounded-lg shadow text-lg w-12 dark:hover:bg-red-600">
 									<img class="dark:brightness-200 p-3" src="/src/front_assets/svg/delete-white.svg">
 								</a>
                                 <button type="submit" onclick="(function(){ return setTimeout(function(){calendar.refetchEvents()},2000)})()" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white dark:bg-gray-700   text-lg shadow">
