@@ -31,22 +31,10 @@
                                 <span class="fs-6 fw-bolder text-gray-800 d-block mb-2"
                                     v-text="translate('Registered Customers')"></span>
                                 <div class="symbol-group symbol-hover flex-nowrap">
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-                                        data-bs-original-title="Alan Warden" data-kt-initialized="1">
-                                        <span class="symbol-label bg-warning text-inverse-warning fw-bold">A</span>
+                                    <div class="symbol symbol-35px symbol-circle" v-for="customer in content.new_customers">
+                                        <img alt="Pic" :src="customer.picture">
                                     </div>
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-                                        data-bs-original-title="Susan Redwood" data-kt-initialized="1">
-                                        <span class="symbol-label bg-primary text-inverse-primary fw-bold">S</span>
-                                    </div>
-                                    <div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip"
-                                        data-bs-original-title="Susan Redwood" data-kt-initialized="1">
-                                        <span class="symbol-label bg-info text-inverse-primary fw-bold">S</span>
-                                    </div>
-                                    <a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal"
-                                        data-bs-target="#kt_modal_view_users">
-                                        <span class="symbol-label bg-light text-gray-400 fs-8 fw-bold">+42</span>
-                                    </a>
+                                    
                                 </div>
                             </div>
                         </div>

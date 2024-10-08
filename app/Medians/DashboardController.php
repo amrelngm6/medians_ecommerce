@@ -144,6 +144,7 @@ class DashboardController extends CustomController
         $data['top_audiobooks'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->withSum('views','times')->withCount('comments','likes')->where('type', 'audiobook')->with('artist')->limit('5')->orderBy('views_sum_times', 'desc')->get();
 
 		$data['customers_count'] = $this->CustomerRepository->masterByDateCount(['start'=>$this->start, 'end'=>$this->end]);
+		$data['new_customers'] = $this->CustomerRepository->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->limit(10)->get();
 
 		$data['visits_count'] = View::totalViews($this->start, $this->end)->sum('times');
 		$data['visits_charts'] = View::totalViews($this->start, $this->end)->selectRaw('date as label, SUM(times) as y, item_type')->having('y', '>', 0)->groupBy('date')->limit('30')->get();

@@ -21,6 +21,14 @@ class CustomerRepository
 	  	return Customer::whereBetween('created_at' , [$params['start'] , $params['end']])->count();
 	}
 
+	/**
+	* Find all items between two days 
+	*/
+	public function eventsByDate($params )
+	{
+	  	return Customer::whereBetween('created_at' , [$params['start'] , $params['end']]);
+	}
+
 
 
 	public function getClassName()
