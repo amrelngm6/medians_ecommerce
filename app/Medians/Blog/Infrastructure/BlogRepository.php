@@ -230,7 +230,6 @@ class BlogRepository
 		{
 			foreach ($data as $key => $value)
 			{
-				print_r($value);
 				$fields = $value;
 				$fields['item_type'] = Blog::class;	
 				$fields['item_id'] = $id;	
