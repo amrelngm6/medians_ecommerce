@@ -97,20 +97,11 @@
                         </div>
                         <div class="card-body pt-3" v-if="content.latest_audio">
                             <div class="d-flex align-items-sm-center mb-7" v-for="audioItem in content.latest_audio">
-                                <div class="symbol symbol-60px symbol-2by3 me-4">
-                                    <div class="symbol-label">
-                                    </div>
-                                </div>
-                                <!--end::Symbol-->
-
-                                <!--begin::Title-->
                                 <div class="d-flex flex-row-fluid flex-wrap align-items-center">
                                     <div class="flex-grow-1 me-2">
-                                        <a href="#" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="audioItem.name"></a>
-
-                                        <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" /> <span v-text="audioItem.views_count"></span> </span>
+                                        <a href="#!" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="audioItem.name"></a>
+                                        <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="audioItem.views_count"></span> </span>
                                     </div>
-
                                 </div>
                                 <!--end::Title-->
                             </div>
