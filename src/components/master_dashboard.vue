@@ -116,8 +116,8 @@
                         </div>
                         <div class="w-full px-8">
                                
-                            <div class="card-body pt-3" v-if="content.latest_audio">
-                                <div class="d-flex align-items-sm-center mb-7" v-for="audioItem in content.latest_audio">
+                            <div class="card-body pt-3" v-if="content.latest_videos">
+                                <div class="d-flex align-items-sm-center mb-7" v-for="audioItem in content.latest_videos">
                                     <div class="d-flex flex-row-fluid flex-wrap align-items-center">
                                         <div class="flex-grow-1 me-2">
                                             <a href="#!" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="audioItem.name"></a>
