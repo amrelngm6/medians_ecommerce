@@ -118,6 +118,13 @@
                                 <span class="fw-bold text-gray-900" v-text="translate('Latest Videos')"></span>
                                 <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Video items')"></span>
                             </h3>
+                            <ul class="absolute flex-none fs-6 fw-semibold gap-2 mb-8 mt-6 nav nav-custom nav-line-tabs nav-line-tabs-2x nav-tabs px-2 right-0" role="tablist">
+                                <li class="nav-item" role="presentation"  v-for="type in ['top', 'new']">
+                                    <a @click="setVideosTab(type)" :class="content.videos_tab == type ? 'border-blue-600 border-b' : '' "  class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
+                                        <span v-text="translate(type)"></span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                         <div class="card-body pt-3" v-if="content.videos">
                             <div class="d-flex align-items-sm-center mb-7" v-for="videoItem in content.videos">
@@ -305,7 +312,7 @@ import {translate, handleGetRequest, formatDateTime, formatCustomTime} from '@/u
 
 import { AgChartsVue } from 'ag-charts-vue3';
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
-// import { content } from '../../tailwind.config';
+import { content } from '../../tailwind.config';
 
 export default 
 {
@@ -536,7 +543,7 @@ export default
         };
 
         const setVideosTab = (type) => {
-            // content.value.videos = content[type+'_videos']; 
+            content.value.videos = content[type+'_videos']; 
             content.value.videos_tab = type;
         }
 
