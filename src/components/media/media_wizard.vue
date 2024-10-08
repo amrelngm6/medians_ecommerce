@@ -231,9 +231,9 @@
                                                 <!--end::Title-->
 
                                                 <!--begin::Description-->
-                                                <div class="d-flex align-items-center mt-1 fs-6 gap-2">
+                                                <div class="d-flex align-items-center mt-1 fs-6 gap-2 ">
                                                     <div class="symbol symbol-circle symbol-25px" >
-                                                        <vue-feather type="message-square p-1" ></vue-feather>
+                                                        <vue-feather class="w-5 pt-2" type="message-square p-1" ></vue-feather>
                                                     </div>
                                                     <div class="text-muted me-2 fs-7" v-text="comment.customer.name ?? ''"></div>
                                                 </div>
