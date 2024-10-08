@@ -131,8 +131,12 @@ class VideoController extends CustomController
 
         $item = $this->repo->find($media_id);
         
+
 		try 
         {
+    
+            $item->addView();
+
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item' => $item,
