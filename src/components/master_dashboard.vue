@@ -122,8 +122,7 @@
                             <div class="card-body pt-3" v-if="content.latest_audio">
                                 <div class="d-flex align-items-sm-center mb-7" v-for="item in content.latest_audio">
                                     <div class="symbol symbol-60px symbol-2by3 me-4">
-                                        <div class="symbol-label"
-                                            :style="{'background-image':  `url(${item.picture})` }">
+                                        <div class="symbol-label">
                                         </div>
                                     </div>
                                     <!--end::Symbol-->
