@@ -13,9 +13,9 @@
                                     <span>{{lang.translate('Article')}}</span>
                                     <h1 class="lg:text-4xl text-2xl ">{{item.name}}</h1>
                                     
-                                    <div class="flex gap-4 py-2">
-                                        <span class="text-sm text-gray-100">{{lang.translate('Likes')}} : {{item.likes_count}}</span>
-                                        <span class="text-sm text-gray-100">{{lang.translate('Items')}} : {{item.items|length}}</span>
+                                    <div class="gap-4 py-2">
+                                        <span class="w-full block text-sm text-gray-100">{{lang.translate('Author')}} : {{item.user.name}}</span>
+                                        <span class="w-full block text-sm text-gray-100">{{lang.translate('Date')}} : {{item.created_at|date('M d, Y | H:i a')}}</span>
                                     </div>
                                     <hr class="opacity-20 my-2" />
                                     <div class="w-full flex gap-2">
