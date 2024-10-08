@@ -21,6 +21,7 @@
                             {title:  "Playlists",link: "/playlists", icon: "playlist"},
                             {title:  "Artists",link: "/artists", icon: "user-tab"},
                             {title:  "Genres",link: "/genres", icon: "audio-tab"},
+                            {title:  "Blog",link: "/blog", icon: "blog"},
                             {title:  "Likes",link: "/likes", icon: "heart"},
                         ] %}
                         <li class="w-full   {{menuitem.link == app.request.pathInfo ? 'active' : '' }}" id="sidemenu-{{loop.index}}" onclick="(function(){ jQuery('#menu-ul').find('li.active').removeClass('active'), jQuery('#sidemenu-{{loop.index}}').addClass('active') })()">
@@ -29,7 +30,7 @@
                                     <img src="/src/front_assets/svg/{{menuitem.icon}}.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
                                     <img src="/src/front_assets/svg/{{menuitem.icon}}-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50">{{lang.translate(menuitem.title)}}</span>
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50">{{lang.translate(menuitem.title)}}</span>
                             </a>
                         </li>
                         {% endfor %}
@@ -42,7 +43,7 @@
                                     <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
                                     <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Upload')}}</span>
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Upload')}}</span>
                             </a>
                         </li>
                         <li class="w-full " id="uploadaudiobook">
@@ -51,7 +52,7 @@
                                     <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
                                     <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Upload Audiobook')}}</span>
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Upload Audiobook')}}</span>
                             </a>
                         </li>
                         
@@ -61,7 +62,7 @@
                                     <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
                                     <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Upload Video')}}</span>
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Upload Video')}}</span>
                             </a>
                         </li>
                         
@@ -71,7 +72,7 @@
                                     <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
                                     <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create Short video')}}</span>
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create Short video')}}</span>
                             </a>
                         </li>
 
@@ -81,7 +82,7 @@
                                     <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
                                     <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create station')}}</span>
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create station')}}</span>
                             </a>
                         </li>
                         
@@ -91,7 +92,7 @@
                                     <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
                                     <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create channel')}}</span>
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create channel')}}</span>
                             </a>
                         </li>
 
@@ -102,7 +103,7 @@
                                     <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
                                     <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create playlist')}}</span>
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create playlist')}}</span>
                             </a>
                         </li>
 
@@ -112,7 +113,7 @@
                                     <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
                                     <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
                                         width="18" />
-                                </span> <span class="py-2 block dark:text-gray-400 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Logout')}}</span>
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Logout')}}</span>
                             </a>
                         </li>
                         {% endif %}

@@ -15,8 +15,8 @@
                         <div class="text-primary  w-full  rounded-2xl ">
                             <div class="w-full ">
                                 <form action="/customer/login" method="POST" id="login-form" class="ajax-form w-full">
-                                    <h2 class="text-2xl dark:text-gray-400 w-full ">{{lang.translate('Login with your account')}}</h2>
-                                    <p data-testid="loginDescription" class="mt-2 dark:text-gray-400  opacity-60 text-base font-normal leading-[1.375rem]">{{lang.translate('Login to check all features')}}</p>
+                                    <h2 class="text-2xl dark:text-gray-300 w-full ">{{lang.translate('Login with your account')}}</h2>
+                                    <p data-testid="loginDescription" class="mt-2 dark:text-gray-300  opacity-60 text-base font-normal leading-[1.375rem]">{{lang.translate('Login to check all features')}}</p>
 
                                     <hr class="opacity-0 my-6" />
                                     <div class="grid-cols-1 grid gap-4 mx-auto ">
@@ -28,26 +28,26 @@
                                         </div>                        
                                     </div>
                                     <div class="w-full flex ">
-                                        <button type="submit" class=" dark:text-gray-400 inline-block my-6 px-6 py-2 rounded-2xl border transition hover:border-orange-600 border-orange-300">{{lang.translate('Login')}}</button>
-                                        <span x-on:click="jQuery('#login-popup').addClass('hidden'); jQuery('#signup-popup').removeClass('hidden'); " class="cursor-pointer flex-end dark:text-gray-400 inline-block my-6 px-6 py-2 rounded-2xl transition dark:hover:text-orange-600 hover:text-orange-600">{{lang.translate('Create new account')}}</span>
+                                        <button type="submit" class=" dark:text-gray-300 inline-block my-6 px-6 py-2 rounded-2xl border transition hover:border-orange-600 border-orange-300">{{lang.translate('Login')}}</button>
+                                        <span x-on:click="jQuery('#login-popup').addClass('hidden'); jQuery('#signup-popup').removeClass('hidden'); " class="cursor-pointer flex-end dark:text-gray-300 inline-block my-6 px-6 py-2 rounded-2xl transition dark:hover:text-orange-600 hover:text-orange-600">{{lang.translate('Create new account')}}</span>
 
                                     </div>
                                 </form>
                                 <div class="w-full flex gap-4">
-                                    <span class="text-xs pt-3 text-center text-gray-600 dark:text-gray-400 mb-2">OR</span>
-                                    <a href="#!" class=" bg-blue-600 rounded-full dark:text-gray-400 inline-block p-1 rounded-2xl dark:border-gray-700 transition hover:border transition hover:border-orange-600 border ">
+                                    <span class="text-xs pt-3 text-center text-gray-600 dark:text-gray-300 mb-2">OR</span>
+                                    <a href="#!" class=" bg-blue-600 rounded-full dark:text-gray-300 inline-block p-1 rounded-2xl dark:border-gray-700 transition hover:border transition hover:border-orange-600 border ">
                                         <span class="w-full gap-3 flex relative">
                                             <span class="bg-white rounded-full w-8 h-8"><img src="/src/front_assets/svg/facebook.svg" class="w-6 h-6 m-1" /></span>
                                             {# <span class="text-left flex-auto text-white py-1">facebook</span> #}
                                         </span>
                                     </a>
-                                    <a href="#!" class=" bg-black rounded-full dark:text-gray-400 inline-block p-1 rounded-2xl dark:border-gray-700  transition hover:border transition hover:border-orange-600 border ">
+                                    <a href="#!" class=" bg-black rounded-full dark:text-gray-300 inline-block p-1 rounded-2xl dark:border-gray-700  transition hover:border transition hover:border-orange-600 border ">
                                         <span class="w-full gap-3 flex relative">
                                             <span class="bg-white rounded-full w-8 h-8"><img src="/src/front_assets/svg/x.svg" class="w-6 h-6 m-1" /></span>
                                             {# <span class="text-left flex-auto text-white py-1 pr-6 block">X</span> #}
                                         </span>
                                     </a>
-                                    <a href="#!" class=" bg-red-600 rounded-full dark:text-gray-400 inline-block p-1 rounded-2xl dark:border-gray-700  transition hover:border transition hover:border-orange-600 border ">
+                                    <a href="#!" class=" bg-red-600 rounded-full dark:text-gray-300 inline-block p-1 rounded-2xl dark:border-gray-700  transition hover:border transition hover:border-orange-600 border ">
                                         <span class="w-full gap-3 flex relative">
                                             <span class="bg-white rounded-full w-8 h-8"><img src="/src/front_assets/svg/gmail.svg" class="w-6 h-6 m-1" /></span>
                                             {# <span class="text-left flex-auto text-white py-1">Gmail</span> #}

@@ -1,5 +1,5 @@
 
-            <div class="py-4  h-full overflow-hidden rounded-2xl" x-data="{}">                     
+            <div class="py-4 article-page h-full overflow-hidden rounded-2xl" x-data="{}">                     
                     
                 <div class="my-4 h-full lg:flex overflow-hidden rounded-2xl leading-7">                     
                     
@@ -47,7 +47,7 @@
                     <div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900  rounded-2xl p-8 h-full">
                         
                         <div class="w-full 	mb-10 relative text-primary" id="latest-uploads">
-                            <h1 class="dark:text-gray-400 text-2xl  ">{{item.lang_content.title}}</h1>
+                            <h1 class="dark:text-gray-300 text-2xl  ">{{item.lang_content.title}}</h1>
                             <hr class="w-10 my-4 " />
                             <div class="my-10 " ></div>
                             <div class="pb-20 ">
@@ -55,7 +55,7 @@
                             </div>
                             
                             <div class="w-full 	my-10 relative text-primary pb-10" id="latest-comments">
-                                <h2 class="text-2xl font-semibold dark:text-gray-400">{{lang.translate('Fans commented')}} <a href="javascript:;" x-on:click="jQuery('#comments-form').toggleClass('hidden')" class="float-right text-base font-normal">{{lang.translate('Add your comment')}}</a></h3>
+                                <h2 class="text-2xl font-semibold dark:text-gray-300">{{lang.translate('Fans commented')}} <a href="javascript:;" x-on:click="jQuery('#comments-form').toggleClass('hidden')" class="float-right text-base font-normal">{{lang.translate('Add your comment')}}</a></h3>
                                 <div class="my-4 " ></div>
                                 <div id="tracks-list" class=" overflow-auto  ">
                                     <div class="w-full mx-auto hidden" id="comments-form" >
@@ -82,3 +82,9 @@
 
             </div>
 
+<style>
+.article-page li {
+    margin: 10px 15px;
+    list-style: circle;
+}
+</style>

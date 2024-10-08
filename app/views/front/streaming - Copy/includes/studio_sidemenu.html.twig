@@ -1,0 +1,25 @@
+
+                <div class="pb-4 lg:px-0 px-1 lg:w-72 w-full  relative overflow-hidden h-full dark:text-gray-400">
+                    <div class="lg:block hidden  text-slate-400 text-opacity-70  text-base font-normal tracking-wide">{{lang.translate('Dashboard MENU')}}</div>
+                    <ul class="pt-2 font-normal lg:block flex ">
+                        <template x-for="menuItem in [{'id':0, 'title':'{{lang.translate('Studio')}}', 'link':'/studio'}, 
+                        {'id':1, 'title':'{{lang.translate('Media List')}}', 'link':'/studio/media'}, 
+                        {'id':7, 'title':'{{lang.translate('Videos')}}', 'link':'/studio/videos'}, 
+                        {'id':9, 'title':'{{lang.translate('Short Videos')}}', 'link':'/studio/shorts'}, 
+                        {'id':2, 'title':'{{lang.translate('Audio Books')}}', 'link':'/studio/audio_books'}, 
+                        {'id':3, 'title':'{{lang.translate('Stations')}}', 'link':'/studio/stations'}, 
+                        {'id':8, 'title':'{{lang.translate('Channels')}}', 'link':'/studio/channels'}, 
+                        {'id':4, 'title':'{{lang.translate('Playlists')}}', 'link':'/studio/playlists'}, 
+                        {'id':5, 'title':'{{lang.translate('Profile Info')}}', 'link':'/studio/profile'},
+                        {'id':6, 'title':'{{lang.translate('Profile')}}', 'link':'/artist/{{app.customer_auth().customer_id}}'}
+                        ] ">
+                            <li class="w-full dark:hover:text-gray-200" :id="'menu-'+menuItem.id">
+                                <a :href="menuItem.link" class="w-full flex gap gap-4 ajax-load ">
+                                    <span class="py-2 block  my-1 border-r w-full dark:border-gray-700 border-gray-50" x-text="menuItem.title"></span>
+                                </a>
+                            </li>
+                        </template>
+
+                    </ul>
+
+                </div>

@@ -16,7 +16,7 @@
                         <div class="text-primary  w-full  rounded-2xl ">
                             <div class="w-full ">
                                 <h4 id="track-item-title" class="text-lg text-primary pb-4"></h4>
-                                <div class="z-20 rounded-2xl w-full  bg-white dark:bg-gray-900 dark:text-gray-400 p-4 ">
+                                <div class="z-20 rounded-2xl w-full  bg-white dark:bg-gray-900 dark:text-gray-300 p-4 ">
                                     
                                     {% if app.customer_auth %}
                                     <p  class="cursor-pointer flex w-full gap-2 py-2"   onclick="(function(){ let id = jQuery('#activeItemId').val(); let img = 'url(/stream?thumbnail=800&image='+jQuery('#activeItemPicture').val()+')'; return jQuery('#add-playlist-popup').removeClass('hidden'),  jQuery('#add-playlist-cover').css('background-image', img ), jQuery('#add-playlist-media').val(id),  jQuery('#track-options-popup').addClass('hidden');  })();return false;" >

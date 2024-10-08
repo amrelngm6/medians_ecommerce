@@ -1,14 +1,14 @@
                         {% if item.media_id > 0 %}
 						<div class="text-primary  w-full  rounded-2xl " id="editChannelPopupInfo">
 							<div class="w-full ">
-								<div class="z-20 rounded-2xl w-full  bg-white dark:bg-gray-800 dark:text-gray-400 p-4 ">
+								<div class="z-20 rounded-2xl w-full  bg-white dark:bg-gray-800 dark:text-gray-300 p-4 ">
 										<div class="relative w-full">
                                             <label class="tooltip disabled text-slate-800 flex gap-2 w-full items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
                                                 <input checked type="radio"  class="hidden"/>
                                                 <span class="checkmark relative"></span>
                                                 <div class="mr-4 grid place-items-center"><img alt="candice" src="{{item.media.picture}}" class="relative inline-block h-12 w-12 !rounded-full object-cover object-center"></div>
                                                 <div style="max-width:68%" >
-                                                    <h6 class="truncate text-slate-800 font-medium dark:text-gray-400">{{item.media.name}}</h6>
+                                                    <h6 class="truncate text-slate-800 font-medium dark:text-gray-300">{{item.media.name}}</h6>
                                                     <p class=" text-sm">{{item.artist.name}}</p>
                                                 </div>
                                             </label>

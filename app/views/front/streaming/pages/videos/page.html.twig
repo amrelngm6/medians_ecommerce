@@ -29,7 +29,7 @@
 
 {% set customer = app.customer_auth() %}
 <div class=" w-full  relative" id="video-overlay">
-	<div class="absolute lg:bottom-20 lg:left-40 left-10 bottom-10  z-10 w-2/3 text-gray-100 dark:text-gray-400">
+	<div class="absolute lg:bottom-20 lg:left-40 left-10 bottom-10  z-10 w-2/3 text-gray-100 dark:text-gray-300">
 		<h1 class="lg:text-4xl text-2xl text-white overflow-hidden">{{item.name}}</h1>
 
 		{% if item.customer_id == customer.customer_id %}
@@ -71,12 +71,12 @@
 		<a href="/artist/{{item.artist.customer_id}}" class="ajax-load flex gap-6 text-primary">
 			<img src="/stream?thumbnail=100&image={{item.artist.picture_name}}" alt="User Avatar" class="w-10 h-10 rounded-full">
 			<div class="text-xl dark:text-gray-300">{{item.artist.name}}
-				<p class="text-xs dark:text-gray-400">{{lang.translate('Artist')}}</p>
+				<p class="text-xs dark:text-gray-300">{{lang.translate('Artist')}}</p>
 			</div>
 		</a>
 		<span class="block pt-10 text-sm text-gray-500">{{lang.translate('About')}}</span>
 		<div class="text-primary overflow-auto" style="max-height: 400px;">
-			<div class="dark:text-gray-400 py-4">{{item.field.about|raw| nl2br  }}</div>
+			<div class="dark:text-gray-300 py-4">{{item.field.about|raw| nl2br  }}</div>
 		</div>
 
 		<div class="max-h-[200px] overflow-auto flex" style="flex-direction: column-reverse;" id="comments-list">

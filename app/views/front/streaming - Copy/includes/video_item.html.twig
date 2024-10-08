@@ -1,0 +1,20 @@
+
+                                        <div class="package bg-white dark:bg-gray-800 show-child shadow-md ">
+                                            <div class="img " style="background: url(/stream?thumbnail=300&dir=videos/screenshots&image={{media_item.picture_name}})">
+                                                <a href="/video/{{media_item.media_id}}" class="ajax-load block relative h-40 w-full "  ></a>
+                                                <div class="save show-on-hover cursor-pointer absolute">
+                                                    <p class="span video-side-popup" data-path="{{media_item.main_file.path}}" ><img src="/src/front_assets/svg/videos.svg" class="w-6 dark:brightness-200" /></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="text ">
+                                                <a href="/video/{{media_item.media_id}}" title="{{media_item.name}}" class="truncate  ajax-load h3 text-md pb-2 hover:text-orange-400">
+                                                    {{media_item.name}}
+                                                </a>
+                                                <p class="p text-xs font-normal flex gap-4">
+                                                    <a href="/artist/{{media_item.author_id}}"  class="ajax-load w-full block relative text-gray-500 text-opacity-75 text-sm  tracking-tight  hover:text-orange-400">{{media_item.artist.name}}</a>
+                                                    <span class="flex-none pt-1">{{media_item.viewscount()}} {{lang.translate('Views')}} - {{media_item.field.duration|date("i:s")}}</span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                            
