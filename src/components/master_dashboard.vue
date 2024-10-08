@@ -154,7 +154,7 @@
                                 <div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2">
                                     <img :src="mediaItem.picture" class="w-10 h-10 rounded-full" />
                                     <div class="w-2/3 flex-grow-1 me-2">
-                                        <a :href="'/audiobook/' + mediaItem.media_id" target="_blank"
+                                        <a :href="'/'+mediaItem.type+'/' + mediaItem.media_id" target="_blank"
                                             class="text-gray-800 fw-bold text-hover-primary fs-6"
                                             v-text="mediaItem.name"></a>
                                         <div class="flex w-full gap-4">
