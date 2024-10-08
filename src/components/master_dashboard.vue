@@ -149,6 +149,14 @@
                                 <span class="fw-bold text-gray-900" v-text="translate('Latest Audiobooks')"></span>
                                 <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Audiobooks items')"></span>
                             </h3>
+                            
+                            <ul class="absolute flex-none fs-6 fw-semibold gap-2 mb-8 mt-6 nav nav-custom nav-line-tabs nav-line-tabs-2x nav-tabs px-2 right-0" role="tablist">
+                                <li class="nav-item" role="presentation"  v-for="type in ['top', 'new']">
+                                    <a @click="setAudiobooksTab(type)" :class="content.audiobooks_tab == type ? 'border-blue-600 border-b' : '' "  class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
+                                        <span v-text="translate(type)"></span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                         <div class="card-body pt-3" v-if="content.latest_audiobooks">
                             <div class="d-flex align-items-sm-center mb-7" v-for="audiobookItem in content.latest_audiobooks">
@@ -546,6 +554,11 @@ export default
             content.value.videos_tab = type;
         }
 
+        const setAudiobooksTab = (type) => {
+            content.value.audiobooks = content[type+'_audiobooks']; 
+            content.value.audiobooks_tab = type;
+        }
+
         
         return {
             getMixChartData,
@@ -572,6 +585,7 @@ export default
             dateValue,
             formatter,
             setVideosTab,
+            setAudiobooksTab,
             
         }
     },
