@@ -230,6 +230,7 @@ class BlogRepository
 		{
 			foreach ($data as $key => $value)
 			{
+				print_r($value);
 				$fields = $value;
 				$fields['item_type'] = Blog::class;	
 				$fields['item_id'] = $id;	
@@ -237,8 +238,7 @@ class BlogRepository
 				$fields['prefix'] = isset($value['prefix']) ? Content::generatePrefix($value['prefix']) : Content::generatePrefix($value['title']);	
 				$fields['created_by'] = $this->app->auth()->id;
 
-				$Model = Content::create($fields);
-				$Model->update($fields);
+				$Model = Content::firstOrCreate($fields);
 			}
 	
 			return $Model;		
