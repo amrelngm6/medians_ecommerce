@@ -103,20 +103,16 @@
                                         <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="audioItem.views_count"></span> </span>
                                     </div>
                                 </div>
-                                <!--end::Title-->
                             </div>
-                            <!--end::Item-->
-
                         </div>
-                        <!--end::Body-->
                     </div>
 
                     <div class="hidden card mb-0 min-w-350px">
                         <div class="w-full p-4">
                             <div class="w-full flex gap-2 pt-4">
-                                <h4 class="w-full ml-4" v-text="translate('Top products')"></h4>
+                                <h4 class="w-full ml-4" v-text="translate('Latest Videos')"></h4>
                             </div>
-                            <p class="text-gray-500 px-4 " v-text="translate('top products with high orders')"></p>
+                            <p class="text-gray-500 px-4 " v-text="translate('Latest uploaded Video items')"></p>
                         </div>
                         <div class="w-full px-8">
                             <div class="w-full" v-if="content">   
