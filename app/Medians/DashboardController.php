@@ -131,6 +131,7 @@ class DashboardController extends CustomController
 		$data['video_charts'] = $mediaItemRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->where('type', 'video')->withSum('views', 'times')->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
         $data['video_count'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->where('type', 'video')->count();
         $data['latest_videos'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->withCount('views','comments','likes')->where('type', 'video')->with('artist')->limit('5')->get();
+        $data['top_videos'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->withCount('views','comments','likes')->where('type', 'video')->with('artist')->limit('5')->orderBy('views_count', 'desc')->get();
 
 		$data['audio_charts'] = $mediaItemRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->where('type', 'audio')-> selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
         $data['audio_count'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->where('type', 'audio')->count();

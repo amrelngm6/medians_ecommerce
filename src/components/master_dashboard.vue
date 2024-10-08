@@ -113,14 +113,28 @@
                     </div>
 
                     <div class="card  w-full card-xl-stretch mb-xl-8">
-                        <div class="card-header align-items-center border-0 mt-4">
-                            <h3 class="card-title align-items-start flex-column">
+                        <div class="card-header align-items-center border-0 mt-4 flex">
+                            <h3 class="card-title align-items-start flex-column w-full">
                                 <span class="fw-bold text-gray-900" v-text="translate('Latest Videos')"></span>
                                 <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Video items')"></span>
                             </h3>
+                            <ul class="flex-none nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x fs-6 fw-semibold mt-6 mb-8 gap-2" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <a @click="videos = content.top_videos" class="nav-link text-active-primary d-flex align-items-center pb-4" href="javascript:;" >
+                                        <vue-feather type="bar-chart" class="w-4" />
+                                        <span v-text="translate('Trending')"></span>
+                                    </a>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <a @click="videos = content.latest_videos" class="nav-link text-active-primary d-flex align-items-center pb-4" href="javascript:;" >
+                                        <vue-feather type="clock" class="w-4" />
+                                        <span v-text="translate('New')"></span>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="card-body pt-3" v-if="content.latest_videos">
-                            <div class="d-flex align-items-sm-center mb-7" v-for="videoItem in content.latest_videos">
+                        <div class="card-body pt-3" v-if="videos">
+                            <div class="d-flex align-items-sm-center mb-7" v-for="videoItem in videos">
                                 <div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2">
                                     <img :src="videoItem.picture" class="w-10 h-10 rounded-full" />
                                     <div class="w-2/3 flex-grow-1 me-2">
@@ -305,6 +319,7 @@ import {translate, handleGetRequest, formatDateTime, formatCustomTime} from '@/u
 
 import { AgChartsVue } from 'ag-charts-vue3';
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
+import { content } from '../../tailwind.config';
 
 export default 
 {
@@ -551,6 +566,9 @@ export default
             merge_line_options,
             pie_options,
             content,
+            videos: content.latest_videos,
+            audio: content.latest_audio,
+            audiobooks: content.latest_audiobooks,
             activeDate,
             dateTimeFormat,
             dateFormat,
