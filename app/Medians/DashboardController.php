@@ -127,9 +127,9 @@ class DashboardController extends CustomController
         // $data['top_products'] = $this->ProductRepository;
         $data['top_customers'] = [];
 			
-		$data['media_charts'] = $mediaItemRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
-        $data['media_count'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
-        $data['latest_media'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->with('customer')->limit('10')->get();
+		$data['audio_charts'] = $mediaItemRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->where('type', 'audio')-> selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
+        $data['audio_count'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->where('type', 'audio')->count();
+        $data['latest_audio'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->where('type', 'audio')->with('artist')->limit('10')->get();
 
 		$data['customers_count'] = $this->CustomerRepository->masterByDateCount(['start'=>$this->start, 'end'=>$this->end]);
 
