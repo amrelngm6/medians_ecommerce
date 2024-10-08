@@ -17,10 +17,10 @@
                     <time class="text-sm font-medium text-indigo-500 md:w-28">{{comment.created_at|date('M d, Y')}}</time>
                 </div>
                 <!-- Title -->
-                <div class="text-slate-500 ml-14"><span class="text-slate-900 dark:text-gray-400 font-bold">{{comment.customer.name}}</span> {{comment.customer.type}}</div>
+                <div class=" ml-14"><span class="text-slate-900 dark:text-gray-400 font-bold">{{comment.customer.name}}</span> {{comment.customer.type}}</div>
             </div>
             <!-- Card -->
-            <div class="bg-white p-4 rounded border border-slate-200 text-slate-500 shadow ml-14 md:ml-44 dark:bg-gray-800 dark:border-gray-600">{{comment.comment}}.</div>
+            <div class="max-h-64 overflow-auto bg-white p-4 rounded border border-slate-200  shadow ml-14 md:ml-44 dark:bg-gray-800 dark:border-gray-600">{{comment.comment}}.</div>
         </div>
         {% endfor %}
 
