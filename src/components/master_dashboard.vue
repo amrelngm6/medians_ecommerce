@@ -119,7 +119,7 @@
                                     <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Audio items')"></span>
                                 </h3>
                             </div>
-                            <div class="card-body pt-3">
+                            <div class="card-body pt-3" v-if="content.latest_audio">
                                 <div class="d-flex align-items-sm-center mb-7" v-for="item in content.latest_audio">
                                     <div class="symbol symbol-60px symbol-2by3 me-4">
                                         <div class="symbol-label"
