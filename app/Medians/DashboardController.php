@@ -134,6 +134,10 @@ class DashboardController extends CustomController
         $data['audio_count'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->where('type', 'audio')->count();
         $data['latest_audio'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->withCount('views')->where('type', 'audio')->with('artist')->limit('5')->get();
 
+		$data['audiobook_charts'] = $mediaItemRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->where('type', 'audiobook')-> selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
+        $data['audiobook_count'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->where('type', 'audiobook')->count();
+        $data['latest_audiobook'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->withCount('views')->where('type', 'audiobook')->with('artist')->limit('5')->get();
+
 		$data['customers_count'] = $this->CustomerRepository->masterByDateCount(['start'=>$this->start, 'end'=>$this->end]);
 
 		$data['visits_charts'] = View::totalViews($this->month_beginning, $this->end)->selectRaw('date, SUM(times) as y, item_type')->having('y', '>', 0)->groupBy('date')->limit('10')->get();
