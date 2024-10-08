@@ -49,7 +49,7 @@ class MediaItemRepository
 		return MediaItem::withCount('likes', 'comments', 'views')->with('main_file')->with(['comments' => function($q) {
 			return $q->with('customer')->limit(10);
 		}])
-		->where('type', $type)->limit($limit)->get();
+		->where('type', $type)->limit($limit)->orderBy('media_id', 'DESC')->get();
 	}
 
 
