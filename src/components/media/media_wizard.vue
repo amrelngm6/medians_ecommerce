@@ -374,16 +374,7 @@ export default
             }
 
             const removeMedia = () => {
-
-                return deleteByKey('media_id', activeItem.value, 'MediaItem')
-                customConfirm(translate('Are you sure'))
-                .then((e) => {
-                    console.log(e)
-                    if (e) {
-                        item.stock_updated = stockType;
-                        saveItemStock(item)
-                    }
-                })
+                return deleteByKey('media_id', activeItem.value, 'MediaItem.delete')
             }
 
             const progressWidth = () => {
