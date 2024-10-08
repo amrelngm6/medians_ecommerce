@@ -131,7 +131,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="card-body pt-3" >
+                        <div class="card-body pt-3" v-if="content.videos">
                             <div class="d-flex align-items-sm-center mb-7" v-for="videoItem in content.videos">
                                 <div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2">
                                     <img :src="videoItem.picture" class="w-10 h-10 rounded-full" />
@@ -412,6 +412,7 @@ export default
                 content.videos = content.latest_videos
                 content.audio = content.latest_audio
                 content.audiobooks = content.latest_audiobooks
+                
                 try {
 
                     // invoicesDataset.value = {
