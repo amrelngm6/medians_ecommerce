@@ -16,8 +16,8 @@
         <div class="block w-full overflow-x-auto py-2" v-if="content">
             <div class="w-full overflow-y-auto overflow-x-hidden px-2 mt-6">
                 <div class="w-full gap-6 flex ">
-                    <div class="flex gap-10 w-full">
-                        <div class="card card-flush h-md-50 mb-xl-10">
+                    <div class="flex gap-10 mb-10 w-full">
+                        <div class="card card-flush min-h-100 mb-xl-10">
                             <div class="card-header pt-5">
                                 <div class="card-title d-flex flex-column">
                                     <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2"
