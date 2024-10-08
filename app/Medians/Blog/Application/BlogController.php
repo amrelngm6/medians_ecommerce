@@ -199,9 +199,10 @@ class BlogController extends CustomController
 			$item->addView();
 			$settings = $this->app->SystemSetting();
 
-			return render('views/front/'.($settings['template'] ?? 'default').'/article.html.twig', [
+			return render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
 		        'item' => $item,
 		        'similar_articles' => $this->repo->similar($item, 3),
+		        'layout' => 'blog/article',
 		    ]);
 
 		} catch (\Exception $e) {

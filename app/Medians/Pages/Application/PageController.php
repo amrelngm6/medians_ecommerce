@@ -261,7 +261,7 @@ class PageController extends CustomController
 
 			switch (get_class($pageContent->item)) {
 				case Blog::class:
-					return (new \Medians\Blog\Application\BlogController)->page($pageContent->item_id);
+					return (new \Medians\Blog\Application\BlogController)->page($pageContent);
 					break;
 				
 				case Page::class:
