@@ -103,9 +103,8 @@
                                     <div class="symbol symbol-35px symbol-circle"
                                         v-for="comment in activeItem.comments">
                                         <img alt="Pic" v-if="activeItem.picture" :src="activeItem.picture">
-                                        <span v-if="!activeItem.picture"
-                                            class="symbol-label bg-info text-inverse-info fw-bold"
-                                            v-text="activeItem.name.substring(0, 1)"></span>
+                                        <span v-if="!activeItem.picture" v-text="activeItem.name.substring(0, 1)"
+                                            class="symbol-label bg-info text-inverse-info fw-bold"></span>
                                     </div>
 
                                     <!--begin::All users-->
@@ -152,39 +151,99 @@
                             <div class="card-body p-9">
                                 <!--begin::Row-->
                                 <div class="row mb-7">
-                                    <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Full Name')"></label>
-                                    <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800" v-text="activeItem.name"></span></div>
+                                    <label class="col-lg-4 fw-semibold text-muted"
+                                        v-text="translate('Full Name')"></label>
+                                    <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                            v-text="activeItem.name"></span></div>
                                 </div>
                                 <!--end::Row-->
 
                                 <!--begin::Input group-->
                                 <div class="row mb-7">
-                                    <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Description')"></label>
-                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.description"></span></div>
+                                    <label class="col-lg-4 fw-semibold text-muted"
+                                        v-text="translate('Description')"></label>
+                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
+                                            v-text="activeItem.description"></span></div>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
                                 <div class="row mb-7">
-                                    <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Duration')"></label>
-                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.field.duration ? toHHMMSS(activeItem.field.duration) : '0'"></span></div>
+                                    <label class="col-lg-4 fw-semibold text-muted"
+                                        v-text="translate('Duration')"></label>
+                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
+                                            v-text="activeItem.field.duration ? toHHMMSS(activeItem.field.duration) : '0'"></span>
+                                    </div>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
                                 <div class="row mb-7">
-                                    <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Filesize')"></label>
-                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.field.filesize ?? '0'"></span></div>
+                                    <label class="col-lg-4 fw-semibold text-muted"
+                                        v-text="translate('Filesize')"></label>
+                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
+                                            v-text="activeItem.field.filesize ?? '0'"></span></div>
                                 </div>
                                 <!--end::Input group-->
 
                                 <!--begin::Input group-->
                                 <div class="row mb-7">
-                                    <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Bitrate')"></label>
-                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6" v-text="activeItem.field.bitrate ?? '0'"></span></div>
+                                    <label class="col-lg-4 fw-semibold text-muted"
+                                        v-text="translate('Bitrate')"></label>
+                                    <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
+                                            v-text="activeItem.field.bitrate ?? '0'"></span></div>
                                 </div>
                                 <!--end::Input group-->
 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class=" card w-full py-10" v-if="activeTab == 'Comments'">
+                <div class="w-full stepper stepper-links ">
+                    <div class="card-header cursor-pointer">
+                        <!--begin::Card title-->
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold m-0" v-text="translate('Media Comments')"></h3>
+                        </div>
+                        <!--end::Card title-->
+                    </div>
+                    <div class="w-full">
+                        <div class="card-body pt-0">
+                            <div class="card-body p-9">
+
+                                <div class="timeline timeline-border-dashed">
+                                    <div class="timeline-item" 
+                                        v-for="comment in activeItem.comments">
+                                        <div class="timeline-line"></div>
+                                        <div class="timeline-icon me-4">
+                                            <vue-feather type="message-square"></vue-feather>
+                                        </div>
+                                        <div class="timeline-content mb-10 mt-n2">
+                                            <!--begin::Timeline heading-->
+                                            <div class="overflow-auto pe-3">
+                                                <!--begin::Title-->
+                                                <div class="fs-5 fw-semibold mb-2" v-text="comment.comment"></div>
+                                                <!--end::Title-->
+
+                                                <!--begin::Description-->
+                                                <div class="d-flex align-items-center mt-1 fs-6">
+                                                    <div class="symbol symbol-circle symbol-25px" >
+                                                        <img :src="comment.customer.picture ?? ''" alt="img">
+                                                    </div>
+                                                    <div class="text-muted me-2 fs-7" v-text="comment.customer.name ?? ''"></div>
+                                                </div>
+                                                <!--end::Description-->
+                                            </div>
+                                            <!--end::Timeline heading-->
+                                        </div>
+                                        <!--end::Timeline content-->
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
@@ -234,7 +293,7 @@ export default
             const activeTab = ref('Info');
             const content = ref({});
             const fillable = ref(['Info']);
-            const tabs = ref([translate('General'), translate('Pricing'), translate('Attributes'), translate('Advanced'), translate('Images'), translate('SEO'), translate('Stats')]);
+            const tabs = ref([translate('Info'), translate('Comments'), translate('Likes'), translate('Stats')]);
 
             if (props.item) {
                 activeItem.value = props.item
