@@ -129,7 +129,7 @@ class MediaItem extends CustomModel
 		return $this->hasOne(MediaFile::class , 'media_id', 'media_id')->select('path');	
 	}
 	
-	public function related($limit = null) 
+	public function related($limit = null, $type = 'audio') 
 	{
 		
 		$query = MediaItem::query();
@@ -137,9 +137,10 @@ class MediaItem extends CustomModel
         foreach (explode(' ', $this->name) as $word) {
 			$query->where('name', 'LIKE', '%' . strtolower($word) . '%')
 			->where('media_id', '!=' , $this->media_id)
+			->where('type', $type)
 			->orWhere('description', 'LIKE', '%' . strtolower($word) . '%')
+			->where('type', $type)
 			->where('media_id', '!=' , $this->media_id);
-
         }
 
 
