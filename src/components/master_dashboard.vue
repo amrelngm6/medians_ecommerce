@@ -452,8 +452,8 @@ export default
                 },
                 {
                     label: translate('Likes'),
-                    backgroundColor: invoices.map((e, i) => colors.value[4]),
-                    data: invoices.map((e, i) => e.y),
+                    backgroundColor: likes.map((e, i) => colors.value[4]),
+                    data: likes.map((e, i) => e.y),
                 },
                 ],
             };
