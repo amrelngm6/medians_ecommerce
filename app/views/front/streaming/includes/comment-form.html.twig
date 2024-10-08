@@ -1,5 +1,5 @@
 <div class="flex mx-auto items-center justify-center shadow-lg mt-10 mx-8 mb-20 max-w-lg">
-   <form action="/front_api/create" id="comment-form-" class="ajax-form w-full max-w-xl bg-white rounded-lg px-4 pt-2">
+   <form action="/front_api/create" id="comment-form-" class="ajax-form w-full max-w-xl bg-white dark:bg-gray-800 dark:border-gray-600 rounded-lg px-4 pt-2">
       <div class="flex flex-wrap -mx-3 mb-6">
         <input type="hidden" name="type" value="Comment.create" />
         <input type="hidden" name="params[item_id]" value="{{id}}" />
@@ -15,7 +15,7 @@
                <p class="text-xs md:text-sm pt-px">{{lang.translate('HTML code is not allowed')}}.</p>
             </div>
             <div class="-mr-1">
-               <input type='submit' class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100" value='{{lang.translate('Post Comment')}}'>
+               <input type='submit' class="bg-white dark:bg-gray-800 dark:border-gray-600 text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100" value='{{lang.translate('Post Comment')}}'>
             </div>
          </div>
       </div>
