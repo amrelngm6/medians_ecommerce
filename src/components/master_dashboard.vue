@@ -118,11 +118,11 @@
                                 <span class="fw-bold text-gray-900" v-text="translate('Latest Videos')"></span>
                                 <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Video items')"></span>
                             </h3>
-                            <ul class="flex-none nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x fs-6 fw-semibold mt-6 mb-8 gap-2" role="tablist">
+                            <ul class="absolute flex-none fs-6 fw-semibold gap-2 mb-8 mt-6 nav nav-custom nav-line-tabs nav-line-tabs-2x nav-tabs px-2 right-0" role="tablist">
                                 <li class="nav-item" role="presentation">
                                     <a @click="videos = content.top_videos" class="nav-link text-active-primary d-flex align-items-center pb-4" href="javascript:;" >
                                         <vue-feather type="bar-chart" class="w-4" />
-                                        <span v-text="translate('Trending')"></span>
+                                        <span v-text="translate('Top')"></span>
                                     </a>
                                 </li>
                                 <li class="nav-item" role="presentation">
