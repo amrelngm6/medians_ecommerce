@@ -32,7 +32,7 @@
                                     v-text="translate('Total media views')"></span>
                                 <div class="symbol-group symbol-hover flex-nowrap">
                                     <div class="symbol symbol-35px symbol-circle" v-for="media in content.top_media">
-                                        <img alt="Pic" :src="customer.media">
+                                        <img alt="Pic" :src="media.picture">
                                     </div>
                                 </div>
                             </div>
