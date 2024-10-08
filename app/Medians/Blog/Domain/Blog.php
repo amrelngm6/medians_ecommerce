@@ -4,6 +4,7 @@ namespace Medians\Blog\Domain;
 
 use Shared\dbaser\CustomModel;
 use Medians\Views\Domain\View;
+use Medians\Comments\Domain\Comment;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Content\Domain\Content;
 use Medians\Categories\Domain\Category;
@@ -97,6 +98,11 @@ class Blog extends CustomModel
 	public function views()
 	{
 		return $this->morphMany(View::class, 'item');
+	}
+
+	public function comments()
+	{
+		return $this->morphMany(Comment::class, 'item');
 	}
 
 
