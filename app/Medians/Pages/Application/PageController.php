@@ -241,22 +241,13 @@ class PageController extends CustomController
      */
     public function page($prefix)
     {
-        $pageContent = $this->contentRepo->find(urldecode($prefix));
-		$categoryRepo = new \Medians\Products\Infrastructure\CategoryRepository;
-		$settings = $this->app->SystemSetting();
-
-		$page = $this->handlePageObject($pageContent);
 
 		try {
 
-			$page->addView();
-						
-            return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/page.html.twig', [
-                'page' => $page,
-                'app' => $this->app,
-				'categories' => $categoryRepo->getGrouped(),
-            ], 'output')));
-            
+			$pageContent = $this->contentRepo->find(urldecode($prefix));
+	
+			return $this->handlePageObject($pageContent);
+
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);
 		}
@@ -269,16 +260,8 @@ class PageController extends CustomController
 			$_SESSION['lang'] = $pageContent->lang;
 
 			switch (get_class($pageContent->item)) {
-				case Product::class:
-					return (new \Medians\Products\Infrastructure\ProductRepository)->find($pageContent->item_id);
-					break;
-
 				case Blog::class:
-					return (new \Medians\Blog\Infrastructure\BlogRepository)->find($pageContent->item_id);
-					break;
-	
-				case Category::class:
-					return (new \Medians\Products\Infrastructure\CategoryRepository)->find($pageContent->item_id);
+					return (new \Medians\Blog\Application\BlogController)->page($pageContent->item_id);
 					break;
 				
 				case Page::class:
