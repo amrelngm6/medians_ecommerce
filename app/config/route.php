@@ -72,7 +72,7 @@ RouteHandler::get('/shorts/create', \Medians\Media\Application\ShortVideoControl
 RouteHandler::get('/generate/short/(:all)', \Medians\Media\Application\ShortVideoController::class.'@generate_page');
 RouteHandler::get('/short/edit/(:all)', \Medians\Media\Application\ShortVideoController::class.'@edit_video');
 RouteHandler::get('/discover/short', \Medians\Media\Application\ShortVideoController::class.'@discover');
-RouteHandler::get('/short/(:all)', \Medians\Media\Application\ShortVideoController::class.'@video_page');
+RouteHandler::get('/short_video/(:all)', \Medians\Media\Application\ShortVideoController::class.'@video_page');
 
 /** Search pages */
 RouteHandler::get('/search/audio', \Medians\Media\Application\MediaItemController::class.'@search');
