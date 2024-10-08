@@ -47,7 +47,7 @@ class MediaItemController extends CustomController
             [ 'value'=> "picture", 'text'=> translate('picture'), 'sortable'=> true ],
             [ 'value'=> "artist.name", 'text'=> translate('Artist'),  ],
             [ 'value'=> "field.duration", 'text'=> translate('Duration'),  ],
-            [ 'value'=> "edit", 'text'=> translate('edit')  ],
+            [ 'value'=> "info", 'text'=> translate('Info')  ],
             [ 'value'=> "delete", 'text'=> translate('delete')  ],
         ];
 	}
