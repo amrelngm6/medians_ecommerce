@@ -66,8 +66,8 @@
                 <div class="">
                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-6">
                         <div class="relative overflow-hidden">
-                            <dashboard_card_white  icon="/uploads/img/booking-unpaid.png" classes="bg-dark pb-30" text_class="fs-4 text-white" value_class="text-white" :title="translate('Orders')" :value="content.invoices_count"></dashboard_card_white>
-                            <line_charts  class="absolute bottom-0 w-full mb-8"  v-if="content.orders_charts" type="bar" :key="content" :data="getChartData(content.orders_charts, 'label', 'total_amount')" />
+                            <dashboard_card_white  icon="/uploads/img/booking-unpaid.png" classes="bg-dark pb-30" text_class="fs-4 text-white" value_class="text-white" :title="translate('Audio')" :value="content.audio_count"></dashboard_card_white>
+                            <line_charts  class="absolute bottom-0 w-full mb-8"  v-if="content.audio_charts" type="bar" :key="content" :data="getChartData(content.audio_charts, 'label', 'y')" />
                         </div>
                         
                         <div class="relative overflow-hidden">
