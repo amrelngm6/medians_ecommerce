@@ -18,6 +18,7 @@ class Blog extends CustomModel
 	protected $table = 'blog';
 
 	public $fillable = [
+		'title', 
 		'picture', 
 		'status', 
 		'created_by'
