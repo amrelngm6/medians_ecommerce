@@ -33,7 +33,7 @@
                                 <div class="symbol-group symbol-hover flex-nowrap">
                                     <div @mouseover="media.showTip = true" @mouseleave="media.showTip = false" class="relative symbol symbol-35px symbol-circle" v-for="media in content.top_media">
                                         <img alt="Pic" :src="media.picture">
-                                        <tooltip v-if="item.showTip" :key="item.showTip" :title="item.time" ></tooltip></div>
+                                        <tooltip v-if="media.showTip" :key="media.showTip" :title="media.name" ></tooltip></div>
                                         
                                         
                                 </div>
