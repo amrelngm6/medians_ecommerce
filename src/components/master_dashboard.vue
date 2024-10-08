@@ -93,7 +93,7 @@
                     <div class="card  w-full card-xl-stretch mb-xl-8" v-for="media in ['audio', 'videos', 'audiobooks']">
                         <div class="card-header align-items-center border-0 mt-4">
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="fw-bold text-gray-900" v-text="translate('Latest '+media)"></span>
+                                <span class="fw-bold text-gray-900" v-text="translate(media+' items')"></span>
                                 <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded '+media+' items')"></span>
                             </h3>
                             
