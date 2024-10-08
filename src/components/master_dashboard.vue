@@ -117,11 +117,12 @@
                         <div class="w-full px-8">
                                
                             <div class="card-body pt-3" v-if="content.latest_videos">
-                                <div class="d-flex align-items-sm-center mb-7" v-for="audioItem in content.latest_videos">
+                                <div class="d-flex align-items-sm-center mb-7" v-for="videoItem in content.latest_videos">
                                     <div class="d-flex flex-row-fluid flex-wrap align-items-center">
+                                        <img :src="videoItem.picture" class="w-10 h-10 rounded-full" />
                                         <div class="flex-grow-1 me-2">
-                                            <a href="#!" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="audioItem.name"></a>
-                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="audioItem.views_count"></span> </span>
+                                            <a href="#!" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="videoItem.name"></a>
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="videoItem.views_count"></span> </span>
                                         </div>
                                     </div>
                                 </div>

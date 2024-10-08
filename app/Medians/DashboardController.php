@@ -126,7 +126,7 @@ class DashboardController extends CustomController
 
         // $data['top_products'] = $this->ProductRepository;
         $data['top_customers'] = [];
-		$data['video_charts'] = $mediaItemRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->where('type', 'video')-> selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
+		$data['video_charts'] = $mediaItemRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->where('type', 'video')->withSum('views', 'times')->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
         $data['video_count'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->where('type', 'video')->count();
         $data['latest_videos'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->withCount('views')->where('type', 'video')->with('artist')->limit('5')->get();
 
