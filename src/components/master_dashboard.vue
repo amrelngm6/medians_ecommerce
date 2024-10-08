@@ -125,7 +125,11 @@
                                     <img :src="videoItem.picture" class="w-10 h-10 rounded-full" />
                                     <div class="w-2/3 flex-grow-1 me-2">
                                         <a :href="'/video/'+videoItem.media_id" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="videoItem.name"></a>
-                                        <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="videoItem.views_count"></span> </span>
+                                        <div class="flex w-full gap-4">
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="videoItem.views_count"></span> </span>
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="message-square" class="w-4" /> <span v-text="videoItem.comments_count"></span> </span>
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="heart" class="w-4" /> <span v-text="videoItem.likes_count"></span> </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +149,11 @@
                                     <img :src="audiobookItem.picture" class="w-10 h-10 rounded-full" />
                                     <div class="w-2/3 flex-grow-1 me-2">
                                         <a :href="'/audiobook/'+audiobookItem.media_id" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6" v-text="audiobookItem.name"></a>
-                                        <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="audiobookItem.views_count"></span> </span>
+                                        <div class="flex w-full gap-4">
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="eye" class="w-4" /> <span v-text="audiobookItem.views_count"></span> </span>
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="message-square" class="w-4" /> <span v-text="audiobookItem.comments_count"></span> </span>
+                                            <span class="text-muted fw-semibold d-block pt-1" ><vue-feather type="heart" class="w-4" /> <span v-text="audiobookItem.likes_count"></span> </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
