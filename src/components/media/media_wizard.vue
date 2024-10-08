@@ -151,7 +151,15 @@
                         <div class="card-body pt-0">
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Full Name')"></label>
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Link')"></label>
+                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                        v-text="conf.url+'media/'+activeItem.media_id"></span></div>
+                            </div>
+                            <!--end::Row-->
+
+                            <!--begin::Row-->
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Media Name')"></label>
                                 <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
                                         v-text="activeItem.name"></span></div>
                             </div>
