@@ -31,9 +31,9 @@
                                 <span class="fs-6 fw-bolder text-gray-800 d-block mb-2"
                                     v-text="translate('Total media views')"></span>
                                 <div class="symbol-group symbol-hover flex-nowrap">
-                                    <div @mouseover="media.showTip = true" @mouseleave="media.showTip = false" class="relative symbol symbol-35px symbol-circle" v-for="media in content.top_media">
+                                    <a :href="'/'+media.type+'/'+media.media_id"  @mouseover="media.showTip = true" @mouseleave="media.showTip = false" class="relative symbol symbol-35px symbol-circle" v-for="media in content.top_media">
                                         <img alt="Pic" :src="media.picture">
-                                        <tooltip v-if="media.showTip" :key="media.showTip" :title="media.name" ></tooltip></div>
+                                        <tooltip v-if="media.showTip" :key="media.showTip" :title="media.name" ></tooltip></a>
                                 </div>
                             </div>
                         </div>
@@ -53,9 +53,9 @@
                                     v-text="translate('Registered Customers')"></span>
                                 <div class="symbol-group symbol-hover flex-nowrap">
                                     
-                                    <div @mouseover="customer.showTip = true" @mouseleave="customer.showTip = false" class="relative symbol symbol-35px symbol-circle" v-for="customer in content.new_customers">
+                                    <a :href="'/artist/'+customer.customer_id" @mouseover="customer.showTip = true" @mouseleave="customer.showTip = false" class="relative symbol symbol-35px symbol-circle" v-for="customer in content.new_customers">
                                         <img alt="Pic" :src="customer.picture">
-                                        <tooltip v-if="customer.showTip" :key="customer.showTip" :title="customer.name" ></tooltip></div>
+                                        <tooltip v-if="customer.showTip" :key="customer.showTip" :title="customer.name" ></tooltip></a>
                                 </div>
                             </div>
                         </div>
