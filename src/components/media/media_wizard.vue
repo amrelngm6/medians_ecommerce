@@ -202,7 +202,7 @@
                         data-bs-target="#kt_account_deactivate" aria-expanded="true"
                         aria-controls="kt_account_deactivate">
                         <div class="card-title m-0">
-                            <h3 class="fw-bold m-0">Deactivate Account</h3>
+                            <h3 class="fw-bold m-0" v-text="translate('Delete this item')"></h3>
                         </div>
                     </div>
                     <!--end::Card header-->
