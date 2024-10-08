@@ -208,7 +208,7 @@
                     <div class="card-header cursor-pointer">
                         <!--begin::Card title-->
                         <div class="card-title m-0">
-                            <h3 class="fw-bold m-0" v-text="translate('Media Comments')"></h3>
+                            <h3 class="fw-bold m-0" v-text="translate('Latest Comments')"></h3>
                         </div>
                         <!--end::Card title-->
                     </div>
@@ -235,7 +235,7 @@
                                                     <div class="symbol symbol-circle symbol-25px" >
                                                         <vue-feather class="w-5 pt-2" type="message-square p-1" ></vue-feather>
                                                     </div>
-                                                    <div class="text-muted me-2 fs-7" v-text="comment.customer.name ?? ''"></div>
+                                                    <div class="text-muted me-2 fs-7 fw-bold" v-text="comment.customer.name ?? ''"></div>
                                                     |
                                                     <div class="text-muted me-2 fs-7" v-text="formatCustomTime(comment.created_at, 'MMMM DD, Y - HH:mm a')"></div>
                                                 </div>
