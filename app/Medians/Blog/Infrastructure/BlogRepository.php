@@ -160,7 +160,7 @@ class BlogRepository
     	$Object->update($dataArray);
 
     	// Store languages content
-    	!empty($data['content_langs']) ? $this->storeContent($data['content_langs'], $Object->id) : '';
+    	!empty($data['content_langs']) ? $this->storeContent(json_encode($data['content_langs'], true), $Object->id) : '';
 		
     	// Store Custom fields
     	isset($data['field']) ? $this->storeCustomFields($data['field'], $Object->id) : '';
@@ -181,7 +181,7 @@ class BlogRepository
     	$Object->update( (array) $data);
 
     	// Store languages content
-    	!empty($data['content_langs']) ? $this->storeContent($data['content_langs'], $data['id']) : '';
+    	!empty($data['content_langs']) ? $this->storeContent(json_encode($data['content_langs'], true), $data['id']) : '';
 
     	// Store Custom fields
     	!empty($data['field']) ? $this->storeCustomFields($data['field'], $data['id']) : '';
