@@ -409,9 +409,9 @@ export default
 
             if (data)
             {
-                content.videos = data.latest_videos
-                content.audio = data.latest_audio
-                content.audiobooks = data.latest_audiobooks
+                content.value.videos = data.latest_videos
+                content.value.audio = data.latest_audio
+                content.value.audiobooks = data.latest_audiobooks
                 
                 try {
 
