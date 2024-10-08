@@ -236,7 +236,7 @@ class BlogRepository
 				$fields['lang'] = $key;	
 				$fields['prefix'] = isset($value['prefix']) ? Content::generatePrefix($value['prefix']) : Content::generatePrefix($value['title']);	
 
-				$Model = Content::firstOrCreate($fields);
+				$Model = Content::create($fields);
 			}
 	
 			return $Model;		
@@ -260,7 +260,6 @@ class BlogRepository
 				$fields['value'] = $value;
 
 				$Model = CustomField::create($fields);
-				$Model->update($fields);
 			}
 	
 			return $Model;		
