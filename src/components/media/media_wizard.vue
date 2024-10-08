@@ -152,8 +152,8 @@
                             <!--begin::Row-->
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Link')"></label>
-                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
-                                        v-text="conf.url+'/'+ activeItem.type+'/'+ activeItem.media_id"></span></div>
+                                <div class="col-lg-8"><a :href="'/'+ activeItem.type+'/'+ activeItem.media_id" class="fw-bold fs-6 text-gray-800"
+                                        v-text="conf.url + activeItem.type+'/'+ activeItem.media_id"></a></div>
                             </div>
                             <!--end::Row-->
 
