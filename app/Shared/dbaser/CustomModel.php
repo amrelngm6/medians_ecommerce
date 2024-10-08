@@ -6,7 +6,9 @@ use \Illuminate\Database\Eloquent\Model;
 
 use Medians\Users\Domain\User;
 use Medians\Content\Domain\Content;
+use Medians\Likes\Domain\Like;
 use Medians\Views\Domain\View;
+use Medians\Comments\Domain\Comment;
 use Medians\Notifications\Domain\NotificationEvent;
 use Medians\Logs\Domain\UsageLog;
 
@@ -44,6 +46,22 @@ class CustomModel extends Model
 	}
 
 	
+	public function viewscount() 
+	{
+		return $this->morphMany(View::class , 'item')->sum('times');	
+	}
+	
+	
+	public function commentscount() 
+	{
+		return $this->morphMany(Comment::class , 'item')->count();	
+	}
+	
+	public function likescount() 
+	{
+		return $this->morphMany(Like::class , 'item')->count();	
+	}
+
 	public function can($permission, $app)
 	{
 	    if (isset($app->auth->role_id))
