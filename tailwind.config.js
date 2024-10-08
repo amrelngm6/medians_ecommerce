@@ -6,6 +6,9 @@ module.exports = {
     "./src/*.{vue,js,ts,jsx,tsx,twig}",
     "./src/**/*.{vue,js,ts,jsx,tsx,twig}",
     "./src/**/**/*.{vue,js,ts,jsx,tsx,twig}",
+    "./app/views/front/*.{html,twig}",
+    "./app/views/front/*/*.{html,twig}",
+    "./app/views/front/*/*/*.{html,twig}",
     "./node_modules/vue-tailwind-datepicker/**/*.js",
   ],
   safelist: [
