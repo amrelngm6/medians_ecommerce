@@ -162,9 +162,9 @@
                 </div>
                 
                 <div class="w-full py-10">
-                    <h4 class="text-base lg:text-lg " v-text="translate('Orders vs Paid Invoices charts')"></h4> 
-                    <div class="w-full bg-white p-4 mb-4 rounded-lg" v-if="content.orders_charts">
-                        <dashboard_pie_chart v-if="content.orders_charts" type="bar"  :key="content" :options="getMixChartData(content.orders_charts, content.invoices_charts)" />
+                    <h4 class="text-base lg:text-lg " v-text="translate('Visitors Actions charts')"></h4> 
+                    <div class="w-full bg-white p-4 mb-4 rounded-lg" v-if="content.visits_charts">
+                        <dashboard_pie_chart v-if="content.visits_charts" type="bar"  :key="content" :options="getMixChartData(content.visits_charts, content.comments_charts, content.likes_charts)" />
                     </div>
                 </div>
 
@@ -434,16 +434,21 @@ export default
         }
 
 
-        const getMixChartData = (orders, invoices) => {
+        const getMixChartData = (views, comments, likes) => {
             
             // Line charts for sales in last days 
             return  {
                 labels: orders.map((e) => e.label),
                 datasets: [
                 {
-                    label: translate('Orders'),
-                    backgroundColor: orders.map((e, i) => colors.value[2]),
-                    data: orders.map((e, i) => e.total_amount),
+                    label: translate('views'),
+                    backgroundColor: views.map((e, i) => colors.value[2]),
+                    data: views.map((e, i) => e.total_amount),
+                },
+                {
+                    label: translate('Paid Invoices'),
+                    backgroundColor: invoices.map((e, i) => colors.value[3]),
+                    data: invoices.map((e, i) => e.total_amount),
                 },
                 {
                     label: translate('Paid Invoices'),

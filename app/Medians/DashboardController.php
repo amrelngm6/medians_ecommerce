@@ -140,8 +140,9 @@ class DashboardController extends CustomController
 
 		$data['customers_count'] = $this->CustomerRepository->masterByDateCount(['start'=>$this->start, 'end'=>$this->end]);
 
-		$data['visits_charts'] = View::totalViews($this->month_beginning, $this->end)->selectRaw('date, SUM(times) as y, item_type')->having('y', '>', 0)->groupBy('date')->limit('10')->get();
 		$data['visits_count'] = View::totalViews($this->start, $this->end)->sum('times');
+		$data['visits_charts'] = View::totalViews($this->start, $this->end)->selectRaw('date, SUM(times) as y, item_type')->having('y', '>', 0)->groupBy('date')->limit('10')->get();
+		$data['likes_charts'] = Like::whereBetween('created_at', [$this->start, $this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y, item_type')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
 
 		// Subscribers stats
 		$data['subscribers_charts'] = $subscriberRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
