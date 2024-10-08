@@ -236,6 +236,8 @@
                                                         <vue-feather class="w-5 pt-2" type="message-square p-1" ></vue-feather>
                                                     </div>
                                                     <div class="text-muted me-2 fs-7" v-text="comment.customer.name ?? ''"></div>
+                                                    |
+                                                    <div class="text-muted me-2 fs-7" v-text="formatCustomTime(comment.created_at, 'MMMM DD, Y - HH:mm a')"></div>
                                                 </div>
                                                 <!--end::Description-->
                                             </div>
