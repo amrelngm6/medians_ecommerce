@@ -136,7 +136,7 @@ class DashboardController extends CustomController
 
 		$data['audiobook_charts'] = $mediaItemRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->where('type', 'audiobook')-> selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
         $data['audiobook_count'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->where('type', 'audiobook')->count();
-        $data['latest_audiobook'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->withCount('views')->where('type', 'audiobook')->with('artist')->limit('5')->get();
+        $data['latest_audiobooks'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->withCount('views')->where('type', 'audiobook')->with('artist')->limit('5')->get();
 
 		$data['customers_count'] = $this->CustomerRepository->masterByDateCount(['start'=>$this->start, 'end'=>$this->end]);
 
