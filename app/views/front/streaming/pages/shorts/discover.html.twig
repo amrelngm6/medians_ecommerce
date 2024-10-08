@@ -136,10 +136,18 @@ $(function(){
     }
 
     function loadVideos() {
-        videoData.forEach((data, i) => {
-            const videoElement = createVideoElement(data);
-            shortVideoContainer.appendChild(videoElement);
-        });
+        
+        const videoElement = createVideoElement(videoData[0]);
+        shortVideoContainer.appendChild(videoElement);
+        
+        setTimeout(function(){
+            videoData.forEach((data, i) => {
+                if (i) {
+                    const videoElement = createVideoElement(data);
+                    shortVideoContainer.appendChild(videoElement);
+                }
+            });
+        }, 5000)
     }
 
     function handleIntersection(entries) {
