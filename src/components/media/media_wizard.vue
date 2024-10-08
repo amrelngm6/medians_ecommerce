@@ -221,7 +221,7 @@
                                         v-for="comment in activeItem.comments">
                                         <div class="timeline-line"></div>
                                         <div class="timeline-icon me-4">
-                                            <img :src="comment.customer.picture ?? ''" alt="img">
+                                            <img class="w-12 h-12 rounded-full" :src="comment.customer.picture ?? ''" alt="img">
                                         </div>
                                         <div class="timeline-content mb-10 mt-n2">
                                             <!--begin::Timeline heading-->
@@ -233,7 +233,7 @@
                                                 <!--begin::Description-->
                                                 <div class="d-flex align-items-center mt-1 fs-6 gap-2">
                                                     <div class="symbol symbol-circle symbol-25px" >
-                                                        <vue-feather type="message-square"></vue-feather>
+                                                        <vue-feather type="message-square p-1" ></vue-feather>
                                                     </div>
                                                     <div class="text-muted me-2 fs-7" v-text="comment.customer.name ?? ''"></div>
                                                 </div>
