@@ -147,6 +147,7 @@ $(function(){
             if (entry.isIntersecting) {
                 entry.target.className ='video-item active'
                 const video = entry.target.querySelector('video');
+                video.load();
                 video.play();
             } else {
                 entry.target.className ='video-item'
