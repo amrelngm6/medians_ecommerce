@@ -24,8 +24,14 @@ class Blog extends CustomModel
 	];
 
 
-	public $appends = ['title','photo','field','category_name','date', 'update_date','class_name'];
+	public $appends = ['title','photo','field','category_name','date', 'update_date','class_name', 'picture_name'];
 
+
+	public function getPictureNameAttribute() 
+	{
+		$e = $this->picture ? explode('/', $this->picture) : [];
+		return end($e);
+	}
 
 	public function getClassNameAttribute() 
 	{
