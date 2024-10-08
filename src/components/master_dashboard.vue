@@ -99,7 +99,7 @@
                             
                             <ul class="absolute flex-none fs-6 fw-semibold gap-2 mb-8 mt-6 nav nav-custom nav-line-tabs nav-line-tabs-2x nav-tabs px-2 right-0" role="tablist">
                                 <li class="nav-item" role="presentation"  v-for="type in ['top', 'new']">
-                                    <a @click="setMediaTab(type)" :class="content[media+'_tab'] == type ? 'border-blue-600 border-b' : '' "  class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
+                                    <a @click="setMediaTab(type, media)" :class="content[media+'_tab'] == type ? 'border-blue-600 border-b' : '' "  class="align-items-center d-flex hover:bg-gray-100 pb-4 px-2 text-active-primary" href="javascript:;" >
                                         <span v-text="translate(type)"></span>
                                     </a>
                                 </li>
@@ -507,6 +507,7 @@ export default
         const setMediaTab = (sortType, mediaType) => {
             content.value[mediaType] = content.value[sortType+'_'+mediaType]; 
             content.value[mediaType+'_tab']  = sortType;
+            console.log(content.value)
         }
 
         
