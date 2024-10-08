@@ -312,7 +312,6 @@ import {translate, handleGetRequest, formatDateTime, formatCustomTime} from '@/u
 
 import { AgChartsVue } from 'ag-charts-vue3';
 import VueTailwindDatepicker from "vue-tailwind-datepicker";
-import { content } from '../../tailwind.config';
 
 export default 
 {
