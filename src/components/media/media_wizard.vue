@@ -208,7 +208,7 @@
                     <!--end::Card header-->
 
                     <!--begin::Content-->
-                    <div id="kt_account_settings_deactivate" class="collapse show">
+                    <div id="" class="">
                         <!--begin::Form-->
                         <form id="kt_account_deactivate_form" class="form fv-plugins-bootstrap5 fv-plugins-framework"
                             novalidate="novalidate">
@@ -227,12 +227,9 @@
                                     <div class="d-flex flex-stack flex-grow-1 ">
                                         <!--begin::Content-->
                                         <div class=" fw-semibold">
-                                            <h4 class="text-gray-900 fw-bold">You Are Deactivating Your
-                                                Account</h4>
+                                            <h4 class="text-gray-900 fw-bold" v-text="translate('Delete this media')"></h4>
 
-                                            <div class="fs-6 text-gray-700 ">For extra security, this
-                                                requires you to confirm your email or phone number when you
-                                                reset yousignr password. <br><a class="fw-bold" href="#">Learn more</a>
+                                            <div class="fs-6 text-gray-700 "> <span v-text="translate('Remove this media and its related files and all related information')"></span> 
                                             </div>
                                         </div>
                                         <!--end::Content-->
@@ -244,10 +241,9 @@
 
                                 <!--begin::Form input row-->
                                 <div class="form-check form-check-solid fv-row fv-plugins-icon-container">
-                                    <input name="deactivate" class="form-check-input" type="checkbox" value=""
+                                    <input name="deactivate" class="form-check-input" type="checkbox" value="" required
                                         id="deactivate">
-                                    <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate">I
-                                        confirm my account deactivation</label>
+                                    <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate" v-text="translate('I Confirm to delete this media')"></label>
                                     <div
                                         class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                                     </div>
@@ -258,8 +254,7 @@
 
                             <!--begin::Card footer-->
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                <button id="kt_account_deactivate_account_submit" type="submit"
-                                    class="btn btn-danger fw-semibold">Deactivate Account</button>
+                                <button id="kt_account_deactivate_account_submit" type="submit"  class="btn btn-danger fw-semibold" v-text="translate('Delete')"></button>
                             </div>
                             <!--end::Card footer-->
 
