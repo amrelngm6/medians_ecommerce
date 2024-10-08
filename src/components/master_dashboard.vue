@@ -116,6 +116,7 @@
                         <div class="card-header align-items-center border-0 mt-4 flex">
                             <h3 class="card-title align-items-start flex-column w-full">
                                 <span class="fw-bold text-gray-900" v-text="translate('Latest Videos')"></span>
+                                <span class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Video items')"></span>
                             </h3>
                             <ul class="flex-none nav nav-custom nav-tabs nav-line-tabs nav-line-tabs-2x fs-6 fw-semibold mt-6 mb-8 gap-2" role="tablist">
                                 <li class="nav-item" role="presentation">
@@ -131,9 +132,6 @@
                                     </a>
                                 </li>
                             </ul>
-                        </div>
-                        <div class="px-8">
-                            <p class="text-muted mt-1 fw-semibold fs-7" v-text="translate('Latest uploaded Video items')"></p>
                         </div>
                         <div class="card-body pt-3" v-if="content.latest_videos">
                             <div class="d-flex align-items-sm-center mb-7" v-for="videoItem in content.latest_videos">
