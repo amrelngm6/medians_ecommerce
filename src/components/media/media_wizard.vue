@@ -364,7 +364,7 @@ export default
             const activeTab = ref('Info');
             const content = ref({});
             const fillable = ref(['Info']);
-            const tabs = ref([translate('Info'), translate('Comments'), translate('Likes'), translate('Stats')]);
+            const tabs = ref([translate('Info'), translate('Comments'), translate('Stats')]);
 
             if (props.item) {
                 activeItem.value = props.item
