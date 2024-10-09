@@ -916,28 +916,46 @@ $(function(){
 
 
 
-
 	/**
-	 * Handle selected date range
+	 * Append selected item for calendar date range
 	 * 
+	 * @param {String} elementId 
 	 */
-	function handleSelectedDurations(id , uniqueId, duration)
+	function appendRangeSelectedItem(elementId)
 	{
-		jQuery(`#selected_media_list`).append(jQuery(`#selected-box-${id}-${uniqueId}`).html())
+		jQuery(`#selected_media_list`).append(jQuery(elementId).html())
 		
 		let elements = jQuery('#selected_media_list').find('.range-selected-media');
-		let elements2=[];
+		let element;
+		jQuery('#channel-range-selected-duration').val('0')
 
 		for (var i = 0; i < elements.length; i++) {
-			elements2[i] = elements[i].dataset;
-		}
-
-		jQuery('#channel-range-selected-duration').val('0')
-		elements2.forEach(element => {
+			element = elements[i].dataset;
 			handleSelectedDuration(element.id, element.uniqueId, element.duration)
-		})
+		}
+	}
+	
+	
+	/**
+	 * Remove selected date range item
+	 */
+	function removeRangeSelectedItem(elementId)
+	{
+		jQuery(elementId).remove()
+		
+		let elements = jQuery('#selected_media_list').find('.range-selected-media');
+		let element;
+		jQuery('#channel-range-selected-duration').val('0')
+
+		for (var i = 0; i < elements.length; i++) {
+			element = elements[i].dataset;
+			handleSelectedDuration(element.id, element.uniqueId, element.duration)
+		}
 	}
 
+	/**
+	 * Handle selected date range item
+	 */
 	function handleSelectedDuration(id, uniqueId, duration)
 	{
 
