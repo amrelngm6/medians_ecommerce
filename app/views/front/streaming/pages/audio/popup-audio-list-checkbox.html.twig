@@ -13,7 +13,7 @@
                 </label>
                 <div id="selected-box-{{item.media_id}}-{{uniqueId}}" class="hidden"> 
                     <div class="range-selected-media w-full  flex gap-2  py-4" id="selected-box-frame-{{item.media_id}}-{{uniqueId}}" data-duration="{{item.field.duration}}" data-unique-id="{{uniqueId}}" data-id="{{item.media_id}}" >
-                        <img onclick="(function() {return removeRangeSelectedItem(`#selected-box-frame-{{item.media_id}}-{{uniqueId}}`, 'channel');})()" class="cursor-pointer dark:brightness-200 w-5" src="/src/front_assets/svg/delete-white.svg" />
+                        <img onclick="(function() {return removeRangeSelectedItem(`#selected-box-frame-{{item.media_id}}-{{uniqueId}}`, 'station');})()" class="cursor-pointer dark:brightness-200 w-5" src="/src/front_assets/svg/delete-white.svg" />
                         <div class="panel panel-info w-full" >
                             <input type="hidden" name="params[selected][media_id][]" value="{{item.media_id}}" />
                             <input type="hidden" name="params[selected][title][]" value="{{item.name}}" />
