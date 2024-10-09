@@ -931,7 +931,7 @@ $(function(){
 
 		for (var i = 0; i < elements.length; i++) {
 			element = elements[i].dataset;
-			handleSelectedDuration(element.id, element.uniqueId, element.duration)
+			handleSelectedDuration(element.id, element.uniqueId, element.duration, type)
 		}
 	}
 	
@@ -949,7 +949,7 @@ $(function(){
 
 		for (var i = 0; i < elements.length; i++) {
 			element = elements[i].dataset;
-			handleSelectedDuration(element.id, element.uniqueId, element.duration)
+			handleSelectedDuration(element.id, element.uniqueId, element.duration, type)
 		}
 	}
 
