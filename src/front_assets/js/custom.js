@@ -910,6 +910,13 @@ $(function(){
 		);
 	}
 
+})
+
+
+
+
+
+
 	/**
 	 * Handle selected date range
 	 * 
@@ -936,13 +943,6 @@ $(function(){
 		jQuery(`#video-list-${id}-${uniqueId}`).remove()
 		jQuery(`#range-item-submit-button`).removeClass(`hidden`);
 	}
-})
-
-
-
-
-
-
 
 
 
