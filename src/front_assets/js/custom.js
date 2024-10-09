@@ -700,90 +700,111 @@ $(function(){
 	var myVideo;
 	var playFrame;
 	const processor = {
-	timerCallback(myVideo) {
-		if (!playFrame || myVideo.ended )   {
-			playFrame = null;
-			return;
-		}
-		this.computeFrame(myVideo);
-		setTimeout(() => {
-			playFrame ? this.timerCallback(myVideo) : '';
-		}, 16); // roughly 60 frames per second
-	},
-
-	doLoad(myVideo) {
-        jQuery(videoCanvas).removeClass('hidden')
-		playFrame = true;
-		this.c1 = document.getElementById("videoCanvas");
-		let canvasContainer = document.getElementById("videoCanvasContainer");
-		
-		this.ctx1 = this.c1.getContext("2d"); 
-
-		let isDragging = false;
-		let offsetX = 0;
-		let offsetY = 0;
-
-		canvasContainer.addEventListener('mousedown', function (e) {
-			isDragging = true;
-			videoCanvas.style.cursor = 'grabbing';
-
-			// Calculate offset position to handle dragging smoothly
-			offsetX = e.clientX - canvasContainer.getBoundingClientRect().left;
-			offsetY = e.clientY - canvasContainer.getBoundingClientRect().top;
-		});
-
-		canvasContainer.addEventListener('ondragstart', function(){
-			isDragging = true;
-			videoCanvas.style.cursor = 'grabbing';
-		}) 
-		
-		// Function to stop dragging
-		window.addEventListener('mouseup', function () {
-			isDragging = false;
-			videoCanvas.style.cursor = 'grab';
-		});
-		
-		// Function to drag the canvas
-		window.addEventListener('mousemove', function (e) {
-			if (isDragging) {
-				// Calculate the new position
-				const left = e.clientX - offsetX;
-				const top = e.clientY - offsetY;
-
-				// Update canvas position
-				canvasContainer.style.left = `${left}px`;
-				canvasContainer.style.top = `${top + 10}px`;
-
-				// Set the position to absolute once dragging starts
-				canvasContainer.style.position = 'fixed';
-				canvasContainer.style.transform = 'none';
+		timerCallback(myVideo) {
+			if (!playFrame || myVideo.ended )   {
+				playFrame = null;
+				return;
 			}
-		});
+			this.computeFrame(myVideo);
+			setTimeout(() => {
+				playFrame ? this.timerCallback(myVideo) : '';
+			}, 16); // roughly 60 frames per second
+		},
 
-        this.width = 300;
-        this.height =  200;
-		this.timerCallback(myVideo)
+		doLoad(myVideo) {
+			jQuery('#videoCanvasContainer').removeClass('hidden')
+			playFrame = true;
+			this.c1 = document.getElementById("videoCanvas");
+			let canvasContainer = document.getElementById("videoCanvasContainer");
+			
+			this.ctx1 = this.c1.getContext("2d"); 
 
-	},
+			let isDragging = false;
+			let offsetX = 0;
+			let offsetY = 0;
 
-	computeFrame(myVideo) {
-		this.ctx1.drawImage(myVideo, 0, 0, this.width, this.height);
-		const frame = this.ctx1.getImageData(0, 0, this.width, this.height);
-		const l = frame.data.length / 4;
+			canvasContainer.addEventListener('mousedown', function (e) {
+				isDragging = true;
+				videoCanvas.style.cursor = 'grabbing';
 
-		for (let i = 0; i < l; i++) {
-		const grey =
-			(frame.data[i * 4 + 0] +
-			frame.data[i * 4 + 1] +
-			frame.data[i * 4 + 2]) /
-			3;
-		}
-		this.ctx1.putImageData(frame, 0, 0);
+				// Calculate offset position to handle dragging smoothly
+				offsetX = e.clientX - canvasContainer.getBoundingClientRect().left;
+				offsetY = e.clientY - canvasContainer.getBoundingClientRect().top;
+			});
 
-		return;
-	},
+			canvasContainer.addEventListener('ondragstart', function(){
+				isDragging = true;
+				videoCanvas.style.cursor = 'grabbing';
+			}) 
+			
+			// Function to stop dragging
+			window.addEventListener('mouseup', function () {
+				isDragging = false;
+				videoCanvas.style.cursor = 'grab';
+			});
+			
+			// Function to drag the canvas
+			window.addEventListener('mousemove', function (e) {
+				if (isDragging) {
+					// Calculate the new position
+					const left = e.clientX - offsetX;
+					const top = e.clientY - offsetY;
+
+					// Update canvas position
+					canvasContainer.style.left = `${left}px`;
+					canvasContainer.style.top = `${top + 10}px`;
+
+					// Set the position to absolute once dragging starts
+					canvasContainer.style.position = 'fixed';
+					canvasContainer.style.transform = 'none';
+				}
+			});
+
+			this.width = 300;
+			this.height =  200;
+			this.timerCallback(myVideo)
+
+		},
+
+		computeFrame(myVideo) {
+			this.ctx1.drawImage(myVideo, 0, 0, this.width, this.height);
+			const frame = this.ctx1.getImageData(0, 0, this.width, this.height);
+			const l = frame.data.length / 4;
+
+			for (let i = 0; i < l; i++) {
+			const grey =
+				(frame.data[i * 4 + 0] +
+				frame.data[i * 4 + 1] +
+				frame.data[i * 4 + 2]) /
+				3;
+			}
+			this.ctx1.putImageData(frame, 0, 0);
+
+			return;
+		},
 	};
 	
+	/**
+	 * Enable / Show video side picture-in-picture
+	 */
+	jQuery(document).on('click', '.video-side-popup', function(){
+    	myVideo = document.getElementById("footer-video");
+		if (myVideo.canPlayType("video/mp4")) {
+			myVideo.setAttribute("src", jQuery(this).data('path'));
+			processor.doLoad(myVideo);
+			myVideo.play()
+		}
+	})
+
+	jQuery(document).on('click', '#pause-video-side-popup', function(){
+		playFrame = false;
+    	myVideo = document.getElementById("footer-video");
+		if (myVideo) {
+			jQuery('#videoCanvasContainer').addClass('hidden')
+			myVideo.pause()
+		}
+	})
+
 	jQuery(document).on('click', '.video-side-popup', function(){
     	myVideo = document.getElementById("footer-video");
 		if (myVideo.canPlayType("video/mp4")) {
@@ -794,6 +815,10 @@ $(function(){
 		}
 	})
 
+	
+	
+	
+	
 	jQuery(document).on('click', '.pause-video, .pause-channel', function(){
     	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
 		playVideo(myVideo)
