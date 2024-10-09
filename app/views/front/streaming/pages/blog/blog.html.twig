@@ -13,11 +13,12 @@
 
         <div class="w-full py-10" >
         {% set customer = app.customer_auth() %}
-        {% for item in items %}
+        {% for item in list.items %}
         {% include 'views/front/'~ template ~'/includes/blog-item.html.twig'  %}
         {% endfor %}
 
         </div>
+				{% include 'views/front/' ~ template ~ '/includes/pagination.html.twig' %}
 
     </div>
     

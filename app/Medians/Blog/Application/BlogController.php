@@ -217,14 +217,19 @@ class BlogController extends CustomController
 	public function list()
 	{
 		$request =  $this->app->request();
+		$params =  $this->app->params();
 
 		try {
+
 			$settings = $this->app->SystemSetting();
+			
+	        $params['limit'] = $settings['view_items_limit'] ?? 10;
+			$list = $this->repo->getWithFilter($params);
 
 		    // return  render('login', [
 			return render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
 		        'first_item' => $this->repo->getFeatured(1),
-		        'items' => $this->repo->getFront(8),
+		        'list' => $list,
 		        'layout' => 'blog/blog',
 
 		    ]);
