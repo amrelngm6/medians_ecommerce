@@ -54,7 +54,7 @@
 													</svg>
 												</div>
 												<input placeholder="{{lang.translate('Search for Audio')}}"   
-													oninput="(function(){   jQuery('#link-item-submit-button, #media-result-box').removeClass('hidden'); (jQuery('#voice-search-list').val() ? '' : jQuery('#media-result-box').addClass('hidden'))})()" 
+													oninput="(function(){   jQuery('#link-item-submit-button, #media-result-box').removeClass('hidden'); (jQuery('#voice-search-list').val().replace(/\s+/, "") ? '' : jQuery('#media-result-box').addClass('hidden'))})()" 
 													name="params[title]" 
 													type="text" 
 													id="voice-search-list" 
