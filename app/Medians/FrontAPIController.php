@@ -49,6 +49,10 @@ class FrontAPIController extends CustomController
 				return (new Media\Application\VideoController)->search_popup_checkbox();
 				break;
 				
+			case 'load-audio-checkbox':
+				return (new Media\Application\MediaItemController)->search_popup_checkbox();
+				break;
+				
 			case 'station-media-popup':
 				return (new Stations\Application\StationMediaController)->media_popup();
 				break;

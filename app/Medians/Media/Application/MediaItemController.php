@@ -456,6 +456,34 @@ class MediaItemController extends CustomController
     }
 
 
+    
+    /**
+     * Search popoup list for Calendar
+     */
+    public function search_popup_checkbox()
+    {
+		$settings = $this->app->SystemSetting();
+
+        $params = $this->app->params();
+
+        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['type'] = 'audio';
+        $list = $this->repo->getWithFilter($params);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/pages/popup-list.html.twig', [
+                'app' => $this->app,
+                'list' => $list,
+                'genres' => $this->categoryRepo->getVideoGenres(),
+                'sub_layout' => 'audio/popup-audio-list-checkbox',
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
 
 
     /**

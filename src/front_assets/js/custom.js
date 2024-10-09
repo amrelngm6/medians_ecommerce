@@ -118,7 +118,8 @@ async function loadStation(stationId, play = true)
 		jQuery('#station-album-name').html('Offline')
 		jQuery('.station-stream-name').html("Offline")
 		jQuery('#station-track-name').html('UNKNOWN')
-		audio.pause()
+		if (audio)
+			audio.pause()
 	}
 	jQuery('.station-streaming-picture'+activeStation.station_id).attr( 'src', (activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.picture : activeStation.picture);
 	jQuery('#station-track-poster').attr( 'src', (activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.picture : activeStation.picture);

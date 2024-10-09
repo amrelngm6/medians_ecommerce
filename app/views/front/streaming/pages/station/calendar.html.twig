@@ -26,7 +26,7 @@
                     <!-- put all in a wrapper:-->
                     <div class="wrap" role="group" aria-label="slider with ruler" style="display: grid; --min: 1; --val: 30; --max: 60">
                         <!-- slider:-->
-                        <input id="r" type="range" list="l" step="1" min="1" max="60" />
+                        <input id="r" type="range" list="l" step="1" min="0" max="60" />
                         <!-- value display:-->
                         <output for="r"></output>
                         <!-- ruler:-->
@@ -107,6 +107,7 @@ $(function() {
             slotDuration: '00:30:00', // Time slots every 30 minutes
             allDaySlot: false, // Disable all-day slot
             editable: true,
+            selectable: true,
             droppable: true, 
             nowIndicator: true,
             scrollTime: '{{now}}',
@@ -142,6 +143,23 @@ $(function() {
 
                 console.log('Date: ' + info.dateStr.substr(0, 10));
                 
+            },
+
+            select: function(info) {
+                
+                var x = new Date(info.startStr);
+                let seconds = Math.abs(x.getTime() - (new Date(info.endStr)).getTime())/1000;
+                let minutes = seconds/60;
+                let currentduration = jQuery('#r').val()
+                if (currentduration == minutes)  
+                    return;
+
+                jQuery('#edit-station-range-popup').toggleClass('hidden')
+                jQuery('#station-range-date').val(info.startStr.substr(0, 10))
+                jQuery('#station-range-start').val(info.startStr.substr(11, 8))
+                jQuery('#station-range-end').val(info.endStr.substr(11, 8))
+                jQuery('#station-range-time').html(info.startStr.substr(11, 8) + ' | ' + info.endStr.substr(11, 8))
+                jQuery('#station-range-duration').html(toHHMMSS(seconds))
             },
 
             eventClick: function(info) {
@@ -235,6 +253,9 @@ $(function() {
         /* 2. update the --val custom property on dragging slider thumb */
         jQuery(document).on('input', 'input[type=range]' , function(e) {
             let _t = e.target;
+            if (_t.value < 1){
+                _t.value = 1
+            }
             _t.parentNode.style.setProperty('--val', +_t.value)
             console.log(_t.value)
             updateSlotDuration(_t.value, calendar)
@@ -250,3 +271,4 @@ $(function() {
     {% include 'views/front/' ~ template ~ '/popups/station-add-media.html.twig' %}
     {% include 'views/front/' ~ template ~ '/popups/station-calendar.html.twig' %}
     {% include 'views/front/' ~ template ~ '/popups/station-record.html.twig' %}
+    {% include 'views/front/' ~ template ~ '/pages/station/station-range-popup.html.twig' %}

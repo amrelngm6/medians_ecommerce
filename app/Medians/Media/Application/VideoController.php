@@ -276,7 +276,7 @@ class VideoController extends CustomController
     
     
     /**
-     * Search popoup list for frontend
+     * Search popoup list for Calendar
      */
     public function search_popup_checkbox()
     {
