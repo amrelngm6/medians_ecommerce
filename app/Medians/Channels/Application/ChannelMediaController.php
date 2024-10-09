@@ -131,7 +131,9 @@ class ChannelMediaController extends CustomController
 	
 
 
-	
+	/**
+	 * Set bulk videos at specified times 
+	 */
 	public function bulk_store() 
 	{
 

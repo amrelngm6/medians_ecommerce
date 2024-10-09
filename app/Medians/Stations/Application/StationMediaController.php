@@ -166,6 +166,51 @@ class StationMediaController extends CustomController
 		return $returnData;
 	}
 
+	
+	/**
+	 * Set bulk videos at specified times 
+	 */
+	public function bulk_store() 
+	{
+
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+
+        try {	
+
+        	$this->app->customer_auth();
+			$params = $this->app->params();
+			foreach ($params['selected']['media_id'] as $key => $value) 
+			{
+				$newParams = [];
+				$newParams['channel_id'] = $params['channel_id'];
+				$newParams['date'] = $params['date'];
+				$newParams['media_id'] = $params['selected']['media_id'][$key];
+				$newParams['media_path'] = $params['selected']['media_path'][$key];
+				$newParams['duration'] = $params['selected']['duration'][$key];
+				$newParams['bitrate'] = $params['selected']['bitrate'][$key];
+				$newParams['filesize'] = $params['selected']['filesize'][$key];
+				$newParams['start_at'] = $params['selected']['start_at'][$key];
+				$newParams['title'] = $params['selected']['title'][$key];
+
+				$filePath = $_SERVER['DOCUMENT_ROOT']. $newParams['media_path'];
+				$newParams = $this->appendFileInfo($newParams, $filePath); 
+
+				$save = $this->repo->store_item($newParams);
+			}
+
+			$returnData = ($save) 
+            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            : array('success'=>0, 'result'=>'Error', 'error'=>1);
+
+        } catch (\Exception $e) {
+        	return array('result'=>$e->getMessage(), 'error'=>1);
+        }
+
+		return $returnData;
+	}
+
 
 
 	public function update()
