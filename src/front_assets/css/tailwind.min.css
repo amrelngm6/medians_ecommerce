@@ -1103,6 +1103,10 @@ video {
   margin-left: 0.5rem;
 }
 
+.ml-20 {
+  margin-left: 5rem;
+}
+
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -1505,8 +1509,16 @@ video {
   min-width: 16rem;
 }
 
+.min-w-72 {
+  min-width: 18rem;
+}
+
 .min-w-8 {
   min-width: 2rem;
+}
+
+.min-w-96 {
+  min-width: 24rem;
 }
 
 .min-w-\[160px\] {
@@ -1519,6 +1531,10 @@ video {
 
 .min-w-\[250px\] {
   min-width: 250px;
+}
+
+.min-w-\[300px\] {
+  min-width: 300px;
 }
 
 .max-w-6xl {
@@ -2733,6 +2749,10 @@ video {
 
 .uppercase {
   text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 .italic {
