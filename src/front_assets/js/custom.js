@@ -38,7 +38,7 @@ document.getElementById('station-player-audio').addEventListener("change", funct
 	setCookie('volume', event.target.value, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 }) ;	
 
-jQuery(document).on('click', '.start-station', function (i, el) {
+jQuery(document).on('click', '.start-station', async function (i, el) {
 
 	audio ? audio.pause() : null
 
@@ -48,16 +48,20 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 	jQuery('#app-cover').addClass('hidden')
 	const stationId = jQuery(this).data('station'); 
 		
-	loadStation(stationId)
+	await loadStation(stationId)
 
 	let val = jQuery('#startions-interval').val();
 	
 	stationInterval = setInterval(function(){
-		loadStation(stationId)
 	}, val > 1  ? (val * 1000) : 30000);
 
 	mainAudio.on('ended', function() {
-		console.log('Ended : ', audio)
+		
+		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ (rand+1);
+		audio.load();
+		audio.play();
+		audio.volume = getCookie('volume')
+		loadStation(stationId)
 	})
 
 
@@ -94,12 +98,12 @@ async function loadStation(stationId, play = true)
 	
 	activeStation = await loadStationJson(stationId);
 
+	await handleStationPlayer()
 }
 
 
 async function handleStationPlayer()
 {
-	
 	let rand = Math.random();
 
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
