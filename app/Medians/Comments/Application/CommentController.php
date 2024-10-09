@@ -99,7 +99,8 @@ class CommentController extends CustomController
 
 			$store = $this->repo->store($params);
 
-			$response = isset($params['append']) ? translate('Thanks for your comment') : $this->comment_response([$store]);
+			// $response = isset($params['append']) ? translate('Thanks for your comment') : $this->comment_response([$store]);
+			$response = translate('Thanks for your comment');
 
             $returnData = (!empty($store)) 
             ? array('success'=>1, 'result'=>$response, 'reload'=>0)
