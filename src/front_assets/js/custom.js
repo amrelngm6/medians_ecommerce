@@ -921,7 +921,7 @@ $(function(){
 	 * Handle selected date range
 	 * 
 	 */
-	function handleSelectedDurations(id , uniqueId)
+	function handleSelectedDurations(id , uniqueId, duration)
 	{
 		
 		let dateTime = jQuery(`#channel-range-date`).val() +' '+ jQuery(`#channel-range-start`).val();
@@ -930,7 +930,7 @@ $(function(){
 		var from = dateToTime(d)
 
 		jQuery(`#selected-start-at-${id}-${uniqueId}`).val( from )
-		jQuery(`#channel-range-selected-duration`).val( parseInt(jQuery(`#channel-range-selected-duration`).val()) + parseInt(item.field.duration) )
+		jQuery(`#channel-range-selected-duration`).val( parseInt(jQuery(`#channel-range-selected-duration`).val()) + parseInt(duration) )
 		var d = new Date(dateTime);
 		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#channel-range-selected-duration`).val()));
 		var to = dateToTime(d)
