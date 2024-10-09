@@ -715,6 +715,7 @@ $(function(){
         jQuery(videoCanvas).removeClass('hidden')
 		playFrame = true;
 		this.c1 = document.getElementById("videoCanvas");
+		let canvasContainer = document.getElementById("videoCanvasContainer");
 		
 		this.ctx1 = this.c1.getContext("2d"); 
 
@@ -722,16 +723,16 @@ $(function(){
 		let offsetX = 0;
 		let offsetY = 0;
 
-		videoCanvas.addEventListener('mousedown', function (e) {
+		canvasContainer.addEventListener('mousedown', function (e) {
 			isDragging = true;
 			videoCanvas.style.cursor = 'grabbing';
 
 			// Calculate offset position to handle dragging smoothly
-			offsetX = e.clientX - videoCanvas.getBoundingClientRect().left;
-			offsetY = e.clientY - videoCanvas.getBoundingClientRect().top;
+			offsetX = e.clientX - canvasContainer.getBoundingClientRect().left;
+			offsetY = e.clientY - canvasContainer.getBoundingClientRect().top;
 		});
 
-		videoCanvas.addEventListener('ondragstart', function(){
+		canvasContainer.addEventListener('ondragstart', function(){
 			isDragging = true;
 			videoCanvas.style.cursor = 'grabbing';
 		}) 
@@ -750,17 +751,15 @@ $(function(){
 				const top = e.clientY - offsetY;
 
 				// Update canvas position
-				videoCanvas.style.left = `${left}px`;
-				videoCanvas.style.top = `${top + 10}px`;
+				canvasContainer.style.left = `${left}px`;
+				canvasContainer.style.top = `${top + 10}px`;
 
 				// Set the position to absolute once dragging starts
-				videoCanvas.style.position = 'fixed';
-				videoCanvas.style.transform = 'none';
+				canvasContainer.style.position = 'fixed';
+				canvasContainer.style.transform = 'none';
 			}
 		});
 
-		
-		
         this.width = 300;
         this.height =  200;
 		this.timerCallback(myVideo)
@@ -794,36 +793,6 @@ $(function(){
 			
 		}
 	})
-
-	// jQuery(document).on('click', '.start-channel', async function(){
-		// jQuery(this).attr('disabled', true)
-    	// try {
-		// 	myVideo = document.getElementById("footer-video");
-		// 	let channelId = jQuery(this).attr('data-channel');
-		// 	await loadChannelJson(channelId);
-
-		// 	if (activeChannel && activeChannel.active_item)
-		// 	{
-		// 		activeChannelMedia = activeChannel.active_item;
-		// 	}
-
-		// 	if (myVideo.canPlayType("video/mp4")) {
-		// 		var a = new Date(activeChannelMedia.start);
-		// 		var b = new Date();
-		// 		var difference = parseInt((b - a) / 1000);
-
-		// 		myVideo.setAttribute("src", '/stream_channel?channel_id='+channelId);
-		// 		myVideo.currentTime = difference;
-		// 		processor.doLoad(myVideo);
-		// 		myVideo.play()
-		// 	}
-	
-		// 	jQuery(this).attr('disabled', false)
-
-		// } catch (error) {
-		// 	jQuery(this).attr('disabled', false)
-		// }
-	// })
 
 	jQuery(document).on('click', '.pause-video, .pause-channel', function(){
     	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
@@ -938,67 +907,67 @@ $(function(){
 
 
 
-	/**
-	 * Append selected item for calendar date range
-	 * 
-	 * @param {String} elementId 
-	 */
-	function appendRangeSelectedItem(elementId, type = 'channel')
-	{
-		jQuery(`#selected_media_list`).append(jQuery(elementId).html())
-		
-		let elements = jQuery('#selected_media_list').find('.range-selected-media');
-		let element;
-		jQuery('#'+type+'-range-selected-duration').val('0')
-
-		for (var i = 0; i < elements.length; i++) {
-			element = elements[i].dataset;
-			handleSelectedDuration(element.id, element.uniqueId, element.duration, type)
-		}
-	}
+/**
+ * Append selected item for calendar date range
+ * 
+ * @param {String} elementId 
+ */
+function appendRangeSelectedItem(elementId, type = 'channel')
+{
+	jQuery(`#selected_media_list`).append(jQuery(elementId).html())
 	
+	let elements = jQuery('#selected_media_list').find('.range-selected-media');
+	let element;
+	jQuery('#'+type+'-range-selected-duration').val('0')
+
+	for (var i = 0; i < elements.length; i++) {
+		element = elements[i].dataset;
+		handleSelectedDuration(element.id, element.uniqueId, element.duration, type)
+	}
+}
+
+
+/**
+ * Remove selected date range item
+ */
+function removeRangeSelectedItem(elementId, type = 'channel')
+{
+	jQuery(elementId).remove()
 	
-	/**
-	 * Remove selected date range item
-	 */
-	function removeRangeSelectedItem(elementId, type = 'channel')
-	{
-		jQuery(elementId).remove()
-		
-		let elements = jQuery('#selected_media_list').find('.range-selected-media');
-		let element;
-		jQuery('#'+type+'-range-selected-duration').val('0')
+	let elements = jQuery('#selected_media_list').find('.range-selected-media');
+	let element;
+	jQuery('#'+type+'-range-selected-duration').val('0')
 
-		for (var i = 0; i < elements.length; i++) {
-			element = elements[i].dataset;
-			handleSelectedDuration(element.id, element.uniqueId, element.duration, type)
-		}
+	for (var i = 0; i < elements.length; i++) {
+		element = elements[i].dataset;
+		handleSelectedDuration(element.id, element.uniqueId, element.duration, type)
 	}
+}
 
-	/**
-	 * Handle selected date range item
-	 */
-	function handleSelectedDuration(id, uniqueId, duration, type = 'channel')
-	{
+/**
+ * Handle selected date range item
+ */
+function handleSelectedDuration(id, uniqueId, duration, type = 'channel')
+{
 
-		let dateTime = jQuery(`#${type}-range-date`).val() +' '+ jQuery(`#${type}-range-start`).val();
-		var d = new Date(dateTime);
-		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#${type}-range-selected-duration`).val()));
-		var from = dateToTime(d)
+	let dateTime = jQuery(`#${type}-range-date`).val() +' '+ jQuery(`#${type}-range-start`).val();
+	var d = new Date(dateTime);
+	d.setSeconds(d.getSeconds() + parseInt(jQuery(`#${type}-range-selected-duration`).val()));
+	var from = dateToTime(d)
 
-		jQuery(`#selected-start-at-${id}-${uniqueId}`).val( from )
-		jQuery(`#${type}-range-selected-duration`).val( parseInt(jQuery(`#${type}-range-selected-duration`).val()) + parseInt(duration) )
-		var d = new Date(dateTime);
-		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#${type}-range-selected-duration`).val()));
-		var to = dateToTime(d)
+	jQuery(`#selected-start-at-${id}-${uniqueId}`).val( from )
+	jQuery(`#${type}-range-selected-duration`).val( parseInt(jQuery(`#${type}-range-selected-duration`).val()) + parseInt(duration) )
+	var d = new Date(dateTime);
+	d.setSeconds(d.getSeconds() + parseInt(jQuery(`#${type}-range-selected-duration`).val()));
+	var to = dateToTime(d)
 
-		jQuery(`#selected-playing-duration-${id}-${uniqueId}`).html(from+' | '+to)
+	jQuery(`#selected-playing-duration-${id}-${uniqueId}`).html(from+' | '+to)
 
-		jQuery(`#${type}-range-selected-duration-text`).html(toHHMMSS(jQuery(`#${type}-range-selected-duration`).val()))
+	jQuery(`#${type}-range-selected-duration-text`).html(toHHMMSS(jQuery(`#${type}-range-selected-duration`).val()))
 
-		jQuery(`#video-list-${id}-${uniqueId}`).remove()
-		jQuery(`#range-item-submit-button`).removeClass(`hidden`);
-	}
+	jQuery(`#video-list-${id}-${uniqueId}`).remove()
+	jQuery(`#range-item-submit-button`).removeClass(`hidden`);
+}
 
 
 
