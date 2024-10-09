@@ -960,12 +960,10 @@ $(function(){
 	{
 
 		let dateTime = jQuery(`#${type}-range-date`).val() +' '+ jQuery(`#${type}-range-start`).val();
-		console.log(dateTime)
-		console.log(`#${type}-range-date`)
 		var d = new Date(dateTime);
 		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#${type}-range-selected-duration`).val()));
 		var from = dateToTime(d)
-		console.log(from)
+
 		jQuery(`#selected-start-at-${id}-${uniqueId}`).val( from )
 		jQuery(`#${type}-range-selected-duration`).val( parseInt(jQuery(`#${type}-range-selected-duration`).val()) + parseInt(duration) )
 		var d = new Date(dateTime);
