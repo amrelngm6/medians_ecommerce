@@ -921,13 +921,13 @@ $(function(){
 	 * 
 	 * @param {String} elementId 
 	 */
-	function appendRangeSelectedItem(elementId)
+	function appendRangeSelectedItem(elementId, type = 'channel')
 	{
 		jQuery(`#selected_media_list`).append(jQuery(elementId).html())
 		
 		let elements = jQuery('#selected_media_list').find('.range-selected-media');
 		let element;
-		jQuery('#channel-range-selected-duration').val('0')
+		jQuery('#'+type+'-range-selected-duration').val('0')
 
 		for (var i = 0; i < elements.length; i++) {
 			element = elements[i].dataset;
@@ -939,13 +939,13 @@ $(function(){
 	/**
 	 * Remove selected date range item
 	 */
-	function removeRangeSelectedItem(elementId)
+	function removeRangeSelectedItem(elementId, type = 'channel')
 	{
 		jQuery(elementId).remove()
 		
 		let elements = jQuery('#selected_media_list').find('.range-selected-media');
 		let element;
-		jQuery('#channel-range-selected-duration').val('0')
+		jQuery('#'+type+'-range-selected-duration').val('0')
 
 		for (var i = 0; i < elements.length; i++) {
 			element = elements[i].dataset;
@@ -956,23 +956,23 @@ $(function(){
 	/**
 	 * Handle selected date range item
 	 */
-	function handleSelectedDuration(id, uniqueId, duration)
+	function handleSelectedDuration(id, uniqueId, duration, type = 'channel')
 	{
 
-		let dateTime = jQuery(`#channel-range-date`).val() +' '+ jQuery(`#channel-range-start`).val();
+		let dateTime = jQuery(`#${type}-range-date`).val() +' '+ jQuery(`#${type}-range-start`).val();
 		var d = new Date(dateTime);
-		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#channel-range-selected-duration`).val()));
+		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#${type}-range-selected-duration`).val()));
 		var from = dateToTime(d)
 
 		jQuery(`#selected-start-at-${id}-${uniqueId}`).val( from )
-		jQuery(`#channel-range-selected-duration`).val( parseInt(jQuery(`#channel-range-selected-duration`).val()) + parseInt(duration) )
+		jQuery(`#${type}-range-selected-duration`).val( parseInt(jQuery(`#${type}-range-selected-duration`).val()) + parseInt(duration) )
 		var d = new Date(dateTime);
-		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#channel-range-selected-duration`).val()));
+		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#${type}-range-selected-duration`).val()));
 		var to = dateToTime(d)
 
 		jQuery(`#selected-playing-duration-${id}-${uniqueId}`).html(from+' | '+to)
 
-		jQuery(`#channel-range-selected-duration-text`).html(toHHMMSS(jQuery(`#channel-range-selected-duration`).val()))
+		jQuery(`#${type}-range-selected-duration-text`).html(toHHMMSS(jQuery(`#${type}-range-selected-duration`).val()))
 
 		jQuery(`#video-list-${id}-${uniqueId}`).remove()
 		jQuery(`#range-item-submit-button`).removeClass(`hidden`);
