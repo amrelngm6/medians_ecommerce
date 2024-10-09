@@ -924,14 +924,22 @@ $(function(){
 	function handleSelectedDurations(id , uniqueId, duration)
 	{
 		
-		jQuery('.range-selected-media').forEach(element => {
-			console.log(element)
-		});
+		let elements = jQuery('body').find('.range-selected-media');
+		let elements2;
 
-		// let dateTime = jQuery(`#channel-range-date`).val() +' '+ jQuery(`#channel-range-start`).val();
-		// var d = new Date(dateTime);
-		// d.setSeconds(d.getSeconds() + parseInt(jQuery(`#channel-range-selected-duration`).val()));
-		// var from = dateToTime(d)
+		for (var i = 0; i < elements.length; i++) {
+			elements2[i] = elements[i].dataset;
+		}
+
+		console.log(elements2)
+
+		let dateTime = jQuery(`#channel-range-date`).val() +' '+ jQuery(`#channel-range-start`).val();
+		var d = new Date(dateTime);
+		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#channel-range-selected-duration`).val()));
+		var from = dateToTime(d)
+
+
+		jQuery(`#channel-range-selected-duration`).val(duration)
 
 		// jQuery(`#selected-start-at-${id}-${uniqueId}`).val( from )
 		// jQuery(`#channel-range-selected-duration`).val( parseInt(jQuery(`#channel-range-selected-duration`).val()) + parseInt(duration) )
