@@ -85,16 +85,16 @@ async function loadStation(stationId, play = true)
 	if (!audio) {
 		audio = mainAudio[0]
 	}
-
+	
 	activeStation = await loadStationJson(stationId);
 	let rand = Math.random();
 
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
 	{
 		streamingStatus = 'same'
-		// if ((audio.duration - audio.currentTime) < 5) {
-			// streamingStatus = 'new'
-		// }
+		if ((audio.duration - audio.currentTime) < 1) {
+			streamingStatus = 'new'
+		}
 	} else if (activeStation.active_item == null) {
 		streamingStatus = null;
 	} else {
