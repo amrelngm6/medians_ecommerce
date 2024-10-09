@@ -22,7 +22,8 @@
                                 </div>
 
                             </div>
-                            {% if station.activeItem.station_media_id > 0%}
+                            {% if station.activeItem.station_media_id > 0 %}
+                            {{station.activeItem.station_media_id}}
                             <img src="/src/front_assets/svg/live.svg" class="absolute bottom-0 right-0 ml-20 w-20" />
                             {% endif  %}
 
