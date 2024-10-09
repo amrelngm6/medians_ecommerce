@@ -185,6 +185,10 @@ class FrontAPIController extends CustomController
 					$return = (new Stations\Application\StationMediaController)->store_record();
 					break;
 
+				case 'StationMedia.bulk_create':
+					$return = (new Stations\Application\StationMediaController)->bulk_store();
+					break;
+					
 				case 'Channel.create':
 					$return = (new Channels\Application\ChannelController)->store();
 					break;
