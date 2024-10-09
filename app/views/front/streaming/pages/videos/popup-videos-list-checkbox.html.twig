@@ -1,26 +1,7 @@
 
 {% set uniqueId = random(50, 1000) %}
                                             <label id="video-list-{{item.media_id}}-{{uniqueId}}" onclick="(function () { 
-                                                
-                                                let dateTime = jQuery('#channel-range-date').val() +' '+ jQuery('#channel-range-start').val();
-                                                var d = new Date(dateTime);
-                                                d.setSeconds(d.getSeconds() + parseInt(jQuery('#channel-range-selected-duration').val()));
-                                                var from = dateToTime(d)
-
-                                                jQuery('#selected-start-at-{{item.media_id}}-{{uniqueId}}').val( from )
-
-                                                jQuery('#channel-range-selected-duration').val( parseInt(jQuery('#channel-range-selected-duration').val()) + parseInt({{item.field.duration}}) )
-                                                var d = new Date(dateTime);
-                                                d.setSeconds(d.getSeconds() + parseInt(jQuery('#channel-range-selected-duration').val()));
-                                                var to = dateToTime(d)
-
-                                                jQuery('#selected-playing-duration-{{item.media_id}}-{{uniqueId}}').html(from+' | '+to)
-                                                jQuery('#selected_media_list').append(jQuery('#selected-box-{{item.media_id}}-{{uniqueId}}').html())
-
-                                                jQuery('#channel-range-selected-duration-text').html(toHHMMSS(jQuery('#channel-range-selected-duration').val()))
-
-                                                jQuery('#video-list-{{item.media_id}}-{{uniqueId}}').remove()
-                                                jQuery('#range-item-submit-button').removeClass('hidden')
+                                                handleSelectedDurations(id, unuiqueId)
                                              })()  " role="button" class="text-slate-800 flex gap-2 w-full items-center rounded-md p-3 transition-all dark:hover:bg-gray-600 hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100">
                                                 <div class="mr-4 grid place-items-center"><img alt="candice" src="{{item.picture}}" class="relative inline-block h-12 w-12 !rounded-full object-cover object-center"></div>
                                                 <div style="max-width:78%" >

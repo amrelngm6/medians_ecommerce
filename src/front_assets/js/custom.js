@@ -909,6 +909,33 @@ $(function(){
 		false,
 		);
 	}
+
+	/**
+	 * Handle selected date range
+	 * 
+	 */
+	function handleSelectedDurations(id , uniqueId)
+	{
+		
+		let dateTime = jQuery(`#channel-range-date`).val() +' '+ jQuery(`#channel-range-start`).val();
+		var d = new Date(dateTime);
+		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#channel-range-selected-duration`).val()));
+		var from = dateToTime(d)
+
+		jQuery(`#selected-start-at-${item.media_id}-${uniqueId}`).val( from )
+		jQuery(`#channel-range-selected-duration`).val( parseInt(jQuery(`#channel-range-selected-duration`).val()) + parseInt(item.field.duration) )
+		var d = new Date(dateTime);
+		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#channel-range-selected-duration`).val()));
+		var to = dateToTime(d)
+
+		jQuery(`#selected-playing-duration-${item.media_id}-${uniqueId}`).html(from+' | '+to)
+		jQuery(`#selected_media_list`).append(jQuery(`#selected-box-${item.media_id}-${uniqueId}`).html())
+
+		jQuery(`#channel-range-selected-duration-text`).html(toHHMMSS(jQuery(`#channel-range-selected-duration`).val()))
+
+		jQuery(`#video-list-${item.media_id}-${uniqueId}`).remove()
+		jQuery(`#range-item-submit-button`).removeClass(`hidden`);
+	}
 })
 
 
