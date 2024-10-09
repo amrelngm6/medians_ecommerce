@@ -55,6 +55,12 @@ jQuery(document).on('click', '.start-station', function (i, el) {
 	stationInterval = setInterval(function(){
 		loadStation(stationId)
 	}, val > 1  ? (val * 1000) : 30000);
+
+	mainAudio.on('ended', function() {
+		console.log('Ended : ', audio)
+	})
+
+
 });
 
 async function loadStationJson(stationId)
