@@ -200,7 +200,7 @@ class CommentController extends CustomController
 
 		try 
         {
-            return $this->comment_response($comments);
+            return printResponse($this->comment_response($comments));
             
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);
@@ -217,9 +217,9 @@ class CommentController extends CustomController
 
 		try {
 
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/includes/comment-block.html.twig', [
+            return render('views/front/'.($settings['template'] ?? 'default').'/includes/comment-block.html.twig', [
 				'comments' => $comments
-            ], 'output'));
+            ], 'output');
             
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);
