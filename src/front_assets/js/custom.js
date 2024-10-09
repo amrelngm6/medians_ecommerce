@@ -924,24 +924,28 @@ $(function(){
 	function handleSelectedDurations(id , uniqueId, duration)
 	{
 		
-		let dateTime = jQuery(`#channel-range-date`).val() +' '+ jQuery(`#channel-range-start`).val();
-		var d = new Date(dateTime);
-		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#channel-range-selected-duration`).val()));
-		var from = dateToTime(d)
+		jQuery('.range-selected-media').forEach(element => {
+			console.log(element)
+		});
 
-		jQuery(`#selected-start-at-${id}-${uniqueId}`).val( from )
-		jQuery(`#channel-range-selected-duration`).val( parseInt(jQuery(`#channel-range-selected-duration`).val()) + parseInt(duration) )
-		var d = new Date(dateTime);
-		d.setSeconds(d.getSeconds() + parseInt(jQuery(`#channel-range-selected-duration`).val()));
-		var to = dateToTime(d)
+		// let dateTime = jQuery(`#channel-range-date`).val() +' '+ jQuery(`#channel-range-start`).val();
+		// var d = new Date(dateTime);
+		// d.setSeconds(d.getSeconds() + parseInt(jQuery(`#channel-range-selected-duration`).val()));
+		// var from = dateToTime(d)
 
-		jQuery(`#selected-playing-duration-${id}-${uniqueId}`).html(from+' | '+to)
-		jQuery(`#selected_media_list`).append(jQuery(`#selected-box-${id}-${uniqueId}`).html())
+		// jQuery(`#selected-start-at-${id}-${uniqueId}`).val( from )
+		// jQuery(`#channel-range-selected-duration`).val( parseInt(jQuery(`#channel-range-selected-duration`).val()) + parseInt(duration) )
+		// var d = new Date(dateTime);
+		// d.setSeconds(d.getSeconds() + parseInt(jQuery(`#channel-range-selected-duration`).val()));
+		// var to = dateToTime(d)
 
-		jQuery(`#channel-range-selected-duration-text`).html(toHHMMSS(jQuery(`#channel-range-selected-duration`).val()))
+		// jQuery(`#selected-playing-duration-${id}-${uniqueId}`).html(from+' | '+to)
+		// jQuery(`#selected_media_list`).append(jQuery(`#selected-box-${id}-${uniqueId}`).html())
 
-		jQuery(`#video-list-${id}-${uniqueId}`).remove()
-		jQuery(`#range-item-submit-button`).removeClass(`hidden`);
+		// jQuery(`#channel-range-selected-duration-text`).html(toHHMMSS(jQuery(`#channel-range-selected-duration`).val()))
+
+		// jQuery(`#video-list-${id}-${uniqueId}`).remove()
+		// jQuery(`#range-item-submit-button`).removeClass(`hidden`);
 	}
 
 
