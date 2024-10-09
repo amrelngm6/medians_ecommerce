@@ -13,7 +13,7 @@
 					</div>
 					<div class="lg:flex w-full gap-10 " >
 						<div class="w-96">
-							<div class="w-full  flex gap-2  py-4">
+							<div class="w-full  flex gap-2  py-4 ">
 								<div class="panel panel-info w-full" >
 									<div class="panel-heading ">
 										<h3 class="panel-title">{{lang.translate('Video')}} / {{lang.translate('Time')}}</h3>
@@ -38,9 +38,9 @@
 							</form>
 
 						</div>
-						<div class="block w-full relative " >
+						<div class="block w-full relative  max-w-lg" >
 
-							<div class="text-primary  rounded-2xl " id="channel-find-track-form" >
+							<div class="text-primary  rounded-2xl  max-w-lg" id="channel-find-track-form" >
 								<div class="w-full ">
 									<div class="z-20 rounded-2xl w-full  bg-white dark:bg-gray-900 dark:text-gray-300 p-4 ">
 										<form action="/front_api" class="flex items-center max-w-lg mx-auto ajax-form" id="new-list-form">
@@ -71,7 +71,7 @@
 								</div>
 							</div>
 
-							<div id="media-result-box" style="max-height: 200px" class="max-height[200px] relative z-10 hidden mt-4 w-full flex  max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-sm">
+							<div id="media-result-box" style="max-height: 200px" class=" max-w-lg relative z-10 hidden mt-4 w-full flex  max-h-64 overflow-auto flex-col rounded-lg border border-slate-200 bg-white dark:bg-gray-800 dark:border-gray-700 shadow-sm">
 								<nav class="flex w-full flex-col gap-1 p-1.5" id="search-result-list-popup"></nav>
 							</div>
 
