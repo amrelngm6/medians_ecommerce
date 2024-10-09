@@ -102,7 +102,7 @@ class CommentController extends CustomController
 			$response = isset($params['append']) ? translate('Thanks for your comment') : $this->comment_response([$store]);
 
             $returnData = (!empty($store)) 
-            ? array('success'=>1, 'result'=>$response, 'reload'=>0)
+            ? $response
             : array('success'=>0, 'result'=>'Error', 'error'=>1);
 
         } catch (\Exception $e) {
