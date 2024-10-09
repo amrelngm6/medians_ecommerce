@@ -82,6 +82,10 @@ async function loadStation(stationId, play = true)
 	// const chunkTimerVal  = jQuery('#station_media_chunk').val() > 5 ? (jQuery('#station_media_chunk').val() - 5) : 55 ;
 	// const chunkTimer  = chunkTimerVal > 1 ? chunkTimerVal : 58 ;
 	
+	if (!audio) {
+		audio = mainAudio[0]
+	}
+	
 	activeStation = await loadStationJson(stationId);
 	let rand = Math.random();
 
