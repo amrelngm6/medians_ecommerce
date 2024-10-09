@@ -48,7 +48,8 @@ class Channel extends CustomModel
 
 	public function activeItem()
 	{
-		return $this->hasOne(ChannelMedia::class, 'channel_id', 'channel_id')->with('media');	
+		$now = date('H:i:s');
+		return $this->hasOne(ChannelMedia::class, 'channel_id', 'channel_id')->with('media')->where('date', date("Y-m-d"))->whereRaw("? BETWEEN `start_at` AND DATE_ADD(`start_at`, INTERVAL `duration` SECOND)", [$now])->orderBy('start_at', 'DESC')->orderBy('duration', 'ASC');	
 	}
 
 	public function customer()
