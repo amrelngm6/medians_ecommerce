@@ -93,6 +93,13 @@ async function loadStation(stationId, play = true)
 	}
 	
 	activeStation = await loadStationJson(stationId);
+
+}
+
+
+async function handleStationPlayer()
+{
+	
 	let rand = Math.random();
 
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
@@ -137,12 +144,13 @@ async function loadStation(stationId, play = true)
 }
 
 
-async function loadChannel(stationId, play = true)
+
+async function loadChannel(channelId, play = true)
 {
 	// const chunkTimerVal  = jQuery('#station_media_chunk').val() > 5 ? (jQuery('#station_media_chunk').val() - 5) : 55 ;
 	// const chunkTimer  = chunkTimerVal > 1 ? chunkTimerVal : 58 ;
 	
-	activeChannel = await loadStationJson(stationId);
+	activeChannel = await loadChannelJson(channelId);
 	
 }
 
@@ -205,9 +213,9 @@ jQuery('#player-pause-button').on("click", function(event) {
 	}
 });
 
-jQuery('#station-player-pause-button').on("click", function(event) {
+jQuery('#station-player-pause-button').on("click", async function(event) {
 	if ( audio.paused ) {
-		loadStation(activeStation.station_id)
+		await loadStation(activeStation.station_id)
 		audio.play()
 	} else  {
 		audio.pause();
