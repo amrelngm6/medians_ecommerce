@@ -1,7 +1,7 @@
 
 			{% set liked = item.liked(customer.customer_id).count() %}
 			
-<div class="grid grid-cols-12 gap-y-6 sm:grid-rows-1">
+<div class="grid grid-cols-12 gap-y-6 sm:grid-rows-1 mb-6">
 	<figure class="max-h-96 group col-span-full overflow-hidden bg-gray-900 sm:col-start-1 sm:col-end-8 sm:row-start-1 sm:row-end-2">
 		<a href="_yt1-single.html"><img class="aspect-14/9 h-full w-full object-cover duration-300 group-hover:scale-110 group-hover:opacity-75" src="/stream?thumbnail=800&image={{item.picture_name}}" alt="{{item.lang_content.title}}"></a>
 	</figure>
