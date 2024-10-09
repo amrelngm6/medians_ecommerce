@@ -184,13 +184,13 @@ class StationMediaController extends CustomController
 			foreach ($params['selected']['media_id'] as $key => $value) 
 			{
 				$newParams = [];
-				$newParams['channel_id'] = $params['channel_id'];
+				$newParams['station_id'] = $params['station_id'];
 				$newParams['date'] = $params['date'];
 				$newParams['media_id'] = $params['selected']['media_id'][$key];
 				$newParams['media_path'] = $params['selected']['media_path'][$key];
-				$newParams['duration'] = $params['selected']['duration'][$key];
-				$newParams['bitrate'] = $params['selected']['bitrate'][$key];
-				$newParams['filesize'] = $params['selected']['filesize'][$key];
+				$newParams['duration'] = $params['selected']['duration'][$key] ?? 0;
+				$newParams['bitrate'] = $params['selected']['bitrate'][$key] ?? 0;
+				$newParams['filesize'] = $params['selected']['filesize'][$key] ?? 0;
 				$newParams['start_at'] = $params['selected']['start_at'][$key];
 				$newParams['title'] = $params['selected']['title'][$key];
 
@@ -305,6 +305,24 @@ class StationMediaController extends CustomController
 			throw new \Exception($e->getMessage(), 1);
 		}
     }
+
+	/** 
+	 * Analyze file and get info
+	 */
+	public function appendFileInfo($params, $filePath)
+	{
+		$getID3 = new getID3;
+
+		$fileInfo = $getID3->analyze($filePath);
+
+		if (isset($fileInfo['playtime_seconds'])) {
+			$params['duration'] = round($fileInfo['playtime_seconds'], 0);
+			$params['bitrate'] = $fileInfo['bitrate'];
+			$params['filesize'] = $fileInfo['filesize'];
+		}
+
+		return $params;
+	}
 
 
 	
