@@ -19,10 +19,10 @@
                                         {% set liked = channel.liked(customer.customer_id).count() %}
                                         <div class="text-sm text-gray-100 flex gap-">
                                             <a href="/front_api/create?type=Like.channel&params[item_id]={{channel.channel_id}}" data-params="{item_id: {{channel.channel_id}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
-                                                <img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-channel-{{channel.channel_id}}').addClass('hidden'); jQuery('#unheart-channel-{{channel.channel_id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-channel-{{channel.channel_id}}" src="/src/front_assets/svg/blank-heart.svg">
-                                                <img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-channel-{{channel.channel_id}}').addClass('hidden'); jQuery('#heart-channel-{{channel.channel_id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-channel-{{channel.channel_id}}" src="/src/front_assets/svg/white-heart.svg">
+                                                <img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-channel-{{channel.channel_id}}').addClass('hidden'); jQuery('#unheart-channel-{{channel.channel_id}}').removeClass('hidden'); jQuery('#likes-count-{{channel.channel_id}}').text(parseInt(jQuery('#likes-count-{{channel.channel_id}}').text()) - 1);" id="heart-channel-{{channel.channel_id}}" src="/src/front_assets/svg/blank-heart.svg">
+                                                <img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-channel-{{channel.channel_id}}').addClass('hidden'); jQuery('#heart-channel-{{channel.channel_id}}').removeClass('hidden'); jQuery('#likes-count-{{channel.channel_id}}').text(parseInt(jQuery('#likes-count-{{channel.channel_id}}').text()) + 1);" id="unheart-channel-{{channel.channel_id}}" src="/src/front_assets/svg/white-heart.svg">
                                             </a>
-                                            <span id="likes-count">{{channel.likescount()}}</span>
+                                            <span id="likes-count-{{channel.channel_id}}">{{channel.likescount()}}</span>
                                         </div>
                                         
                                         <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 ">
