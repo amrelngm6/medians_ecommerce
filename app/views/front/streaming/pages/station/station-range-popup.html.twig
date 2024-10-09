@@ -23,8 +23,9 @@
 									</div>
 								</div>
 							</div>
-							
-							<form action="/front_api/create" class=" w-full ajax-form" id="new-range-item">
+
+							<form action="/front_api/create" class="w-full ajax-form" id="submit-range-items" >
+
 								<input type="hidden" name="type" value="StationMedia.bulk_create"/>
 
 								<input type="hidden" name="params[date]" id="station-range-date" />
@@ -108,14 +109,14 @@
 
 					</div>
 					
-								<div class="show-on-hover mt-2 absolute bottom-10 right-0 mt-4 flex-col rounded-lg shadow-sm">
-									<div class="text-center w-full py-2 hidden" id="range-item-submit-button">
-										<button onclick="(function(){ return jQuery('form#new-range-item').submit(); })()" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
-											<div class="absolute inset-0 w-3 bg-purple-800 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
-											<span class="relative text-black group-hover:text-white">{{lang.translate('Save')}}</span>
-										</button>
-									</div>
-								</div>
+                    <div class="show-on-hover mt-2 absolute bottom-10 right-0 mt-4 flex-col rounded-lg shadow-sm">
+                        <div class="text-center w-full py-2 hidden" id="range-item-submit-button">
+                            <button onclick="(function(){ return jQuery('form#submit-range-items').submit(); })()" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white text-lg shadow">
+                                <div class="absolute inset-0 w-3 bg-purple-800 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
+                                <span class="relative text-black group-hover:text-white">{{lang.translate('Save')}}</span>
+                            </button>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>
