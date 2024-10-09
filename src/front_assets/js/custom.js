@@ -56,7 +56,7 @@ jQuery(document).on('click', '.start-station', async function (i, el) {
 	}, val > 1  ? (val * 1000) : 30000);
 
 	mainAudio.on('ended', function() {
-		
+		let rand = Math.random();
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ (rand+1);
 		audio.load();
 		audio.play();
