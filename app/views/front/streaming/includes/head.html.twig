@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{item.lang_content.seo_title ? item.lang_content.seo_title : (item.content ? item.lang_content.title : app.SystemSetting.sitename)}}</title>
+    <title>{{item.lang_content.seo_title ? item.lang_content.seo_title : (item.content ? item.lang_content.title : (item.name ?? app.SystemSetting.sitename))}}</title>
     <meta name="description" content="{{item.lang_content.seo_desc ? item.lang_content.seo_desc : app.SystemSetting.seo_desc}}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
  
@@ -19,7 +19,7 @@
     <meta property='og:description' content="{{item.lang_content.seo_desc ? item.lang_content.seo_desc : app.SystemSetting.seo_desc}}">
     <!-- Twitter -->
     <meta property='twitter:card' content='summary_large_image'>
-    <meta property='twitter:title' content="{{item.lang_content.title ? item.lang_content.title : app.SystemSetting.sitename}}">
+    <meta property='twitter:title' content="{{item.lang_content.title ? item.lang_content.title : (item.name ?? app.SystemSetting.sitename)}}">
     <meta property='twitter:image' content='{{app.CONF.url}}stream?{{item.type == 'video' ? 'dir=videos/screenshots&' : ''}}image={{item.picture_name ?? 'logo.png'}}&thumbnail=800'>
     <meta property='twitter:description' content="{{item.lang_content.seo_desc ? item.lang_content.seo_desc : app.SystemSetting.seo_desc}}">
     
