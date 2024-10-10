@@ -21,17 +21,17 @@
 							<div class=" justify-between block grid grid-cols-1 gap-6 ">
 								<div class="cursor-pointer block w-full group flex gap-6 gap">
 									<img src="/src/front_assets/svg/whatsapp.svg" width="40" />
-									<a href="" data-link="https://wa.me/?text={{app.CONF.url}}" class="block pt-2 share-dialog_label__od1MX dark:group-hover:text-wynk-dark-subtitle-gray dark:text-wynk-dark-text-secondary">Whatsapp</a>
+									<a href="javascript:;" x-on:click="window.open('https://wa.me/?text={{app.CONF.url}}'+jQuery('#show-box-path').val())"  class="block pt-2 share-dialog_label__od1MX dark:group-hover:text-wynk-dark-subtitle-gray dark:text-wynk-dark-text-secondary">Whatsapp</a>
 								</div>
                                 
 								<div class="cursor-pointer block w-full group flex gap-6 gap">
 									<img src="/src/front_assets/svg/facebook_blue.svg" width="40" />
-									<a href="javascript:;" x-on:click="window.open('https://www.facebook.com/sharer/sharer.php?u={{app.CONF.url}}'+jQuery('#show-box-path').val())" target="_blank" data-link="https://wa.me/?text={{app.CONF.url}}" class="block pt-2 share-dialog_label__od1MX dark:group-hover:text-wynk-dark-subtitle-gray dark:text-wynk-dark-text-secondary">Facebook</a>
+									<a href="javascript:;" x-on:click="window.open('https://www.facebook.com/sharer/sharer.php?u={{app.CONF.url}}'+jQuery('#show-box-path').val())" target="_blank" class="block pt-2 share-dialog_label__od1MX dark:group-hover:text-wynk-dark-subtitle-gray dark:text-wynk-dark-text-secondary">Facebook</a>
 								</div>
                                 
 								<div class="cursor-pointer block w-full group flex gap-6 gap">
 									<img src="/src/front_assets/svg/link.svg" width="40" />
-									<a href="javascript:;" onclick="(function(){ navigator.clipboard.writeText('{{app.CONF.url}}'+jQuery('#show-box-path').val()); })" id="copy-link" data-link="{{app.CONF.url}}" class="block pt-2 share-dialog_label__od1MX dark:group-hover:text-wynk-dark-subtitle-gray dark:text-wynk-dark-text-secondary">Copy link</a>
+									<a href="javascript:;" x-on:click=" navigator.clipboard.writeText('{{app.CONF.url}}'+jQuery('#show-box-path').val()), Swal.fire('{{lang.translate('Thanks')}}', '{{lang.translate('Link copied to your clipboard')}}', 'success')}" id="copy-link" data-link="{{app.CONF.url}}" class="block pt-2 share-dialog_label__od1MX dark:group-hover:text-wynk-dark-subtitle-gray dark:text-wynk-dark-text-secondary">Copy link</a>
 								</div>
 							</div>
 						</div>
