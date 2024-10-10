@@ -93,7 +93,7 @@ class SiteSettingsController extends CustomController
 			
 			'Head tags'=> [	
 				[ 'key'=> "google_tag_code", 'title'=> translate('Google Tag ID'), 'help_text'=>translate('Add your Google Tag ID Like that (ex: G-xxxxxxxxxx )'), 'fillable'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "google_tag_code", 'title'=> translate('Google Tag ID'), 'help_text'=>translate('Add your Google Tag ID Like that (ex: G-xxxxxxxxxx )'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "seo_desc", 'title'=> translate('Default Description Tag'), 'help_text'=>translate('This is default SEO desc content if the page does not have'), 'fillable'=> true, 'column_type'=>'text' ],
 			],
 			
 			

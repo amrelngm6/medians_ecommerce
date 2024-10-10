@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{page.lang_content.seo_title ? page.lang_content.seo_title : (page.lang_content.title ?? app.SystemSetting.sitename)}}</title>
+    <title>{{page.lang_content.seo_title ?? (page.lang_content.title ?? app.SystemSetting.sitename)}}</title>
     <meta name="description" content="{{page.lang_content.seo_desc ? page.lang_content.seo_desc : app.SystemSetting.sitename}}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="canonical" href="{{app.request.uri}}">
@@ -14,7 +14,7 @@
     <!-- Open Graph / Facebook -->
     <meta property='og:type' content='website'>
     <meta property='og:url' content='{{ canonicalUrl}}'>
-    <meta property='og:title' content="{{item.lang_content.title ? item.lang_content.title : (item.name ?? app.SystemSetting.sitename)}}">
+    <meta property='og:title' content="{{item.lang_content.seo_title ??  (item.lang_content.title ?? app.SystemSetting.sitename)}}">
     <meta property='og:image' content='{{app.CONF.url}}stream?{{item.type == 'video' ? 'dir=videos/screenshots&' : ''}}image={{item.picture_name ?? 'fair.jpg'}}&thumbnail=800'>
     <meta property='og:description' content="{{item.lang_content.seo_desc ? item.lang_content.seo_desc : app.SystemSetting.seo_desc}}">
 
