@@ -201,6 +201,7 @@ class BlogController extends CustomController
 
 			return render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
 		        'item' => $item,
+		        'page' => $item,
 		        'similar_articles' => $this->repo->similar($item, 3),
 				'layout' => 'article'
 		    ]);
@@ -257,6 +258,7 @@ class BlogController extends CustomController
 		        'search_items' => $request->get('search') ?  $this->repo->search($request, 10) : [],
 		        'search_text' => $request->get('search'),
 		        'item' => $category,
+		        'page' => $category,
 		        'items' => $category_items,
 				'offset' => $offset,
 				'pages' => array_fill(0,$pages,[]),
