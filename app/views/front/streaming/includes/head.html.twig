@@ -5,11 +5,42 @@
     <meta charset="utf-8">
     <meta content="ie=edge" http-equiv="x-ua-compatible">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{item.content.seo_title ? item.content.seo_title : (item.content ? item.content.title : app.SystemSetting.sitename)}}</title>
-    <meta name="description" content="{{item.content.seo_desc ? item.content.seo_desc : app.SystemSetting.sitename}}">
+    <title>{{item.lang_content.seo_title ? item.lang_content.seo_title : (item.content ? item.lang_content.title : app.SystemSetting.sitename)}}</title>
+    <meta name="description" content="{{item.lang_content.seo_desc ? item.lang_content.seo_desc : app.SystemSetting.seo_desc}}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="canonical" href="{{app.request.uri}}">
  
+    {% set canonicalUrl = app.request.uri|trim('/') %}
+    <link rel='canonical' href='{{ canonicalUrl }}'>
+    <!-- Open Graph / Facebook -->
+    <meta property='og:type' content='website'>
+    <meta property='og:url' content='{{ canonicalUrl}}'>
+    <meta property='og:title' content="{{item.lang_content.title ? item.lang_content.title : app.setting('sitename')}}">
+    <meta property='og:image' content='/stream?image={{item.picture_name ?? 'logo.png'}}&thumbnail=800'>
+    <meta property='og:description' content="{{item.lang_content.seo_desc ? item.lang_content.seo_desc : app.setting('seo_desc')}}">
+    <!-- Twitter -->
+    <meta property='twitter:card' content='summary_large_image'>
+    <meta property='twitter:title' content="{{item.lang_content.title ? item.lang_content.title : app.setting('sitename')}}">
+    <meta property='twitter:image' content='/stream?image={{item.picture_name ?? 'logo.png'}}&thumbnail=800'>
+    <meta property='twitter:description' content="{{item.lang_content.seo_desc ? item.lang_content.seo_desc : app.setting('seo_desc')}}">
+    
+    <meta name="msapplication-config" content="none"/>
+
+    <!-- Favicon -->
+    <link rel='shortcut icon' type='image.png' href='/stream?dir=img&image=favicon.png&thumbnail=48'>
+    <link rel='icon' type='image.png' sizes='48x48' href='/stream?dir=img&image=favicon.png&thumbnail=48'>
+    <link rel='icon' type='image.png' sizes='32x32' href='/stream?dir=img&image=favicon.png&thumbnail=32'>
+    <link rel='icon' type='image.png' sizes='16x16' href='/stream?dir=img&image=favicon.png&thumbnail=16'>
+    <link rel='apple-touch-icon' sizes='180x180' href='/stream?dir=img&image=favicon.png&thumbnail=180'>
+    <link rel='apple-touch-icon-precomposed' sizes='180x180' href='/stream?dir=img&image=favicon.png&thumbnail=180'>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/stream?dir=img&image=favicon.png&thumbnail=180">
+    <link rel="icon" type="image/png" sizes="32x32" href="/stream?dir=img&image=favicon.png&thumbnail=32">
+    <link rel="icon" type="image/png" sizes="16x16" href="/stream?dir=img&image=favicon.png&thumbnail=16">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
+
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/uploads/images/favicon.webp">
     <link rel="icon" type="image.webp" sizes="32x32" href="/uploads/images/favicon.webp">
