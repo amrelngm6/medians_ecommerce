@@ -22,11 +22,11 @@
                                         {% set liked = item.liked(app.customer.customer_id).first() %}
                                         <a href="/front_api/create?type=Like.playlist&params[item_id]={{item.playlist_id}}" data-params="{item_id: {{item.media_id}} }" class="ajax-link cursor-pointer text-sm text-gray-100">
                                         
-                                        <img class="{{liked ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{item.media_id}}').addClass('hidden'); jQuery('#unheart-{{item.media_id}}').removeClass('hidden')" id="heart-{{item.media_id}}" src="/src/front_assets/svg/white-heart.svg">
+                                        <img class="{{liked ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{item.media_id}}').addClass('hidden'); jQuery('#unheart-{{item.media_id}}').removeClass('hidden')" id="heart-{{item.media_id}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
                                         <img class="{{liked ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{item.media_id}}').addClass('hidden'); jQuery('#heart-{{item.media_id}}').removeClass('hidden')" id="unheart-{{item.media_id}}" src="/src/front_assets/svg/blank-heart.svg">
 
                                         </a>
-                                        <span x-on:click="jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
+                                        <span x-on:click="jQuery('#show-box-path').val('audio/{{item.playlist_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
                                     </div>
                                 </div>
                                 

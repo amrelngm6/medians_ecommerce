@@ -45,7 +45,7 @@
 			<div class="text-sm text-gray-100 flex gap-">
 				<a href="/front_api/create?type=Like.channel&params[item_id]={{item.channel_id}}" data-params="{item_id: {{item.channel_id}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
 					<img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{item.channel_id}}').addClass('hidden'); jQuery('#unheart-{{item.channel_id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-{{item.channel_id}}" src="/src/front_assets/svg/blank-heart.svg">
-					<img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{item.channel_id}}').addClass('hidden'); jQuery('#heart-{{item.channel_id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{item.channel_id}}" src="/src/front_assets/svg/white-heart.svg">
+					<img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{item.channel_id}}').addClass('hidden'); jQuery('#heart-{{item.channel_id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{item.channel_id}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
 				</a>
 				<span id="likes-count">{{item.likescount()}}</span>
 			</div>
@@ -58,7 +58,7 @@
 				<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg" />
 				<span id="comments-">{{item.commentscount()}}</span>
 			</span>
-			<span x-on:click="jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
+			<span x-on:click="jQuery('#show-box-path').val('channel/{{item.channel_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
 
 		</div>
 
