@@ -15,12 +15,12 @@
     <meta property='og:type' content='website'>
     <meta property='og:url' content='{{ canonicalUrl}}'>
     <meta property='og:title' content="{{item.lang_content.title ? item.lang_content.title : app.SystemSetting.sitename}}">
-<meta property='og:image' content='{{app.CONF.url}}stream?image={{item.picture_name ?? 'logo.png'}}&thumbnail=800'>
+<meta property='og:image' content='{{app.CONF.url}}stream?{{item.type == 'video' ? 'dir=videos/screenshots&' : ''}}image={{item.picture_name ?? 'logo.png'}}&thumbnail=800'>
     <meta property='og:description' content="{{item.lang_content.seo_desc ? item.lang_content.seo_desc : app.SystemSetting.seo_desc}}">
     <!-- Twitter -->
     <meta property='twitter:card' content='summary_large_image'>
     <meta property='twitter:title' content="{{item.lang_content.title ? item.lang_content.title : app.SystemSetting.sitename}}">
-    <meta property='twitter:image' content='{{app.CONF.url}}stream?image={{item.picture_name ?? 'logo.png'}}&thumbnail=800'>
+    <meta property='twitter:image' content='{{app.CONF.url}}stream?{{item.type == 'video' ? 'dir=videos/screenshots&' : ''}}image={{item.picture_name ?? 'logo.png'}}&thumbnail=800'>
     <meta property='twitter:description' content="{{item.lang_content.seo_desc ? item.lang_content.seo_desc : app.SystemSetting.seo_desc}}">
     
     <meta name="msapplication-config" content="none"/>
