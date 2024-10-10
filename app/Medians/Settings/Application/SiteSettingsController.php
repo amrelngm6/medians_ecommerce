@@ -91,6 +91,12 @@ class SiteSettingsController extends CustomController
 				[ 'key'=> "behance_link", 'title'=> translate('Behance link'), 'fillable'=> true, 'column_type'=>'text' ],
 			],
 			
+			'Head tags'=> [	
+				[ 'key'=> "google_tag_code", 'title'=> translate('Google Tag ID'), 'help_text'=>translate('Add your Google Tag ID Like that (ex: G-xxxxxxxxxx )'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "google_tag_code", 'title'=> translate('Google Tag ID'), 'help_text'=>translate('Add your Google Tag ID Like that (ex: G-xxxxxxxxxx )'), 'fillable'=> true, 'column_type'=>'text' ],
+			],
+			
+			
 			'options'=> [	
 				[ 'key'=> "allow_guest_checkout", 'title'=> translate('Allow Guest Checkout'), 'help_text'=>translate('Allow guests to complete checkout without signup'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 			],

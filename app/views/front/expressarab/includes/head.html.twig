@@ -15,13 +15,33 @@
     <meta property='og:type' content='website'>
     <meta property='og:url' content='{{ canonicalUrl}}'>
     <meta property='og:title' content="{{item.lang_content.title ? item.lang_content.title : (item.name ?? app.SystemSetting.sitename)}}">
-    <meta property='og:image' content='{{app.CONF.url}}stream?{{item.type == 'video' ? 'dir=videos/screenshots&' : ''}}image={{item.picture_name ?? 'logo.png'}}&thumbnail=800'>
+    <meta property='og:image' content='{{app.CONF.url}}stream?{{item.type == 'video' ? 'dir=videos/screenshots&' : ''}}image={{item.picture_name ?? 'fair.jpg'}}&thumbnail=800'>
     <meta property='og:description' content="{{item.lang_content.seo_desc ? item.lang_content.seo_desc : app.SystemSetting.seo_desc}}">
+
+
+        
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="article" />
+    <meta property="og:description" content="We specialize in taking your business to new heights with our comprehensive exhibitions services and B2B marketing solutions." />
+    <meta property="og:site_name" content="Express Arab" />
+    <meta property="article:publisher" content="https://www.facebook.com/expressarab" />
+    <meta property="og:updated_time" content="{{"now"|date("Y-m-d\TH:i:s")}}" />
+    <meta property="og:image" content="https://express-arab.net/uploads/images/fair.jpg" />
+    <meta property="og:image:secure_url" content="https://express-arab.net/uploads/images/fair.jpg" />
+    <meta property="og:image:width" content="1383" />
+    <meta property="og:image:height" content="266" />
+    <meta property="og:image:alt" content="fair" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="article:published_time" content="2023-04-18T01:33:51" />
+    <meta property="article:modified_time" content="{{"now"|date("Y-m-d\TH:i:s")}}" />
+
     <!-- Twitter -->
     <meta property='twitter:card' content='summary_large_image'>
     <meta property='twitter:title' content="{{item.lang_content.title ? item.lang_content.title : (item.name ?? app.SystemSetting.sitename)}}">
-    <meta property='twitter:image' content='{{app.CONF.url}}stream?{{item.type == 'video' ? 'dir=videos/screenshots&' : ''}}image={{item.picture_name ?? 'logo.png'}}&thumbnail=800'>
+    <meta property='twitter:image' content='{{app.CONF.url}}stream?/image={{item.picture_name ?? 'fair.jpg'}}&thumbnail=800'>
     <meta property='twitter:description' content="{{item.lang_content.seo_desc ? item.lang_content.seo_desc : app.SystemSetting.seo_desc}}">
+    <meta name="twitter:label1" content="Time to read" />
+    <meta name="twitter:data1" content="Less than a minute" />
     
     <meta name="msapplication-config" content="none"/>
 
@@ -33,5 +53,36 @@
 
     {% include 'views/front/'~ template ~'/includes/head_assets.html.twig' %}
     <script> var rootURL = '{{app.CONF.url|slice(0,-1)}}'; </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{app.SystemSetting.google_tag_code}}"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '{{app.SystemSetting.google_tag_code}}');
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </head>
 <body class="p-0 m-0 {{page.lang == 'ar' ? 'rtl' : 'ltr'}} dark:bg-gray-800 bg-gray-50">
