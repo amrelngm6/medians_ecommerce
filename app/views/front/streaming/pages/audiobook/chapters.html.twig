@@ -29,7 +29,7 @@
                                         <div class="flex gap-10 w-full relative z-10">
                                             <div class="w-1/2">
                                                 <p class="text-lg py-2">{{lang.translate('Chapter name')}} </p>
-                                                <input name="params[chapters][title][]" placeholder="{{lang.translate('Chapter Name')}} *" x-model="chapter.title" value="{{chapter.title}}" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-rose-300  border-gray-200 w-full"  />
+                                                <input name="params[chapters][title][]" placeholder="{{lang.translate('Chapter Name')}} *" x-model="chapter.title" value="{{chapter.title}}" class=" dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-rose-400  border-gray-200 w-full"  />
                                             </div>
                                             <div class="text-primary dark:text-gray-300   block">
                                                 
@@ -95,9 +95,9 @@
                         </template>
                     </template>
                     <div class="my-4"></div>
-                    <span  class="cursor-pointer dark:text-gray-300 float-left inline-block px-6 py-2 rounded-2xl border transition hover:border-rose-600 border-rose-300" x-on:click="jQuery('#upload-file-popup').removeClass('hidden'), jQuery('#upload-file-media').val('{{item.media_id}}')">{{lang.translate('Add chapter')}}</span>
+                    <span  class="cursor-pointer dark:text-gray-300 float-left inline-block px-6 py-2 rounded-2xl border transition hover:border-rose-600 border-rose-400" x-on:click="jQuery('#upload-file-popup').removeClass('hidden'), jQuery('#upload-file-media').val('{{item.media_id}}')">{{lang.translate('Add chapter')}}</span>
 
-                    <button class=" dark:text-gray-300 float-right inline-block px-6 py-2 rounded-2xl border transition hover:border-rose-600 border-rose-300">{{lang.translate('Save')}}</button>
+                    <button class=" dark:text-gray-300 float-right inline-block px-6 py-2 rounded-2xl border transition hover:border-rose-600 border-rose-400">{{lang.translate('Save')}}</button>
                     
                 </form>
                 {% include 'views/front/'~ template ~'/popups/upload-file.html.twig' %}
