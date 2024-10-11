@@ -9,16 +9,14 @@
                             <img src="/stream?thumbnail=800&image={{item.picture_name}}"  class="absolute bg-img left-0 top-0" />
                             <div class=" w-full overflow-hidden rounded-2xl text-white mx-auto text-center relative z-10 ">
                                 <img src="/stream?thumbnail=300&image={{item.picture_name}}"  class="w-32 h-32 lg:w-56 lg:h-56 rounded-full shadow-xl" />
-                                <div class="p-8 text-left ">
+                                <div class="py-8 text-left ">
                                     <span>{{lang.translate('Audiobook')}}</span>
-                                    <h1 class="lg:text-2xl text-xl ">{{item.name}}</h1>
+                                    <h1 class="lg:text-2xl text-xl pb-4">{{item.name}}</h1>
                                     
-                                    <div class="flex gap-4 py-2">
                                         {% set customer = app.customer_auth() %}
                                         {% set itemId = item.media_id %}
                                         {% set itemType = 'media' %}
                                         {% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
-                                    </div>
                                     <hr class="opacity-20 my-2" />
                                     <div class="w-full flex gap-2">
                                         <span x-on:click="jQuery('#show-box-path').val('audiobook/{{item.media_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
