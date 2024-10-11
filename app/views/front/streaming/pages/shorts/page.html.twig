@@ -41,23 +41,10 @@
 		{% endif %}
 
 		<div class="w-full flex gap-4 py-4">
-			{% set liked = item.liked(customer.customer_id).count() %}
-			<div class="text-sm text-gray-100 flex gap-">
-				<a href="/front_api/create?type=Like.media&params[item_id]={{item.media_id}}" data-params="{item_id: {{item.media_id}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
-					<img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{item.media_id}}').addClass('hidden'); jQuery('#unheart-{{item.media_id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-{{item.media_id}}" src="/src/front_assets/svg/blank-heart.svg">
-					<img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{item.media_id}}').addClass('hidden'); jQuery('#heart-{{item.media_id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{item.media_id}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
-				</a>
-				<span id="likes-count">{{item.likescount()}}</span>
-			</div>
-			
-			<span class=" cursor-pointer text-sm text-gray-100 flex gap-2 ">
-				<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg" />
-				<span id="views-count">{{item.viewsscount()}}</span>
-			</span>
-			<span class=" cursor-pointer text-sm text-gray-100 flex gap-2 ">
-				<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg" />
-				<span id="comments-">{{item.commentscount()}}</span>
-			</span>
+		
+			{% set itemId = item.media_id %}
+			{% set itemType = 'media' %}
+			{% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
 			<span x-on:click="jQuery('#show-box-path').val('audio/{{item.media_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
 
 		</div>
