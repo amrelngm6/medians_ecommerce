@@ -15,6 +15,7 @@
                                 </div>
                                 <div class="flex gap-4 py-2">
                                     {% set itemId = item.media_id %}
+                        			{% set itemType = 'media' %}
                                     {% set customer = app.customer_auth() %}
                         			{% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
 

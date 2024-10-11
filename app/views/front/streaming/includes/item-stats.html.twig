@@ -2,7 +2,7 @@
 <div class="flex gap-4">
 
 			<div class="text-sm text-gray-100 flex gap-2 relative">
-				<a href="/front_api/create?type=Like.media&params[item_id]={{itemId}}" data-params="{item_id: {{itemId}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
+				<a href="/front_api/create?type=Like.{{itemType}}&params[item_id]={{itemId}}" data-params="{item_id: {{itemId}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
 					<img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{itemId}}').addClass('hidden'); jQuery('#unheart-{{itemId}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-{{itemId}}" src="/src/front_assets/svg/blank-heart.svg">
 					<img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{itemId}}').addClass('hidden'); jQuery('#heart-{{itemId}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{itemId}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
 				</a>
