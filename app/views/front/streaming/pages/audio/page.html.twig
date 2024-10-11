@@ -14,9 +14,9 @@
                                     <p class="truncate-text truncate">{{item.description}} </p>
                                 </div>
                                 <div class="flex gap-4 py-2">
-                                    <span class="text-sm text-gray-100">{{lang.translate('Likes')}} : {{item.likes_count}}  </span>
-                                    <span class="text-sm text-gray-100">{{lang.translate('Plays')}} : {{item.plays_count}}</span>
-                                    <span class="text-sm text-gray-100">{{lang.translate('Comments')}} : {{item.comments_count}}</span>
+                                    <span class="text-sm text-gray-100">{{lang.translate('Likes')}} : {{item.likescount()}}  </span>
+                                    <span class="text-sm text-gray-100">{{lang.translate('Plays')}} : {{item.viewscount()}}</span>
+                                    <span class="text-sm text-gray-100">{{lang.translate('Comments')}} : {{item.commentscount()}}</span>
                                     <span class="text-sm text-gray-100">{{lang.translate('Duration')}} : <span x-text="convertToTime({{item.field.duration}})"></span> </span>
                                    {% set liked = item.liked(app.customer.customer_id).first() %}
                                     <a href="/front_api/create?type=Like.media&params[item_id]={{item.media_id}}" data-params="{item_id: {{item.media_id}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
