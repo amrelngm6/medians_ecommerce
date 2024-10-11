@@ -1,0 +1,11 @@
+                
+                <div class="p-4 w-full text-primary ">
+                    <h2 class="dark:text-gray-300 text-2xl pb-6 pt-4">{{lang.translate('Top Channels')}}</h2>
+                    <div id="channel-list"  class="w-full  " >
+                        {% for item in channels  %}
+                        {% include 'views/front/' ~ template ~ '/includes/artist-block.html.twig' %}
+                        {% endfor %}
+
+                    </div>
+                </div>
+                <div class="h-10"></div>

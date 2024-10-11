@@ -1,0 +1,126 @@
+
+            <div class="my-4  h-full overflow-hidden rounded-2xl" x-data="{is_slide: 'slide'}">                     
+                    
+                <div class="w-full  ">
+                    <div class=" p-8 relative " >
+                        <div class="artist-overlay top-[-20px] left-0 absolute w-full h-full py-20 bg-gradient-to-b from-gray-800 to-black"></div>
+                        <img src="/stream?thumbnail=900&image={{item.picture_name}}"  class="absolute bg-img left-20px top-0 w-full" />
+                        <div class="flex w-full text-white mx-auto text-center relative z-10">
+                            <img src="/stream?thumbnail=300&image={{item.picture_name}}"  class="w-40 h-40 lg:w-56 lg:h-56 rounded-full shadow-xl" />
+                            <div class="p-8 text-left w-full">
+                                <span>{{lang.translate('Track')}}</span>
+                                <h1 class="lg:text-2xl text-lg ">{{item.name}}</h1>
+                                <div class="py-2 font-thin">
+                                    <p class="truncate-text truncate">{{item.description}} </p>
+                                </div>
+                                <div class="flex gap-4 py-2">
+                                    <span class="text-sm text-gray-100">{{lang.translate('Likes')}} : {{item.likes_count}}  </span>
+                                    <span class="text-sm text-gray-100">{{lang.translate('Plays')}} : {{item.plays_count}}</span>
+                                    <span class="text-sm text-gray-100">{{lang.translate('Comments')}} : {{item.comments_count}}</span>
+                                    <span class="text-sm text-gray-100">{{lang.translate('Duration')}} : <span x-text="convertToTime({{item.field.duration}})"></span> </span>
+                                   {% set liked = item.liked(app.customer.customer_id).first() %}
+                                    <a href="/front_api/create?type=Like.media&params[item_id]={{item.media_id}}" data-params="{item_id: {{item.media_id}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
+                                        <img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{item.media_id}}').addClass('hidden'); jQuery('#unheart-{{item.media_id}}').removeClass('hidden')" id="heart-{{item.media_id}}" src="/src/front_assets/svg/blank-heart.svg">
+                                        <img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{item.media_id}}').addClass('hidden'); jQuery('#heart-{{item.media_id}}').removeClass('hidden')" id="unheart-{{item.media_id}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
+                                    </a>
+
+                                    <span x-on:click="jQuery('#show-box-path').val('audio/{{item.media_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
+                                    <a href="/media/edit/{{item.media_id}}" class="ajax-load cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/edit.svg" class="w-5"></a>
+                                    <div class="w-4 relative">
+                                        <span class="active-parent cursor-pointer mx-2 text-gray-100 leading-3 text-xl font-extrabold" >...</span>
+                                        <div class="show-active active-child hidden z-20 rounded-2xl w-40 right-0 top-10 absolute bg-white dark:bg-gray-900 dark:text-gray-300 p-4 ">
+                                            <a  class="cursor-pointer text-gray-600 flex w-full gap-2 py-2"   x-on:click="jQuery('#add-playlist-cover').css('background-image', 'url( /stream?thumbnail=800&image={{item.picture_name}} )'); jQuery('#add-playlist-media').val({{item.media_id}}); jQuery('#add-playlist-popup').removeClass('hidden')" >
+                                                <img src="/src/front_assets/svg/queue_list.svg" width="24" />
+                                                <span class="w-full text-xs pt-1">{{lang.translate('Add to playlist')}}</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
+                    
+                    <div class="w-full ">
+                        {% include 'views/front/'~app.SystemSetting.template ~'/pages/audio/single-player.html.twig' %}        
+                    </div>
+                    <span class="block pt-10 text-sm text-gray-500">{{lang.translate('Description')}}</span>
+                    <div class="text-primary">
+                        <p class="dark:text-gray-300 py-4">{{item.description}}</p>
+                    </div>
+                    <div class="w-full 	py-10" id="item-related-items">
+                        <div class=" w-full flex gap-4 text-primary">
+                            <div class=" w-full flex gap-4 dark:text-gray-300 ">
+                                <h2 class="text-2xl  font-normal">{{lang.translate('Fans who liked')}}</h3>
+                                <a href="#!" class="p-2 transition hover:text-orange-500">See all</a>
+                            </div>
+                            
+                            <div class="flex gap gap-4">
+                                <button class="prev-btn" data-slider="related-items"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
+                                <button class="next-btn" data-slider="related-items"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
+                            </div>
+                        </div>
+                        <div class="my-4 " ></div>
+
+                        <div id="related-items" class="carousel-container flex gap-2" data-count="4"  >
+                            {% set list = {'items' : item.related(10, item.type)} %}
+                            {% for media_item in list.items %}
+                            {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/track_item.html.twig' %}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                    <div class="w-full 	py-10" id="top-played-items">
+                        <div class=" w-full flex gap-4 text-primary">
+                            <div class=" w-full flex gap-4 dark:text-gray-300 ">
+                                <h2 class="text-2xl  font-normal">Fans Also Played</h3>
+                                <a href="#!" class="p-2 transition hover:text-orange-500">See all</a>
+                            </div>
+                            
+                            <div class="flex gap gap-4">
+                                <button class="prev-btn" data-slider="played-items"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
+                                <button class="next-btn" data-slider="played-items"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
+                            </div>
+                        </div>
+                        <div class="my-4 " ></div>
+                        <div id="played-items" class="carousel-container flex gap-2" data-count="4"  >
+                        
+
+                        </div>
+
+                    </div>
+
+                    
+
+                    <div class="w-full 	my-10 relative text-primary " id="latest-uploads">
+                        <h2 class="text-2xl font-normal dark:text-gray-300">Fans also played</h3>
+                        <div class="my-4 " ></div>
+                        <div id="tracks-list" class=" overflow-auto max-h-80 ">
+                        </div>
+                        <div class="my-10 " ></div>
+                        <div class="z-10 absolute bottom-0 bg-gradient-to-b from-transparent dark:to-gray-900 to-white w-full h-20"></div>
+                    </div>
+
+                    <div class="w-full 	my-10 relative text-primary " id="latest-comments">
+                        <h2 class="text-2xl font-normal dark:text-gray-300">{{lang.translate('Fans commented')}} <a href="javascript:;" x-on:click="jQuery('#comments-form').toggleClass('hidden')" class="float-right text-base font-normal">{{lang.translate('Add your comment')}}</a></h3>
+                        <div class="my-4 " ></div>
+                        <div id="tracks-list" class=" overflow-auto  ">
+                            <div class="w-full mx-auto hidden" id="comments-form" >
+                                {% set id = item.media_id %}
+                                {% set comments = item.comments %}
+                                {% include 'views/front/' ~ template ~ '/includes/comment-form.html.twig' %}
+                            </div>
+                            <div class="w-full mx-auto">
+                                {% include 'views/front/' ~ template ~ '/includes/comments.html.twig'%}
+                            </div>
+                        </div>
+                        <div class="my-10 " ></div>
+                        <div class="z-10 absolute bottom-0 bg-gradient-to-b from-transparent dark:to-gray-900 to-white w-full h-20"></div>
+                    </div>
+
+                </div>
+
+            </div>
+

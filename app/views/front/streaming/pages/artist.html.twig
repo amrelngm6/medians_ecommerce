@@ -10,20 +10,20 @@
 
 		{% if item.customer_id == customer.customer_id %}
 			<div class="{{ following == null ? '' : ' hidden'}} float-right" x-on:click="jQuery('#heart-{{item.customer_id}}').addClass('hidden'); jQuery('#unheart-{{item.customer_id}}').removeClass('hidden')" id="heart-{{item.customer_id}}">
-				<a href="/studio" class="ajax-load hover:border-orange-300 hover:text-orange-300 border  border border-4 border-white rounded-full py-2 px-6">
+				<a href="/studio" class="ajax-load hover:border-rose-300 hover:text-rose-300 border  border border-4 border-white rounded-full py-2 px-6">
 					<span>{{lang.translate('Manage')}}</span>
 				</a>
 			</div>
 		{% else  %}
 			{% set following = item.following(customer.customer_id).first() %}
 			<div class="{{ following == null ? '' : ' hidden'}} float-right" x-on:click="jQuery('#heart-{{item.customer_id}}').addClass('hidden'); jQuery('#unheart-{{item.customer_id}}').removeClass('hidden')" id="heart-{{item.customer_id}}">
-				<a href="/front_api/create?type=Follower.create&params[item_id]={{item.customer_id}}" data-params="{item_id: {{item.customer_id}} }" class="ajax-link hover:border-orange-300 hover:text-orange-300 border border-4 border-white rounded-full py-2 px-6">
+				<a href="/front_api/create?type=Follower.create&params[item_id]={{item.customer_id}}" data-params="{item_id: {{item.customer_id}} }" class="ajax-link hover:border-rose-300 hover:text-rose-300 border border-4 border-white rounded-full py-2 px-6">
 					<span>{{lang.translate('Follow')}}</span>
 				</a>
 			</div>
 
 			<div class="{{ following == null ? 'hidden' : '' }} float-right" x-on:click="jQuery('#unheart-{{item.customer_id}}').addClass('hidden'); jQuery('#heart-{{item.customer_id}}').removeClass('hidden')" id="unheart-{{item.customer_id}}">
-				<a href="/front_api/delete?type=Follower.unfollow&params[item_id]={{item.customer_id}}" data-params="{item_id: {{item.customer_id}} }" class="ajax-link hover:border-orange-300 hover:text-orange-300 border border-4 border-white rounded-full py-2 px-6">
+				<a href="/front_api/delete?type=Follower.unfollow&params[item_id]={{item.customer_id}}" data-params="{item_id: {{item.customer_id}} }" class="ajax-link hover:border-rose-300 hover:text-rose-300 border border-4 border-white rounded-full py-2 px-6">
 					<span>{{lang.translate('UnFollow')}}</span>
 				</a>
 			</div>
@@ -58,20 +58,20 @@
 					</div>
 					{% if item.customer_id == app.customer.customer_id %}
 						<div class="{{ following == null ? '' : ' hidden'}} float-right" x-on:click="jQuery('#heart-{{item.customer_id}}').addClass('hidden'); jQuery('#unheart-{{item.customer_id}}').removeClass('hidden')" id="heart-{{item.customer_id}}">
-							<a href="/studio" class="ajax-load hover:border-orange-300 hover:text-orange-300 border border-4 border-white rounded-full py-2 px-6">
+							<a href="/studio" class="ajax-load hover:border-rose-300 hover:text-rose-300 border border-4 border-white rounded-full py-2 px-6">
 								<span>{{lang.translate('Manage')}}</span>
 							</a>
 						</div>
 					{% else  %}
 						{% set following = item.following(app.customer.customer_id).first() %}
 						<div class="{{ following == null ? '' : ' hidden'}} float-right" x-on:click="jQuery('#heart-{{item.customer_id}}').addClass('hidden'); jQuery('#unheart-{{item.customer_id}}').removeClass('hidden')" id="heart-{{item.customer_id}}">
-							<a href="/front_api/create?type=Follower.create&params[item_id]={{item.customer_id}}" data-params="{item_id: {{item.customer_id}} }" class="ajax-link hover:border-orange-300 hover:text-orange-300 border border-4 border-white rounded-full py-2 px-6">
+							<a href="/front_api/create?type=Follower.create&params[item_id]={{item.customer_id}}" data-params="{item_id: {{item.customer_id}} }" class="ajax-link hover:border-rose-300 hover:text-rose-300 border border-4 border-white rounded-full py-2 px-6">
 								<span>{{lang.translate('Follow')}}</span>
 							</a>
 						</div>
 
 						<div class="{{ following == null ? 'hidden' : '' }} float-right" x-on:click="jQuery('#unheart-{{item.customer_id}}').addClass('hidden'); jQuery('#heart-{{item.customer_id}}').removeClass('hidden')" id="unheart-{{item.customer_id}}">
-							<a href="/front_api/delete?type=Follower.unfollow&params[item_id]={{item.customer_id}}" data-params="{item_id: {{item.customer_id}} }" class="ajax-link hover:border-orange-300 hover:text-orange-300 border border-4 border-white rounded-full py-2 px-6">
+							<a href="/front_api/delete?type=Follower.unfollow&params[item_id]={{item.customer_id}}" data-params="{item_id: {{item.customer_id}} }" class="ajax-link hover:border-rose-300 hover:text-rose-300 border border-4 border-white rounded-full py-2 px-6">
 								<span>{{lang.translate('UnFollow')}}</span>
 							</a>
 						</div>
@@ -101,7 +101,7 @@
                 <div class=" w-full flex gap-4 text-primary pb-10">
                     <div class=" w-full flex gap-4 dark:text-gray-300 ">
 					<h2 class="text-2xl  font-normal">{{lang.translate('Media items')}}</h3>
-                        <a href="#!" class="p-2 transition hover:text-orange-500">See all</a>
+                        <a href="#!" class="p-2 transition hover:text-rose-500">See all</a>
                     </div>
 
                     <div class="hs__arrows flex gap-4"><a class="arrow disabled arrow-prev"></a><a class="arrow arrow-next"></a></div>
@@ -128,7 +128,7 @@
                 <div class=" w-full flex gap-4 text-primary pb-10">
                     <div class=" w-full flex gap-4 dark:text-gray-300 ">
     					<h2 class="text-2xl  font-normal">{{lang.translate('Liked items')}}</h3>
-                        <a href="#!" class="p-2 transition hover:text-orange-500">See all</a>
+                        <a href="#!" class="p-2 transition hover:text-rose-500">See all</a>
                     </div>
 
                     <div class="hs__arrows flex gap-4"><a class="arrow disabled arrow-prev"></a><a class="arrow arrow-next"></a></div>
@@ -157,7 +157,7 @@
                 <div class=" w-full flex gap-4 text-primary pb-10">
                     <div class=" w-full flex gap-4 dark:text-gray-300 ">
                         <h2 class="text-2xl  font-normal">{{lang.translate('Audio books')}}</h3>
-                        <a href="#!" class="p-2 transition hover:text-orange-500">See all</a>
+                        <a href="#!" class="p-2 transition hover:text-rose-500">See all</a>
                     </div>
 
                     <div class="hs__arrows flex gap-4"><a class="arrow disabled arrow-prev"></a><a class="arrow arrow-next"></a></div>
@@ -184,7 +184,7 @@
                 <div class=" w-full flex gap-4 text-primary pb-10">
                     <div class=" w-full flex gap-4 dark:text-gray-300 ">
                         <h2 class="text-2xl  font-normal">{{lang.translate('Stations')}}</h3>
-                        {# <a href="#!" class="p-2 transition hover:text-orange-500">See all</a> #}
+                        {# <a href="#!" class="p-2 transition hover:text-rose-500">See all</a> #}
                     </div>
 
                     <div class="hs__arrows gap-4"><a class="arrow disabled arrow-prev"></a><a class="arrow arrow-next"></a></div>

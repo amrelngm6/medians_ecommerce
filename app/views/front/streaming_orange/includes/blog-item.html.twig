@@ -1,0 +1,35 @@
+
+			{% set liked = item.liked(customer.customer_id).count() %}
+			
+<div class="grid grid-cols-12 gap-y-6 sm:grid-rows-1 mb-10">
+	<figure class="max-h-96 group col-span-full overflow-hidden bg-gray-900 sm:col-start-1 sm:col-end-8 sm:row-start-1 sm:row-end-2">
+		<a href="_yt1-single.html"><img class="aspect-14/9 h-full w-full object-cover duration-300 group-hover:scale-110 group-hover:opacity-75" src="/stream?thumbnail=800&image={{item.picture_name}}" alt="{{item.lang_content.title}}"></a>
+	</figure>
+	<div class="relative text-primary  col-span-full bg-white dark:bg-gray-800 sm:col-start-6 sm:col-end-13 sm:row-start-1 sm:row-end-2 sm:mt-12 lg:mt-[70px] sm:p-6 sm:pr-0 md:px-7 lg:p-9 lg:pb-12">
+		<div class="mb-4 inline-flex bg-accent gap-6 py-1 text-xs uppercase leading-none dark:text-gray-100 lg:mb-7">
+            <div class="text-sm  flex gap-">
+				<a href="/front_api/create?type=Like.channel&params[item_id]={{item.id}}" data-params="{item_id: {{item.id}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
+					<img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-blog-{{item.id}}').addClass('hidden'); jQuery('#unheart-blog-blog-{{item.id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-blog-{{item.id}}" src="/src/front_assets/svg/blank-heart.svg">
+					<img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-blog-{{item.id}}').addClass('hidden'); jQuery('#heart-blog-{{item.id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-blog-{{item.id}}" src="/src/front_assets/svg/{{ app.is_dark ? 'white-' : ''}}heart.svg">
+				</a>
+				<span id="likes-count">{{item.likescount()}}</span>
+			</div>
+			
+			<span class=" cursor-pointer text-sm  flex gap-2 ">
+				<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg" />
+				<span id="views-count">{{item.viewscount()}}</span>
+			</span>
+			<span class=" cursor-pointer text-sm  flex gap-2 ">
+				<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg" />
+				<span id="comments-">{{item.commentscount()}}</span>
+			</span>
+            
+        </div>
+		<h2 class=" mb-4 text-2xl leading-none sm:text-xl lg:text-4xl lg:mb-6 lg:tracking-tighter lg:leading-none">
+			<a href="/{{item.lang_content.prefix}}" class=" transition-colors  dark:text-white ajax-load dark:hover:text-orange-400 hover:text-orange-400" >{{item.lang_content.title}}</a>
+		</h2>
+		<div class="dark:text-gray-300  sm:text-sm lg:pr-20 lg:text-lg lg:leading-8 tracking-tight">{{item.lang_content.short}}</div>
+		<div class="items-center flex gap-2 dark:text-gray-300 mt-3 sm:text-sm lg:mb-6 lg:text-base"><span class="material-symbols-outlined">today</span> <span>{{item.lang_content.created_at|date('M d, Y')}}</span></div>
+	</div>
+</div>
+

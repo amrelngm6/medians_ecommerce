@@ -1,0 +1,124 @@
+          
+            <div id="main-side" class=" flex" x-data="{}">
+                <div class="w-1"></div>
+                {% set customer = app.customer_auth() %}
+                <div class="bg-white dark:bg-gray-900 py-4 lg:px-0 px-1 w-56 sidebar lg:relative fixed left-0 z-10 top-0 overflow-hidden h-full">
+                    <div class="w-full flex gap-4 text-primary">
+                        <img src="/src/front_assets/svg/soundcloud.svg" />
+                        <span class="p-1 dark:text-orange-500 "> {{app.SystemSetting.sitename}}</span>
+                    </div>
+                    <hr class="lg:block hidden my-4  opacity-30" />
+                    <div class="lg:block hidden pt-2 px-1 text-slate-400 text-opacity-70  text-base font-normal tracking-wide">{{lang.translate('MENU')}}</div>
+                    <ul class="pt-2 font-normal overflow-auto pb-20" style="max-height:calc(100vh - 135px)" id="menu-ul">
+                        {% for menuitem in [
+                            {title:  "Home",link: "/", icon: "home"},
+                            {title:  "Discover",link: "/discover", icon: "cloud-bolt"},
+                            {title:  "Videos",link: "/discover/video", icon: "video-play"},
+                            {title:  "Short Videos",link: "/discover/short", icon: "videos"},
+                            {title:  "Audiobooks",link: "/discover/audiobook", icon: "audiobook-tab"},
+                            {title:  "Stations",link: "/stations", icon: "station"},
+                            {title:  "Channels",link: "/channels", icon: "channel"},
+                            {title:  "Playlists",link: "/playlists", icon: "playlist"},
+                            {title:  "Artists",link: "/artists", icon: "user-tab"},
+                            {title:  "Genres",link: "/genres", icon: "audio-tab"},
+                            {title:  "Blog",link: "/blog", icon: "blog"},
+                            {title:  "Likes",link: "/likes", icon: "heart"},
+                        ] %}
+                        <li class="w-full   {{menuitem.link == app.request.pathInfo ? 'active' : '' }}" id="sidemenu-{{loop.index}}" onclick="(function(){ jQuery('#menu-ul').find('li.active').removeClass('active'), jQuery('#sidemenu-{{loop.index}}').addClass('active') })()">
+                            <a href="{{menuitem.link}}" {{lang.translate(menuitem.icon)}} class="w-full flex gap gap-4 ajax-load ">
+                                <span class="min-w-8  text-center relative my-2">
+                                    <img src="/src/front_assets/svg/{{menuitem.icon}}.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
+                                    <img src="/src/front_assets/svg/{{menuitem.icon}}-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
+                                        width="18" />
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50">{{lang.translate(menuitem.title)}}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+
+                        {% if customer.customer_id %}
+                        <li><hr class="my-2" /></li>
+                        <li class="w-full " id="upload">
+                            <a href="/upload" title="{{lang.translate('Upload')}}"  class="w-full flex gap gap-4  ajax-load  ">
+                                <span class="min-w-8  text-center relative my-2">
+                                    <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
+                                    <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
+                                        width="18" />
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Upload')}}</span>
+                            </a>
+                        </li>
+                        <li class="w-full " id="uploadaudiobook">
+                            <a href="/upload/audiobook" title="{{lang.translate('Upload Audiobook')}}"  class="w-full flex gap gap-4  ajax-load  ">
+                                <span class="min-w-8  text-center relative my-2">
+                                    <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
+                                    <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
+                                        width="18" />
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Upload Audiobook')}}</span>
+                            </a>
+                        </li>
+                        
+                        <li class="w-full " id="uploadVideo">
+                            <a href="/upload/video" title="{{lang.translate('Upload Video')}}"  class="w-full flex gap gap-4  ajax-load  ">
+                                <span class="min-w-8  text-center relative my-2">
+                                    <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
+                                    <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
+                                        width="18" />
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Upload Video')}}</span>
+                            </a>
+                        </li>
+                        
+                        <li class="w-full " id="uploadShort">
+                            <a href="/shorts/create" title="{{lang.translate('Create shorts')}}"  class="w-full flex gap gap-4  ajax-load  ">
+                                <span class="min-w-8  text-center relative my-2">
+                                    <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
+                                    <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
+                                        width="18" />
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create Short video')}}</span>
+                            </a>
+                        </li>
+
+                        <li class="w-full " id="uploadStation">
+                            <a href="/stations/create" title="{{lang.translate('Create station')}}"  class="w-full flex gap gap-4  ajax-load  ">
+                                <span class="min-w-8  text-center relative my-2">
+                                    <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
+                                    <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
+                                        width="18" />
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create station')}}</span>
+                            </a>
+                        </li>
+                        
+                        <li class="w-full " id="uploadChannel">
+                            <a href="/channels/create" title="{{lang.translate('Create channel')}}"  class="w-full flex gap gap-4  ajax-load  ">
+                                <span class="min-w-8  text-center relative my-2">
+                                    <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
+                                    <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
+                                        width="18" />
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create channel')}}</span>
+                            </a>
+                        </li>
+
+
+                        <li class="w-full " id="create-playlist">
+                            <a title="{{lang.translate('Create Playlists')}}" href="#!" x-on:click="jQuery('#create-playlist-popup').removeClass('hidden')" class="w-full flex gap gap-4   ">
+                                <span class="min-w-8  text-center relative my-2">
+                                    <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
+                                    <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
+                                        width="18" />
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Create playlist')}}</span>
+                            </a>
+                        </li>
+
+                        <li class="w-full " id="logout">
+                            <a title="{{lang.translate('Logout')}}" href="/logout"class="w-full flex gap gap-4   ">
+                            <span class="min-w-8  text-center relative my-2">
+                                    <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
+                                    <img src="/src/front_assets/svg/menu-dot-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
+                                        width="18" />
+                                </span> <span class="py-2 block dark:text-gray-300 my-1 border-r w-full dark:border-gray-700 border-gray-50 ">{{lang.translate('Logout')}}</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+
+                </div>
+            </div>

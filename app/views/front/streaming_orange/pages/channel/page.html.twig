@@ -1,0 +1,305 @@
+<div class=" w-full  lg:h-screen gradient-top-overlay" style="min-height: 300px; max-height: calc(100vh - 70px)">
+
+
+	<figure id="channelContainer" class="w-full  shadow-xl absolute top-0 left-0 h-screen" style=" background-size:cover">
+		<video id="channelPlayer" data-container="channelContainer" class="w-full h-screen"  crossorigin="anonymous" >
+			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/webm"/>
+			<source src="/stream_channel?channel_id={{item.channel_id}}" type="video/mp4"/>
+		</video>
+
+		<div id="channel-controls" class="flex px-6 gap-4 text-gray-400 absolute bottom-0 left-0 w-full gradient-top-overlay pt-10" data-state="hidden">
+			<button class="play-channel brightness-200 w-full"  data-player="channelPlayer" id="play" type="button" data-state="play"><img src="/src/front_assets/svg/video-play.svg" class="w-4 brightness-200"/></button>
+			<button class="pause-channel brightness-200 w-full"  data-player="channelPlayer" style="display:none" id="pause" type="button" data-state="pause"><img src="/src/front_assets/svg/video-pause.svg" class="w-4 brightness-200"/></button>
+
+            <div class="flex gap-4 flex-end">
+                <div class="volume relative show-child flex-none">
+                    <button class="brightness-200" id="mute"  data-player="channelPlayer" type="button" style="padding-top: 5px" data-state="mute"><img src="/src/front_assets/svg/video-volume.svg" class="w-4 brightness-200"/></button>
+                    <input type="range" id="channel-volume"  data-player="channelPlayer" min="0" step=".1" max="1" class="show-on-hover absolute bottom-0 h-2 left-1 w-20" style="transform-origin: left; transform: rotate(270deg);"/>
+                </div>
+                <button id="fs" class="fullscreen " id="pause"  data-container="channelContainer" type="button" data-state="go-fullscreen"><img src="/src/front_assets/svg/fullscreen.svg" class="w-4 brightness-200"/></button>
+            </div>
+		</div>
+	</figure>
+
+</div>
+<div class=" w-full h-40 absolute top-0 left-0 gradient-overlay" style="z-index:1; "></div>
+
+{% set customer = app.customer_auth() %}
+<div class=" w-full  relative" id="video-overlay">
+	<div class="absolute lg:bottom-40 lg:left-40 left-10 bottom-10  z-10 w-2/3 text-gray-100 dark:text-gray-300">
+		<h1 class="lg:text-4xl text-2xl text-white overflow-hidden">{{item.name}}</h1>
+
+		{% if item.customer_id == customer.customer_id %}
+			<div class="{{ following == null ? '' : ' hidden'}} float-right" >
+				<a href="/channels/manage/{{item.channel_id}}" class=" hover:border-orange-300 hover:text-orange-300 border  border border-4 border-white rounded-full py-2 px-6">
+					<span>{{lang.translate('Edit')}}</span>
+				</a>
+			</div>
+		{% else  %}
+        
+		{% endif %}
+
+		<div class="w-full flex gap-4 ">
+
+			{% set liked = item.liked(customer.customer_id).count() %}
+			<div class="text-sm text-gray-100 flex gap-">
+				<a href="/front_api/create?type=Like.channel&params[item_id]={{item.channel_id}}" data-params="{item_id: {{item.channel_id}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
+					<img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{item.channel_id}}').addClass('hidden'); jQuery('#unheart-{{item.channel_id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-{{item.channel_id}}" src="/src/front_assets/svg/blank-heart.svg">
+					<img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{item.channel_id}}').addClass('hidden'); jQuery('#heart-{{item.channel_id}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{item.channel_id}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
+				</a>
+				<span id="likes-count">{{item.likescount()}}</span>
+			</div>
+			
+			<span class=" cursor-pointer text-sm text-gray-100 flex gap-2 ">
+				<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg" />
+				<span id="views-count">{{item.viewscount()}}</span>
+			</span>
+			<span class=" cursor-pointer text-sm text-gray-100 flex gap-2 ">
+				<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg" />
+				<span id="comments-">{{item.commentscount()}}</span>
+			</span>
+			<span x-on:click="jQuery('#show-box-path').val('channel/{{item.channel_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
+
+		</div>
+
+	</div>
+</div>
+<div class="pb-4  h-full overflow-hidden rounded-2xl mt-10" x-data="{is_slide: 'slide'}">
+
+	<div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
+
+		<a href="/artist/{{item.customer.customer_id}}" class="ajax-load flex gap-6 text-primary">
+			<img src="/stream?thumbnail=100&image={{item.customer.picture_name}}" alt="User Avatar" class="w-10 h-10 rounded-full">
+			<div class="text-xl dark:text-gray-300">{{item.customer.name}}
+				<p class="text-xs dark:text-gray-300">{{lang.translate('Artist')}}</p>
+			</div>
+		</a>
+		<span class="block pt-10 text-sm text-gray-500">{{lang.translate('About')}}</span>
+		<div class="text-primary overflow-auto" style="max-height: 400px;">
+			<div class="dark:text-gray-300 py-4">{{item.field.about|raw| nl2br  }}</div>
+		</div>
+
+		<div class="max-h-[200px] overflow-auto flex" style="flex-direction: column-reverse;" id="comments-list">
+			{% set comments = item.comments %}
+			{% include 'views/front/' ~ template ~ '/includes/video-comment-block.html.twig' %}
+		</div>
+		<label for="chat" class="sr-only">{{lang.translate('Your comment')}}</label>
+		<form action="/front_api/create" id="comment-short" class="ajax-form w-full " data-element="comments-list" data-prepend="true">
+			<div class="flex items-center py-2 px-3 bg-gray-50 rounded-lg dark:bg-gray-700">
+				<input type="hidden" name="type" value="Comment.create"/>
+				<input type="hidden" name="params[item_id]" value="{{item.channel_id}}"/>
+				<input type="hidden" name="params[item_type]" value="{{item.getClassName()}}"/>
+				<input type="hidden" name="append" value="true"/>
+				<textarea id="chat" name="params[comment]" rows="1" class="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
+				<button type="submit" onclick="(function(){  setTimeout(function(){jQuery('#chat').val(''); }, 1000)})()" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
+					<svg class="w-6 h-6 rotate-90" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+						<path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+					</svg>
+				</button>
+			</div>
+		</form>
+	</div>
+
+
+</div>
+
+
+<script  type="text/javascript">
+// var lastId;
+$(function()  {
+    const channelPlayer = document.getElementById('channelPlayer');
+    const bufferingIndicator = document.getElementById('bufferingIndicator');
+    let mediaSource;
+    let sourceBuffer;
+    let isSourceOpen = false;
+    let startPosition = 0; // Variable to hold the calculated start time
+
+    function fetchCurrentVideoInfo(channelId) {
+        fetch(`/channel_json/` + channelId)
+            .then(response => response.json())
+            .then(data => {
+
+                if (data && data.active_item) {
+
+                    if (activeChannelMedia && data.active_item.channel_media_id == activeChannelMedia.channel_media_id)
+                    {
+                        return;
+                    }
+
+                    activeChannel = data;
+                    activeChannelMedia = data.active_item;
+                    loadVideoPartially();  // Start loading video
+                    if (activeChannelMedia.channel_media_id)
+                    {
+                        jQuery('#video-overlay').fadeOut(200)
+                        jQuery('.play-channel').fadeOut(200)
+                        jQuery('.pause-channel').fadeIn(200)
+                        jQuery('#channelContainer').css('z-index',  50)
+                    }
+                    jQuery('#channelContainer').css('background-image',  'url(/uploads/videos/live.webp)')
+                    jQuery('#channelPlayer').fadeIn(200)
+                    channelPlayer.play()
+                    jQuery('#channel-volume').val(getCookie('volume'))
+                	channelPlayer.volume = getCookie('volume')
+
+                } else {
+        			jQuery('#video-overlay').fadeIn(200)
+                    jQuery('#channelContainer').css('background-image',  'url(/uploads/videos/offline.webp)')
+                    jQuery('#channelContainer').css('background-position',  'center center')
+                    jQuery('#channelContainer').css('background-size',  'cover')
+                    jQuery('#channelPlayer').fadeOut(200)
+                    jQuery('.pause-channel').fadeOut(200)
+                    jQuery('.play-channel').fadeIn(200)
+                    jQuery('#channelContainer').css('z-index',  0)
+                    console.log('No video currently playing');
+                    channelPlayer.pause()
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    function loadVideoPartially() {
+        if (!activeChannelMedia) {
+            return;
+        }
+
+        var a = new Date(activeChannelMedia.start);  // When the media started
+        var b = new Date();  // Current time
+        startPosition = parseInt((b - a) / 1000);  // Calculate the start position in seconds
+
+        const videoUrl = '/stream_channel?channel_id=' + activeChannel.channel_id + '&hash='+Math.random();
+
+        if (mediaSource) {
+            if (mediaSource.readyState === 'open') {
+                mediaSource.endOfStream();
+            }
+            URL.revokeObjectURL(channelPlayer.src);  // Revoke previous source
+        }
+
+        mediaSource = new MediaSource();
+        channelPlayer.src = videoUrl;
+
+        mediaSource.addEventListener('sourceopen', function() {
+            isSourceOpen = true;
+            sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
+            sourceBuffer.mode = 'segments';
+
+            fetchInitSegment(videoUrl).then(() => {
+                channelPlayer.currentTime = startPosition;  // Set the correct start time
+                preloadNextSegment(startPosition);  // Preload the next segment
+            });
+
+            channelPlayer.addEventListener('seeking', onSeeking);  // Handle seeking
+        });
+
+        mediaSource.addEventListener('sourceended', function() {
+            isSourceOpen = false;
+        });
+
+        setTimeout(function() {
+            channelPlayer.currentTime = startPosition ?? 0
+            channelPlayer.play();  // Start playback after a short delay
+        }, 500);
+    }
+
+    // Fetch the initial segment (first part of the video)
+    function fetchInitSegment(url) {
+        return fetchWithRetry(url, { headers: { 'Range': 'bytes=0-' } })
+            .then(response => response.arrayBuffer())
+            .then(data => {
+                sourceBuffer.appendBuffer(data);
+                return new Promise(resolve => {
+                    sourceBuffer.addEventListener('updateend', resolve, { once: true });
+                });
+            });
+    }
+
+    // Fetch a specific segment at the given time
+    function fetchSegmentAtTime(time) {
+        const estimatedByteOffset = Math.floor(time * 1000000);  // Rough estimate for byte range
+        const chunkSize = 1024 * 1024;  // 1 MB chunk size
+
+        fetchWithRetry(channelPlayer.src, {
+            headers: { 'Range': `bytes=${estimatedByteOffset}-${estimatedByteOffset + chunkSize - 1}` }
+        })
+        .then(response => response.arrayBuffer())
+        .then(data => {
+            sourceBuffer.appendBuffer(data);
+            bufferingIndicator.style.display = 'none';
+            preloadNextSegment(time);  // Preload the next segment
+        })
+        .catch(error => {
+            console.error('Error fetching video segment:', error);
+            bufferingIndicator.style.display = 'none';
+        });
+    }
+
+    // Preload the next segment for smoother playback
+    function preloadNextSegment(time) {
+        const nextTime = time + 30;  // Preload 5 seconds ahead
+        fetchSegmentAtTime(nextTime);
+    }
+
+    // Handle the seeking event (user scrubs to a different time)
+    function onSeeking() {
+        const currentTime = channelPlayer.currentTime;
+        const buffered = channelPlayer.buffered;
+
+        if (isTimeBuffered(currentTime, buffered)) {
+            return;
+        }
+
+        bufferingIndicator.style.display = 'block';
+        abortCurrentRequests();  // Optionally abort any ongoing fetch requests
+        fetchSegmentAtTime(currentTime);  // Fetch segment for the new time
+    }
+
+    // Check if the current time is already buffered
+    function isTimeBuffered(time, buffered) {
+        for (let i = 0; i < buffered.length; i++) {
+            if (time >= buffered.start(i) && time <= buffered.end(i)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Optional: Abort any ongoing fetch requests (implementation required)
+    function abortCurrentRequests() {
+        // Implement logic to abort ongoing fetch requests if necessary
+    }
+
+    // Retry logic for fetching segments with a maximum number of retries
+    function fetchWithRetry(url, options = {}, retries = 3) {
+        return fetch(url, options).catch(error => {
+            if (retries > 0) {
+                return fetchWithRetry(url, options, retries - 1);
+            } else {
+                throw error;
+            }
+        });
+    }
+
+    // Fetch channel info and start the process when the page loads
+    fetchCurrentVideoInfo({{item.channel_id}});
+
+    // Periodically check for updates (refresh video information at intervals)
+    window.navigation.addEventListener("navigate", (event) => {
+        clearInterval(stationCommentsInterval);
+        window.navigation.removeEventListener("navigate", function(){});
+    });
+
+    let stationIntervalAmount = jQuery('#startions-interval').val();
+    var stationCommentsInterval = setInterval(async function() {
+        // Periodically check for updates (e.g., every 5 minutes)
+        fetchCurrentVideoInfo({{item.channel_id}});
+    }, stationIntervalAmount > 1 ? (stationIntervalAmount * 1000) : 60000);
+
+    jQuery(document).on('click', 'a', function(){
+        channelPlayer.pause()
+        channelPlayer.src = ''
+    })
+
+});
+
+</script>
