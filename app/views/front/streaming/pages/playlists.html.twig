@@ -17,6 +17,7 @@
                                     
                                     <div class="flex gap-4 py-2">
                                     
+                                        {% set customer = app.customer_auth() %}
                                         {% set item = playlist %}
                                         {% set itemId = playlist.playlist_id %}
                                         {% set itemType = 'playlist' %}

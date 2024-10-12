@@ -3,7 +3,6 @@
                     <h2 class="dark:text-gray-300 text-2xl py-4">{{lang.translate('Top channels')}}</h2>
                     <div id="channel-list"  class="w-full  grid lg:grid-cols-2 grid-cols-1 py-4 gap-4" >
                         {% set customer = app.customer_auth() %}
-
                         {% for channel in items  %}
                         {% include 'views/front/' ~ template ~ '/pages/channel/channel-block.html.twig' %}
                         {% endfor %}

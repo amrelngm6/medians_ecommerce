@@ -1,6 +1,7 @@
 <div class="py-4 px-2 w-full">
 
 
+    {% set customer = app.customer_auth() %}
     {% include 'views/front/' ~ template ~ '/includes/home_videos.html.twig' %}
 
     <div class="w-full relative  rounded-lg ">

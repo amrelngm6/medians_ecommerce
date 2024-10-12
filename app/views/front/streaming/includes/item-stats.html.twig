@@ -6,18 +6,18 @@
                         <img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{itemId}}').addClass('hidden'); jQuery('#unheart-{{itemId}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-{{itemId}}" src="/src/front_assets/svg/blank-heart.svg">
                         <img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{itemId}}').addClass('hidden'); jQuery('#heart-{{itemId}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{itemId}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
                     </a>
-                    <span id="likes-count">{{item.likescount()}}</span>
+                    <span class="pt-1" id="likes-count-{{itemType}}-{{itemId}}">{{item.likescount()}}</span>
                     <span class="tooltiptext  text-xs">{{lang.translate('Like')}}</span>
                 </div>
 
                 <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 relative">
                     <span class="tooltiptext  text-xs">{{lang.translate('Views')}}</span>
                     <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg"/>
-                    <span id="views-count">{{item.viewscount()}}</span>
+                    <span class="pt-1" id="views-count">{{item.viewscount()}}</span>
                 </span>
                 <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 relative">
                     <span class="tooltiptext  text-xs">{{lang.translate('Comments')}}</span>
                     <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg"/>
-                    <span id="comments-">{{item.commentscount()}}</span>
+                    <span class="pt-1" id="comments-">{{item.commentscount()}}</span>
                 </span>
             </div>
