@@ -1,7 +1,7 @@
                         <div class=" w-full  relative lg:h-64 h-56 overflow-hidden rounded-2xl mb-4 border border-gray-200 dark:border-gray-600">
                             {% set a = channel.findMediaByTime(channel.channel_id, "now"|date("H:i:s") ) %}
                             <div class=" w-full  gradient-top-overlay">
-                                <img style="z-index:0" src="/stream?thumbnail=1000&image={{channel.picture_name}}" class="w-full  shadow-xl absolute top-0 left-0 "/>
+                                <img style="z-index:0" src="/stream?thumbnail=1000&image={{channel.picture_name}}" class="w-full h-full shadow-xl absolute top-0 left-0 "/>
                             </div>
                             <div class=" w-full h-96 absolute bottom-0 left-0 gradient-top-overlay" style="z-index:0; "></div>
                             <div class="z-30 absolute lg:bottom-10 lg:left-20 left-4 bottom-4  z-10  lg:w-2/3 text-gray-100 dark:text-gray-300">
