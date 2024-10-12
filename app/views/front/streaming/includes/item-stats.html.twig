@@ -1,23 +1,23 @@
-			{% set liked = item.liked(customer.customer_id).count() %}
-<div class="flex gap-4">
+            {% set liked = item.liked(customer.customer_id).count() %}
+            <div class="flex gap-4">
 
-			<div class="text-sm text-gray-100 flex gap-2 relative">
-                <span class="tooltiptext left text-xs">{{lang.translate('Like')}}</span>
-				<a href="/front_api/create?type=Like.{{itemType}}&params[item_id]={{itemId}}" data-params="{item_id: {{itemId}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
-					<img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{itemId}}').addClass('hidden'); jQuery('#unheart-{{itemId}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-{{itemId}}" src="/src/front_assets/svg/blank-heart.svg">
-					<img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{itemId}}').addClass('hidden'); jQuery('#heart-{{itemId}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{itemId}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
-				</a>
-				<span id="likes-count">{{item.likescount()}}</span>
-			</div>
-			
-			<span class=" cursor-pointer text-sm text-gray-100 flex gap-2 relative">
-                <span class="tooltiptext  text-xs">{{lang.translate('Views')}}</span>
-				<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg" />
-				<span id="views-count">{{item.viewscount()}}</span>
-			</span>
-			<span class=" cursor-pointer text-sm text-gray-100 flex gap-2 relative">
-                <span class="tooltiptext  text-xs">{{lang.translate('Comments')}}</span>
-				<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg" />
-				<span id="comments-">{{item.commentscount()}}</span>
-			</span>
-</div>
+                <div class="text-sm text-gray-100 flex gap-2 relative">
+                    <span class="tooltiptext left text-xs">{{lang.translate('Like')}}</span>
+                    <a href="/front_api/create?type=Like.{{itemType}}&params[item_id]={{itemId}}" data-params="{item_id: {{itemId}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
+                        <img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{itemId}}').addClass('hidden'); jQuery('#unheart-{{itemId}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-{{itemId}}" src="/src/front_assets/svg/blank-heart.svg">
+                        <img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{itemId}}').addClass('hidden'); jQuery('#heart-{{itemId}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{itemId}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
+                    </a>
+                    <span id="likes-count">{{item.likescount()}}</span>
+                </div>
+
+                <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 relative">
+                    <span class="tooltiptext  text-xs">{{lang.translate('Views')}}</span>
+                    <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg"/>
+                    <span id="views-count">{{item.viewscount()}}</span>
+                </span>
+                <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 relative">
+                    <span class="tooltiptext  text-xs">{{lang.translate('Comments')}}</span>
+                    <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg"/>
+                    <span id="comments-">{{item.commentscount()}}</span>
+                </span>
+            </div>
