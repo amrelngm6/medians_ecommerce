@@ -95,7 +95,6 @@ RouteHandler::get('/studio/profile', \Medians\Customers\Application\CustomerCont
 RouteHandler::get('/studio/channels', \Medians\Channels\Application\ChannelController::class.'@studio');
 
 RouteHandler::get('/discover', \Medians\Media\Application\MediaItemController::class.'@discover');
-RouteHandler::get('/likes', \Medians\Media\Application\MediaItemController::class.'@likes');
 RouteHandler::get('/genres', \Medians\Media\Application\MediaItemController::class.'@genres');
 RouteHandler::get('/genre/(:all)', \Medians\Media\Application\MediaItemController::class.'@genre');
 RouteHandler::get('/book_genre/(:all)', \Medians\Media\Application\AudiobookController::class.'@genre');

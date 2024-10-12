@@ -22,7 +22,6 @@
                             {title:  "Artists",link: "/artists", icon: "user-tab"},
                             {title:  "Genres",link: "/genres", icon: "audio-tab"},
                             {title:  "Blog",link: "/blog", icon: "blog"},
-                            {title:  "Likes",link: "/likes", icon: "heart"},
                         ] %}
                         <li  onclick="(function(){ jQuery('#menu-ul').find('li.active').removeClass('active'); jQuery('#sidemenu-{{loop.index}}').addClass('active');  return jQuery('#main-side').toggleClass('hidden'); })()"  class="w-full   {{menuitem.link == app.request.pathInfo ? 'active' : '' }}" onclick="(function(){ return jQuery('#main-side').toggleClass('hidden'); })()"  id="sidemenu-{{loop.index}}" >
                             <a href="{{menuitem.link}}" class="w-full flex gap gap-4 ajax-load ">
