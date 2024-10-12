@@ -18,7 +18,7 @@
                                                 {% set item = media_item %}
                                                 {% set itemId = media_item.media_id %}
                                                 {% set itemType = 'media' %}
-                                                <div class="w-full flex gap-4 pt-2">
+                                                <div class="w-full flex gap-4 pt-2 hover:text-rose-400 text-gray-400 dark:text-gray-100">
                                                     {% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
                                                     <span class="flex-1 text-right">{{media_item.field.duration|date("i:s")}}</span>
                                                 </div>
