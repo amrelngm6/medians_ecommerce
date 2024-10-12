@@ -4,6 +4,8 @@ namespace Medians\Categories\Domain;
 
 use Shared\dbaser\CustomModel;
 use Medians\Content\Domain\Content;
+use Medians\Media\Domain\MediaItem;
+use Medians\Media\Domain\MediaGenre;
 
 class BookGenre extends Category
 {
@@ -54,5 +56,10 @@ class BookGenre extends Category
 	public function langs() 
 	{
 		return $this->morphMany(Content::class , 'item')->groupBy('lang');	
+	}
+
+	public function items() 
+	{
+		return $this->belongsToMany(MediaItem::class, MediaGenre::class, 'genre_id', 'media_id');	
 	}
 }
