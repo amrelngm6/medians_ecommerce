@@ -2032,7 +2032,13 @@ Videos Box with colored Border
 .package {
     border-radius: 30px;
     transition: 0.2s ease-in-out;
-  }
+}
+div[data-count="4"] .package {
+    max-width: 280px;
+}
+div[data-count="3"] .package {
+    max-width: 350px;
+}
   
   .package:hover .save {
     transition: 0.2s ease-in-out;
