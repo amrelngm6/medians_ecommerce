@@ -15,7 +15,7 @@
                         ] ">
                             <li class="w-full dark:hover:text-gray-200" :id="'menu-'+menuItem.id">
                                 <a :href="menuItem.link" class="w-full flex gap gap-4 ajax-load ">
-                                    <span class="py-2 block  my-1 lg:border-r w-full dark:border-gray-700 border-gray-50" x-text="menuItem.title"></span>
+                                    <span class="py-2 block  my-1 lg:border-r w-full dark:border-gray-700 border-gray-50 " :class="menuItem.link == '{{app.request.pathInfo}}' ? 'text-rose-500' : '' " x-text="menuItem.title"></span>
                                 </a>
                             </li>
                         </template>
