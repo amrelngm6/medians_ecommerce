@@ -7,6 +7,7 @@ use Medians\Media\Domain\MediaItem;
 use Medians\Playlists\Domain\Playlist;
 use Medians\Stations\Domain\Station;
 use Medians\Channels\Domain\Channel;
+use Medians\Blog\Domain\Blog;
 
 class LikeRepository 
 {
@@ -49,6 +50,11 @@ class LikeRepository
 	public function checkLikedChannel($item_id, $customer_id)
 	{
 		return Like::where('item_id', $item_id)->where('item_type', Channel::class)->where('customer_id', $customer_id)->first();
+	}
+
+	public function checklikedArticle($item_id, $customer_id)
+	{
+		return Like::where('item_id', $item_id)->where('item_type', Blog::class)->where('customer_id', $customer_id)->first();
 	}
 
 
@@ -202,6 +208,24 @@ class LikeRepository
 		try {
 			
 			return $this->checkLikedChannel($params['item_id'], $customer_id)->delete();
+
+		} catch (\Exception $e) {
+
+			throw new \Exception("Error Processing Request " . $e->getMessage(), 1);
+			
+		}
+	}
+
+	/**
+	* Delete item to database
+	*
+	* @Returns Boolen
+	*/
+	public function deleteArticle($params, $customer_id) 
+	{
+		try {
+			
+			return $this->checkLikedArticle($params['item_id'], $customer_id)->delete();
 
 		} catch (\Exception $e) {
 
