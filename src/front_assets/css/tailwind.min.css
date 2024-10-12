@@ -4269,6 +4269,10 @@ video {
     width: 24rem;
   }
 
+  .lg\:w-auto {
+    width: auto;
+  }
+
   .lg\:w-full {
     width: 100%;
   }
@@ -4342,6 +4346,14 @@ video {
 
   .lg\:pr-6 {
     padding-right: 1.5rem;
+  }
+
+  .lg\:pt-0 {
+    padding-top: 0px;
+  }
+
+  .lg\:pt-4 {
+    padding-top: 1rem;
   }
 
   .lg\:text-2xl {
