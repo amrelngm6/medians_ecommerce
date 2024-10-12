@@ -85,6 +85,11 @@ class Customer extends CustomModel
 		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audiobook')->orderBy('media_id', 'DESC');	
 	}
 
+	public function videos() 
+	{
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'video')->orderBy('media_id', 'DESC');	
+	}
+
 	public function audio_items() 
 	{
 		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audio')->orderBy('media_id', 'DESC');	
