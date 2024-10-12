@@ -18,7 +18,8 @@
                             <div class=" px-2 py-8 lg:p-8  relative overflow-hidden  rounded-2xl" >
                                 <div class="artist-overlay top-[-20px] left-0 absolute w-full h-full py-20 bg-gradient-to-b from-gray-800 to-black"></div>
                                 <img src="/stream?thumbnail=300&image={{playlist.items[0].media.picture_name}}"  class="absolute bg-img left-0 top-0 w-full" />
-                                <div class="flex lg:block w-full overflow-hidden rounded-2xl text-white mx-auto text-center relative z-10 ">
+                                <div class=" lg:block w-full overflow-hidden rounded-2xl text-white mx-auto text-center relative z-10 ">
+                                    
                                     <a href="/playlist/{{playlist.playlist_id}}" class="ajax-load "><img src="/stream?thumbnail=300&image={{playlist.items[0].media.picture_name}}"  class="mx-auto w-28 h-28 lg:w-32 lg:h-32 rounded-full shadow-xl" /></a>
                                     <div class="pt-4 text-left ">
                                         <a href="/playlist/{{playlist.playlist_id}}" class="ajax-load lg:text-2xl text-lg hover:text-gray-100">{{playlist.name}}</a>
