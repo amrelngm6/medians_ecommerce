@@ -1,19 +1,24 @@
   
-                        <div class="w-full relative bg-white dark:bg-gray-900  lg:p-8 p-4 rounded-2xl rounded  shadow-md mb-4" id="top-charts-slider" x-data="{is_slide: 'slide'}">
+  
+		<div class="w-full relative bg-white dark:bg-gray-900  lg:p-8 p-4 rounded-2xl rounded  shadow-md mb-4" id="slide-video-items" data-count="4">
+            <div class="hs__wrapper" x-data="{is_slide: false}">
+            
+                <div class=" w-full flex gap-4 text-primary pb-10">
+                    <div class=" w-full flex gap-4 dark:text-gray-300 ">
+					<h3 class="text-2xl  font-normal">{{lang.translate('Audiobook Genres')}}</h3>
+                        <a href="/discover?params[author_id]={{item.customer_id}}" class="ajax-load p-2 transition hover:text-rose-500">{{lang.translate('See all')}}</a>
+                    </div>
 
-                            <div class="flex w-full pb-4 text-primary">
-                                <h3 class=" text-xl font-normal w-full dark:text-gray-300">Genres</h3>
-                                <div class="flex gap gap-4">
-                                    <button class="prev-btn" data-slider="top-charts"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
-                                    <button class="next-btn" data-slider="top-charts"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
-                                </div>
-                            </div>
-                            <hr class="opacity-30 mb-4" />
+                    <div class="hs__arrows flex gap-4"><a class="arrow disabled arrow-prev"></a><a class="arrow arrow-next"></a></div>
+                </div>
+                <ul class="hs" >
+					{% for genre in genres %}
+                    <li class="hs__item  max-w-[250px]"> 
+                        {% include 'views/front/' ~ template ~ '/includes/book_genres_list.html.twig' %}
+                    </li>
+    				{% endfor %}    
+                </ul>
+            </div>
 
-                            <div  class="carousel-container flex gap-4" data-count="4" id="top-charts">
-                            {% for genre in genres %}
-                                {% include 'views/front/' ~ template ~ '/includes/book_genres_list.html.twig' %}
-                            {% endfor %}
-                            </div>
+		</div>
 
-                        </div>
