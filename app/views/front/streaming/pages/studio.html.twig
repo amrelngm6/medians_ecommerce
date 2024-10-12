@@ -9,26 +9,22 @@
 		<div class='ui block w-full mb-12 pb-12'>
 			<div class='ui_box dark:hover:bg-rose-800 w-full relative'>
 				<div class='ui_box__inner p-10'>
-					<h2>
-						Conversion Rate
-					</h2>
-					<p>Lorem ipsum dolor sit amet</p>
+					<h2>{{lang.translate('Audio items')}}</h2>
+					<p>{{lang.translate('Stats of uploaded audio items')}}</p>
 					<div class='stat'>
 						<span>12</span>
 					</div>
 					<canvas id="myChart"></canvas>
 				</div>
 				<div class='drop'>
-					<p>Take a closer look</p>
+					<p>{{lang.translate('Add New')}}</p>
 					<div class='arrow'></div>
 				</div>
 			</div>
 			<div class='ui_box dark:hover:bg-rose-800 w-full relative'>
 				<div class='ui_box__inner p-10'>
-					<h2>
-						Sales By Type
-					</h2>
-					<p>Lorem ipsum dolor sit amet</p>
+					<h2>{{lang.translate('Audiobooks')}}</h2>
+					<p>{{lang.translate('Stats of uploaded Audiobooks')}}</p>
                     
 					<div class='stat'>
 						<span>75</span>
@@ -37,16 +33,14 @@
 
 				</div>
 				<div class='drop'>
-					<p>Take a closer look</p>
+					<p>{{lang.translate('Add New')}}</p>
 					<div class='arrow'></div>
 				</div>
 			</div>
 			<div class='ui_box dark:hover:bg-rose-800 w-full relative'>
 				<div class='ui_box__inner p-10'>
-					<h2>
-						Total Sales
-					</h2>
-					<p>Lorem ipsum dolor sit amet</p>
+					<h2>{{lang.translate('Videos')}}</h2>
+					<p>{{lang.translate('Stats of uploaded Videos')}}</p>
 					<div class='stat'>
 						<span>0</span>
 					</div>
@@ -586,7 +580,10 @@ const chartsData1 = {
       datasets: [{
         label: '# of Votes',
         data: [12, 19, 3, 5, 2, 3],
-        borderWidth: 1
+        borderWidth: 1,
+        backgroundColor: '#9BD0F5',
+        borderColor: '#9BD0F5',
+        color: '#9BD0F5',
       }]
     };
 
