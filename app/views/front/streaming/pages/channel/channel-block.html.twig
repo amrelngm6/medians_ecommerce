@@ -17,6 +17,7 @@
                                     <div class="flex gap-4 pt-6 text-sm text-gray-100">
                                     
                                         
+                                        {% set item = channel %}
                                         {% set itemId = channel.channel_id %}
                                         {% set itemType = 'channel' %}
                                         {% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
