@@ -3,8 +3,8 @@
 
                 <div class="text-sm flex gap-2 relative">
                     <a href="/front_api/create?type=Like.{{itemType}}&params[item_id]={{itemId}}" data-params="{item_id: {{itemId}} }" class="ajax-link cursor-pointer mx-2 text-sm  flex">
-                        <img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{itemType}}-{{itemId}}').addClass('hidden'); jQuery('#unheart-{{itemType}}-{{itemId}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) - 1);" id="heart-{{itemType}}-{{itemId}}" src="/src/front_assets/svg/blank-heart.svg">
-                        <img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{itemType}}-{{itemId}}').addClass('hidden'); jQuery('#heart-{{itemType}}-{{itemId}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{itemType}}-{{itemId}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
+                        <img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-{{itemType}}-{{itemId}}').addClass('hidden'); jQuery('#unheart-{{itemType}}-{{itemId}}').removeClass('hidden'); jQuery('#likes-count-{{itemType}}-{{itemId}}').text(parseInt(jQuery('#likes-count-{{itemType}}-{{itemId}}').text()) - 1);" id="heart-{{itemType}}-{{itemId}}" src="/src/front_assets/svg/blank-heart.svg">
+                        <img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{itemType}}-{{itemId}}').addClass('hidden'); jQuery('#heart-{{itemType}}-{{itemId}}').removeClass('hidden'); jQuery('#likes-count-{{itemType}}-{{itemId}}').text(parseInt(jQuery('#likes-count-{{itemType}}-{{itemId}}').text()) + 1);" id="unheart-{{itemType}}-{{itemId}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
                     </a>
                     <span class="pt-1" id="likes-count-{{itemType}}-{{itemId}}">{{item.likescount()}}</span>
                     <span class="tooltiptext  text-xs">{{lang.translate('Like')}}</span>
