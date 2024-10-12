@@ -73,7 +73,7 @@ body {
     .sidebar {
         margin-top: 50px;
         position: fixed;
-        z-index: 999;
+        z-index: 999999;
     }
 }
 
