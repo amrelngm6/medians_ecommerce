@@ -4218,6 +4218,10 @@ video {
     margin-right: 0.25rem;
   }
 
+  .lg\:mt-10 {
+    margin-top: 2.5rem;
+  }
+
   .lg\:mt-\[70px\] {
     margin-top: 70px;
   }
