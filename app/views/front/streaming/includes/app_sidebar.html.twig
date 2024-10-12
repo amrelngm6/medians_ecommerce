@@ -9,7 +9,7 @@
                     </div>
                     <hr class="lg:block hidden my-4  opacity-30" />
                     <div class="lg:block hidden pt-2 px-1 text-slate-400 text-opacity-70  text-base font-normal tracking-wide">{{lang.translate('MENU')}}</div>
-                    <ul class="pt-2 font-normal overflow-auto pb-20" style="max-height:calc(100vh - 135px)" onclick="(function(){ return jQuery('#main-side').toggleClass('hidden'); })()"  id="menu-ul" >
+                    <ul class="pt-2 font-normal overflow-auto pb-20" style="max-height:calc(100vh - 135px)"  id="menu-ul" >
                         {% for menuitem in [
                             {title:  "Home",link: "/", icon: "home"},
                             {title:  "Discover",link: "/discover", icon: "cloud-bolt"},
@@ -24,7 +24,7 @@
                             {title:  "Blog",link: "/blog", icon: "blog"},
                             {title:  "Likes",link: "/likes", icon: "heart"},
                         ] %}
-                        <li  onclick="(function(){ return jQuery('#main-side').toggleClass('hidden'); })()"  class="w-full   {{menuitem.link == app.request.pathInfo ? 'active' : '' }}" onclick="(function(){ return jQuery('#main-side').toggleClass('hidden'); })()"  id="sidemenu-{{loop.index}}" onclick="(function(){ jQuery('#menu-ul').find('li.active').removeClass('active'), jQuery('#sidemenu-{{loop.index}}').addClass('active') })()">
+                        <li  onclick="(function(){ jQuery('#menu-ul').find('li.active').removeClass('active'); jQuery('#sidemenu-{{loop.index}}').addClass('active');  return jQuery('#main-side').toggleClass('hidden'); })()"  class="w-full   {{menuitem.link == app.request.pathInfo ? 'active' : '' }}" onclick="(function(){ return jQuery('#main-side').toggleClass('hidden'); })()"  id="sidemenu-{{loop.index}}" >
                             <a href="{{menuitem.link}}" class="w-full flex gap gap-4 ajax-load ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/{{menuitem.icon}}.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
@@ -37,7 +37,7 @@
 
                         {% if customer.customer_id %}
                         <li><hr class="my-2" /></li>
-                        <li class="w-full " onclick="(function(){ return jQuery('#main-side').toggleClass('hidden'); })()"  id="upload">
+                        <li class="w-full " onclick="(function(){  jQuery('#main-side').toggleClass('hidden'); })()"  id="upload">
                             <a href="/upload" title="{{lang.translate('Upload')}}"  class="w-full flex gap gap-4  ajax-load  ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/menu-dot.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
