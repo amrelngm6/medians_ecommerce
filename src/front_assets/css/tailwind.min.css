@@ -1573,6 +1573,10 @@ video {
   max-width: 90%;
 }
 
+.max-w-full {
+  max-width: 100%;
+}
+
 .max-w-lg {
   max-width: 32rem;
 }
@@ -4194,6 +4198,10 @@ video {
     margin-bottom: 1.75rem;
   }
 
+  .lg\:mb-8 {
+    margin-bottom: 2rem;
+  }
+
   .lg\:ml-20 {
     margin-left: 5rem;
   }
@@ -4359,6 +4367,10 @@ video {
 
   .lg\:pr-20 {
     padding-right: 5rem;
+  }
+
+  .lg\:pr-4 {
+    padding-right: 1rem;
   }
 
   .lg\:pr-6 {

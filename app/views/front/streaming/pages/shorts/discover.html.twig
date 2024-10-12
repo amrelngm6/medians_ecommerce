@@ -63,14 +63,14 @@ $(function(){
         video.src = data.src;
         video.setAttribute('id', `my-video-${data.id}`);
         video.poster = data.poster;
-        video.className = 'rounded-lg lg:p-4 pr-4';
+        video.className = 'rounded-lg lg:p-4';
         video.controls = false;
         video.autoplay = false;
         video.preload = "none";
         video.dataset.container = `videoContainer-${data.id}`;
 
         const actionButtons = document.createElement('div');
-        actionButtons.className = 'flex px-6 mx-auto gap-4 text-gray-400 absolute bottom-10 mb-8 left-0 right-0 mx-auto gradient-top-overlay pt-10';
+        actionButtons.className = 'max-w-full flex px-6 mx-auto gap-4 text-gray-400 absolute lg:bottom-10 bottom-0 lg:mb-8 left-0  right-0 mx-auto gradient-top-overlay pt-10';
         actionButtons.setAttribute('id', 'video-controls');
         actionButtons.style.display = 'none'
         actionButtons.innerHTML = `
