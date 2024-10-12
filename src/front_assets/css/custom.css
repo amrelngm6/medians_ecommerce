@@ -71,7 +71,7 @@ body {
 
 @media screen and (max-width:1024px) {
     .sidebar {
-        max-width: 40px;
+        margin-top: 50px;
     }
 }
 

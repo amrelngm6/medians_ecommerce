@@ -1,6 +1,7 @@
                 <div class="px-2 w-full flex my-2 gap-4" x-data="{}">
                     <div class="w-full text-gray-400">
-                        <h2 class="text-xl    py-2">{{title ?? app.SystemSetting.sitename}}</h2>
+                        <h2 class="text-xl lg:block hidden   py-2">{{title ?? app.SystemSetting.sitename}}</h2>
+                        <h2 class="text-xl lg:hidden block   py-2" onclick="(function(){ return  jQuery('#main-side').toggleClass('hidden'); })()" ><img src="/src/front_assets/svg/menu.svg" class="w-8" /></h2>
                     </div>
                     <a href="/search/audio" class="ajax-load w-8 py-4" >
                         <img src="/src/front_assets/svg/search.svg" class="" width="14" />
