@@ -16,23 +16,12 @@
                                 <div class="w-full flex gap-4 pt-6">
                                     <div class="flex gap-4 pt-6 text-sm text-gray-100">
                                     
-                                        {% set liked = channel.liked(customer.customer_id).count() %}
-                                        <div class="text-sm text-gray-100 flex gap-">
-                                            <a href="/front_api/create?type=Like.channel&params[item_id]={{channel.channel_id}}" data-params="{item_id: {{channel.channel_id}} }" class="ajax-link cursor-pointer mx-2 text-sm text-gray-100  flex">
-                                                <img class="{{ liked == null ? 'hidden' : ''}} w-5" x-on:click="jQuery('#heart-channel-{{channel.channel_id}}').addClass('hidden'); jQuery('#unheart-channel-{{channel.channel_id}}').removeClass('hidden'); jQuery('#likes-count-{{channel.channel_id}}').text(parseInt(jQuery('#likes-count-{{channel.channel_id}}').text()) - 1);" id="heart-channel-{{channel.channel_id}}" src="/src/front_assets/svg/blank-heart.svg">
-                                                <img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-channel-{{channel.channel_id}}').addClass('hidden'); jQuery('#heart-channel-{{channel.channel_id}}').removeClass('hidden'); jQuery('#likes-count-{{channel.channel_id}}').text(parseInt(jQuery('#likes-count-{{channel.channel_id}}').text()) + 1);" id="unheart-channel-{{channel.channel_id}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
-                                            </a>
-                                            <span id="likes-count-{{channel.channel_id}}">{{channel.likescount()}}</span>
-                                        </div>
                                         
-                                        <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 ">
-                                            <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg" />
-                                            <span id="views-count">{{channel.viewscount()}}</span>
-                                        </span>
-                                        <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 ">
-                                            <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg" />
-                                            <span id="comments-">{{channel.commentscount()}}</span>
-                                        </span>
+                                        {% set itemId = channel.channel_id %}
+                                        {% set itemType = 'channel' %}
+                                        {% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
+                                        <span x-on:click="jQuery('#show-box-path').val('channel/{{item.channel_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
+
                                     </div>
                                 </div>
 
