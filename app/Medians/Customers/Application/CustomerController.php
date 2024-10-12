@@ -168,7 +168,7 @@ class CustomerController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'channels' => $this->repo->get(),
-                'layout' => 'arists'
+                'layout' => 'artists'
             ], 'output'));
             
 		} catch (\Exception $e) {
