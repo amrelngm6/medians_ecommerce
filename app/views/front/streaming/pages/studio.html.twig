@@ -1,3 +1,5 @@
+ <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <div class="px-2 lg:flex gap-10">
 
 	{% include 'views/front/' ~ template ~ '/includes/studio_sidemenu.html.twig' %}
@@ -5,7 +7,7 @@
 	<div class="w-full">
 
 		<div class='ui block w-full mb-12 pb-12'>
-			<div class='ui_box w-full relative'>
+			<div class='ui_box dark:hover:bg-rose-800 w-full relative'>
 				<div class='ui_box__inner p-10'>
 					<h2>
 						Conversion Rate
@@ -14,50 +16,28 @@
 					<div class='stat'>
 						<span>58%</span>
 					</div>
-					<div class='progress'>
-						<canvas id="myChart"></canvas>
-					</div>
+					<canvas id="myChart"></canvas>
 				</div>
 				<div class='drop'>
 					<p>Take a closer look</p>
 					<div class='arrow'></div>
 				</div>
 			</div>
-			<div class='ui_box w-full relative'>
+			<div class='ui_box dark:hover:bg-rose-800 w-full relative'>
 				<div class='ui_box__inner p-10'>
 					<h2>
 						Sales By Type
 					</h2>
 					<p>Lorem ipsum dolor sit amet</p>
-					<div class='stat_left'>
-						<ul>
-							<li>
-								Electical
-							</li>
-							<li>
-								Clothing
-							</li>
-							<li>
-								Entertainment
-							</li>
-							<li>
-								Kitchen
-							</li>
-						</ul>
-					</div>
-					<div class='progress_graph'>
-						<div class='progress_graph__bar--1'></div>
-						<div class='progress_graph__bar--2'></div>
-						<div class='progress_graph__bar--3'></div>
-						<div class='progress_graph__bar--4'></div>
-					</div>
+					<canvas id="myChart2"></canvas>
+
 				</div>
 				<div class='drop'>
 					<p>Take a closer look</p>
 					<div class='arrow'></div>
 				</div>
 			</div>
-			<div class='ui_box w-full relative'>
+			<div class='ui_box dark:hover:bg-rose-800 w-full relative'>
 				<div class='ui_box__inner p-10'>
 					<h2>
 						Total Sales
@@ -66,9 +46,8 @@
 					<div class='stat'>
 						<span>$34,403.93</span>
 					</div>
-					<div class='progress'>
-						<div class='progress_bar--two'></div>
-					</div>
+					<canvas id="myChart3"></canvas>
+
 				</div>
 				<div class='drop'>
 					<p>Take a closer look</p>
@@ -134,9 +113,9 @@
 											<g>
 												<defs>
 													<path id="LOGOSVGID_1_" d="M228.4,181.2c59.6,0,107.8,48.3,107.8,107.8c0,59.6-48.3,107.8-107.8,107.8
-														                                                                c-59.6,0-107.8-48.3-107.8-107.8C120.6,229.5,168.8,181.2,228.4,181.2 M228.4,78c-116.5,0-211,94.5-211,211
-														                                                                c0,116.5,94.5,211,211,211c116.5,0,211-94.5,211-211c0-25.2-4.4-49.5-12.6-71.9c-5.2-14.4-16.9-24.2-32-26.9
-														                                                                c-45.1-7.9-82-39.7-97.1-81.9c-5.2-14.5-16.8-24.3-31.9-27C253.7,79.2,241.2,78,228.4,78z"></path>
+																																																								                                                                c-59.6,0-107.8-48.3-107.8-107.8C120.6,229.5,168.8,181.2,228.4,181.2 M228.4,78c-116.5,0-211,94.5-211,211
+																																																								                                                                c0,116.5,94.5,211,211,211c116.5,0,211-94.5,211-211c0-25.2-4.4-49.5-12.6-71.9c-5.2-14.4-16.9-24.2-32-26.9
+																																																								                                                                c-45.1-7.9-82-39.7-97.1-81.9c-5.2-14.5-16.8-24.3-31.9-27C253.7,79.2,241.2,78,228.4,78z"></path>
 												</defs>
 												<use xlink:href="#LOGOSVGID_1_" clip-rule="evenodd" fill-rule="evenodd" fill="currentColor" class="overflow-visible"></use>
 												<clipPath id="LOGOSVGID_2_">
@@ -147,7 +126,7 @@
 											<g>
 												<defs>
 													<path id="LOGOSVGID_3_" d="M416.8,0c36.3,0,65.8,29.5,65.8,65.8c0,36.3-29.5,65.8-65.8,65.8c-36.3,0-65.8-29.5-65.8-65.8
-														                                                                C351,29.5,380.5,0,416.8,0"></path>
+																																																								                                                                C351,29.5,380.5,0,416.8,0"></path>
 												</defs>
 												<use xlink:href="#LOGOSVGID_3_" clip-rule="evenodd" fill-rule="evenodd" fill="currentColor" class="overflow-visible"></use>
 												<clipPath id="LOGOSVGID_4_">
@@ -584,37 +563,44 @@
 </div>
 
 
- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
  <script>
-  const ctx = document.getElementById('myChart');
+  const chartsOptions = {
+    textPosition: true,
+    responsive: true,
+    scales: {
+        y: {
+            display: false
+        }
+    },
+    plugins: {
+        legend: false,
+    }
+};
 
-  new Chart(ctx, {
-    type: 'line',
-    data: {
+const chartsData1 = {
       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
       datasets: [{
         label: '# of Votes',
         data: [12, 19, 3, 5, 2, 3],
         borderWidth: 1
       }]
-    },
-    options: {
-        responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      },
-      plugins: {
-        legend: {
-            position: 'top',
-        },
-        title: {
-            display: true,
-            text: 'Chart.js Line Chart'
-        }
-        }
-    }
+    };
+
+  new Chart(document.getElementById('myChart'), {
+    type: 'line',
+    data: chartsData1,
+    options: chartsOptions
   });
+  
+new Chart(document.getElementById('myChart2'), {
+    type: 'line',
+    data: chartsData1,
+    options: chartsOptions
+});
+
+new Chart(document.getElementById('myChart3'), {
+    type: 'line',
+    data: chartsData1,
+    options: chartsOptions
+});
 </script>
