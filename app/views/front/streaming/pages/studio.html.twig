@@ -6,7 +6,7 @@
 
 	<div class="text-primary">
 
-		<div class='ui block w-full mb-12 pb-12 flex   dark:text-gray-100'>
+		<div class='ui block w-full mb-12 pb-12 lg:flex   dark:text-gray-100'>
 			<div class='ui_box hover:bg-rose-600 w-full hover:text-gray-100 relative'>
 				<div class='ui_box__inner p-10'>
 					<h2>{{lang.translate('Audio items')}}</h2>
@@ -287,17 +287,33 @@ $(function(){
     }
 };
 
+{% set audioCharts = customer.chartsMedia('audio') %}
 const chartsData1 = {
-      labels: ['Red', 'Blue', 'Yellow'],
+      labels: JSON.parse('{{audioCharts|column('label')|json_encode|raw}}'),
       datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
+        label: '# {{lang.translate('of')}} {{lang.translate('Items')}}',
+        data: JSON.parse('{{audioCharts|column('y')|json_encode|raw}}'),
         borderWidth: 1,
         backgroundColor: '#9BD0F5',
         borderColor: '#9BD0F5',
         color: '#9BD0F5',
       }]
     };
+
+    
+{% set videoCharts = customer.chartsMedia('video') %}
+const chartsData2 = {
+      labels: JSON.parse('{{videoCharts|column('label')|json_encode|raw}}'),
+      datasets: [{
+        label: '# {{lang.translate('of')}} {{lang.translate('Items')}}',
+        data: JSON.parse('{{videoCharts|column('y')|json_encode|raw}}'),
+        borderWidth: 1,
+        backgroundColor: '#9BD0F5',
+        borderColor: '#9BD0F5',
+        color: '#9BD0F5',
+      }]
+    };
+
 
   new Chart(document.getElementById('myChart'), {
     type: 'line',
@@ -307,7 +323,7 @@ const chartsData1 = {
   
 new Chart(document.getElementById('myChart2'), {
     type: 'line',
-    data: chartsData1,
+    data: chartsData2,
     options: chartsOptions
 });
 
