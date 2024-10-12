@@ -25,7 +25,7 @@
                                     
                                         <span class=" cursor-pointer text-sm flex gap-2 relative">
                                             <span class="tooltiptext  text-xs">{{lang.translate('Followers')}}</span>
-                                            <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg"/>
+                                            <img class="w-5" src="/src/front_assets/svg/user-tab.svg"/>
                                             <span class="pt-1" id="Followers-{{item.customer_id}}">{{item.followers|length}}</span>
                                         </span>
                                     
@@ -34,7 +34,11 @@
                                             <img class="w-5" src="/src/front_assets/svg/audio-tab.svg"/>
                                             <span class="pt-1" id="artist-audio-{{item.customer_id}}">{{item.audio_items|length}}</span>
                                         </span>
-                                        <span class="text-sm text-gray-100">{{lang.translate('Audiobooks')}} : {{item.audiobooks|length}} </span>
+                                        <span class=" cursor-pointer text-sm flex gap-2 relative">
+                                            <span class="tooltiptext  text-xs">{{lang.translate('audiobooks')}}</span>
+                                            <img class="w-5" src="/src/front_assets/svg/audiobook-tab.svg"/>
+                                            <span class="pt-1" id="artist-audiobook-{{item.customer_id}}">{{item.audiobooks|length}}</span>
+                                        </span>
                                         <span class="text-sm text-gray-100">{{lang.translate('Playlists')}} : {{item.playlists|length}} </span>
                                     </div>
                                 </div>
