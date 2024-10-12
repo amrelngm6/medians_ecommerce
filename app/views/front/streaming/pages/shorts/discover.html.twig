@@ -65,8 +65,8 @@ $(function(){
         video.poster = data.poster;
         video.className = 'rounded-lg lg:p-4';
         video.controls = false;
-        video.autoplay = false;
-        video.preload = "none";
+        video.autoplay = true;
+        video.preload = "metadata";
         video.dataset.container = `videoContainer-${data.id}`;
 
         const actionButtons = document.createElement('div');
@@ -136,18 +136,10 @@ $(function(){
     }
 
     function loadVideos() {
-        
-        const videoElement = createVideoElement(videoData[0]);
-        shortVideoContainer.appendChild(videoElement);
-        
-        setTimeout(function(){
-            videoData.forEach((data, i) => {
-                if (i) {
-                    const videoElement = createVideoElement(data);
-                    shortVideoContainer.appendChild(videoElement);
-                }
-            });
-        }, 5000)
+        videoData.forEach((data, i) => {
+            const videoElement = createVideoElement(data);
+            shortVideoContainer.appendChild(videoElement);
+        });
     }
 
     function handleIntersection(entries) {
