@@ -2635,13 +2635,13 @@ body .ui .drop {
 
 
 body .ui_box {
-    transform: scale(1);
+    transform: scale(.8);
     transition-property: transform, background;
     transition-duration: 0.3s;
 }
 
 body .ui_box:hover {
-    transform: scale(1.1);
+    transform: scale(1);
     transition-property: transform, background;
     transition-duration: 0.3s;
     position: relative;
@@ -2652,7 +2652,7 @@ body .ui_box:hover {
 .ui_box:hover>.drop {
     transition-property: bottom, opacity;
     transition-duration: 0.3s;
-    bottom: -42px;
+    bottom: -35px;
     opacity: 1;
 }
 

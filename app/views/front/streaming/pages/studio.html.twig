@@ -11,7 +11,7 @@
 				<div class='ui_box__inner p-10'>
 					<h2>{{lang.translate('Audio items')}}</h2>
 					<p>{{lang.translate('Stats of uploaded audio items')}}</p>
-					<div class='stat text-2xl'>
+					<div class='stat text-6xl py-4'>
 						<span>{{customer.audio_items|length}}</span>
 					</div>
 					<canvas id="myChart"></canvas>
@@ -26,13 +26,13 @@
 					<h2>{{lang.translate('Audiobooks')}}</h2>
 					<p>{{lang.translate('Stats of uploaded Audiobooks')}}</p>
                     
-					<div class='stat'>
+					<div class='stat text-6xl py-4'>
 						<span>{{customer.audiobooks|length}}</span>
 					</div>
 					<canvas id="myChart2"></canvas>
 
 				</div>
-				<div class='drop'>
+				<div class='drop bg-rose-600'>
 					<p>{{lang.translate('Add New')}}</p>
 					<div class='arrow'></div>
 				</div>
@@ -41,13 +41,13 @@
 				<div class='ui_box__inner p-10'>
 					<h2>{{lang.translate('Videos')}}</h2>
 					<p>{{lang.translate('Stats of uploaded Videos')}}</p>
-					<div class='stat'>
+					<div class='stat text-6xl py-4'>
 						<span>{{customer.videos|length}}</span>
 					</div>
 					<canvas id="myChart3"></canvas>
 
 				</div>
-				<div class='drop'>
+				<div class='drop bg-rose-600'>
 					<p>Take a closer look</p>
 					<div class='arrow'></div>
 				</div>
@@ -548,7 +548,6 @@
 
  <script>
   const chartsOptions = {
-    chartArea: { width: '80%' },
     textPosition: true,
     responsive: true,
     scales: {
