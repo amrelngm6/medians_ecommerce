@@ -3,15 +3,15 @@
                         <h2 class="text-xl lg:block hidden   py-2">{{title ?? app.SystemSetting.sitename}}</h2>
                         <h2 class="text-xl lg:hidden block   py-2" onclick="(function(){ return  jQuery('#main-side').toggleClass('hidden'); })()" ><img src="/src/front_assets/svg/menu.svg" class="w-8" /></h2>
                     </div>
-                    <a href="/search/audio" class="ajax-load w-8 py-4" >
+                    <a href="/search/audio" class="min-w-8  ajax-load w-8 py-4" >
                         <img src="/src/front_assets/svg/search.svg" class="" width="14" />
                     </a>
 
                     {% if app.customer %}
-                    <a href="#" class="w-8 py-4">
+                    <a href="#" class="min-w-8 w-8 py-4">
                         <img src="/src/front_assets/svg/notification.svg" class="" width="18" />
                     </a>
-                    <div class="min-w-56 w-auto justify-start items-center inline-flex">
+                    <div class="min-w-40 w-auto justify-start items-center inline-flex">
                         <a href="/studio" class="ajax-load justify-start items-center gap-4 flex">
                             <img class="relative rounded-full w-8 h-8" src="/stream?thumbnail=50&image={{app.customer.picture_name}}" />
                             <div class="text-primary flex-col justify-start items-start  inline-flex">
