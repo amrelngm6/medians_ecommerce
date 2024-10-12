@@ -1267,8 +1267,11 @@ Down
     transform: rotate(-90deg);
 }
 
-.hs__item {
+div[data-count="4"] .hs__item ,
+div[data-count="3"] .hs__item {
     max-width: 320px;
+}
+.hs__item {
     flex-grow: 1;
     flex-shrink: 0;
     flex-basis: calc(100% / 3 - (10px * 2) - (20px / 3));
