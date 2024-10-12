@@ -1978,9 +1978,7 @@ Animated borders Card
     position: absolute;
     top: 5px;
     left: 5px;
-    margin: auto;
-    right: 5px;
-    width: calc(100% - 120px);
+    width: calc(100% - 10px);
     height: 240px;
     z-index: 2;
     backdrop-filter: blur(24px);
