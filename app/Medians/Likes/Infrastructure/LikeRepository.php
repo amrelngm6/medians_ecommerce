@@ -128,6 +128,17 @@ class LikeRepository
     }
     	
 
+	/**
+	* Save item to database
+	*/
+	public function store_article($data) 
+	{
+		$data['item_type'] = Blog::class;
+
+		return $this->store($data);
+    }
+    	
+
     /**
      * Update Lead
      */
