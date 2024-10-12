@@ -13,7 +13,7 @@
                             ] %}
                             <li class=" mx-auto">
                             
-                                <a href="{{menuitem.link}}" class="ajax-load flex gap-2 items-center justify-center p-4 border-b-2 {{ menuitem.link == app.request.pathInfo ? "border-blue-600 text-primary active dark:text-blue-500 dark:border-blue-500" : "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"}} rounded-t-lg  group text-lg">
+                                <a href="{{menuitem.link}}" class="ajax-load flex gap-2 items-center justify-center p-2 lg:p-4 border-b-2 {{ menuitem.link == app.request.pathInfo ? "border-blue-600 text-primary active dark:text-blue-500 dark:border-blue-500" : "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"}} rounded-t-lg  group text-lg">
                                     <img src="/src/front_assets/svg/{{menuitem.icon}}" class="w-6 h-6 dark:brightness-200" />
                                     {{ lang.translate(menuitem.title)}}
                                 </a>
