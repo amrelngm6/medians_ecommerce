@@ -9,10 +9,10 @@
 
                                             <div class="text ">
                                                 <div class="relative">
-                                                    <a href="/video/{{media_item.media_id}}" title="{{media_item.name}}" class="truncate  ajax-load h3 text-md pb-2 hover:text-rose-400 text-gray-400 dark:text-gray-100 hover:text-rose-500 relative">
+                                                    <a href="/video/{{media_item.media_id}}"  class="truncate  ajax-load h3 text-md pb-2 hover:text-rose-400 text-gray-400 dark:text-gray-100 hover:text-rose-500 relative">
                                                         {{media_item.name}}
                                                     </a>
-                                                    <span class="tooltiptext">{{media_item.name}}</span>
+                                                    <span title="{{media_item.name}}" class="tooltiptext">{{media_item.name}}</span>
                                                 </div>
                                                 <p class="p text-xs font-normal flex gap-4">
                                                     <a href="/artist/{{media_item.author_id}}"  class="ajax-load w-full block relative text-gray-500 text-opacity-75 text-sm  tracking-tight  hover:text-rose-400">{{media_item.artist.name}}</a>
