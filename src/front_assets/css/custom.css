@@ -1945,7 +1945,10 @@ Tooltip
     min-width: fit-content;
     margin-left: auto;
     left: auto;
-
+    
+}
+.tooltiptext.wide {
+    left: 25%;
 }
 
 /* Show the tooltip text when you mouse over the tooltip container */
