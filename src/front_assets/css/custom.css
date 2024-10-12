@@ -2426,7 +2426,7 @@ Shorts
 
 @media (max-width: 767px) {
     .shorts .short-video-container {
-        margin-left: 40px
+        margin-left: 0
     }
 
     body .shorts .user-info {

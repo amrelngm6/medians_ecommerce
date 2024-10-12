@@ -657,6 +657,10 @@ video {
   bottom: 2.5rem;
 }
 
+.bottom-2 {
+  bottom: 0.5rem;
+}
+
 .bottom-4 {
   bottom: 1rem;
 }
@@ -2374,6 +2378,11 @@ video {
 
 .p-9 {
   padding: 2.25rem;
+}
+
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .px-0\.5 {
@@ -4108,6 +4117,10 @@ video {
     position: fixed;
   }
 
+  .lg\:absolute {
+    position: absolute;
+  }
+
   .lg\:relative {
     position: relative;
   }
@@ -4297,6 +4310,10 @@ video {
     justify-content: space-between;
   }
 
+  .lg\:gap-2 {
+    gap: 0.5rem;
+  }
+
   .lg\:border-4 {
     border-width: 4px;
   }
@@ -4350,10 +4367,6 @@ video {
 
   .lg\:pt-0 {
     padding-top: 0px;
-  }
-
-  .lg\:pt-4 {
-    padding-top: 1rem;
   }
 
   .lg\:text-2xl {
