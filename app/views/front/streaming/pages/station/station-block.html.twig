@@ -14,11 +14,13 @@
                                 </div>
 
                                 <div class="w-full flex gap-4 pt-6">
-                                    <div class="flex gap-4 pt-6">
-                                        <span class="text-sm text-gray-100">{{lang.translate('Likes')}} : {{station.likes|length}} </span>
-                                        <span class="text-sm text-gray-100">{{lang.translate('Plays')}} : {{station.views|length}} </span>
-                                        <span class="text-sm text-gray-100">{{lang.translate('Items')}} : {{station.items|length}} </span>
-                                    </div>
+                                
+                                    {% set item = station %}
+                                    {% set itemId = station.station_id %}
+                                    {% set itemType = 'station' %}
+                                    {% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
+                                    <span x-on:click="jQuery('#show-box-path').val('station/{{station.station_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
+
                                 </div>
 
                             </div>
