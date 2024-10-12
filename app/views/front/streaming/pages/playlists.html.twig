@@ -23,8 +23,9 @@
                                         {% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
                                         <span x-on:click="jQuery('#show-box-path').val('playlist/{{playlist.playlist_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
 
-                                        <span class="text-sm text-gray-100">{{lang.translate('Items')}} : {{playlist.items|length}}</span>
                                     </div>
+                                        <span class="text-sm text-gray-100">{{lang.translate('Items')}} : {{playlist.items|length}}</span>
+
                                 </div>
                             </div>
                         </div>  
