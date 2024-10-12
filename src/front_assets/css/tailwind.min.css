@@ -1441,10 +1441,6 @@ video {
   width: 5rem;
 }
 
-.w-24 {
-  width: 6rem;
-}
-
 .w-28 {
   width: 7rem;
 }
@@ -4303,6 +4299,10 @@ video {
     width: 66.666667%;
   }
 
+  .lg\:w-24 {
+    width: 6rem;
+  }
+
   .lg\:w-3\/4 {
     width: 75%;
   }
@@ -4397,6 +4397,10 @@ video {
 
   .lg\:border-r {
     border-right-width: 1px;
+  }
+
+  .lg\:bg-transparent {
+    background-color: transparent;
   }
 
   .lg\:p-0 {
