@@ -24,8 +24,8 @@
                             {title:  "Blog",link: "/blog", icon: "blog"},
                             {title:  "Likes",link: "/likes", icon: "heart"},
                         ] %}
-                        <li class="w-full   {{menuitem.link == app.request.pathInfo ? 'active' : '' }}" id="sidemenu-{{loop.index}}" onclick="(function(){ jQuery('#menu-ul').find('li.active').removeClass('active'), jQuery('#sidemenu-{{loop.index}}').addClass('active') })()">
-                            <a href="{{menuitem.link}}" onclick="(function(){ return jQuery('#main-side').toggleClass('hidden') }))()" class="w-full flex gap gap-4 ajax-load ">
+                        <li  onclick="(function(){ return jQuery('#main-side').toggleClass('hidden') }))()"  class="w-full   {{menuitem.link == app.request.pathInfo ? 'active' : '' }}" id="sidemenu-{{loop.index}}" onclick="(function(){ jQuery('#menu-ul').find('li.active').removeClass('active'), jQuery('#sidemenu-{{loop.index}}').addClass('active') })()">
+                            <a href="{{menuitem.link}}" class="w-full flex gap gap-4 ajax-load ">
                                 <span class="min-w-8  text-center relative my-2">
                                     <img src="/src/front_assets/svg/{{menuitem.icon}}.svg" class="absolute top-2 left-0 right-0 dark:brightness-200 mx-auto"  width="18" />
                                     <img src="/src/front_assets/svg/{{menuitem.icon}}-active.svg" class="active-icon absolute top-2 left-0 right-0  mx-auto" 
