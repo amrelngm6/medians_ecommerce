@@ -29,7 +29,7 @@
 
 {% set customer = app.customer_auth() %}
 <div class=" w-full  relative" id="video-overlay">
-	<div class="absolute lg:bottom-20 lg:left-40 left-10 bottom-10  z-10 w-2/3 text-gray-100 dark:text-gray-300">
+	<div class="absolute lg:bottom-20 lg:left-40 bottom-4 py-6 px-2 w-full z-10 w-2/3 text-gray-100 dark:text-gray-300">
 		<h1 class="lg:text-4xl text-2xl text-white overflow-hidden">{{item.name}}</h1>
 
 		{% if item.customer_id == customer.customer_id %}
