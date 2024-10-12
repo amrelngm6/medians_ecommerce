@@ -35,6 +35,11 @@
                                             <span class="pt-1" id="artist-audio-{{item.customer_id}}">{{item.audio_items|length}}</span>
                                         </span>
                                         <span class=" cursor-pointer text-sm flex gap-2 relative">
+                                            <span class="tooltiptext  text-xs">{{lang.translate('Videos')}}</span>
+                                            <img class="w-5 brightness-200" src="/src/front_assets/svg/videos.svg"/>
+                                            <span class="pt-1" id="artist-videos-{{item.customer_id}}">{{item.videos|length}}</span>
+                                        </span>
+                                        <span class=" cursor-pointer text-sm flex gap-2 relative">
                                             <span class="tooltiptext  text-xs">{{lang.translate('Audiobooks')}}</span>
                                             <img class="w-5 brightness-200" src="/src/front_assets/svg/audiobook-tab.svg"/>
                                             <span class="pt-1" id="artist-audiobook-{{item.customer_id}}">{{item.audiobooks|length}}</span>
