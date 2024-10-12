@@ -1561,6 +1561,10 @@ video {
   max-width: 250px;
 }
 
+.max-w-\[40\%\] {
+  max-width: 40%;
+}
+
 .max-w-\[42\.125rem\] {
   max-width: 42.125rem;
 }
@@ -4298,6 +4302,10 @@ video {
     width: 100%;
   }
 
+  .lg\:max-w-\[90\%\] {
+    max-width: 90%;
+  }
+
   .lg\:grid-cols-12 {
     grid-template-columns: repeat(12, minmax(0, 1fr));
   }
@@ -4332,6 +4340,10 @@ video {
 
   .lg\:border-r {
     border-right-width: 1px;
+  }
+
+  .lg\:p-0 {
+    padding: 0px;
   }
 
   .lg\:p-4 {
