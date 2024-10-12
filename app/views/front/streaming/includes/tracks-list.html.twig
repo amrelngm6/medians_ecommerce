@@ -1,6 +1,6 @@
 
                                         <li class="relative" >
-                                            <div class="py-1 gap-4 flex text-primary transition " >
+                                            <div class="py-1 lg:gap-4 gap-2 flex text-primary transition " >
                                                 
                                                 <img src="/stream?thumbnail=300&image={{media_item.picture_name}}" width="48" height="48" class="rounded-lg lg:block hidden" />
                                                 <div class="slide__audio js-audio start-player" id="media-{{media_item.media_id}}" data-list="{{list.items|column('player_object')|json_encode}}" data-index="{{loop.index - 1}}">
