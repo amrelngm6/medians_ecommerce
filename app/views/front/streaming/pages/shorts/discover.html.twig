@@ -148,6 +148,7 @@ $(function(){
                 entry.target.className ='video-item active'
                 const video = entry.target.querySelector('video');
                 console.log('playing:' ,video)
+                video.load();
                 video.play();
             } else {
                 entry.target.className ='video-item'
