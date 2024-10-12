@@ -7,7 +7,7 @@
                         <img class="{{ liked == null ? '' : 'hidden'}} w-5" x-on:click="jQuery('#unheart-{{itemId}}').addClass('hidden'); jQuery('#heart-{{itemId}}').removeClass('hidden'); jQuery('#likes-count').text(parseInt(jQuery('#likes-count').text()) + 1);" id="unheart-{{itemId}}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
                     </a>
                     <span id="likes-count">{{item.likescount()}}</span>
-                    <span class="tooltiptext left text-xs">{{lang.translate('Like')}}</span>
+                    <span class="tooltiptext  text-xs">{{lang.translate('Like')}}</span>
                 </div>
 
                 <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 relative">
