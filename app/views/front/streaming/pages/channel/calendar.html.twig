@@ -157,7 +157,6 @@ $(function() {
             },
             
             eventMouseLeave: function(info) {
-                console.log(info)
                 jQuery('#calendar-hover-info').css('bottom', '-100%')
 
             },
@@ -226,9 +225,6 @@ $(function() {
         })
         calendar.scrollToTime( "{{'now'| date('H:i:00')}}");
 
-        jQuery(document).on('click', 'label', function(){
-            console.log(selected_media)
-        })
 });
 
     </script>

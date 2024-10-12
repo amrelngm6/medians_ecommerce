@@ -141,8 +141,6 @@ $(function() {
                 jQuery("#linkStationMediaStartDate").val(info.dateStr.substr(0, 10));
                 jQuery('#find-track-popup').toggleClass('hidden')
 
-                console.log('Date: ' + info.dateStr.substr(0, 10));
-                
             },
 
             select: function(info) {
@@ -193,7 +191,6 @@ $(function() {
             },
             
             eventMouseLeave: function(info) {
-                console.log(info)
                 jQuery('#calendar-hover-info').css('bottom', '-100%')
 
             },
@@ -257,7 +254,6 @@ $(function() {
                 _t.value = 1
             }
             _t.parentNode.style.setProperty('--val', +_t.value)
-            console.log(_t.value)
             updateSlotDuration(_t.value, calendar)
             calendar.scrollToTime( "{{'now'| date('H:i:00')}}");
 
