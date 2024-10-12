@@ -1236,6 +1236,7 @@ Down
 
 .hs__arrows {
     align-self: center;
+    display: flex;
 }
 
 .dark .hs__arrows .arrow.disabled:before,
