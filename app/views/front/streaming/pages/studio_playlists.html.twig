@@ -2,7 +2,7 @@
 
 	{% include 'views/front/' ~ template ~ '/includes/studio_sidemenu.html.twig' %}
 
-	<div class="dark:text-gray-300 w-full gap-6 overflow-hidden dark:bg-gray-900 bg-white   p-8 rounded-lg shadow shadow-lg relative">
+	<div class="dark:text-gray-300 w-full gap-6 overflow-hidden dark:bg-gray-900 bg-white   px-2 py-8 lg:p-8  rounded-lg shadow shadow-lg relative">
 
 		<div class="box">
 			<div class="box-header with-border">
@@ -15,7 +15,7 @@
                     <div class="my-4 h-full lg:flex overflow-hidden rounded-2xl">                     
                     
                         <div class="overflow-hidden w-full lg:w-96 min-w-64" >
-                            <div class=" p-8 relative overflow-hidden  rounded-2xl" >
+                            <div class=" px-2 py-8 lg:p-8  relative overflow-hidden  rounded-2xl" >
                                 <div class="artist-overlay top-[-20px] left-0 absolute w-full h-full py-20 bg-gradient-to-b from-gray-800 to-black"></div>
                                 <img src="/stream?thumbnail=300&image={{playlist.items[0].media.picture_name}}"  class="absolute bg-img left-0 top-0 w-full" />
                                 <div class="flex lg:block w-full overflow-hidden rounded-2xl text-white mx-auto text-center relative z-10 ">
