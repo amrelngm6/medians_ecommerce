@@ -18,7 +18,7 @@
 								<th style="width: 50px">{{lang.translate('Title')}}</th>
 								<th class="min-w-40 lg:min-w-56"></th>
 								<th style="min-width: 100px">{{lang.translate('Stats')}}</th>
-								<th style="min-width: 100px">{{lang.translate('Chapters')}}</th>
+								<th class="lg:flex hidden" style="min-width: 100px">{{lang.translate('Chapters')}}</th>
 								<th class="text-center py-8 min-h-20" >{{lang.translate('Actions')}}</th>
 							</tr>
 						</thead>
@@ -52,7 +52,7 @@
 										</span>
 									</div>
 								</td>
-								<td class="flex gap-2 py-4">
+								<td class="lg:flex hidden gap-2 py-4 ">
 									<span class="text-fade block">
 										({{item.files|length}})
 									</span>
