@@ -201,7 +201,7 @@
                 <div class=" w-full flex gap-4 text-primary pb-10">
                     <div class=" w-full flex gap-4 dark:text-gray-300 ">
                         <h2 class="text-2xl  font-normal">{{lang.translate('videos')}}</h3>
-                        {# <a href="#!" class="p-2 transition hover:text-rose-500">{{lang.translate('See all')}}</a> #}
+                        <a href="/discover/videos?params[author_id]={{item.customer_id}}" class="ajax-load p-2 transition hover:text-rose-500">{{lang.translate('See all')}}</a>
                     </div>
 
                     <div class="hs__arrows gap-4"><a class="arrow disabled arrow-prev"></a><a class="arrow arrow-next"></a></div>
