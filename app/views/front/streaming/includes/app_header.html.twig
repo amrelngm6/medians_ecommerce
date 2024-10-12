@@ -1,7 +1,10 @@
                 <div class="px-2 w-full flex my-2 gap-4" x-data="{}">
-                    <div class="w-full text-gray-400">
+                    <div class="w-full flex gap-2 text-gray-400">
                         <h2 class="text-xl lg:block hidden   py-2">{{title ?? app.SystemSetting.sitename}}</h2>
-                        <h2 class="text-xl lg:hidden block   py-2" onclick="(function(){ return  jQuery('#main-side').toggleClass('hidden'); })()" ><img src="/src/front_assets/svg/menu.svg" class="w-8" /></h2>
+                        <h2 class="text-xl lg:hidden flex gap-4   py-2" onclick="(function(){ return  jQuery('#main-side').toggleClass('hidden'); })()" >
+                            <img src="/src/front_assets/svg/menu.svg" class="w-8" />
+                        </h2>
+                        <a href="/" class="ajax-load"><img src="{{app.SystemSetting.logo}}" class="lg:w-24 w-20 py-2 mt-1" /></a>
                     </div>
                     <a href="/search/audio" class="min-w-8  ajax-load w-8 py-4" >
                         <img src="/src/front_assets/svg/search.svg" class="" width="14" />
