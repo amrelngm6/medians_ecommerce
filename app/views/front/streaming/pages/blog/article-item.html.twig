@@ -6,7 +6,7 @@
 	</figure>
 	<div class="relative text-primary  col-span-full bg-white dark:bg-gray-800 sm:col-start-6 sm:col-end-13 sm:row-start-1 sm:row-end-2 sm:mt-12 lg:mt-[70px] sm:p-6 sm:pr-0 md:px-7 lg:p-9 lg:pb-12">
 		<div class="mb-4 inline-flex bg-accent gap-6 py-1 text-xs uppercase leading-none dark:text-gray-100 lg:mb-7">
-            
+      {% set customer = app.customer_auth() %}
 			{% set itemId = item.id %}
 			{% set itemType = 'article' %}
 			{% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
