@@ -4206,6 +4206,10 @@ video {
     margin-bottom: 2rem;
   }
 
+  .lg\:ml-14 {
+    margin-left: 3.5rem;
+  }
+
   .lg\:ml-20 {
     margin-left: 5rem;
   }
@@ -4232,6 +4236,10 @@ video {
 
   .lg\:flex {
     display: flex;
+  }
+
+  .lg\:grid {
+    display: grid;
   }
 
   .lg\:hidden {
