@@ -2662,7 +2662,7 @@ body .ui_box:hover {
     transform: rotate(765deg);
 }
 
-.arrow {
+.ui_box .arrow {
     width: 4px;
     height: 4px;
     transition-property: transform;
