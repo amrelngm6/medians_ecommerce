@@ -4,21 +4,28 @@
 
                 {% include 'views/front/' ~ template ~ '/includes/genres_section.html.twig' %}
 
-                <div class="z-20 w-full relative dark:bg-gray-900 bg-white   lg:p-8 p-4 rounded-lg rounded  shadow-md mb-4" id="channels-list">
 
-                    <div class="flex text-primary  w-full pb-4">
-                        <h3 class="text-xl text-gray-500 font-normal w-full">{{lang.translate('Top Artists')}}</h3>
-                        <div class="flex gap gap-4">
-                            <button class="prev-btn" data-slider="top-authors"><img class="w-8" src="/src/front_assets/svg/left.svg"></button>
-                            <button class="next-btn" data-slider="top-authors"><img class="w-8" src="/src/front_assets/svg/right.svg"></button>
+                <div class="z-20 w-full relative dark:bg-gray-900 bg-white   lg:p-8 p-4 rounded-lg rounded  shadow-md mb-4" id="artists-list"  data-count="5">
+                    <div class="hs__wrapper" >
+                        <div class=" w-full flex gap-4 text-primary pb-10">
+                            <div class=" w-full flex gap-4 dark:text-gray-300 ">
+                                <h3 class="text-2xl  font-normal">{{lang.translate('Top Artists')}}</h3>
+                                <a href="/discover?params[author_id]={{item.customer_id}}" class="ajax-load p-2 transition hover:text-rose-500">{{lang.translate('See all')}}</a>
+                            </div>
+
+                            <div class="hs__arrows flex gap-4"><a class="arrow disabled arrow-prev"></a><a class="arrow arrow-next"></a></div>
                         </div>
+                        <ul class="hs" >
+                            {% for artist in artists.items %}
+                            <li class="hs__item  max-w-[250px]"> 
+                                {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/artist-item.html.twig' %}
+                            </li>
+                            {% endfor %}    
+                        </ul>
                     </div>
-                    <hr class="opacity-30 mb-4" />
 
-                    <div class="carousel-container flex gap-2" data-count="5" id="top-authors" >
-                        {% include 'views/front/' ~ template ~ '/pages/channel/channel_list.html.twig' %}
-                    </div>
                 </div>
+                
 
 
                 <div class="w-full lg:flex gap-6 dark:bg-gray-900 bg-white lg:p-8 py-8 px-2 rounded-lg shadow shadow-lg relative" >
