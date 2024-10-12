@@ -209,7 +209,7 @@
                 </div>
                 <ul class="hs" >
                     {% set list = {'items' : item.videos} %}
-                    {% for station in list.items %}
+                    {% for media_item in list.items %}
                     <li class="hs__item"> 
                         {% include 'views/front/' ~ template ~ '/includes/video-item.html.twig' %}
                     </li>
