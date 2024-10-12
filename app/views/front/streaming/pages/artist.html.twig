@@ -30,10 +30,31 @@
 		{% endif %}
 
 		<div class="w-full flex gap-4 ">
-
-			<span class="text-sm text-gray-100">{{lang.translate('Followers')}}
-				:
-				{{item.followers|length}}
+			<span class=" cursor-pointer text-sm flex gap-2 relative">
+				<span class="tooltiptext  text-xs">{{lang.translate('Followers')}}</span>
+				<img class="w-5 brightness-200" src="/src/front_assets/svg/user-tab.svg"/>
+				<span class="pt-1" id="Followers-{{item.customer_id}}">{{item.followers|length}}</span>
+			</span>
+		
+			<span class=" cursor-pointer text-sm flex gap-2 relative">
+				<span class="tooltiptext  text-xs">{{lang.translate('Audio Items')}}</span>
+				<img class="w-5 brightness-200" src="/src/front_assets/svg/audio-tab.svg"/>
+				<span class="pt-1" id="artist-audio-{{item.customer_id}}">{{item.audio_items|length}}</span>
+			</span>
+			<span class=" cursor-pointer text-sm flex gap-2 relative">
+				<span class="tooltiptext  text-xs">{{lang.translate('Videos')}}</span>
+				<img class="w-5 brightness-200" src="/src/front_assets/svg/videos.svg"/>
+				<span class="pt-1" id="artist-videos-{{item.customer_id}}">{{item.videos|length}}</span>
+			</span>
+			<span class=" cursor-pointer text-sm flex gap-2 relative">
+				<span class="tooltiptext  text-xs">{{lang.translate('Audiobooks')}}</span>
+				<img class="w-5 brightness-200" src="/src/front_assets/svg/audiobook-tab.svg"/>
+				<span class="pt-1" id="artist-audiobook-{{item.customer_id}}">{{item.audiobooks|length}}</span>
+			</span>
+			<span class=" cursor-pointer text-sm flex gap-2 relative">
+				<span class="tooltiptext  text-xs">{{lang.translate('Playlists')}}</span>
+				<img class="w-5 brightness-200" src="/src/front_assets/svg/playlist.svg"/>
+				<span class="pt-1" id="artist-playlist-{{item.customer_id}}">{{item.playlists|length}}</span>
 			</span>
 			<span x-on:click="jQuery('#show-box-path').val('artist/{{item.customer_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
 
