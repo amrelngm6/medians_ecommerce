@@ -4,14 +4,14 @@
 	<figure class="max-h-96 group col-span-full overflow-hidden bg-gray-900 sm:col-start-1 sm:col-end-8 sm:row-start-1 sm:row-end-2">
 		<a href="_yt1-single.html"><img class="aspect-14/9 h-full w-full object-cover duration-300 group-hover:scale-110 group-hover:opacity-75" src="/stream?thumbnail=800&image={{item.picture_name}}" alt="{{item.lang_content.title}}"></a>
 	</figure>
-	<div class="relative text-primary  col-span-full bg-white dark:bg-gray-800 sm:col-start-6 sm:col-end-13 sm:row-start-1 sm:row-end-2 sm:mt-12 lg:mt-[70px] sm:p-6 sm:pr-0 md:px-7 lg:p-9 lg:pb-12">
+	<div class="relative text-primary  col-span-full bg-white dark:bg-gray-800 sm:col-start-6 sm:col-end-13 sm:row-start-1 sm:row-end-2 sm:mt-12 lg:mt-[70px] p-6 md:px-7 lg:p-9 lg:pb-12">
 		<div class="mb-4 inline-flex bg-accent gap-6 py-1 text-xs uppercase leading-none dark:text-gray-100 lg:mb-7">
       {% set customer = app.customer_auth() %}
 			{% set itemId = item.id %}
 			{% set itemType = 'article' %}
 			{% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
             
-        </div>
+    </div>
 		<h2 class=" mb-4 text-2xl leading-none sm:text-xl lg:text-4xl lg:mb-6 lg:tracking-tighter lg:leading-none">
 			<a href="/{{item.lang_content.prefix}}" class=" transition-colors  dark:text-white ajax-load dark:hover:text-rose-400 hover:text-rose-400" >{{item.lang_content.title}}</a>
 		</h2>
