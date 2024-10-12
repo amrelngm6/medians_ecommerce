@@ -2648,89 +2648,6 @@ body .ui_box {
     transition-duration: 0.3s;
 }
 
-body .ui_box__inner {
-    padding: 30px;
-}
-
-body .ui_box__inner span {
-    font-size: 36px;
-    font-weight: 700;
-}
-
-body .ui_box__inner .progress {
-    width: 100%;
-    margin-top: 10px;
-    height: 6px;
-    background: rgba(0, 0, 0, 0.3);
-    margin-bottom: 15px;
-}
-
-body .ui_box__inner .progress_graph {
-    float: right;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
-    width: 85px;
-    text-align: center;
-    position: relative;
-    padding-left: 20px;
-    top: 24px;
-}
-
-body .ui_box__inner .progress_graph__bar--1 {
-    width: 10px;
-    height: 20px;
-    background: #4FA584;
-    float: left;
-    margin-right: 10px;
-    position: relative;
-    bottom: -10px;
-    -webkit-animation: graph 1s;
-}
-
-body .ui_box__inner .progress_graph__bar--2 {
-    width: 10px;
-    -webkit-animation: graph2 1s;
-    height: 30px;
-    float: left;
-    margin-right: 10px;
-    background: #4FA584;
-}
-
-body .ui_box__inner .progress_graph__bar--3 {
-    width: 10px;
-    height: 24px;
-    margin-right: 10px;
-    -webkit-animation: graph3 1s;
-    background: #4FA584;
-    float: left;
-    position: relative;
-    bottom: -6px;
-}
-
-body .ui_box__inner .progress_graph__bar--4 {
-    width: 10px;
-    height: 14px;
-    -webkit-animation: graph4 1s;
-    bottom: -16px;
-    position: relative;
-    background: #4FA584;
-    float: left;
-}
-
-body .ui_box h2 {
-    font-weight: normal;
-    font-size: 16px;
-    margin: -4px 0px 3px 0px;
-}
-
-body .ui_box p {
-    font-size: 11px;
-    color: #b6b6b6;
-    clear: left;
-    font-weight: 300;
-    width: 160px;
-    margin: 2px 0px 15px 0px;
-}
-
 body .ui_box:hover {
     transform: scale(1.1);
     transition-property: transform, background;
@@ -2739,9 +2656,6 @@ body .ui_box:hover {
     z-index: 1;
 }
 
-.ui_box:hover>.ui_box__inner p {
-    color: #b3dacb;
-}
 
 .ui_box:hover>.drop {
     transition-property: bottom, opacity;
@@ -2754,19 +2668,6 @@ body .ui_box:hover {
     transition-property: transform;
     transition-duration: 1s;
     transform: rotate(765deg);
-}
-
-.ui_box:hover>.ui_box__inner .progress_graph>div {
-    background: white;
-}
-
-.ui_box:hover>.ui_box__inner .progress .progress_bar,
-.ui_box:hover>.ui_box__inner .progress .progress_bar--two {
-    background: white;
-}
-
-.stat_left {
-    float: left;
 }
 
 .arrow {
