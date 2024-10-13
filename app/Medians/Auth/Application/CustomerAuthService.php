@@ -224,12 +224,12 @@ class CustomerAuthService
 
 		try {
 				
-			// Get system settings for Google Login
+			// Get system settings for Facebook Login
 			$settings = $this->app->SystemSetting();
 
-			$Google = new FacebookService($settings['facebook_client_id'], $settings['facebook_client_secret']);
+			$Facebook = new FacebookService($settings['facebook_client_id'], $settings['facebook_client_secret']);
 
-			return $Google->verifyLoginWithFacebook();
+			return $Facebook->verifyLoginWithFacebook();
 
         } catch (Exception $e) {
         	throw new \Exception($e->getMessage(), 1);
