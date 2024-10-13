@@ -177,7 +177,7 @@ class CustomerAuthService
 				$updated = $checkUser->update(['status'=>'on']);
 			}
 
-			return render('views/front/'. ($settings['template'] ?? 'default') .'/pages/layout.html.twig', [
+			return render('views/front/'. ($settings['template'] ?? 'default') .'/layout.html.twig', [
 				// 'load_vue' => true,
 				'title' => translate('Activation page'),
 				'app' => $this->app,
