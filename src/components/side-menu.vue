@@ -10,8 +10,8 @@
         <div class="app-sidebar-logo px-6" id="kt_app_sidebar_logo">
             <!--begin::Logo image-->
             <a class="pt-10" v-if="system_setting" href="/dashboard">
-                <img alt="Logo" :src="system_setting.logo" class="app-sidebar-logo-default w-2/3" />
-                <img alt="Logo" :src="system_setting.logo" class="app-sidebar-logo-minimize w-2/3" />
+                <img alt="Logo" :src="system_setting.backend_logo" class="app-sidebar-logo-default w-2/3" />
+                <img alt="Logo" :src="system_setting.backend_logo" class="app-sidebar-logo-minimize w-2/3" />
             </a>
             <!--end::Logo image-->
 

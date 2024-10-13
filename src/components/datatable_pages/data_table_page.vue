@@ -60,12 +60,6 @@
                             <img :src="item.logo" class="w-8 h-8 rounded-full" />
                         </template>
 
-                        <template #item-business="item">
-                            <div class="flex gap-2" v-if="item.business" >
-                                <img :src="item.business.logo" class="w-8 h-8 rounded-full" />
-                                <span class="py-2" v-text="item.business.business_name"></span>
-                            </div>
-                        </template>
 
                         <template #item-item="item">
                             <div class="flex gap-2" v-if="item.item" >
