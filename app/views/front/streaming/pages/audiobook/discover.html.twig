@@ -1,12 +1,12 @@
 <div class="py-4 px-2 w-full">
 
-	{% include 'views/front/' ~ template ~ '/includes/book_genres_section.html.twig' %}
+	{% include 'views/front/' ~ app.SystemSetting.template ~ '/includes/book_genres_section.html.twig' %}
 
 
 	<div class="w-full lg:flex gap-6 dark:bg-gray-900 bg-white  py-4 px-4 lgp-8 rounded-lg shadow shadow-lg relative">
 
 		<div class="min-w-56  z-10 relative" id="filter-parent">
-			{% include 'views/front/' ~ template ~ '/includes/book-filter-sidebar.html.twig' %}
+			{% include 'views/front/' ~ app.SystemSetting.template ~ '/includes/book-filter-sidebar.html.twig' %}
 		</div>
 		<div class="w-full relative  rounded-lg shadow-md  ">
 			<div class="w-full text-primary border-1 py-2 lg:p-8">
@@ -19,12 +19,12 @@
 					<div class="w-full ">
 						<ul class="w-full lg:grid-cols-2 grid-cols-1 grid gap-10 pb-20">
 							{% for audiobook in list.items %}
-							{% include 'views/front/' ~ template ~ '/pages/audiobook/item.html.twig' %}			
+							{% include 'views/front/' ~ app.SystemSetting.template ~ '/pages/audiobook/item.html.twig' %}			
 							{% endfor %}
 						</ul>
 					</div>
 				</div>
-				{% include 'views/front/' ~ template ~ '/includes/pagination.html.twig' %}
+				{% include 'views/front/' ~ app.SystemSetting.template ~ '/includes/pagination.html.twig' %}
 
 			</div>
 		</div>

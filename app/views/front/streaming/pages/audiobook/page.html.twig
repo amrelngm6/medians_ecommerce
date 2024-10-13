@@ -36,7 +36,7 @@
                                 
                                 {% set audiobook = item %}
                                 {% for file in item.files %}
-                                {% include 'views/front/' ~ template ~ '/pages/audiobook/item.html.twig' %}
+                                {% include 'views/front/' ~ template ~ '/includes/audiobook-item.html.twig' %}
                                 {% endfor %}
 
                                 </ul>
@@ -69,6 +69,7 @@
                                 </div>
 
                             </div>
+
 
                             {% set relatedVideo = item.related(10, 'video') %}
                             {% if relatedVideo|length %}
