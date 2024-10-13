@@ -130,21 +130,24 @@ class FacebookService
                 exit;
               }
               
-            
-            $localPic = isset($user['picture']['url']) ?  $this->saveImageFromUrl($user['picture']['url'], '/uploads/images/'.md5($user_info['picture']['url']).'.jpg') : '';
               
-			// Prepare user data to store
-			$params['email'] = $user_info['email'];
-			$params['name'] = $user_info['name'];
-			$params['picture'] = $localPic;
-			$params['status'] = 'on';
-
-			$user = $this->repo->findByEmail($params['email']);
-
-			if (isset($user->customer_id))
-				$user->update(['picture' => $localPic]);
-			else 
-				$user = $this->repo->store($params);
+              $localPic = isset($user['picture']['url']) ?  $this->saveImageFromUrl($user['picture']['url'], '/uploads/images/'.md5($user_info['picture']['url']).'.jpg') : '';
+              
+              // Prepare user data to store
+              $params['email'] = $user_info['email'];
+              $params['name'] = $user_info['name'];
+              $params['picture'] = $localPic;
+              $params['status'] = 'on';
+              
+              $user = $this->repo->findByEmail($params['email']);
+              
+            if (isset($user->customer_id)) {
+                $user->update(['picture' => $localPic]);
+            }   else  {
+                $user = $this->repo->store($params);
+                $value = md5(strtotime(date('YmdHis')).$user->customer_id);
+                $this->repo->setCustomCode((object) $user, 'activation_token', $value);
+            }
 
 			// Check if user saved
 			if (isset($user->customer_id)){
