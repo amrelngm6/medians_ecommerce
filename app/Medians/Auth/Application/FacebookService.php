@@ -120,10 +120,8 @@ class FacebookService
               
               // Now you can make API requests for user data
               try {
-                $response = $fb->get('/me?fields=id,name,email', $accessToken);
+                $response = $fb->get('/me?fields=id,name,email,picture.type(large)', $accessToken);
                 $user_info = $response->getGraphUser();
-                echo 'Name: ' . $user['name'] . '<br>';
-                echo 'Email: ' . $user['email'];
               } catch(\Facebook\Exceptions\FacebookResponseException $e) {
                 echo 'Graph returned an error: ' . $e->getMessage();
                 exit;
@@ -131,11 +129,10 @@ class FacebookService
                 echo 'Facebook SDK returned an error: ' . $e->getMessage();
                 exit;
               }
+              
             
-              print_r($user_info);
-              return;
-			$localPic = $Google->saveImageFromUrl($user_info['picture'], '/uploads/images/'.md5($user_info['picture']).'.jpg');
-
+            $localPic = $this->saveImageFromUrl($user['picture']['url'], '/uploads/images/'.md5($user_info['picture']['url']).'.jpg');
+              
 			// Prepare user data to store
 			$params['email'] = $user_info['email'];
 			$params['name'] = $user_info['name'];
@@ -152,7 +149,7 @@ class FacebookService
 			// Check if user saved
 			if (isset($user->customer_id)){
 				$this->setSession($user);
-		    	$this->repo->setCustomCode((object) $user, 'google_id', $user_info['id']);
+		    	$this->repo->setCustomCode((object) $user, 'facebook_id', $user_info['id']);
 			} else {
 				return null;
 			}  
