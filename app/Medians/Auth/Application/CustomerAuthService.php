@@ -172,8 +172,6 @@ class CustomerAuthService
             
             $checkUser = $this->repo->findByToken($code, 'activation_token');
 
-			print_r($checkUser);
-			print_r($code);
             if (!empty($checkUser))
             {
 				$updated = $checkUser->update(['status'=>'on']);
