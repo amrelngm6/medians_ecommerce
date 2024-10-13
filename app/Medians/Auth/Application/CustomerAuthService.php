@@ -250,6 +250,7 @@ class CustomerAuthService
 			$params['email'] = $user_info['email'];
 			$params['name'] = $user_info['name'];
 			$params['picture'] = $user_info['picture'];
+			$params['status'] = 'on';
 
 			$user = $this->repo->findByEmail($params['email']);
 
