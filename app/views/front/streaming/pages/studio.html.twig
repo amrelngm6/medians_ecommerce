@@ -288,7 +288,7 @@ $(function(){
 };
 
 {% set audioCharts = customer.chartsMedia('audio') %}
-const chartsData1 = {
+const audioCharts = {
       labels: JSON.parse('{{audioCharts|column('label')|json_encode|raw}}'),
       datasets: [{
         label: '# {{lang.translate('of')}} {{lang.translate('Items')}}',
@@ -302,7 +302,7 @@ const chartsData1 = {
 
     
 {% set videoCharts = customer.chartsMedia('video') %}
-const chartsData2 = {
+const videoCharts = {
       labels: JSON.parse('{{videoCharts|column('label')|json_encode|raw}}'),
       datasets: [{
         label: '# {{lang.translate('of')}} {{lang.translate('Items')}}',
@@ -313,23 +313,38 @@ const chartsData2 = {
         color: '#9BD0F5',
       }]
     };
+    
+{% set audiobookCharts = customer.chartsMedia('audiobook') %}
+const audiobookCharts = {
+      labels: JSON.parse('{{audiobookCharts|column('label')|json_encode|raw}}'),
+      datasets: [{
+        label: '# {{lang.translate('of')}} {{lang.translate('Items')}}',
+        data: JSON.parse('{{audiobookCharts|column('y')|json_encode|raw}}'),
+        borderWidth: 1,
+        backgroundColor: '#9BD0F5',
+        borderColor: '#9BD0F5',
+        color: '#9BD0F5',
+      }]
+    };
 
 
-  new Chart(document.getElementById('myChart'), {
-    type: 'line',
-    data: chartsData1,
-    options: chartsOptions
-  });
   
-new Chart(document.getElementById('myChart2'), {
+new Chart(document.getElementById('myChart'), {
     type: 'line',
-    data: chartsData2,
+    data: audioCharts,
     options: chartsOptions
 });
 
+new Chart(document.getElementById('myChart2'), {
+    type: 'line',
+    data: audiobookCharts,
+    options: chartsOptions
+});
+
+
 new Chart(document.getElementById('myChart3'), {
     type: 'line',
-    data: chartsData1,
+    data: videoCharts,
     options: chartsOptions
 });
 })

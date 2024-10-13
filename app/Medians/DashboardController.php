@@ -128,7 +128,6 @@ class DashboardController extends CustomController
         $data['total_media_views'] = View::totalViews($this->start, $this->end)->where('item_type', $mediaItem::class)->sum('times');
 
 
-        // $data['top_products'] = $this->ProductRepository;
         $data['top_customers'] = [];
         $data['top_media'] = $mediaItemRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->withSum('views','times')->withCount('comments','likes')->with('artist')->limit('5')->orderBy('views_sum_times', 'desc')->get();
 
