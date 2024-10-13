@@ -97,7 +97,7 @@
                             </div>
                             <ul class="hs" >
                                 {% set list = {'items' : relatedAudiobooks } %}
-                                {% for media_item in list.items %}
+                                {% for audiobook in list.items %}
                                 <li class="hs__item  max-w-[250px]"> 
                                     {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/audiobook-item.html.twig' %}
                                 </li>
