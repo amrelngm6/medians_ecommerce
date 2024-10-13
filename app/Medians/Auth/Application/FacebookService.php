@@ -61,19 +61,19 @@ class FacebookService
 
 		try {
 				
-			// Get system settings for Facebook Login
+			// Get system settings for Google Login
 			$SystemSettings = new SystemSettingsController;
 
 			$settings = $SystemSettings->getAll();
 
-			$Facebook = new FacebookService($settings['facebook_login_key'], $settings['facebook_login_secret']);
+			$Google = new GoogleService($settings['google_client_id'], $settings['google_client_secret']);
 
 			$code = $this->app->request()->get('code');
 
-		  	$Facebook->client->setAccessToken($Facebook->client->fetchAccessTokenWithAuthCode($code));
+		  	$Google->client->setAccessToken($Google->client->fetchAccessTokenWithAuthCode($code));
 
 		  	// Check if code is expired or invalid
-		  	if($Facebook->client->isAccessTokenExpired())
+		  	if($Google->client->isAccessTokenExpired())
 		  	{
 	  			return false;
 		  	}
@@ -83,30 +83,30 @@ class FacebookService
 			$google_oauth = new Google_Service_Oauth2($Google->client);
 			$user_info = $google_oauth->userinfo->get();
 
+			$localPic = $Google->saveImageFromUrl($user_info['picture'], '/uploads/images/'.md5($user_info['picture']).'.jpg');
+
 			// Prepare user data to store
-			$pictureName = rand(999999, 999999).date('Ymdhis').'.jpg';
 			$params['email'] = $user_info['email'];
-			$params['first_name'] = $user_info['givenName'];
-			$params['last_name'] = $user_info['familyName'];
-			$params['role_id'] = '3';
-			$params['picture'] = $this->saveImageFromUrl($user_info['picture'], '/uploads/customers/'.$pictureName) ;
+			$params['name'] = $user_info['name'];
+			$params['picture'] = $localPic;
+			$params['status'] = 'on';
 
-			$user = $this->repo->getByEmail($params['email']);
+			$user = $this->repo->findByEmail($params['email']);
 
-			if (isset($user->id))
-				$user->update(['picture' => $user_info['picture']]);
+			if (isset($user->customer_id))
+				$user->update(['picture' => $localPic]);
 			else 
 				$user = $this->repo->store($params);
 
 			// Check if user saved
-			if (isset($user->id)){
+			if (isset($user->customer_id)){
 				$this->setSession($user);
-		    	$this->repo->setCustomCode((object) $user, 'facebook_id', $user_info['id']);
+		    	$this->repo->setCustomCode((object) $user, 'google_id', $user_info['id']);
 			} else {
 				return null;
 			}  
 
-			echo $this->app->redirect('/dashboard');
+			echo $this->app->redirect(isset($user->field['activation_token']) ? './activate-account/'.$user->field['activation_token'] : '/customer/dashboard');
 
 		} catch (Exception $e) {
 			return array('error'=>$e->getMessage());

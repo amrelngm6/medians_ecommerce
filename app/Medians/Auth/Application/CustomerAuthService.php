@@ -217,6 +217,26 @@ class CustomerAuthService
 	}
 
 
+	public function verifyLoginWithFacebook()
+	{
+		
+		$this->app = new \config\APP;
+
+		try {
+				
+			// Get system settings for Google Login
+			$settings = $this->app->SystemSetting();
+
+			$Google = new GoogleService($settings['google_client_id'], $settings['google_client_secret']);
+
+			return $Google->verifyLoginWithFacebook();
+
+        } catch (Exception $e) {
+        	throw new \Exception($e->getMessage(), 1);
+        }
+	}
+
+
 	public function verifyLoginWithGoogle()
 	{
 
@@ -225,9 +245,7 @@ class CustomerAuthService
 		try {
 				
 			// Get system settings for Google Login
-			$SystemSettings = new SystemSettingsController;
-
-			$settings = $SystemSettings->getAll();
+			$settings = $this->app->SystemSetting();
 
 			$Google = new GoogleService($settings['google_client_id'], $settings['google_client_secret']);
 
