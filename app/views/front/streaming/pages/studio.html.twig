@@ -331,20 +331,20 @@ $(function(){
 
 setTimeout(function(){
     
-        new Chart(document.getElementById('myChart'), {
+        new Chart(jQuery('#myChart')[0], {
             type: 'line',
             data: audioCharts,
             options: chartsOptions
         });
 
-        new Chart(document.getElementById('myChart2'), {
+        new Chart(jQuery('#myChart2')[0], {
             type: 'line',
             data: audiobookCharts,
             options: chartsOptions
         });
 
 
-        new Chart(document.getElementById('myChart3'), {
+        new Chart(jQuery('#myChart3')[0], {
             type: 'line',
             data: videoCharts,
             options: chartsOptions
