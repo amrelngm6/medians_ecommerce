@@ -47,16 +47,15 @@
 	<div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
         <div class="relative w-full   gap-4 flex">
 			<div class="relative w-full   gap-4 flex">
-				<a href="/artist/{{item.artist.customer_id}}" class="ajax-load flex gap-6 text-primary">
-					<img src="/stream?thumbnail=100&image={{item.artist.picture_name}}" alt="User Avatar" class="w-10 h-10 rounded-full">
-					<div class="text-xl dark:text-gray-300">{{item.artist.name}}
-						<p class="text-xs dark:text-gray-300">{{lang.translate('Artist')}}</p>
-					</div>
-				</a>
+            
+                <a href="/artist/{{item.customer.customer_id}}" class="ajax-load flex gap-6 text-primary">
+                    <img src="/stream?thumbnail=100&image={{item.customer.picture_name}}" alt="User Avatar" class="w-10 h-10 rounded-full">
+                    <div class="text-xl dark:text-gray-300">{{item.customer.name}}
+                        <p class="text-xs dark:text-gray-300">{{lang.translate('Artist')}}</p>
+                    </div>
+                </a>
 			</div>
 			<div class="flex gap-2 flex-none text-primary h-8"> 
-
-
 
                 {% set itemId = item.channel_id %}
                 {% set itemType = 'channel' %}
