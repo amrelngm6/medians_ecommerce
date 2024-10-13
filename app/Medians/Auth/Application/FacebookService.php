@@ -39,6 +39,9 @@ class FacebookService
             'default_graph_version' => 'v17.0',
         ]);
         
+        $tokenMetadata = $this->client->getOAuth2Client()->debugToken($accessToken);
+        $tokenMetadata->validateAppId('YOUR_APP_ID');  // Validate app ID
+
 	}
 
 
