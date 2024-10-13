@@ -293,6 +293,23 @@ class CustomerAuthService
 	}
 
 
+
+	public function loginWithFacebook()
+	{
+		
+		$this->app = new \config\APP;
+
+		$settings = $this->app->SystemSetting();
+
+		if (empty($settings['facebook_client_id']))
+			return null;
+
+		$Facebook = new FacebookService($settings['facebook_client_id'],$settings['facebook_client_secret']);
+
+		return $Facebook->getLoginUrl();
+	}
+
+
 	/**
 	 * User login request
 	 */ 
