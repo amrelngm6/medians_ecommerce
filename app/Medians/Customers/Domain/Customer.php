@@ -83,7 +83,7 @@ class Customer extends CustomModel
 
 	public function chartsMedia($type = 'audio', $limit = 4) 
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->selectRaw("type, DATE_FORMAT(created_at, '%b %d') as label, COUNT(*) as y")->having('y', '>', 0)->where('type', $type)->groupBy('label')->limit($limit)->get();	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->selectRaw("type, DATE_FORMAT(created_at, '%b %d') as label, COUNT(*) as y")->having('y', '>', 0)->where('type', $type)->orderBy('created_at')->groupBy('label')->limit($limit)->get();	
 	}
 
 	public function audiobooks() 
