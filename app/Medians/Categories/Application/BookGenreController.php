@@ -81,6 +81,43 @@ class BookGenreController extends CustomController
 
 
 
+	/**
+	 * Admin genre page by ID
+	 * 
+	 */ 
+    public function genre($id)
+    {
+		$this->app = new \config\APP;
+
+		$settings = $this->app->SystemSetting();
+
+		$this->app->customer_auth();
+
+		$params = $this->app->params();
+
+		$mediaRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
+		
+		try 
+        {
+            $item = $this->repo->find($id);
+
+			return render('category_wizard', [
+		        'load_vue' => true,
+		        'title' => translate('Video Genre'),
+		        'columns' => $this->columns(),
+		        'fillable' => $this->fillable(),
+		        'item' => $item,
+		        'categories' => $this->repo->getBookGenres(),
+		        'fillable_category' => (new CategoryController())->fillable(),
+				'model' => 'VideoGenre',
+		    ]);
+
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+
 
 	public function store() 
 	{

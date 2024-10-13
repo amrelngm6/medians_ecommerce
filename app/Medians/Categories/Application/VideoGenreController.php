@@ -79,7 +79,7 @@ class VideoGenreController extends CustomController
 	    ]);
 	}
 
-		/**
+	/**
 	 * Admin genre page by ID
 	 * 
 	 */ 
@@ -124,6 +124,7 @@ class VideoGenreController extends CustomController
 		$this->app = new \config\APP;
 
 		$params = $this->app->params();
+		
         try {	
 
         	$this->validate($params);
@@ -190,8 +191,21 @@ class VideoGenreController extends CustomController
 	public function validate($params) 
 	{
 
-
-
 	}
+
+	
+	/**
+	 * Frontend genre page
+	 * 
+	 */ 
+	public function page( $genreContent ) 
+	{
+
+		$mediaController = new \Medians\Media\Application\VideoController;
+
+		return $mediaController->genre($genreContent->prefix);
+	}
+
+
 
 }

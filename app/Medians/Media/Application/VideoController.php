@@ -367,16 +367,16 @@ class VideoController extends CustomController
 		$settings = $this->app->SystemSetting();
 		$this->app->customer_auth();
         $params = $this->app->params();
-
 		try 
         {
-            $item = $this->categoryRepo->getGenreByPrefix($prefix);
+            $item = $this->categoryRepo->getVideoGenreByPrefix($prefix);
             
             if (empty($item->category_id))
     			throw new \Exception(translate('Page not found'), 1);
 
             $params['limit'] = $settings['view_items_limit'] ?? null;
             $params['genre'] = $item->category_id;
+            $params['type'] = 'video';
             $list = $this->repo->getWithFilter($params);
             
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
@@ -384,7 +384,7 @@ class VideoController extends CustomController
                 'item' => $item,
                 'list' => $list,
                 'genres' => $this->categoryRepo->getVideoGenres(),
-                'layout' => 'genre'
+                'layout' => 'videos/genre'
             ], 'output'));
             
 		} catch (\Exception $e) {

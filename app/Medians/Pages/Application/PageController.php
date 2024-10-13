@@ -269,6 +269,10 @@ class PageController extends CustomController
 				case Genre::class:
 					return (new \Medians\Categories\Application\GenreController)->page($pageContent);
 					break;
+		
+				case VideoGenre::class:
+					return (new \Medians\Categories\Application\VideoGenreController)->page($pageContent);
+					break;
 				
 				case Page::class:
 					return $this->repo->find($pageContent->item_id, $pageContent->prefix);

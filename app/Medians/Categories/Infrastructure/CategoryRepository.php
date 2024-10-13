@@ -137,7 +137,6 @@ class CategoryRepository
 	*/
 	public function store($data) 
 	{
-
 		$Model = new Category();
 		
 		foreach ($data as $key => $value) 
@@ -149,6 +148,7 @@ class CategoryRepository
 		}	
 
 		$dataArray['status'] = isset($dataArray['status']) ? 'on' : 0;
+		
 		// Return the FBUserInfo object with the new data
     	$Object = Category::create($dataArray);
 

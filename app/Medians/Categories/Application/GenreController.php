@@ -79,23 +79,42 @@ class GenreController extends CustomController
 	    ]);
 	}
 
-
 	/**
-	 * Admin index items
+	 * Admin genre page by ID
 	 * 
 	 */ 
-	public function create(  ) 
-	{
-	    return render('category_wizard', [
-	        'load_vue' => true,
-	        'title' => translate('Product Categories'),
-	        'items' => $this->repo->get(100),
-	        'columns' => $this->columns(),
-			'categories' => $this->repo->list(),
-			'fillable' => $this->fillable(),
-	    ]);
-	}
+    public function genre($id)
+    {
+		$this->app = new \config\APP;
 
+		$settings = $this->app->SystemSetting();
+
+		$this->app->customer_auth();
+
+		$params = $this->app->params();
+
+		$mediaRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
+		
+		try 
+        {
+            $item = $this->repo->find($id);
+
+			return render('category_wizard', [
+		        'load_vue' => true,
+		        'title' => translate('Genre page'),
+		        'columns' => $this->columns(),
+		        'fillable' => $this->fillable(),
+		        'item' => $item,
+		        'categories' => $this->repo->getGenres(),
+		        'fillable_category' => (new CategoryController())->fillable(),
+				'model' => 'Genre',
+		    ]);
+
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
 
 
 
@@ -187,41 +206,5 @@ class GenreController extends CustomController
 	}
 
 
-	/**
-	 * Admin genre page by ID
-	 * 
-	 */ 
-    public function genre($id)
-    {
-		$this->app = new \config\APP;
-
-		$settings = $this->app->SystemSetting();
-
-		$this->app->customer_auth();
-
-		$params = $this->app->params();
-
-		$mediaRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
-		
-		try 
-        {
-            $item = $this->repo->find($id);
-
-			return render('category_wizard', [
-		        'load_vue' => true,
-		        'title' => translate('Genre page'),
-		        'columns' => $this->columns(),
-		        'fillable' => $this->fillable(),
-		        'item' => $item,
-		        'categories' => $this->repo->getGenres(),
-		        'fillable_category' => (new CategoryController())->fillable(),
-				'model' => 'Genre',
-		    ]);
-
-		} catch (\Exception $e) {
-			throw new \Exception($e->getMessage(), 1);
-		}
-    }
-    
 
 }
