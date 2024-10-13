@@ -61,6 +61,7 @@ class APIController extends CustomController
 		$app = new \config\APP;
 		$request = $app->request();
 		
+		return;
 		try {
 				
 			$return = [];

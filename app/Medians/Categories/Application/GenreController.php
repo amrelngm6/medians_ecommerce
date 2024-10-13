@@ -147,7 +147,6 @@ class GenreController extends CustomController
 	public function delete() 
 	{
 
-
 		$this->app = new \config\APP;
 
 		$params = $this->app->params();
@@ -181,43 +180,44 @@ class GenreController extends CustomController
 	 */ 
 	public function page( $genreContent ) 
 	{
-		$this->app = new \config\APP;
 
-		return $this->genre($genreContent->prefix);
+		$mediaController = new \Medians\Media\Application\MediaItemController;
+
+		return $mediaController->genre($genreContent->prefix);
 	}
 
 
 	/**
-	 * Frontend genre page by prefix
+	 * Admin genre page by ID
 	 * 
 	 */ 
-    public function genre($prefix)
+    public function genre($id)
     {
+		$this->app = new \config\APP;
+
 		$settings = $this->app->SystemSetting();
+
 		$this->app->customer_auth();
-        $params = $this->app->params();
+
+		$params = $this->app->params();
 
 		$mediaRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
 		
 		try 
         {
-            $item = $this->repo->getGenreByPrefix($prefix);
-            
-            if (empty($item->category_id))
-    			throw new \Exception(translate('Page not found'), 1);
+            $item = $this->repo->find($id);
 
-            $params['limit'] = $settings['view_items_limit'] ?? null;
-            $params['genre'] = $item->category_id;
-            $list = $mediaRepo->getWithFilter($params);
-            
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
-                'app' => $this->app,
-                'item' => $item,
-                'list' => $list,
-                'genres' => $this->repo->getGenres(),
-                'layout' => 'genre'
-            ], 'output'));
-            
+			return render('category_wizard', [
+		        'load_vue' => true,
+		        'title' => translate('Genre page'),
+		        'columns' => $this->columns(),
+		        'fillable' => $this->fillable(),
+		        'item' => $item,
+		        'categories' => $this->repo->getGenres(),
+		        'fillable_category' => (new CategoryController())->fillable(),
+				'model' => 'Genre',
+		    ]);
+
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);
 		}

@@ -1,10 +1,10 @@
-                        <div class="py-8 flex gap-4" id="filter-side" >
-                            <p class="text-lg text-gray-400">{{lang.translate('Filters')}}</p>
-                            <ul class="dark:text-gray-300 flex gap-4">
-                                <li class="relative show-child w-full">
-                                    <div class="flex w-full">
+                        <div class="py-8 lg:flex gap-4" id="filter-side" >
+                            <p class="text-lg text-gray-400 pb-4">{{lang.translate('Filters')}}</p>
+                            <ul class="dark:text-gray-300 flex gap-10  ">
+                                <li class="relative show-child w-full min-w-40">
+                                    <div class="flex w-full gap-4">
                                         <span class="w-full text-base dark:text-gray-300  text-gray-600 ">{{lang.translate('Genre')}}</span>
-                                        <img src="/src/front_assets/svg/arrow.svg" />
+                                        <img class="w-4 h-4 mt-2" src="/src/front_assets/svg/arrow.svg" />
                                     </div>
                                     <div class="py-3 inline-block ">
                                         <span class="{{item.lang_content.title ?? 'hidden'}} text-xs rounded-full py-1 px-2 bg-gray-300 text-gray-800  gap-2 inline-block">    
@@ -17,10 +17,10 @@
                                         {% endfor %}
                                     </div>
                                 </li>
-                                <li class="relative show-child w-full">
+                                <li class="relative show-child w-full min-w-40">
                                     <div class="flex w-full">
                                         <span class="w-full text-base dark:text-gray-300  text-gray-600 ">{{lang.translate('Sort')}}</span>
-                                        <img src="/src/front_assets/svg/arrow.svg" />
+                                        <img class="w-4 h-4 mt-2" src="/src/front_assets/svg/arrow.svg" />
                                     </div>
                                     <div class="py-3 inline-block  ">
                                         <span class="{{app.params.type != '' ? '' : 'hidden'}} text-xs rounded-full py-1 px-2 bg-gray-300 text-gray-800  gap-2 inline-block">    
@@ -33,10 +33,10 @@
                                         {% endfor %}
                                     </div>
                                 </li>
-                                <li class="relative show-child w-full ">
+                                <li class="relative show-child w-full min-w-40">
                                     <div class="flex w-full">
                                         <span class="w-full text-base dark:text-gray-300  text-gray-600 ">{{lang.translate('Date')}}</span>
-                                        <img src="/src/front_assets/svg/arrow.svg" />
+                                        <img class="w-4 h-4 mt-2" src="/src/front_assets/svg/arrow.svg" />
                                     </div>
                                     <div class="py-2 inline-block ">
                                         <span class="text-xs rounded-full py-1 px-2 bg-gray-300 text-gray-800 {{app.params.date != '' ? '' : 'hidden'}}  gap-2 inline-block">    

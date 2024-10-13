@@ -197,14 +197,14 @@ class VideoController extends CustomController
         
         $artistRepo = new \Medians\Customers\Infrastructure\CustomerRepository;
         $query['limit'] = $settings['view_items_limit'] ?? null;
-        $channels = $artistRepo->getWithFilter($query);
+        $artists = $artistRepo->getWithFilter($query);
         
 		try 
         {
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'video_items' => $list,
-                'channels' => $channels,
+                'artists' => $artists,
                 'genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => 'videos/discover'
             ], 'output'));

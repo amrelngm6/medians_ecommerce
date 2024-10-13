@@ -34,7 +34,7 @@ class VideoGenreController extends CustomController
             [ 'value'=> "category_id", 'text'=> "#"],
             [ 'value'=> "name", 'text'=> translate('name'), 'sortable'=> true ],
             [ 'value'=> "picture", 'text'=> translate('picture'), 'sortable'=> true ],
-            [ 'value'=> "parent.name", 'text'=> translate('Parent'), 'sortable'=> true ],
+            // [ 'value'=> "parent.name", 'text'=> translate('Parent'), 'sortable'=> true ],
             [ 'value'=> "path", 'text'=> translate('Path'), 'sortable'=> true ],
             [ 'value'=> "status", 'text'=> translate('Status'), 'sortable'=> true ],
             [ 'value'=> "edit", 'text'=> translate('edit')  ],
@@ -79,6 +79,43 @@ class VideoGenreController extends CustomController
 	    ]);
 	}
 
+		/**
+	 * Admin genre page by ID
+	 * 
+	 */ 
+    public function genre($id)
+    {
+		$this->app = new \config\APP;
+
+		$settings = $this->app->SystemSetting();
+
+		$this->app->customer_auth();
+
+		$params = $this->app->params();
+
+		$mediaRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
+		
+		try 
+        {
+            $item = $this->repo->find($id);
+
+			return render('category_wizard', [
+		        'load_vue' => true,
+		        'title' => translate('Video Genre'),
+		        'columns' => $this->columns(),
+		        'fillable' => $this->fillable(),
+		        'item' => $item,
+		        'categories' => $this->repo->getVideoGenres(),
+		        'fillable_category' => (new CategoryController())->fillable(),
+				'model' => 'VideoGenre',
+		    ]);
+
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+
 
 
 	public function store() 
@@ -92,9 +129,10 @@ class VideoGenreController extends CustomController
         	$this->validate($params);
 
 			$params['model'] = \Medians\Categories\Domain\VideoGenre::class;
+
             $returnData = (!empty($this->repo->store($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
-            : array('success'=>0, 'result'=>'Error', 'error'=>1);
+            : array('eror'=>'Error');
 
         } catch (\Exception $e) {
         	return array('result'=>$e->getMessage(), 'error'=>1);
