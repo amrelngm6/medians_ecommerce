@@ -41,11 +41,6 @@
 		{% endif %}
 
 		<div class="w-full flex gap-4 py-4">
-			{% set itemId = item.media_id %}
-			{% set itemType = 'media' %}
-			{% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
-			<span x-on:click="jQuery('#show-box-path').val('video/{{item.media_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
-
 		</div>
 
 	</div>
@@ -54,12 +49,27 @@
 
 	<div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
 
-		<a href="/artist/{{item.artist.customer_id}}" class="ajax-load flex gap-6 text-primary">
-			<img src="/stream?thumbnail=100&image={{item.artist.picture_name}}" alt="User Avatar" class="w-10 h-10 rounded-full">
-			<div class="text-xl dark:text-gray-300">{{item.artist.name}}
-				<p class="text-xs dark:text-gray-300">{{lang.translate('Artist')}}</p>
+		<div class="relative w-full   gap-4 flex">
+			<div class="relative w-full   gap-4 flex">
+				<a href="/artist/{{item.artist.customer_id}}" class="ajax-load flex gap-6 text-primary">
+					<img src="/stream?thumbnail=100&image={{item.artist.picture_name}}" alt="User Avatar" class="w-10 h-10 rounded-full">
+					<div class="text-xl dark:text-gray-300">{{item.artist.name}}
+						<p class="text-xs dark:text-gray-300">{{lang.translate('Artist')}}</p>
+					</div>
+				</a>
 			</div>
-		</a>
+			<div class="flex gap-2 flex-none text-primary pt-3"> 
+
+				{% set itemId = item.media_id %}
+				{% set itemType = 'media' %}
+				{% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
+				<span x-on:click="jQuery('#show-box-path').val('video/{{item.media_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100 pt-2"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
+
+				<span class="pt-1">{{item.created_at|date("M d, Y")}}</span>
+			</div>
+		</div>
+		<h2 class="pt-10	  text-2xl text-white overflow-hidden">{{item.name}}</h2>
+
 		<span class="block pt-10 text-sm text-gray-500">{{lang.translate('About')}}</span>
 		<div class="text-primary overflow-auto" style="max-height: 400px;">
 			<div class="dark:text-gray-300 py-4">{{item.field.about|raw| nl2br  }}</div>

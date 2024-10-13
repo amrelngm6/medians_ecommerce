@@ -8,7 +8,7 @@
                         <div class="lg:flex w-full text-white mx-auto text-center relative z-10">
                             <img src="/stream?thumbnail=300&image={{item.picture_name}}"  class="w-40 h-40 lg:w-56 lg:h-56 rounded-full shadow-xl" />
                             <div class="lg:p-8 py-8 text-left w-full">
-                                <span>{{lang.translate('Track')}}</span>
+                                <a href="/artist/{{item.author_id}}" class="ajax-load pb-1">{{item.artist.name}}</a>
                                 <h1 class="lg:text-2xl text-lg ">{{item.name}}</h1>
                                 <div class="py-2 font-thin">
                                     <p class="truncate-text truncate">{{item.description}} </p>
@@ -40,6 +40,7 @@
                         </div>
                     </div>
                 </div>  
+                
                 <div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
                     
                     <div class="w-full ">
