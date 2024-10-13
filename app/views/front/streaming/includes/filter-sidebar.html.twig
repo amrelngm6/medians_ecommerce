@@ -48,6 +48,7 @@
                                         {% for period in ['day','week','month', 'year'] %}
                                         <p><a href="?params[sort_by]={{app.params.sort_by}}&params[date]={{period}}&params[title]={{app.params.title}}" class="ajax-load">{{lang.translate(period)}}</a></p>
                                         {% endfor %}
+                                        <p><a href="?params[sort_by]={{app.params.sort_by}}&params[title]={{app.params.title}}" class="ajax-load">{{lang.translate('All')}}</a></p>
                                     </div>
                                 </li>
                             </ul>
