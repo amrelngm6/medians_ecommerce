@@ -873,8 +873,6 @@ $(function(){
 		if (!myVideo)
 			return;
 
-		
-
 		if (myVideo.paused) {
 			myVideo.play()
 			jQuery(`#${myVideo.dataset.container} .play-video`).hide().parent().find('.pause-video').fadeIn(200)
