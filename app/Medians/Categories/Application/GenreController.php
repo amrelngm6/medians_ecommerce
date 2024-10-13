@@ -98,7 +98,17 @@ class GenreController extends CustomController
 
 
 	/**
-	 * Admin genre page
+	 * Frontend genre page
+	 * 
+	 */ 
+	public function page( $genreContent ) 
+	{
+		return $this->genre($genreContent->item_id);
+	}
+
+
+	/**
+	 * Frontend genre page by ID
 	 * 
 	 */ 
 	public function genre( $genre_id ) 

@@ -6,8 +6,10 @@ use Medians\Menus\Infrastructure\MenuRepository;
 use Medians\Content\Infrastructure\ContentRepository;
 use Medians\Pages\Domain\Page;
 use Medians\Blog\Domain\Blog;
-use Medians\Products\Domain\Product;
 use Medians\Categories\Domain\Category;
+use Medians\Categories\Domain\Genre;
+use Medians\Categories\Domain\BookGenre;
+use Medians\Categories\Domain\VideoGenre;
 use Shared\dbaser\CustomController;
 
 class PageController extends CustomController 
@@ -262,6 +264,10 @@ class PageController extends CustomController
 			switch (get_class($pageContent->item)) {
 				case Blog::class:
 					return (new \Medians\Blog\Application\BlogController)->page($pageContent);
+					break;
+		
+				case Genre::class:
+					return (new \Medians\Categories\Application\GenreController)->page($pageContent);
 					break;
 				
 				case Page::class:
