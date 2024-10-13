@@ -131,7 +131,7 @@ class FacebookService
               }
               
             
-            $localPic = $this->saveImageFromUrl($user['picture']['url'], '/uploads/images/'.md5($user_info['picture']['url']).'.jpg');
+            $localPic = isset($user['picture']['url']) ?  $this->saveImageFromUrl($user['picture']['url'], '/uploads/images/'.md5($user_info['picture']['url']).'.jpg') : '';
               
 			// Prepare user data to store
 			$params['email'] = $user_info['email'];
