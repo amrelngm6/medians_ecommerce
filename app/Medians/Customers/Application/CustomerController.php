@@ -154,6 +154,34 @@ class CustomerController extends CustomController
 	}
 
     
+
+	/**
+	*  Update item
+	*/
+	public function updatePassword() 
+	{
+		$customer = $this->app->customer_auth();
+		$params = $this->app->params();
+
+		try {
+
+            $oldPassword = $params['old_password'];
+            $newPassword = $params['new_password'];
+            $newPassword = $params['confirm_password'];
+
+			$params['customer_id'] = $customer->customer_id;
+
+
+            return (!empty($this->repo->checkUpdatePassword($params))) 
+            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            : array('success'=>0, 'result'=>'Error', 'error'=>1);
+
+        } catch (Exception $e) {
+            return  array('error'=>$e->getMessage());
+        }
+	}
+
+    
     /**
      * Channels list page for frontend
      */
