@@ -98,20 +98,42 @@ class FacebookService
             $oAuth2Client = $fb->getOAuth2Client();
             $tokenMetadata = $oAuth2Client->debugToken($accessToken);
             
-            echo 'App ID in token: ' . $tokenMetadata->getAppId() . '<br>';
-            echo 'Your App ID: ' . $this->cliendId . '<br>';
-            
             // Validate that the token belongs to the correct app
             $tokenMetadata->validateAppId($this->cliendId);  // This should match your actual App ID
             $tokenMetadata->validateExpiration(); // Validate that the token has not expired
                 
 
 
-            return;
-	  		// Get user data through API
-			$google_oauth = new Google_Service_Oauth2($Google->client);
-			$user_info = $google_oauth->userinfo->get();
 
+            if (!$accessToken->isLongLived()) {
+                // Exchange short-lived token for long-lived token if necessary
+                try {
+                  $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+                } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+                  echo 'Error getting long-lived access token: ' . $e->getMessage();
+                  exit;
+                }
+              }
+              
+              // Set the access token in the session
+              $_SESSION['fb_access_token'] = (string) $accessToken;
+              
+              // Now you can make API requests for user data
+              try {
+                $response = $fb->get('/me?fields=id,name,email', $accessToken);
+                $user_info = $response->getGraphUser();
+                echo 'Name: ' . $user['name'] . '<br>';
+                echo 'Email: ' . $user['email'];
+              } catch(\Facebook\Exceptions\FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+              } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+              }
+            
+              print_r($user_info);
+              return;
 			$localPic = $Google->saveImageFromUrl($user_info['picture'], '/uploads/images/'.md5($user_info['picture']).'.jpg');
 
 			// Prepare user data to store
