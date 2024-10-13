@@ -133,6 +133,7 @@ $.each( instance, function(key, value) {
       prevArrow = arrows.filter('.arrow-prev'),
       nextArrow = arrows.filter('.arrow-next'),
       box = jQuery(instance[key]).find(".hs"), 
+      count = jQuery(instance[key]).attr("data-count"), 
       x = 0,
       mx = 0,
       maxScrollWidth = box[0].scrollWidth - (box[0].clientWidth / 2) - (box.width() / 2);
@@ -140,12 +141,12 @@ $.each( instance, function(key, value) {
       jQuery(arrows).on('click', function() {
       
     if (jQuery(this).hasClass("arrow-next")) {
-      x = ((box.width() / 1)) + box.scrollLeft() - 10;
+      x = ((box.width() / (count > 1 ? 2 : 1))) + box.scrollLeft() - 10;
       box.animate({
         scrollLeft: x,
       })
     } else {
-      x = ((box.width() / 1)) - box.scrollLeft() -10;
+      x = ((box.width() / (count > 1 ? 2 : 1))) - box.scrollLeft() -10;
       box.animate({
         scrollLeft: -x,
       })
