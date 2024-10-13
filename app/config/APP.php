@@ -296,7 +296,7 @@ class APP
 			array('permission'=> 'Dashboard.index', 'title'=>translate('Dashboard'), 'icon'=>'airplay', 'link'=>'dashboard', 'component'=>'master_dashboard'),
 			
 
-			array('permission'=>'Customers.index', 'title'=>translate('Customers'),  'icon'=>'users', 'link'=>'admin/customers', 'component'=>'data_table'),
+			array('permission'=>'Customers.index', 'title'=>translate('Artists'),  'icon'=>'users', 'link'=>'admin/customers', 'component'=>'data_table'),
 			
 			
 			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'blog'),
