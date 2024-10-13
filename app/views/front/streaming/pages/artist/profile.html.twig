@@ -48,16 +48,19 @@
                 
                     <input type="hidden" name="type" value="Customer.update" />
                     
-                    <div class=" text-primary mt-6"><h4 class="text-xl dark:text-gray-300">{{lang.translate('Basic info')}}</h4></div>
-                    <hr class="opacity-30 my-2" />
                     <div class="grid-cols-1 lg:grid-cols-2 grid gap-10">
                         <div class="text-primary w-full block">
-                            <input name="params[name]" placeholder="{{lang.translate('Full Name')}} *" value="{{item.name}}" class="text-gray-600 dark:text-gray-300 dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-rose-400  border-gray-200" />
+                            <input type="password" name="params[old_password]" placeholder="{{lang.translate('Current password')}} *" class="text-gray-600 dark:text-gray-300 dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-rose-400  border-gray-200" />
                         </div>                    
                     </div>
                     
-                    <div class="text-primary w-full block my-6">
-                        <textarea rows="3" placeholder="{{lang.translate('About')}} *" name="params[field][about]" class="text-gray-600 dark:text-gray-300 dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-rose-400  border-gray-200" >{{item.field.about}}</textarea>
+                    <div class="grid-cols-1 lg:grid-cols-2 grid gap-10">
+                        <div class="text-primary w-full block">
+                            <input type="password" name="params[new_password]" placeholder="{{lang.translate('New password')}} *" class="text-gray-600 dark:text-gray-300 dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-rose-400  border-gray-200" />
+                        </div>                    
+                        <div class="text-primary w-full block">
+                            <input type="password" name="params[confirm_password]" placeholder="{{lang.translate('Confirm password')}} *" class="text-gray-600 dark:text-gray-300 dark:bg-gray-900 dark:border-gray-700 py-2 px-4 w-full rounded-2xl bg-gray-100 border focus:outline-none focus:border-rose-400  border-gray-200" />
+                        </div>                    
                     </div>
                     
                     <button class=" dark:text-gray-300 float-right inline-block px-6 py-2 rounded-2xl border transition hover:border-rose-600 border-rose-400">{{lang.translate('Save')}}</button>

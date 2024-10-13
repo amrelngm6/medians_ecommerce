@@ -167,7 +167,11 @@ class CustomerController extends CustomController
 
             $oldPassword = $params['old_password'];
             $newPassword = $params['new_password'];
-            $newPassword = $params['confirm_password'];
+            $confirmPassword = $params['confirm_password'];
+
+			if ($confirmPassword != $newPassword)
+				throw new \Exception(translate("Paswords not matched"), 1);
+				
 
 			$params['customer_id'] = $customer->customer_id;
 
