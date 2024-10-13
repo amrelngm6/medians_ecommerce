@@ -217,6 +217,8 @@ class CustomerRepository
 		$Model = new Customer();
 
 		$dataArray = [];
+    	$data['picture'] = $data['picture'] ?? ('/uploads/img/letters/'. strtolower(substr($data['name'], 0, 1)) .'.png');
+
 		foreach ($data as $key => $value) 
 		{
 			if (in_array($key, $Model->getFields()))
@@ -277,6 +279,7 @@ class CustomerRepository
 		$Model = $Model->firstOrCreate($data);
 
     	$data['customer_id'] = $Model->customer_id;
+    	$data['picture'] = $data['picture'] ?? ('/uploads/img/letters/'. strtolower(substr($data['name'], 0, 1)) .'.png');
 		$this->checkUpdatePassword($data);
     	/**
 		* Set token for activation by Customer
