@@ -174,7 +174,7 @@ class FacebookService
 	public function setSession($data, $code = null) 
 	{
 
-		$AuthService = new AuthService;
+		$AuthService = new CustomerAuthService;
 
 		return $AuthService->setSession($data, $code);
 	}
