@@ -63,57 +63,57 @@ class FacebookService
 
 
 		try {
-				
-            $helper = $this->client->getRedirectLoginHelper();
 
-            try {
-                $accessToken = $helper->getAccessToken();
-            } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-                // When Graph returns an error
-                echo 'Graph returned an error: ' . $e->getMessage();
-                exit;
-            } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-                // When validation fails or other local issues
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                exit;
-            }
+                $fb = $this->client;
 
-            if (!isset($accessToken)) {
-                echo 'No OAuth data could be obtained from the callback. Please check if you have the right App ID, secret, and redirect URI.';
-                exit;
-            }
+                $helper = $fb->getRedirectLoginHelper();
 
-            $oAuth2Client = $this->client->getOAuth2Client();
-            $tokenMetadata = $oAuth2Client->debugToken($accessToken);
-            $tokenMetadata->validateAppId('YOUR_APP_ID'); // Validate app ID
-            $tokenMetadata->validateExpiration(); // Check token expiration
-
-            if (!$accessToken->isLongLived()) {
-                // Exchange short-lived token for long-lived token if necessary
                 try {
-                    $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
-                } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-                    echo 'Error getting long-lived access token: ' . $e->getMessage();
+                    $accessToken = $helper->getAccessToken();
+                } catch(\Facebook\Exceptions\FacebookResponseException $e) {
+                    echo 'Graph returned an error: ' . $e->getMessage();
+                    exit;
+                } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+                    echo 'Facebook SDK returned an error: ' . $e->getMessage();
                     exit;
                 }
-            }
 
-            // Set the access token in the session
-            $_SESSION['fb_access_token'] = (string) $accessToken;
+                if (!isset($accessToken)) {
+                    if ($helper->getError()) {
+                        // Display detailed error information
+                        echo "Error: " . $helper->getError() . "\n";
+                        echo "Error Code: " . $helper->getErrorCode() . "\n";
+                        echo "Error Reason: " . $helper->getErrorReason() . "\n";
+                        echo "Error Description: " . $helper->getErrorDescription() . "\n";
+                    } else {
+                        echo 'Bad request';
+                    }
+                    exit;
+                }
 
-            // Now you can make API requests for user data
-            try {
-                $response = $this->client->get('/me?fields=id,name,email', $accessToken);
-                $user = $response->getGraphUser();
-                echo 'Name: ' . $user['name'] . '<br>';
-                echo 'Email: ' . $user['email'];
-            } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-                echo 'Graph returned an error: ' . $e->getMessage();
-                exit;
-            } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                exit;
-            }
+                // If access token was successfully retrieved, debug the token
+                $oAuth2Client = $fb->getOAuth2Client();
+                $tokenMetadata = $oAuth2Client->debugToken($accessToken);
+
+                // Validate the access token metadata (App ID and expiration)
+                $tokenMetadata->validateAppId('YOUR_APP_ID');  // Replace with your App ID
+                $tokenMetadata->validateExpiration();
+
+                echo 'Access Token is valid.';
+
+                // Output user data
+                try {
+                    $response = $fb->get('/me?fields=id,name,email', $accessToken);
+                    $user = $response->getGraphUser();
+                    echo 'Name: ' . $user['name'] . '<br>';
+                    echo 'Email: ' . $user['email'];
+                } catch(\Facebook\Exceptions\FacebookResponseException $e) {
+                    echo 'Graph returned an error: ' . $e->getMessage();
+                    exit;
+                } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+                    echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                    exit;
+                }
 
 
             return;
