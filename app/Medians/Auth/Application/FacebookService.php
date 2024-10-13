@@ -112,11 +112,6 @@ class FacebookService
                 exit;
             }
 
-		  	// Check if code is expired or invalid
-		  	if($Google->client->isAccessTokenExpired())
-		  	{
-	  			return false;
-		  	}
 
             return;
 	  		// Get user data through API
