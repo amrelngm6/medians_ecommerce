@@ -130,7 +130,7 @@
                                 {% set list = {'items' : relatedVideo } %}
                                 {% for media_item in list.items %}
                                 <li class="hs__item  max-w-[250px]"> 
-                                    {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/audiobook-item.html.twig' %}
+                                    {% include 'views/front/'~ app.SystemSetting.template ~ '/includes/video-item.html.twig' %}
                                 </li>
                                 {% endfor %}    
                             </ul>
