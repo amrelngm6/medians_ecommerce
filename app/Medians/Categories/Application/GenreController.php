@@ -97,25 +97,6 @@ class GenreController extends CustomController
 	}
 
 
-	/**
-	 * Frontend genre page
-	 * 
-	 */ 
-	public function page( $genreContent ) 
-	{
-		return $this->genre($genreContent->item_id);
-	}
-
-
-	/**
-	 * Frontend genre page by ID
-	 * 
-	 */ 
-	public function genre( $genre_id ) 
-	{
-		
-	}
-
 
 
 	public function store() 
@@ -192,5 +173,55 @@ class GenreController extends CustomController
 
 
 	}
+
+	
+	/**
+	 * Frontend genre page
+	 * 
+	 */ 
+	public function page( $genreContent ) 
+	{
+		$this->app = new \config\APP;
+
+		return $this->genre($genreContent->prefix);
+	}
+
+
+	/**
+	 * Frontend genre page by prefix
+	 * 
+	 */ 
+    public function genre($prefix)
+    {
+		$settings = $this->app->SystemSetting();
+		$this->app->customer_auth();
+        $params = $this->app->params();
+
+		$mediaRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
+		
+		try 
+        {
+            $item = $this->repo->getGenreByPrefix($prefix);
+            
+            if (empty($item->category_id))
+    			throw new \Exception(translate('Page not found'), 1);
+
+            $params['limit'] = $settings['view_items_limit'] ?? null;
+            $params['genre'] = $item->category_id;
+            $list = $mediaRepo->getWithFilter($params);
+            
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'item' => $item,
+                'list' => $list,
+                'genres' => $this->repo->getGenres(),
+                'layout' => 'genre'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
 
 }
