@@ -140,12 +140,12 @@ $.each( instance, function(key, value) {
       jQuery(arrows).on('click', function() {
       
     if (jQuery(this).hasClass("arrow-next")) {
-      x = ((box.width() / 2)) + box.scrollLeft() - 10;
+      x = ((box.width() / 1)) + box.scrollLeft() - 10;
       box.animate({
         scrollLeft: x,
       })
     } else {
-      x = ((box.width() / 2)) - box.scrollLeft() -10;
+      x = ((box.width() / 1)) - box.scrollLeft() -10;
       box.animate({
         scrollLeft: -x,
       })
