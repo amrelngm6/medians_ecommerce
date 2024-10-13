@@ -61,16 +61,56 @@ class FacebookService
 
 		try {
 				
-			// Get system settings for Google Login
-			$SystemSettings = new SystemSettingsController;
+            $helper = $this->client->getRedirectLoginHelper();
 
-			$settings = $SystemSettings->getAll();
+            try {
+                $accessToken = $helper->getAccessToken();
+            } catch(\Facebook\Exceptions\FacebookResponseException $e) {
+                // When Graph returns an error
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+            } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+                // When validation fails or other local issues
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+            }
 
-			$Google = new GoogleService($settings['google_client_id'], $settings['google_client_secret']);
+            if (!isset($accessToken)) {
+                echo 'No OAuth data could be obtained from the callback. Please check if you have the right App ID, secret, and redirect URI.';
+                exit;
+            }
 
-			$code = $this->app->request()->get('code');
+            $oAuth2Client = $this->client->getOAuth2Client();
+            $tokenMetadata = $oAuth2Client->debugToken($accessToken);
+            $tokenMetadata->validateAppId('YOUR_APP_ID'); // Validate app ID
+            $tokenMetadata->validateExpiration(); // Check token expiration
 
-		  	$Google->client->setAccessToken($Google->client->fetchAccessTokenWithAuthCode($code));
+            if (!$accessToken->isLongLived()) {
+                // Exchange short-lived token for long-lived token if necessary
+                try {
+                    $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+                } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+                    echo 'Error getting long-lived access token: ' . $e->getMessage();
+                    exit;
+                }
+            }
+
+            // Set the access token in the session
+            $_SESSION['fb_access_token'] = (string) $accessToken;
+
+            // Now you can make API requests for user data
+            try {
+                $response = $this->client->get('/me?fields=id,name,email', $accessToken);
+                $user = $response->getGraphUser();
+                echo 'Name: ' . $user['name'] . '<br>';
+                echo 'Email: ' . $user['email'];
+            } catch(\Facebook\Exceptions\FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+            } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+            }
 
 		  	// Check if code is expired or invalid
 		  	if($Google->client->isAccessTokenExpired())
@@ -78,7 +118,7 @@ class FacebookService
 	  			return false;
 		  	}
 
-
+            return;
 	  		// Get user data through API
 			$google_oauth = new Google_Service_Oauth2($Google->client);
 			$user_info = $google_oauth->userinfo->get();
