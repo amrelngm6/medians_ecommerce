@@ -165,6 +165,7 @@ class APP
 
 	public function google_login_link()
 	{
+
 		return (new CustomerAuthService())->loginWithGoogle();
 	}
 
