@@ -104,7 +104,7 @@
 		</div>
 		{% endif %}
 		
-		{% set related = item.related(10, item.type) %}
+		{% set related = item.related(10, 'audio') %}
 		{% if related|length %}
 		<div class="w-full 	pt-6" id="slide-audio-items" data-count="4">
 			<div class="hs__wrapper" x-data="{is_slide: false}">
