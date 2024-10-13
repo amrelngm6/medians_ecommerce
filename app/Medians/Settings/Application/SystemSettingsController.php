@@ -89,6 +89,12 @@ class SystemSettingsController extends CustomController
 				[ 'key'=> "google_map_api", 'title'=> translate('Google Map API'), 'help_text'=>translate('Used for maps'),'fillable'=> true, 'column_type'=>'text' ],
 			],
 			
+			'facebook'=> [	
+				[ 'key'=> "allow_facebook_login", 'title'=> translate('Login with Facebook'), 'help_text'=>translate('Allow users to signup with Gmail'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "facebook_client_id", 'title'=> translate('Facebook Client ID'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "facebook_client_secret", 'title'=> translate('Facebook Client secret'), 'fillable'=> true, 'column_type'=>'text' ],
+			],
+			
 			'twitter'=> [	
 				[ 'key'=> "allow_twitter_login", 'title'=> translate('Login with Twitter'), 'help_text'=>translate('Allow users to signup with Twitter ( X ) account'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "twitter_api_key", 'title'=> translate('Twitter API Key'), 'fillable'=> true, 'column_type'=>'text' ],
