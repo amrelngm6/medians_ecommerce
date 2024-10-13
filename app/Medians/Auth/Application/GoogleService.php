@@ -38,7 +38,7 @@ class GoogleService
 		$this->client = new Client();
 		$this->client->setClientId($client_id);
 		$this->client->setClientSecret($client_secret);
-		$this->client->setRedirectUri($this->app->CONF['url'].'google_login_redirect');
+		$this->client->setRedirectUri($this->app->CONF['url'].'/google_login_redirect');
 		$this->client->addScope("email");
 		$this->client->addScope("profile");
 	}
