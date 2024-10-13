@@ -246,16 +246,18 @@ class CustomerAuthService
 			$google_oauth = new Google_Service_Oauth2($Google->client);
 			$user_info = $google_oauth->userinfo->get();
 
+			$localPic = $Google->saveImageFromUrl($user_info['picture'], '/uploads/images/'.md5($user_info['picture']).'.jpg');
+
 			// Prepare user data to store
 			$params['email'] = $user_info['email'];
 			$params['name'] = $user_info['name'];
-			$params['picture'] = $user_info['picture'];
+			$params['picture'] = $localPic;
 			$params['status'] = 'on';
 
 			$user = $this->repo->findByEmail($params['email']);
 
 			if (isset($user->customer_id))
-				$user->update(['picture' => $user_info['picture']]);
+				$user->update(['picture' => $localPic]);
 			else 
 				$user = $this->repo->store($params);
 
