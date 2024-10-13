@@ -166,6 +166,7 @@ class CustomerAuthService
 	public function activate($code)
 	{
 		$this->app = new \config\APP;
+		$settings = $this->app->SystemSetting();
 		
         try {
             
@@ -176,7 +177,7 @@ class CustomerAuthService
 				$updated = $checkUser->update(['status'=>'on']);
 			}
 
-			return render('views/front/auth/activate.html.twig', [
+			return render('views/front/'. ($settings['template'] ?? 'default') .'/auth/activate.html.twig', [
 				// 'load_vue' => true,
 				'title' => translate('Activation page'),
 				'app' => $this->app,
