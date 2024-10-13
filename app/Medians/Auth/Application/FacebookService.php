@@ -61,56 +61,43 @@ class FacebookService
 
 		try {
 
-                $fb = $this->client;
+            $fb = $this->client;
 
-                $helper = $fb->getRedirectLoginHelper();
+            $helper = $fb->getRedirectLoginHelper();
 
-                try {
-                    $accessToken = $helper->getAccessToken();
-                } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-                    echo 'Graph returned an error: ' . $e->getMessage();
-                    exit;
-                } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-                    echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                    exit;
+            try {
+                $accessToken = $helper->getAccessToken();
+            } catch (\Facebook\Exceptions\FacebookResponseException $e) {
+                echo 'Graph returned an error: ' . $e->getMessage();
+                exit;
+            } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                exit;
+            }
+            
+            if (!isset($accessToken)) {
+                if ($helper->getError()) {
+                    echo "Error: " . $helper->getError() . "\n";
+                    echo "Error Code: " . $helper->getErrorCode() . "\n";
+                    echo "Error Reason: " . $helper->getErrorReason() . "\n";
+                    echo "Error Description: " . $helper->getErrorDescription() . "\n";
+                } else {
+                    echo 'Bad request';
                 }
-
-                if (!isset($accessToken)) {
-                    if ($helper->getError()) {
-                        // Display detailed error information
-                        echo "Error: " . $helper->getError() . "\n";
-                        echo "Error Code: " . $helper->getErrorCode() . "\n";
-                        echo "Error Reason: " . $helper->getErrorReason() . "\n";
-                        echo "Error Description: " . $helper->getErrorDescription() . "\n";
-                    } else {
-                        echo 'Bad request';
-                    }
-                    exit;
-                }
-
-                // If access token was successfully retrieved, debug the token
-                $oAuth2Client = $fb->getOAuth2Client();
-                $tokenMetadata = $oAuth2Client->debugToken($accessToken);
-
-                // Validate the access token metadata (App ID and expiration)
-                $tokenMetadata->validateAppId('YOUR_APP_ID');  // Replace with your App ID
-                $tokenMetadata->validateExpiration();
-
-                echo 'Access Token is valid.';
-
-                // Output user data
-                try {
-                    $response = $fb->get('/me?fields=id,name,email', $accessToken);
-                    $user = $response->getGraphUser();
-                    echo 'Name: ' . $user['name'] . '<br>';
-                    echo 'Email: ' . $user['email'];
-                } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-                    echo 'Graph returned an error: ' . $e->getMessage();
-                    exit;
-                } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-                    echo 'Facebook SDK returned an error: ' . $e->getMessage();
-                    exit;
-                }
+                exit;
+            }
+            
+            // Debug the token metadata
+            $oAuth2Client = $fb->getOAuth2Client();
+            $tokenMetadata = $oAuth2Client->debugToken($accessToken);
+            
+            echo 'App ID in token: ' . $tokenMetadata->getAppId() . '<br>';
+            echo 'Your App ID: ' . 'YOUR_APP_ID' . '<br>';
+            
+            // Validate that the token belongs to the correct app
+            $tokenMetadata->validateAppId('YOUR_APP_ID');  // This should match your actual App ID
+            $tokenMetadata->validateExpiration(); // Validate that the token has not expired
+                
 
 
             return;
