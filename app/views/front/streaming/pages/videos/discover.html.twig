@@ -1,5 +1,6 @@
 <div class="py-4 px-2 w-full">
 
+    {% include 'views/front/' ~ template ~ '/includes/filter-top.html.twig' %}
 
     {% set customer = app.customer_auth() %}
     {% include 'views/front/' ~ template ~ '/includes/home_videos.html.twig' %}
