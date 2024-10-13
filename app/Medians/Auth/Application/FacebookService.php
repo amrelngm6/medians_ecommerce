@@ -38,9 +38,9 @@ class FacebookService
             'app_secret' => $client_secret,
             'default_graph_version' => 'v17.0',
         ]);
-        
+        $token = 'AQBQcN7bp-3TTQ44UJ5uIdUi3S0tbxlAAr3HteP4zB-_qoyCavbYf2DlKOT2VtbUPmV67w1sFziYTXDOoGRwFxZEq-SEzHaIno6WqQI8gyrm-UOrnyHQNbNMrKcLdCVED3QiaDcS9yGkfUxPwKUk4kJIjn6MpdNEhgTshSv16GZUUEHtXMjOaohfJ3llN-rI8gJXc1_JVLosQgkqpPOForaVrcZ9Uioj7JRv1BJhQ_1Fy-WWLTvOD5dI-hY2qwCRjIYuDWTDYCivCA5MRCRJTWmAEw4y2xHh-CiZ6LSDk4hYbzGsB_gtJhFoK5LpYRjNFUaTFzIbGro39LrwNrAzVYQ8YU04l_erKPLuuw7Xuyrc3FUNRk2MnidOVw8qIUEgJzDwT88MTMi5Cuj-Avp1swht';
         $tokenMetadata = $this->client->getOAuth2Client()->debugToken($accessToken);
-        $tokenMetadata->validateAppId('YOUR_APP_ID');  // Validate app ID
+        $tokenMetadata->validateAppId($client_id);  // Validate app ID
 
 	}
 
