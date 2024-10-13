@@ -63,8 +63,6 @@
                     
                     <account_tab :currency="currency"  v-if="activeTab == 'account'" :overview="content.overview" :item="activeItem" />
                    
-                    <invoices_tab :currency="currency" :conf="conf" v-if="activeTab == 'invoices'" :invoices="content.invoices" :item="activeItem" :system_setting="system_setting" />
-                    
                     <info_tab :currency="currency"  :conf="conf" v-if="activeTab == 'business_info'" :overview="content.overview" :item="activeItem"  />
 
                     <setting_tab :conf="conf" v-if="activeTab == 'settings'" :fillable="content.fillable" :item="activeItem"  :system_setting="system_setting" />
@@ -117,7 +115,6 @@ const SideFormUpdate = defineAsyncComponent(() =>
 
 const form_field = defineAsyncComponent(() => import('@/components/includes/form_field.vue') );
 const account_tab = defineAsyncComponent(() => import('@/components/profile/account.vue') );
-const invoices_tab = defineAsyncComponent(() => import('@/components/profile/invoices.vue') );
 const setting_tab = defineAsyncComponent(() => import('@/components/profile/setting.vue') );
 const info_tab = defineAsyncComponent(() => import('@/components/profile/info.vue') );
 
@@ -128,7 +125,6 @@ export default {
         SideFormCreate,
         account_tab,
         form_field,
-        invoices_tab,
         setting_tab,
         info_tab
 
@@ -146,7 +142,6 @@ export default {
         const tabsList = ref([
             { title: translate('Account'), link: 'account' },
             { title: translate('Settings'), link: 'settings' },
-            { title: translate('Invoices'), link: 'invoices' },
         ]);
 
 

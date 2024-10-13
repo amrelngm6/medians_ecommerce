@@ -416,7 +416,6 @@ export default
                 orderStatusClass,
                 orderStatus,
                 getChartData,
-                invoicesDataset,
                 projects,
                 events,
                 bookingCharts,

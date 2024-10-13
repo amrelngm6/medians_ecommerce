@@ -52,21 +52,11 @@ const pages = defineAsyncComponent(() => import('@/components/pages.vue') );
 
 const blog = defineAsyncComponent(() => import('@/components/blog/index.vue') );
 
-const payments = defineAsyncComponent(() => import('@/components/payments.vue') );
-
 const app_settings = defineAsyncComponent(() => import('@/components/settings/app_settings.vue') );
 
 const profile = defineAsyncComponent(() => import('@/components/profile/profile.vue') );
 
 const gallery = defineAsyncComponent(() => import('@/components/gallery/index.vue') );
-
-const payment_methods = defineAsyncComponent(() => import('@/components/payment_methods.vue') );
-
-const transactions = defineAsyncComponent(() => import('@/components/transactions.vue') );
-
-const invoices = defineAsyncComponent(() => import('@/components/invoices.vue') );
-
-const orders = defineAsyncComponent(() => import('@/components/orders.vue') );
 
 const translations = defineAsyncComponent(() => import('@/components/translations.vue') );
 
@@ -100,14 +90,10 @@ export default {
         roles,
         system_settings,
         users,
-        payments,
         pages,
         app_settings,
         profile,
         gallery,
-        transactions,
-        invoices,
-        orders,
         translations,
         contact_forms,
         menus,
@@ -115,7 +101,6 @@ export default {
         notifications_events,
         plugins,
         hooks,
-        payment_methods,
         media,
         blog,
         translate,
