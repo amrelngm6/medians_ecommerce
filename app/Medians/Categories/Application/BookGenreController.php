@@ -80,32 +80,6 @@ class BookGenreController extends CustomController
 	}
 
 
-	/**
-	 * Admin genre page
-	 * 
-	 */ 
-	public function genre( $genre_id ) 
-	{
-		$page = $this->repo->find($genre_id);
-
-		try {
-			
-			return render('category_wizard', [
-		        'load_vue' => true,
-		        'title' => translate('genre page'),
-		        'columns' => $this->columns(),
-		        'fillable' => $this->fillable(),
-		        'item' => $page,
-		        'categories' => $this->repo->getAllBookGenres(),
-		        'fillable_category' => (new CategoryController())->fillable(),
-				'model' => 'BookGenre'
-		    ]);
-		} catch (\Exception $e) {
-			throw new \Exception($e->getMessage(), 1);
-			
-		}
-	}
-
 
 
 	public function store() 

@@ -81,51 +81,6 @@ class CategoryController extends CustomController
 	}
 
 
-	/**
-	 * Admin index items
-	 * 
-	 */ 
-	public function create(  ) 
-	{
-	    return render('category_wizard', [
-	        'load_vue' => true,
-	        'title' => translate('Product Categories'),
-	        'items' => $this->repo->get(100),
-	        'columns' => $this->columns(),
-			'categories' => $this->repo->list(),
-			'fillable' => $this->fillable(),
-	    ]);
-	}
-
-
-	/**
-	 * Admin category page
-	 * 
-	 */ 
-	public function category( $category_id ) 
-	{
-		$page = $this->repo->find($category_id);
-
-		try {
-			
-			$page->addView();
-
-			return render('category_wizard', [
-		        'load_vue' => true,
-		        'title' => translate('Category page'),
-		        'columns' => $this->columns(),
-		        'fillable' => $this->fillable(),
-		        'item' => $page,
-		        'categories' => $this->repo->list($category_id),
-		        'fillable_category' => (new CategoryController())->fillable(),
-		    ]);
-		} catch (\Exception $e) {
-			throw new \Exception($e->getMessage(), 1);
-			
-		}
-	}
-
-
 
 	public function store() 
 	{

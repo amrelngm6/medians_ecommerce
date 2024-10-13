@@ -113,24 +113,7 @@ class GenreController extends CustomController
 	 */ 
 	public function genre( $genre_id ) 
 	{
-		$page = $this->repo->find($genre_id);
-
-		try {
-			
-			return render('category_wizard', [
-		        'load_vue' => true,
-		        'title' => translate('genre page'),
-		        'columns' => $this->columns(),
-		        'fillable' => $this->fillable(),
-		        'item' => $page,
-		        'categories' => $this->repo->getAllGenres($genre_id),
-		        'fillable_category' => (new CategoryController())->fillable(),
-				'model' => 'Genre'
-		    ]);
-		} catch (\Exception $e) {
-			throw new \Exception($e->getMessage(), 1);
-			
-		}
+		
 	}
 
 
