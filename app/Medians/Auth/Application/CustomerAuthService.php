@@ -177,12 +177,13 @@ class CustomerAuthService
 				$updated = $checkUser->update(['status'=>'on']);
 			}
 
-			return render('views/front/'. ($settings['template'] ?? 'default') .'/pages/activate.html.twig', [
+			return render('views/front/'. ($settings['template'] ?? 'default') .'/pages/layout.html.twig', [
 				// 'load_vue' => true,
 				'title' => translate('Activation page'),
 				'app' => $this->app,
 				'msg' => isset($updated) ? translate('Account activated successfully') : translate('Code not valid'),
 				'valid' => isset($updated) ? true : false,
+				'layout' => 'activate',
 			]);
 
         } catch (Exception $e) {
