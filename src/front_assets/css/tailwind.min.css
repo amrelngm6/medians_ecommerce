@@ -733,6 +733,10 @@ video {
   right: -30px;
 }
 
+.right-\[-60px\] {
+  right: -60px;
+}
+
 .right-\[2px\] {
   right: 2px;
 }
@@ -779,6 +783,14 @@ video {
 
 .top-5 {
   top: 1.25rem;
+}
+
+.top-\[-10px\] {
+  top: -10px;
+}
+
+.top-\[-15px\] {
+  top: -15px;
 }
 
 .top-\[-20px\] {
@@ -2572,10 +2584,6 @@ video {
 
 .pe-1 {
   padding-inline-end: 0.25rem;
-}
-
-.pe-10 {
-  padding-inline-end: 2.5rem;
 }
 
 .pe-2 {
