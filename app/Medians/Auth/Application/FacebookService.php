@@ -24,14 +24,21 @@ class FacebookService
 	protected $app;
 	
 	public $client;
+	
+    public $cliendSecret;
+
+	public $cliendId;
 
 	function __construct($client_id, $client_secret)
 	{
 
+        $this->cliendId = $client_id;
+
+        $this->cliendSecret = $client_secret;
+
 		$this->app = new \config\APP;
 		
 		$this->repo = new \Medians\Users\Infrastructure\UserRepository();
-
 
         $this->client = new \Facebook\Facebook([
             'app_id' => $client_id,
@@ -92,10 +99,10 @@ class FacebookService
             $tokenMetadata = $oAuth2Client->debugToken($accessToken);
             
             echo 'App ID in token: ' . $tokenMetadata->getAppId() . '<br>';
-            echo 'Your App ID: ' . 'YOUR_APP_ID' . '<br>';
+            echo 'Your App ID: ' . $this->cliendId . '<br>';
             
             // Validate that the token belongs to the correct app
-            $tokenMetadata->validateAppId('YOUR_APP_ID');  // This should match your actual App ID
+            $tokenMetadata->validateAppId($this->cliendId);  // This should match your actual App ID
             $tokenMetadata->validateExpiration(); // Validate that the token has not expired
                 
 
