@@ -274,9 +274,30 @@ class CustomerController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item' => $customer,
-                'genre_type' => 'book_genres',
-                'model_type' => 'audiobook',
                 'layout' => isset($this->app->customer->customer_id) ? 'artist/profile' : 'signin'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
+
+	/**
+     * Edit info page for frontend
+     */
+    public function edit_information()
+    {
+		$customer = $this->app->customer_auth();
+
+		$settings = $this->app->SystemSetting();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'item' => $customer,
+                'layout' => isset($this->app->customer->customer_id) ? 'artist/information' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
