@@ -163,6 +163,11 @@ class APP
 		return (new CustomerAuthService())->checkSessionId();
 	}
 
+	public function google_login_link()
+	{
+		return (new CustomerAuthService())->loginWithGoogle();
+	}
+
 	/**
 	 * Get session for the Guests
 	 */
