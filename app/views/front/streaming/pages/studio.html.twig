@@ -300,7 +300,7 @@ $(function(){
                 borderColor: '#9BD0F5',
                 color: '#9BD0F5',
             }]
-            };
+        };
 
             
         {% set videoCharts = customer.chartsMedia('video') %}
@@ -314,8 +314,8 @@ $(function(){
                 borderColor: '#9BD0F5',
                 color: '#9BD0F5',
             }]
-            };
-            
+        };
+        
         {% set audiobookCharts = customer.chartsMedia('audiobook') %}
         const audiobookCharts = {
             labels: JSON.parse('{{audiobookCharts|column('label')|json_encode|raw}}'),
@@ -327,10 +327,10 @@ $(function(){
                 borderColor: '#9BD0F5',
                 color: '#9BD0F5',
             }]
-            };
+        };
 
-
-        
+setTimeout(function(){
+    
         new Chart(document.getElementById('myChart'), {
             type: 'line',
             data: audioCharts,
@@ -349,6 +349,8 @@ $(function(){
             data: videoCharts,
             options: chartsOptions
         });
+}, 1000)
+        
     })
 
 })
