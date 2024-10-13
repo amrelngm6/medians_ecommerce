@@ -38,7 +38,7 @@ class FacebookService
 
 		$this->app = new \config\APP;
 		
-		$this->repo = new \Medians\Users\Infrastructure\UserRepository();
+		$this->repo = new \Medians\Customers\Infrastructure\CustomerRepository();
 
         $this->client = new \Facebook\Facebook([
             'app_id' => $client_id,
