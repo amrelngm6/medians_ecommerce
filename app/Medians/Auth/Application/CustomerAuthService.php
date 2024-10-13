@@ -227,7 +227,7 @@ class CustomerAuthService
 			// Get system settings for Google Login
 			$settings = $this->app->SystemSetting();
 
-			$Google = new GoogleService($settings['google_client_id'], $settings['google_client_secret']);
+			$Google = new FacebookService($settings['facebook_client_id'], $settings['facebook_client_secret']);
 
 			return $Google->verifyLoginWithFacebook();
 
