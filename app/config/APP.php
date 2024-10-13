@@ -353,12 +353,13 @@ class APP
 				array('permission'=>'Gallery.index', 'title'=>translate('Gallery'),  'icon'=>'tool', 'link'=>'admin/gallery', 'component'=>'gallery'),
 			]
 			),
-			// array( 'title'=>translate('Plugins'),  'icon'=>'gift', 'link'=>'#plugins', 'superadmin'=> true, 'sub'=>
-			// [
-			// 	array('permission'=>'Plugins.index', 'title'=>translate('Plugins'),  'icon'=>'tool', 'link'=>'admin/plugins', 'component'=>'plugins'),
-			// 	array('permission'=>'Hooks.index', 'title'=>translate('Hooks'),  'icon'=>'tool', 'link'=>'admin/hooks', 'component'=>'hooks'),
-			// ]
-			// ),
+			
+			array( 'title'=>translate('Plugins'),  'icon'=>'gift', 'link'=>'#plugins', 'superadmin'=> true, 'sub'=>
+			[
+				array('permission'=>'Plugins.index', 'title'=>translate('Plugins'),  'icon'=>'tool', 'link'=>'admin/plugins', 'component'=>'plugins'),
+				array('permission'=>'Hooks.index', 'title'=>translate('Hooks'),  'icon'=>'tool', 'link'=>'admin/hooks', 'component'=>'hooks'),
+			]
+			),
 			
 			array( 'title'=>translate('Management'),  'icon'=>'target', 'link'=>'#management', 'superadmin'=> true, 'sub'=>
 			[
