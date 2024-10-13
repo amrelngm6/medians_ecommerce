@@ -274,9 +274,10 @@ class CustomerAuthService
 
 	public function loginWithGoogle()
 	{
-		$SystemSettings = new SystemSettingsController;
+		
+		$this->app = new \config\APP;
 
-		$settings = $SystemSettings->getAll();
+		$settings = $this->app->SystemSetting();
 
 		if (empty($settings['google_client_id']))
 			return null;
