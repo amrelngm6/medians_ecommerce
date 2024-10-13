@@ -32,6 +32,7 @@ RouteHandler::get('/switch-lang/(:all)', \Medians\DashboardController::class.'@s
 RouteHandler::get('/', \Medians\Pages\Application\PageController::class.'@homepage');
 RouteHandler::get('/dashboard/login', \Medians\Auth\Application\AuthService::class.'@loginPage');
 RouteHandler::get('/google_login_redirect', \Medians\Auth\Application\CustomerAuthService::class.'@verifyLoginWithGoogle');
+RouteHandler::get('/facebook_login_redirect', \Medians\Auth\Application\CustomerAuthService::class.'@verifyLoginWithFacebook');
 RouteHandler::get('/activate-account/(:all)', \Medians\Auth\Application\CustomerAuthService::class.'@activate');
 RouteHandler::get('/reset-password', \Medians\Auth\Application\AuthService::class.'@resetPasswordPage');
 RouteHandler::get('/reset-password-code', \Medians\Auth\Application\AuthService::class.'@resetPasswordCodePage');
