@@ -3,36 +3,39 @@
             <div class="w-full block px-2">
 
                 {% include 'views/front/' ~ template ~ '/includes/app_channels.html.twig' %}
+
                 <div class="h-10"></div>
 
                 <div class="w-full lg:flex gap-6  mb-10">
-                        <div class="w-full h-28 relative overflow-hidden bg-gradient-to-r from-pink-600 to-red-400 rounded-full">
-                            <div class="pl-4 pr-2.5 py-2.5 left-[16px] top-[16px] absolute flex-col justify-start items-start gap-px inline-flex">
-                            <div class="text-white text-2xl font-bold">Music streaming</div>
-                            <div class="text-white text-2xl font-extrabold ">Best of 2024</div>
-                            </div>
-                            <img class="w-28 h-28 right-[-30px] top-[-6px] absolute origin-top-left rotate-[11.62deg] rounded-3xl" src="/uploads/img/60x60.png" />
-                        </div>  
+                    <div class="w-full h-28 relative overflow-hidden bg-gradient-to-r from-pink-600 to-red-400 rounded-full">
+                        <div class="pl-4 pr-2.5 py-2.5 left-[16px] top-[16px] absolute flex-col justify-start items-start gap-px inline-flex">
+                            <div class="text-white text-2xl font-bold">{{lang.translate('Stations')}}</div>
+                            <div class="text-white text-2xl font-extrabold ">{{lang.translate('Listen to live stations')}}</div>
+                        </div>
+                        <img class="w-28 h-32 right-[-30px] top-[-10px] absolute origin-top-left rotate-[11.62deg] rounded-3xl" src="/uploads/img/station-1.jpg" />
+                    </div>  
 
-                        
-                        <div class="w-full h-28 relative overflow-hidden bg-gradient-to-r from-purple-600 to-cyan-200 rounded-full">
-                            <div class="pl-4 pr-2.5 py-2.5 left-[16px] top-[16px] absolute flex-col justify-start items-start gap-px inline-flex">
-                            <div class="text-white text-2xl font-bold">Audiobooks</div>
-                            <div class="text-white text-2xl font-extrabold ">With PDF</div>
-                            </div>
-                            <img class="w-28 h-28 right-[-30px] top-[-6px] absolute origin-top-left rotate-[11.62deg] rounded-3xl" src="/uploads/img/60x60.png" />
-                        </div>  
-                        
-                        
-                        <div class="w-full h-28 relative overflow-hidden bg-gradient-to-r from-rose-500 to-yellow-300 rounded-full">
-                            <div class="pl-4 pr-2.5 py-2.5 left-[16px] top-[16px] absolute flex-col justify-start items-start gap-px inline-flex">
-                            <div class="text-white text-2xl font-bold">Courses</div>
-                            <div class="text-white text-2xl font-extrabold ">and Toturials</div>
-                            </div>
-                            <img class="w-28 h-28 right-[-30px] top-[-6px] absolute origin-top-left rotate-[11.62deg] rounded-3xl" src="/uploads/img/60x60.png" />
-                        </div>  
-                    </div>
+                    
+                    <div class="w-full h-28 relative overflow-hidden bg-gradient-to-r from-purple-600 to-cyan-200 rounded-full">
+                        <div class="pl-4 pr-2.5 py-2.5 left-[16px] top-[16px] absolute flex-col justify-start items-start gap-px inline-flex">
+                            <div class="text-white text-2xl font-bold">{{lang.translate('Audiobooks')}}</div>
+                            <div class="text-white text-2xl font-extrabold ">{{lang.translate('Listen to books chapters')}}</div>
+                        </div>
+                        <img class="w-28 h-32 right-[-30px] top-[-10px] absolute origin-top-left rotate-[11.62deg] rounded-3xl" src="/uploads/img/station-1.jpg" />
+                    </div>  
+                    
+                    
+                    <div class="w-full h-28 relative overflow-hidden bg-gradient-to-r from-rose-500 to-yellow-300 rounded-full">
+                        <div class="pl-4 pr-2.5 py-2.5 left-[16px] top-[16px] absolute flex-col justify-start items-start gap-px inline-flex">
+                            <div class="text-white text-2xl font-bold">{{lang.translate('Channels')}}</div>
+                            <div class="text-white text-2xl font-extrabold ">{{lang.translate('Watch live channels')}}</div>
+                        </div>
+                        <img class="w-28 h-32 right-[-30px] top-[-10px] absolute origin-top-left rotate-[11.62deg] rounded-3xl" src="/uploads/img/station-1.jpg" />
+                    </div>  
+                </div>
 
-                    {% include 'views/front/' ~ template ~ '/includes/app_explore_trends.html.twig' %}
+                {% include 'views/front/' ~ template ~ '/includes/home_audio.html.twig' %}
+                <div class="h-10"></div>
 
-                    {% include 'views/front/' ~ template ~ '/includes/home_videos.html.twig' %}
+                {% include 'views/front/' ~ template ~ '/includes/home_videos.html.twig' %}
+            </div>
