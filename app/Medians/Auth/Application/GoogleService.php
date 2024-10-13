@@ -32,8 +32,9 @@ class GoogleService
 	{
 
 		$this->app = new \config\APP;
-
+		
 		$this->repo = new \Medians\Users\Infrastructure\UserRepository();
+		echo $this->app->CONF['url'].'google_login_redirect';
 
 		$this->client = new Client();
 		$this->client->setClientId($client_id);
