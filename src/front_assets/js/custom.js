@@ -354,10 +354,6 @@ function updateAudio(e, $elem) {
 
 function initAudioPlayer() {
 
-	
-	if (audio)
-		return audio.pause();
-	
 	jQuery('#player-audio').val(getCookie('volume'))
 	audio.volume = getCookie('volume')
 
@@ -874,11 +870,9 @@ $(function(){
 
 	function playVideo(myVideo)
 	{	
-		if (audio)
-			return audio.pause();
-		
 		if (!myVideo)
 			return;
+
 		
 
 		if (myVideo.paused) {
