@@ -383,7 +383,7 @@ class CustomerAuthService
 
 			echo (isset($checkUser->customer_id)) 
 			? json_encode(array('success'=>1, 'result'=>translate('Password updated successfully'), 'redirect'=>$this->app->CONF['url'].'customer/login')) 
-			: json_encode(array('error'=>$checkUser));
+			: json_encode(array('error'=>$checkUser, 'no_reset'=>1));
 
         } catch (Exception $e) {
         	throw new \Exception($e->getMessage(), 1);
@@ -453,7 +453,7 @@ class CustomerAuthService
 			
 			return  printResponse((isset($check->customer_id))
 			? array('success'=>1, 'result'=>translate('Updated successfully')) 
-			: array('error'=>1, 'result'=>translate('Error')));
+			: array('error'=>1, 'result'=>translate('Error'), 'no_reset'=>1));
 
 		} catch (\Throwable $th) {
 			return printResponse(array('error'=> $th->getMessage()));
