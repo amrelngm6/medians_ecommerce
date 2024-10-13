@@ -299,7 +299,6 @@ class APP
 			array('permission'=>'Customers.index', 'title'=>translate('Artists'),  'icon'=>'users', 'link'=>'admin/customers', 'component'=>'data_table'),
 			
 			
-			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'blog'),
 			
 			array('title'=>translate('Media'),  'icon'=>'music', 'link'=>'#media', 'sub'=>
 			[
@@ -318,6 +317,7 @@ class APP
 			]
 			),
 			
+			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'blog'),
 			
 			array('title'=>translate('Categories'),  'icon'=>'list', 'link'=>'#genres', 'sub'=>
 			[
