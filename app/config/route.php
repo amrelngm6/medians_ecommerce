@@ -83,6 +83,7 @@ RouteHandler::get('/search/short', \Medians\Media\Application\ShortVideoControll
 RouteHandler::get('/search/artist', \Medians\Customers\Application\CustomerController::class.'@search');
 RouteHandler::get('/search/playlist', \Medians\Playlists\Application\PlaylistController::class.'@search');
 RouteHandler::get('/search/station', \Medians\Stations\Application\StationController::class.'@search');
+RouteHandler::get('/search/channel', \Medians\Channels\Application\ChannelController::class.'@search');
 
 /** Studio pages */
 RouteHandler::get('/studio', \Medians\Media\Application\MediaItemController::class.'@studio');
