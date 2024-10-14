@@ -1904,6 +1904,10 @@ Station card
     top: -5px;
 }
 
+[dir="rtl"] .course-info .btn {
+    right: auto;
+    left: 30px;
+}
 .course-info .btn {
     background-color: #2A265F;
     border: 0;
