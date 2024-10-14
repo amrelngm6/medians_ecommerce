@@ -107,7 +107,7 @@ class TranslationController extends CustomController
         	$params['created_by'] = $this->app->auth()->id;
 
             $returnData = (!empty($this->repo->storeItems($params))) 
-            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>0)
             : array('result'=>'Error', 'error'=>1);
 
         } catch (Exception $e) {
