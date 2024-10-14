@@ -31,6 +31,7 @@ class FacebookService
 
 	function __construct($client_id, $client_secret)
 	{
+        session_start();
 
         $this->cliendId = $client_id;
 
@@ -51,9 +52,8 @@ class FacebookService
 
 	public function getLoginUrl()
 	{
-        session_start();
         
-        $helper = $this->client->getRedirectLoginHelper(false);
+        $helper = $this->client->getRedirectLoginHelper();
         
         $permissions = ['email', 'public_profile']; // Optional: Add more permissions like 'user_photos', etc.
         
@@ -63,7 +63,6 @@ class FacebookService
 
 	public function verifyLoginWithFacebook()
 	{
-        session_start();
 
 		$this->app = new \config\APP;
 
@@ -72,7 +71,7 @@ class FacebookService
 
             $fb = $this->client;
 
-            $helper = $fb->getRedirectLoginHelper(false);
+            $helper = $fb->getRedirectLoginHelper();
 
             try {
                 $accessToken = $helper->getAccessToken();
