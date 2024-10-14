@@ -2784,3 +2784,8 @@ body .ui_box:hover {
         height: 13px;
     }
 }
+[dir="rtl"] .lg\:ml-60
+{
+    margin-left: 0;
+    margin-right: 15rem;
+}
