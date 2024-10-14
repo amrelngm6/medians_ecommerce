@@ -24,7 +24,7 @@ class MediaFile extends CustomModel
 		'sort',
 	];
 
-	public $appends = ['wave', 'filename', 'picture', 'player_object', 'field'];
+	public $appends = ['wave', 'filename', 'picture', 'player_object'];
 
 	public function getWaveAttribute() 
 	{
