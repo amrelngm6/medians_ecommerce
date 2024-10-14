@@ -1908,6 +1908,9 @@ Station card
 [dir="rtl"] .filter-arrow {
     transform: rotate(180deg);
 }
+[dir="rtl"] .left-\[16px\] {
+    right: 16px;
+}
 [dir="rtl"] .lg\:left-\[100\%\] {
     right: 100%;
     left: auto;
