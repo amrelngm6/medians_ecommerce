@@ -43,7 +43,7 @@ class FacebookService
         $this->client = new \Facebook\Facebook([
             'app_id' => $client_id,
             'app_secret' => $client_secret,
-            'default_graph_version' => 'v17.0',
+            'default_graph_version' => 'v21.0',
         ]);
         
 	}
