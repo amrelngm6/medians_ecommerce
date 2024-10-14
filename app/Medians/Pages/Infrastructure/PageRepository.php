@@ -19,6 +19,14 @@ class PageRepository
 	}
 
 
+	public function findByPrefix($prefix = null)
+	{
+		return Page::with(['lang_content'=>function($q) use ($prefix){
+			$prefix ? $q->where('prefix', $prefix) : $q;
+		}])->first();
+	}
+
+
 	public function homepage()
 	{
 		return Page::where('homepage', 'on')->with(['lang_content'=>function($q) {
@@ -73,7 +81,7 @@ class PageRepository
     	isset($data['field']) ? $this->storeFields($data['field'], $Object->page_id) : '';
 
     	// Store Lang content
-    	!empty($data['content_langs']) ? $this->storeContent( (array) $data['content_langs'], $Object->page_id) : '';
+    	!empty($data['content']) ? $this->storeContent( (array) $data['content'], $Object->page_id) : '';
 
     	return $Object;
     }
@@ -93,7 +101,7 @@ class PageRepository
 		// Store Custom fields
     	isset($data['field']) ? $this->storeFields($data['field'], $Object->page_id) : '';
 
-    	!empty($data['content_langs']) ? $this->storeContent($data['content_langs'], $Object->page_id) : '';
+    	!empty($data['content']) ? $this->storeContent($data['content'], $Object->page_id) : '';
 
     	return $Object;
 
@@ -150,7 +158,6 @@ class PageRepository
 		$fields['item_id'] = $page_id;	
 		$fields['lang'] = $key;	
 		$fields['prefix'] =  $prefix;
-		print_r($fields);
 		$Model = Content::create($fields);
 
 		return $Model;

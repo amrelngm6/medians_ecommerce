@@ -142,7 +142,7 @@ class PageController extends CustomController
 
 
         	$params['created_by'] = $this->app->auth()->id;
-        	$params['content_langs'] = $this->app->request()->get('params')['content_langs'];
+        	$params['content'] = json_decode($this->app->request()->get('params')['content_langs'], true);
 
             $returnData = (!empty($this->repo->store($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
@@ -164,8 +164,9 @@ class PageController extends CustomController
 
         try {
 
-        	$params['lang_content'] = $this->app->request()->get('params')['lang_content'];
+        	$params['content'] = json_decode($this->app->request()->get('params')['content_langs'], true);
 
+			
             if ($this->repo->update($params))
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0);
@@ -223,14 +224,16 @@ class PageController extends CustomController
 
 
     
+	
+	
     
     /**
      * Homepage for frontend
      */
-    public function homepage()
+    public function subPage($prefix)
     {
 		
-        $page = $this->repo->homepage();
+        $page = $this->repo->findByPrefix($prefix);
 
 		$categoryRepo = new \Medians\Categories\Infrastructure\CategoryRepository;
 		$mediaItemRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
@@ -241,23 +244,14 @@ class PageController extends CustomController
 		try {
 			
 			$page->addView();
-			$params = [];
-			$params['limit'] = 8;
-			$params['type'] = 'audio';
-			$audioList = $mediaItemRepo->getWithFilter($params);
-			
-			$params['limit'] = 8;
-			$params['type'] = 'video';
-			$videoList = $mediaItemRepo->getWithFilter($params);
 
             return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'page' => $page,
+                'item' => $page,
                 'app' => $this->app,
-				'explore_items' => $audioList,
-				'video_items' => $videoList,
 				'genres' => $categoryRepo->getGenres(),
 				'channels' => $customerRepo->get(),
-				'layout' => 'app'
+				'layout' => 'subpage'
             ], 'output')));
             
 		} catch (\Exception $e) {
@@ -305,7 +299,7 @@ class PageController extends CustomController
 					break;
 				
 				case Page::class:
-					return $this->repo->find($pageContent->item_id, $pageContent->prefix);
+					return $this->subPage($pageContent->prefix);
 					break;
 			}
 			

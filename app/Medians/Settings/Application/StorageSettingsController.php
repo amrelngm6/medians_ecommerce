@@ -58,10 +58,6 @@ class StorageSettingsController extends CustomController
 			],
 			
 
-            'import videos'=> [	
-				[ 'key'=> "youtube_api", 'title'=> translate('YouTube API'), 'help_text'=>translate(''), 'fillable'=> true, 'column_type'=>'text' ],
-			],
-			
 	
         ];
 	}

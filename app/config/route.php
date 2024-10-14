@@ -335,6 +335,7 @@ if(!empty($app->auth()))
     RouteHandler::get('/admin/system_settings', \Medians\Settings\Application\SystemSettingsController::class.'@index');
     RouteHandler::get('/admin/site_settings', \Medians\Settings\Application\SiteSettingsController::class.'@index');
     RouteHandler::get('/admin/storage_settings', \Medians\Settings\Application\StorageSettingsController::class.'@index');
+    RouteHandler::get('/admin/videos_settings', \Medians\Settings\Application\VideosSettingsController::class.'@index');
 
     /**
     * @return Notifications events 
