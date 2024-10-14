@@ -52,6 +52,11 @@ class CategoryRepository
 		return Category::where('model', $model)->get();
 	}
 
+	public function getGenresByIds($ids)
+	{
+		return Genre::where('model', Genre::class)->whereIn('category_id', $ids)->get();
+	}
+
 
 	/**
 	 * Media Genres

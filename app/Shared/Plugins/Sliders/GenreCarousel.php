@@ -2,21 +2,20 @@
 
 namespace Shared\Plugins\Sliders;
 
-use Medians\Products\Infrastructure\CategoryRepository;
-use Medians\Products\Infrastructure\ProductRepository;
+use Medians\Categories\Infrastructure\CategoryRepository;
 use Medians\Hooks\Infrastructure\HookRepository;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Hooks\Domain\Hook;
 
 
-class CategoryCarousel 
+class GenreCarousel 
 {
 
 	
-    private $categoryRepo;
+    private $genreRepo;
     private $productRepo;
     private $hookRepo;
-    public $name = "Category carousel";
+    public $name = "Genre carousel";
     public $description = "";
     public $version = "1.0";
     public $shortcode = "";
@@ -24,9 +23,8 @@ class CategoryCarousel
 
 	function __construct()
 	{
-		$this->categoryRepo = new CategoryRepository;
+		$this->genreRepo = new CategoryRepository;
 		$this->hookRepo = new HookRepository;
-		$this->productRepo = new ProductRepository;
 	}
 
 
@@ -42,9 +40,9 @@ class CategoryCarousel
 			'basic'=> [	
 				[ 'key'=> "categories", 'title'=> translate('Categories'), 'help_text'=> translate('Select categories to display'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'category_id', 'multiple' => true,
-					'data' => $this->categoryRepo->getActive()  
+					'data' => $this->genreRepo->getGenres()  
 				],	
-				[ 'key'=> "img_style", 'title'=> translate('Image style'), 'help_text'=> translate('Select style of the category image to display'),
+				[ 'key'=> "img_style", 'title'=> translate('Image style'), 'help_text'=> translate('Select style of the genre image to display'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'img_style', 
 					'data' => [["name"=> "Squared", "img_style"=>""], ["name"=>"Circle", "img_style"=> "rounded-full"], ["name"=>"Rounded", "img_style"=>"rounded-lg"]]  
 				],	
@@ -116,15 +114,15 @@ class CategoryCarousel
 	{
 
 		try {
-			
 			$hook = $this->hookRepo->find($params['id']);
 
 			$params['categories_ids'] = json_decode($hook->field['categories']);
 
-			$items = $this->categoryRepo->getByIds($params['categories_ids']);
+			$items = $this->genreRepo->getGenresByIds($params['categories_ids']);
+			return 10000;
 
-            return renderPlugin('Shared/Plugins/views/category_carousel.html.twig', [
-		        'items' => $items,
+            return renderPlugin('views/front/streaming/includes/genres_section.html.twig', [
+		        'genres' => $items,
 				'hook' => $hook
 		    ],'output');
 
