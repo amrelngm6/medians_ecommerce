@@ -51,7 +51,7 @@ class FacebookService
 
 	public function getLoginUrl()
 	{
-        $_SESSION['fb_access_token'] = false;
+        session_destroy();
         
         $helper = $this->client->getRedirectLoginHelper(false);
         
