@@ -396,6 +396,9 @@ class APP
 				array('permission'=> 'ShortVideosSettings.index', 'title'=> translate('Short Videos settings'),  'icon'=>'tool', 'link'=>'admin/short_videos_settings', 'component'=>'system_settings'),
 				array('permission'=> 'AudioSettings.index', 'title'=> translate('Audio settings'),  'icon'=>'tool', 'link'=>'admin/audio_settings', 'component'=>'system_settings'),
 				array('permission'=> 'AudiobooksSettings.index', 'title'=> translate('Audiobooks settings'),  'icon'=>'tool', 'link'=>'admin/audiobooks_settings', 'component'=>'system_settings'),
+				array('permission'=> 'AudiobooksSettings.index', 'title'=> translate('Audiobooks settings'),  'icon'=>'tool', 'link'=>'admin/audiobooks_settings', 'component'=>'system_settings'),
+				array('permission'=> 'ChannelsSettings.index', 'title'=> translate('Channels settings'),  'icon'=>'tool', 'link'=>'admin/channels_settings', 'component'=>'system_settings'),
+				array('permission'=> 'StationsSettings.index', 'title'=> translate('Stations settings'),  'icon'=>'tool', 'link'=>'admin/stations_settings', 'component'=>'system_settings'),
 			]
 			),
 			
