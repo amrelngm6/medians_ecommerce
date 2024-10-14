@@ -111,6 +111,7 @@ function loadConfig($template, $data)
     $data['app']->setting = $setting;
     $data['template'] = $setting['template'] ?? 'default';
     $data['menu'] = $app->menu();
+    $data['sidemenu'] = $app->sideMenu();
     $data['langs'] = $languages;
     $data['startdate'] = !empty($app->request()->get('start')) ? $app->request()->get('start') : date('Y-m-d');
     $data['enddate'] = !empty($app->request()->get('end')) ? $app->request()->get('end') : date('Y-m-d');

@@ -5,7 +5,7 @@ use \Shared\dbaser\CustomController;
 
 use Medians\Settings\Infrastructure\SystemSettingsRepository;
 
-class VideosSettingsController extends CustomController
+class AudiobooksSettingsController extends CustomController
 {
 
 	/**
@@ -36,7 +36,7 @@ class VideosSettingsController extends CustomController
 
 		return [
 			'basic'=> [	
-				[ 'key'=> "enable_videos", 'title'=> translate('Allow videos feature'), 'help_text'=>translate('You can allow / disallow with Videos at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "enable_audiobooks", 'title'=> translate('Allow audiobooks feature'), 'help_text'=>translate('You can allow / disallow with Audiobooks at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
                 
 			],		
         ];
@@ -52,7 +52,7 @@ class VideosSettingsController extends CustomController
 			'load_vue' => true,
 			'setting' => (new SystemSettingsController())->getAll(),
 			'fillable' => $this->fillable(),
-			'title' => translate('Video Settings'),
+			'title' => translate('Audiobooks Settings'),
 	    ]);
 	} 
 

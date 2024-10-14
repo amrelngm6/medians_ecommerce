@@ -304,11 +304,8 @@ class APP
 		$data = array(
 			
 			array('permission'=> 'Dashboard.index', 'title'=>translate('Dashboard'), 'icon'=>'airplay', 'link'=>'dashboard', 'component'=>'master_dashboard'),
-			
 
 			array('permission'=>'Customers.index', 'title'=>translate('Artists'),  'icon'=>'users', 'link'=>'admin/customers', 'component'=>'data_table'),
-			
-			
 			
 			array('title'=>translate('Media'),  'icon'=>'music', 'link'=>'#media', 'sub'=>
 			[
@@ -396,6 +393,7 @@ class APP
 				array('permission'=> 'SystemSettings.index', 'title'=> translate('System Settings'),  'icon'=>'tool', 'link'=>'admin/system_settings', 'component'=>'system_settings'),
 				array('permission'=> 'StorageSettings.index', 'title'=> translate('Storage settings'),  'icon'=>'tool', 'link'=>'admin/storage_settings', 'component'=>'system_settings'),
 				array('permission'=> 'VideosSettings.index', 'title'=> translate('Videos settings'),  'icon'=>'tool', 'link'=>'admin/videos_settings', 'component'=>'system_settings'),
+				array('permission'=> 'AudioSettings.index', 'title'=> translate('Audio settings'),  'icon'=>'tool', 'link'=>'admin/audio_settings', 'component'=>'system_settings'),
 			]
 			),
 			
@@ -490,6 +488,48 @@ class APP
 
 			return array_values(array_filter($newMenu));
 		}
+	}
+
+
+
+
+
+	
+	/**
+	 * Return Superadmin menu
+	 * List of side menu
+	 */
+	public function sideMenu()
+	{
+		$settings = $this->SystemSetting();
+
+		$data = array(
+			
+
+			array('title'=>translate('Home'),  'icon'=>'home', 'link'=>'/'),
+
+			isset($settings['enable_audio']) ? array('title'=>translate('Discover'),  'icon'=>'cloud-bolt', 'link'=>'/discover') : null,
+
+			isset($settings['enable_videos']) ? array('title'=>translate('Videos'),  'icon'=>'video-play', 'link'=>'/discover/video') : null,
+
+			isset($settings['enable_short_videos']) ? array('title'=>translate('Short Videos'),  'icon'=>'videos', 'link'=>'/discover/short') : null,
+
+			isset($settings['enable_audiobooks']) ? array('title'=>translate('Audiobooks'),  'icon'=>'audiobook-tab', 'link'=>'/discover/audiobook') : null,
+
+			isset($settings['enable_stations']) ? array('title'=>translate('Stations'),  'icon'=>'station', 'link'=>'/stations') : null,
+
+			isset($settings['enable_channels']) ? array('title'=>translate('Channels'),  'icon'=>'channel', 'link'=>'/channels') : null,
+
+			isset($settings['enable_playlist']) ? array('title'=>translate('Playlists'),  'icon'=>'playlist', 'link'=>'/playlists') : null,
+			
+			array('title'=>translate('Artists'),  'icon'=>'user-tab', 'link'=>'/artists'),
+			array('title'=>translate('Genres'),  'icon'=>'audio-tab', 'link'=>'/genres'),
+			array('title'=>translate('Blog'),  'icon'=>'blog', 'link'=>'/blog'),
+			array('title'=>translate('Logout'),  'icon'=>'log-out', 'link'=>'/logout'),
+
+		);
+
+		return array_filter($data);
 	}
 
 }
