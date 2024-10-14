@@ -75,6 +75,11 @@ body {
         position: fixed;
         z-index: 9999;
     }
+    [dir="rtl"] .lg\:ml-60
+    {
+        margin-left: 0;
+        margin-right: 15rem;
+    }
 }
 
 li.active {
@@ -2783,9 +2788,4 @@ body .ui_box:hover {
     to {
         height: 13px;
     }
-}
-[dir="rtl"] .lg\:ml-60
-{
-    margin-left: 0;
-    margin-right: 15rem;
 }
