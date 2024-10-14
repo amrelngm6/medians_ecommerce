@@ -42,7 +42,7 @@ class VideoGrid
 				[ 'key'=> "media_limit", 'title'=> translate('Max number') , 'help_text'=> translate('Max number of loaded media'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "categories", 'title'=> translate('Categories'), 'help_text'=> translate('Select categories to display media from'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'category_id', 'multiple' => true,
-					'data' => $this->genreRepo->getGenres()  
+					'data' => $this->genreRepo->getVideoGenres()  
 				],	
 			],	
             
@@ -116,7 +116,7 @@ class VideoGrid
 
 			return renderPlugin('Shared/Plugins/views/video_grid.html.twig', [
 		        'list' => $list,
-				'hook' => $hook
+				'hook' => $hook,
 		    ]);
 
 		} catch (\Exception $e) {

@@ -71,9 +71,11 @@ function renderPlugin($template, $data)
      */ 
     try {
 
-        // $data = loadConfig($template, $data);
+        $setting = $app->SystemSetting();
+
         $data['app'] = $app;
         $data['lang'] = new \helper\Lang($_SESSION['lang']);
+        $data['template'] = $setting['template'] ?? 'default';
         $output =  $app->template()->render($template, $data);
 
     } catch (\Throwable $th) {
