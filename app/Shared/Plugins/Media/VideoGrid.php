@@ -7,14 +7,14 @@ use Medians\CustomFields\Domain\CustomField;
 use Medians\Hooks\Domain\Hook;
 
 
-class AudioGrid 
+class VideoGrid 
 {
 
 	
     private $genreRepo;
     private $mediaRepo;
     private $hookRepo;
-    public $name = "Audio grid";
+    public $name = "Video grid";
     public $description = "";
     public $version = "1.0";
     public $shortcode = "";
@@ -110,11 +110,11 @@ class AudioGrid
 
 			$params['categories_ids'] = json_decode($hook->field['categories']);
 			$params['limit'] = json_decode($hook->field['media_limit'] ?? '');
-			$params['type'] = 'audio';
+			$params['type'] = 'video';
 
 			$list = $this->mediaRepo->getWithFilter($params);
 
-			return renderPlugin('Shared/Plugins/views/audio_grid.html.twig', [
+			return renderPlugin('Shared/Plugins/views/video_grid.html.twig', [
 		        'list' => $list,
 				'hook' => $hook
 		    ]);
