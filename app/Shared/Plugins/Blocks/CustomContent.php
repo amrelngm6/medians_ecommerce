@@ -64,7 +64,26 @@ class CustomContent
 		$params = $app->request()->get('params');
 
 		$Object->content = $params['options']['content'];
-		$Object->save();
+		$saveContent = $Object->save();
+		
+		$clear = CustomField::where('model_id', $Object->id)->where('model_type', Hook::class)->delete();
+
+		if ($data) {
+			
+			foreach ($data as $key => $value)
+			{
+				$fields = [];
+				$fields['model_id'] = $Object->id;	
+				$fields['model_type'] = Hook::class;	
+				$fields['code'] = $key;
+				$fields['title'] = '';
+				$fields['value'] = (is_array($value) || is_object($value)) ? json_encode($value) : $value;
+
+				$Model = CustomField::firstOrCreate($fields);
+			}
+	
+			return $Model ?? '';		
+		}
 
     	return $Object;
 
