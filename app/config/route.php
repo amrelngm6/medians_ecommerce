@@ -91,7 +91,7 @@ RouteHandler::get('/studio/audio', \Medians\Media\Application\MediaItemControlle
 RouteHandler::get('/studio/videos', \Medians\Media\Application\VideoController::class.'@studio_media');
 RouteHandler::get('/studio/shorts', \Medians\Media\Application\ShortVideoController::class.'@studio_media');
 RouteHandler::get('/studio/playlists', \Medians\Media\Application\MediaItemController::class.'@studio_playlists');
-RouteHandler::get('/studio/audio_books', \Medians\Media\Application\AudiobookController::class.'@studio_audiobooks');
+RouteHandler::get('/studio/audiobooks', \Medians\Media\Application\AudiobookController::class.'@studio_audiobooks');
 RouteHandler::get('/studio/stations', \Medians\Stations\Application\StationController::class.'@studio');
 RouteHandler::get('/studio/profile', \Medians\Customers\Application\CustomerController::class.'@edit_profile');
 RouteHandler::get('/studio/information', \Medians\Customers\Application\CustomerController::class.'@edit_information');
