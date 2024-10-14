@@ -10,19 +10,10 @@
                     <hr class="lg:block hidden my-4  opacity-30" />
                     <div class="lg:block hidden pt-2 px-1 text-slate-400 text-opacity-70  text-base font-normal tracking-wide">{{lang.translate('MENU')}}</div>
                     <ul class="pt-2 font-normal overflow-auto pb-20" style="max-height:calc(100vh - 135px)"  id="menu-ul" >
-                        {% for menuitem in [
-                            {title:  "Home",link: "/", icon: "home"},
-                            {title:  "Discover",link: "/discover", icon: "cloud-bolt"},
-                            {title:  "Videos",link: "/discover/video", icon: "video-play"},
-                            {title:  "Short Videos",link: "/discover/short", icon: "videos"},
-                            {title:  "Audiobooks",link: "/discover/audiobook", icon: "audiobook-tab"},
-                            {title:  "Stations",link: "/stations", icon: "station"},
-                            {title:  "Channels",link: "/channels", icon: "channel"},
-                            {title:  "Playlists",link: "/playlists", icon: "playlist"},
-                            {title:  "Artists",link: "/artists", icon: "user-tab"},
-                            {title:  "Genres",link: "/genres", icon: "audio-tab"},
-                            {title:  "Blog",link: "/blog", icon: "blog"},
-                        ] %}
+                        {% for menuitem in 
+                        app.sideMenu
+
+                        %}
                         <li  onclick="(function(){ jQuery('#menu-ul').find('li.active').removeClass('active'); jQuery('#sidemenu-{{loop.index}}').addClass('active');  return jQuery('#main-side').toggleClass('hidden'); })()"  class="w-full   {{menuitem.link == app.request.pathInfo ? 'active' : '' }}" onclick="(function(){ return jQuery('#main-side').toggleClass('hidden'); })()"  id="sidemenu-{{loop.index}}" >
                             <a href="{{menuitem.link}}" class="w-full flex gap gap-4 ajax-load ">
                                 <span class="min-w-8  text-center relative my-2">

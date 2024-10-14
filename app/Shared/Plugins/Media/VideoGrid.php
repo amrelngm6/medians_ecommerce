@@ -106,6 +106,13 @@ class VideoGrid
 	{
 		try {
 			
+			$app = new \config\APP;
+
+			$settings = $app->SystemSetting();
+			
+			if (empty($settings['enable_videos']))
+				return;
+
 			$hook = $this->hookRepo->find($params['id']);
 
 			if (!$hook)

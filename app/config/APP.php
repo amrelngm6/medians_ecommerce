@@ -513,19 +513,19 @@ class APP
 
 			array('title'=>translate('Home'),  'icon'=>'home', 'link'=>'/'),
 
-			isset($settings['enable_audio']) ? array('title'=>translate('Discover'),  'icon'=>'cloud-bolt', 'link'=>'/discover') : null,
+			!empty($settings['enable_audio']) ? array('title'=>translate('Discover'),  'icon'=>'cloud-bolt', 'link'=>'/discover') : null,
 
-			isset($settings['enable_videos']) ? array('title'=>translate('Videos'),  'icon'=>'video-play', 'link'=>'/discover/video') : null,
+			!empty($settings['enable_videos']) ? array('title'=>translate('Videos'),  'icon'=>'video-play', 'link'=>'/discover/video') : null,
 
-			isset($settings['enable_short_videos']) ? array('title'=>translate('Short Videos'),  'icon'=>'videos', 'link'=>'/discover/short') : null,
+			!empty($settings['enable_short_videos']) ? array('title'=>translate('Short Videos'),  'icon'=>'videos', 'link'=>'/discover/short') : null,
 
-			isset($settings['enable_audiobooks']) ? array('title'=>translate('Audiobooks'),  'icon'=>'audiobook-tab', 'link'=>'/discover/audiobook') : null,
+			!empty($settings['enable_audiobooks']) ? array('title'=>translate('Audiobooks'),  'icon'=>'audiobook-tab', 'link'=>'/discover/audiobook') : null,
 
-			isset($settings['enable_stations']) ? array('title'=>translate('Stations'),  'icon'=>'station', 'link'=>'/stations') : null,
+			!empty($settings['enable_stations']) ? array('title'=>translate('Stations'),  'icon'=>'station', 'link'=>'/stations') : null,
 
-			isset($settings['enable_channels']) ? array('title'=>translate('Channels'),  'icon'=>'channel', 'link'=>'/channels') : null,
+			!empty($settings['enable_channels']) ? array('title'=>translate('Channels'),  'icon'=>'channel', 'link'=>'/channels') : null,
 
-			isset($settings['enable_playlist']) ? array('title'=>translate('Playlists'),  'icon'=>'playlist', 'link'=>'/playlists') : null,
+			!empty($settings['enable_playlist']) ? array('title'=>translate('Playlists'),  'icon'=>'playlist', 'link'=>'/playlists') : null,
 			
 			array('title'=>translate('Artists'),  'icon'=>'user-tab', 'link'=>'/artists'),
 			array('title'=>translate('Genres'),  'icon'=>'audio-tab', 'link'=>'/genres'),

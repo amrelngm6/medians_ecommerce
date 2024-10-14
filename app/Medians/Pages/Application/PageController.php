@@ -224,6 +224,33 @@ class PageController extends CustomController
 
 
     
+    /**
+     * Homepage for frontend
+     */
+    public function homepage()
+    {
+		
+        $page = $this->repo->homepage();
+
+		$settings = $this->app->SystemSetting();
+
+		try {
+			
+			$page->addView();
+
+            return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'page' => $page,
+                'item' => $page,
+                'app' => $this->app,
+				'layout' => 'subpage'
+            ], 'output')));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+			
+		}
+    }
+    
 	
 	
     

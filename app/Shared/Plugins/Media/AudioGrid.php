@@ -57,7 +57,7 @@ class AudioGrid
 	}
 
 	/**
-	 * Index settings page
+	 * Index page
 	 * 
 	 */
 	public function index()
@@ -106,6 +106,13 @@ class AudioGrid
 	{
 		try {
 			
+			$app = new \config\APP;
+
+			$settings = $app->SystemSetting();
+			
+			if (empty($settings['enable_audio']))
+				return;
+
 			$hook = $this->hookRepo->find($params['id']);
 
 			if (!$hook)
