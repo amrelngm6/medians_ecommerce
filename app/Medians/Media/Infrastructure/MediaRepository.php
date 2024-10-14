@@ -191,6 +191,10 @@ class MediaRepository
     public function resize($file, $w=null, $h='-1')
     {
 
+		$app = new \config\APP;
+
+		$settings = $app->SystemSetting();
+
     	$filepath = $_SERVER['DOCUMENT_ROOT'].$file;
     	$output = str_replace(['/images/','/img/'], '/thumbnails/', str_replace(['.png','.jpg','.jpeg', '.webp'], $w.'.webp', $filepath));
 
@@ -201,8 +205,7 @@ class MediaRepository
 		
     	if (is_file($filepath))
     	{
-			shell_exec($_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
-			// shell_exec('ffmpeg -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
+			shell_exec($settings['ffmpeg_path'].' -i '.$filepath.' -vf scale="'.$w.':'.$h.'" '.$output);
     	}
 
 		return str_replace($_SERVER['DOCUMENT_ROOT'], '', $output);
@@ -211,8 +214,13 @@ class MediaRepository
 
 	public function convertAudioWithFfmpeg($filepath, $output)
 	{
-		$ffmpeg = $_SERVER['DOCUMENT_ROOT'].'/app/Shared/ffmpeg';
-		$run = shell_exec("$ffmpeg -i $filepath $output");
+		
+		$app = new \config\APP;
+
+		$settings = $app->SystemSetting();
+
+		$run = shell_exec($settings['ffmpeg_path']." -i $filepath $output");
+
 		return file_exists($output) ? $output : null;
 	}
 
