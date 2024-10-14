@@ -52,7 +52,7 @@ class FacebookService
 	public function getLoginUrl()
 	{
 
-        $helper = $this->client->getRedirectLoginHelper();
+        $helper = $this->client->getRedirectLoginHelper(false);
         
         $permissions = ['email']; // Optional: Add more permissions like 'user_photos', etc.
         
@@ -70,7 +70,7 @@ class FacebookService
 
             $fb = $this->client;
 
-            $helper = $fb->getRedirectLoginHelper();
+            $helper = $fb->getRedirectLoginHelper(false);
 
             try {
                 $accessToken = $helper->getAccessToken();
