@@ -140,8 +140,6 @@ class MediaController extends CustomController
 
 		$item = $this->mediaRepo->findByFile($filePath);
 
-		print_r($item);
-		return;
 
 		if (isset($item->main_file->storage) && $item->main_file->storage == 'google')
 		{
