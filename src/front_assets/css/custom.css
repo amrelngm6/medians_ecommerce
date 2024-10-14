@@ -1905,6 +1905,10 @@ Station card
     top: -5px;
 }
 
+[dir="rtl"] .lg\:left-\[100\%\] {
+    right: 100%;
+    left: auto;
+}
 [dir="rtl"] .course-info .btn {
     right: auto;
     left: 30px;
