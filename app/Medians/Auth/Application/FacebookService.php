@@ -51,7 +51,8 @@ class FacebookService
 
 	public function getLoginUrl()
 	{
-
+        $_SESSION['fb_access_token'] = false;
+        
         $helper = $this->client->getRedirectLoginHelper(false);
         
         $permissions = ['email']; // Optional: Add more permissions like 'user_photos', etc.
