@@ -72,6 +72,7 @@ class FacebookService
             $fb = $this->client;
 
             $helper = $fb->getRedirectLoginHelper();
+            $_SESSION['FBRLH_state']=$_GET['state'];
 
             try {
                 $accessToken = $helper->getAccessToken();
