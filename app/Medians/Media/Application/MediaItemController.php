@@ -502,6 +502,13 @@ class MediaItemController extends CustomController
             if (!empty($params['link']))
             {
                 
+                $headers = get_headers($params['link'], 1);
+
+                // Check if Content-Length header is available
+                if (isset($headers['Content-Length'])) {
+                    return array('error'=>1, 'result'=>formatSizeUnits($headers['Content-Length']), 'reload'=>0);
+                }
+
                 $params['name'] = '';
                 $params['description'] = '';
                 $tempFilePath = '/uploads/audio/tmp/'.md5($params['link']).'.mp3';
