@@ -547,7 +547,9 @@ class MediaItemController extends CustomController
             
             if (isset($fileInfo['playtime_seconds']))
             {
-                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+                $params['field'][ 'duration'] = round($fileInfo['playtime_seconds'] ?? 0, 0);
+                $params['field'][ 'filesize'] = round($fileInfo['filesize'] ?? 0, 0);
+                $params['field'][ 'bitrate'] = round($fileInfo['bitrate'] ?? 0, 0);
             }
 
             if (isset($fileInfo['tags']['id3v2']))
@@ -573,7 +575,6 @@ class MediaItemController extends CustomController
             {
                 $service = new GoogleStorageService();
                 $upload = $service->uploadFileToGCS($filePath);
-                // ($generateWave && $upload) ? unlink($_SERVER['DOCUMENT_ROOT'].$filePath) : '';
             }
 
             return $save;
