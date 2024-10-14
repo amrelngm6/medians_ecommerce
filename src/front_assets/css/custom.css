@@ -1239,6 +1239,7 @@ Down
     /* IE 10+ */
     -webkit-overflow-scrolling: touch;
     margin: 0 -20px;
+    direction: ltr;
 }
 
 .hs__header {
