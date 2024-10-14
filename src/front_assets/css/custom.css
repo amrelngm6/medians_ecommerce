@@ -147,7 +147,9 @@ li.active {
     max-width: 50px;
     max-height: 50px;
 }
-
+.audio__controls {
+    direction: ltr;
+}
 .slide__audio {
     position: relative;
     /* background: black; */
