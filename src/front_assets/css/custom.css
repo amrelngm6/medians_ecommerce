@@ -70,6 +70,10 @@ body {
 }
 
 @media screen and (min-width:1024px) {
+    [dir="rtl"] .float-right
+    {
+        float: left;
+    }
     [dir="rtl"] .lg\:ml-60
     {
         margin-left: 0;
