@@ -69,17 +69,15 @@ function renderPlugin($template, $data)
      * Response will be override only
      * In case the system works In Vue APP
      */ 
-    
-    // $data = loadConfig($template, $data);
-    $data['app'] = $app;
-    $data['lang'] = new \helper\Lang($_SESSION['lang']);
-    // $data = loadConfig($template, $data);
     try {
-        
+
+        // $data = loadConfig($template, $data);
+        $data['app'] = $app;
+        $data['lang'] = new \helper\Lang($_SESSION['lang']);
         $output =  $app->template()->render($template, $data);
 
     } catch (\Throwable $th) {
-        echo $th->getMessage();
+        return $th->getMessage();
     }
 
     return $output;
