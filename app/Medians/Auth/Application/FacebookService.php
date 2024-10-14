@@ -123,7 +123,7 @@ class FacebookService
               
               // Now you can make API requests for user data
               try {
-                $response = $fb->get('/me?fields=id,name,email', $accessToken);
+                $response = $fb->get('/me?fields=id,name,email,picture.type(large)', $accessToken);
                 $user_info = $response->getGraphUser();
               } catch(\Facebook\Exceptions\FacebookResponseException $e) {
                 echo 'Graph returned an error 2: ' . $e->getMessage();
