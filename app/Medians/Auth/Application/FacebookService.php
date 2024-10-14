@@ -62,6 +62,7 @@ class FacebookService
 
 	public function verifyLoginWithFacebook()
 	{
+        session_start();
 
 		$this->app = new \config\APP;
 
