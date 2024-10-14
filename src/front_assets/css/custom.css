@@ -2439,8 +2439,7 @@ Shorts
     scroll-snap-type: y mandatory;
 }
 [dir="rtl"] .shorts .short-video-container {
-    right: 0;
-    left: auto;
+    left: 0;
 }
 @media (max-width: 767px) {
     .shorts .short-video-container {
