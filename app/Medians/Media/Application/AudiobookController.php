@@ -370,6 +370,14 @@ class AudiobookController extends CustomController
         
         $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
 
+        if (isset($fileInfo['playtime_seconds']))
+        {
+            $params['field'][ 'duration'] = round($fileInfo['playtime_seconds'] ?? 0, 0);
+            $params['field'][ 'filesize'] = round($fileInfo['filesize'] ?? 0, 0);
+            $params['field'][ 'bitrate'] = round($fileInfo['bitrate'] ?? 0, 0);
+            $params['field'][ 'bpm'] = $fileInfo['id3v2']['comments']['bpm'][0] ?? 0;
+        }
+
         if (isset($fileInfo['tags']['id3v2']))
         {
             $file['title'] = $fileInfo['tags']['id3v2']['title'][0] ?? 'Unknown Title';

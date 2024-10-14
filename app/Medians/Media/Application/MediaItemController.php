@@ -550,6 +550,7 @@ class MediaItemController extends CustomController
                 $params['field'][ 'duration'] = round($fileInfo['playtime_seconds'] ?? 0, 0);
                 $params['field'][ 'filesize'] = round($fileInfo['filesize'] ?? 0, 0);
                 $params['field'][ 'bitrate'] = round($fileInfo['bitrate'] ?? 0, 0);
+                $params['field'][ 'bpm'] = $fileInfo['id3v2']['comments']['bpm'][0] ?? 0;
             }
 
             if (isset($fileInfo['tags']['id3v2']))

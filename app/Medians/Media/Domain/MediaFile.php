@@ -24,7 +24,7 @@ class MediaFile extends CustomModel
 		'sort',
 	];
 
-	public $appends = ['wave', 'filename', 'picture', 'player_object'];
+	public $appends = ['wave', 'filename', 'picture', 'player_object', 'field'];
 
 	public function getWaveAttribute() 
 	{
@@ -44,6 +44,13 @@ class MediaFile extends CustomModel
 		return $this->media->picture ?? '';
 	}
 
+	
+	public function getFieldAttribute() 
+	{
+		return !empty($this->custom_fields) ? array_column($this->custom_fields->toArray(), 'value', 'code') : [];
+	}
+
+
 	public function media() 
 	{
 		return $this->hasOne(MediaItem::class , 'media_id', 'media_id');	
@@ -62,5 +69,10 @@ class MediaFile extends CustomModel
 		];
 	}
 
+
+	public function custom_fields()
+	{
+		return $this->morphMany(CustomField::class, 'model');
+	}
 
 }

@@ -246,6 +246,30 @@ class MediaItemRepository
 		}
 	}
 
+	
+	/**
+	* Save file related items to database
+	*/
+	public function storeFileCustomFields($data, $id) 
+	{
+		CustomField::where('model_type', MediaFile::class)->where('model_id', $id)->delete();
+		if ($data)
+		{
+			foreach ($data as $key => $value)
+			{
+				$fields = [];
+				$fields['model_type'] = MediaFile::class;	
+				$fields['model_id'] = $id;	
+				$fields['code'] = $key;	
+				$fields['value'] = $value;
+
+				$Model = CustomField::create($fields);
+			}
+	
+			return $Model;		
+		}
+	}
+
 
 	/**
 	* Save related items to database
@@ -285,6 +309,8 @@ class MediaItemRepository
 			$fields['type'] = $file['type'] ?? 'audio';	
 
 			$Model = MediaFile::firstOrCreate($fields);
+	
+			isset($file['field']) ? $this->storeFileCustomFields($data['field'] ,$Object->media_id) : '';
 	
 			return $Model;		
 		}
