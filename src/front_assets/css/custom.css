@@ -2440,6 +2440,7 @@ Shorts
 }
 [dir="rtl"] .shorts .short-video-container {
     right: 0;
+    left: auto;
 }
 @media (max-width: 767px) {
     .shorts .short-video-container {
