@@ -75,10 +75,10 @@ class FacebookService
             try {
                 $accessToken = $helper->getAccessToken();
             } catch (\Facebook\Exceptions\FacebookResponseException $e) {
-                echo 'Graph returned an error: ' . $e->getMessage();
+                echo 'Graph returned an error 1: ' . $e->getMessage();
                 exit;
             } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                echo 'Facebook SDK returned an error 1: ' . $e->getMessage();
                 exit;
             }
             
@@ -123,10 +123,10 @@ class FacebookService
                 $response = $fb->get('/me?fields=id,name,email,picture.type(large)', $accessToken);
                 $user_info = $response->getGraphUser();
               } catch(\Facebook\Exceptions\FacebookResponseException $e) {
-                echo 'Graph returned an error: ' . $e->getMessage();
+                echo 'Graph returned an error 2: ' . $e->getMessage();
                 exit;
               } catch(\Facebook\Exceptions\FacebookSDKException $e) {
-                echo 'Facebook SDK returned an error: ' . $e->getMessage();
+                echo 'Facebook SDK returned an error 2: ' . $e->getMessage();
                 exit;
               }
               
