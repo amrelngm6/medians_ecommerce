@@ -526,8 +526,10 @@ class APP
 
 			!empty($settings['enable_playlist']) ? array('title'=>translate('Playlists'),  'icon'=>'playlist', 'link'=>'/playlists') : null,
 			
+			!empty($settings['enable_audio']) ? array('title'=>translate('Genres'),  'icon'=>'audio-tab', 'link'=>'/genres') : null,
+			
 			array('title'=>translate('Artists'),  'icon'=>'user-tab', 'link'=>'/artists'),
-			array('title'=>translate('Genres'),  'icon'=>'audio-tab', 'link'=>'/genres'),
+			
 			array('title'=>translate('Blog'),  'icon'=>'blog', 'link'=>'/blog'),
 			array('title'=>translate('Logout'),  'icon'=>'log-out', 'link'=>'/logout'),
 
