@@ -37,6 +37,7 @@ class VideosSettingsController extends CustomController
 		return [
 			'basic'=> [	
 				[ 'key'=> "enable_videos", 'title'=> translate('Allow videos feature'), 'help_text'=>translate('You can allow / disallow with Videos at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "video_max_size", 'title'=> translate('Video max size'), 'help_text'=>translate('Max size for uploaded Videos'), 'fillable'=> true, 'column_type'=>'number' ],
                 
 			],		
         ];

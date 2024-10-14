@@ -37,6 +37,7 @@ class AudiobooksSettingsController extends CustomController
 		return [
 			'basic'=> [	
 				[ 'key'=> "enable_audiobooks", 'title'=> translate('Allow audiobooks feature'), 'help_text'=>translate('You can allow / disallow with Audiobooks at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "audiobook_max_size", 'title'=> translate('Audiobook max size'), 'help_text'=>translate('Max size for uploaded Audiobooks'), 'fillable'=> true, 'column_type'=>'number' ],
                 
 			],		
         ];
