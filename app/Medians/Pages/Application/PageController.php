@@ -41,7 +41,7 @@ class PageController extends CustomController
 
 		return [
             [ 'value'=> "page_id", 'text'=> "#"],
-            [ 'value'=> "title", 'text'=> translate('Title'), 'sortable'=> true ],
+            [ 'value'=> "lang_content.title", 'text'=> translate('Title'), 'sortable'=> true ],
             [ 'value'=> "lang_content.prefix", 'text'=> translate('link'), 'sortable'=> true ],
             [ 'value'=> "homepage", 'text'=> translate('Is Homepage'), 'sortable'=> true ],
             [ 'value'=> "status", 'text'=> translate('Status'), 'sortable'=> true ],
@@ -140,13 +140,8 @@ class PageController extends CustomController
 
         try {	
 
-			if (!trim($params['title']))
-			{
-				throw new \Exception(json_encode(['error'=>'Empty title']));
-			}
 
         	$params['created_by'] = $this->app->auth()->id;
-        	$params['content'] = $this->handleLangs($params);
 
             $returnData = (!empty($this->repo->store($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
@@ -163,6 +158,7 @@ class PageController extends CustomController
 
 	public function update()
 	{
+		return;
 		$params = $this->app->params();
 
         try {

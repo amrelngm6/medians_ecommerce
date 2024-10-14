@@ -73,7 +73,7 @@ class PageRepository
     	isset($data['field']) ? $this->storeFields($data['field'], $Object->page_id) : '';
 
     	// Store Lang content
-    	isset($data['content']) ? $this->storeContent($data['content'], $Object->page_id) : '';
+    	!empty($data['content_langs']) ? $this->storeContent( (array) $data['content_langs'], $Object->page_id) : '';
 
     	return $Object;
     }
@@ -92,6 +92,7 @@ class PageRepository
 
 		// Store Custom fields
     	isset($data['field']) ? $this->storeFields($data['field'], $Object->page_id) : '';
+    	!empty($data['content_langs']) ? $this->storeContent($data['content_langs'], $Object->page_id) : '';
 
     	return $Object;
 
@@ -140,6 +141,7 @@ class PageRepository
 
 	public function storeLang($fields, $key, $page_id )
 	{
+		$fields = ( array) $fields;
 		$checkPrefix = isset($fields['prefix']) ? $fields['prefix'] : Content::generatePrefix($fields['title']);	
 		$prefix = Content::where('prefix',$checkPrefix)->first() ? $checkPrefix.rand(999, 999999) : $checkPrefix;
 

@@ -33,6 +33,19 @@
                             </div>
                         </div>
                         
+                        <div class="card card-flush py-4">
+                            <div class="card-header">
+                                <div class="card-title"> <h2 v-text="translate('Homepage')"></h2></div>
+                                <div class="card-toolbar">
+                                    <div :class="activeItem.homepage == 'on' ? 'bg-success' : 'bg-danger'" class="rounded-circle w-15px h-15px" ></div>
+                                </div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <form_field :item="activeItem" :column="{required: true, key:'homepage',title: translate('homepage') , column_type:'select', text_key: 'title', column_key: 'value', data:[{'value': null,'title':translate('Sub-page')} , {'value':'on','title':translate('Homepage')}]}" ></form_field>
+                                <div class="text-muted fs-7" v-text="translate('Set this page as Homepage')"></div>
+                            </div>
+                        </div>
+                        
 
                         <div class="card card-flush py-4">
                             <div class="card-header">
@@ -87,8 +100,8 @@
                                                         <div class="text-muted fs-7" v-text="translate('Name is required and recommended to be unique')"> </div>
                                                     </div>
                                                     <div>
-                                                        <label class="form-label gap-6 flex"><span v-text="translate('Description')"></span><strong class="px-4" v-text="translate(language.language_code)"></strong> </label>
-                                                        <textarea class="form-control" v-model="activeItem.content_langs[language.language_code].content"></textarea>
+                                                        <label class="form-label gap-6 flex"><span v-text="translate('Content')"></span><strong class="px-4" v-text="translate(language.language_code)"></strong> </label>
+                                                        <form_field :column="{column_type: 'editor', key: 'content'}" :item="activeItem.content_langs[language.language_code]" :conf="conf"></form_field>
                                                         <div class="text-muted fs-7"
                                                             v-text="translate('Set a description to the item for better visibility')">
                                                         </div>
@@ -99,22 +112,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade show active" v-if="activeTab != translate('General')">
-                                <div class="card w-full ">
-
-                                    <div class="card-body w-full">
-                                        <div class="py-1 w-full pt-4" v-for="column in content.fillable[activeTab]">
-                                            <span class="block mb-2 form-label text-gray-600 text-lg"
-                                                v-text="column.title" v-if="column.column_type != 'hidden'"></span>
-                                            <form_field @callback="handleField" :column="column" 
-                                                :item="activeItem.field" :conf="conf"></form_field>
-                                            <!-- <select_field @callback="handleField" :column="column" v-if="column.type == 'select'"
-                                                :item="activeItem.field" :conf="conf"></select_field> -->
-                                            <p v-text="column.help_text" v-if="column.help_text"></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             <div class="tab-pane fade show active" v-if="activeTab == translate('SEO')" >
                                 <div class="d-flex flex-column gap-7 gap-lg-10">
 
@@ -222,7 +220,7 @@ export default
             route_icon,
             form_field,
         },
-        name: 'Products categories',
+        name: 'Pages',
         emits: ['callback'],
         setup(props, { emit }) {
 
