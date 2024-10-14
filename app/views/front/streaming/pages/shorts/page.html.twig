@@ -78,7 +78,7 @@
 
 		
 		{% set relatedVideo = item.related(10, 'video') %}
-		{% if relatedVideo|length %}
+		{% if app.SystemSetting.enable_videos and relatedVideo|length %}
 		<div class="w-full 	pt-6" id="slide-video-items" data-count="4">
 			<div class="hs__wrapper" x-data="{is_slide: false}">
 			
@@ -131,7 +131,7 @@
 		{% endif %}
 		
 		{% set relatedAudiobooks = item.related(10, 'audiobook') %}
-		{% if relatedAudiobooks|length %}
+		{% if app.SystemSetting.enable_audiobooks and relatedAudiobooks|length %}
 		<div class="w-full 	pt-6" id="slide-audiobooks-items" data-count="4">
 			<div class="hs__wrapper" x-data="{is_slide: false}">
 			

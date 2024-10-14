@@ -105,7 +105,7 @@
 		{% endif %}
 		
 		{% set related = item.related(10, 'audio') %}
-		{% if related|length %}
+		{% if app.SystemSetting.enable_audio and related|length %}
 		<div class="w-full 	pt-6" id="slide-audio-items" data-count="4">
 			<div class="hs__wrapper" x-data="{is_slide: false}">
 			
@@ -132,7 +132,7 @@
 		{% endif %}
 		
 		{% set relatedAudiobooks = item.related(10, 'audiobook') %}
-		{% if relatedAudiobooks|length %}
+		{% if app.SystemSetting.enable_audiobooks and relatedAudiobooks|length %}
 		<div class="w-full 	pt-6" id="slide-audiobooks-items" data-count="4">
 			<div class="hs__wrapper" x-data="{is_slide: false}">
 			

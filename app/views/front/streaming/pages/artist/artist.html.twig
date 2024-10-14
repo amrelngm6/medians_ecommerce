@@ -64,7 +64,7 @@
 		<div class="text-primary overflow-auto" style="max-height: 400px;">
 			<p class="dark:text-gray-300 py-4">{{item.field.about|raw| nl2br  }}</p>
 		</div>
-		{% if item.audio_items|length %}
+		{% if app.SystemSetting.enable_audio and item.audio_items|length %}
 		<div class="w-full 	pt-6" id="slide-audio-items" data-count="4">
             <div class="hs__wrapper" x-data="{is_slide: false}">
             
@@ -146,7 +146,7 @@
 		</div>
 		{% endif %}
 
-		{% if item.videos|length %}
+		{% if app.SystemSetting.enable_videos and item.videos|length %}
         
 		<div class="w-full 	pt-10 " id="slide-videos" data-count="4">
             <div class="hs__wrapper" x-data="{is_slide: false}">
@@ -174,7 +174,7 @@
 		{% endif %}
 
 
-		{% if item.stations|length %}
+		{% if app.SystemSetting.enable_stations and item.stations|length %}
         
 		<div class="w-full 	pt-10 " id="slide-stations" data-count="2">
             <div class="hs__wrapper" x-data="{is_slide: false}">
@@ -202,7 +202,7 @@
 		{% endif %}
 
 
-		{% if item.channels|length %}
+		{% if app.SystemSetting.enable_channels and item.channels|length %}
         
 		<div class="w-full 	pt-10 " id="slide-channels" data-count="2">
             <div class="hs__wrapper" x-data="{is_slide: false}">
