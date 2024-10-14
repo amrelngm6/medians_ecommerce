@@ -132,11 +132,10 @@ class MediaController extends CustomController
 		$startTime = $this->app->request()->get('s') ?? 0;
 		$startDuration = $this->app->request()->get('d') ?? 0;
 
-		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/audio/' . $this->app->request()->get('audio'))) {
-			$filePath = '/uploads/audio/' . $this->app->request()->get('audio');
-		} else
-		{
+		if (file_exists($_SERVER['DOCUMENT_ROOT'].'/uploads/tmp/audio/' . $this->app->request()->get('audio'))) {
 			$filePath = '/uploads/audio/tmp/' . $this->app->request()->get('audio');
+		} else {
+			$filePath = '/uploads/audio/' . $this->app->request()->get('audio');
 		}
 
 		$item = $this->mediaRepo->findByFile($filePath);
