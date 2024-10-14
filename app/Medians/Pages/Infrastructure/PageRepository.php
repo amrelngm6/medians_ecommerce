@@ -150,6 +150,7 @@ class PageRepository
 		$fields['item_id'] = $page_id;	
 		$fields['lang'] = $key;	
 		$fields['prefix'] =  $prefix;
+		print_r($fields);
 		$Model = Content::create($fields);
 
 		return $Model;

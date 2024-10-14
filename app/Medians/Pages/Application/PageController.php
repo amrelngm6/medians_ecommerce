@@ -142,7 +142,7 @@ class PageController extends CustomController
 
 
         	$params['created_by'] = $this->app->auth()->id;
-        	$params['lang_content'] = $this->app->request()->get('params')['lang_content'];
+        	$params['content_langs'] = $this->app->request()->get('params')['content_langs'];
 
             $returnData = (!empty($this->repo->store($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
@@ -168,7 +168,7 @@ class PageController extends CustomController
 
             if ($this->repo->update($params))
             {
-                return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
+                return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0);
             }
         
 
