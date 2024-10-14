@@ -2431,15 +2431,16 @@ Shorts
 */
 .shorts .short-video-container {
     position: fixed;
-    margin-left: 230px;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100% - 230px);
     height: 100%;
     overflow-y: scroll;
     scroll-snap-type: y mandatory;
 }
-
+[dir="rtl"] .shorts .short-video-container {
+    right: 0;
+}
 @media (max-width: 767px) {
     .shorts .short-video-container {
         margin-left: 0
