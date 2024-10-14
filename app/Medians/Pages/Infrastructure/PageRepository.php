@@ -88,10 +88,11 @@ class PageRepository
 		$Object = Page::find($data['page_id']);
 		
 		// Return the  object with the new data
-    	$Object->update( (array) $data);
+    	$update = $Object->update( (array) $data);
 
 		// Store Custom fields
     	isset($data['field']) ? $this->storeFields($data['field'], $Object->page_id) : '';
+
     	!empty($data['content_langs']) ? $this->storeContent($data['content_langs'], $Object->page_id) : '';
 
     	return $Object;
@@ -148,13 +149,8 @@ class PageRepository
 		$fields['item_type'] = Page::class;	
 		$fields['item_id'] = $page_id;	
 		$fields['lang'] = $key;	
-		
-		$Model = Content::firstOrCreate($fields);
-		if ($Model->wasRecentlyCreated)
-		{
-			$fields['prefix'] =  $prefix;
-			$Model->update($fields);
-		}
+		$fields['prefix'] =  $prefix;
+		$Model = Content::create($fields);
 
 		return $Model;
 	}

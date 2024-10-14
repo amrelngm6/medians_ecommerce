@@ -142,6 +142,7 @@ class PageController extends CustomController
 
 
         	$params['created_by'] = $this->app->auth()->id;
+        	$params['lang_content'] = $this->app->request()->get('params')['lang_content'];
 
             $returnData = (!empty($this->repo->store($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
@@ -158,13 +159,12 @@ class PageController extends CustomController
 
 	public function update()
 	{
-		return;
+
 		$params = $this->app->params();
 
         try {
 
-        	$params['status'] = isset($params['status']) ? $params['status'] : null;
-        	$params['homepage'] = isset($params['homepage']) ? $params['homepage'] : null;
+        	$params['lang_content'] = $this->app->request()->get('params')['lang_content'];
 
             if ($this->repo->update($params))
             {
@@ -173,7 +173,7 @@ class PageController extends CustomController
         
 
         } catch (\Exception $e) {
-        	throw new \Exception("Error Processing Request", 1);
+        	throw new \Exception("Error Processing Request {$e->getMessage()} ", 1);
         	
         }
 	}
