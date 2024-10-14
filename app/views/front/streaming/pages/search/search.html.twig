@@ -12,6 +12,8 @@
                                 <input rel="nofollow" name="params[title]" value="{{app.params.title}}" type="text" id="voice-search" data-element="search-result-popup" data-form="new-item-form" class="search bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="{{lang.translate('Search for media items')}}" required />
                                 <span class="cursor-pointer absolute inset-y-0 end-0 flex items-center px-6">
                                     {% include 'views/front/streaming/popups/speech-to-text.html.twig' %}
+                                    <span class="tooltiptext">{{lang.translate('Search by Voice')}}</span>
+
                                 </span>
                             </div>
                         </div>
