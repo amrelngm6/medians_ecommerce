@@ -69,17 +69,20 @@ body {
     transition: all .1s ease-in-out 0s;
 }
 
+@media screen and (min-width:1024px) {
+    [dir="rtl"] .lg\:ml-60
+    {
+        margin-left: 0;
+        margin-right: 15rem;
+    }
+}
 @media screen and (max-width:1024px) {
     .sidebar {
         margin-top: 50px;
         position: fixed;
         z-index: 9999;
     }
-    [dir="rtl"] .lg\:ml-60
-    {
-        margin-left: 0;
-        margin-right: 15rem;
-    }
+
 }
 
 li.active {
