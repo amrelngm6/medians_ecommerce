@@ -12,6 +12,7 @@ class AudioGrid
 
 	
     private $genreRepo;
+    private $mediaRepo;
     private $hookRepo;
     public $name = "Audio grid";
     public $description = "";
@@ -22,6 +23,7 @@ class AudioGrid
 	function __construct()
 	{
 		$this->genreRepo = new \Medians\Categories\Infrastructure\CategoryRepository;
+		$this->mediaRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
 		$this->hookRepo = new HookRepository;
 	}
 
@@ -102,7 +104,6 @@ class AudioGrid
 	 */ 
 	public function view($params ) 
 	{
-
 		try {
 			
 			$hook = $this->hookRepo->find($params['id']);
@@ -110,12 +111,12 @@ class AudioGrid
 			$params['categories_ids'] = json_decode($hook->field['categories']);
 			$params['limit'] = json_decode($hook->field['media_limit'] ?? '');
 
-			$items = $this->productRepo->getWithFilter($params);
+			$list = $this->mediaRepo->getWithFilter($params);
 
-            return renderPlugin('Shared/Plugins/views/audio_grid.html.twig', [
-		        'items' => $items['items'],
+			return renderPlugin('Shared/Plugins/views/audio_grid.html.twig', [
+		        'list' => $list,
 				'hook' => $hook
-		    ],'output');
+		    ]);
 
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);

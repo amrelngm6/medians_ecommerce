@@ -72,9 +72,15 @@ function renderPlugin($template, $data)
     
     // $data = loadConfig($template, $data);
     $data['app'] = $app;
-    $data['lang'] = new helper\Lang($_SESSION['lang']);
+    $data['lang'] = new \helper\Lang($_SESSION['lang']);
     // $data = loadConfig($template, $data);
-    $output =  $app->template()->render($template, $data);
+    try {
+        
+        $output =  $app->template()->render($template, $data);
+
+    } catch (\Throwable $th) {
+        echo $th->getMessage();
+    }
 
     return $output;
  } 
@@ -111,12 +117,15 @@ function loadConfig($template, $data)
     $data['lang'] = new helper\Lang($_SESSION['lang']);
     $data['lang_json'] = (new helper\Lang($_SESSION['lang']))->load();
     $data['lang_key'] = substr($_SESSION['lang'],0,2);
+
     return $data;
 }
 
 function processShortcodes($content) {
     // Use preg_replace_callback to find shortcodes and process them
     $checkCode = preg_replace_callback('/\[plugin_shortcode(.*?)\]/', 'replaceShortcode', $content);
+    
+    
     return  $checkCode ?? $content;
 }
 
