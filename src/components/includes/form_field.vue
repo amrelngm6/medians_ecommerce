@@ -41,6 +41,8 @@
         
         <vue-medialibrary-field @changed="multiple_changed" :key="item" v-if="column.column_type == 'file' || column.column_type == 'picture' "  :name="handleName(column)" :filepath="item[column.key]" :api_url="conf.url"></vue-medialibrary-field>
 
+        <ckeditor v-model="item[column.key]" v-if="column.column_type == 'editor'"
+                :editor="editor" :config="editorConfig" />
     </div>
 </template>
 <script>
@@ -51,11 +53,20 @@ import { translate, handleGetRequest, handleName, isInput, setActiveStatus, hand
 import Multiselect from '@vueform/multiselect'
 import {ref} from 'vue'
 
+
+
+import { ClassicEditor, FullPage , Bold, Essentials, Italic, Mention, Paragraph, Link, List, Table, TableToolbar, GeneralHtmlSupport,  SourceEditing, Image, ImageInsert, Undo, Heading, Font } from 'ckeditor5';
+import { Ckeditor } from '@ckeditor/ckeditor5-vue';
+
+import 'ckeditor5/ckeditor5.css';
+
+
 export default 
 {
     components: {
         'vue-medialibrary-field': field,
         close_icon,
+        Ckeditor,
         Multiselect 
     },
 
@@ -98,7 +109,27 @@ export default
         }
 
 
+        const editor = ClassicEditor;
+        const editorConfig =  ref({
+            allowedContent:true,
+            htmlSupport: {
+                allow: [
+                    {
+                        name: /.*/,
+                        attributes: true,
+                        classes: true,
+                        styles: true
+                    }
+                ]
+            },
+            plugins: [ SourceEditing, Bold, Essentials, Italic, Mention, Paragraph,  Undo, Heading, Link, List, Image, Font,Table, TableToolbar, GeneralHtmlSupport  ],
+            toolbar: [ 'undo', 'redo', '|', 'bold', 'italic', 'heading', 'fontSize', 'fontColor' ,'link','insertImage', 'insertTable', 'sourceEditing', 'bulletedList', 'numberedList' ],
+        });
+        
+        
         return {
+            editor,
+            editorConfig,
             file: '',
             multipleValue,
             isInput,

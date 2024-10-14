@@ -116,8 +116,8 @@ class ArtistCarousel
 
 			$items = $this->artistRepo->getByIds($params['artists']);
 
-            return renderPlugin('views/front/streaming/includes/genres_section.html.twig', [
-		        'genres' => $items,
+            return renderPlugin('Shared/Plugins/views/artists_carousel.html.twig', [
+		        'artists' => $items,
 				'hook' => $hook
 		    ],'output');
 
