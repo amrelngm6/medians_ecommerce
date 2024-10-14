@@ -1243,6 +1243,7 @@ Down
 .hs__arrows {
     align-self: center;
     display: flex;
+    direction: ltr;
 }
 
 .dark .hs__arrows .arrow.disabled:before,
