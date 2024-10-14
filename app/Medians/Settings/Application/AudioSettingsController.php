@@ -37,6 +37,7 @@ class AudioSettingsController extends CustomController
 		return [
 			'basic'=> [	
 				[ 'key'=> "enable_audio", 'title'=> translate('Allow audio feature'), 'help_text'=>translate('You can allow / disallow with Audio at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "audio_max_size", 'title'=> translate('Audio max size'), 'help_text'=>translate('Max size for uploaded audio files'), 'fillable'=> true, 'column_type'=>'number' ],
                 
 			],		
         ];
