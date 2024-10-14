@@ -51,6 +51,16 @@ class CustomerRepository
 		return Customer::where('email' , $email)->first();
 	}
 
+	public function getByIds($ids)
+	{
+		return Customer::whereIn('customer_id' , $ids)->get();
+	}
+
+	public function getActive()
+	{
+		return Customer::where('status' , 'on')->get();
+	}
+
 
 	/**
 	 * Check Customer session by his token

@@ -2,20 +2,19 @@
 
 namespace Shared\Plugins\Sliders;
 
-use Medians\Categories\Infrastructure\CategoryRepository;
+use Medians\Customers\Infrastructure\CustomerRepository;
 use Medians\Hooks\Infrastructure\HookRepository;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Hooks\Domain\Hook;
 
 
-class GenreCarousel 
+class ArtistCarousel 
 {
 
 	
-    private $genreRepo;
-    private $productRepo;
+    private $artistRepo;
     private $hookRepo;
-    public $name = "Genre carousel";
+    public $name = "Artist carousel";
     public $description = "";
     public $version = "1.0";
     public $shortcode = "";
@@ -23,7 +22,7 @@ class GenreCarousel
 
 	function __construct()
 	{
-		$this->genreRepo = new CategoryRepository;
+		$this->artistRepo = new CustomerRepository;
 		$this->hookRepo = new HookRepository;
 	}
 
@@ -38,15 +37,12 @@ class GenreCarousel
 		return [
             
 			'basic'=> [	
-				[ 'key'=> "categories", 'title'=> translate('Categories'), 'help_text'=> translate('Select categories to display'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'category_id', 'multiple' => true,
-					'data' => $this->genreRepo->getGenres()  
+				[ 'key'=> "artists", 'title'=> translate('Artists'), 'help_text'=> translate('Select artists to display'),
+					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'customer_id', 'multiple' => true,
+					'data' => $this->artistRepo->getActive()  
 				],	
-				[ 'key'=> "img_style", 'title'=> translate('Image style'), 'help_text'=> translate('Select style of the genre image to display'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'img_style', 
-					'data' => [["name"=> "Squared", "img_style"=>""], ["name"=>"Circle", "img_style"=> "rounded-full"], ["name"=>"Rounded", "img_style"=>"rounded-lg"]]  
-				],	
-				[ 'key'=> "show_title", 'title'=> translate('Show title') , 'help_text'=> translate('Show title of the Hook'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "show_followers", 'title'=> translate('Show followers count') , 'help_text'=> translate('Show followers count of the artist'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "show_audio_items", 'title'=> translate('Show audio count') , 'help_text'=> translate('Show audio uploads count of the artist'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 
 			],	
             
@@ -116,9 +112,9 @@ class GenreCarousel
 		try {
 			$hook = $this->hookRepo->find($params['id']);
 
-			$params['categories_ids'] = json_decode($hook->field['categories']);
+			$params['artists'] = json_decode($hook->field['artists']);
 
-			$items = $this->genreRepo->getGenresByIds($params['categories_ids']);
+			$items = $this->artistRepo->getByIds($params['artists']);
 
             return renderPlugin('views/front/streaming/includes/genres_section.html.twig', [
 		        'genres' => $items,
