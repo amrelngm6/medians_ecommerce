@@ -80,6 +80,7 @@ class FacebookService
                 echo 'Graph returned an error 1: ' . $e->getMessage();
                 exit;
             } catch (\Facebook\Exceptions\FacebookSDKException $e) {
+                var_dump($helper->getError());
                 echo 'Facebook SDK returned an error 1: ' . $e->getMessage();
                 exit;
             }
