@@ -45,7 +45,7 @@ class MediaFile extends CustomModel
 	}
 
 	
-	public function getFieldAttribute() 
+	public function field() 
 	{
 		return !empty($this->custom_fields) ? array_column($this->custom_fields->toArray(), 'value', 'code') : [];
 	}
