@@ -58,24 +58,13 @@ class CustomContent
      */
     public function update($data, $Object)
     {
-		$clear = CustomField::where('model_id', $Object->id)->where('model_type', Hook::class)->delete();
+		
+		$app = new \config\APP;
 
-		if ($data) {
-			
-			foreach ($data as $key => $value)
-			{
-				$fields = [];
-				$fields['model_id'] = $Object->id;	
-				$fields['model_type'] = Hook::class;	
-				$fields['code'] = $key;
-				$fields['title'] = '';
-				$fields['value'] = (is_array($value) || is_object($value)) ? json_encode($value) : $value;
+		$params = $app->request()->get('params');
 
-				$Model = CustomField::firstOrCreate($fields);
-			}
-	
-			return $Model ?? '';		
-		}
+		$Object->content = $params['options']['content'];
+		$Object->save();
 
     	return $Object;
 
@@ -92,11 +81,7 @@ class CustomContent
 			
 			$hook = $this->hookRepo->find($params['id']);
 
-			return $hook->field['content'] ??  '';
-			
-            return renderPlugin('Shared/Plugins/views/custom_content.html.twig', [
-				'hook' => $hook
-		    ],'output');
+			return $hook->content;
 
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);

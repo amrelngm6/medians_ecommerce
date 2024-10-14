@@ -72,6 +72,40 @@ class PageController extends CustomController
 	
 
 	/**
+	 * Admin page by ID
+	 * 
+	 */ 
+    public function admin_item($id)
+    {
+		$this->app = new \config\APP;
+
+		$settings = $this->app->SystemSetting();
+
+		$this->app->customer_auth();
+
+		$params = $this->app->params();
+
+		try 
+        {
+            $item = $this->repo->find($id);
+
+			return render('page_wizard', [
+		        'load_vue' => true,
+		        'title' => translate('Frontend Pages'),
+		        'columns' => $this->columns(),
+		        'fillable' => $this->fillable(),
+		        'item' => $item,
+				'model' => 'Page',
+		    ]);
+
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+
+
+	/**
 	 * Admin index items
 	 * 
 	 * @param Silex\Application $app

@@ -48,8 +48,6 @@ const system_settings = defineAsyncComponent(() => import('@/components/settings
 
 const users = defineAsyncComponent(() => import('@/components/users.vue') );
 
-const pages = defineAsyncComponent(() => import('@/components/pages.vue') );
-
 const blog = defineAsyncComponent(() => import('@/components/blog/index.vue') );
 
 const app_settings = defineAsyncComponent(() => import('@/components/settings/app_settings.vue') );
@@ -71,6 +69,8 @@ const hooks = defineAsyncComponent(() => import('@/components/hooks/index.vue') 
 const plugins = defineAsyncComponent(() => import('@/components/plugins/index.vue') );
 
 const categories = defineAsyncComponent(() => import('@/components/categories/index.vue') );
+
+const pages = defineAsyncComponent(() => import('@/components/pages/index.vue') );
 
 const notifications_events = defineAsyncComponent(() => import('@/components/notifications_events.vue') );
 
@@ -103,6 +103,7 @@ export default {
         hooks,
         media,
         blog,
+        pages,
         translate,
         'help_messages':HelpMessages,
       },

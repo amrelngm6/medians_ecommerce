@@ -373,6 +373,7 @@ if(!empty($app->auth()))
     */
     RouteHandler::get('/admin/email_builder', \Medians\Builders\Application\EmailBuilderController::class.'@index');
     RouteHandler::get('/admin/pages', \Medians\Pages\Application\PageController::class.'@index');
+    RouteHandler::get('/admin/pages/(:all)', \Medians\Pages\Application\PageController::class.'@admin_item');
     RouteHandler::get('/admin/builder', \Medians\Builders\Application\BuilderController::class.'@index');
     RouteHandler::get('/admin/editor', \Medians\Pages\Application\PageController::class.'@editor');
     RouteHandler::get('/admin/builder/load', \Medians\Builders\Application\BuilderController::class.'@load'); 
