@@ -141,14 +141,14 @@ class MediaController extends CustomController
 
 		$item = $this->mediaRepo->findByFile($filePath);
 
+		print_r($item);
+		return;
+
 		if (isset($item->main_file->storage) && $item->main_file->storage == 'google')
 		{
 			$service = new GoogleStorageService();
 			
 			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'] . $filePath;
-
-			print_r($item);
-			return;
 
 			return file_exists($tmpFilePath) 
 			? $this->streamAudioFromTimeRange($tmpFilePath, $startTime, 0)
