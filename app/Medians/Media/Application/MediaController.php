@@ -147,6 +147,8 @@ class MediaController extends CustomController
 			
 			$tmpFilePath = $_SERVER['DOCUMENT_ROOT'] . $filePath;
 
+			print_r($item);
+			return;
 
 			return file_exists($tmpFilePath) 
 			? $this->streamAudioFromTimeRange($tmpFilePath, $startTime, 0)
