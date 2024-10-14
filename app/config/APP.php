@@ -531,7 +531,6 @@ class APP
 			array('title'=>translate('Artists'),  'icon'=>'user-tab', 'link'=>'/artists'),
 			
 			array('title'=>translate('Blog'),  'icon'=>'blog', 'link'=>'/blog'),
-			array('title'=>translate('Logout'),  'icon'=>'log-out', 'link'=>'/logout'),
 
 		);
 
