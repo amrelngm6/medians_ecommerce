@@ -74,10 +74,17 @@ body {
     {
         float: left;
     }
-    [dir="rtl"] .lg\:ml-60
-    {
+    [dir="rtl"] .lg\:ml-60 {
         margin-left: 0;
         margin-right: 15rem;
+    }
+    [dir="rtl"] .md\:before\:ml-\[8\.75rem\]::before {
+        margin-right: 8.75rem;
+        margin-left: 0;
+    }
+    [dir="rtl"] .md\:ml-44 {
+        margin-left: 0;
+        margin-right: 11rem;
     }
 }
 @media screen and (max-width:1024px) {
