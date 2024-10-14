@@ -68,9 +68,9 @@ class CustomContent
 		
 		$clear = CustomField::where('model_id', $Object->id)->where('model_type', Hook::class)->delete();
 
-		if ($data) {
+		if ($params['options']) {
 			
-			foreach ($data as $key => $value)
+			foreach ($params['options'] as $key => $value)
 			{
 				$fields = [];
 				$fields['model_id'] = $Object->id;	
