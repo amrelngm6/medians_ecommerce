@@ -110,9 +110,9 @@ class AudioGrid
 
 			if (!$hook)
 				return ;
-			
-			$params['categories_ids'] = json_decode($hook->field['categories']);
-			$params['limit'] = json_decode($hook->field['media_limit'] ?? '');
+
+			$params['categories_ids'] = isset($hook->field['categories']) ? json_decode($hook->field['categories']) : 0;
+			$params['limit'] = isset($hook->field['media_limit']) ? json_decode($hook->field['media_limit']) : 0;
 			$params['type'] = 'audio';
 
 			$list = $this->mediaRepo->getWithFilter($params);
