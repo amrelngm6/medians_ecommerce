@@ -23,7 +23,14 @@
 			</div>
 		{% endif %}
 
+	</div>
+</div>
+<div class="pb-4  h-full overflow-hidden rounded-2xl" x-data="{is_slide: 'slide'}">
+
+	<div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
+
 		<div class="w-full flex gap-4 ">
+        
 			<span class=" cursor-pointer text-sm flex gap-2 relative">
 				<span class="tooltiptext  text-xs">{{lang.translate('Followers')}}</span>
 				<img class="w-5 brightness-200" src="/src/front_assets/svg/user-tab.svg"/>
@@ -53,14 +60,8 @@
 			<span x-on:click="jQuery('#show-box-path').val('artist/{{item.customer_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
 
 		</div>
-
-	</div>
-</div>
-<div class="pb-4  h-full overflow-hidden rounded-2xl" x-data="{is_slide: 'slide'}">
-
-	<div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
-
 		<span class="block pt-10 text-sm text-gray-500">{{lang.translate('About')}}</span>
+
 		<div class="text-primary overflow-auto" style="max-height: 400px;">
 			<p class="dark:text-gray-300 py-4">{{item.field.about|raw| nl2br  }}</p>
 		</div>
