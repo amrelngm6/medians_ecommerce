@@ -200,7 +200,7 @@ class CustomerController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'channels' => $this->repo->get(),
-                'layout' => 'artists'
+                'layout' => 'artist/artists'
             ], 'output'));
             
 		} catch (\Exception $e) {
@@ -250,7 +250,7 @@ class CustomerController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item' => $item,
-                'layout' => 'artist'
+                'layout' => 'artist/artist'
             ], 'output'));
             
 		} catch (\Exception $e) {

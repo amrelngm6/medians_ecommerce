@@ -120,7 +120,7 @@
 		</div>
 		{% endif %} #}
 
-		{% if item.audiobooks|length %}
+		{% if app.SystemSetting.enable_audiobooks and item.audiobooks|length %}
 		<div class="w-full 	pt-6" id="slide-audiobooks-items">
             <div class="hs__wrapper" x-data="{is_slide: false}">
             

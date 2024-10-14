@@ -396,7 +396,6 @@ class APP
 				array('permission'=> 'ShortVideosSettings.index', 'title'=> translate('Short Videos settings'),  'icon'=>'tool', 'link'=>'admin/short_videos_settings', 'component'=>'system_settings'),
 				array('permission'=> 'AudioSettings.index', 'title'=> translate('Audio settings'),  'icon'=>'tool', 'link'=>'admin/audio_settings', 'component'=>'system_settings'),
 				array('permission'=> 'AudiobooksSettings.index', 'title'=> translate('Audiobooks settings'),  'icon'=>'tool', 'link'=>'admin/audiobooks_settings', 'component'=>'system_settings'),
-				array('permission'=> 'AudiobooksSettings.index', 'title'=> translate('Audiobooks settings'),  'icon'=>'tool', 'link'=>'admin/audiobooks_settings', 'component'=>'system_settings'),
 				array('permission'=> 'ChannelsSettings.index', 'title'=> translate('Channels settings'),  'icon'=>'tool', 'link'=>'admin/channels_settings', 'component'=>'system_settings'),
 				array('permission'=> 'StationsSettings.index', 'title'=> translate('Stations settings'),  'icon'=>'tool', 'link'=>'admin/stations_settings', 'component'=>'system_settings'),
 			]
@@ -531,6 +530,76 @@ class APP
 			array('title'=>translate('Genres'),  'icon'=>'audio-tab', 'link'=>'/genres'),
 			array('title'=>translate('Blog'),  'icon'=>'blog', 'link'=>'/blog'),
 			array('title'=>translate('Logout'),  'icon'=>'log-out', 'link'=>'/logout'),
+
+		);
+
+		return array_filter($data);
+	}
+	
+
+	/**
+	 * Return Search menu
+	 * List of search pages
+	 */
+	public function searchMenu()
+	{
+		$settings = $this->SystemSetting();
+
+		$data = array(
+			
+
+			!empty($settings['enable_audio']) ? array('title'=>translate('Audio'),  'icon'=>'audio-tab', 'link'=>'/search/audio') : null,
+
+			!empty($settings['enable_videos']) ? array('title'=>translate('Videos'),  'icon'=>'video-play', 'link'=>'/search/video') : null,
+
+			!empty($settings['enable_short_videos']) ? array('title'=>translate('Shorts'),  'icon'=>'videos', 'link'=>'/search/short') : null,
+
+			!empty($settings['enable_audiobooks']) ? array('title'=>translate('Audiobooks'),  'icon'=>'audiobook-tab', 'link'=>'/search/audiobook') : null,
+
+			!empty($settings['enable_stations']) ? array('title'=>translate('Stations'),  'icon'=>'station', 'link'=>'/search/station') : null,
+
+			!empty($settings['enable_channels']) ? array('title'=>translate('Channels'),  'icon'=>'channel', 'link'=>'/search/channel') : null,
+
+			!empty($settings['enable_playlist']) ? array('title'=>translate('Playlists'),  'icon'=>'playlist-tab', 'link'=>'/search/playlist') : null,
+			
+
+		);
+
+		return array_filter($data);
+	}
+	
+
+	/**
+	 * Return Studio menu
+	 * List of Artist studio pages
+	 */
+	public function studioMenu()
+	{
+		$settings = $this->SystemSetting();
+
+		$data = array(
+			
+			array('title'=>translate('Studio'),  'link'=>'/studio'),
+
+			!empty($settings['enable_audio']) ? array('title'=>translate('Audio'),   'link'=>'/studio/audio') : null,
+
+			!empty($settings['enable_videos']) ? array('title'=>translate('Videos'),  'link'=>'/studio/videos') : null,
+
+			!empty($settings['enable_short_videos']) ? array('title'=>translate('Shorts'),  'link'=>'/studio/shorts') : null,
+
+			!empty($settings['enable_audiobooks']) ? array('title'=>translate('Audiobooks'),  'link'=>'/studio/audiobooks') : null,
+
+			!empty($settings['enable_stations']) ? array('title'=>translate('Stations'), 'link'=>'/studio/stations') : null,
+
+			!empty($settings['enable_channels']) ? array('title'=>translate('Channels'), 'link'=>'/studio/channels') : null,
+
+			!empty($settings['enable_playlist']) ? array('title'=>translate('Playlists'), 'link'=>'/studio/playlists') : null,
+			
+			array('title'=>translate('Settings'),  'link'=>'/studio/profile'),
+
+			array('title'=>translate('Information'),  'link'=>'/studio/information'),
+
+			array('title'=>translate('Profile'),  'link'=>'/artist/'.$this->customer_id()),
 
 		);
 

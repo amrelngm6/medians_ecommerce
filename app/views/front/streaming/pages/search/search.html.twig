@@ -19,20 +19,11 @@
 
                     <div class="border-b border-gray-200 dark:border-gray-700">
                         <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-300  mx-auto">
-                            {% for menuitem in [
-                                {title:  "Audio",link: "/search/audio", icon: "audio-tab.svg"},
-                                {title: "Audio books",link: "/search/audiobook", icon: "audiobook-tab.svg"},
-                                {title: "Videos",link: "/search/video", icon: "video-play.svg"},
-                                {title: "Shorts",link: "/search/short", icon: "videos.svg"},
-                                {title: "Stations",link: "/search/station", icon: "station.svg"},
-                                {title: "Channels",link: "/search/channel", icon: "channel.svg"},
-                                {title: "Playlists",link: "/search/playlist", icon: "playlist-tab.svg"},
-                                {title: "Artists",link: "/search/artist", icon: "user-tab.svg"}
-                            ] %}
+                            {% for menuitem in app.searchMenu %}
                             <li class="me-2 mx-auto">
                             
                                 <a href="{{menuitem.link}}?params[title]={{app.params.title}}" class="ajax-load flex gap-2 items-center justify-center p-4 border-b-2 {{ menuitem.link == app.request.pathInfo ? "border-blue-600 text-primary active dark:text-blue-500 dark:border-blue-500" : "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"}} rounded-t-lg  group text-lg">
-                                    <img src="/src/front_assets/svg/{{menuitem.icon}}" class="w-6 h-6" />
+                                    <img src="/src/front_assets/svg/{{menuitem.icon}}.svg" class="w-6 h-6" />
                                     {{ lang.translate(menuitem.title)}}
                                 </a>
                             </li>

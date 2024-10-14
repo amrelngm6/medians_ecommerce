@@ -87,7 +87,7 @@ RouteHandler::get('/search/channel', \Medians\Channels\Application\ChannelContro
 
 /** Studio pages */
 RouteHandler::get('/studio', \Medians\Media\Application\MediaItemController::class.'@studio');
-RouteHandler::get('/studio/media', \Medians\Media\Application\MediaItemController::class.'@studio_media');
+RouteHandler::get('/studio/audio', \Medians\Media\Application\MediaItemController::class.'@studio_media');
 RouteHandler::get('/studio/videos', \Medians\Media\Application\VideoController::class.'@studio_media');
 RouteHandler::get('/studio/shorts', \Medians\Media\Application\ShortVideoController::class.'@studio_media');
 RouteHandler::get('/studio/playlists', \Medians\Media\Application\MediaItemController::class.'@studio_playlists');
