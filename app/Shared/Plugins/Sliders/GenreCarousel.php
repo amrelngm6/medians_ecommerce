@@ -114,6 +114,15 @@ class GenreCarousel
 	{
 
 		try {
+			
+			$app = new \config\APP;
+
+			$settings = $app->SystemSetting();
+			
+			if (empty($settings['enable_audio']))
+				return;
+
+				
 			$hook = $this->hookRepo->find($params['id']);
 
 			$params['categories_ids'] = json_decode($hook->field['categories']);
