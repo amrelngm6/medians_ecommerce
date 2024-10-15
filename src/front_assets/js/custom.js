@@ -41,7 +41,7 @@ jQuery('#station-player-audio').on('change', function(event) {
 
 jQuery(document).on('click', '.start-station', async function (i, el) {
 	console.log('call pause 4')
-
+	rand += 1
 	audio ? audio.pause() : null
 
 	jQuery('#station-player-audio').val(getCookie('volume'))
@@ -51,7 +51,11 @@ jQuery(document).on('click', '.start-station', async function (i, el) {
 	const stationId = jQuery(this).data('station'); 
 		
 	await loadStation(stationId)
-	audio.play()
+	
+	audio.src = '/stream_station?station_id='+ stationId+'&hash='+ rand;
+	audio.load();
+	audio.play();
+	audio.volume = getCookie('volume')
 
 	mainAudio.on('ended', function() {
 		rand += 1
