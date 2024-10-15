@@ -87,6 +87,11 @@ class MediaItem extends CustomModel
 		return $this->hasOne(Customer::class , 'customer_id', 'author_id');	
 	}
 	 
+	public function customer()
+	{
+		return $this->hasOne(Customer::class, 'customer_id', 'customer_id');	
+	}
+
 	public function genres() 
 	{
 		return $this->belongsToMany(Genre::class, MediaGenre::class, 'media_id', 'genre_id');	

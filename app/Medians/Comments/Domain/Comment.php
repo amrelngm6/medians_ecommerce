@@ -41,4 +41,11 @@ class Comment extends CustomModel
 		return $this->hasOne(Customer::class, 'customer_id', 'customer_id');	
 	}
 
+	public function receiverAsCustomer()
+	{
+		return $this->item->customer ?? null;	
+	}
+
+	
+
 }
