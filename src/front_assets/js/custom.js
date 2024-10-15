@@ -877,6 +877,7 @@ $(function(){
 			return;
 
 		myVideo.volume = getCookie('volume')
+		jQuery('#video-volume').val(getCookie('volume'))
 
 		if (myVideo.paused) {
 			myVideo.play()
