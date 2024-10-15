@@ -9,10 +9,15 @@
                         <img src="/src/front_assets/svg/search.svg" class="" width="14" />
                     </a>
                     
-                    <div href="/search/audio" class="relative show-child min-w-8 py-4 cursor-pointer" >
-                        <img src="/uploads/img/flags/{{lang_key}}.svg" class="" width="14" />
-                        <div class="show-on-hover absolute p-4 bg-white dark:bg-gray-900 rounded-lg">
-
+                    <div  class="relative show-child min-w-8 py-4 cursor-pointer" >
+                        <img src="/uploads/img/flags/{{lang_key}}.svg" class="rounded-full" width="14" />
+                        <div class="show-on-hover absolute right-0 p-4 bg-white dark:bg-gray-900 rounded-lg w-40 flex-col flex gap-2">
+                            {% for l in app.Languages %}
+                            <a href="/switch-lang/{{l.language_code}}" class="flex w-full gap-4">
+                                <img src="{{l.icon}}" class="" width="14" />
+                                <span>{{l.name}}</span>
+                            </a> 
+                            {% endfor %}
                         </div>
                     </div>
 

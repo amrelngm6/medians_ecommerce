@@ -90,14 +90,6 @@ class APP
 		return isset($_COOKIE['is_dark']) ? true : false;
 	}
 
-	/**
-	 * Load all setting for a Business 
-	 * return as Array
-	 */ 
-	public function BusinessSettings()
-	{
-		return  (new \Medians\Settings\Application\SettingsController())->getAll();
-	}
 
 	/**
 	 * Load Sysetem Settings
