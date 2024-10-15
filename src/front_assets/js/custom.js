@@ -902,7 +902,7 @@ $(function(){
 			() => {
 				jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
 				jQuery(`#${myVideo.dataset.container} progress`).val(myVideo.currentTime);
-
+				jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
 			})
 			
 			
