@@ -12,3 +12,11 @@
                             
                         </div>
                     </div>
+                    
+                    {% set genres = audiobook_genres %}
+                	{% include 'views/front/' ~ app.SystemSetting.template ~ '/includes/book_genres_section.html.twig' %}
+
+
+                    {% set genres = video_genres %}
+                	{% include 'views/front/' ~ app.SystemSetting.template ~ '/includes/video_genres_list.html.twig' %}
+                    

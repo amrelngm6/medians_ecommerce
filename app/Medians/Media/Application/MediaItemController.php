@@ -367,6 +367,8 @@ class MediaItemController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'genres' => $this->categoryRepo->getGenres(),
+                'audiobook_genres' => $this->categoryRepo->getBookGenres(),
+                'video_genres' => $this->categoryRepo->getVideoGenres(),
                 'layout' => 'genres'
             ], 'output'));
             
