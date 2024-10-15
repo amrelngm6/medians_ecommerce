@@ -2,7 +2,7 @@
 
 
 	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
-		<video id="my-video" data-container="videoContainer" class="w-full h-screen" {{app.SystemSetting.autoplay_short_video ? 'autoplay' : ''}} poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous">
+		<video id="my-video" data-container="videoContainer" class="w-full h-screen" poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous">
 			<source src="/stream_short_video?video={{item.main_file.filename}}" type="video/webm"/>
 		</video>
 
@@ -197,28 +197,17 @@ $(function(){
 		let myVideo = document.getElementById('my-video')
 		console.log(myVideo)
 		/** On Load video */
-		myVideo.addEventListener(
-		"play",
-		() => {
-		console.log('Video loaded')
-		},
-		false,
-		);
-
-		myVideo.addEventListener(
-		"loadedmetadata",
-		() => {
-		console.log('Video loaded')
-
-			jQuery(`#current-time-page`).html(convertToTime(myVideo.currentTime));
-			jQuery(`#video-duration-page`).html(convertToTime(myVideo.duration))
-			jQuery(`progress`).attr("max", myVideo.duration);
-			
-			jQuery('#video-overlay').fadeOut(200)
-			jQuery(`#videoContainer`).css('z-index',  999)
-		},
-		false,
-		);
+		myVideo.volume = getCookie('volume')
+		jQuery(`#current-time-page`).html(convertToTime(myVideo.currentTime));
+		jQuery(`#video-duration-page`).html(convertToTime(myVideo.duration))
+		jQuery(`#video-volume`).val(myVideo.volume);
+		jQuery(`progress`).attr("max", myVideo.duration);
+		
+		jQuery('#video-overlay').fadeOut(200)
+		jQuery(`#videoContainer`).css('z-index',  999)
+		{% if app.SystemSetting.autoplay_short_video %}
+			myVideo.play()
+		{% endif %}
 	})
 })
 
