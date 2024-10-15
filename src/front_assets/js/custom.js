@@ -39,6 +39,7 @@ jQuery('#station-player-audio').on('change', function(event) {
 }) ;	
 
 jQuery(document).on('click', '.start-station', async function (i, el) {
+	console.log('call pause 4')
 
 	audio ? audio.pause() : null
 
@@ -158,6 +159,7 @@ async function loadChannel(channelId, play = true)
 
 jQuery(document).on('click', '.start-player', function (i, el) {
 	jQuery('#station-app-cover').addClass('hidden')
+		console.log('call pause 5')
 	audio ? audio.pause() : null
 	player = jQuery(this);
 	list = JSON.parse(player.attr('data-list'))
@@ -184,8 +186,10 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 jQuery(document).on('click', '.start-single-player', function (i, el) {
 	player = jQuery(this);
 
-	if (audio)
+	if (audio) {
 		audio.pause()
+		console.log('call pause 1')
+	}
 
 	jQuery('#station-app-cover').addClass('hidden')
 	list = JSON.parse(player.attr('data-list'))
@@ -222,6 +226,7 @@ jQuery('#station-player-pause-button').on("click", async function(event) {
 		await loadStation(activeStation.station_id)
 		audio.play()
 	} else  {
+		console.log('call pause 2')
 		audio.pause();
 		if (stationInterval) {
 			clearInterval(stationInterval)
@@ -304,6 +309,7 @@ function runAudio()
 }
 
 function pauseStyles() {
+	console.log('call pause 3')
 		
 	audio.pause();
 	player.removeClass('playing');
