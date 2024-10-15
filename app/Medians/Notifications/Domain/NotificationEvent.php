@@ -194,9 +194,10 @@ class NotificationEvent extends CustomModel
     	$params['receiver'] = $receiver;
 		$templateRepo = new \Medians\Templates\Infrastructure\EmailTemplateRepository;
 		$template = $templateRepo->find($event->template_id);
-    	$event->body = isset($template->content) ? $app->renderTemplate($template->content)->render($params) : '';
     	$event->subject = $app->renderTemplate($event->subject ?? ' ')->render($params);
     	$event->body_text = $app->renderTemplate($event->body_text ?? ' ')->render($params);
+		$params['content'] = $event->body_text;
+    	$event->body = isset($template->content) ? $app->renderTemplate($template->content)->render($params) : '';
 
     	return Notification::storeEventNotification($event, $model, $receiver);
 	}
