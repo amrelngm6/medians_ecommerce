@@ -40,6 +40,10 @@ class VideosSettingsController extends CustomController
 				[ 'key'=> "video_max_size", 'title'=> translate('Video max size'), 'help_text'=>translate('Max size for uploaded Videos'), 'fillable'=> true, 'column_type'=>'number' ],
                 
 			],		
+			'audoplay'=> [	
+				[ 'key'=> "autoplay_video", 'title'=> translate('Autoplay at single page'), 'help_text'=>translate('Auto play videos at video page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+                
+			],		
         ];
 	}
 
