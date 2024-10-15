@@ -2,25 +2,25 @@
 
 
 	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
-		<video id="my-video" class="w-full lg:h-screen" data-container="videoContainer" preload="metadata"  {{app.SystemSetting.autoplay_shorts ? 'autoplay' : ''}}  poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous" >
+		<video id="video-page" class="w-full lg:h-screen" data-container="videoContainer" preload="metadata"  {{app.SystemSetting.autoplay_shorts ? 'autoplay' : ''}}  poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous" >
 			<source src="/stream_video?video={{item.main_file.filename}}" type="video/mp4"/>
 		</video>
 
 		<div id="video-controls" class="flex px-6 gap-4 text-gray-400 absolute bottom-0 left-0 w-full gradient-top-overlay pt-10" data-state="hidden">
-			<button class="play-video brightness-200" data-player="my-video" id="play" type="button" data-state="play"><img src="/src/front_assets/svg/video-play.svg" class="w-4 brightness-200"/></button>
-			<button class="pause-video brightness-200" data-player="my-video" style="display:none" id="pause" type="button" data-state="pause"><img src="/src/front_assets/svg/video-pause.svg" class="w-4 brightness-200"/></button>
+			<button class="play-video brightness-200" data-player="video-page" id="play" type="button" data-state="play"><img src="/src/front_assets/svg/video-play.svg" class="w-4 brightness-200"/></button>
+			<button class="pause-video brightness-200" data-player="video-page" style="display:none" id="pause" type="button" data-state="pause"><img src="/src/front_assets/svg/video-pause.svg" class="w-4 brightness-200"/></button>
 			<div id="current-time-page"></div>
 			<div class="progress w-full">
-				<progress id="progress" data-player="my-video" class="cursor-pointer bg-gray-800 w-full rounded-2xl overflow-hidden " value="0" min="0" step="1" max="">
+				<progress id="progress" data-player="video-page" class="cursor-pointer bg-gray-800 w-full rounded-2xl overflow-hidden " value="0" min="0" step="1" max="">
 					<span id="progress-bar"></span>
 				</progress>
 			</div>
 			<span id="video-duration-page"></span>
 			<div class="volume relative show-child ">
-				<button class="brightness-200" id="mute" data-player="my-video" type="button" style="padding-top: 5px" data-state="mute"><img src="/src/front_assets/svg/video-volume.svg" class="w-4 brightness-200"/></button>
-				<input type="range" id="video-volume" data-player="my-video" min="0" step=".1" max="1" class="show-on-hover absolute bottom-0 h-2 left-1 w-20" style="transform-origin: left; transform: rotate(270deg);"/>
+				<button class="brightness-200" id="mute" data-player="video-page" type="button" style="padding-top: 5px" data-state="mute"><img src="/src/front_assets/svg/video-volume.svg" class="w-4 brightness-200"/></button>
+				<input type="range" id="video-volume" data-player="video-page" min="0" step=".1" max="1" class="show-on-hover absolute bottom-0 h-2 left-1 w-20" style="transform-origin: left; transform: rotate(270deg);"/>
 			</div>
-			<button id="fs" class="fullscreen " data-container="videoContainer" data-player="my-video" id="pause" type="button" data-state="go-fullscreen"><img src="/src/front_assets/svg/fullscreen.svg" class="w-4 brightness-200"/></button>
+			<button id="fs" class="fullscreen " data-container="videoContainer" data-player="video-page" id="pause" type="button" data-state="go-fullscreen"><img src="/src/front_assets/svg/fullscreen.svg" class="w-4 brightness-200"/></button>
 		</div>
 	</figure>
 
@@ -186,10 +186,10 @@
 
 $(function(){
 	
-	let myVideo = document.getElementById('my-video')
+	let myVideo = document.getElementById('video-page')
 	
     jQuery(document).on('click', '#main-side a', function(){
-		var video = document.getElementById('my-video') 
+		var video = document.getElementById('video-page') 
 		video.pause()
 		video.src =  '';
 	})
