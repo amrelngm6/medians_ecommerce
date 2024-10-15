@@ -36,6 +36,8 @@ class MailService
 
 	public function sendMail()
 	{
+		error_log('Sending');
+
 		// Get system settings for Google Login
 		$SystemSettings = new SystemSettingsController;
 
