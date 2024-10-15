@@ -51,9 +51,10 @@ jQuery(document).on('click', '.start-station', async function (i, el) {
 		
 	await loadStation(stationId)
 
+	let rand = Math.random();
 	mainAudio.on('ended', function() {
-		let rand = Math.random();
-		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ (rand+1);
+		rand += 1
+		audio.src = '/stream_station?station_id='+ stationId+'&hash='+rand;
 		audio.load();
 		audio.play();
 		audio.volume = getCookie('volume')
