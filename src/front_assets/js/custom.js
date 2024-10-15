@@ -50,7 +50,7 @@ jQuery(document).on('click', '.start-station', async function (i, el) {
 		
 	await loadStation(stationId)
 
-	let val = jQuery('#startions-interval').val();
+	let val = jQuery('#stations-interval').val();
 	
 	stationInterval = setInterval(function(){
 	}, val > 1  ? (val * 1000) : 30000);
