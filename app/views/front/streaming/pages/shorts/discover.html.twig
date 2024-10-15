@@ -10,7 +10,7 @@ $(function(){
     const videoData = [
         {% for item in video_items.items %}
         {{item.addView()}}
-        { id: '{{item.media_id}}', likes: '{{item.likescount()}}', comments: '{{item.commentscount()}}', views: '{{item.viewscount()}}', liked: '{{item.liked(app.customer.customer_id).first()}}', src: '/stream_short_video?video={{item.player_object.file}}', poster: '/stream?thumbnail=1600&dir=videos/screenshots&image={{item.player_object.poster}}', username: '{{item.player_object.artist}}', avatar: '/stream?thumbnail=100&image={{item.artist.picture_name}}', title: '{{item.player_object.title}}', description: "{{item.description|trim}}" },
+        { id: '{{item.media_id}}', likes: '{{item.likescount()}}', comments: '{{item.commentscount()}}', views: '{{item.viewscount()}}', liked: '{{item.liked(app.customer.customer_id).first()}}', src: '/stream_short_video?video={{item.player_object.file}}', poster: '/stream?thumbnail=800&dir=videos/screenshots&image={{item.player_object.poster}}', username: '{{item.player_object.artist}}', avatar: '/stream?thumbnail=100&image={{item.artist.picture_name}}', title: '{{item.player_object.title}}', description: "{{item.description|trim}}" },
         {% endfor %}
     ];
 
