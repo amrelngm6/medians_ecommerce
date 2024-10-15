@@ -906,6 +906,20 @@ $(function(){
 			})
 			
 			
+		/** On Load video */
+		myVideo.addEventListener(
+		"loadedmetadata",
+		() => {
+			jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
+			jQuery(`${myVideo.dataset.container} #video-duration-page`).html(convertToTime(myVideo.duration))
+			jQuery(`${myVideo.dataset.container} progress`).attr("max", myVideo.duration);
+			
+			jQuery('#video-overlay').fadeOut(200)
+			jQuery(`${myVideo.dataset.container}`).css('z-index',  999)
+		},
+		false,
+		);
+			
 		/** On Play video */
 		myVideo.addEventListener(
 		"play",
