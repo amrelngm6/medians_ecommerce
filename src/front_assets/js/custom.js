@@ -186,7 +186,10 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 
 jQuery(document).on('click', '.start-single-player', function (i, el) {
 	player = jQuery(this);
-	audio.pause()
+
+	if (audio)
+		audio.pause()
+	
 	jQuery('#station-app-cover').addClass('hidden')
 	list = JSON.parse(player.attr('data-list'))
 	index = player.attr('data-index')
