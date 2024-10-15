@@ -113,7 +113,7 @@ class EmailTemplateController extends CustomController
 
 	public function update()
 	{
-		$params = $this->app->params();
+		$params = $this->app->request()->get('params');
 
         try {
 
