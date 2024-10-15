@@ -902,12 +902,12 @@ function playVideo(myVideo, autoPlay = true)
 	
 	/** On time update */
 	myVideo.addEventListener(
-		"timeupdate",
-		() => {
-			jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
-			jQuery(`#${myVideo.dataset.container} progress`).val(myVideo.currentTime);
-			jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
-		})
+	"timeupdate",
+	() => {
+		jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
+		jQuery(`#${myVideo.dataset.container} progress`).val(myVideo.currentTime);
+		jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
+	})
 		
 		
 	/** On Load video */
@@ -920,9 +920,7 @@ function playVideo(myVideo, autoPlay = true)
 		
 		jQuery('#video-overlay').fadeOut(200)
 		jQuery(`#${myVideo.dataset.container}`).css('z-index',  999)
-	},
-	false,
-	);
+	}, false );
 		
 	/** On Play video */
 	myVideo.addEventListener(
@@ -933,9 +931,7 @@ function playVideo(myVideo, autoPlay = true)
 		
 		jQuery('#video-overlay').fadeOut(200)
 		jQuery(`#${myVideo.dataset.container}`).css('z-index',  999)
-	},
-	false,
-	);
+	}, false);
 		
 	/** On Pause video */
 	myVideo.addEventListener(
@@ -943,9 +939,7 @@ function playVideo(myVideo, autoPlay = true)
 	() => {
 		jQuery('#video-overlay').fadeIn(200)
 		jQuery(`#${myVideo.dataset.container}`).css('z-index',  0)
-	},
-	false,
-	);
+	}, false );
 }
 
 

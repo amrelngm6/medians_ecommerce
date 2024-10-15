@@ -186,6 +186,8 @@
 
 $(function(){
 	
+	let myVideo = document.getElementById('my-video')
+	
     jQuery(document).on('click', '#main-side a', function(){
 		var video = document.getElementById('my-video') 
 		video.pause()
@@ -194,10 +196,8 @@ $(function(){
 
 	addEventListener('load', e => {
 		
-		let myVideo = document.getElementById('my-video')
 		console.log(myVideo)
 		playVideo(myVideo, {{app.SystemSetting.autoplay_short_video ? 'true' : 'false'}})
-		return;
 	})
 })
 </script>
