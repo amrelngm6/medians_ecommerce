@@ -200,6 +200,8 @@ $(function(){
 		myVideo.addEventListener(
 		"loadedmetadata",
 		() => {
+		console.log('Video loaded')
+
 			jQuery(`#current-time-page`).html(convertToTime(myVideo.currentTime));
 			jQuery(`#video-duration-page`).html(convertToTime(myVideo.duration))
 			jQuery(`progress`).attr("max", myVideo.duration);
