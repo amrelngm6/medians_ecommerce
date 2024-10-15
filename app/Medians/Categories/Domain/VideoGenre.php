@@ -5,6 +5,9 @@ namespace Medians\Categories\Domain;
 use Shared\dbaser\CustomModel;
 use Medians\Content\Domain\Content;
 
+use Medians\Media\Domain\MediaItem;
+use Medians\Media\Domain\MediaGenre;
+
 class VideoGenre extends Category
 {
 
