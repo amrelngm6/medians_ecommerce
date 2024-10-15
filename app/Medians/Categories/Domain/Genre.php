@@ -51,6 +51,12 @@ class Genre extends Category
 	}
 	
 
+
+	public function items() 
+	{
+		return $this->belongsToMany(MediaItem::class, MediaGenre::class, 'genre_id', 'media_id');	
+	}
+	
 	public function langs() 
 	{
 		return $this->morphMany(Content::class , 'item')->groupBy('lang');	
