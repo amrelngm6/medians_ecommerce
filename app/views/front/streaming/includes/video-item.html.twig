@@ -5,6 +5,15 @@
                                                 <div class="save show-on-hover cursor-pointer absolute">
                                                     <p class="span video-side-popup" data-path="{{media_item.main_file.path}}" ><img src="/src/front_assets/svg/videos.svg" class="w-6 dark:brightness-200" /></p>
                                                 </div>
+
+                                                <div class="image-list">
+                                                    <div class="image-item">
+                                                        {% for i in [1,2,3,4,5,6,7,8,9,10] %}
+                                                        <img src="/stream?thumbnail=300&dir=videos/screenshots&image=screenshot_{{i}}_{{media_item.picture_name|split('_')[2]}}" alt="Video Screenshot">
+                                                        {% endfor %}
+                                                        <!-- Add more images if needed -->
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="text ">
@@ -29,3 +38,61 @@
                                             </div>
                                         </div>
                                             
+                                            <style>
+.image-list {
+  display: flex;
+  gap: 20px;
+}
+
+.image-item {
+  position: relative;
+  width: 100;
+  height: 100px; /* Adjust this to your image height */
+}
+
+.image-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Show only the first image by default */
+.image-item img:first-child {
+  opacity: 1;
+}
+
+/* Hover animation to cycle through images */
+.image-item:hover img {
+  animation: image-switch 5s steps(1) infinite;
+}
+
+/* Keyframes to switch between images */
+@keyframes image-switch {
+  0% { opacity: 1; }
+  10% { opacity: 0; }
+  20% { opacity: 0; }
+  30% { opacity: 0; }
+  40% { opacity: 0; }
+  50% { opacity: 0; }
+  60% { opacity: 0; }
+  70% { opacity: 0; }
+  80% { opacity: 0; }
+  90% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* Additional images to cycle through (adjust percentages if you have more) */
+.image-item:hover img:nth-child(2) { animation-delay: 0.50s; }
+.image-item:hover img:nth-child(3) { animation-delay: 1s; }
+.image-item:hover img:nth-child(4) { animation-delay: 1.50s; }
+.image-item:hover img:nth-child(5) { animation-delay: 2s; }
+.image-item:hover img:nth-child(6) { animation-delay: 2.50s; }
+.image-item:hover img:nth-child(7) { animation-delay: 3s; }
+.image-item:hover img:nth-child(8) { animation-delay: 3.50s; }
+.image-item:hover img:nth-child(9) { animation-delay: 4s; }
+.image-item:hover img:nth-child(10) { animation-delay: 4.5s; }
+                                            </style>
