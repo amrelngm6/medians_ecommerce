@@ -52,6 +52,7 @@ class EmailTemplateController extends CustomController
 		return [
             [ 'key'=> "template_id", 'title'=> "#", 'column_type'=>'hidden'],
             [ 'key'=> "title", 'title'=> translate('Title'), 'required'=>true, 'fillable'=> true, 'column_type'=>'text' ],
+            [ 'key'=> "content", 'title'=> translate('Content'), 'required'=>true, 'fillable'=> true, 'column_type'=>'editor' ],
             [ 'key'=> "status", 'title'=> translate('Status'), 'fillable'=> true, 'column_type'=>'checkbox' ],
         ];
 	}
@@ -96,7 +97,6 @@ class EmailTemplateController extends CustomController
         try {	
 
         	$params['created_by'] = $this->app->auth()->id;
-        	$params['content'] = $this->handleLangs($params);
 
             $returnData = (!empty($this->repo->store($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
@@ -118,7 +118,6 @@ class EmailTemplateController extends CustomController
         try {
 
         	$params['status'] = isset($params['status']) ? $params['status'] : null;
-        	$params['homepage'] = isset($params['homepage']) ? $params['homepage'] : null;
 
             if ($this->repo->update($params))
             {
@@ -155,26 +154,8 @@ class EmailTemplateController extends CustomController
 
 	public function validate($params) 
 	{
-		if (empty($params['content']['en']['title']))
-		{
-        	throw new \Exception(json_encode(array('result'=>translate('NAME_EMPTY'), 'error'=>1)), 1);
-		}
 	}
 	
-
-	public function handleLangs($params) 
-	{
-		$langsRepo = new \Medians\Languages\Infrastructure\LanguageRepository();
-		$langs = $langsRepo->getActive();
-		$fields = [];
-		foreach ($langs as $row) 
-		{
-			$fields[$row->language_code] = ["title"=> $params['title']];
-		}
-		return $fields;	
-	}
-
-
 
     
     
