@@ -227,8 +227,8 @@ function formatSizeUnits($bytes, $format = 'text') {
         $bytes = number_format($bytes / 1073741824, 2);
         $unit = 'GB';
     } elseif ($bytes >= 1048576) {
-        $mbSize = number_format($bytes / 1048576, 2) * 1;
         $bytes = number_format($bytes / 1048576, 2);
+        $mbSize = $bytes;
         $unit = 'MB';
     } elseif ($bytes >= 1024) {
         $mbSize = 1;
@@ -247,7 +247,7 @@ function formatSizeUnits($bytes, $format = 'text') {
 
     if ($format == 'text')
     {
-        $bytes = "$bytes $format";
+        $bytes = "$bytes $unit";
     }
     
     if ($format == 'number')
