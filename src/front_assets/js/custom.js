@@ -26,6 +26,7 @@ function runSlide()
 var mainAudio = jQuery('audio');
 
 var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename, activeChannel, activeChannelMedia, activeStation, activeStationMedia, stationInterval;
+let rand = Math.random();
 
 
 jQuery('#player-audio').on('change', function(event) {
@@ -50,8 +51,8 @@ jQuery(document).on('click', '.start-station', async function (i, el) {
 	const stationId = jQuery(this).data('station'); 
 		
 	await loadStation(stationId)
-	audio.play
-	let rand = Math.random();
+	audio.play()
+
 	mainAudio.on('ended', function() {
 		rand += 1
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+rand;
@@ -97,8 +98,6 @@ async function loadStation(stationId, play = true)
 
 	await handleStationPlayer(stationId, play)
 }
-
-let rand = Math.random();
 
 
 async function handleStationPlayer(stationId, play = true)
