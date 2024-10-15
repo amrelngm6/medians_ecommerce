@@ -196,7 +196,7 @@ $(function(){
 		
 		let myVideo = document.getElementById('my-video')
 		console.log(myVideo)
-		playVideo(myVideo)
+		playVideo(myVideo, {{app.SystemSetting.autoplay_short_video ? 'true' : 'false'}})
 		return;
 		/** On Load video */
 		myVideo.volume = getCookie('volume')

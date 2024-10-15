@@ -875,7 +875,7 @@ $(function(){
 })
 
 
-function playVideo(myVideo)
+function playVideo(myVideo, autoPlay = true)
 {	
 	if (!myVideo)
 		return;
@@ -883,7 +883,7 @@ function playVideo(myVideo)
 	myVideo.volume = getCookie('volume')
 	jQuery('#video-volume').val(getCookie('volume'))
 
-	if (myVideo.paused) {
+	if (myVideo.paused && autoPlay) {
 		myVideo.play()
 		jQuery(`#${myVideo.dataset.container} .play-video`).hide().parent().find('.pause-video').fadeIn(200)
 		jQuery('#channelContainer .play-channel').hide().parent().find('.pause-channel').fadeIn(200)
