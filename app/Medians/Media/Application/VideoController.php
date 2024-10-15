@@ -162,7 +162,7 @@ class VideoController extends CustomController
         
 		try 
         {
-            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/pages/video/embed.html.twig', [
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/pages/videos/embed.html.twig', [
                 'item' => $item,
             ], 'output'));
             
