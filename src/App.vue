@@ -40,8 +40,6 @@ import {translate, handleAccess, handleRequest, handleGetRequest, showAlert} fro
 // Default data table pages
 const data_table = defineAsyncComponent(() => import('@/components/datatable_pages/data_table_page.vue') );
 
-const email_templates = defineAsyncComponent(() => import('@/components/email_templates.vue') );
-
 const roles = defineAsyncComponent(() => import('@/components/roles.vue') );
 
 const system_settings = defineAsyncComponent(() => import('@/components/settings/system_settings.vue') );
@@ -97,7 +95,6 @@ export default {
         translations,
         contact_forms,
         menus,
-        email_templates,
         notifications_events,
         plugins,
         hooks,

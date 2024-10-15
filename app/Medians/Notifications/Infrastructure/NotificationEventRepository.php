@@ -107,7 +107,7 @@ class NotificationEventRepository
 			'User' => \Medians\Users\Domain\User::class,
 			'HelpMessage' => \Medians\Help\Domain\HelpMessage::class,
 			'Payment' => \Medians\Payments\Domain\Payment::class,
-			'HelpMessageComment' => \Medians\Help\Domain\HelpMessageComment::class,
+			'Comment' => \Medians\Comments\Domain\Comment::class,
 		];
 	}   
 

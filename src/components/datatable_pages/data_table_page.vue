@@ -90,12 +90,6 @@
                             
                         </template>
 
-                        <template #item-builder="item">
-                            <button class="p-2  hover:text-gray-600 text-purple" @click="handleAction('builder', item)">
-                                <vue-feather class="w-5" type="edit-3"></vue-feather>
-                            </button>
-                        </template>
-
                         <template #item-edit="item">
                             <button v-if="!item.not_editable" class="p-2  hover:text-gray-600 text-purple" @click="handleAction('edit', item)">
                                 <vue-feather class="w-5" type="edit"></vue-feather>
@@ -201,11 +195,6 @@ export default
                     showEditSide.value = true; 
                     break;  
 
-                case 'builder':
-                    var key = content.value.object_key ?? props.object_key ;
-                    var name = content.value.object_name ?? props.object_name ;
-                    window.open(props.conf.url+'admin/builder?lang='+((data.content ? data.content.lang : null) ?? props.langs[0].language_code)+'&item_type='+name+'&item_id='+(data[key] ?? 0), '_blank').focus();
-                    break;  
 
                 case 'delete':
                     var name = content.value.object_name ?? props.object_name ;
