@@ -50,7 +50,7 @@ jQuery(document).on('click', '.start-station', async function (i, el) {
 	const stationId = jQuery(this).data('station'); 
 		
 	await loadStation(stationId)
-
+	audio.play
 	let rand = Math.random();
 	mainAudio.on('ended', function() {
 		rand += 1
@@ -98,11 +98,12 @@ async function loadStation(stationId, play = true)
 	await handleStationPlayer(stationId, play)
 }
 
+let rand = Math.random();
+
 
 async function handleStationPlayer(stationId, play = true)
 {
-	let rand = Math.random();
-
+	rand += 1
 	if (activeStationMedia && activeStation.active_item && activeStation.active_item.media_id == activeStationMedia.media_id)
 	{
 		streamingStatus = 'same'
