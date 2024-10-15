@@ -50,18 +50,13 @@ jQuery(document).on('click', '.start-station', async function (i, el) {
 		
 	await loadStation(stationId)
 
-	let val = jQuery('#stations-interval').val();
-	
-	stationInterval = setInterval(function(){
-	}, val > 1  ? (val * 1000) : 30000);
-
 	mainAudio.on('ended', function() {
 		let rand = Math.random();
 		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ (rand+1);
 		audio.load();
 		audio.play();
 		audio.volume = getCookie('volume')
-		loadStation(stationId)
+		// loadStation(stationId)
 	})
 
 
@@ -126,7 +121,7 @@ async function handleStationPlayer(stationId)
 		audio.play();
 		audio.volume = getCookie('volume')
 	}
-
+	
 	if (activeStationMedia)
 	{
 		jQuery('#station-album-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name : activeStationMedia.title)
