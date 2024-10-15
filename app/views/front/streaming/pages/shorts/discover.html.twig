@@ -101,7 +101,7 @@ $(function(){
         // place a listener on it
         video.addEventListener( "loadedmetadata", function () {
             // retrieve dimensions
-            actionButtons.style.width = video.videoWidth+'px'
+            {# actionButtons.style.width = video.videoWidth+'px' #}
             actionButtons.style.display = 'flex'
             jQuery(`#progress[data-player=${video.id}]`).attr('max', video.duration)
             jQuery(`#${videoWrapper.id} #video-duration-page`).html( convertToTime(video.duration))
