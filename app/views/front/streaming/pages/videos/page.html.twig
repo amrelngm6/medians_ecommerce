@@ -183,9 +183,21 @@
 </div>
 
 <script>
+
+$(function(){
+	
     jQuery(document).on('click', '#main-side a', function(){
 		var video = document.getElementById('my-video') 
 		video.pause()
 		video.src =  '';
 	})
+
+	addEventListener('load', e => {
+		
+		let myVideo = document.getElementById('my-video')
+		console.log(myVideo)
+		playVideo(myVideo, {{app.SystemSetting.autoplay_short_video ? 'true' : 'false'}})
+		return;
+	})
+})
 </script>

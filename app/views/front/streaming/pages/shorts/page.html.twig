@@ -198,16 +198,6 @@ $(function(){
 		console.log(myVideo)
 		playVideo(myVideo, {{app.SystemSetting.autoplay_short_video ? 'true' : 'false'}})
 		return;
-		/** On Load video */
-		myVideo.volume = getCookie('volume')
-		jQuery(`#current-time-page`).html(convertToTime(myVideo.currentTime));
-		jQuery(`#video-duration-page`).html(convertToTime(myVideo.duration))
-		jQuery(`#video-volume`).val(myVideo.volume);
-		jQuery(`progress`).attr("max", myVideo.duration);
-		jQuery(`.play-video`).hide().parent().find('.pause-video').fadeIn(200)
-		
-		jQuery('#video-overlay').fadeOut(200)
-		jQuery(`#videoContainer`).css('z-index',  999)
 	})
 })
 
