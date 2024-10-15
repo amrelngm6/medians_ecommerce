@@ -150,6 +150,27 @@ class VideoController extends CustomController
     }
     
     
+    
+    /**
+     * Embed Video page for Iframe usage
+     */
+    public function embed($media_id)
+    {
+		$settings = $this->app->SystemSetting();
+
+        $item = $this->repo->find($media_id);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/pages/video/embed.html.twig', [
+                'item' => $item,
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
 
     /**
      * Studio media page for frontend

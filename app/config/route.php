@@ -129,6 +129,7 @@ RouteHandler::get('/blog', \Medians\Blog\Application\BlogController::class.'@lis
 
 /** Embed pages */
 RouteHandler::get('/embed_audio/(:all)', \Medians\Media\Application\MediaItemController::class.'@embed');
+RouteHandler::get('/embed_video/(:all)', \Medians\Media\Application\VideoController::class.'@embed');
 
 RouteHandler::get('/customer/login', \Medians\Auth\Application\CustomerAuthService::class.'@loginPage');
 RouteHandler::get('/customer/signup', \Medians\Auth\Application\CustomerAuthService::class.'@signupPage');
