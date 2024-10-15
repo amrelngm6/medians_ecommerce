@@ -209,48 +209,52 @@
 	})
 
 	$(function() {
-		var videoElement = document.getElementById('my-video');
-		var adContainer = document.getElementById('ad-container');
+		  window.onload = function() {
 
-		// Step 1: Initialize the Google IMA SDK
-		var adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, videoElement);
-		var adsLoader = new google.ima.AdsLoader(adDisplayContainer);
-		var adsManager;
+				var videoElement = document.getElementById('my-video');
+				var adContainer = document.getElementById('ad-container');
 
-		// Step 2: Request Ads
-		function requestAds() {
-			adDisplayContainer.initialize(); // This must be called as a result of a user action.
-			var adsRequest = new google.ima.AdsRequest();
-			adsRequest.adTagUrl = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/your-ad-unit-path&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]';
-			adsLoader.requestAds(adsRequest);
-		}
+				// Step 1: Initialize the Google IMA SDK
+				var adDisplayContainer = new google.ima.AdDisplayContainer(adContainer, videoElement);
+				var adsLoader = new google.ima.AdsLoader(adDisplayContainer);
+				var adsManager;
 
-		// Step 3: Handle Ad Loaded Event
-		adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, function(event) {
-			adsManager = event.getAdsManager(videoElement); // AdsManager manages ad playback.
-			adsManager.init(videoElement.clientWidth, videoElement.clientHeight, google.ima.ViewMode.NORMAL);
-			adsManager.start(); // Start the ad.
-		});
+				// Step 2: Request Ads
+				function requestAds() {
+					adDisplayContainer.initialize(); // This must be called as a result of a user action.
+					var adsRequest = new google.ima.AdsRequest();
+					adsRequest.adTagUrl = 'https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&iu=/your-ad-unit-path&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&correlator=[timestamp]';
+					adsLoader.requestAds(adsRequest);
+				}
 
-		// Step 4: Handle Ad Error
-		adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, function(error) {
-			console.log('Ad error: ', error.getError());
-			if (adsManager) adsManager.destroy();
-		});
+				// Step 3: Handle Ad Loaded Event
+				adsLoader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED, function(event) {
+					adsManager = event.getAdsManager(videoElement); // AdsManager manages ad playback.
+					adsManager.init(videoElement.clientWidth, videoElement.clientHeight, google.ima.ViewMode.NORMAL);
+					adsManager.start(); // Start the ad.
+				});
 
-		// Step 5: Control Video Playback with Ads
-		videoElement.addEventListener('play', function() {
-			requestAds(); // Request ads when the video is played for the first time.
-		});
+				// Step 4: Handle Ad Error
+				adsLoader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR, function(error) {
+					console.log('Ad error: ', error.getError());
+					if (adsManager) adsManager.destroy();
+				});
 
-		// Optional: Ad Event Handling
-		adsManager.addEventListener(google.ima.AdEvent.Type.STARTED, function() {
-			console.log('Ad started');
-		});
+				// Step 5: Control Video Playback with Ads
+				videoElement.addEventListener('play', function() {
+					requestAds(); // Request ads when the video is played for the first time.
+				});
 
-		adsManager.addEventListener(google.ima.AdEvent.Type.COMPLETE, function() {
-			console.log('Ad completed');
-			videoElement.play(); // Resume video playback after ad completes.
-		});
+				// Optional: Ad Event Handling
+				adsManager.addEventListener(google.ima.AdEvent.Type.STARTED, function() {
+					console.log('Ad started');
+				});
+
+				adsManager.addEventListener(google.ima.AdEvent.Type.COMPLETE, function() {
+					console.log('Ad completed');
+					videoElement.play(); // Resume video playback after ad completes.
+				});
+
+		  };
 	})
 </script>
