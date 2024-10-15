@@ -94,11 +94,11 @@ async function loadStation(stationId, play = true)
 	
 	activeStation = await loadStationJson(stationId);
 
-	await handleStationPlayer(stationId)
+	await handleStationPlayer(stationId, play)
 }
 
 
-async function handleStationPlayer(stationId)
+async function handleStationPlayer(stationId, play = true)
 {
 	let rand = Math.random();
 
