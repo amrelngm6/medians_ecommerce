@@ -198,6 +198,14 @@ $(function(){
 		console.log(myVideo)
 		/** On Load video */
 		myVideo.addEventListener(
+		"play",
+		() => {
+		console.log('Video loaded')
+		},
+		false,
+		);
+
+		myVideo.addEventListener(
 		"loadedmetadata",
 		() => {
 		console.log('Video loaded')
