@@ -41,6 +41,7 @@
         
         <vue-medialibrary-field @changed="multiple_changed" :key="item" v-if="column.column_type == 'file' || column.column_type == 'picture' "  :name="handleName(column)" :filepath="item[column.key]" :api_url="conf.url"></vue-medialibrary-field>
 
+        <input type="hidden" v-model="item[column.key]"  :name="handleName(column)" v-if="column.column_type == 'editor'" />
         <ckeditor v-model="item[column.key]" v-if="column.column_type == 'editor'"
                 :editor="editor" :config="editorConfig" />
     </div>
