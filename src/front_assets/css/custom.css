@@ -2463,6 +2463,10 @@ Shorts
     border-right-width: 0px;
     border-left-width: 1px;
 }
+[dir="rtl"] .lg\:left-40 {
+    right:  10rem;
+    left: auto;
+}
 [dir="rtl"] .lg\:text-left,
 [dir="rtl"] .text-left {
     text-align: right;
