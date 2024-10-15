@@ -1002,3 +1002,8 @@ function handleSelectedDuration(id, uniqueId, duration, type = 'channel')
 
 
 
+
+function embedIframeCode(link)
+{
+	return '<iframe width="400" height="400"  src="'+link+'" ></iframe>'
+}
