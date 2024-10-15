@@ -70,7 +70,7 @@ class EmailTemplateController extends CustomController
 		
 		try {
 			
-		    return render('email_templates', [
+		    return render('data_table', [
 		        'load_vue' => true,
 		        'title' => translate('Templates'),
 		        'columns' => $this->columns(),
