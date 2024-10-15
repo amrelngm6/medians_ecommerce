@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="">
+<head>
+    
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Medians</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <link rel="stylesheet" href="/src/front_assets/css/tailwind.min.css" />
+    <link defer rel="stylesheet" href="/src/front_assets/css/main.css" />
+    <link rel="stylesheet" href="/src/front_assets/css/custom.css" />
+    <script src="/src/front_assets/js/jquery.min.js"></script>
+    <script src="/src/front_assets/js/roundslider.js"></script>
+    <script> var rootURL = 'https://streaming.quatre-co.com'; </script>
+</head>
+
+<body>
+    
+
+            <div class="my-4  h-full overflow-hidden rounded-2xl" x-data="{is_slide: 'slide'}">                     
+                
+                <div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
+                    
+                    {% include 'views/front/'~app.SystemSetting.template ~'/pages/audio/single-player.html.twig' %}        
+
+                </div>
+
+            </div>
+
+
+<script src="/src/front_assets/js/custom.js"></script>
+
+</body>
+</html>

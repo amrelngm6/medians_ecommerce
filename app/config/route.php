@@ -127,6 +127,9 @@ RouteHandler::get('/channel/(:all)', \Medians\Channels\Application\ChannelContro
 /** Blog pages */
 RouteHandler::get('/blog', \Medians\Blog\Application\BlogController::class.'@list');
 
+/** Embed pages */
+RouteHandler::get('/embed_audio/(:all)', \Medians\Media\Application\MediaItemController::class.'@embed');
+
 RouteHandler::get('/customer/login', \Medians\Auth\Application\CustomerAuthService::class.'@loginPage');
 RouteHandler::get('/customer/signup', \Medians\Auth\Application\CustomerAuthService::class.'@signupPage');
 RouteHandler::get('/customer/confirm_account', \Medians\Auth\Application\CustomerAuthService::class.'@otp');

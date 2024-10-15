@@ -148,6 +148,28 @@ class MediaItemController extends CustomController
     }
     
     
+    
+    /**
+     * Audio page for frontend
+     */
+    public function embed($media_id)
+    {
+		$settings = $this->app->SystemSetting();
+
+        $item = $this->repo->find($media_id);
+        
+		try 
+        {
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/pages/audio/embed.html.twig', [
+                'item' => $item,
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+    
+    
 
     /**
      * Studio page for frontend
