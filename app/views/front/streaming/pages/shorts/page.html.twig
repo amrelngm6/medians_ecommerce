@@ -2,7 +2,7 @@
 
 
 	<figure id="videoContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
-		<video id="my-video" data-container="videoContainer" class="w-full h-screen" {{app.SystemSetting.autoplay_short_video ? 'autoplay' : ''}}   poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous">
+		<video id="my-video" data-container="videoContainer" class="w-full h-screen"   poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous">
 			<source src="/stream_short_video?video={{item.main_file.filename}}" type="video/webm"/>
 		</video>
 
