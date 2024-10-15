@@ -876,6 +876,8 @@ $(function(){
 		if (!myVideo)
 			return;
 
+		myVideo.volume = getCookie('volume')
+
 		if (myVideo.paused) {
 			myVideo.play()
 			jQuery(`#${myVideo.dataset.container} .play-video`).hide().parent().find('.pause-video').fadeIn(200)
