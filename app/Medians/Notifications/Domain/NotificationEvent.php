@@ -190,16 +190,17 @@ class NotificationEvent extends CustomModel
 		 * Append the model as paramater to render the content
 		 * And replace the shortcode
 		 */ 
+		$templateRepo = new \Medians\Templates\Infrastructure\EmailTemplateRepository;
+		$template = $templateRepo->find($event->template_id);
+		
     	$params['model'] = $model;
     	$params['receiver'] = $receiver;
     	$params['app'] = $app;
-		$templateRepo = new \Medians\Templates\Infrastructure\EmailTemplateRepository;
-		$template = $templateRepo->find($event->template_id);
+		$params['content'] = $app->renderTemplate($event->body_text ?? ' ')->render($params);
     	$event->subject = $app->renderTemplate($event->subject ?? ' ')->render($params);
-    	$event->body_text = $app->renderTemplate($event->body_text ?? ' ')->render($params);
-		$params['content'] = $event->body_text;
     	$event->body = isset($template->content) ? $app->renderTemplate($template->content)->render($params) : '';
-
+    	$event->body_text = $params['content'];
+		
     	return Notification::storeEventNotification($event, $model, $receiver);
 	}
 }
