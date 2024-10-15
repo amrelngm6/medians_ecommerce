@@ -31,7 +31,6 @@ class FacebookService
 
 	function __construct($client_id, $client_secret)
 	{
-        session_start();
 
         $this->cliendId = $client_id;
 
