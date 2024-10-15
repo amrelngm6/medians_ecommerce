@@ -35,7 +35,7 @@ class EmailTemplateController extends CustomController
             [ 'value'=> "template_id", 'text'=> "#"],
             [ 'value'=> "title", 'text'=> translate('Title'), 'sortable'=> true ],
             [ 'value'=> "status", 'text'=> translate('Status'), 'sortable'=> true ],
-			[ 'value'=> 'text', 'text'=>translate('Edit')],
+			[ 'value'=> 'edit', 'text'=>translate('Edit')],
 			['value'=>'delete', 'text'=>translate('Delete')],
         ];
 	}
