@@ -871,82 +871,82 @@ $(function(){
 		myVideo.play()
 	});
 
-	function playVideo(myVideo)
-	{	
-		if (!myVideo)
-			return;
-
-		myVideo.volume = getCookie('volume')
-		jQuery('#video-volume').val(getCookie('volume'))
-
-		if (myVideo.paused) {
-			myVideo.play()
-			jQuery(`#${myVideo.dataset.container} .play-video`).hide().parent().find('.pause-video').fadeIn(200)
-			jQuery('#channelContainer .play-channel').hide().parent().find('.pause-channel').fadeIn(200)
-			jQuery('#video-overlay').fadeOut(200)
-			jQuery('#channelContainer').css('z-index',  50)
-		} else {
-			jQuery(`#${myVideo.dataset.container} .pause-video`).hide().parent().find('.play-video').fadeIn(200)
-			jQuery('#channelContainer .pause-channel').hide().parent().find('.play-channel').fadeIn(200)
-			jQuery('#video-overlay').fadeIn(200)
-			myVideo.pause()
-			jQuery('#channelContainer').css('z-index',  0)
-		} 	
-		jQuery('#video-duration-page').html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
-		jQuery('#videoContainer progress').attr("max", myVideo.duration);
-
-		
-		/** On time update */
-		myVideo.addEventListener(
-			"timeupdate",
-			() => {
-				jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
-				jQuery(`#${myVideo.dataset.container} progress`).val(myVideo.currentTime);
-				jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
-			})
-			
-			
-		/** On Load video */
-		myVideo.addEventListener(
-		"loadedmetadata",
-		() => {
-			jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
-			jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(convertToTime(myVideo.duration))
-			jQuery(`#${myVideo.dataset.container} progress`).attr("max", myVideo.duration);
-			
-			jQuery('#video-overlay').fadeOut(200)
-			jQuery(`#${myVideo.dataset.container}`).css('z-index',  999)
-		},
-		false,
-		);
-			
-		/** On Play video */
-		myVideo.addEventListener(
-		"play",
-		() => {
-			jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(convertToTime(myVideo.duration))
-			jQuery(`#${myVideo.dataset.container} progress`).attr("max", myVideo.duration);
-			
-			jQuery('#video-overlay').fadeOut(200)
-			jQuery(`#${myVideo.dataset.container}`).css('z-index',  999)
-		},
-		false,
-		);
-			
-		/** On Pause video */
-		myVideo.addEventListener(
-		"pause",
-		() => {
-			jQuery('#video-overlay').fadeIn(200)
-			jQuery(`#${myVideo.dataset.container}`).css('z-index',  0)
-		},
-		false,
-		);
-	}
 
 })
 
 
+function playVideo(myVideo)
+{	
+	if (!myVideo)
+		return;
+
+	myVideo.volume = getCookie('volume')
+	jQuery('#video-volume').val(getCookie('volume'))
+
+	if (myVideo.paused) {
+		myVideo.play()
+		jQuery(`#${myVideo.dataset.container} .play-video`).hide().parent().find('.pause-video').fadeIn(200)
+		jQuery('#channelContainer .play-channel').hide().parent().find('.pause-channel').fadeIn(200)
+		jQuery('#video-overlay').fadeOut(200)
+		jQuery('#channelContainer').css('z-index',  50)
+	} else {
+		jQuery(`#${myVideo.dataset.container} .pause-video`).hide().parent().find('.play-video').fadeIn(200)
+		jQuery('#channelContainer .pause-channel').hide().parent().find('.play-channel').fadeIn(200)
+		jQuery('#video-overlay').fadeIn(200)
+		myVideo.pause()
+		jQuery('#channelContainer').css('z-index',  0)
+	} 	
+	jQuery('#video-duration-page').html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
+	jQuery('#videoContainer progress').attr("max", myVideo.duration);
+
+	
+	/** On time update */
+	myVideo.addEventListener(
+		"timeupdate",
+		() => {
+			jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
+			jQuery(`#${myVideo.dataset.container} progress`).val(myVideo.currentTime);
+			jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
+		})
+		
+		
+	/** On Load video */
+	myVideo.addEventListener(
+	"loadedmetadata",
+	() => {
+		jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
+		jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(convertToTime(myVideo.duration))
+		jQuery(`#${myVideo.dataset.container} progress`).attr("max", myVideo.duration);
+		
+		jQuery('#video-overlay').fadeOut(200)
+		jQuery(`#${myVideo.dataset.container}`).css('z-index',  999)
+	},
+	false,
+	);
+		
+	/** On Play video */
+	myVideo.addEventListener(
+	"play",
+	() => {
+		jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(convertToTime(myVideo.duration))
+		jQuery(`#${myVideo.dataset.container} progress`).attr("max", myVideo.duration);
+		
+		jQuery('#video-overlay').fadeOut(200)
+		jQuery(`#${myVideo.dataset.container}`).css('z-index',  999)
+	},
+	false,
+	);
+		
+	/** On Pause video */
+	myVideo.addEventListener(
+	"pause",
+	() => {
+		jQuery('#video-overlay').fadeIn(200)
+		jQuery(`#${myVideo.dataset.container}`).css('z-index',  0)
+	},
+	false,
+	);
+}
 
 
 
