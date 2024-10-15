@@ -507,9 +507,8 @@ class MediaItemController extends CustomController
                 // Check if Content-Length header is available
                 if (isset($headers['Content-Length'])) {
                     if ($settings['audio_max_size'] < formatSizeUnits($headers['Content-Length'], 'number')) {
-                        return array('error'=>1, 'result'=>formatSizeUnits($headers['Content-Length']), 'reload'=>0);
+                        throw new \Exception(translate('Filez size is too large max size is'). formatSizeUnits($headers['Content-Length']), 1);
                     }
-                    return array('error'=>1, 'result'=>formatSizeUnits($headers['Content-Length'], 'number'), 'reload'=>0);
                 }
 
                 $params['name'] = '';
