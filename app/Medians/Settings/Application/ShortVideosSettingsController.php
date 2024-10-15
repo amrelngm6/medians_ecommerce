@@ -43,7 +43,7 @@ class ShortVideosSettingsController extends CustomController
 			],		
 			'audoplay'=> [	
 				[ 'key'=> "autoplay_shorts", 'title'=> translate('Autoplay for Shorts'), 'help_text'=>translate('Auto play videos at shorts list page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
-				[ 'key'=> "autoplay_short_page", 'title'=> translate('Autoplay at single page'), 'help_text'=>translate('Auto play videos at short video page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "autoplay_short_video", 'title'=> translate('Autoplay at single page'), 'help_text'=>translate('Auto play videos at short video page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
                 
 			],		
         ];
