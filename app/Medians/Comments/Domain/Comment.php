@@ -44,7 +44,7 @@ class Comment extends CustomModel
 	public function receiverAsCustomer()
 	{
 
-		$item = $this->with(['item'=> function($q) {return $q->with('customer') ;}])->first()->customer;
+		$item = $this->item->customer;
 
 		return $item ?? null;	
 	}
