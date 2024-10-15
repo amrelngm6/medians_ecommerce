@@ -48,6 +48,7 @@ class MailService
 
 		try {
 		    //Server settings
+			error_log('Sending Try');
 
 		    $mail->isSMTP();                                    //Send using SMTP
 			$mail->Host       = $settings['smtp_host'];         //Set the SMTP server to send through
@@ -59,11 +60,13 @@ class MailService
 			$mail->Port       = $settings['smtp_port'];         //TCP port to connect to; use 587 if you have set `SMTPSecure = 
 			$mail->CharSet        = 'utf-8';         //TCP port to connect to; use 587 if you have set `SMTPSecure = 
 			$mail->ContentType         = 'text/html';         //TCP port to connect to; use 587 if you have set `SMTPSecure = 
+			error_log('Sending strings');
 
 		    //Recipients
 		    $mail->setFrom($settings['smtp_sender'], 'Medians');
 		    $mail->addAddress($this->email, $this->name);     //Add a recipient
 		    $mail->addReplyTo($settings['smtp_sender'], 'no-reply');
+			error_log('Sending subject');
 
 		    // $mail->addBCC('info@medianssolutions.com');
 
@@ -71,10 +74,13 @@ class MailService
 		    $mail->isHTML(true);                                  //Set email format to HTML
 		    $mail->Subject = $this->subject;
 		    $mail->Body    = render('views/email/email.html.twig',['msg'=> $this->body], null);
+			error_log('Sending now');
 
 		    $send = $mail->send();
 
 			if ($send) {
+			error_log('Sent');
+
 				return true;
 			}
 
