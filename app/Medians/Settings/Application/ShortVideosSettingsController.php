@@ -41,6 +41,11 @@ class ShortVideosSettingsController extends CustomController
 				[ 'key'=> "shortvideo_max_duration", 'title'=> translate('Short Video max duration'), 'help_text'=>translate('Max duration to generate Short Videos in seconds 5 min : 300'), 'fillable'=> true, 'column_type'=>'number' ],
                 
 			],		
+			'audoplay'=> [	
+				[ 'key'=> "autoplay_shorts", 'title'=> translate('Autoplay for Shorts'), 'help_text'=>translate('Auto play videos at shorts list page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "autoplay_short_page", 'title'=> translate('Autoplay at single page'), 'help_text'=>translate('Auto play videos at short video page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+                
+			],		
         ];
 	}
 
