@@ -39,7 +39,7 @@ class MailService
 		// Get system settings for Google Login
 		$SystemSettings = new SystemSettingsController;
 
-		$settings = $SystemSettings->getAll();
+		$settings = $this->app->SystemSetting();
 
 		//Create an instance; passing `true` enables exceptions
 		$mail = new PHPMailer(true);
@@ -70,11 +70,16 @@ class MailService
 		    $mail->Subject = $this->subject;
 		    $mail->Body    = render('views/email/email.html.twig',['msg'=> $this->body], null);
 
-		    $mail->send();
+		    $send = $mail->send();
 
-		    return true;
+			if ($send) {
+				return true;
+			}
+
+			error_log($mail->body);
 
 		} catch (Exception $e) {
+			error_log($mail->ErrorInfo);
 		    return translate("Message could not be sent. Mailer Error"). $mail->ErrorInfo;
 		}
 	}
