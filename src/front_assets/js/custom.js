@@ -28,12 +28,12 @@ var mainAudio = jQuery('audio');
 var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename, activeChannel, activeChannelMedia, activeStation, activeStationMedia, stationInterval;
 
 
-document.getElementById('player-audio').addEventListener("change", function(event) {
+jQuery('#player-audio').on('change', function(event) {
 	audio.volume = event.target.value;
 	setCookie('volume', event.target.value, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 }) ;	
 
-document.getElementById('station-player-audio').addEventListener("change", function(event) {
+jQuery('#station-player-audio').on('change', function(event) {
 	audio.volume = event.target.value;
 	setCookie('volume', event.target.value, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 }) ;	
@@ -189,7 +189,7 @@ jQuery(document).on('click', '.start-single-player', function (i, el) {
 
 	if (audio)
 		audio.pause()
-	
+
 	jQuery('#station-app-cover').addClass('hidden')
 	list = JSON.parse(player.attr('data-list'))
 	index = player.attr('data-index')
