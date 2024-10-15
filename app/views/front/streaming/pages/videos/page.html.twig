@@ -186,7 +186,7 @@
 
 $(function(){
 	
-	let myVideo = document.getElementById('video-page')
+	let video = document.getElementById('video-page')
 	
     jQuery(document).on('click', '#main-side a', function(){
 		var video = document.getElementById('video-page') 
@@ -196,8 +196,8 @@ $(function(){
 
 	addEventListener('load', e => {
 		
-		console.log(myVideo)
-		playVideo(myVideo, {{app.SystemSetting.autoplay_short_video ? 'true' : 'false'}})
+		console.log(video)
+		playVideo(video, {{app.SystemSetting.autoplay_short_video ? 'true' : 'false'}})
 	})
 })
 </script>

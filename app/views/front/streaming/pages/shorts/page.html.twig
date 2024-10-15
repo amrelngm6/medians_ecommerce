@@ -194,9 +194,9 @@ $(function(){
 
 	addEventListener('load', e => {
 		
-		let myVideo = document.getElementById('video-page')
-		console.log(myVideo)
-		playVideo(myVideo, {{app.SystemSetting.autoplay_short_video ? 'true' : 'false'}})
+		let video = document.getElementById('video-page')
+		console.log(video)
+		playVideo(video, {{app.SystemSetting.autoplay_short_video ? 'true' : 'false'}})
 		return;
 	})
 })
