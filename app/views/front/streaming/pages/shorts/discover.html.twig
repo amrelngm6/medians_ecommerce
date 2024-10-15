@@ -65,6 +65,7 @@ $(function(){
         video.poster = data.poster;
         video.className = 'rounded-lg lg:p-4';
         video.controls = false;
+        video.volume = getCookie('volume');
         video.autoplay = {{app.SystemSetting.autoplay_shorts ? 'true' : 'false' }};
         video.preload = "none";
         video.dataset.container = `videoContainer-${data.id}`;
