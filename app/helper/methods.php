@@ -220,19 +220,39 @@ function Page403()
 
 
 // Format File size into human-readable units
-function formatSizeUnits($bytes) {
+function formatSizeUnits($bytes, $format = 'text') {
+    $mbSize = 0;
     if ($bytes >= 1073741824) {
-        $bytes = number_format($bytes / 1073741824, 2) . ' GB';
+        $mbSize = number_format($bytes / 1073741824, 2) * 1000;
+        $bytes = number_format($bytes / 1073741824, 2);
+        $unit = 'GB';
     } elseif ($bytes >= 1048576) {
-        $bytes = number_format($bytes / 1048576, 2) . ' MB';
+        $mbSize = number_format($bytes / 1048576, 2) * 1;
+        $bytes = number_format($bytes / 1048576, 2);
+        $unit = 'MB';
     } elseif ($bytes >= 1024) {
-        $bytes = number_format($bytes / 1024, 2) . ' KB';
+        $mbSize = 1;
+        $bytes = number_format($bytes / 1024, 2);
+        $unit = 'KB';
     } elseif ($bytes > 1) {
-        $bytes = $bytes . ' bytes';
+        $bytes = $bytes ;
+        $unit = 'B';
     } elseif ($bytes == 1) {
-        $bytes = $bytes . ' byte';
+        $bytes = $bytes ;
+        $unit = 'B';
     } else {
-        $bytes = '0 bytes';
+        $bytes = 0;
+        $unit = 'B';
+    }
+
+    if ($format == 'text')
+    {
+        $bytes = "$bytes $format";
+    }
+    
+    if ($format == 'number')
+    {
+        $bytes = $mbSize ?? 0;
     }
 
     return $bytes;
