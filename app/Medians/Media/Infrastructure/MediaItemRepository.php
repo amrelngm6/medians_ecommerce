@@ -333,7 +333,7 @@ class MediaItemRepository
 		if ($data['media_file_id'])
 		{
 	
-			$clear = $this->deleteMediaFiles($item->media_id);
+			$clear = $this->clearMediaFiles($item->media_id);
 
 			foreach ($data['media_file_id'] as $key => $value)
 			{
