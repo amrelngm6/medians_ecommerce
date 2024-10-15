@@ -128,13 +128,15 @@ class NotificationEvent extends CustomModel
 	 */
 	public function filterReceivers($event, $model)
 	{	
+
 		switch ($event->receiver_model) 
 		{
-			case Customer::class:
-				return method_exists($model, 'receiverAsCustomer') ? [$model->receiverAsCustomer()] : null;
+			case Customer::class :
+				$customers = [$model->receiverAsCustomer()];
+				return $customers;
 				break;
 				
-			case User::class:
+			case User::class :
 				return method_exists($model, 'receiverAsUser') ? [$model->receiverAsUser()] : null;
 				break;
 			
@@ -152,10 +154,15 @@ class NotificationEvent extends CustomModel
 	public function renderNotification($event, $model)
 	{
 		try {
+			
 			$receivers = $this->filterReceivers($event, $model);
 
-			if (!$receivers)
+
+			if (!$receivers) {
 				return null;
+			}
+
+				
 
 			foreach ($receivers as $key => $receiver) 
 			{
@@ -186,10 +193,10 @@ class NotificationEvent extends CustomModel
     	$params['model'] = $model;
     	$params['receiver'] = $receiver;
 		$templateRepo = new \Medians\Templates\Infrastructure\EmailTemplateRepository;
-		$template = $templateRepo->findByLang($event->template_id, isset($receiver->field['language']) ? $receiver->field['language'] : $app->default_lang);
-    	$event->body = isset($template->content->content) ? $app->renderTemplate($template->content->content)->render($params) : '';
-    	$event->subject = $app->renderTemplate($event->subject)->render($params);
-    	$event->body_text = $app->renderTemplate($event->body_text)->render($params);
+		$template = $templateRepo->find($event->template_id);
+    	$event->body = isset($template->content) ? $app->renderTemplate($template->content)->render($params) : '';
+    	$event->subject = $app->renderTemplate($event->subject ?? ' ')->render($params);
+    	$event->body_text = $app->renderTemplate($event->body_text ?? ' ')->render($params);
 
     	return Notification::storeEventNotification($event, $model, $receiver);
 	}

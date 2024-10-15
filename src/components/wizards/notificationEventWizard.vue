@@ -42,7 +42,34 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-center mt-10"><a href="javascript:;" class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger" @click="activeTab = 'Confirm'" v-text="translate('Next')"></a></p>
+                                <p class="text-center mt-10"><a href="javascript:;" class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger" @click="activeTab = 'Content'" v-text="translate('Next')"></a></p>
+                            </div>
+
+                            
+                            <div class="w-full  mx-auto" v-if="activeTab == 'Content'" :key="activeTab">
+                                <div class="card-body pt-0"  >
+                                    <div class="settings-form" >
+                                        <div class="max-w-xl mb-6 mx-auto row" >
+                                           
+                                            <label v-text="fillable.subject.title" class="col-form-label required fw-semibold fs-4 fw-bold" ></label>
+                                            <form_field class="flex-end" :item="activeItem" :column="fillable.subject" />
+                                            <span v-text="fillable.subject.help_text" v-if="fillable.subject.help_text" class="col-form-label required fw-semibold fs-5" ></span>
+                                            <hr class="block mt-6 my-2 opacity-10" />
+                                           
+                                            <label v-text="fillable.template_id.title" class="col-form-label required fw-semibold fs-4 fw-bold" ></label>
+                                            <form_field class="flex-end" :item="activeItem" :column="fillable.template_id" />
+                                            <span v-text="fillable.template_id.help_text" v-if="fillable.template_id.help_text" class="col-form-label required fw-semibold fs-5" ></span>
+                                            <hr class="block mt-6 my-2 opacity-10" />
+
+                                            <label v-text="fillable.body_text.title" class="col-form-label required fw-semibold fs-4 fw-bold" ></label>
+                                            <form_field class="flex-end" :item="activeItem" :column="fillable.body_text" />
+                                            <span v-text="fillable.body_text.help_text" v-if="fillable.body_text.help_text" class="col-form-label required fw-semibold fs-5" ></span>
+                                            <hr class="block mt-6 my-2 opacity-10" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-center mt-10"><a href="javascript:;" class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger" @click="activeTab = 'Fields'" v-text="translate('Next')"></a></p>
                             </div>
 
                             <div class="" v-if="activeTab == 'Fields'" :key="activeTab">
@@ -71,33 +98,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-center mt-10"><a href="javascript:;" class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger" @click="activeTab = 'Content'" v-text="translate('Next')"></a></p>
-                            </div>
-
-                            <div class="w-full  mx-auto" v-if="activeTab == 'Content'" :key="activeTab">
-                                <div class="card-body pt-0"  >
-                                    <div class="settings-form" >
-                                        <div class="max-w-xl mb-6 mx-auto row" >
-                                           
-                                            <label v-text="fillable.subject.title" class="col-form-label required fw-semibold fs-4 fw-bold" ></label>
-                                            <form_field class="flex-end" :item="activeItem" :column="fillable.subject" />
-                                            <span v-text="fillable.subject.help_text" v-if="fillable.subject.help_text" class="col-form-label required fw-semibold fs-5" ></span>
-                                            <hr class="block mt-6 my-2 opacity-10" />
-                                           
-                                            <label v-text="fillable.template_id.title" class="col-form-label required fw-semibold fs-4 fw-bold" ></label>
-                                            <form_field class="flex-end" :item="activeItem" :column="fillable.template_id" />
-                                            <span v-text="fillable.template_id.help_text" v-if="fillable.template_id.help_text" class="col-form-label required fw-semibold fs-5" ></span>
-                                            <hr class="block mt-6 my-2 opacity-10" />
-
-                                            <label v-text="fillable.body_text.title" class="col-form-label required fw-semibold fs-4 fw-bold" ></label>
-                                            <form_field class="flex-end" :item="activeItem" :column="fillable.body_text" />
-                                            <span v-text="fillable.body_text.help_text" v-if="fillable.body_text.help_text" class="col-form-label required fw-semibold fs-5" ></span>
-                                            <hr class="block mt-6 my-2 opacity-10" />
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <p class="text-center mt-10"><a href="javascript:;" class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger" @click="activeTab = 'Fields'" v-text="translate('Next')"></a></p>
+                                <p class="text-center mt-10"><a href="javascript:;" class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger" @click="activeTab = 'Confirm'" v-text="translate('Next')"></a></p>
                             </div>
 
                             <div class="w-full  mx-auto" v-if="activeTab == 'Confirm'" :key="activeTab">
