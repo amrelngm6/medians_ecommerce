@@ -892,7 +892,7 @@ $(function(){
 			myVideo.pause()
 			jQuery('#channelContainer').css('z-index',  0)
 		} 	
-		jQuery('#video-duration-page').html(convertToTime(myVideo.duration))
+		jQuery('#video-duration-page').html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
 		jQuery('#videoContainer progress').attr("max", myVideo.duration);
 
 		
