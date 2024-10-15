@@ -43,11 +43,9 @@ class Comment extends CustomModel
 
 	public function receiverAsCustomer()
 	{
-		return $this->item->with('customer')->customer;
+		$customer = $this->item->with('customer')->find($this->item_id);
 
-		$item = $this->item->customer;
-
-		return $item ?? null;	
+		return $customer->customer ?? null;
 	}
 
 	
