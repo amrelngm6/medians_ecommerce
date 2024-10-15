@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 session_start(); 
 date_default_timezone_set('Africa/Cairo');
 
-echo shell_exec('du -sh ./');
+
 
 // Allow from any origin
 if (isset($_SERVER['HTTP_ORIGIN'])) {
