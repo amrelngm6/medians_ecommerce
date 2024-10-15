@@ -1005,5 +1005,5 @@ function handleSelectedDuration(id, uniqueId, duration, type = 'channel')
 
 function embedIframeCode(link)
 {
-	return '<iframe width="400" height="400"  src="'+link+'" ></iframe>'
+	return '<iframe frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="400" height="400"  src="'+link+'" ></iframe>'
 }
