@@ -765,6 +765,7 @@ $(function(){
 
 			this.width = 300;
 			this.height =  200;
+			myVideo.volume = getCookie('volume')
 			this.timerCallback(myVideo)
 
 		},
