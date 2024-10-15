@@ -847,14 +847,14 @@ $(function(){
 		myVideo.volume = jQuery(this).val()
 		setCookie('volume', myVideo.volume, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 	})
-	jQuery(document).on('click', '.fullscreen,video', function(){
+	jQuery(document).on('click', '.fullscreen', function(){
 		videoContainer = document.getElementById(jQuery(this).attr('data-container'));
 		return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
 			? document.exitFullscreen()
 			: videoContainer.requestFullscreen();
 	})
 
-	jQuery(document).on('dblclick', '#videoCanvas', function(){
+	jQuery(document).on('dblclick', '#videoCanvas,video', function(){
 		videoContainer = document.getElementById(jQuery(this).attr('data-container'));
 		return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
 			? document.exitFullscreen()
