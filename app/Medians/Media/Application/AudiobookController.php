@@ -228,7 +228,7 @@ class AudiobookController extends CustomController
                 'genre_type' => 'book_genres',
                 'model_type' => 'audiobook',
                 'genres' => $this->categoryRepo->getBookGenres(),
-                'layout' => isset($this->app->customer->customer_id) ? 'media-edit' : 'signin'
+                'layout' => isset($this->app->customer->customer_id) ? 'audiobook/edit' : 'signin'
             ], 'output'));
             
 		} catch (\Exception $e) {
