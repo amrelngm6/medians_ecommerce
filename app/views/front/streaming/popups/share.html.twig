@@ -39,7 +39,7 @@
 								<div class="cursor-pointer block w-full group flex gap-6 gap">
 									<img src="/src/front_assets/svg/link.svg" width="40" />
 									<a href="javascript:;" onclick="(function(){ 
-									navigator.clipboard.writeText(embedIframeCode(jQuery('#show-box-iframe').val()));
+									navigator.clipboard.writeText(embedIframeCode('{{app.CONF.url}}embed_'+jQuery('#show-box-path').val()));
 									Swal.fire('{{lang.translate('Done')}}', '{{lang.translate('Iframe code copied to your clipboard')}}', 'success'); })()" id="copy-link" class="block pt-2 share-dialog_label__od1MX dark:group-hover:text-wynk-dark-subtitle-gray dark:text-wynk-dark-text-secondary">Embed Iframe</a>
 								</div>
 							</div>
