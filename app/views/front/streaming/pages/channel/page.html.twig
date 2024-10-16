@@ -34,9 +34,7 @@
 				<a href="/channels/manage/{{item.channel_id}}" class=" hover:border-rose-400 hover:text-rose-400 border  border border-4 border-white rounded-full py-2 px-6">
 					<span>{{lang.translate('Edit')}}</span>
 				</a>
-			</div>
-		{% else  %}
-        
+			</div>        
 		{% endif %}
 
 
@@ -45,32 +43,34 @@
 <div class="pb-4  h-full overflow-hidden rounded-2xl mt-10" x-data="{is_slide: 'slide'}">
 
 	<div class="relative z-10 w-full  gap-4 bg-white dark:bg-gray-900 rounded-2xl p-8 h-full">
-        <div class="relative w-full   gap-4 flex">
+    
+		<div class="relative w-full   gap-4 flex lg:flex-row flex-col">
 			<div class="relative w-full   gap-4 flex">
-            
-                <a href="/artist/{{item.customer.customer_id}}" class="ajax-load flex gap-6 text-primary">
-                    <img src="/stream?thumbnail=100&image={{item.customer.picture_name}}" alt="User Avatar" class="w-10 h-10 rounded-full">
-                    <div class="text-xl dark:text-gray-300">{{item.customer.name}}
-                        <p class="text-xs dark:text-gray-300">{{lang.translate('Artist')}}</p>
-                    </div>
-                </a>
+				<a href="/artist/{{item.customer.customer_id}}" class="ajax-load flex gap-6 text-primary">
+					<img src="/stream?thumbnail=100&image={{item.customer.picture_name}}" alt="User Avatar" class="w-10 h-10 rounded-full">
+					<div class="text-xl dark:text-gray-300">{{item.customer.name}}
+						<p class="text-xs dark:text-gray-300">{{lang.translate('Artist')}}</p>
+					</div>
+				</a>
 			</div>
 			<div class="flex gap-2 flex-none text-primary h-8"> 
 
                 {% set itemId = item.channel_id %}
                 {% set itemType = 'channel' %}
-                {% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
+				<div class="flex-none pt-1">
+					{% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
+				</div>
+				<div class="flex-none flex">
+					<span class="relative flex pt-2">
+						<span x-on:click="jQuery('#show-box-path').val('channel/{{itemId}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100 "><img src="/src/front_assets/svg/share{{app.is_dark ? '-white' : ''}}.svg" class="w-5"></span>
+						<span class="tooltiptext">{{lang.translate('Share')}}</span>
+					</span>
 
-				<span class="relative flex pt-2">
-                    <span x-on:click="jQuery('#show-box-path').val('channel/{{item.channel_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
-					<span class="tooltiptext">{{lang.translate('Share')}}</span>
-				</span>
-
-				<span class="pt-1">{{item.created_at|date("M d, Y")}}</span>
+					<span class="pt-1">{{item.created_at|date("M d, Y")}}</span>
+				</div>
 			</div>
 		</div>
-		<h2 class="pt-10 text-2xl dark:text-gray-100 text-gray-600 overflow-hidden">{{item.name}}</h2>
-
+		<h2 class="pt-10 text-2xl  text-rose-500 overflow-hidden">{{item.name}}</h2>
 
 		<span class="block pt-10 text-sm text-gray-500">{{lang.translate('About')}}</span>
 		<div class="text-primary overflow-auto" style="max-height: 400px;">
