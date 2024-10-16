@@ -411,8 +411,8 @@ RouteHandler::get('/logout', function ()
 
 RouteHandler::get('/switch-mode/(:all)', function ($mode) 
 {
-    $_COOKIE['is_dark'] = $mode == 'dark' ? true : false;
-    echo (new \config\APP)->redirect('/');
+    $set = setcookie('is_dark', $mode, 7 * 24 * 3600);
+    echo $set ? (new \config\APP)->redirect('/') : '';
 });
 
 // Front API GET requests
