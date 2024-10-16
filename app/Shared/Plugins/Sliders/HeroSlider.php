@@ -42,16 +42,6 @@ class HeroSlider
 				],	
 			],	
             
-			'styles'=> [	
-				[ 'key'=> "animation_effect", 'title'=> translate('Effect'), 'help_text'=> translate('Select Effect to change slides'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'animation_effect', 'column_key'=>'animation_effect',  
-					'data' => [['animation_effect'=>'Fade'], ['animation_effect'=>'Slide'], ['animation_effect'=>'Flip'], ['animation_effect'=>'Cube']]
-				],
-				[ 'key'=> "preview_count", 'title'=> translate('Preview count') , 'help_text'=> translate('Number of slides to show by default'), 'fillable'=> true, 'required'=> true, 'column_type'=>'number' ],
-
-			],	
-            
-            
 			
         ];
 	}
