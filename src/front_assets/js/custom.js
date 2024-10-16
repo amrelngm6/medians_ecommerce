@@ -667,7 +667,7 @@ function reloadFuncs()
 	stickyPlaylist();
     showSlides()
 	handleSlides()
-	
+
 	document.querySelectorAll('[data-multi-select]').forEach(select => new MultiSelect(select));
 }
 
@@ -806,3 +806,22 @@ function embedIframeCode(link)
 {
 	return '<iframe frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="100%" height="400"  src="'+link+'" ></iframe>'
 }
+
+
+
+
+/**
+ * Movies Slider events
+ */
+jQuery(document).on('click', '.movie-slider', function(e) {
+        
+	const slider = document.querySelector('.movie-slider-ul');
+	const items = document.querySelectorAll('.movie-slider');
+	slider.append(items[1])
+
+});
+jQuery(document).on('click', '.movie-slider-arrow', function(e) {
+	const slider = document.querySelector('.movie-slider-ul');
+	const items = document.querySelectorAll('.movie-slider');
+	jQuery(this).hasClass('next') ? slider.append(items[0]) : slider.prepend(items[items.length-1])
+})
