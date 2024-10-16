@@ -1,5 +1,10 @@
 <div class="px-2 w-full flex  my-2 lg:gap-4 gap-1" x-data="{}">
 	<div class="w-full flex  gap-2 text-gray-400">
+    
+        <div class=" lg:block hidden h-12" style="scale: .4; transform-origin: left;">  
+            {% include 'views/front/streaming/includes/switch-mode.html.twig' %}
+        </div>
+
 		<h2 class="text-xl lg:hidden flex gap-4 cursor-pointer py-2" onclick="(function(){ return  jQuery('#main-side').toggleClass('hidden'); })()">
 			<img src="/src/front_assets/svg/menu.svg" class="w-8"/>
 		</h2>
@@ -21,10 +26,6 @@
 		</div>
 	</div>
 
-    <div class=" lg:block hidden ">  
-        {% include 'views/front/streaming/includes/switch-mode.html.twig' %}
-    </div>
-
 	{% if app.customer %}
 		<div class="lg:min-w-40 w-auto justify-start items-center inline-flex show-child ">
 			<div class="show-on-hover absolute right-0 top-full p-4 bg-white dark:bg-gray-900 text-primary rounded-lg w-40 flex-col flex gap-4">
@@ -40,7 +41,7 @@
 					-
 					{{lang.translate('Logout')}}
 				</a>
-                <div class="w-full lg:hidden block">  
+                <div class="w-full lg:hidden block"  style="scale: .4; transform-origin: left;">  
     				{% include 'views/front/streaming/includes/switch-mode.html.twig' %}
                 </div>
 
