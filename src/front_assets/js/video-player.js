@@ -1,115 +1,256 @@
+/**
+ * Medians Video player
+ * With Picture-in-picture
+ * 
+ */
 $(function(){
-    const videoPlayer = document.getElementById('videoPlayer');
-    const bufferingIndicator = document.getElementById('bufferingIndicator');
-    let mediaSource;
-    let sourceBuffer;
-    let isSourceOpen = false;
+	var myVideo;
+	var playFrame;
+	const processor = 
+    {
+		timerCallback(myVideo) {
+			if (!playFrame || myVideo.ended )   {
+				playFrame = null;
+				return;
+			}
+			this.computeFrame(myVideo);
+			setTimeout(() => {
+				playFrame ? this.timerCallback(myVideo) : '';
+			}, 16); 
+		},
 
-    function fetchCurrentVideoInfo(channelId) {
-        fetch(`/channel_json/`+channelId)
-            .then(response => response.json())
-            .then(data => {
-                if (data) {
-                    loadVideoPartially(data.active_item);
-                } else {
-                    console.log('No video currently playing');
-                }
-            })
-            .catch(error => console.error('Error:', error));
-    }
+		doLoad(myVideo) {
+			jQuery('#videoCanvasContainer').removeClass('hidden')
+			playFrame = true;
+			this.c1 = document.getElementById("videoCanvas");
+			let canvasContainer = document.getElementById("videoCanvasContainer");
+			
+			this.ctx1 = this.c1.getContext("2d"); 
 
-    function loadVideoPartially(media) {
-        
-        var a = new Date(media.start);
-        var b = new Date();
-        var startPosition = parseInt((b - a) / 1000);
-        var startPosition = parseInt(((b - a) / 1000) - 3600);
-        // var startPosition = 130;
+			let isDragging = false;
+			let offsetX = 0;
+			let offsetY = 0;
 
-        const videoUrl = '/stream_video?video=' +media.filename;
-        
-        if (mediaSource) {
-            if (mediaSource.readyState === 'open') {
-                mediaSource.endOfStream();
-            }
-            URL.revokeObjectURL(videoPlayer.src);
-        }
+			canvasContainer.addEventListener('mousedown', function (e) {
+				isDragging = true;
+				videoCanvas.style.cursor = 'grabbing';
 
-        mediaSource = new MediaSource();
-        videoPlayer.src = URL.createObjectURL(mediaSource);
+				// Calculate offset position to handle dragging smoothly
+				offsetX = e.clientX - canvasContainer.getBoundingClientRect().left;
+				offsetY = e.clientY - canvasContainer.getBoundingClientRect().top;
+			});
 
-        mediaSource.addEventListener('sourceopen', function() {
-            isSourceOpen = true;
-            sourceBuffer = mediaSource.addSourceBuffer('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
-            sourceBuffer.mode = 'segments';
-            
-            fetchInitSegment(videoUrl).then(() => {
-                videoPlayer.currentTime = startPosition;
-            });
+			canvasContainer.addEventListener('ondragstart', function(){
+				isDragging = true;
+				videoCanvas.style.cursor = 'grabbing';
+			}) 
+			
+			// Function to stop dragging
+			window.addEventListener('mouseup', function () {
+				isDragging = false;
+				videoCanvas.style.cursor = 'grab';
+			});
+			
+			// Function to drag the canvas
+			window.addEventListener('mousemove', function (e) {
+				if (isDragging) {
+					// Calculate the new position
+					const left = e.clientX - offsetX;
+					const top = e.clientY - offsetY;
 
-            videoPlayer.addEventListener('seeking', onSeeking);
-        });
+					// Update canvas position
+					canvasContainer.style.left = `${left}px`;
+					canvasContainer.style.top = `${top + 10}px`;
 
-        mediaSource.addEventListener('sourceended', function() {
-            isSourceOpen = false;
-        });
-        videoPlayer.play()
-    }
+					// Set the position to absolute once dragging starts
+					canvasContainer.style.position = 'fixed';
+					canvasContainer.style.transform = 'none';
+				}
+			});
 
-    function fetchInitSegment(url) {
-        return fetch(url, { headers: { 'Range': 'bytes=0-' } })
-            .then(response => response.arrayBuffer())
-            .then(data => {
-                sourceBuffer.appendBuffer(data);
-                return new Promise(resolve => {
-                    sourceBuffer.addEventListener('updateend', resolve, { once: true });
-                });
-            });
-    }
+			this.width = 300;
+			this.height =  200;
+			myVideo.volume = getCookie('volume')
+			this.timerCallback(myVideo)
 
-    function onSeeking() {
-        const currentTime = videoPlayer.currentTime;
-        const buffered = videoPlayer.buffered;
+		},
 
-        if (isTimeBuffered(currentTime, buffered)) {
-            return;
-        }
+		computeFrame(myVideo) {
+			this.ctx1.drawImage(myVideo, 0, 0, this.width, this.height);
+			const frame = this.ctx1.getImageData(0, 0, this.width, this.height);
+			const l = frame.data.length / 4;
 
-        bufferingIndicator.style.display = 'block';
-        abortCurrentRequests();
-        fetchSegmentAtTime(videoPlayer.currentTime);
-    }
+			for (let i = 0; i < l; i++) {
+			const grey =
+				(frame.data[i * 4 + 0] +
+				frame.data[i * 4 + 1] +
+				frame.data[i * 4 + 2]) /
+				3;
+			}
+			this.ctx1.putImageData(frame, 0, 0);
 
-    function isTimeBuffered(time, buffered) {
-        for (let i = 0; i < buffered.length; i++) {
-            if (time >= buffered.start(i) && time <= buffered.end(i)) {
-                return true;
-            }
-        }
-        return false;
-    }
+			return;
+		},
+	};
+	
+	/**
+	 * Enable / Show video side picture-in-picture
+	 */
+	jQuery(document).on('click', '.video-side-popup', function(){
+    	myVideo = document.getElementById("footer-video");
+		if (myVideo.canPlayType("video/mp4")) {
+			myVideo.setAttribute("src", jQuery(this).data('path'));
+			processor.doLoad(myVideo);
+			myVideo.play()
+		}
+	})
 
-    function abortCurrentRequests() {
-        // Implement logic to abort any ongoing fetch requests
-    }
+	jQuery(document).on('click', '#pause-video-side-popup', function(){
+		playFrame = false;
+    	myVideo = document.getElementById("footer-video");
+		if (myVideo) {
+			jQuery('#videoCanvasContainer').addClass('hidden')
+			myVideo.pause()
+		}
+	})
 
-    function fetchSegmentAtTime(time) {
-        // In a real implementation, you would calculate the byte range for the segment containing 'time'
-        // This is a simplified version
-        const estimatedByteOffset = Math.floor(time * 1000000); // Very rough estimate
-        
-        fetch(videoPlayer.src, {
-            headers: { 'Range': `bytes=${estimatedByteOffset}-` }
-        })
-        .then(response => response.arrayBuffer())
-        .then(data => {
-            sourceBuffer.appendBuffer(data);
-            bufferingIndicator.style.display = 'none';
-        })
-        .catch(error => {
-            console.error('Error fetching video segment:', error);
-            bufferingIndicator.style.display = 'none';
-        });
-    }
+	jQuery(document).on('click', '.video-side-popup', function(){
+    	myVideo = document.getElementById("footer-video");
+		if (myVideo.canPlayType("video/mp4")) {
+			myVideo.setAttribute("src", jQuery(this).data('path'));
+			processor.doLoad(myVideo);
+			myVideo.play()
+			
+		}
+	})
+
+	
+	
+	
+	
+	jQuery(document).on('click', '.pause-video, .pause-channel', function(){
+    	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
+		playVideo(myVideo)
+	})
+	jQuery(document).on('click', '.play-video, .play-channel', function(){
+    	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
+		playVideo(myVideo)
+	})
+
+	/** On Play video */
+	jQuery(document).on( "click", "video", function() {
+		myVideo = document.getElementById(jQuery(this).attr('id') );
+		dataContainer = jQuery(this).attr('data-container');
+		if (dataContainer) {
+			playVideo(myVideo)
+		}
+		
+	});
+
+	jQuery(document).on('change', '#video-volume, #channel-volume', function(){
+    	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
+		myVideo.volume = jQuery(this).val()
+		setCookie('volume', myVideo.volume, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
+	})
+	jQuery(document).on('click', '.fullscreen', function(){
+		videoContainer = document.getElementById(jQuery(this).attr('data-container'));
+		return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
+			? document.exitFullscreen()
+			: videoContainer.requestFullscreen();
+	})
+
+	jQuery(document).on('dblclick', '#videoCanvas,video', function(){
+		videoContainer = document.getElementById(jQuery(this).attr('data-container'));
+		return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
+			? document.exitFullscreen()
+			: videoContainer.requestFullscreen();
+	})
+
+
+	/** On change current time */
+	jQuery(document).on('click', 'progress', (e) => {
+		let progress = document.getElementById('progress')
+		const rect = progress.getBoundingClientRect();
+		const pos = (e.pageX - rect.left) / progress.offsetWidth;
+		myVideo = document.getElementById(e.target.dataset.player);
+		myVideo.currentTime = pos * myVideo.duration;
+		myVideo.play()
+	});
+
 
 })
+
+
+
+/**
+ * 
+ * @param {*} myVideo Video player element
+ * @param {*} autoPlay Auto-play video 
+ * @returns void
+ */
+function playVideo(myVideo, autoPlay = true)
+{	
+	if (!myVideo)
+		return;
+
+	myVideo.volume = getCookie('volume')
+	jQuery('#video-volume').val(getCookie('volume'))
+
+	if (myVideo.paused && autoPlay) {
+		myVideo.play()
+		jQuery(`#${myVideo.dataset.container} .play-video`).hide().parent().find('.pause-video').fadeIn(200)
+		jQuery('#channelContainer .play-channel').hide().parent().find('.pause-channel').fadeIn(200)
+		jQuery('#video-overlay').fadeOut(200)
+		jQuery('#channelContainer').css('z-index',  50)
+	} else {
+		jQuery(`#${myVideo.dataset.container} .pause-video`).hide().parent().find('.play-video').fadeIn(200)
+		jQuery('#channelContainer .pause-channel').hide().parent().find('.play-channel').fadeIn(200)
+		jQuery('#video-overlay').fadeIn(200)
+		myVideo.pause()
+		jQuery('#channelContainer').css('z-index',  0)
+	} 	
+	jQuery('#video-duration-page').html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
+	jQuery('#videoContainer progress').attr("max", myVideo.duration);
+
+	
+	/** On time update */
+	myVideo.addEventListener(
+	"timeupdate",
+	() => {
+		jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
+		jQuery(`#${myVideo.dataset.container} progress`).val(myVideo.currentTime);
+		jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
+	})
+		
+		
+	/** On Load video */
+	myVideo.addEventListener(
+	"loadedmetadata",
+	() => {
+		jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
+		jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(convertToTime(myVideo.duration))
+		jQuery(`#${myVideo.dataset.container} progress`).attr("max", myVideo.duration);
+		
+		jQuery('#video-overlay').fadeOut(200)
+		jQuery(`#${myVideo.dataset.container}`).css('z-index',  999)
+	}, false );
+		
+	/** On Play video */
+	myVideo.addEventListener(
+	"play",
+	() => {
+		jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(convertToTime(myVideo.duration))
+		jQuery(`#${myVideo.dataset.container} progress`).attr("max", myVideo.duration);
+		
+		jQuery('#video-overlay').fadeOut(200)
+		jQuery(`#${myVideo.dataset.container}`).css('z-index',  999)
+	}, false);
+		
+	/** On Pause video */
+	myVideo.addEventListener(
+	"pause",
+	() => {
+		jQuery('#video-overlay').fadeIn(200)
+		jQuery(`#${myVideo.dataset.container}`).css('z-index',  0)
+	}, false );
+}

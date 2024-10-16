@@ -1,44 +1,38 @@
 /**
- * 
- * Slider loop carousel
+ * Main functions 
+ * Audio player
+ * Station player
  * 
  */
-function runSlide()
-{
-	const slider = document.querySelector('.channel-slider');
-	const images = document.querySelectorAll('.channel-slider > div');
-	if (slider)
-	{
-		slider.style.width = `${images.length * 100}%`;
-		// If you want to stop the continuous loop on hover, you can add event listeners
-		slider.addEventListener('mouseenter', () => {
-			slider.style.animationPlayState = 'paused';
-		});
-
-		slider.addEventListener('mouseleave', () => {
-			slider.style.animationPlayState = 'running';
-		});
-	}
-}
-
-
-
 var mainAudio = jQuery('audio');
-
-var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename, activeChannel, activeChannelMedia, activeStation, activeStationMedia, stationInterval;
+var audio, canPlay, player, audioInfo, audioObject, list, index, is_slide, filename, activeChannel, activeChannelMedia, activeStation, activeStationMedia, stationInterval, streamingStatus;
 let rand = Math.random();
 
-
+/**
+ * Set audio volume when audio source 
+ * is being changed
+ */
 jQuery('#player-audio').on('change', function(event) {
 	audio.volume = event.target.value;
 	setCookie('volume', event.target.value, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 }) ;	
 
+
+/**
+ * Set Station audio player volume when active media 
+ * is being changed
+ */
 jQuery('#station-player-audio').on('change', function(event) {
 	audio.volume = event.target.value;
 	setCookie('volume', event.target.value, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 }) ;	
 
+
+/**
+ * Start streaming Audio station
+ * Update the player and the active media info
+ * 
+ */
 jQuery(document).on('click', '.start-station', async function (i, el) {
 	console.log('call pause 4')
 	rand += 1
@@ -63,21 +57,17 @@ jQuery(document).on('click', '.start-station', async function (i, el) {
 		audio.load();
 		audio.play();
 		audio.volume = getCookie('volume')
-		// loadStation(stationId)
 	})
-
-
 });
 
-async function loadStationJson(stationId)
-{
-	const response  = await $.get('/station_json/'+stationId);
 
-	activeStation = JSON.parse(response)
 
-	return activeStation;
-}
-
+/**
+ * Load channel and set the Active channel object
+ * 
+ * @param {*} channelId ID of the channel
+ * @returns {Object} activeChannel
+ */
 async function loadChannelJson(channelId)
 {
 	const response  = await $.get('/channel_json/'+channelId);
@@ -87,13 +77,44 @@ async function loadChannelJson(channelId)
 	return activeChannel;
 }
 
-var streamingStatus;
 
+
+/**
+ * Load Channel and set the Active channel Object
+ * 
+ * @param {*} channelId ID of the channel
+ */
+async function loadChannel(channelId)
+{
+	activeChannel = await loadChannelJson(channelId);
+}
+
+
+
+/**
+ * Load Station and set the Active Station object
+ * 
+ * @param {*} stationId ID of the station 
+ * @returns {Object} activeStation
+ */
+async function loadStationJson(stationId)
+{
+	const response  = await $.get('/station_json/'+stationId);
+
+	activeStation = JSON.parse(response)
+
+	return activeStation;
+}
+
+
+/**
+ * Load Station media and set the active Station 
+ *  
+ * @param {*} stationId ID of the station 
+ * @param {*} play Optional to start streaming automatically
+ */
 async function loadStation(stationId, play = true)
 {
-	// const chunkTimerVal  = jQuery('#station_media_chunk').val() > 5 ? (jQuery('#station_media_chunk').val() - 5) : 55 ;
-	// const chunkTimer  = chunkTimerVal > 1 ? chunkTimerVal : 58 ;
-	
 	if (!audio) {
 		audio = mainAudio[0]
 	}
@@ -103,7 +124,12 @@ async function loadStation(stationId, play = true)
 	await handleStationPlayer(stationId, play)
 }
 
-
+/**
+ * Handle the Audio Stations player
+ *  
+ * @param {*} stationId ID of the station 
+ * @param {*} play Optional to start streaming automatically
+ */
 async function handleStationPlayer(stationId, play = true)
 {
 	rand += 1
@@ -152,19 +178,13 @@ async function handleStationPlayer(stationId, play = true)
 
 
 
-async function loadChannel(channelId, play = true)
-{
-	// const chunkTimerVal  = jQuery('#station_media_chunk').val() > 5 ? (jQuery('#station_media_chunk').val() - 5) : 55 ;
-	// const chunkTimer  = chunkTimerVal > 1 ? chunkTimerVal : 58 ;
-	
-	activeChannel = await loadChannelJson(channelId);
-	
-}
 
-
+/**
+ * Start Playing Audio list of items 
+ * Handle the list and play the clicked index
+ */
 jQuery(document).on('click', '.start-player', function (i, el) {
 	jQuery('#station-app-cover').addClass('hidden')
-		console.log('call pause 5')
 	audio ? audio.pause() : null
 	player = jQuery(this);
 	list = JSON.parse(player.attr('data-list'))
@@ -188,6 +208,12 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 	}
 });
 
+
+
+/**
+ * Start Playing Single Audio item
+ * For Audio page, more...
+ */
 jQuery(document).on('click', '.start-single-player', function (i, el) {
 	player = jQuery(this);
 
@@ -218,6 +244,10 @@ jQuery(document).on('click', '.start-single-player', function (i, el) {
 });
 
 
+/**
+ * Play / Pause Audio item event
+ * And handle the styles
+ */
 jQuery('#player-pause-button').on("click", function(event) {
 	if (audio.paused ) {
 		playStyles();
@@ -226,6 +256,42 @@ jQuery('#player-pause-button').on("click", function(event) {
 	}
 });
 
+
+/**
+ * Go to previous item in list On click
+ * Not working with ( Stations & Single audio )
+ */
+jQuery('#player-previous').on("click", function(event) {
+	index = index ? (index - 1) : 0; 
+	if (list[index])
+	{
+		handleFile();
+	}
+
+});
+
+
+/**
+ * Go to next item in list On click
+ * Not working with ( Stations & Single audio )
+ */
+jQuery('#player-next').on("click", function(event) {
+	index = list[index + 1] ? (index + 1) : index; 
+	if (list[index]) {
+		handleFile();
+	}
+});
+
+
+jQuery('#volume-mute-img').on("click", function(event) {
+	audio.muted = !audio.muted;
+}) ;
+
+
+
+/**
+ * Play / Pause Audio stations
+ */
 jQuery('#station-player-pause-button').on("click", async function(event) {
 	if ( audio.paused ) {
 		await loadStation(activeStation.station_id)
@@ -240,44 +306,13 @@ jQuery('#station-player-pause-button').on("click", async function(event) {
 	jQuery(this).toggleClass('active')
 });
 
-jQuery('#player-previous').on("click", function(event) {
-	index = index ? (index - 1) : 0; 
-	if (list[index])
-	{
-		handleFile();
-	}
-
-});
-jQuery('#player-next').on("click", function(event) {
-	index = list[index + 1] ? (index + 1) : index; 
-	if (list[index])
-	{
-		handleFile();
-	}
-
-});
-
-jQuery('#volume-mute-img').on("click", function(event) {
-	audio.muted = !audio.muted;
-}) ;
-
-function moveItem(array, fromIndex, direction) {
-    const toIndex = direction === 'up' ? fromIndex - 1 : fromIndex + 1;
-
-    // Ensure the new index is within bounds
-    if (toIndex < 0 || toIndex >= array.length) {
-        return array; // No movement, return original array
-    }
-
-    // Swap the elements
-    const temp = array[toIndex];
-    array[toIndex] = array[fromIndex];
-    array[fromIndex] = temp;
-
-    return array; // Updated array
-}
 
 
+
+/**
+ * Handle stream file info of Audio item
+ * Useful for Audiobooks chapters info
+ */
 function handleFile()
 {
 	audioObject = list[index] ?? {};
@@ -289,7 +324,11 @@ function handleFile()
 	playStyles()
 }
 
-function runAudio()
+
+/**
+ * Handle the circles for Audio items
+ */
+function handlePlayerCircles()
 {
 
 	jQuery('.audio__slider').roundSlider({
@@ -303,19 +342,17 @@ function runAudio()
 	});
 	jQuery(document).on('drag, change', '.audio__slider', function (e) {
 		let $this = $(this);
-		let $elem = $this.closest('.js-audio');
-		
 		$this.addClass('active');
-		updateAudio(e.handle.value, $elem);
+		updateAudio(e.handle.value);
 	});
-
-	
-
 }
 
+
+/**
+ * Handle Media and player styles
+ * On audio stop playing ( Pause ) 
+ */
 function pauseStyles() {
-	console.log('call pause 3')
-		
 	audio.pause();
 	player.removeClass('playing');
 	player.parent().removeClass('active');
@@ -326,6 +363,11 @@ function pauseStyles() {
 	document.getElementById('player-track').classList.remove('active') 
 }
 
+
+/**
+ * Handle Media and player styles
+ * On audio start playing 
+ */
 function playStyles() {
 	
 	$('.js-audio').removeClass('playing');
@@ -351,18 +393,25 @@ function playStyles() {
 	}, 100)
 }
 
-function updateAudio(e, $elem) {
+
+/**
+ * 
+ * @param {*} e  Value to seek audio 
+ */
+function updateAudio(e) {
 
 	let value = e;
-	var play = $elem.find('.play-pause'),
-		maxduration = audio.duration;
+	var maxduration = audio.duration;
 
 	var y = (value / 100) * maxduration;
 
 	audio.currentTime = y;
-
 }
 
+
+/**
+ * Start initiate Audio player
+ */
 function initAudioPlayer() {
 
 	jQuery('#player-audio').val(getCookie('volume'))
@@ -375,10 +424,6 @@ function initAudioPlayer() {
 
 	mainAudio.on('loadedmetadata', function() {
 		const duration = audio.duration;
-		if (isFinite(duration)) {
-			// playStyles()
-		} else {
-		}
 	});
 
 	
@@ -451,7 +496,7 @@ function initAudioPlayer() {
 		
 		let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
 		
-		updateAudio(percentage.toFixed(2), $elem);
+		updateAudio(percentage.toFixed(2));
 	
 	});
 
@@ -466,7 +511,7 @@ function initAudioPlayer() {
 		
 		let $elem = jQuery(event.target.parentNode.parentNode).find('.js-audio');
 		
-		updateAudio(percentage.toFixed(2), $elem);
+		updateAudio(percentage.toFixed(2));
 	
 	});
 
@@ -522,30 +567,12 @@ function convertToTime(num) {
 }
 
 
+
 /**
- * Load Ajax
+ * Sticky sidebar at scroll
+ * 
+ * @return void 
  */
-function includeFiles(file, id)
-{
-	
-	const check = document.getElementById(id);
-
-	if (!check)
-		return null;
-
-	const xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function() {
-		if (this.readyState === 4 && this.status === 200) {
-			document.getElementById(id).innerHTML = this.responseText;
-		}
-	};
-	xhr.open("GET", "includes/"+file+".html", true);
-	xhr.send();
-}
-
-
-
-
 function stickyScroll()
 {
 	const sidebar = document.querySelector('#filter-side');
@@ -575,31 +602,12 @@ function stickyScroll()
 }
 
 
-jQuery(document).on('click', '.active-parent', function(item){
 
-	jQuery(this).parent().toggleClass('active')
-})
-
-
-jQuery(document).on('click', '.active-child', function(item){
-
-	jQuery(this).parent().toggleClass('active')
-})
-
-// const activeParents = document.querySelectorAll('.active-parent');
-// activeParents.forEach((item, i) => {
-// 	item.addEventListener('click',function(i){
-		
-// 	})
-// })
-
-// const activeChilds = document.querySelectorAll('.active-child');
-// activeChilds.forEach((item, i) => {
-// 	item.addEventListener('click',function(i){
-// 		item.parentElement.classList.toggle('active')
-// 	})
-// })
-
+/**
+ * Sticky sidebar at scroll for Playlist page
+ * 
+ * @return void 
+ */
 function stickyPlaylist()
 {
 	const sidebar = document.querySelector('#playlist-side');
@@ -630,7 +638,16 @@ function stickyPlaylist()
 }
 
 
-// jQuery('html').removeClass('dark') 
+jQuery(document).on('click', '.active-parent', function(item){
+
+	jQuery(this).parent().toggleClass('active')
+})
+
+
+jQuery(document).on('click', '.active-child', function(item){
+
+	jQuery(this).parent().toggleClass('active')
+})
 
 
 setTimeout(function() {
@@ -646,9 +663,8 @@ function reloadFuncs()
 	const a =  ((page[page.length - 1]).replace('.html', ''))
 
 	stickyScroll()
-	runAudio()
+	handlePlayerCircles()
 	stickyPlaylist();
-	runSlide()
     showSlides()
 	handleSlides()
 
@@ -674,7 +690,10 @@ jQuery(document).on('click','.pCard_add', function () {
 });
 
 
-// Vanilla javascript
+/**
+ * When user back to previous page
+ * Load page in ajax
+ */
 window.addEventListener('popstate', function (e) {
 	e.preventDefault()
     var state = e.state;
@@ -705,255 +724,7 @@ window.addEventListener('popstate', function (e) {
 
 
 /**
- * Video Picture-in-picture player
- */
-$(function(){
-	var myVideo;
-	var playFrame;
-	const processor = {
-		timerCallback(myVideo) {
-			if (!playFrame || myVideo.ended )   {
-				playFrame = null;
-				return;
-			}
-			this.computeFrame(myVideo);
-			setTimeout(() => {
-				playFrame ? this.timerCallback(myVideo) : '';
-			}, 16); // roughly 60 frames per second
-		},
-
-		doLoad(myVideo) {
-			jQuery('#videoCanvasContainer').removeClass('hidden')
-			playFrame = true;
-			this.c1 = document.getElementById("videoCanvas");
-			let canvasContainer = document.getElementById("videoCanvasContainer");
-			
-			this.ctx1 = this.c1.getContext("2d"); 
-
-			let isDragging = false;
-			let offsetX = 0;
-			let offsetY = 0;
-
-			canvasContainer.addEventListener('mousedown', function (e) {
-				isDragging = true;
-				videoCanvas.style.cursor = 'grabbing';
-
-				// Calculate offset position to handle dragging smoothly
-				offsetX = e.clientX - canvasContainer.getBoundingClientRect().left;
-				offsetY = e.clientY - canvasContainer.getBoundingClientRect().top;
-			});
-
-			canvasContainer.addEventListener('ondragstart', function(){
-				isDragging = true;
-				videoCanvas.style.cursor = 'grabbing';
-			}) 
-			
-			// Function to stop dragging
-			window.addEventListener('mouseup', function () {
-				isDragging = false;
-				videoCanvas.style.cursor = 'grab';
-			});
-			
-			// Function to drag the canvas
-			window.addEventListener('mousemove', function (e) {
-				if (isDragging) {
-					// Calculate the new position
-					const left = e.clientX - offsetX;
-					const top = e.clientY - offsetY;
-
-					// Update canvas position
-					canvasContainer.style.left = `${left}px`;
-					canvasContainer.style.top = `${top + 10}px`;
-
-					// Set the position to absolute once dragging starts
-					canvasContainer.style.position = 'fixed';
-					canvasContainer.style.transform = 'none';
-				}
-			});
-
-			this.width = 300;
-			this.height =  200;
-			myVideo.volume = getCookie('volume')
-			this.timerCallback(myVideo)
-
-		},
-
-		computeFrame(myVideo) {
-			this.ctx1.drawImage(myVideo, 0, 0, this.width, this.height);
-			const frame = this.ctx1.getImageData(0, 0, this.width, this.height);
-			const l = frame.data.length / 4;
-
-			for (let i = 0; i < l; i++) {
-			const grey =
-				(frame.data[i * 4 + 0] +
-				frame.data[i * 4 + 1] +
-				frame.data[i * 4 + 2]) /
-				3;
-			}
-			this.ctx1.putImageData(frame, 0, 0);
-
-			return;
-		},
-	};
-	
-	/**
-	 * Enable / Show video side picture-in-picture
-	 */
-	jQuery(document).on('click', '.video-side-popup', function(){
-    	myVideo = document.getElementById("footer-video");
-		if (myVideo.canPlayType("video/mp4")) {
-			myVideo.setAttribute("src", jQuery(this).data('path'));
-			processor.doLoad(myVideo);
-			myVideo.play()
-		}
-	})
-
-	jQuery(document).on('click', '#pause-video-side-popup', function(){
-		playFrame = false;
-    	myVideo = document.getElementById("footer-video");
-		if (myVideo) {
-			jQuery('#videoCanvasContainer').addClass('hidden')
-			myVideo.pause()
-		}
-	})
-
-	jQuery(document).on('click', '.video-side-popup', function(){
-    	myVideo = document.getElementById("footer-video");
-		if (myVideo.canPlayType("video/mp4")) {
-			myVideo.setAttribute("src", jQuery(this).data('path'));
-			processor.doLoad(myVideo);
-			myVideo.play()
-			
-		}
-	})
-
-	
-	
-	
-	
-	jQuery(document).on('click', '.pause-video, .pause-channel', function(){
-    	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
-		playVideo(myVideo)
-	})
-	jQuery(document).on('click', '.play-video, .play-channel', function(){
-    	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
-		playVideo(myVideo)
-	})
-
-	/** On Play video */
-	jQuery(document).on( "click", "video", function() {
-		myVideo = document.getElementById(jQuery(this).attr('id') );
-		dataContainer = jQuery(this).attr('data-container');
-		if (dataContainer) {
-			playVideo(myVideo)
-		}
-		
-	});
-
-	jQuery(document).on('change', '#video-volume, #channel-volume', function(){
-    	myVideo = document.getElementById(jQuery(this).attr('data-player')  );
-		myVideo.volume = jQuery(this).val()
-		setCookie('volume', myVideo.volume, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
-	})
-	jQuery(document).on('click', '.fullscreen', function(){
-		videoContainer = document.getElementById(jQuery(this).attr('data-container'));
-		return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
-			? document.exitFullscreen()
-			: videoContainer.requestFullscreen();
-	})
-
-	jQuery(document).on('dblclick', '#videoCanvas,video', function(){
-		videoContainer = document.getElementById(jQuery(this).attr('data-container'));
-		return	(window.innerWidth == screen.width && window.innerHeight == screen.height) 
-			? document.exitFullscreen()
-			: videoContainer.requestFullscreen();
-	})
-
-
-	/** On change current time */
-	jQuery(document).on('click', 'progress', (e) => {
-		let progress = document.getElementById('progress')
-		const rect = progress.getBoundingClientRect();
-		const pos = (e.pageX - rect.left) / progress.offsetWidth;
-		myVideo = document.getElementById(e.target.dataset.player);
-		myVideo.currentTime = pos * myVideo.duration;
-		myVideo.play()
-	});
-
-
-})
-
-
-function playVideo(myVideo, autoPlay = true)
-{	
-	if (!myVideo)
-		return;
-
-	myVideo.volume = getCookie('volume')
-	jQuery('#video-volume').val(getCookie('volume'))
-
-	if (myVideo.paused && autoPlay) {
-		myVideo.play()
-		jQuery(`#${myVideo.dataset.container} .play-video`).hide().parent().find('.pause-video').fadeIn(200)
-		jQuery('#channelContainer .play-channel').hide().parent().find('.pause-channel').fadeIn(200)
-		jQuery('#video-overlay').fadeOut(200)
-		jQuery('#channelContainer').css('z-index',  50)
-	} else {
-		jQuery(`#${myVideo.dataset.container} .pause-video`).hide().parent().find('.play-video').fadeIn(200)
-		jQuery('#channelContainer .pause-channel').hide().parent().find('.play-channel').fadeIn(200)
-		jQuery('#video-overlay').fadeIn(200)
-		myVideo.pause()
-		jQuery('#channelContainer').css('z-index',  0)
-	} 	
-	jQuery('#video-duration-page').html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
-	jQuery('#videoContainer progress').attr("max", myVideo.duration);
-
-	
-	/** On time update */
-	myVideo.addEventListener(
-	"timeupdate",
-	() => {
-		jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
-		jQuery(`#${myVideo.dataset.container} progress`).val(myVideo.currentTime);
-		jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
-	})
-		
-		
-	/** On Load video */
-	myVideo.addEventListener(
-	"loadedmetadata",
-	() => {
-		jQuery(`#${myVideo.dataset.container} #current-time-page`).html(convertToTime(myVideo.currentTime));
-		jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(convertToTime(myVideo.duration))
-		jQuery(`#${myVideo.dataset.container} progress`).attr("max", myVideo.duration);
-		
-		jQuery('#video-overlay').fadeOut(200)
-		jQuery(`#${myVideo.dataset.container}`).css('z-index',  999)
-	}, false );
-		
-	/** On Play video */
-	myVideo.addEventListener(
-	"play",
-	() => {
-		jQuery(`#${myVideo.dataset.container} #video-duration-page`).html(convertToTime(myVideo.duration))
-		jQuery(`#${myVideo.dataset.container} progress`).attr("max", myVideo.duration);
-		
-		jQuery('#video-overlay').fadeOut(200)
-		jQuery(`#${myVideo.dataset.container}`).css('z-index',  999)
-	}, false);
-		
-	/** On Pause video */
-	myVideo.addEventListener(
-	"pause",
-	() => {
-		jQuery('#video-overlay').fadeIn(200)
-		jQuery(`#${myVideo.dataset.container}`).css('z-index',  0)
-	}, false );
-}
-
-
-
-/**
+ * Calendar Page
  * Append selected item for calendar date range
  * 
  * @param {String} elementId 
@@ -974,6 +745,7 @@ function appendRangeSelectedItem(elementId, type = 'channel')
 
 
 /**
+ * Calendar Page
  * Remove selected date range item
  */
 function removeRangeSelectedItem(elementId, type = 'channel')
@@ -991,6 +763,7 @@ function removeRangeSelectedItem(elementId, type = 'channel')
 }
 
 /**
+ * Calendar Page
  * Handle selected date range item
  */
 function handleSelectedDuration(id, uniqueId, duration, type = 'channel')
@@ -1022,7 +795,12 @@ function handleSelectedDuration(id, uniqueId, duration, type = 'channel')
 
 
 
-
+/**
+ * Get IFrame code example for active link
+ * 
+ * @param {*} link Link of the page 
+ * @returns 
+ */
 function embedIframeCode(link)
 {
 	return '<iframe frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="100%" height="400"  src="'+link+'" ></iframe>'
