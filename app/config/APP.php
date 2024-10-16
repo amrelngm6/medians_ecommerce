@@ -315,9 +315,7 @@ class APP
 				array('permission'=>'Channels.index', 'title'=>translate('Channels'),  'icon'=>'tag', 'link'=>'admin/channels', 'component'=>'data_table'),
 			]
 			),
-			
-			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'blog'),
-			
+						
 			array('title'=>translate('Categories'),  'icon'=>'list', 'link'=>'#genres', 'sub'=>
 			[
 				array('permission'=>'MediaGenres.index', 'title'=>translate('Genres'),  'icon'=>'truck', 'link'=>'admin/genres', 'component'=>'categories'),
@@ -326,6 +324,8 @@ class APP
 			]
 			),
 			
+			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'blog'),
+
 			array('title'=>translate('Marketing'),  'icon'=>'send', 'link'=>'#newsletters', 'sub'=>
 			[
 				array('permission'=>'Newsletters.index', 'title'=>translate('newsletters'),  'icon'=>'truck', 'link'=>'admin/newsletters', 'component'=>'data_table'),
