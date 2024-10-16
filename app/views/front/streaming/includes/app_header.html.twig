@@ -5,12 +5,12 @@
                         </h2>
                         <a href="/" class="lg:hidden ajax-load"><img src="{{app.SystemSetting.logo}}" class="lg:w-24 w-20 py-2 mt-1" /></a>
                     </div>
-                    <a href="/search/audio" class="min-w-8  ajax-load w-8 py-4" >
-                        <img src="/src/front_assets/svg/search.svg" class="" width="14" />
+                    <a href="/search/audio" class="ajax-load py-6" >
+                        <img src="/src/front_assets/svg/search.svg" class="w-6" width="14" />
                     </a>
                     
-                    <div  class="relative show-child min-w-8 py-4 cursor-pointer" >
-                        <img src="/uploads/img/flags/{{lang_key}}.svg" class="rounded-full w-4 h-4" width="14" />
+                    <div  class="relative show-child min-w-8  pt-6 cursor-pointer" >
+                        <img src="/uploads/img/flags/{{lang_key}}.svg" class="rounded-full w-6 h-6" width="14" />
                         <div class="show-on-hover absolute right-0 p-4 bg-white dark:bg-gray-900 rounded-lg w-40 flex-col flex gap-2">
                             {% for l in app.Languages %}
                             <a href="/switch-lang/{{l.language_code}}" class="flex w-full gap-4">
