@@ -4220,6 +4220,10 @@ video {
     height: 10rem;
   }
 
+  .lg\:h-5 {
+    height: 1.25rem;
+  }
+
   .lg\:h-56 {
     height: 14rem;
   }
@@ -4258,6 +4262,10 @@ video {
 
   .lg\:w-40 {
     width: 10rem;
+  }
+
+  .lg\:w-5 {
+    width: 1.25rem;
   }
 
   .lg\:w-56 {
