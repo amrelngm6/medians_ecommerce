@@ -58,17 +58,19 @@
 					</div>
 				</a>
 			</div>
-			<div class="flex gap-2 flex-none text-primary h-8"> 
+			<div class="lg:flex gap-2 flex-none text-primary h-8"> 
 
 				{% set itemId = item.media_id %}
 				{% set itemType = 'media' %}
 				{% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
-				<span class="relative flex pt-2">
-					<span x-on:click="jQuery('#show-box-path').val('video/{{itemId}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100 "><img src="/src/front_assets/svg/share{{app.is_dark ? '-white' : ''}}.svg" class="w-5"></span>
-					<span class="tooltiptext">{{lang.translate('Share')}}</span>
-				</span>
+				<div>
+					<span class="relative flex pt-2">
+						<span x-on:click="jQuery('#show-box-path').val('video/{{itemId}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100 "><img src="/src/front_assets/svg/share{{app.is_dark ? '-white' : ''}}.svg" class="w-5"></span>
+						<span class="tooltiptext">{{lang.translate('Share')}}</span>
+					</span>
 
-				<span class="pt-1">{{item.created_at|date("M d, Y")}}</span>
+					<span class="pt-1">{{item.created_at|date("M d, Y")}}</span>
+				</div>
 			</div>
 		</div>
 		<h2 class="pt-10	  text-2xl text-white overflow-hidden">{{item.name}}</h2>
