@@ -817,7 +817,7 @@ jQuery(document).on('click', '.movie-slider', function(e) {
         
 	const slider = document.querySelector('.movie-slider-ul');
 	const items = document.querySelectorAll('.movie-slider');
-	slider.append(items[1])
+	slider.append(items[0])
 
 });
 jQuery(document).on('click', '.movie-slider-arrow', function(e) {
