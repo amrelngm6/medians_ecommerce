@@ -667,7 +667,8 @@ function reloadFuncs()
 	stickyPlaylist();
     showSlides()
 	handleSlides()
-
+	
+	document.querySelectorAll('[data-multi-select]').forEach(select => new MultiSelect(select));
 }
 
 jQuery(document).on('change', '#imageInput', function(event) {
