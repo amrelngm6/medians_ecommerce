@@ -1,8 +1,4 @@
 
-
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.10.1/main.min.css' rel='stylesheet' />
-
-
     <div class="pb-20 w-full">
         
         <form action="/front_api/update" class="ajax-form" id="calendar-form">
@@ -65,10 +61,8 @@
             </label>
         </div>
     </div>
+
     {% include 'views/front/' ~ template ~ '/scripts/station_calendar.html.twig' %}
-
-    
-
 
     {% include 'views/front/' ~ template ~ '/popups/station-add-media.html.twig' %}
     {% include 'views/front/' ~ template ~ '/popups/station-calendar.html.twig' %}

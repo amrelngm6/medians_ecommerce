@@ -63,7 +63,6 @@
 <script  type="text/javascript">
 var lastId;
 $(function() {
-    /* code */
     loadStationJson({{station.station_id}})
 
     window.navigation.addEventListener("navigate", (event) => {
@@ -74,6 +73,7 @@ $(function() {
     let stationIntervalAmount = jQuery('#stations-interval').val();
     var stationCommentsInterval = setInterval(async function(){
     
+        // Update Comments list 
         lastId = jQuery('.comment').first().data('id')
         loadSection('/front_api?type=comments-list&params[item_id]={{station.station_id}}&params[last_id]='+lastId , 'comments-list', false, true)
         if (activeStationMedia) {
