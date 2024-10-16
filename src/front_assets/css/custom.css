@@ -2191,6 +2191,9 @@ Video Player
 }
 
 /* Custom controls styling */
+#video-controls {
+    direction: ltr;
+}
 :fullscreen #video-controls img {
     filter: brightness(5);
 }
