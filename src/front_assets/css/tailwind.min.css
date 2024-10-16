@@ -2576,16 +2576,8 @@ video {
   padding-right: 0.625rem;
 }
 
-.pr-4 {
-  padding-right: 1rem;
-}
-
 .pr-5 {
   padding-right: 1.25rem;
-}
-
-.pr-6 {
-  padding-right: 1.5rem;
 }
 
 .ps-10 {
@@ -2953,11 +2945,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
-.text-yellow-300 {
-  --tw-text-opacity: 1;
-  color: rgb(253 224 71 / var(--tw-text-opacity));
 }
 
 .text-yellow-400 {
@@ -4162,10 +4149,6 @@ video {
 
   .lg\:mb-8 {
     margin-bottom: 2rem;
-  }
-
-  .lg\:ml-20 {
-    margin-left: 5rem;
   }
 
   .lg\:ml-60 {

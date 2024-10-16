@@ -2838,3 +2838,8 @@ body .ui_box:hover {
         height: 13px;
     }
 }
+
+[lang="en"] .right-\[-60px\]
+{
+    right: -60px;
+}
