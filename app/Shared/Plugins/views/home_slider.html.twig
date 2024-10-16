@@ -2,19 +2,13 @@
 <div class="relative w-full h-screen" id="movie-slider-container">
   <ul class='slider movie-slider-ul'>
     {% if gallery.items[0] %}
-    <li class='movie-slider' style="background-image: url('{{gallery.items[0].media}}')">
-      <div class='content'>
-        <h2 class='title'>{{gallery.items[0].title}}</h2>
-        <p class='description'> {{gallery.items[0].text}} </p>
-        <a href="{{gallery.items[0].link}}">{{gallery.items[0].button_text}}</a>
-      </div>
-    </li>
+    <li class='movie-slider' style="background-image: url('{{gallery.items[0].media}}')"></li>
     {% endif %}
     {% for item in gallery.items %}
 
     <li class='movie-slider' style="background-image: url('{{item.media}}')">
       <div class='content'>
-        <h2 class='title'>{{item.title}}</h2>
+        <h2 class='title text-4xl'>{{item.title}}</h2>
         <p class='description'> {{item.text}} </p>
         <a href="{{item.link}}">{{item.button_text}}</a>
       </div>
