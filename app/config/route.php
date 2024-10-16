@@ -409,6 +409,12 @@ RouteHandler::get('/logout', function ()
     echo (new \config\APP)->redirect('./');
 });
 
+RouteHandler::get('/switch-mode/(:all)', function ($mode) 
+{
+    $_COOKIE['is_dark'] = $mode == 'dark' ? true : false;
+    echo (new \config\APP)->redirect('./');
+});
+
 // Front API GET requests
 RouteHandler::get('/front_api', \Medians\FrontAPIController::class.'@handle');
 RouteHandler::post('/front_api', \Medians\FrontAPIController::class.'@handle');
