@@ -65,9 +65,9 @@
                             <div class="card-header">
                                 <div class="card-title"><h2 v-text="translate('CSS Classes')"></h2></div>
                             </div>
-                            <div class="card-body pt-0">
+                            <div class="card-body pt-0" >
                                 <label  v-text="translate('CSS custom class')" class="form-label"></label>
-                                <form_field  @callback="(newVal) => {activeItem.field ? (activeItem.field['class'] = newVal) : (activeItem.field = newVal), console.log(newVal)}" :item="activeItem.field" :column="{required: false, key:'class',title: translate('Class') , column_type:'text', column_key: 'class'}" ></form_field>
+                                <form_field  @callback="(newVal) => {activeItem.field ? (activeItem.field.class = newVal) : (activeItem.field = newVal), console.log(newVal)}" :item="activeItem.field ?? {}" :column="{required: false, key:'class',title: translate('Class') , column_type:'text', column_key: 'class'}" ></form_field>
                                 <div class="text-muted fs-7" v-text="translate('Assign one or more css class to this page to define the style')"></div>
                             </div>
                         </div>
