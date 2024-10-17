@@ -3812,28 +3812,43 @@ label .switch-shadow {
 
 
 
-before\:bg-gray-900:before {
+.before\:bg-no-repeat::before {
     content: var(--tw-content);
-    --tw-bg-opacity: 1;
-    background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+    background-repeat: no-repeat;
 }
-.before\:rounded-2xl:before {
+.before\:bg-top::before {
     content: var(--tw-content);
-    border-radius: 1rem;
+    background-position: top;
 }
-.before\:-z-10:before {
+.before\:bg-contain::before {
     content: var(--tw-content);
-    z-index: -10;
+    background-size: contain;
 }
-.before\:inset-0:before {
+.before\:bg-\[url\(\'\.\.\/\.\.\/assets\/svg\/component\/banner-bg-gray\.svg\'\)\]::before {
     content: var(--tw-content);
-    inset: 0;
+    background-image: url(../../assets/svg/component/banner-bg-gray.svg);
 }
-.before\:absolute:before {
+.before\:w-2\/3::before {
+    content: var(--tw-content);
+    width: 66.666667%;
+}
+.before\:h-full::before {
+    content: var(--tw-content);
+    height: 100%;
+}
+.before\:z-0::before {
+    content: var(--tw-content);
+    z-index: 0;
+}
+.before\:top-0::before {
+    content: var(--tw-content);
+    top: 0px;
+}
+.before\:start-0::before {
+    content: var(--tw-content);
+    inset-inline-start: 0px;
+}
+.before\:absolute::before {
     content: var(--tw-content);
     position: absolute;
-}
-.before\:pointer-events-none:before {
-    content: var(--tw-content);
-    pointer-events: none;
 }
