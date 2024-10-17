@@ -23,7 +23,11 @@ class PageRepository
 	{
 		return Page::with(['lang_content'=>function($q) use ($prefix){
 			$prefix ? $q->where('prefix', $prefix) : $q;
-		}])->first();
+		}])->
+		whereHas('lang_content',function($q) use ($prefix){
+			$prefix ? $q->where('prefix', $prefix) : $q;
+		})->
+		first();
 	}
 
 

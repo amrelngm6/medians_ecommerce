@@ -261,7 +261,7 @@ class PageController extends CustomController
     {
 		
         $page = $this->repo->findByPrefix($prefix);
-
+		
 		$categoryRepo = new \Medians\Categories\Infrastructure\CategoryRepository;
 		$mediaItemRepo = new \Medians\Media\Infrastructure\MediaItemRepository;
 		$customerRepo = new \Medians\Customers\Infrastructure\CustomerRepository;
@@ -273,7 +273,7 @@ class PageController extends CustomController
 			$page->addView();
 
             return printResponse(processShortcodes(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
-                'page' => $page,
+                'subpage' => $page,
                 'item' => $page,
                 'app' => $this->app,
 				'genres' => $categoryRepo->getGenres(),

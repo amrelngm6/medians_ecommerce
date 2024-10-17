@@ -27,7 +27,7 @@ class Page extends CustomModel
 	];
 
 
-	public $appends = ['photo','field','name', 'data','content_langs'];
+	public $appends = ['photo','field','name', 'data','content_langs', 'content'];
 
 
 
@@ -38,7 +38,8 @@ class Page extends CustomModel
 
 	public function getDataAttribute() 
 	{
-		return isset($this->content->content) ? $this->content->content : ''; 
+
+		return $this->content_langs[$_SESSION['lang']]->content ??  ''; 
 	}
 
 	public function getFieldAttribute() 
@@ -48,7 +49,12 @@ class Page extends CustomModel
 
 	public function getNameAttribute() : ?String
 	{
-		return isset($this->content->title) ? $this->content->title : $this->title;
+		return isset($this->lang_content->title) ? $this->lang_content->title : $this->title;
+	}
+
+	public function getContentAttribute() : ?String
+	{
+		return isset($this->lang_content->content) ? $this->lang_content->content : $this->title;
 	}
 
 	public function getPhotoAttribute() : ?String
@@ -69,7 +75,7 @@ class Page extends CustomModel
 
 	public function lang_content()
 	{
-		return $this->morphOne(Content::class, 'item')->where('lang',$_SESSION['lang']);
+		return $this->morphOne(Content::class, 'item')->where('lang', $_SESSION['lang']);
 	}
 
 	// public function lang_content()
