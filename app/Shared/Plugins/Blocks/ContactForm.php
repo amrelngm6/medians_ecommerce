@@ -47,6 +47,7 @@ class ContactForm
 				[ 'key'=> "address", 'title'=> translate('Contact Address') , 'help_text'=> translate('Your contact Address info to show at the side'), 'fillable'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "email", 'title'=> translate('Contact Email') , 'help_text'=> translate('Your contact Email info to show at the side'), 'fillable'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "phone", 'title'=> translate('Contact Phone') , 'help_text'=> translate('Your contact Phone field to show at the side'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "form_text", 'title'=> translate('Form intro text') , 'help_text'=> translate('Text to show before the form'), 'fillable'=> true, 'column_type'=>'text' ],
 			],	
             
             
