@@ -15,12 +15,12 @@
                     </div>
                     <div class="lg:w-1/2 px-6 mt-4 lg:mt-0">
                         {% if hook.field.email %}
-                        <h2 class="font-bold text-gray-dark">EMAIL</h2>
-                        <a href="mailto:your@email.com" class="text-primary leading-relaxed">your@email.com</a>
+                        <h2 class="font-bold text-gray-dark">{{lang.translate('EMAIL')}}</h2>
+                        <a href="mailto:{{hook.field.email}}" class="text-primary leading-relaxed">{{hook.field.email}}</a>
                         {% endif %}
                         {% if hook.field.phone %}
-                        <h2 class="font-bold text-gray-dark mt-4">PHONE</h2>
-                        <a href="tel:123-456-7890" class="leading-relaxed">123-456-7890</a>
+                        <h2 class="font-bold text-gray-dark mt-4">{{lang.translate('PHONE')}}</h2>
+                        <a href="tel:{{item.field.phone}}" class="leading-relaxed">{{item.field.phone}}</a>
                         {% endif %}
                     </div>
                 </div>
