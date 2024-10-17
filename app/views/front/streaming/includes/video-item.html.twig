@@ -3,7 +3,7 @@
                                             <div class="img relative" style="background: url(/stream?thumbnail=300&dir=videos/screenshots&image={{media_item.picture_name}})">
                                                 <a href="/video/{{media_item.media_id}}" class="ajax-load block relative h-40 w-full "  >
                                                 
-                                                    <span class="image-item block w-full" >
+                                                    <span class="image-item block w-full" id="video-pictures-{{item.media_id}}" >
                                                         {% for i in [1,2,3,4,5,6,7,8,9,10] %}
                                                         <img src="/stream?thumbnail=300&dir=videos/screenshots&image=screenshot_{{i}}_{{media_item.picture_name|split('_')[2]}}" alt="Video Screenshot">
                                                         {% endfor %}

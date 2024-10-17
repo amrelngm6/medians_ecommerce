@@ -3259,7 +3259,7 @@ body .ui_box:hover {
   transition: left .4s;
 }
 
-.slider {
+label .switch-slider {
   display: none;
 }
 
@@ -3551,123 +3551,123 @@ body .ui_box:hover {
 
 /* actions */
 
-.slider:checked+ .darkswitch .bb8 {
+.switch-slider:checked+ .darkswitch .bb8 {
   left: 29%;
 }
 
-.slider:checked + .darkswitch  .bb8 .ball {
+.switch-slider:checked + .darkswitch  .bb8 .ball {
   -webkit-transform: rotate(180deg);
   -ms-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 
-.slider:hover+ .darkswitch .bb8 .eyes {
+.switch-slider:hover+ .darkswitch .bb8 .eyes {
   left: 60%;
 }
 
-.slider:checked:hover+ .darkswitch .bb8 .eyes {
+.switch-slider:checked:hover+ .darkswitch .bb8 .eyes {
   left: -20%;
 }
 
-.slider:active+ .darkswitch .bb8 .head {
+.switch-slider:active+ .darkswitch .bb8 .head {
   -webkit-transform: translate(35px, 3px) rotateZ(17deg);
   -ms-transform: translate(35px, 3px) rotate(17deg);
   transform: translate(30px, 3px) rotateZ(17deg);
 }
 
-.slider:checked:active+ .darkswitch .bb8 .head {
+.switch-slider:checked:active+ .darkswitch .bb8 .head {
   -webkit-transform: translate(-35px, 6px) rotateZ(-17deg);
   -ms-transform: translate(-35px, 6px) rotate(-17deg);
   transform: translate(-35px, 6px) rotateZ(-17deg);
 }
 
-.slider:active+.darkswitch .antennas {
+.switch-slider:active+.darkswitch .antennas {
   -webkit-transform: translate(35px, -20px) rotateZ(17deg);
   -ms-transform: translate(35px, -20px) rotate(17deg);
   transform: translate(35px, -20px) rotateZ(17deg);
 }
 
-.slider:active:not(:hover)+.darkswitch .antennas {
+.switch-slider:active:not(:hover)+.darkswitch .antennas {
   -webkit-transform: translate(35px, -10px) rotateZ(17deg);
   -ms-transform: translate(35px, -10px) rotate(17deg);
   transform: translate(35px, -10px) rotateZ(17deg);
 }
 
-.slider:checked:active+.darkswitch .antennas {
+.switch-slider:checked:active+.darkswitch .antennas {
   -webkit-transform: translate(-35px, 10px) rotateZ(-17deg);
   -ms-transform: translate(-35px, 10px) rotate(-17deg);
   transform: translate(-35px, 15px) rotateZ(-17deg);
 }
 
-.slider:checked:active:not(:hover)+.darkswitch .antennas {
+.switch-slider:checked:active:not(:hover)+.darkswitch .antennas {
   -webkit-transform: translate(-30px, 20px) rotateZ(-17deg);
   -ms-transform: translate(-30px, 20px) rotate(-17deg);
   transform: translate(-25px, 25px) rotateZ(-17deg);
 }
 
-.slider:hover+ .darkswitch .antennas, .slider:checked+ .darkswitch .antennas {
+.switch-slider:hover+ .darkswitch .antennas, .switch-slider:checked+ .darkswitch .antennas {
   left: 6%;
 }
 
-.slider:hover+ .darkswitch .stripe.detail, .slider:checked+ .darkswitch .stripe.detail {
+.switch-slider:hover+ .darkswitch .stripe.detail, .switch-slider:checked+ .darkswitch .stripe.detail {
   left: 0;
 }
 
-.slider:checked:hover+ .darkswitch .antennas {
+.switch-slider:checked:hover+ .darkswitch .antennas {
   left: 28%;
 }
 
-.slider:checked:hover+ .darkswitch .stripe.detail {
+.switch-slider:checked:hover+ .darkswitch .stripe.detail {
   left: -38%;
 }
 
-.slider:checked + .darkswitch {
+.switch-slider:checked + .darkswitch {
   background-color: #112350;
 }
 
-.slider:checked + .darkswitch .suns {
+.switch-slider:checked + .darkswitch .suns {
   top: 50px;
 }
 
-.slider:checked + .darkswitch .moons .first-moon {
+.switch-slider:checked + .darkswitch .moons .first-moon {
   top: 15px;
   -webkit-box-shadow: 0 0 10px #B8CCCD;
   box-shadow: 0 0 10px #B8CCCD;
 }
 
-.slider:checked + .darkswitch .moons::after {
+.switch-slider:checked + .darkswitch .moons::after {
   top: 38px;
   -webkit-box-shadow: 0 0 15px #B8CCCD;
   box-shadow: 0 0 15px #B8CCCD;
 }
 
-.slider:checked + .darkswitch .moons::before {
+.switch-slider:checked + .darkswitch .moons::before {
   top: 34px;
   -webkit-box-shadow: 0 0 15px #B8CCCD;
   box-shadow: 0 0 15px #B8CCCD;
 }
 
-.slider:checked + .darkswitch .moons .star {
+.switch-slider:checked + .darkswitch .moons .star {
   -webkit-box-shadow: 0 0 20px 2px #fff;
   box-shadow: 0 0 20px 2px #fff;
 }
 
-.slider:checked + .darkswitch .moons .star.star-1 {
+.switch-slider:checked + .darkswitch .moons .star.star-1 {
   top: 20px;
 }
 
-.slider:checked + .darkswitch .moons .star.star-2 {
+.switch-slider:checked + .darkswitch .moons .star.star-2 {
   top: 15px;
 }
 
-.slider:checked + .darkswitch .moons .star.star-3 {
+.switch-slider:checked + .darkswitch .moons .star.star-3 {
   top: 15px;
 }
 
-.slider:checked + .darkswitch .moons .star.star-4 {
+.switch-slider:checked + .darkswitch .moons .star.star-4 {
   top: 45px;
 }
 
-.slider:checked + .darkswitch .moons .star.star-5 {
+.switch-slider:checked + .darkswitch .moons .star.star-5 {
   top: 53px;
 }
