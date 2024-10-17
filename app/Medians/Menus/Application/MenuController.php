@@ -5,7 +5,7 @@ use \Shared\dbaser\CustomController;
 
 use Medians\Menus\Infrastructure\MenuRepository;
 use Medians\Pages\Infrastructure\PageRepository;
-use Medians\Products\Infrastructure\CategoryRepository;
+use Medians\Categories\Infrastructure\CategoryRepository;
 
 class MenuController extends CustomController
 {

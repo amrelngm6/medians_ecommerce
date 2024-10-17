@@ -106,13 +106,18 @@ export default
       
       const handleSelected = () => {
         let array = props.active_links;
+        if (array.length < 1)
+          return;
+        
         for (let i = 0; i < array.length; i++) {
           const element = array[i].page;
-          element.type = array[i].type;
-          element.items = array[i].items;
-          if (element.type == props.item.type)
-          {
-            selectedPages.value[selectedPages.value.length] = element;
+          if (element) {
+            element.type = array[i].type;
+            element.items = array[i].items;
+            if (element.type == props.item.type)
+            {
+              selectedPages.value[selectedPages.value.length] = element;
+            }
           }
         }
       }
