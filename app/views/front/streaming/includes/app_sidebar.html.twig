@@ -24,7 +24,7 @@
                         {% endfor %}
 
                         {% if customer.customer_id %}
-                        <li><hr class="my-2" /></li>
+                        <li><hr class="lg:block hidden my-4  opacity-30"></li>
                         {% if app.SystemSetting.enable_audio %}
                         <li class="w-full " onclick="(function(){  jQuery('#main-side').toggleClass('hidden'); })()"  id="upload">
                             <a href="/upload" title="{{lang.translate('Upload')}}"  class="w-full flex gap gap-4  ajax-load  ">
