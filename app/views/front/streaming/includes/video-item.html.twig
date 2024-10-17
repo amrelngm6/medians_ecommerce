@@ -98,7 +98,7 @@
 $(function(){
     let pics = [ {% for i in [1,2,3,4,5,6,7,8,9,10] %} 'screenshot_{{i}}_{{media_item.picture_name|split('_')[2]}}', {% endfor %} ];
     let appended_{{media_item.media_id}} = false
-    jQuery(document).on('mouseenter', '.append-video-pictures', function(){
+    jQuery(document).on('mouseenter', '#video-pictures-{{media_item.media_id}}', function(){
         if (appended_{{media_item.media_id}})
             return;
 
