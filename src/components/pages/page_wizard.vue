@@ -252,7 +252,7 @@ export default
             const content = ref({});
             const collapsed = ref(false);
 
-            const templates = ref([{title:  translate('Default'), value:'layout'}, {title:  translate('Fullwidth'), value:''}]);
+            const templates = ref([{title:  translate('Default'), value:'subpage'}, {title:  translate('Fullwidth'), value:'fullwidth'}]);
 
             const tabs = ref([translate('General'), translate('SEO')]);
 
@@ -279,7 +279,7 @@ export default
 
             const save = () => {
                 // var params = new URLSearchParams();
-                let array = JSON.parse(JSON.stringify(activeItem.value));
+                // let array = JSON.parse(JSON.stringify(activeItem.value));
                 // let keys = Object.keys(array)
                 // let k, d, value = '';
                 // for (let i = 0; i < keys.length; i++) {
@@ -288,7 +288,8 @@ export default
                 //     params.append('params[' + k + ']', d)
                 // }
                 const finalObject = toRaw(activeItem.value);
-                console.log(finalObject)
+                finalObject.field = {class: activeItem.value.field.class}
+                
                 var params = new URLSearchParams();
                 params.append('params', JSON.stringify(finalObject))
 

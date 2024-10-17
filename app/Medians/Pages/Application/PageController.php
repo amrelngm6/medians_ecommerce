@@ -165,9 +165,8 @@ class PageController extends CustomController
         try {
 
         	$params['content'] = $params['content_langs'];
+        	$params['homepage'] = (isset($params['homepage']) && $params['homepage'] == 'true') ? 'on' : null;
 			
-			print_r($params);
-			return;
 			
             if ($this->repo->update($params))
             {

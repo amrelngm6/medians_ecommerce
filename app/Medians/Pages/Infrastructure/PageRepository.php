@@ -175,6 +175,10 @@ class PageRepository
 		CustomField::where('model_type', Page::class)->where('model_id', $page_id)->delete();
 		if ($data)
 		{
+			if (is_string($data))
+			{
+				$data = json_decode($data);
+			}
 			foreach ($data as $key => $value)
 			{
 				$fields = array();
