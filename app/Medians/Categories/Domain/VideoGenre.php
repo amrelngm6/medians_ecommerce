@@ -16,7 +16,7 @@ class VideoGenre extends Category
 	*/
 
 
-	public $appends = ['content_langs', 'lang_content','name', 'class_name','picture_name'];
+	public $appends = ['content_langs', 'lang_content','name' ,'prefix', 'class_name','picture_name'];
 
 	
 	public function getPictureNameAttribute() 
@@ -33,8 +33,13 @@ class VideoGenre extends Category
 
 	public function getNameAttribute()
 	{
-		return isset($this->lang_content->title) ? $this->lang_content->title : '';
+		return $this->lang_content->title ?? '';
 	} 
+
+	public function getLinkAttribute() : ?String
+	{
+		return $this->lang_content->prefix ?? '';
+	}
 
 	public function getContentLangsAttribute()
 	{

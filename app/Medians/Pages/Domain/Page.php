@@ -51,12 +51,17 @@ class Page extends CustomModel
 
 	public function getNameAttribute() : ?String
 	{
-		return isset($this->lang_content->title) ? $this->lang_content->title : $this->title;
+		return $this->lang_content->title ?? '';
+	}
+
+	public function getLinkAttribute() : ?String
+	{
+		return $this->lang_content->prefix ?? '';
 	}
 
 	public function getContentAttribute() : ?String
 	{
-		return isset($this->lang_content->content) ? $this->lang_content->content : $this->title;
+		return $this->lang_content->content ?? '';
 	}
 
 	public function getPhotoAttribute() : ?String
