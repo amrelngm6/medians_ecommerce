@@ -3535,7 +3535,7 @@ label .switch-slider {
   top: 110%;
 }
 
-.shadow {
+label .switch-shadow {
   background: #3A271C;
   -webkit-box-shadow: 5px 0 50px #3A271C;
   box-shadow: 5px 0 50px #3A271C;
