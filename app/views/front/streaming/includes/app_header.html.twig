@@ -46,13 +46,15 @@
                 </div>
 
 			</div>
-			<a href="/studio" class="ajax-load justify-start items-center gap-4 flex">
-				<img class="relative rounded-full w-8 h-8 min-w-10 min-h-10" src="/stream?thumbnail=50&image={{app.customer.picture_name}}"/>
-				<div class="lg:flex hidden text-primary flex-col justify-start items-start  ">
-					<span class="text-slate-400 text-opacity-70 text-xs font-normal ">{{lang.translate('Welcome')}}</span>
-					<div class="dark:text-rose-400 text-base font-normal">{{app.customer_auth.name}}</div>
-				</div>
-			</a>
+			<div class=" justify-start items-center gap-4 flex">
+                <img class="relative rounded-full w-8 h-8 min-w-10 min-h-10" src="/stream?thumbnail=50&image={{app.customer.picture_name}}"/>
+                <a href="/studio" class="ajax-load ">
+                    <div class="lg:flex hidden text-primary flex-col justify-start items-start  ">
+                        <span class="text-slate-400 text-opacity-70 text-xs font-normal ">{{lang.translate('Welcome')}}</span>
+                        <div class="dark:text-rose-400 text-base font-normal">{{app.customer_auth.name}}</div>
+                    </div>
+                </a>
+			</div>
 		</div>
 	{% else %}
 		<span x-on:click="jQuery('#login-popup').removeClass('hidden')" class="transition hover:opacity-60 cursor-pointer dark:text-white flex p-2 transition">
