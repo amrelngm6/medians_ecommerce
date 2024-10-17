@@ -43,6 +43,18 @@ class ContactForm
 				[ 'key'=> "show_message", 'title'=> translate('Show Message field') , 'help_text'=> translate('Show / hide Message field at the form'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 			],	
             
+			'info'=> [	
+				[ 'key'=> "address", 'title'=> translate('Contact Address') , 'help_text'=> translate('Your contact Address info to show at the side'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "email", 'title'=> translate('Contact Email') , 'help_text'=> translate('Your contact Email info to show at the side'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "phone", 'title'=> translate('Contact Phone') , 'help_text'=> translate('Your contact Phone field to show at the side'), 'fillable'=> true, 'column_type'=>'text' ],
+			],	
+            
+            
+			'map'=> [	
+				[ 'key'=> "show_map_iframe", 'title'=> translate('Show Name field') , 'help_text'=> translate('Show / hide Map IFrame at the page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "map_url", 'title'=> translate('Contact Phone') , 'help_text'=> translate('Your location URL for Google Map Iframe ( only IFrame src )'), 'fillable'=> true, 'column_type'=>'text' ],
+			],	
+            
 			
         ];
 	}
