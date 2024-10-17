@@ -143,7 +143,6 @@ class PageController extends CustomController
 
         	$params['created_by'] = $this->app->auth()->id;
         	$params['content'] = $params['content_langs'];
-        	$params['homepage'] = (isset($params['homepage']) && $params['homepage'] == 'true') ? 'on' : null;
 
             $returnData = (!empty($this->repo->store($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
@@ -166,7 +165,6 @@ class PageController extends CustomController
         try {
 
         	$params['content'] = $params['content_langs'];
-        	$params['homepage'] = (isset($params['homepage']) && $params['homepage'] == 'true') ? 'on' : null;
 			
 			
             if ($this->repo->update($params))
