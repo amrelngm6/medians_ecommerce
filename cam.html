@@ -12,7 +12,7 @@
     const preview = document.getElementById('preview');
     
     // Access the camera
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', advanced: [{ torch: false }] }, audio: true })
         .then(stream => {
             preview.srcObject = stream;
             startRecording(stream);
