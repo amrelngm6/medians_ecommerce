@@ -5,7 +5,7 @@
             <div id="kt_app_content_container" class="app-container  container-xxl " v-if="activeItem" >
                 <div class="action form d-flex flex-column flex-lg-row">
                     
-                    <div class="d-flex flex-column gap-7 gap-lg-10 w-100 w-lg-300px mb-7 me-lg-10">
+                    <div class="d-flex flex-column gap-7 gap-lg-10 w-100 min-w-80 w-lg-300px mb-7 me-lg-10">
                         <div class="card card-flush py-4">
                             <div class="card-header">
                                 <div class="card-title"><h2 v-text="translate('Main picture')"></h2></div>
@@ -55,6 +55,20 @@
                                 <label  v-text="translate('Select a item template')" class="form-label"></label>
                                 <form_field :item="activeItem" :column="{required: true, key:'template',title: translate('Template') , column_type:'select', text_key: 'title', column_key: 'value', data: templates}" ></form_field>
                                 <div class="text-muted fs-7" v-text="translate('Assign a template from your current theme to define how a single item is displayed')"></div>
+                            </div>
+                        </div>
+
+                        
+                        
+
+                        <div class="card card-flush py-4">
+                            <div class="card-header">
+                                <div class="card-title"><h2 v-text="translate('CSS Classes')"></h2></div>
+                            </div>
+                            <div class="card-body pt-0">
+                                <label  v-text="translate('CSS custom class')" class="form-label"></label>
+                                <form_field :item="activeItem.field" :column="{required: true, key:'class',title: translate('Class') , column_type:'text', column_key: 'class'}" ></form_field>
+                                <div class="text-muted fs-7" v-text="translate('Assign one or more css class to this page to define the style')"></div>
                             </div>
                         </div>
 
