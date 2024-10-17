@@ -182,6 +182,27 @@ async function handleStationPlayer(stationId, play = true)
  * Start Playing Audio list of items 
  * Handle the list and play the clicked index
  */
+jQuery(document).on('click', '.restart-player', function (i, el) {
+
+	
+	player = jQuery(this);
+	list = JSON.parse(player.attr('data-list'))
+	index = parseInt(player.attr('data-index'))
+	audioInfo = player.find('.slide__audio-player');
+	audioObject = list[index] ?? {};
+
+	if (audio.src != rootURL+audioInfo.attr('data-path'))
+	{
+		audio.src = audioInfo.attr('data-path');
+		audio.load()
+		playStyles()
+
+	} else {
+		(!audio.paused ) ?  pauseStyles() : playStyles()
+	}
+
+})
+
 jQuery(document).on('click', '.start-player', function (i, el) {
 	jQuery('#station-app-cover').addClass('hidden')
 	audio ? audio.pause() : null
@@ -424,20 +445,8 @@ function initAudioPlayer() {
 		const duration = audio.duration;
 	});
 
+
 	
-	play.on('click', () => {
-		console.log(jQuery(this).closest('.js-audio'))
-		if (audio.src != rootURL+audioInfo.attr('data-path'))
-		{
-			audio.src = audioInfo.attr('data-path');
-			audio.load()
-			playStyles()
-
-		} else {
-			(!audio.paused ) ?  pauseStyles() : playStyles()
-		}
-	});
-
 	circle.attr({
 		'stroke-dasharray': totalLength,
 	});
