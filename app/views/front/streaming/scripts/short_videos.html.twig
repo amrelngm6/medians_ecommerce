@@ -37,7 +37,7 @@ $(function(){
                     <img class="`+ (data.liked ? 'hidden' : '')+` w-5" x-on:click="jQuery('#heart-${data.id}').addClass('hidden'); jQuery('#unheart-${data.id}').removeClass('hidden'); jQuery('#likes-count-${data.id}').text(parseInt(jQuery('#likes-count-${data.id}').text()) + 1);" id="heart-${data.id}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
                     <img class="`+ (!data.liked ? 'hidden' : '')+` w-5" x-on:click="jQuery('#unheart-${data.id}').addClass('hidden'); jQuery('#heart-${data.id}').removeClass('hidden'); jQuery('#likes-count-${data.id}').text(parseInt(jQuery('#likes-count-${data.id}').text()) - 1);" id="unheart-${data.id}" src="/src/front_assets/svg/blank-heart.svg">
                     <span id="likes-count-${data.id}">${data.likes}</span>
-                    <span class="tooltiptext left-0  text-xs">{{lang.translate('Like')}}</span>
+                    <span class="tooltiptext right left-0  text-xs">{{lang.translate('Like')}}</span>
                 </a>
                 <span class="relative  cursor-pointer text-sm text-gray-100 flex gap-2 pt-10">
                     <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg" />
