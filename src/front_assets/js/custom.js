@@ -197,7 +197,8 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 		audio.load()
 		initAudioPlayer()
 		playStyles()
-		// player.removeClass('start-player')
+		player.removeClass('start-player')
+		player.addClass('restart-player')
 		jQuery('#player-previous').removeClass('hidden')
 		jQuery('#player-next').removeClass('hidden')
 
@@ -425,7 +426,7 @@ function initAudioPlayer() {
 
 	
 	play.on('click', () => {
-		
+		console.log(jQuery(this).closest('.js-audio'))
 		if (audio.src != rootURL+audioInfo.attr('data-path'))
 		{
 			audio.src = audioInfo.attr('data-path');
