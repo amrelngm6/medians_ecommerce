@@ -2568,7 +2568,6 @@ Shorts
 .shorts .user-profile {
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .shorts .user-avatar {
