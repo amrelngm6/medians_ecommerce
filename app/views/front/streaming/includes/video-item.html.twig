@@ -1,12 +1,11 @@
 
+
                                         <div class="package bg-white dark:bg-gray-800 show-child shadow-md overflow-hidden">
                                             <div class="img relative" style="background: url(/stream?thumbnail=300&dir=videos/screenshots&image={{media_item.picture_name}})">
                                                 <a href="/video/{{media_item.media_id}}" class="ajax-load block relative h-40 w-full "  >
                                                 
-                                                    <span class="image-item block w-full" id="video-pictures-{{item.media_id}}" >
-                                                        {% for i in [1,2,3,4,5,6,7,8,9,10] %}
-                                                        <img src="/stream?thumbnail=300&dir=videos/screenshots&image=screenshot_{{i}}_{{media_item.picture_name|split('_')[2]}}" alt="Video Screenshot">
-                                                        {% endfor %}
+                                                    <span  class="image-item block w-full append-video-pictures" id="video-pictures-{{media_item.media_id}}" >
+                                                        
                                                         <!-- Add more images if needed -->
                                                     </span>
                                                 </a>
@@ -62,7 +61,7 @@
 }
 
 /* Hover animation to cycle through images */
-.package:hover .image-item img {
+.package:hover .image-item > img {
   animation: image-switch 5s steps(1) infinite;
 }
 
@@ -92,3 +91,22 @@
 .image-item:hover img:nth-child(9) { animation-delay: 4s; }
 .image-item:hover img:nth-child(10) { animation-delay: 4.5s; }
                                             </style>
+
+<script>
+$(function(){
+    let pics = [ {% for i in [1,2,3,4,5,6,7,8,9,10] %} 'screenshot_{{i}}_{{media_item.picture_name|split('_')[2]}}', {% endfor %} ];
+        
+    jQuery(document).on('mouseenter', '.append-video-pictures', function(){
+        alert(1)
+        const fragment = document.createDocumentFragment();
+        pics.forEach(url => {
+            const img = document.createElement('img');
+            img.src = '/stream?thumbnail=300&dir=videos/screenshots&image='+url;
+            fragment.appendChild(img);
+        });
+        jQuery('#video-pictures-{{media_item.media_id}}').html(fragment);
+        jQuery(this).removeClass('.append-video-pictures');
+
+    })
+})
+</script>
