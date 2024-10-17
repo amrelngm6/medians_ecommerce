@@ -205,7 +205,7 @@ class MediaItemController extends CustomController
         
         // $this->checkSession($customer);
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_audio_limit'] ?? null;
         $params['author_id'] = $customer->customer_id ?? 0;
         $params['type'] = 'audio';
         $list = $this->repo->getWithFilter($params);
@@ -260,13 +260,13 @@ class MediaItemController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_audio_limit'] ?? null;
         $params['type'] = 'audio';
         $list = $this->repo->getWithFilter($params);
 
         
         $artistRepo = new \Medians\Customers\Infrastructure\CustomerRepository;
-        $query['limit'] = $settings['view_items_limit'] ?? null;
+        $query['limit'] = $settings['view_audio_limit'] ?? null;
         $artists = $artistRepo->getWithFilter($query);
         
 		try 
@@ -295,7 +295,7 @@ class MediaItemController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_audio_limit'] ?? null;
         $params['type'] = 'audio';
         $list = $this->repo->getWithFilter($params);
         
@@ -324,7 +324,7 @@ class MediaItemController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_audio_limit'] ?? null;
         $params['type'] = 'audio';
         $list = $this->repo->getWithFilter($params);
         
@@ -355,7 +355,7 @@ class MediaItemController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_audio_limit'] ?? null;
         $params['likes'] = true;
         $params['customer_id'] = $this->app->customer->customer_id ?? 0;
         $list = $this->repo->getWithFilter($params);
@@ -416,7 +416,7 @@ class MediaItemController extends CustomController
             if (empty($item->category_id))
     			throw new \Exception(translate('Page not found'), 1);
 
-            $params['limit'] = $settings['view_items_limit'] ?? null;
+            $params['limit'] = $settings['view_audio_limit'] ?? null;
             $params['genre'] = $item->category_id;
             $list = $this->repo->getWithFilter($params);
             
@@ -490,7 +490,7 @@ class MediaItemController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_audio_limit'] ?? null;
         $params['type'] = 'audio';
         $list = $this->repo->getWithFilter($params);
         
