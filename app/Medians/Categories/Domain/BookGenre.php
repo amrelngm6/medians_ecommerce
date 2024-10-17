@@ -15,7 +15,7 @@ class BookGenre extends Category
 	*/
 
 
-	public $appends = ['content_langs', 'lang_content','name' ,'prefix', 'class_name','picture_name'];
+	public $appends = ['content_langs', 'lang_content','name' ,'link', 'class_name','picture_name'];
 
 	
 	public function getPictureNameAttribute() 
