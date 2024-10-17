@@ -3034,6 +3034,9 @@ body .ui_box:hover {
 }
 
 @media (width < 650px) {
+    .shorts .video-title {
+        font-size: 18px;
+    }
     #movie-slider-container .content {
         & .title {
             font-size: 0.9rem;
