@@ -84,15 +84,15 @@ export default
 
     setup(props, {emit}) {
 
-        const changed = (model) => 
+        const changed = (newVak) => 
         {
-            emit('callback', model, props.column.key);
+            emit('callback', newVak, props.column.key);
         }
 
-        const multiple_changed = (model) => 
+        const multiple_changed = (newVak) => 
         {
             // emit('callback', model.map(e => e[props.column.key]), props.column.key );
-            emit('callback', model, props.column.key, true);
+            emit('callback', newVak, props.column.key, true);
 
         }
 

@@ -44,7 +44,7 @@ class Content extends CustomModel
 
 	public function getDataAttribute()
 	{
-		return $this->content;
+		// return $this->content;
 	}
 
 

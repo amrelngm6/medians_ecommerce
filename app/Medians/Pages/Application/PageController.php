@@ -160,12 +160,14 @@ class PageController extends CustomController
 	public function update()
 	{
 
-		$params = $this->app->params();
+		$params = (array) json_decode($this->app->request()->get('params'), true);
 
         try {
 
-        	$params['content'] = json_decode($this->app->request()->get('params')['content_langs'], true);
-
+        	$params['content'] = $params['content_langs'];
+			
+			print_r($params);
+			return;
 			
             if ($this->repo->update($params))
             {

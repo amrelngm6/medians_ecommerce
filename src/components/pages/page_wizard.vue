@@ -67,7 +67,7 @@
                             </div>
                             <div class="card-body pt-0">
                                 <label  v-text="translate('CSS custom class')" class="form-label"></label>
-                                <form_field :item="activeItem.field" :column="{required: true, key:'class',title: translate('Class') , column_type:'text', column_key: 'class'}" ></form_field>
+                                <form_field  @callback="(newVal) => {activeItem.field ? (activeItem.field['class'] = newVal) : (activeItem.field = newVal), console.log(newVal)}" :item="activeItem.field" :column="{required: false, key:'class',title: translate('Class') , column_type:'text', column_key: 'class'}" ></form_field>
                                 <div class="text-muted fs-7" v-text="translate('Assign one or more css class to this page to define the style')"></div>
                             </div>
                         </div>
@@ -200,7 +200,7 @@ import static_field from '@/components/includes/static_form_field.vue';
 import 'vue3-easy-data-table/dist/style.css';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 
-import { defineAsyncComponent, computed, ref } from 'vue';
+import { defineAsyncComponent, toRaw , ref } from 'vue';
 import { translate, handleGetRequest, handleRequest, deleteByKey, showAlert, handleAccess, getPositionAddress, findPlaces, getPlaceDetails } from '@/utils.vue';
 
 const SideFormCreate = defineAsyncComponent(() =>
@@ -278,17 +278,21 @@ export default
             }
 
             const save = () => {
-                var params = new URLSearchParams();
+                // var params = new URLSearchParams();
                 let array = JSON.parse(JSON.stringify(activeItem.value));
-                let keys = Object.keys(array)
-                let k, d, value = '';
-                for (let i = 0; i < keys.length; i++) {
-                    k = keys[i]
-                    d = (typeof array[k] === 'object' || typeof array[k] === 'array' )? JSON.stringify(array[k]) : array[k]
-                    params.append('params[' + k + ']', d)
-                }
+                // let keys = Object.keys(array)
+                // let k, d, value = '';
+                // for (let i = 0; i < keys.length; i++) {
+                //     k = keys[i]
+                //     d = (typeof array[k] === 'object' || typeof array[k] === 'array' )? JSON.stringify(array[k]) : array[k]
+                //     params.append('params[' + k + ']', d)
+                // }
+                const finalObject = toRaw(activeItem.value);
+                console.log(finalObject)
+                var params = new URLSearchParams();
+                params.append('params', JSON.stringify(finalObject))
 
-                let type = array.page_id > 0 ? 'update' : 'create';
+                let type = (activeItem.value.page_id && activeItem.value.page_id > 0 ) ? 'update' : 'create';
                 let model = content.value.model ?? 'Page';
                 params.append('type', model + '.' + type)
                 handleRequest(params, '/api/' + type).then(response => {
