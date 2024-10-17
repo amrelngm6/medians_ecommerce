@@ -52,7 +52,7 @@ class ContactForm
             
 			'map'=> [	
 				[ 'key'=> "show_map_iframe", 'title'=> translate('Show Name field') , 'help_text'=> translate('Show / hide Map IFrame at the page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
-				[ 'key'=> "map_url", 'title'=> translate('Contact Phone') , 'help_text'=> translate('Your location URL for Google Map Iframe ( only IFrame src )'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "map_url", 'title'=> translate('Map URL') , 'help_text'=> translate('Your location URL for Google Map Iframe ( only IFrame src )'), 'fillable'=> true, 'column_type'=>'text' ],
 			],	
             
 			
