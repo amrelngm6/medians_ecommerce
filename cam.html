@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Stream</title>
+</head>
+<body>
+
+<video id="preview" autoplay></video>
+<script>
+    const preview = document.getElementById('preview');
+    
+    // Access the camera
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+        .then(stream => {
+            preview.srcObject = stream;
+            startRecording(stream);
+        }).catch(error => console.error('Error accessing media devices.', error));
+    
+    let mediaRecorder;
+    
+    function startRecording(stream) {
+        mediaRecorder = new MediaRecorder(stream, {
+            mimeType: 'video/webm; codecs=vp9'
+        });
+        
+        // Start recording in 5-second intervals
+        mediaRecorder.ondataavailable = function (e) {
+            if (e.data.size > 0) {
+                // Send the video blob to the server
+                uploadChunk(e.data);
+            }
+        };
+        
+        mediaRecorder.start(5000);  // Record in 5-second chunks
+    }
+    
+    function uploadChunk(blob) {
+        const formData = new FormData();
+        formData.append('videoChunk', blob, 'video.webm');
+        
+        // Send to PHP backend
+        fetch('upload.php', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.text())
+          .then(data => console.log('Chunk uploaded:', data))
+          .catch(error => console.error('Upload error:', error));
+    }
+</script>
+</body>
+</html>
