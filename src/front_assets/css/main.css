@@ -324,6 +324,11 @@
       direction: rtl;
   }
   
+  
+  .ltr {
+      direction: ltr;
+  }
+  
   body {
       font-family: 'Poppins';
   }
