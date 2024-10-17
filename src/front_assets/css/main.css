@@ -320,14 +320,12 @@
   
   }
   
+  [lang="en"]  .en-rtl ,
   .rtl {
       direction: rtl;
   }
-  
-  [lang="en"]  .en-rtl {
-    direction: rtl;
-  }
-  .ltr {
+  [lang="ar"]  .en-rtl ,
+    .ltr {
       direction: ltr;
   }
   
