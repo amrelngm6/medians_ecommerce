@@ -134,13 +134,6 @@ $(function(){
         return videoItem;
     }
 
-    function loadVideos() {
-        videoData.forEach((data, i) => {
-            const videoElement = createVideoElement(data);
-            shortVideoContainer.appendChild(videoElement);
-        });
-    }
-
     function handleIntersection(entries) {
         entries.forEach((entry, i) => {
             if (entry.isIntersecting) {
@@ -155,6 +148,14 @@ $(function(){
                 const video = entry.target.querySelector('video');
                 video.pause();
             }
+        });
+    }
+
+
+    function loadVideos() {
+        videoData.forEach((data, i) => {
+            const videoElement = createVideoElement(data);
+            shortVideoContainer.appendChild(videoElement);
         });
     }
 

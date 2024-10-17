@@ -2000,7 +2000,7 @@ Tooltip
 .tooltiptext.right {
     padding: 5px 10px;
     border-radius: 6px;
-    top: 0;
+    top: 100%;
     left: 100%;
     margin: 0 auto;
     min-width: fit-content;
