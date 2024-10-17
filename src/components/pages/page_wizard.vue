@@ -288,7 +288,8 @@ export default
                 //     params.append('params[' + k + ']', d)
                 // }
                 const finalObject = toRaw(activeItem.value);
-                finalObject.field = {class: activeItem.value.field.class}
+                
+                finalObject.field = activeItem.value.field ? {class: activeItem.value.field.class} : {}
                 
                 var params = new URLSearchParams();
                 params.append('params', JSON.stringify(finalObject))
