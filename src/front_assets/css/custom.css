@@ -3803,3 +3803,37 @@ label .switch-shadow {
 .video-image-item:hover img:nth-child(10) {
     animation-delay: 4.5s;
 }
+
+
+
+
+
+
+
+
+
+before\:bg-gray-900:before {
+    content: var(--tw-content);
+    --tw-bg-opacity: 1;
+    background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+.before\:rounded-2xl:before {
+    content: var(--tw-content);
+    border-radius: 1rem;
+}
+.before\:-z-10:before {
+    content: var(--tw-content);
+    z-index: -10;
+}
+.before\:inset-0:before {
+    content: var(--tw-content);
+    inset: 0;
+}
+.before\:absolute:before {
+    content: var(--tw-content);
+    position: absolute;
+}
+.before\:pointer-events-none:before {
+    content: var(--tw-content);
+    pointer-events: none;
+}
