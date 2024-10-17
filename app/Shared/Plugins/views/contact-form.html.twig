@@ -1,4 +1,4 @@
- <section id="contact" class="bg-white dark:bg-gray-800 dark:bg-gray-900 py-16 flex items-center justify-center min-h-screen">
+ <section id="contact" class="bg-white dark:bg-gray-800 dark:border-gray-600 dark:bg-gray-900 py-16 flex items-center justify-center min-h-screen">
         <div class="container px-5 py-24 mx-auto gap-6  flex sm:flex-nowrap flex-wrap">
             <div class="lg:w-2/3 md:w-1/2 bg-blue-300 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative">
                 {% if hook.field.show_map_iframe %}
@@ -6,7 +6,7 @@
                     src="{{hook.field.map_url|raw}}"
                     style="filter: grayscale(0) contrast(1.2) opacity(0.6);"></iframe>
                 {% endif %}
-                <div class="bg-white dark:bg-gray-800 dark:bg-gray-900 relative h-48 flex flex-wrap py-6 rounded-2xl shadow-md">
+                <div class="bg-white dark:bg-gray-800 dark:border-gray-600 dark:bg-gray-900 relative h-48 flex flex-wrap py-6 rounded-2xl shadow-md">
                     <div class="lg:w-1/2 px-6">
                         {% if hook.field.address %}
                         <h2 class="font-bold text-gray-dark">{{lang.translate('ADDRESS')}}</h2>
@@ -34,29 +34,29 @@
                 {% if hook.field.show_name %}
                 <div class="relative mb-4">
                     <label for="name" class="leading-7 text-sm text-gray-dark">Name</label>
-                    <input type="text" id="name" name="params[name]" class="w-full bg-white dark:bg-gray-800 rounded-2xl border border-gray-txt  text-base outline-none text-gray-txt py-1 px-3 leading-8">
+                    <input type="text" id="name" name="params[name]" class="w-full bg-white dark:bg-gray-800 dark:border-gray-600 rounded-2xl border border-gray-txt  text-base outline-none text-gray-txt py-1 px-3 leading-8">
                 </div>
                 {% endif %}
                 {% if hook.field.show_phone %}
                 <div class="relative mb-4">
                     <label for="phone" class="leading-7 text-sm text-gray-dark">Phone</label>
-                    <input type="text" id="phone" name="params[phone]" class="w-full bg-white dark:bg-gray-800 rounded-2xl border border-gray-txt  text-base outline-none text-gray-txt py-1 px-3 leading-8">
+                    <input type="text" id="phone" name="params[phone]" class="w-full bg-white dark:bg-gray-800 dark:border-gray-600 rounded-2xl border border-gray-txt  text-base outline-none text-gray-txt py-1 px-3 leading-8">
                 </div>
                 {% endif %}
                 {% if hook.field.show_email %}
                 <div class="relative mb-4">
                     <label for="email" class="leading-7 text-sm text-gray-dark">Email</label>
-                    <input type="email" id="email" name="params[email]" class="w-full bg-white dark:bg-gray-800 rounded-2xl border border-gray-txt text-base outline-none text-gray-txt py-1 px-3 leading-8">
+                    <input type="email" id="email" name="params[email]" class="w-full bg-white dark:bg-gray-800 dark:border-gray-600 rounded-2xl border border-gray-txt text-base outline-none text-gray-txt py-1 px-3 leading-8">
                 </div>
                 {% endif %}
                 {% if hook.field.show_message %}
                 <div class="relative mb-4">
                     <label for="message" class="leading-7 text-sm text-gray-dark">Message</label>
-                    <textarea id="message" name="params[message]" class="w-full bg-white dark:bg-gray-800 rounded-2xl border border-gray-txt  h-32 text-base outline-none text-gray-txt py-1 px-3 resize-none"></textarea>
+                    <textarea id="message" name="params[message]" class="w-full bg-white dark:bg-gray-800 dark:border-gray-600 rounded-2xl border border-gray-txt  h-32 text-base outline-none text-gray-txt py-1 px-3 resize-none"></textarea>
                 </div>
                 {% endif %}
                 
-                <button type="submit" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white dark:bg-gray-800  dark:border-gray-700 dark:bg-gray-800 text-lg shadow">
+                <button type="submit" class="mx-auto mt-2 group relative h-12 w-48 overflow-hidden rounded-lg bg-white dark:bg-gray-800 dark:border-gray-600  dark:border-gray-700 dark:bg-gray-800 dark:border-gray-600 text-lg shadow">
                     <div class="absolute inset-0 w-3 bg-purple-800 transition-all duration-[250ms] ease-out group-hover:w-full"></div>
                     <span class="relative text-black group-hover:text-white">{{lang.translate('Send')}}</span>
                 </button>
