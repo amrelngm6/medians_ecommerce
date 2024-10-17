@@ -40,11 +40,11 @@ $(function(){
                 </a>
                 <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 pt-10">
                     <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg" />
-                    <span id="views-count-${data.id}">${data.views}</span>
+                    <span id="views-count-${data.id}">${data.viewscount}</span>
                 </span>
                 <span class=" cursor-pointer text-sm text-gray-100 flex gap-2 pt-10">
                     <img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg" />
-                    <span id="views-comments-${data.id}">${data.comments}</span>
+                    <span id="views-comments-${data.id}">${data.commentscount}</span>
                 </span>
             </div>
         `;
