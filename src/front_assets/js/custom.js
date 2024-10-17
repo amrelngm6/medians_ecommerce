@@ -197,7 +197,7 @@ jQuery(document).on('click', '.start-player', function (i, el) {
 		audio.load()
 		initAudioPlayer()
 		playStyles()
-		player.removeClass('start-player')
+		// player.removeClass('start-player')
 		jQuery('#player-previous').removeClass('hidden')
 		jQuery('#player-next').removeClass('hidden')
 
