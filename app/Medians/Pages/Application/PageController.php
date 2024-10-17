@@ -136,13 +136,14 @@ class PageController extends CustomController
 	public function store() 
 	{
 
-		$params = $this->app->params();
+		$params = (array) json_decode($this->app->request()->get('params'), true);
 
         try {	
 
 
         	$params['created_by'] = $this->app->auth()->id;
-        	$params['content'] = json_decode($this->app->request()->get('params')['content_langs'], true);
+        	$params['content'] = $params['content_langs'];
+        	$params['homepage'] = (isset($params['homepage']) && $params['homepage'] == 'true') ? 'on' : null;
 
             $returnData = (!empty($this->repo->store($params))) 
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
