@@ -1,7 +1,7 @@
 
 
-                                        <div class="package bg-white dark:bg-gray-800 show-child shadow-md overflow-hidden">
-                                            <div class="img relative" style="background: url(/stream?thumbnail=300&dir=videos/screenshots&image={{media_item.picture_name}})">
+                                        <div class="package bg-white dark:bg-gray-800 show-child shadow-md ">
+                                            <div class="img relative overflow-hidden" style="background: url(/stream?thumbnail=300&dir=videos/screenshots&image={{media_item.picture_name}})">
                                                 <a href="/video/{{media_item.media_id}}" class="ajax-load block relative h-40 w-full "  >
                                                 
                                                     <span  class="image-item block w-full append-video-pictures" id="video-pictures-{{media_item.media_id}}" >
@@ -16,10 +16,12 @@
                                             </div>
 
                                             <div class="text ">
-                                                <div class="relative">
-                                                    <a href="/video/{{media_item.media_id}}"  class="truncate  ajax-load h3 text-md pb-2 hover:text-rose-400 text-gray-400 dark:text-gray-100 hover:text-rose-500 relative">
-                                                        {{media_item.name}}
-                                                    </a>
+                                                <div class="relative ">
+                                                    <div class="overflow-hidden">
+                                                        <a href="/video/{{media_item.media_id}}"  class="truncate  ajax-load h3 text-md pb-2 hover:text-rose-400 text-gray-400 dark:text-gray-100 hover:text-rose-500 relative">
+                                                            {{media_item.name}}
+                                                        </a>
+                                                    </div>
                                                     <span title="{{media_item.name}}" class="tooltiptext wide">{{media_item.name}}</span>
                                                 </div>
                                                 <p class="p text-xs font-normal flex gap-4">
@@ -61,7 +63,7 @@
 }
 
 /* Hover animation to cycle through images */
-.package:hover .image-item > img {
+ .image-item:hover > img {
   animation: image-switch 5s steps(1) infinite;
 }
 
@@ -95,9 +97,11 @@
 <script>
 $(function(){
     let pics = [ {% for i in [1,2,3,4,5,6,7,8,9,10] %} 'screenshot_{{i}}_{{media_item.picture_name|split('_')[2]}}', {% endfor %} ];
-        
+    let appended_{{media_item.media_id}} = false
     jQuery(document).on('mouseenter', '.append-video-pictures', function(){
-        alert(1)
+        if (appended_{{media_item.media_id}})
+            return;
+
         const fragment = document.createDocumentFragment();
         pics.forEach(url => {
             const img = document.createElement('img');
@@ -105,8 +109,7 @@ $(function(){
             fragment.appendChild(img);
         });
         jQuery('#video-pictures-{{media_item.media_id}}').html(fragment);
-        jQuery(this).removeClass('.append-video-pictures');
-
+        appended_{{media_item.media_id}} = true
     })
 })
 </script>
