@@ -34,7 +34,7 @@ jQuery('#station-player-audio').on('change', function(event) {
  * 
  */
 jQuery(document).on('click', '.start-station', async function (i, el) {
-	console.log('call pause 4')
+
 	rand += 1
 	audio ? audio.pause() : null
 
@@ -167,7 +167,6 @@ async function handleStationPlayer(stationId, play = true)
 		jQuery('.station-stream-name').html("Offline")
 		jQuery('#station-track-name').html('UNKNOWN')
 		if (audio && !play) {
-			console.log('call pause')
 			audio.pause()
 		}
 	}
@@ -219,7 +218,6 @@ jQuery(document).on('click', '.start-single-player', function (i, el) {
 
 	if (audio) {
 		audio.pause()
-		console.log('call pause 1')
 	}
 
 	jQuery('#station-app-cover').addClass('hidden')
@@ -297,7 +295,6 @@ jQuery('#station-player-pause-button').on("click", async function(event) {
 		await loadStation(activeStation.station_id)
 		audio.play()
 	} else  {
-		console.log('call pause 2')
 		audio.pause();
 		if (stationInterval) {
 			clearInterval(stationInterval)
@@ -449,9 +446,7 @@ function initAudioPlayer() {
 		circle.attr({
 			'stroke-dasharray': totalLength,
 		});
-		console.log(circle)
-		console.log(audioInfo.attr('data-id'))
-		console.log(audioInfo)
+
 		let currentTime = audio.currentTime,
 		maxduration = audio.duration,
 		calc = totalLength - (currentTime / maxduration * totalLength);
