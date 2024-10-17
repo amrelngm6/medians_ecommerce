@@ -33,7 +33,7 @@ $(function(){
             </div>
             
             <div class="absolute block bottom-0  lg:left-4 right-10 py-10 lg:w-full flex gap-6" >
-                <a href="/front_api/create?type=Like.media&params[item_id]=${data.id}" data-params="{item_id: ${data.id} }" class="ajax-link cursor-pointer text-sm text-gray-100 flex gap-2 pt-10">
+                <a href="/front_api/create?type=Like.media&params[item_id]=${data.id}" data-params="{item_id: ${data.id} }" class="ajax-link cursor-pointer text-sm text-gray-100 flex gap-2 pt-0 lg:pt-10">
                     <img class="`+ (data.liked ? 'hidden' : '')+` w-5" x-on:click="jQuery('#heart-${data.id}').addClass('hidden'); jQuery('#unheart-${data.id}').removeClass('hidden'); jQuery('#likes-count-${data.id}').text(parseInt(jQuery('#likes-count-${data.id}').text()) + 1);" id="heart-${data.id}" src="/src/front_assets/svg/{{app.is_dark ? 'white-' : ''}}heart.svg">
                     <img class="`+ (!data.liked ? 'hidden' : '')+` w-5" x-on:click="jQuery('#unheart-${data.id}').addClass('hidden'); jQuery('#heart-${data.id}').removeClass('hidden'); jQuery('#likes-count-${data.id}').text(parseInt(jQuery('#likes-count-${data.id}').text()) - 1);" id="unheart-${data.id}" src="/src/front_assets/svg/blank-heart.svg">
                     <span id="likes-count-${data.id}">${data.likes}</span>
