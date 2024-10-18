@@ -412,7 +412,7 @@ RouteHandler::get('/logout', function ()
 RouteHandler::get('/switch-mode/(:all)', function ($mode) 
 {
     $set = setcookie('is_dark', ($mode == 'dark'), time() + (10 * 365 * 24 * 60 * 60), "/");
-    return true;
+    return $mode;
 });
 
 // Front API GET requests
