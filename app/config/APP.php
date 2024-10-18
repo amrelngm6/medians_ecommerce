@@ -85,7 +85,6 @@ class APP
 	 */
 	public function is_dark()
 	{
-		print_r($_SESSION['is_dark'] ?? '');
 		$setting = $this->SystemSetting();
 		$_SESSION['is_dark'] = $_SESSION['is_dark'] ?? (!empty($setting['is_dark']));
 		return !empty($_SESSION['is_dark']);
