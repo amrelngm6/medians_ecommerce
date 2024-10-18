@@ -26,20 +26,18 @@
                                     {% endif %}
                                     
                                     <hr class="opacity-50" />
-                                    <a  class="cursor-pointer flex w-full gap-2 py-2"   >
-                                        <img src="/src/front_assets/svg/play-next.svg" width="24" />
-                                        <span class="w-full text-xs pt-1">{{lang.translate('Add to Station')}}</span>
-                                    </a>
-                                    <hr class="opacity-50" />
-                                    <a  class="cursor-pointer flex w-full gap-2 py-2"    >
-                                        <img src="/src/front_assets/svg/download.svg" width="24" />
-                                        <span class="w-full text-xs pt-1">{{lang.translate('Download')}}</span>
-                                    </a>
-                                    <hr class="opacity-50" />
                                     <p  class="cursor-pointer flex w-full gap-2 py-2 ajax-load"  onclick="(function(){ return loadPage('/audio/'+jQuery('#activeItemId').val()), jQuery('#track-options-popup').addClass('hidden');  })(); return false; "  >
                                         <img src="/src/front_assets/svg/playlist.svg" width="24" />
                                         <span class="w-full text-xs pt-1">{{lang.translate('View')}}</span>
                                     </p>
+                                    <hr class="opacity-50" />
+						
+									<a  class="cursor-pointer text-gray-600 flex w-full gap-2 py-2"   x-on:click="(function(){ 
+										navigator.clipboard.writeText(embedIframeCode('{{app.CONF.url}}embed_audio/{{item.media_id}}'));
+										Swal.fire('{{lang.translate('Done')}}', '{{lang.translate('Iframe code copied to your clipboard')}}', 'success'); })()" >
+										<img src="/src/front_assets/svg/embed.svg" width="24" />
+										<span class="w-full text-xs pt-1">{{lang.translate('Embed Iframe')}}</span>
+									</a>
                                 </div>
                             </div>
                         </div>
