@@ -241,12 +241,15 @@ class CustomerController extends CustomController
      */
     public function artist($artist_name)
     {
+        
 		$settings = $this->app->SystemSetting();
 
-        $item = $this->repo->find($artist_name);
-        
 		try 
         {
+			$item = $this->repo->find($artist_name);
+	
+			$item->addView();
+
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item' => $item,

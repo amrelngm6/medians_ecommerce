@@ -10,6 +10,7 @@ use Medians\Playlists\Domain\Playlist;
 use Medians\Stations\Domain\Station;
 use Medians\Channels\Domain\Channel;
 use Medians\Likes\Domain\Like;
+use Medians\Views\Domain\View;
 
 
 class Customer extends CustomModel
@@ -88,7 +89,7 @@ class Customer extends CustomModel
 
 	public function limitedMedia($type = 'audio', $limit = 4) 
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withSum('views', 'times')->withCount('views')->whereIn('type', $type)->orderBy('created_at')->limit($limit)->orderBy('views_count', 'ASC')->get();	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withSum('views', 'times')->withCount('likes', 'comments')->whereIn('type', $type)->orderBy('created_at')->limit($limit)->orderBy('views_sum_times', 'ASC')->get();	
 	}
 
 	public function audiobooks()
@@ -137,10 +138,9 @@ class Customer extends CustomModel
 
 	public function viewscount() 
 	{
-		return $this->belongsToMany(View::class, MediaItem::class, 'author_id', 'item_id');	
+		return $this->morphMany(View::class , 'item')->sum('times');	
 	}
 	
-
 
 
     public function receiverAsCustomer()
