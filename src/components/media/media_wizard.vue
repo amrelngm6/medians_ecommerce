@@ -366,11 +366,11 @@
                                 </li>
                                 <li class="ps-1  text-gray-600 flex gap-2 dark:text-neutral-400">
                                     <span v-text="translate('File size')"></span>
-                                    <b v-text="file.field.filesize ?? activeItem.field.filesize"></b>
+                                    <b v-text="((file.field.filesize ?? activeItem.field.filesize) / 1000000) + translate('MB')"></b>
                                 </li>
                                 <li class="ps-1  text-gray-600 flex gap-2 dark:text-neutral-400">
                                     <span v-text="translate('Duration')"></span>
-                                    <b v-text="file.field.duration ?? activeItem.field.duration"></b>
+                                    <b v-text="toHHMMSS(file.field.duration ?? activeItem.field.duration)"></b>
                                 </li>
                                 <li class="ps-1  text-gray-600 dark:text-neutral-400">
                                     <span v-text="translate('Bitrate')"></span>
@@ -399,7 +399,7 @@ import 'vue3-easy-data-table/dist/style.css';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 
 import { defineAsyncComponent, ref } from 'vue';
-import { translate, getProgressWidth, customConfirm, formatCustomTime, toHHMMSS, deleteByKey } from '@/utils.vue';
+import { translate, getProgressWidth,  formatCustomTime, toHHMMSS, deleteByKey } from '@/utils.vue';
 
 const form_field = defineAsyncComponent(() =>
     import('@/components/includes/form_field.vue')
