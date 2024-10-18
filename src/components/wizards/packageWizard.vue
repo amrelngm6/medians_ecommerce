@@ -210,7 +210,6 @@ const form_field = defineAsyncComponent(() =>
 export default
     {
         components: {
-            'datatabble': Vue3EasyDataTable,
             SideFormCreate,
             SideFormUpdate,
             close_icon,
