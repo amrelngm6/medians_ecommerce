@@ -102,8 +102,8 @@
                                     <!--begin::User-->
                                     <div class="symbol symbol-35px symbol-circle"
                                         v-for="comment in activeItem.comments">
-                                        <img alt="Pic" v-if="activeItem.picture" :src="activeItem.picture">
-                                        <span v-if="!activeItem.picture" v-text="activeItem.name.substring(0, 1)"
+                                        <img alt="Pic" v-if="comment.customer.picture" :src="activeItem.picture">
+                                        <span v-if="!activeItem.customer.picture" v-text="activeItem.name.substring(0, 1)"
                                             class="symbol-label bg-info text-inverse-info fw-bold"></span>
                                     </div>
 
@@ -354,7 +354,7 @@
                         <div class="grow pb-8 text-lg group-last:pb-0">
                             <h3 class="mb-1 text-xs text-gray-600 dark:text-neutral-400" v-text="translate(file.type)"></h3>
 
-                            <a :href="file.path" class="font-semibold text-xl py-1 text-gray-800 dark:text-neutral-200"  v-text="file.title"></a>
+                            <a :href="file.path" class="font-semibold text-xl py-1 text-gray-800 dark:text-neutral-200"  v-text="file.title ?? activeItem.name"></a>
 
                             <p class="mt-1  text-gray-600 dark:text-neutral-400">
                             </p>
@@ -366,15 +366,15 @@
                                 </li>
                                 <li class="ps-1  text-gray-600 flex gap-2 dark:text-neutral-400">
                                     <span v-text="translate('File size')"></span>
-                                    <b v-text="((file.field.filesize ?? activeItem.field.filesize) / 1000000) + translate('MB')"></b>
+                                    <b v-text="Math.round((file.field.filesize ?? activeItem.field.filesize) / 1000000, 2) + translate('MB')"></b>
                                 </li>
                                 <li class="ps-1  text-gray-600 flex gap-2 dark:text-neutral-400">
                                     <span v-text="translate('Duration')"></span>
                                     <b v-text="toHHMMSS(file.field.duration ?? activeItem.field.duration)"></b>
                                 </li>
-                                <li class="ps-1  text-gray-600 dark:text-neutral-400">
+                                <li class="ps-1 flex gap-2 text-gray-600 dark:text-neutral-400">
                                     <span v-text="translate('Bitrate')"></span>
-                                    <b v-text="file.field.bitrate ?? activeItem.field.bitrate"></b>
+                                    <b v-text="Math.round(file.field.bitrate ?? activeItem.field.bitrate, 2)"></b>
                                 </li>
                             </ul>
                         </div>
