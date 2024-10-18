@@ -141,6 +141,24 @@
                                                 v-model="activeItem.audiobooks_uploads_limit">
                                         </div>
 
+                                        <div class="w-full mb-6 mx-auto row">
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
+                                                v-text="translate('Stations uploads limit')"></label>
+                                            <input :required="true" autocomplete="off" name="params[stations_uploads_limit]"
+                                                class="form-control form-control-solid"
+                                                :placeholder="translate('Max available Stations count for this package subscribers')" type="number"
+                                                v-model="activeItem.stations_uploads_limit">
+                                        </div>
+
+                                        <div class="w-full mb-6 mx-auto row">
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
+                                                v-text="translate('Channels uploads limit')"></label>
+                                            <input :required="true" autocomplete="off" name="params[channels_uploads_limit]"
+                                                class="form-control form-control-solid"
+                                                :placeholder="translate('Max available Channels count for this package subscribers')" type="number"
+                                                v-model="activeItem.channels_uploads_limit">
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
