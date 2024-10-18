@@ -123,7 +123,7 @@ class PackageController extends CustomController
 			$params['status'] = (isset($params['status']) && $params['status'] != 'false') ? 'on' : null;
 
            	$returnData =  ($this->repo->update($params))
-           	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>true)
+           	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0)
            	: array('error'=>'Not allowed');
 
 
