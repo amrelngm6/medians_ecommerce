@@ -360,6 +360,13 @@ class APP
 			]
 			),
 			
+			array( 'title'=>translate('Packages'),  'icon'=>'gift', 'link'=>'#plugins', 'superadmin'=> true, 'sub'=>
+			[
+				array('permission'=>'Packages.index', 'title'=>translate('Packages'),  'icon'=>'tool', 'link'=>'admin/packages', 'component'=>'packages'),
+				array('permission'=>'Hooks.index', 'title'=>translate('Hooks'),  'icon'=>'tool', 'link'=>'admin/hooks', 'component'=>'hooks'),
+			]
+			),
+			
 			array( 'title'=>translate('Management'),  'icon'=>'target', 'link'=>'#management', 'superadmin'=> true, 'sub'=>
 			[
 

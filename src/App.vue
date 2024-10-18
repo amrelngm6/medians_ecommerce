@@ -72,6 +72,8 @@ const pages = defineAsyncComponent(() => import('@/components/pages/index.vue') 
 
 const notifications_events = defineAsyncComponent(() => import('@/components/notifications_events.vue') );
 
+const packages = defineAsyncComponent(() => import('@/components/packages.vue') );
+
 
 
 
@@ -79,6 +81,7 @@ const notifications_events = defineAsyncComponent(() => import('@/components/not
 export default {
     name: 'app',
     components: {
+        packages,
         categories,
         data_table,
         SideMenu,
