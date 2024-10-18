@@ -209,6 +209,10 @@ class APIController extends CustomController
 					$return = (new Templates\Application\EmailTemplateController)->store();
 					break;
 					
+				case 'Package.create':
+					$return = (new Packages\Application\PackageController)->store();
+					break;
+					
 		
 			}
 
@@ -406,6 +410,10 @@ class APIController extends CustomController
 				$controller = new Templates\Application\EmailTemplateController; 
 				break;
 			
+			case 'Package.update':
+				$controller = new Packageس\Application\PackageController; 
+				break;
+			
 		}
 
 		return response(isset($controller) ? json_encode($controller->update()) : []);
@@ -541,8 +549,8 @@ class APIController extends CustomController
 					return response((new Categories\Application\VideoGenreController())->delete());
 					break;
 					
-				case 'Mood.delete':
-					return response((new Categories\Application\MoodController())->delete());
+				case 'Package.delete':
+					return response((new Packages\Application\PackageController())->delete());
 					break;
 			
 			}

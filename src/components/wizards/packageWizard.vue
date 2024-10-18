@@ -18,13 +18,13 @@
 
                                         <input name="params[package_id]" type="hidden">
 
-                                        <label class=" text-xl required font-semibold fs-6" :for="'input' + i"
+                                        <label class=" text-xl required font-semibold text-xl" :for="'input' + i"
                                             v-text="translate('Package name')"></label>
                                         <input :required="true" autocomplete="off" name="params[name]"
                                             class="form-control form-control-solid" :placeholder="translate('Package name')"
                                             v-model="activeItem.name">
                                         <hr class="block mt-6 my-2 opacity-10" />
-                                        <label class=" text-xl required font-semibold fs-6" :for="'input' + i"
+                                        <label class=" text-xl required font-semibold text-xl" :for="'input' + i"
                                             v-text="translate('Description')"></label>
                                         <textarea :required="true" autocomplete="off" name="params[description]"
                                             class="form-control form-control-solid" :placeholder="translate('Description')"
@@ -49,7 +49,7 @@
                                                 <div class=" font-semibold">
                                                     <h4 class="text-gray-900 fw-bold"
                                                         v-text="translate('Set Plan Cost')"></h4>
-                                                    <div class="fs-6 text-gray-700 "
+                                                    <div class="text-xl text-gray-700 "
                                                         v-text="translate('Set the cost of this package')">
                                                     </div>
                                                 </div>
@@ -59,30 +59,30 @@
                                         <hr class="opacity-10 my-4" />
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl required font-semibold fs-6"
+                                            <label class=" text-xl required font-semibold"
                                                 v-text="translate('Cost per month')"></label>
-                                            <input :required="true" autocomplete="off" name="params[double_cost_month]"
+                                            <input :required="true" autocomplete="off" name="params[cost_month]"
                                                 class="form-control form-control-solid"
-                                                :placeholder="translate('Double Trips cost per month')" type="number"
-                                                v-model="activeItem.double_cost_month">
+                                                :placeholder="translate('Cost per month')" type="number"
+                                                v-model="activeItem.cost_month">
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl required font-semibold fs-6"
+                                            <label class=" text-xl required font-semibold "
                                                 v-text="translate('Cost per quarter')"></label>
-                                            <input :required="true" autocomplete="off" name="params[double_cost_quarter]"
+                                            <input :required="true" autocomplete="off" name="params[cost_quarter]"
                                                 class="form-control form-control-solid"
-                                                :placeholder="translate('Double Trips cost per quarter')" type="number"
-                                                v-model="activeItem.double_cost_quarter">
+                                                :placeholder="translate('Cost per month')" type="number"
+                                                v-model="activeItem.cost_quarter">
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl required font-semibold fs-6"
+                                            <label class=" text-xl required font-semibold "
                                                 v-text="translate('Cost per year')"></label>
-                                            <input :required="true" autocomplete="off" name="params[double_cost_year]"
+                                            <input :required="true" autocomplete="off" name="params[cost_year]"
                                                 class="form-control form-control-solid"
-                                                :placeholder="translate('Double Trips cost per year')" type="number"
-                                                v-model="activeItem.double_cost_year">
+                                                :placeholder="translate('Cost per month')" type="number"
+                                                v-model="activeItem.cost_year">
                                         </div>
 
                                     </div>
@@ -105,7 +105,7 @@
                                                 <div class=" font-semibold">
                                                     <h4 class="text-gray-900 fw-bold"
                                                         v-text="translate('Set limit of features access')"></h4>
-                                                    <div class="fs-6 text-gray-700 "
+                                                    <div class="text-xl text-gray-700 "
                                                         v-text="translate('Set the access limit for all features and options related to this package')">
                                                     </div>
                                                 </div>
@@ -115,7 +115,7 @@
                                         <hr class="opacity-10 my-4" />
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl flex gap-4 required font-semibold fs-6">
+                                            <label class=" text-xl flex gap-4 required font-semibold text-xl">
                                                 <vue-feather type="music" class="w-6" />
                                                 <span class="font-semibold text-xl" v-text="translate('Audio uploads limit')"></span>
                                             </label>
@@ -126,7 +126,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl flex gap-4 required font-semibold fs-6">
+                                            <label class=" text-xl flex gap-4 required font-semibold text-xl">
                                                 <vue-feather type="camera" class="w-6" />
                                                 <span class="font-semibold text-xl" v-text="translate('Videos uploads limit')"></span>
                                             </label>
@@ -137,7 +137,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl flex gap-4 required font-semibold fs-6">
+                                            <label class=" text-xl flex gap-4 required font-semibold text-xl">
                                                 <vue-feather type="book-open" class="w-6" />
                                                 <span class="font-semibold text-xl" v-text="translate('Audiobooks uploads limit')"></span>
                                             </label>
@@ -148,7 +148,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl flex gap-4 required font-semibold fs-6">
+                                            <label class=" text-xl flex gap-4 required font-semibold text-xl">
                                                 <vue-feather type="radio" class="w-6" />
                                                 <span class="font-semibold text-xl" v-text="translate('Stations uploads limit')"></span>
                                             </label>
@@ -159,7 +159,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl flex gap-4 required font-semibold fs-6">
+                                            <label class=" text-xl flex gap-4 required font-semibold text-xl">
                                                 <vue-feather type="video" class="w-6" />
                                                 <span class="font-semibold text-xl" v-text="translate('Channels uploads limit')"></span>
                                             </label>
@@ -211,13 +211,13 @@
 
                                         <div class="card-header border-0">
                                             <div class="card-title">
-                                                <h2 v-text="translate('Double trips cost')"></h2>
+                                                <h2 v-text="translate('Subscription cost')"></h2>
                                             </div>
                                         </div>
 
                                         <div class="card-body py-0">
                                             <div class="fs-5 font-semibold text-gray-500 mb-4"
-                                                v-text="translate('Cost for Two trips daily Morning and Afternoon')"></div>
+                                                v-text="translate('Costs for Package subscription based on duration')"></div>
 
                                             <div class="d-flex flex-wrap flex-stack mb-5">
                                                 <div class="d-flex ">
@@ -225,8 +225,8 @@
                                                         class="border border-dashed border-gray-300 w-150px rounded my-3 p-4 me-6">
                                                         <span class="fs-1 fw-bold text-gray-800 lh-1">
                                                             <span v-text="currency.symbol"></span><span class="counted"
-                                                                v-text="activeItem.double_cost_month"></span>
-                                                            <span class="fs-6 font-semibold text-muted d-block lh-1 pt-2"
+                                                                v-text="activeItem.cost_month"></span>
+                                                            <span class="text-xl font-semibold text-muted d-block lh-1 pt-2"
                                                                 v-text="translate('/Month')"></span>
                                                         </span>
                                                     </div>
@@ -235,8 +235,8 @@
                                                         class="border border-dashed border-gray-300 w-150px rounded my-3 p-4 me-6">
                                                         <span class="fs-1 fw-bold text-gray-800 lh-1">
                                                             <span v-text="currency.symbol"></span><span class="counted"
-                                                                v-text="activeItem.double_cost_quarter"></span>
-                                                            <span class="fs-6 font-semibold text-muted d-block lh-1 pt-2"
+                                                                v-text="activeItem.cost_quarter"></span>
+                                                            <span class="text-xl font-semibold text-muted d-block lh-1 pt-2"
                                                                 v-text="translate('/Quarter')"></span>
                                                         </span>
 
@@ -246,8 +246,8 @@
                                                         class="border border-dashed border-gray-300 w-150px rounded my-3 p-4 me-6">
                                                         <span class="fs-1 fw-bold text-gray-800 lh-1">
                                                             <span v-text="currency.symbol"></span><span class="counted"
-                                                                v-text="activeItem.double_cost_year"></span>
-                                                            <span class="fs-6 font-semibold text-muted d-block lh-1 pt-2"
+                                                                v-text="activeItem.cost_year"></span>
+                                                            <span class="text-xl font-semibold text-muted d-block lh-1 pt-2"
                                                                 v-text="translate('/Year')"></span>
                                                         </span>
 
