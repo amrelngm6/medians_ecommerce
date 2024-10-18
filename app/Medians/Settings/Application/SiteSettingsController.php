@@ -62,7 +62,7 @@ class SiteSettingsController extends CustomController
 			'cookies'=> [	
 				[ 'key'=> "show_cookie_box", 'title'=> translate('Show Cookies Box'), 'help_text'=>translate('Show cookies box at the bottom of the page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "cookie_text", 'title'=> translate('Cookies text'), 'help_text'=> translate('Text of the cookies box'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "cookie_button", 'title'=> translate('Cookies button'), 'help_text'=> translate('Button Text of the cookies box'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "cookie_button", 'title'=> translate('Cookies button'), 'help_text'=> translate('Button Text of the cookies box'), 'fillable'=> true, 'required'=> false, 'column_type'=>'text' ],
 
 			],
 			'fonts'=> [	

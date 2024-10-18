@@ -92,6 +92,16 @@ class APP
 
 
 	/**
+	 * Is dark
+	 */
+	public function cookie_accepted()
+	{
+		$setting = $this->SystemSetting();
+		return $_COOKIE['cookie_accepted'] ?? false;
+	}
+
+
+	/**
 	 * Load Sysetem Settings
 	 */ 
 	public function SystemSetting()

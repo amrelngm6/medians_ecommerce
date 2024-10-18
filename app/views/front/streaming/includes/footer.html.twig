@@ -5,7 +5,7 @@
 {% include 'views/front/' ~ template ~ '/popups/share.html.twig' %}
 {% include 'views/front/' ~ template ~ '/popups/track-options.html.twig' %}
 
-
+{% if app.SystemSetting.show_cookie_box and app.cookie_accepted == false %}
 <div
 	id="cookies-with-stacked-buttons" class="fixed bottom-0 end-0 z-[60] sm:max-w-sm w-full mx-auto p-6">
 	<!-- Card -->
@@ -25,7 +25,7 @@
 			</button>
 		</div>
 		<p class="mt-2 text-sm text-gray-800 dark:text-gray-100">
-			{{app.SystemSetting.cookie_text}}
+			{{app.SystemSetting.cookie_text|raw}}
 		</p>
 		<div class="mt-5 mb-2 w-full flex gap-x-2">
 			<div class="grid w-full">
@@ -43,6 +43,7 @@
 	</div>
 	<!-- End Card -->
 </div>
+{% endif %}
 
 
 <div id="app-cover" class="hidden show-child">
