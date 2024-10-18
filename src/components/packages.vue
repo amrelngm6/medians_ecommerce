@@ -102,7 +102,7 @@ export default
         const url =  props.conf.url+props.path+'?load=json';
 
         const showEditSide = ref(false);
-        const activeItem = ref({});
+        const activeItem = ref({feature:{}});
         const content = ref({});
         const showWizard =  ref(false);
         
@@ -121,7 +121,7 @@ export default
 
         const addPackageWizard = () => 
         {
-            activeItem.value = {};
+            activeItem.value = {feature:{}};
             showWizard.value = true;
         }
         
