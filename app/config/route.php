@@ -355,10 +355,13 @@ if(!empty($app->auth()))
     RouteHandler::get('/admin/roles', Medians\Roles\Application\RoleController::class.'@index');
 
 
-    /** @return Business Languages */
+    /** @return Languages */
     RouteHandler::get('/admin/languages', Medians\Languages\Application\LanguageController::class.'@index');
 
-    /** @return Business Translations */
+    /** @return Packages */
+    RouteHandler::get('/admin/packages', Medians\Packages\Application\PackageController::class.'@index');
+
+    /** @return Translations */
     RouteHandler::get('/admin/translations', Medians\Languages\Application\TranslationController::class.'@index');
 
     /** @return Subscriber */
