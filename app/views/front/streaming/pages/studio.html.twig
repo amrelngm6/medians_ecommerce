@@ -267,7 +267,7 @@
 
 				<div class="flex align-items-sm-center mb-7 relative">
 					<div class="flex w-full align-items-center gap-2 ">
-						<img src="{{item.picture_name}}" class="w-10 h-10 rounded-full">
+						<img src="/stream?thumbnail=50&image={{item.picture_name}}" class="w-10 h-10 rounded-full">
 						<div class="w-full flex-grow-1 me-2 relative">
 							<span class="tooltiptext wide">{{item.name}}</span>
 							<div class="max-w-72 truncate">
@@ -309,7 +309,7 @@
 			{% for item in customer.limitedMedia(['video'], 5) %}
 
 				<div class="flex align-items-sm-center mb-7 relative">
-					<div class="flex w-full align-items-center gap-2"><img src="{{item.picture_name}}" class="w-10 h-10 rounded-full">
+					<div class="flex w-full align-items-center gap-2"><img src="/stream?thumbnail=50&dir=videos/screenshots&image={{item.picture_name}}" class="w-10 h-10 rounded-full">
 						<div class="w-full flex-grow-1 me-2 relative">
 							<span class="tooltiptext wide">{{item.name}}</span>
 							<div class="max-w-72 truncate">
@@ -350,7 +350,7 @@
 
 				<div class="flex align-items-sm-center mb-7 relative">
 					<div class="flex w-full align-items-center gap-2">
-						<img src="{{item.picture_name}}" class="w-10 h-10 rounded-full">
+						<img src="/stream?thumbnail=50&image={{item.picture_name}}" class="w-10 h-10 rounded-full">
 						<div class="w-full flex-grow-1 me-2 relative">
 							<span class="tooltiptext wide">{{item.name}}</span>
 							<div class="max-w-72 truncate">
