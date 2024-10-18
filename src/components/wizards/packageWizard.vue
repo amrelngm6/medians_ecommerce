@@ -18,13 +18,13 @@
 
                                         <input name="params[package_id]" type="hidden">
 
-                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6" :for="'input' + i"
+                                        <label class=" col-form-label required fw-semibold fs-6" :for="'input' + i"
                                             v-text="translate('Package name')"></label>
                                         <input :required="true" autocomplete="off" name="params[name]"
                                             class="form-control form-control-solid" :placeholder="translate('Package name')"
                                             v-model="activeItem.name">
                                         <hr class="block mt-6 my-2 opacity-10" />
-                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6" :for="'input' + i"
+                                        <label class=" col-form-label required fw-semibold fs-6" :for="'input' + i"
                                             v-text="translate('Description')"></label>
                                         <textarea :required="true" autocomplete="off" name="params[description]"
                                             class="form-control form-control-solid" :placeholder="translate('Description')"
@@ -59,7 +59,7 @@
                                         <hr class="opacity-10 my-4" />
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
+                                            <label class=" col-form-label required fw-semibold fs-6"
                                                 v-text="translate('Cost per month')"></label>
                                             <input :required="true" autocomplete="off" name="params[double_cost_month]"
                                                 class="form-control form-control-solid"
@@ -68,7 +68,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
+                                            <label class=" col-form-label required fw-semibold fs-6"
                                                 v-text="translate('Cost per quarter')"></label>
                                             <input :required="true" autocomplete="off" name="params[double_cost_quarter]"
                                                 class="form-control form-control-solid"
@@ -77,7 +77,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
+                                            <label class=" col-form-label required fw-semibold fs-6"
                                                 v-text="translate('Cost per year')"></label>
                                             <input :required="true" autocomplete="off" name="params[double_cost_year]"
                                                 class="form-control form-control-solid"
@@ -115,7 +115,7 @@
                                         <hr class="opacity-10 my-4" />
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label flex gap-4 required fw-semibold fs-6">
+                                            <label class=" col-form-label flex gap-4 required fw-semibold fs-6">
                                                 <vue-feather type="music" class="w-4" />
                                                 <span v-text="translate('Audio uploads limit')"></span>
                                             </label>
@@ -126,7 +126,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label flex gap-4 required fw-semibold fs-6">
+                                            <label class=" col-form-label flex gap-4 required fw-semibold fs-6">
                                                 <vue-feather type="camera" class="w-4" />
                                                 <span v-text="translate('Videos uploads limit')"></span>
                                             </label>
@@ -137,7 +137,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label flex gap-4 required fw-semibold fs-6">
+                                            <label class=" col-form-label flex gap-4 required fw-semibold fs-6">
                                                 <vue-feather type="book-open" class="w-4" />
                                                 <span v-text="translate('Audiobooks uploads limit')"></span>
                                             </label>
@@ -148,7 +148,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label flex gap-4 required fw-semibold fs-6">
+                                            <label class=" col-form-label flex gap-4 required fw-semibold fs-6">
                                                 <vue-feather type="radio" class="w-4" />
                                                 <span v-text="translate('Stations uploads limit')"></span>
                                             </label>
@@ -159,7 +159,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label flex gap-4 required fw-semibold fs-6">
+                                            <label class=" col-form-label flex gap-4 required fw-semibold fs-6">
                                                 <vue-feather type="video" class="w-4" />
                                                 <span v-text="translate('Channels uploads limit')"></span>
                                             </label>
