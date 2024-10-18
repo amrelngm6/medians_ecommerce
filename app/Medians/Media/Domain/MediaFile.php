@@ -4,6 +4,7 @@ namespace Medians\Media\Domain;
 
 use Shared\dbaser\CustomModel;
 
+use Medians\CustomFields\Domain\CustomField;
 
 class MediaFile extends CustomModel
 {
