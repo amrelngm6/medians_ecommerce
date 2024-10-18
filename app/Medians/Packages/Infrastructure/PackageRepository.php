@@ -59,6 +59,8 @@ class PackageRepository
 		// Return the Model object with the new data
     	$Object = Package::firstOrCreate($dataArray);
 
+    	isset($data['field']) ? $this->storeCustomFields($data['field'] ,$Object->package_id) : '';
+
     	return $Object;
 	}
 
@@ -73,6 +75,9 @@ class PackageRepository
 		
 		// Return the Model object with the new data
     	$Object->update( (array) $data);
+
+    	isset($data['field']) ? $this->storeCustomFields($data['field'] ,$Object->package_id) : '';
+
 
     	return $Object;
     } 
@@ -97,5 +102,29 @@ class PackageRepository
 		}
 	}
 
+
+	
+	/**
+	* Save file related items to database
+	*/
+	public function storeCustomFields($data, $id) 
+	{
+		CustomField::where('model_type', Package::class)->where('model_id', $id)->delete();
+		if ($data)
+		{
+			foreach ($data as $key => $value)
+			{
+				$fields = [];
+				$fields['model_type'] = Package::class;	
+				$fields['model_id'] = $id;	
+				$fields['code'] = $key;	
+				$fields['value'] = $value;
+
+				$Model = CustomField::create($fields);
+			}
+	
+			return $Model;		
+		}
+	}
 
 }

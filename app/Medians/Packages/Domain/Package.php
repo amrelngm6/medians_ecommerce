@@ -20,6 +20,7 @@ class Package extends CustomModel
 	protected $fillable = [
 		'name',
 		'description',
+    	'payment_type',
     	'status',
     	'created_by',
 	];

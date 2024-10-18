@@ -36,6 +36,7 @@ class PackageController extends CustomController
             [ 'value'=> "package_id", 'text'=> "#"],
             [ 'value'=> "name", 'text'=> translate('Package name'), 'sortable'=> true ],
             [ 'value'=> "description", 'text'=> translate('Description'), 'sortable'=> true ],
+            [ 'value'=> "payment_type", 'text'=> translate('Plan type'), 'sortable'=> true ],
             [ 'value'=> "status", 'text'=> translate('status'), 'sortable'=> true ],
             [ 'value'=> "edit", 'text'=> translate('edit')  ],
             [ 'value'=> "delete", 'text'=> translate('delete')  ],
@@ -52,17 +53,6 @@ class PackageController extends CustomController
 	{
 
 		return [
-            [ 'key'=> "package_id", 'title'=> "#", 'column_type'=>'hidden'],
-			[ 'key'=> "name", 'title'=> translate('package_name'), 'required'=>true, 'sortable'=> true, 'fillable'=> true, 'column_type'=>'text' ],
-			[ 'key'=> "description", 'title'=> translate('Desc'), 'required'=>true, 'sortable'=> true, 'fillable'=> true, 'column_type'=>'textarea' ],
-			[ 'key'=> "single_cost_month", 'title'=> translate('1-Trip Cost per-month'), 'required'=>true, 'sortable'=> true, 'fillable'=> true, 'column_type'=>'number' ],
-			[ 'key'=> "single_cost_quarter", 'title'=> translate('1-Trip Cost per-quarter'), 'required'=>true, 'sortable'=> true, 'fillable'=> true, 'column_type'=>'number' ],
-			[ 'key'=> "single_cost_year", 'title'=> translate('1-Trip Cost per-year'), 'required'=>true, 'sortable'=> true, 'fillable'=> true, 'column_type'=>'number' ],
-			[ 'key'=> "double_cost_month", 'title'=> translate('2-Trip Cost per-month'), 'required'=>true, 'sortable'=> true, 'fillable'=> true, 'column_type'=>'number' ],
-			[ 'key'=> "double_cost_quarter", 'title'=> translate('2-Trip Cost per-quarter'), 'required'=>true, 'sortable'=> true, 'fillable'=> true, 'column_type'=>'number' ],
-			[ 'key'=> "double_cost_year", 'title'=> translate('1-Trip Cost per-year'), 'required'=>true, 'sortable'=> true, 'fillable'=> true, 'column_type'=>'number' ],
-            [ 'key'=> "status", 'title'=> translate('Status'), 'sortable'=> true, 'fillable'=>true, 'column_type'=>'checkbox' ],
-
         ];
 	}
 
