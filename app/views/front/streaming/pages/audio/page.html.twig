@@ -24,21 +24,21 @@
                                     <div class="lg:w-auto px-2 w-full flex gap-4 lg:pt-0 pt-4">
                                         <span class="flex  gap-2 text-sm text-gray-100"><img src="/src/front_assets/svg/time{{app.is_dark ? '-white' : ''}}.svg" class="w-4" /> : <span x-text="convertToTime({{item.field.duration}})"></span> </span>
                                         <span x-on:click="jQuery('#show-box-path').val('audio/{{item.media_id}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/share.svg" class="w-5"></span>
-                                        <div class="cursor-pointer block w-full group flex gap-6 gap">
-                                            <a href="javascript:;" onclick="(function(){ 
-                                            navigator.clipboard.writeText(embedIframeCode('{{app.CONF.url}}embed_'+jQuery('#show-box-path').val()));
-                                            Swal.fire('{{lang.translate('Done')}}', '{{lang.translate('Iframe code copied to your clipboard')}}', 'success'); })()" id="copy-link" class="block pt-2 share-dialog_label__od1MX dark:group-hover:text-wynk-dark-subtitle-gray dark:text-wynk-dark-text-secondary">
-                                            <img src="/src/front_assets/svg/link.svg" width="40" />
-                                            </a>
-                                        </div>
                                         <a href="/media/edit/{{item.media_id}}" class="ajax-load cursor-pointer mx-2 text-sm text-gray-100"><img src="/src/front_assets/svg/edit.svg" class="w-5"></a>
                                         <div class="w-4 relative">
                                             <span class="active-parent cursor-pointer mx-2 text-gray-100 leading-3 text-xl font-extrabold" >...</span>
-                                            <div class="show-active active-child hidden z-20 rounded-2xl w-40 right-0 top-10 absolute bg-white dark:bg-gray-900 dark:text-gray-300 p-4 ">
+                                            <div class="show-active active-child hidden z-20 rounded-2xl w-40 right-0 top-0 absolute bg-white dark:bg-gray-900 dark:text-gray-300 p-4 ">
                                                 <a  class="cursor-pointer text-gray-600 flex w-full gap-2 py-2"   x-on:click="jQuery('#add-playlist-cover').css('background-image', 'url( /stream?thumbnail=800&image={{item.picture_name}} )'); jQuery('#add-playlist-media').val({{item.media_id}}); jQuery('#add-playlist-popup').removeClass('hidden')" >
                                                     <img src="/src/front_assets/svg/queue_list.svg" width="24" />
                                                     <span class="w-full text-xs pt-1">{{lang.translate('Add to playlist')}}</span>
                                                 </a>
+                                                <a  class="cursor-pointer text-gray-600 flex w-full gap-2 py-2"   x-on:click="(function(){ 
+                                                    navigator.clipboard.writeText(embedIframeCode('{{app.CONF.url}}embed_'+jQuery('#show-box-path').val()));
+                                                    Swal.fire('{{lang.translate('Done')}}', '{{lang.translate('Iframe code copied to your clipboard')}}', 'success'); })()" >
+                                                    <img src="/src/front_assets/svg/link.svg" width="24" />
+                                                    <span class="w-full text-xs pt-1">{{lang.translate('Embed Iframe')}}</span>
+                                                </a>
+                                                
                                             </div>
                                         </div>
                                     </div>
