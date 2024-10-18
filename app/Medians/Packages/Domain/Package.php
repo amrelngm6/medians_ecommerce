@@ -22,20 +22,23 @@ class Package extends CustomModel
 		'name',
 		'description',
     	'payment_type',
+    	'cost_month',
+    	'cost_quarter',
+    	'cost_year',
     	'status',
     	'created_by',
 	];
 
-    public $appends = ['field'];
+    public $appends = ['feature'];
 
-	public function getFieldAttribute()
+	public function getFeatureAttribute()
 	{
-		return !empty($this->custom_fields) ? array_column($this->custom_fields->toArray(), 'value', 'code') : [];
+		return !empty($this->features) ? array_column($this->features->toArray(), 'value', 'code') : [];
 	}
 
-	public function custom_fields()
+	public function features()
 	{
-		return $this->morphMany(CustomField::class, 'model');
+		return $this->hasMany(PackageFeature::class, 'package_id', 'package_id');
 	}
 
 

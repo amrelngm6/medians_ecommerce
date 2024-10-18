@@ -107,16 +107,15 @@ class PackageRepository
 	/**
 	* Save file related items to database
 	*/
-	public function storeCustomFields($data, $id) 
+	public function storeFeatures($data, $id) 
 	{
-		CustomField::where('model_type', Package::class)->where('model_id', $id)->delete();
+		PackageFeature::where('package_id', $id)->delete();
 		if ($data)
 		{
 			foreach ($data as $key => $value)
 			{
 				$fields = [];
-				$fields['model_type'] = Package::class;	
-				$fields['model_id'] = $id;	
+				$fields['package_id'] = $id;	
 				$fields['code'] = $key;	
 				$fields['value'] = $value;
 
