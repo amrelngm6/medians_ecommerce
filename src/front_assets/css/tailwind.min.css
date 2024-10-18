@@ -1545,6 +1545,10 @@ video {
   max-width: 72rem;
 }
 
+.max-w-80 {
+  max-width: 20rem;
+}
+
 .max-w-96 {
   max-width: 24rem;
 }
@@ -3857,10 +3861,6 @@ video {
 
   .sm\:w-auto {
     width: auto;
-  }
-
-  .sm\:min-w-\[220px\] {
-    min-width: 220px;
   }
 
   .sm\:grid-cols-2 {
