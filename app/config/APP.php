@@ -87,8 +87,8 @@ class APP
 	{
 		print_r($_SESSION['is_dark'] ?? '');
 		$setting = $this->SystemSetting();
-		$_COOKIE['is_dark'] = $_COOKIE['is_dark'] ?? (!empty($setting['is_dark']) ? true : false);
-		return !empty($_COOKIE['is_dark']);
+		$_SESSION['is_dark'] = $_SESSION['is_dark'] ?? (!empty($setting['is_dark']));
+		return !empty($_SESSION['is_dark']);
 	}
 
 
