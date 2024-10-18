@@ -41,6 +41,8 @@
 		{% endif %}
 
 		<div class="w-full flex gap-4 py-4">
+		
+                                               
 		</div>
 
 	</div>
@@ -70,6 +72,12 @@
 						<span x-on:click="jQuery('#show-box-path').val('video/{{itemId}}'); jQuery('#share-popup').removeClass('hidden')" class="cursor-pointer mx-2 text-sm text-gray-100 "><img src="/src/front_assets/svg/share{{app.is_dark ? '-white' : ''}}.svg" class="w-5"></span>
 						<span class="tooltiptext">{{lang.translate('Share')}}</span>
 					</span>
+					<a  class="cursor-pointer text-gray-600 flex w-full gap-2 py-2"   x-on:click="(function(){ 
+						navigator.clipboard.writeText(embedIframeCode('{{app.CONF.url}}embed_audio/{{item.media_id}}'));
+						Swal.fire('{{lang.translate('Done')}}', '{{lang.translate('Iframe code copied to your clipboard')}}', 'success'); })()" >
+						<img src="/src/front_assets/svg/link.svg" width="24" />
+						<span class="w-full text-xs pt-1">{{lang.translate('Embed Iframe')}}</span>
+					</a>
 
 					<span class="pt-1">{{item.created_at|date("M d, Y")}}</span>
 				</div>
