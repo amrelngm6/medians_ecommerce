@@ -105,6 +105,7 @@
                                         <img alt="Pic" v-if="comment && comment.customer" :src="comment.customer.picture">
                                         <span v-if="comment && activeItem.customer && !activeItem.customer.picture" v-text="activeItem.name.substring(0, 1)"
                                             class="symbol-label bg-info text-inverse-info fw-bold"></span>
+                                        <tooltip v-if="comment && comment.customer" :title="comment.customer.name" ></tooltip>
                                     </div>
 
                                     <!--begin::All users-->
@@ -406,6 +407,7 @@ const form_field = defineAsyncComponent(() =>
 );
 
 import field from '@/components/includes/Field.vue';
+import tooltip from '@/components/includes/tooltip.vue';
 
 export default
     {
@@ -413,6 +415,7 @@ export default
             'vue-medialibrary-field': field,
             'datatabble': Vue3EasyDataTable,
             close_icon,
+            tooltip,
             delete_icon,
             car_icon,
             route_icon,
