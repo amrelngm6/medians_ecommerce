@@ -224,6 +224,7 @@ class VideoController extends CustomController
         {
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
+                'item'=> ['name'=> translate('Top Videos'),  'description'=> translate('Watch our top videos')], 
                 'video_items' => $list,
                 'artists' => $artists,
                 'genres' => $this->categoryRepo->getVideoGenres(),
