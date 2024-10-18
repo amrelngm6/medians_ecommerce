@@ -3,6 +3,7 @@
 namespace Medians\Packages\Domain;
 
 use Shared\dbaser\CustomModel;
+use Medians\CustomFields\Domain\CustomField;
 
 /**
  * Subscription class database queries
