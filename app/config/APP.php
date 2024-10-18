@@ -85,7 +85,7 @@ class APP
 	 */
 	public function is_dark()
 	{
-		
+		print_r($_COOKIE);
 		$setting = $this->SystemSetting();
 		$_COOKIE['is_dark'] = $_COOKIE['is_dark'] ?? (!empty($setting['is_dark']) ? true : false);
 		return !empty($_COOKIE['is_dark']);
