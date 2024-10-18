@@ -405,6 +405,7 @@ class StationController extends CustomController
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
+                'item'=> ['name'=> translate('Top Stations'),  'description'=> translate('Listen to audio stations')], 
 				'items' => $list['items'],
 				'list' => $list,
                 'layout' => 'station/stations'
