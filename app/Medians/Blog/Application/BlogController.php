@@ -228,7 +228,7 @@ class BlogController extends CustomController
 
 		    // return  render('login', [
 			return render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
-		        'first_item' => $this->repo->getFeatured(1),
+                'item'=> ['name'=> translate('Top Articles'),  'description'=> translate('List of our latest articles')], 
 		        'list' => $list,
 		        'layout' => 'blog/blog',
 
