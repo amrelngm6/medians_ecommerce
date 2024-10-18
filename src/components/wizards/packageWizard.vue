@@ -43,6 +43,18 @@
                                 <div class="settings-form">
                                     <div class="max-w-xl mb-6 mx-auto">
 
+                                        <div class="mx-auto pt-10">
+
+                                            <label class=" flex gap-2 cursor-pointer">
+                                                <form_field class="flex-end" :item="activeItem"
+                                                    :column="{ key: 'payment_type', title: translate('Free plan'), column_type: 'checkbox', hide_text:true }">
+                                                </form_field>
+                                                <div class="pt-3">
+                                                    <span class="badge badge-light fw-bold me-auto px-4 py-3" v-text="!activeItem.payment_type ? 'Free' : 'Paid'"></span>
+                                                </div>
+                                            </label>
+                                        </div>
+
                                         <div
                                             class="notice d-flex bg-blue-100 rounded border-primary border border-dashed rounded-3 p-6">
                                             <div class="d-flex flex-stack flex-grow-1 ">
