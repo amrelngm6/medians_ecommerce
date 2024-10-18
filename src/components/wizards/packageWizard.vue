@@ -329,7 +329,7 @@ export default
         setup(props, { emit }) {
 
             const showEditSide = ref(false);
-            const activeItem = ref({});
+            const activeItem = ref({feature: {}});
             const activeTab = ref('Info');
             const content = ref({});
             const fillable = ref(['Info', 'Cost' ,'Features', 'Confirm']);
