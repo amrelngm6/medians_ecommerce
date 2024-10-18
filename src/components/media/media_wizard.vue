@@ -100,12 +100,11 @@
                                 <!--begin::Users-->
                                 <div class="symbol-group symbol-hover mb-3">
                                     <!--begin::User-->
-                                    <div class="symbol symbol-35px symbol-circle"
-                                        v-for="comment in activeItem.comments">
+                                    <div v-for="comment in activeItem.comments"  @mouseover="comment.showTip = true" @mouseleave="comment.showTip = false" class="symbol symbol-35px symbol-circle" >
                                         <img alt="Pic" v-if="comment && comment.customer" :src="comment.customer.picture">
                                         <span v-if="comment && activeItem.customer && !activeItem.customer.picture" v-text="activeItem.name.substring(0, 1)"
                                             class="symbol-label bg-info text-inverse-info fw-bold"></span>
-                                        <tooltip v-if="comment && comment.customer" :title="comment.customer.name" ></tooltip>
+                                        <tooltip v-if="comment.showTip && comment.customer" :title="comment.customer.name" ></tooltip>
                                     </div>
 
                                     <!--begin::All users-->
