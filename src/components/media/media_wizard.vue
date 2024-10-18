@@ -109,7 +109,8 @@
 
                                     <!--begin::All users-->
                                     <a href="#" class="symbol symbol-35px symbol-circle">
-                                        <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bold" v-text="activeItem.comments_count > 10 ? (activeItem.comments_count - 10) : '+'"></span>
+                                        <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bold"
+                                            v-text="activeItem.comments_count > 10 ? (activeItem.comments_count - 10) : '+'"></span>
                                     </a>
                                     <!--end::All users-->
                                 </div>
@@ -152,8 +153,10 @@
                             <!--begin::Row-->
                             <div class="row mb-7">
                                 <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Link')"></label>
-                                <div class="col-lg-8"><a target="_blank" :href="'/'+ activeItem.type+'/'+ activeItem.media_id" class="fw-bold fs-6 text-gray-800"
-                                        v-text="conf.url + activeItem.type+'/'+ activeItem.media_id"></a></div>
+                                <div class="col-lg-8"><a target="_blank"
+                                        :href="'/' + activeItem.type + '/' + activeItem.media_id"
+                                        class="fw-bold fs-6 text-gray-800"
+                                        v-text="conf.url + activeItem.type + '/' + activeItem.media_id"></a></div>
                             </div>
                             <!--end::Row-->
 
@@ -235,9 +238,11 @@
                                     <div class="d-flex flex-stack flex-grow-1 ">
                                         <!--begin::Content-->
                                         <div class=" fw-semibold">
-                                            <h4 class="text-gray-900 fw-bold" v-text="translate('Delete this media')"></h4>
+                                            <h4 class="text-gray-900 fw-bold" v-text="translate('Delete this media')">
+                                            </h4>
 
-                                            <div class="fs-6 text-gray-700 "> <span v-text="translate('Remove this media and its related files and all related information')"></span> 
+                                            <div class="fs-6 text-gray-700 "> <span
+                                                    v-text="translate('Remove this media and its related files and all related information')"></span>
                                             </div>
                                         </div>
                                         <!--end::Content-->
@@ -251,7 +256,8 @@
                                 <div class="form-check form-check-solid fv-row fv-plugins-icon-container">
                                     <input name="deactivate" class="form-check-input" type="checkbox" value="" required
                                         id="deactivate">
-                                    <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate" v-text="translate('I Confirm to delete this media')"></label>
+                                    <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate"
+                                        v-text="translate('I Confirm to delete this media')"></label>
                                     <div
                                         class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                                     </div>
@@ -262,7 +268,8 @@
 
                             <!--begin::Card footer-->
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                <a id="kt_account_deactivate_account_submit" @click="removeMedia" class="btn btn-danger fw-semibold" v-text="translate('Delete')"></a>
+                                <a id="kt_account_deactivate_account_submit" @click="removeMedia"
+                                    class="btn btn-danger fw-semibold" v-text="translate('Delete')"></a>
                             </div>
                             <!--end::Card footer-->
                         </form>
@@ -327,6 +334,58 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card w-full py-10">
+                <!-- Timeline -->
+                <div>
+                    <!-- Item -->
+                    <div class="group relative flex gap-x-5" v-for="file in activeItem.files">
+                        <!-- Icon -->
+                        <div
+                            class="relative group-last:after:hidden after:absolute after:top-8 after:bottom-2 after:start-3 after:w-px after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-neutral-700">
+                            <div class="relative z-10 size-6 flex justify-center items-center">
+                                <vue-feather type="video" v-if="activeItem.type == 'video'" class="shrink-0 size-6 text-gray-600 dark:text-neutral-400" />
+                                <vue-feather type="music" v-if="activeItem.type == 'audio'" class="shrink-0 size-6 text-gray-600 dark:text-neutral-400" />
+                                <vue-feather type="headphones" v-if="activeItem.type == 'audiobook'" class="shrink-0 size-6 text-gray-600 dark:text-neutral-400" />
+                            </div>
+                        </div>
+                        <!-- End Icon -->
+
+                        <!-- Right Content -->
+                        <div class="grow pb-8 group-last:pb-0">
+                            <h3 class="mb-1 text-xs text-gray-600 dark:text-neutral-400" v-text="translate(file.type)"></h3>
+
+                            <p class="font-semibold text-sm text-gray-800 dark:text-neutral-200"  v-text="file.title"></p>
+
+                            <p class="mt-1 text-sm text-gray-600 dark:text-neutral-400">
+                            </p>
+
+                            <ul class="ms-6 mt-3 space-y-1.5 flex gap-10">
+                                <li class="ps-1 text-sm text-gray-600 dark:text-neutral-400">
+                                    <span v-text="translate('Storage location')"></span>
+                                    <span v-text="file.storage"></span>
+                                </li>
+                                <li class="ps-1 text-sm text-gray-600 dark:text-neutral-400">
+                                    <span v-text="translate('File size')"></span>
+                                    <span v-text="file.field.filesize"></span>
+                                </li>
+                                <li class="ps-1 text-sm text-gray-600 dark:text-neutral-400">
+                                    <span v-text="translate('Duration')"></span>
+                                    <span v-text="file.field.duration"></span>
+                                </li>
+                                <li class="ps-1 text-sm text-gray-600 dark:text-neutral-400">
+                                    <span v-text="translate('Bitrate')"></span>
+                                    <span v-text="file.field.bitrate"></span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- End Right Content -->
+                    </div>
+                    <!-- End Item -->
+
+                </div>
+                <!-- End Timeline -->
+            </div>
         </div>
     </div>
 </template>
@@ -370,12 +429,13 @@ export default
             const activeTab = ref('Info');
             const content = ref({});
             const fillable = ref(['Info']);
-            const tabs = ref([translate('Info'), translate('Comments'), translate('Stats')]);
 
             if (props.item) {
                 activeItem.value = props.item
                 fields.value = props.item.translation ?? []
             }
+
+            const tabs = ref([translate('Info'), translate('Comments'), translate('Files'), translate('Stats')]);
 
             const back = () => {
                 emit('callback');
@@ -406,7 +466,7 @@ export default
                 showModal.value = true
             }
 
-            
+
 
             const activeField = ref(0);
             const showModal = ref(false);
