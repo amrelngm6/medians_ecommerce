@@ -117,7 +117,7 @@
                                         <div class="w-full mb-6 mx-auto row">
                                             <label class=" text-xl flex gap-4 required font-semibold fs-6">
                                                 <vue-feather type="music" class="w-6" />
-                                                <span v-text="translate('Audio uploads limit')"></span>
+                                                <span class="font-semibold text-xl" v-text="translate('Audio uploads limit')"></span>
                                             </label>
                                             <input :required="true" autocomplete="off" name="params[audio_uploads_limit]"
                                                 class="form-control form-control-solid"
@@ -128,7 +128,7 @@
                                         <div class="w-full mb-6 mx-auto row">
                                             <label class=" text-xl flex gap-4 required font-semibold fs-6">
                                                 <vue-feather type="camera" class="w-6" />
-                                                <span v-text="translate('Videos uploads limit')"></span>
+                                                <span class="font-semibold text-xl" v-text="translate('Videos uploads limit')"></span>
                                             </label>
                                             <input :required="true" autocomplete="off" name="params[videos_uploads_limit]"
                                                 class="form-control form-control-solid"
@@ -139,7 +139,7 @@
                                         <div class="w-full mb-6 mx-auto row">
                                             <label class=" text-xl flex gap-4 required font-semibold fs-6">
                                                 <vue-feather type="book-open" class="w-6" />
-                                                <span v-text="translate('Audiobooks uploads limit')"></span>
+                                                <span class="font-semibold text-xl" v-text="translate('Audiobooks uploads limit')"></span>
                                             </label>
                                             <input :required="true" autocomplete="off" name="params[audiobooks_uploads_limit]"
                                                 class="form-control form-control-solid"
@@ -150,7 +150,7 @@
                                         <div class="w-full mb-6 mx-auto row">
                                             <label class=" text-xl flex gap-4 required font-semibold fs-6">
                                                 <vue-feather type="radio" class="w-6" />
-                                                <span v-text="translate('Stations uploads limit')"></span>
+                                                <span class="font-semibold text-xl" v-text="translate('Stations uploads limit')"></span>
                                             </label>
                                             <input :required="true" autocomplete="off" name="params[stations_uploads_limit]"
                                                 class="form-control form-control-solid"
@@ -161,7 +161,7 @@
                                         <div class="w-full mb-6 mx-auto row">
                                             <label class=" text-xl flex gap-4 required font-semibold fs-6">
                                                 <vue-feather type="video" class="w-6" />
-                                                <span v-text="translate('Channels uploads limit')"></span>
+                                                <span class="font-semibold text-xl" v-text="translate('Channels uploads limit')"></span>
                                             </label>
                                             <input :required="true" autocomplete="off" name="params[channels_uploads_limit]"
                                                 class="form-control form-control-solid"
