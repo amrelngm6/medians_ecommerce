@@ -18,13 +18,13 @@
 
                                         <input name="params[package_id]" type="hidden">
 
-                                        <label class=" col-form-label required fw-semibold fs-6" :for="'input' + i"
+                                        <label class=" col-form-label required font-semibold fs-6" :for="'input' + i"
                                             v-text="translate('Package name')"></label>
                                         <input :required="true" autocomplete="off" name="params[name]"
                                             class="form-control form-control-solid" :placeholder="translate('Package name')"
                                             v-model="activeItem.name">
                                         <hr class="block mt-6 my-2 opacity-10" />
-                                        <label class=" col-form-label required fw-semibold fs-6" :for="'input' + i"
+                                        <label class=" col-form-label required font-semibold fs-6" :for="'input' + i"
                                             v-text="translate('Description')"></label>
                                         <textarea :required="true" autocomplete="off" name="params[description]"
                                             class="form-control form-control-solid" :placeholder="translate('Description')"
@@ -46,7 +46,7 @@
                                         <div
                                             class="notice d-flex bg-blue-100 rounded border-primary border border-dashed rounded-3 p-6">
                                             <div class="d-flex flex-stack flex-grow-1 ">
-                                                <div class=" fw-semibold">
+                                                <div class=" font-semibold">
                                                     <h4 class="text-gray-900 fw-bold"
                                                         v-text="translate('Set Plan Cost')"></h4>
                                                     <div class="fs-6 text-gray-700 "
@@ -59,7 +59,7 @@
                                         <hr class="opacity-10 my-4" />
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" col-form-label required fw-semibold fs-6"
+                                            <label class=" col-form-label required font-semibold fs-6"
                                                 v-text="translate('Cost per month')"></label>
                                             <input :required="true" autocomplete="off" name="params[double_cost_month]"
                                                 class="form-control form-control-solid"
@@ -68,7 +68,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" col-form-label required fw-semibold fs-6"
+                                            <label class=" col-form-label required font-semibold fs-6"
                                                 v-text="translate('Cost per quarter')"></label>
                                             <input :required="true" autocomplete="off" name="params[double_cost_quarter]"
                                                 class="form-control form-control-solid"
@@ -77,7 +77,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" col-form-label required fw-semibold fs-6"
+                                            <label class=" col-form-label required font-semibold fs-6"
                                                 v-text="translate('Cost per year')"></label>
                                             <input :required="true" autocomplete="off" name="params[double_cost_year]"
                                                 class="form-control form-control-solid"
@@ -102,7 +102,7 @@
                                         <div
                                             class="notice d-flex bg-blue-100 rounded border-primary border border-dashed rounded-3 p-6">
                                             <div class="d-flex flex-stack flex-grow-1 ">
-                                                <div class=" fw-semibold">
+                                                <div class=" font-semibold">
                                                     <h4 class="text-gray-900 fw-bold"
                                                         v-text="translate('Set limit of features access')"></h4>
                                                     <div class="fs-6 text-gray-700 "
@@ -115,7 +115,7 @@
                                         <hr class="opacity-10 my-4" />
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" col-form-label flex gap-4 required fw-semibold fs-6">
+                                            <label class=" col-form-label flex gap-4 required font-semibold fs-6">
                                                 <vue-feather type="music" class="w-6" />
                                                 <span v-text="translate('Audio uploads limit')"></span>
                                             </label>
@@ -126,7 +126,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" col-form-label flex gap-4 required fw-semibold fs-6">
+                                            <label class=" col-form-label flex gap-4 required font-semibold fs-6">
                                                 <vue-feather type="camera" class="w-6" />
                                                 <span v-text="translate('Videos uploads limit')"></span>
                                             </label>
@@ -137,7 +137,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" col-form-label flex gap-4 required fw-semibold fs-6">
+                                            <label class=" col-form-label flex gap-4 required font-semibold fs-6">
                                                 <vue-feather type="book-open" class="w-6" />
                                                 <span v-text="translate('Audiobooks uploads limit')"></span>
                                             </label>
@@ -148,7 +148,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" col-form-label flex gap-4 required fw-semibold fs-6">
+                                            <label class=" col-form-label flex gap-4 required font-semibold fs-6">
                                                 <vue-feather type="radio" class="w-6" />
                                                 <span v-text="translate('Stations uploads limit')"></span>
                                             </label>
@@ -159,7 +159,7 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class=" col-form-label flex gap-4 required fw-semibold fs-6">
+                                            <label class=" col-form-label flex gap-4 required font-semibold fs-6">
                                                 <vue-feather type="video" class="w-6" />
                                                 <span v-text="translate('Channels uploads limit')"></span>
                                             </label>
@@ -189,7 +189,7 @@
                                             </div>
 
                                             <div class="card-body py-0">
-                                                <div class="fs-5 fw-semibold text-gray-500 mb-4" v-text="activeItem.description"></div>
+                                                <div class="fs-5 font-semibold text-gray-500 mb-4" v-text="activeItem.description"></div>
                                             </div>
                                         </div>
                                         <div class="mx-auto pt-10">
@@ -216,7 +216,7 @@
                                         </div>
 
                                         <div class="card-body py-0">
-                                            <div class="fs-5 fw-semibold text-gray-500 mb-4"
+                                            <div class="fs-5 font-semibold text-gray-500 mb-4"
                                                 v-text="translate('Cost for Two trips daily Morning and Afternoon')"></div>
 
                                             <div class="d-flex flex-wrap flex-stack mb-5">
@@ -226,7 +226,7 @@
                                                         <span class="fs-1 fw-bold text-gray-800 lh-1">
                                                             <span v-text="currency.symbol"></span><span class="counted"
                                                                 v-text="activeItem.double_cost_month"></span>
-                                                            <span class="fs-6 fw-semibold text-muted d-block lh-1 pt-2"
+                                                            <span class="fs-6 font-semibold text-muted d-block lh-1 pt-2"
                                                                 v-text="translate('/Month')"></span>
                                                         </span>
                                                     </div>
@@ -236,7 +236,7 @@
                                                         <span class="fs-1 fw-bold text-gray-800 lh-1">
                                                             <span v-text="currency.symbol"></span><span class="counted"
                                                                 v-text="activeItem.double_cost_quarter"></span>
-                                                            <span class="fs-6 fw-semibold text-muted d-block lh-1 pt-2"
+                                                            <span class="fs-6 font-semibold text-muted d-block lh-1 pt-2"
                                                                 v-text="translate('/Quarter')"></span>
                                                         </span>
 
@@ -247,7 +247,7 @@
                                                         <span class="fs-1 fw-bold text-gray-800 lh-1">
                                                             <span v-text="currency.symbol"></span><span class="counted"
                                                                 v-text="activeItem.double_cost_year"></span>
-                                                            <span class="fs-6 fw-semibold text-muted d-block lh-1 pt-2"
+                                                            <span class="fs-6 font-semibold text-muted d-block lh-1 pt-2"
                                                                 v-text="translate('/Year')"></span>
                                                         </span>
 
