@@ -3,6 +3,7 @@
 namespace Medians\Packages\Infrastructure;
 
 use Medians\Packages\Domain\Package;
+use Medians\Packages\Domain\PackageFeature;
 
 
 /**
