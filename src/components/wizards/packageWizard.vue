@@ -43,9 +43,9 @@
                                 <div class="settings-form">
                                     <div class="max-w-xl mb-6 mx-auto">
 
-                                        <div class="mx-auto pt-10">
-
-                                            <label class=" flex gap-2 cursor-pointer">
+                                        <div class="mx-auto pb-10 flex gap-10">
+                                            <span class="text-xl font-semibold w-full" v-text="translate('Package type')"></span>
+                                            <label class="flex-none flex gap-2 cursor-pointer">
                                                 <form_field class="flex-end" :item="activeItem"
                                                     :column="{ key: 'payment_type', title: translate('Free plan'), column_type: 'checkbox', hide_text:true }">
                                                 </form_field>
