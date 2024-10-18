@@ -206,7 +206,9 @@ function playVideo(myVideo, autoPlay = true)
 		jQuery(`#${myVideo.dataset.container} .pause-video`).hide().parent().find('.play-video').fadeIn(200)
 		jQuery('#channelContainer .pause-channel').hide().parent().find('.play-channel').fadeIn(200)
 		jQuery('#video-overlay').fadeIn(200)
-		myVideo.pause()
+		if (myVideo)
+			myVideo.pause()
+		
 		jQuery('#channelContainer').css('z-index',  0)
 	} 	
 	jQuery('#video-duration-page').html(myVideo.duration > 0 ? convertToTime(myVideo.duration) : '--')
