@@ -33,7 +33,7 @@
                                                     <span class="w-full text-xs pt-1">{{lang.translate('Add to playlist')}}</span>
                                                 </a>
                                                 <a  class="cursor-pointer text-gray-600 flex w-full gap-2 py-2"   x-on:click="(function(){ 
-                                                    navigator.clipboard.writeText(embedIframeCode('{{app.CONF.url}}embed_'+jQuery('#show-box-path').val()));
+                                                    navigator.clipboard.writeText(embedIframeCode('{{app.CONF.url}}embed_audio/{{item.media_id}}'));
                                                     Swal.fire('{{lang.translate('Done')}}', '{{lang.translate('Iframe code copied to your clipboard')}}', 'success'); })()" >
                                                     <img src="/src/front_assets/svg/link.svg" width="24" />
                                                     <span class="w-full text-xs pt-1">{{lang.translate('Embed Iframe')}}</span>
