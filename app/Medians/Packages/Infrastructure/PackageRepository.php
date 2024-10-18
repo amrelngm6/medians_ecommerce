@@ -59,7 +59,7 @@ class PackageRepository
 		// Return the Model object with the new data
     	$Object = Package::firstOrCreate($dataArray);
 
-    	isset($data['field']) ? $this->storeCustomFields($data['field'] ,$Object->package_id) : '';
+    	isset($data['feature']) ? $this->storeFeatures($data['feature'] ,$Object->package_id) : '';
 
     	return $Object;
 	}
@@ -76,7 +76,7 @@ class PackageRepository
 		// Return the Model object with the new data
     	$Object->update( (array) $data);
 
-    	isset($data['field']) ? $this->storeCustomFields($data['field'] ,$Object->package_id) : '';
+    	isset($data['feature']) ? $this->storeFeatures($data['feature'] ,$Object->package_id) : '';
 
 
     	return $Object;
