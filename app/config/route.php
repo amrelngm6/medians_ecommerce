@@ -416,6 +416,12 @@ RouteHandler::get('/switch-mode/(:all)', function ($mode)
     return $_SESSION['is_dark'];
 });
 
+RouteHandler::get('/accept-cookie', function () 
+{
+    setcookie('cookie_accepted', 1, time() + (10 * 365 * 24 * 60 * 60), "/");
+    return;
+});
+
 // Front API GET requests
 RouteHandler::get('/front_api', \Medians\FrontAPIController::class.'@handle');
 RouteHandler::post('/front_api', \Medians\FrontAPIController::class.'@handle');

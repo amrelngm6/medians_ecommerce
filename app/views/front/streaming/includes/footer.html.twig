@@ -29,7 +29,7 @@
 		</p>
 		<div class="mt-5 mb-2 w-full flex gap-x-2">
 			<div class="grid w-full">
-				<button type="button" class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+				<button onclick="(function(){ return fetch('/accept-cookie'); })()" type="button"  class="py-2 px-3 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
 					{{app.SystemSetting.cookie_button}}
 				</button>
 			</div>
@@ -48,7 +48,7 @@
 
 <div id="app-cover" class="hidden show-child">
 	<div id="player">
-		<span onclick="(function(){ return jQuery('#app-cover').addClass('hidden')})()" class=" absolute bottom-4 ml-2 cursor-pointer z-10"><img src="/src/front_assets/svg/close.svg" class="w-4"/></span>
+		<span  onclick="(function(){ return jQuery('#app-cover').addClass('hidden')})()" class=" absolute bottom-4 ml-2 cursor-pointer z-10"><img src="/src/front_assets/svg/close.svg" class="w-4"/></span>
 
 		<div id="player-track" class="active dark:text-gray-100">
 			<div id="album-name" class="truncate"></div>
