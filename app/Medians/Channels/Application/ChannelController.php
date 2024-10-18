@@ -413,6 +413,7 @@ class ChannelController extends CustomController
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
+                'item'=> ['name'=> translate('Top Channels'),  'description'=> translate('Watch our top Channels')], 
 				'items' => $list['items'],
 				'list' => $list,
                 'layout' => 'channel/channels'
