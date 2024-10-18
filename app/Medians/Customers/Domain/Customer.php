@@ -86,20 +86,27 @@ class Customer extends CustomModel
 		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->selectRaw("type, DATE_FORMAT(created_at, '%b %d') as label, COUNT(*) as y")->having('y', '>', 0)->where('type', $type)->orderBy('created_at')->groupBy('label')->limit($limit)->get();	
 	}
 
-	public function audiobooks() 
+	public function limitedMedia($type = 'audio', $limit = 4) 
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audiobook')->orderBy('media_id', 'DESC');	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->where('type', $type)->orderBy('created_at')->limit($limit)->get();	
 	}
 
-	public function videos() 
+	public function audiobooks($limit = null) 
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'video')->orderBy('media_id', 'DESC');	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audiobook')->limit($limit)->orderBy('media_id', 'DESC');	
 	}
 
-	public function audio_items() 
+	public function videos($limit = null) 
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audio')->orderBy('media_id', 'DESC');	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'video')->limit($limit)->orderBy('media_id', 'DESC');	
 	}
+
+	public function audio_items($limit = null) 
+	{
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audio')->limit($limit)->orderBy('media_id', 'DESC');	
+	}
+
+
 
 	public function playlists() 
 	{

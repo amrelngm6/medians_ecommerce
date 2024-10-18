@@ -1,6 +1,5 @@
-
 <div class="px-2 lg:flex gap-10 pt-10">
-    {% set customer = app.customer_auth %}
+	{% set customer = app.customer_auth %}
 	{% include 'views/front/' ~ template ~ '/includes/studio_sidemenu.html.twig' %}
 
 	<div class="text-primary">
@@ -16,7 +15,9 @@
 					<canvas id="myChart"></canvas>
 				</div>
 				<div class='drop bg-rose-800'>
-					<p> <a href="/upload" class="ajax-load" >{{lang.translate('Add New')}}</a> </p>
+					<p>
+						<a href="/upload" class="ajax-load">{{lang.translate('Add New')}}</a>
+					</p>
 					<div class='arrow'></div>
 				</div>
 			</div>
@@ -24,7 +25,7 @@
 				<div class='ui_box__inner p-10'>
 					<h2>{{lang.translate('Audiobooks')}}</h2>
 					<p>{{lang.translate('Stats of uploaded Audiobooks')}}</p>
-                    
+
 					<div class='stat text-6xl py-4'>
 						<span>{{customer.audiobooks|length}}</span>
 					</div>
@@ -32,7 +33,9 @@
 
 				</div>
 				<div class='drop bg-rose-800'>
-					<p> <a href="/upload/audiobook" class="ajax-load" >{{lang.translate('Add New')}}</a> </p>
+					<p>
+						<a href="/upload/audiobook" class="ajax-load">{{lang.translate('Add New')}}</a>
+					</p>
 					<div class='arrow'></div>
 				</div>
 			</div>
@@ -47,7 +50,9 @@
 
 				</div>
 				<div class='drop bg-rose-800'>
-					<p> <a href="/upload/video" class="ajax-load" >{{lang.translate('Add New')}}</a> </p>
+					<p>
+						<a href="/upload/video" class="ajax-load">{{lang.translate('Add New')}}</a>
+					</p>
 					<div class='arrow'></div>
 				</div>
 			</div>
@@ -59,8 +64,7 @@
 				<div class="ltablet:col-span-6 rounded-lg bg-white rounded-lg shadow-md col-span-12 lg:col-span-6">
 					<div class="nui-card nui-card-rounded-md nui-card-default h-full p-8"><!--[--><div class="flex h-full flex-col justify-between gap-y-6 sm:flex-row sm:gap-y-0">
 							<div class="flex flex-col">
-								<p
-									class="nui-paragraph nui-paragraph-sm nui-weight-normal nui-lead-normal text-muted-400 mb-4">
+								<p class="nui-paragraph nui-paragraph-sm nui-weight-normal nui-lead-normal text-muted-400 mb-4">
 									{{lang.translate('Welcome')}}
 								</p>
 								<h2 class="text-2xl text-muted-800 dark:text-muted-100">
@@ -76,12 +80,10 @@
 								</div>
 							</div>
 							<div class="flex flex-col">
-								<p
-									class="nui-paragraph nui-paragraph-sm nui-weight-normal nui-lead-normal text-muted-400 mb-4">
+								<p class="nui-paragraph nui-paragraph-sm nui-weight-normal nui-lead-normal text-muted-400 mb-4">
 									{{lang.translate('Total plays')}}
 								</p>
-								<h5
-									class="nui-heading nui-heading-2xl nui-weight-semibold nui-lead-normal mb-6">
+								<h5 class="nui-heading nui-heading-2xl nui-weight-semibold nui-lead-normal mb-6">
 									543.120
 									<!--]-->
 								</h5>
@@ -91,9 +93,9 @@
 											<g>
 												<defs>
 													<path id="LOGOSVGID_1_" d="M228.4,181.2c59.6,0,107.8,48.3,107.8,107.8c0,59.6-48.3,107.8-107.8,107.8">
-																																																								                                                                c-59.6,0-107.8-48.3-107.8-107.8C120.6,229.5,168.8,181.2,228.4,181.2 M228.4,78c-116.5,0-211,94.5-211,211
-																																																								                                                                c0,116.5,94.5,211,211,211c116.5,0,211-94.5,211-211c0-25.2-4.4-49.5-12.6-71.9c-5.2-14.4-16.9-24.2-32-26.9
-																																																								                                                                c-45.1-7.9-82-39.7-97.1-81.9c-5.2-14.5-16.8-24.3-31.9-27C253.7,79.2,241.2,78,228.4,78z"></path>
+														c-59.6,0-107.8-48.3-107.8-107.8C120.6,229.5,168.8,181.2,228.4,181.2 M228.4,78c-116.5,0-211,94.5-211,211
+																																																																						                                                                c0,116.5,94.5,211,211,211c116.5,0,211-94.5,211-211c0-25.2-4.4-49.5-12.6-71.9c-5.2-14.4-16.9-24.2-32-26.9
+																																																																						                                                                c-45.1-7.9-82-39.7-97.1-81.9c-5.2-14.5-16.8-24.3-31.9-27C253.7,79.2,241.2,78,228.4,78z"></path>
 												</defs>
 												<use xlink:href="#LOGOSVGID_1_" clip-rule="evenodd" fill-rule="evenodd" fill="currentColor" class="overflow-visible"></use>
 												<clipPath id="LOGOSVGID_2_">
@@ -104,7 +106,7 @@
 											<g>
 												<defs>
 													<path id="LOGOSVGID_3_" d="M416.8,0c36.3,0,65.8,29.5,65.8,65.8c0,36.3-29.5,65.8-65.8,65.8c-36.3,0-65.8-29.5-65.8-65.8
-																																																								                                                                C351,29.5,380.5,0,416.8,0"></path>
+																																																																						                                                                C351,29.5,380.5,0,416.8,0"></path>
 												</defs>
 												<use xlink:href="#LOGOSVGID_3_" clip-rule="evenodd" fill-rule="evenodd" fill="currentColor" class="overflow-visible"></use>
 												<clipPath id="LOGOSVGID_4_">
@@ -127,14 +129,15 @@
 									{{lang.translate('Video Editor')}}
 									<!--]-->
 								</h2>
-								<p
-									class="main_font text-gray-200 mb-6"> {{lang.translate('You can generate short video through the Video Editor with custom duration')}}
+								<p class="main_font text-gray-200 mb-6">
+									{{lang.translate('You can generate short video through the Video Editor with custom duration')}}
 								</p>
-                                <a href="/shorts/create" class="ajax-load w-48 dark:text-gray-300 text-gray-100 float-right inline-block px-6 py-2 rounded-2xl border transition hover:border-rose-600 border-rose-400">{{lang.translate('Create Short video')}} </a>
+								<a href="/shorts/create" class="ajax-load w-48 dark:text-gray-300 text-gray-100 float-right inline-block px-6 py-2 rounded-2xl border transition hover:border-rose-600 border-rose-400">{{lang.translate('Create Short video')}}
+								</a>
 							</div>
 							<div class="relative min-h-[180px] min-w-[160px] shrink-0 h-48">
 								<div class="absolute bottom-0 end-0 min-w-[250px] max-w-[250px]  sm:-end-16">
-									<img src="/uploads/img/editor.webp" />
+									<img src="/uploads/img/editor.webp"/>
 								</div>
 							</div>
 						</div><!--]--></div>
@@ -259,6 +262,139 @@
 									</svg><!--]--></button>
 							</div>
 						</div><!--]--></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="w-full lg:flex gap gap-6 pb-6">
+			<div class="card w-full card-xl-stretch mb-xl-8">
+				<div class="card-header align-items-center border-0 mt-4">
+					<h3 class="card-title align-items-start flex-column">
+						<span class="fw-bold text-gray-900">ملفات
+							                    صوتية</span>
+						<span class="text-muted mt-1 fw-semibold fs-7">Latest uploaded audio items</span>
+					</h3>
+
+				</div>
+				<div class="card-body pt-3">
+					<div class="d-flex align-items-sm-center mb-7">
+						<div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2"><img src="/uploads/images/AdobeStock_914901935-640w-66fb4482c12da.webp" class="w-10 h-10 rounded-full">
+							<div class="w-2/3 flex-grow-1 me-2">
+								<a href="/audio/48" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6">Thriller - Michel Jackson
+								</a>
+								<div class="flex w-full gap-4">
+									<span class="text-muted fw-semibold flex gap-4  pt-1">
+										<i class="vue-feather vue-feather--eye w-4" data-name="eye" data-tags="view,watch" data-type="eye">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye vue-feather__content">
+												<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+												<circle cx="12" cy="12" r="3"></circle>
+											</svg>
+										</i>
+										<span>8</span>
+									</span>
+									<span class="text-muted fw-semibold flex gap-4  pt-1">
+										<i class="vue-feather vue-feather--message-square w-4" data-name="message-square" data-tags="comment,chat" data-type="message-square">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square vue-feather__content">
+												<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+											</svg>
+										</i>
+										<span>2</span>
+									</span>
+									<span class="text-muted fw-semibold flex gap-4  pt-1">
+										<i class="vue-feather vue-feather--heart w-4" data-name="heart" data-tags="like,love,emotion" data-type="heart">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart vue-feather__content">
+												<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+											</svg>
+										</i>
+										<span>0</span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card w-full card-xl-stretch mb-xl-8">
+				<div class="card-header align-items-center border-0 mt-4">
+					<h3 class="card-title align-items-start flex-column">
+						<span class="fw-bold text-gray-900">Videos
+							                    items</span>
+						<span class="text-muted mt-1 fw-semibold fs-7">Latest uploaded videos items</span>
+					</h3>
+
+				</div>
+				<div class="card-body pt-3">
+					<div class="d-flex align-items-sm-center mb-7">
+						<div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2"><img src="/uploads/videos/screenshots/screenshot_4_9180a5fa217eaf8379089247021e8f45.jpg" class="w-10 h-10 rounded-full">
+							<div class="w-2/3 flex-grow-1 me-2">
+								<a href="/video/81" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6">Kol zanby</a>
+								<div class="flex w-full gap-4">
+									<span class="text-muted fw-semibold flex gap-4  pt-1">
+										<i class="vue-feather vue-feather--eye w-4" data-name="eye" data-tags="view,watch" data-type="eye">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye vue-feather__content">
+												<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+												<circle cx="12" cy="12" r="3"></circle>
+											</svg>
+										</i>
+										<span></span>
+									</span>
+									<span class="text-muted fw-semibold flex gap-4  pt-1">
+										<i class="vue-feather vue-feather--message-square w-4" data-name="message-square" data-tags="comment,chat" data-type="message-square">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square vue-feather__content">
+												<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+											</svg>
+										</i>
+										<span>0</span>
+									</span>
+									<span class="text-muted fw-semibold flex gap-4  pt-1">
+										<i class="vue-feather vue-feather--heart w-4" data-name="heart" data-tags="like,love,emotion" data-type="heart">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart vue-feather__content">
+												<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+											</svg>
+										</i>
+										<span>0</span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card w-full card-xl-stretch mb-xl-8">
+				<div class="card-header align-items-center border-0 mt-4">
+					<h3 class="card-title align-items-start flex-column">
+						<span class="fw-bold text-gray-900">{{lang.translate('Audiobooks items')}}</span>
+						<span class="text-muted mt-1 fw-semibold fs-7">{{lang.translate('Latest uploaded audiobooks items')}}</span>
+					</h3>
+				</div>
+				<div class="card-body pt-3">
+					{% for item in customer.limitedMedia('audio', 5) %}
+					
+					<div class="d-flex align-items-sm-center mb-7">
+						<div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2"><img src="{{item.picture_name}}" class="w-10 h-10 rounded-full">
+							<div class="w-2/3 flex-grow-1 me-2">
+								<a href="/audiobook/{{item.media_id}}" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6">{{item.name}}</a>
+								<div class="flex w-full gap-4">
+									<span class=" cursor-pointer text-sm flex gap-2 relative">
+										<span class="tooltiptext  text-xs">{{lang.translate('Likes')}}</span>
+										<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg"/>
+										<span class="pt-1" id="views-count">{{item.likescount()}}</span>
+									</span>
+									<span class=" cursor-pointer text-sm flex gap-2 relative">
+										<span class="tooltiptext  text-xs">{{lang.translate('Views')}}</span>
+										<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg"/>
+										<span class="pt-1" id="views-count">{{item.viewscount()}}</span>
+									</span>
+									<span class=" cursor-pointer text-sm flex gap-2 relative">
+										<span class="tooltiptext  text-xs">{{lang.translate('Comments')}}</span>
+										<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg"/>
+										<span class="pt-1" id="comments-">{{item.commentscount()}}</span>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
