@@ -366,15 +366,15 @@
                                 </li>
                                 <li class="ps-1  text-gray-600 flex gap-2 dark:text-neutral-400">
                                     <span v-text="translate('File size')"></span>
-                                    <b v-text="file.field.filesize"></b>
+                                    <b v-text="file.field.filesize ?? activeItem.field.filesize"></b>
                                 </li>
                                 <li class="ps-1  text-gray-600 flex gap-2 dark:text-neutral-400">
                                     <span v-text="translate('Duration')"></span>
-                                    <b v-text="file.field.duration"></b>
+                                    <b v-text="file.field.duration ?? activeItem.field.duration"></b>
                                 </li>
                                 <li class="ps-1  text-gray-600 dark:text-neutral-400">
                                     <span v-text="translate('Bitrate')"></span>
-                                    <b v-text="file.field.bitrate"></b>
+                                    <b v-text="file.field.bitrate ?? activeItem.field.bitrate"></b>
                                 </li>
                             </ul>
                         </div>
