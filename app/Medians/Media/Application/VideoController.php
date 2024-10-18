@@ -583,8 +583,9 @@ class VideoController extends CustomController
             if (isset($fileInfo['playtime_seconds']))
             {
                 $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-                $params['field']['bitrate'] = $fileInfo['bitrate'];
-                $params['field']['filesize'] = $fileInfo['filesize'];
+                $params['field']['bitrate'] = $fileInfo['bitrate'] ?? 0;
+                $params['field']['filesize'] = $fileInfo['filesize'] ?? 0;
+                $params['field']['bpm'] = $fileInfo['id3v2']['comments']['bpm'][0] ?? 0;
             }
 
             if (isset($fileInfo['tags']['id3v2']))
