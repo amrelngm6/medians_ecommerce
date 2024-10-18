@@ -1,5 +1,5 @@
                 <label >
-					<input onchange="(function(){ jQuery('html').toggleClass('dark'); fetch('switch-mode/'+(jQuery('html').hasClass('dark') ? 'dark' : 'light'))})()" class="switch-slider" {{app.is_dark ? 'checked' : ''}}  type="checkbox">
+					<input onchange="(function(){ jQuery('html').toggleClass('dark'); fetch('/switch-mode/'+(jQuery('html').hasClass('dark') ? 'dark' : 'light'))})()" class="switch-slider" {{app.is_dark ? 'checked' : ''}}  type="checkbox">
 					<div  class="darkswitch">
 						<div class="suns"></div>
 						<div class="moons">
