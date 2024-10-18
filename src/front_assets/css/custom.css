@@ -2472,6 +2472,10 @@ Multi-select
 
 
 
+.dark .stats-icons img
+{
+    filter: brightness(2);
+}
 
 /** 
 Shorts
@@ -2516,10 +2520,6 @@ Shorts
     }
 }
 
-.dark #video-page .stats-icons
-{
-    filter: brightness(2);
-}
 
 .shorts .video-item {
     position: relative;

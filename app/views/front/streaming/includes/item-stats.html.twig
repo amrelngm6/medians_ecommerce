@@ -1,5 +1,5 @@
             {% set liked = item.liked(customer.customer_id).count() %}
-            <div class="flex gap-4  ">
+            <div class="flex gap-4 stats-icons ">
 
                 <div class="text-sm flex gap-2 relative">
                     <a href="/front_api/create?type=Like.{{itemType}}&params[item_id]={{itemId}}" data-params="{item_id: {{itemId}} }" class="ajax-link cursor-pointer mx-2 text-sm  flex">
