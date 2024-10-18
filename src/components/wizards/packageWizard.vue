@@ -115,8 +115,10 @@
                                         <hr class="opacity-10 my-4" />
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
-                                                v-text="translate('Audio uploads limit')"></label>
+                                            <label class="col-lg-4 col-form-label flex gap-4 required fw-semibold fs-6">
+                                                <vue-feather type="music" class="w-4" />
+                                                <span v-text="translate('Audio uploads limit')"></span>
+                                            </label>
                                             <input :required="true" autocomplete="off" name="params[audio_uploads_limit]"
                                                 class="form-control form-control-solid"
                                                 :placeholder="translate('Max available Audio count for this package subscribers')" type="number"
@@ -124,8 +126,10 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
-                                                v-text="translate('Videos uploads limit')"></label>
+                                            <label class="col-lg-4 col-form-label flex gap-4 required fw-semibold fs-6">
+                                                <vue-feather type="camera" class="w-4" />
+                                                <span v-text="translate('Videos uploads limit')"></span>
+                                            </label>
                                             <input :required="true" autocomplete="off" name="params[videos_uploads_limit]"
                                                 class="form-control form-control-solid"
                                                 :placeholder="translate('Max available Videos count for this package subscribers')" type="number"
@@ -133,8 +137,10 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
-                                                v-text="translate('Audiobooks uploads limit')"></label>
+                                            <label class="col-lg-4 col-form-label flex gap-4 required fw-semibold fs-6">
+                                                <vue-feather type="book-open" class="w-4" />
+                                                <span v-text="translate('Audiobooks uploads limit')"></span>
+                                            </label>
                                             <input :required="true" autocomplete="off" name="params[audiobooks_uploads_limit]"
                                                 class="form-control form-control-solid"
                                                 :placeholder="translate('Max available Audiobooks count for this package subscribers')" type="number"
@@ -142,8 +148,10 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
-                                                v-text="translate('Stations uploads limit')"></label>
+                                            <label class="col-lg-4 col-form-label flex gap-4 required fw-semibold fs-6">
+                                                <vue-feather type="radio" class="w-4" />
+                                                <span v-text="translate('Stations uploads limit')"></span>
+                                            </label>
                                             <input :required="true" autocomplete="off" name="params[stations_uploads_limit]"
                                                 class="form-control form-control-solid"
                                                 :placeholder="translate('Max available Stations count for this package subscribers')" type="number"
@@ -151,8 +159,10 @@
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
-                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
-                                                v-text="translate('Channels uploads limit')"></label>
+                                            <label class="col-lg-4 col-form-label flex gap-4 required fw-semibold fs-6">
+                                                <vue-feather type="video" class="w-4" />
+                                                <span v-text="translate('Channels uploads limit')"></span>
+                                            </label>
                                             <input :required="true" autocomplete="off" name="params[channels_uploads_limit]"
                                                 class="form-control form-control-solid"
                                                 :placeholder="translate('Max available Channels count for this package subscribers')" type="number"
