@@ -411,7 +411,7 @@ class APIController extends CustomController
 				break;
 			
 			case 'Package.update':
-				$controller = new Packageس\Application\PackageController; 
+				$controller = new Packages\Application\PackageController; 
 				break;
 			
 		}
