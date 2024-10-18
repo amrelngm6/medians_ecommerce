@@ -199,6 +199,7 @@ class CustomerController extends CustomController
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
+                'item'=> ['name'=> translate('Top Artists'),  'description'=> translate('Follow our top Artists')], 
                 'channels' => $this->repo->get(),
                 'layout' => 'artist/artists'
             ], 'output'));
