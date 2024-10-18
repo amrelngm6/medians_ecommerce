@@ -354,7 +354,7 @@
                         <div class="grow pb-8 text-lg group-last:pb-0">
                             <h3 class="mb-1 text-xs text-gray-600 dark:text-neutral-400" v-text="translate(file.type)"></h3>
 
-                            <a :href="file.path" class="font-semibold text-xl py-1 text-gray-800 dark:text-neutral-200"  v-text="file.title ?? activeItem.name"></a>
+                            <a :href="file.path" class="font-semibold text-xl py-1 text-gray-800 dark:text-neutral-200"  v-text="file.title.length ? file.title : activeItem.name"></a>
 
                             <p class="mt-1  text-gray-600 dark:text-neutral-400">
                             </p>
