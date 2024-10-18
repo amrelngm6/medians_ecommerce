@@ -103,7 +103,7 @@
                                     <div class="symbol symbol-35px symbol-circle"
                                         v-for="comment in activeItem.comments">
                                         <img alt="Pic" v-if="comment && comment.customer" :src="comment.customer.picture">
-                                        <span v-if="comment && !activeItem.customer" v-text="activeItem.name.substring(0, 1)"
+                                        <span v-if="comment && activeItem.customer && !activeItem.customer.picture" v-text="activeItem.name.substring(0, 1)"
                                             class="symbol-label bg-info text-inverse-info fw-bold"></span>
                                     </div>
 
