@@ -45,10 +45,9 @@
 
                                         <div class="mx-auto pb-10 flex gap-10">
                                             <span class="text-xl font-semibold w-full" v-text="translate('Package type')"></span>
+                                            <input type="hidden" name="params[payment_type]" value="free" />
                                             <label class="flex-none flex gap-2 cursor-pointer">
-                                                <form_field class="flex-end" :item="activeItem"
-                                                    :column="{ key: 'payment_type', title: translate('Free plan'), column_type: 'checkbox', hide_text:true }">
-                                                </form_field>
+                                                <div class="py-4 flex gap gap-2 cursor-pointer"><span class="bg-red-400 mx-2 mt-1 bg-red-400 block h-4 relative rounded-full w-8" style="direction: ltr;"><a class="absolute bg-white block h-4 relative right-0 rounded-full w-4" style="left: 16px;"></a></span><!----><input type="checkbox" class="hidden" name="params[payment_type]" value=""><input type="checkbox" class="hidden" name="params[payment_type]" value="paid" :checked="activeItem.payment_type == 'paid'"></div>
                                                 <div class="pt-3">
                                                     <span class="badge badge-light fw-bold me-auto px-4 py-3" v-text="!activeItem.payment_type ? 'Free' : 'Paid'"></span>
                                                 </div>
