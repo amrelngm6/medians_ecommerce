@@ -2516,6 +2516,11 @@ Shorts
     }
 }
 
+.dark #video-page .stats-icons
+{
+    filter: brightness(2);
+}
+
 .shorts .video-item {
     position: relative;
     width: 100%;

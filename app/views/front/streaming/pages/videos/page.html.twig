@@ -1,4 +1,4 @@
-<div class=" w-full  lg:h-screen gradient-top-overlay min-h-40" style=" max-height: calc(100vh - 70px)">
+<div class=" w-full  lg:h-screen gradient-top-overlay min-h-40" id="video-page" style=" max-height: calc(100vh - 70px)">
 
 
 	<figure id="videoPageContainer" class="w-full  shadow-xl absolute top-0 left-0 ">
@@ -64,7 +64,7 @@
 
 				{% set itemId = item.media_id %}
 				{% set itemType = 'media' %}
-				<div class="flex-none pt-1">
+				<div class="flex-none pt-1 stats-icons">
 					{% include 'views/front/' ~ template ~ '/includes/item-stats.html.twig' %}
 				</div>
 				<div class="flex-none flex gap-4">
