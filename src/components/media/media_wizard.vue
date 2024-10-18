@@ -138,7 +138,7 @@
             </div>
 
 
-            <div v-if="activeTab == 'Info'">
+            <div v-if="activeTab == translate('Info')">
 
                 <div class=" card w-full py-10 shadow-sm">
                     <div class="w-full stepper stepper-links ">
@@ -280,8 +280,7 @@
 
             </div>
 
-
-            <div class=" card w-full py-10" v-if="activeTab == 'Comments'">
+            <div class=" card w-full py-10" v-if="activeTab == translate('Comments')">
                 <div class="w-full stepper stepper-links ">
                     <div class="card-header cursor-pointer">
                         <!--begin::Card title-->
@@ -335,7 +334,7 @@
                 </div>
             </div>
 
-            <div class="card w-full py-10">
+            <div class="card w-full p-10" v-if="activeTab == translate('Files')">
                 <!-- Timeline -->
                 <div>
                     <!-- Item -->
@@ -352,30 +351,30 @@
                         <!-- End Icon -->
 
                         <!-- Right Content -->
-                        <div class="grow pb-8 group-last:pb-0">
+                        <div class="grow pb-8 text-lg group-last:pb-0">
                             <h3 class="mb-1 text-xs text-gray-600 dark:text-neutral-400" v-text="translate(file.type)"></h3>
 
-                            <p class="font-semibold text-sm text-gray-800 dark:text-neutral-200"  v-text="file.title"></p>
+                            <a :href="file.path" class="font-semibold text-xl py-1 text-gray-800 dark:text-neutral-200"  v-text="file.title"></a>
 
-                            <p class="mt-1 text-sm text-gray-600 dark:text-neutral-400">
+                            <p class="mt-1  text-gray-600 dark:text-neutral-400">
                             </p>
 
-                            <ul class="ms-6 mt-3 space-y-1.5 flex gap-10">
-                                <li class="ps-1 text-sm text-gray-600 dark:text-neutral-400">
+                            <ul class="px-0 mt-3  flex gap-10">
+                                <li class="ps-1  text-gray-600 flex gap-2 dark:text-neutral-400">
                                     <span v-text="translate('Storage location')"></span>
-                                    <span v-text="file.storage"></span>
+                                    <b v-text="file.storage"></b>
                                 </li>
-                                <li class="ps-1 text-sm text-gray-600 dark:text-neutral-400">
+                                <li class="ps-1  text-gray-600 flex gap-2 dark:text-neutral-400">
                                     <span v-text="translate('File size')"></span>
-                                    <span v-text="file.field.filesize"></span>
+                                    <b v-text="file.field.filesize"></b>
                                 </li>
-                                <li class="ps-1 text-sm text-gray-600 dark:text-neutral-400">
+                                <li class="ps-1  text-gray-600 flex gap-2 dark:text-neutral-400">
                                     <span v-text="translate('Duration')"></span>
-                                    <span v-text="file.field.duration"></span>
+                                    <b v-text="file.field.duration"></b>
                                 </li>
-                                <li class="ps-1 text-sm text-gray-600 dark:text-neutral-400">
+                                <li class="ps-1  text-gray-600 dark:text-neutral-400">
                                     <span v-text="translate('Bitrate')"></span>
-                                    <span v-text="file.field.bitrate"></span>
+                                    <b v-text="file.field.bitrate"></b>
                                 </li>
                             </ul>
                         </div>
@@ -435,7 +434,7 @@ export default
                 fields.value = props.item.translation ?? []
             }
 
-            const tabs = ref([translate('Info'), translate('Comments'), translate('Files'), translate('Stats')]);
+            const tabs = ref([translate('Info'), translate('Files'), translate('Comments')]);
 
             const back = () => {
                 emit('callback');
