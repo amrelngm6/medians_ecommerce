@@ -94,8 +94,8 @@
 												<defs>
 													<path id="LOGOSVGID_1_" d="M228.4,181.2c59.6,0,107.8,48.3,107.8,107.8c0,59.6-48.3,107.8-107.8,107.8">
 														c-59.6,0-107.8-48.3-107.8-107.8C120.6,229.5,168.8,181.2,228.4,181.2 M228.4,78c-116.5,0-211,94.5-211,211
-																																																																																				                                                                c0,116.5,94.5,211,211,211c116.5,0,211-94.5,211-211c0-25.2-4.4-49.5-12.6-71.9c-5.2-14.4-16.9-24.2-32-26.9
-																																																																																				                                                                c-45.1-7.9-82-39.7-97.1-81.9c-5.2-14.5-16.8-24.3-31.9-27C253.7,79.2,241.2,78,228.4,78z"></path>
+																																																																																																		                                                                c0,116.5,94.5,211,211,211c116.5,0,211-94.5,211-211c0-25.2-4.4-49.5-12.6-71.9c-5.2-14.4-16.9-24.2-32-26.9
+																																																																																																		                                                                c-45.1-7.9-82-39.7-97.1-81.9c-5.2-14.5-16.8-24.3-31.9-27C253.7,79.2,241.2,78,228.4,78z"></path>
 												</defs>
 												<use xlink:href="#LOGOSVGID_1_" clip-rule="evenodd" fill-rule="evenodd" fill="currentColor" class="overflow-visible"></use>
 												<clipPath id="LOGOSVGID_2_">
@@ -106,7 +106,7 @@
 											<g>
 												<defs>
 													<path id="LOGOSVGID_3_" d="M416.8,0c36.3,0,65.8,29.5,65.8,65.8c0,36.3-29.5,65.8-65.8,65.8c-36.3,0-65.8-29.5-65.8-65.8
-																																																																																				                                                                C351,29.5,380.5,0,416.8,0"></path>
+																																																																																																		                                                                C351,29.5,380.5,0,416.8,0"></path>
 												</defs>
 												<use xlink:href="#LOGOSVGID_3_" clip-rule="evenodd" fill-rule="evenodd" fill="currentColor" class="overflow-visible"></use>
 												<clipPath id="LOGOSVGID_4_">
@@ -149,109 +149,107 @@
 </div>
 
 
-
-
 <!-- Card Section -->
-<div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-  <!-- Grid -->
-  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-    <!-- Card -->
-    <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-      <div class="p-4 md:p-5 flex gap-x-4">
-        <div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
-          <svg class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
+<div
+	class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+	<!-- Grid -->
+	<div
+		class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+		<!-- Card -->
+		<div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+			<div class="p-4 md:p-5 flex gap-x-4">
+				<div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
+					<svg class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+				</div>
 
-        <div class="grow">
-          <div class="flex items-center gap-x-2">
-            <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-              {{lang.translate('Profile visitors')}}
-            </p>
-          </div>
-          <div class="mt-1 flex items-center gap-x-2">
-            <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-				{{customer.viewscount()}}
-            </h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Card -->
+				<div class="grow">
+					<div class="flex items-center gap-x-2">
+						<p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+							{{lang.translate('Profile visitors')}}
+						</p>
+					</div>
+					<div class="mt-1 flex items-center gap-x-2">
+						<h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
+							{{customer.viewscount()}}
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Card -->
 
-    <!-- Card -->
-    <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-      <div class="p-4 md:p-5 flex gap-x-4">
-        <div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
-          <svg class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>
-        </div>
+		<!-- Card -->
+		<div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+			<div class="p-4 md:p-5 flex gap-x-4">
+				<div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
+					<svg class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>
+				</div>
 
-        <div class="grow">
-          <div class="flex items-center gap-x-2">
-            <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-              {{lang.translate('Media Likes')}}
-            </p>
-          </div>
-          <div class="mt-1 flex items-center gap-x-2">
-            <h3 class="text-xl font-medium text-gray-800 dark:text-neutral-200">
-				{{customer.limitedMedia(['audio', 'audiobook','video', 'short_video'], null).sum('likes_count')}}
-            </h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Card -->
+				<div class="grow">
+					<div class="flex items-center gap-x-2">
+						<p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+							{{lang.translate('Media Likes')}}
+						</p>
+					</div>
+					<div class="mt-1 flex items-center gap-x-2">
+						<h3 class="text-xl font-medium text-gray-800 dark:text-neutral-200">
+							{{customer.limitedMedia(['audio', 'audiobook','video', 'short_video'], null).sum('likes_count')}}
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Card -->
 
-    <!-- Card -->
-    <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-      <div class="p-4 md:p-5 flex gap-x-4">
-        <div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
-          <svg class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6"/><path d="m12 12 4 10 1.7-4.3L22 16Z"/></svg>
-        </div>
+		<!-- Card -->
+		<div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+			<div class="p-4 md:p-5 flex gap-x-4">
+				<div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
+					<svg class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h6"/><path d="m12 12 4 10 1.7-4.3L22 16Z"/></svg>
+				</div>
 
-        <div class="grow">
-          <div class="flex items-center gap-x-2">
-            <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-              {{lang.translate('Media Comments')}}
-            </p>
-          </div>
-          <div class="mt-1 flex items-center gap-x-2">
-            <h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
-				{{customer.limitedMedia(['audio', 'audiobook','video', 'short_video'], null).sum('comments_count')}}
-            </h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Card -->
+				<div class="grow">
+					<div class="flex items-center gap-x-2">
+						<p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+							{{lang.translate('Media Comments')}}
+						</p>
+					</div>
+					<div class="mt-1 flex items-center gap-x-2">
+						<h3 class="text-xl sm:text-2xl font-medium text-gray-800 dark:text-neutral-200">
+							{{customer.limitedMedia(['audio', 'audiobook','video', 'short_video'], null).sum('comments_count')}}
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Card -->
 
-    <!-- Card -->
-    <div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
-      <div class="p-4 md:p-5 flex gap-x-4">
-        <div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
-          <svg class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z"/><path d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path d="M21 17v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2"/><path d="M21 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2"/></svg>
-        </div>
+		<!-- Card -->
+		<div class="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+			<div class="p-4 md:p-5 flex gap-x-4">
+				<div class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
+					<svg class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12s2.545-5 7-5c4.454 0 7 5 7 5s-2.546 5-7 5c-4.455 0-7-5-7-5z"/><path d="M12 13a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path d="M21 17v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2"/><path d="M21 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2"/></svg>
+				</div>
 
-        <div class="grow">
-          <div class="flex items-center gap-x-2">
-            <p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
-              {{lang.translate('Media views')}}
-            </p>
-          </div>
-          <div class="mt-1 flex items-center gap-x-2">
-            <h3 class="text-xl font-medium text-gray-800 dark:text-neutral-200">
-				{{customer.limitedMedia(['audio', 'audiobook','video', 'short_video'], null).sum('views_sum_times')}}
-            </h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Card -->
-  </div>
-  <!-- End Grid -->
+				<div class="grow">
+					<div class="flex items-center gap-x-2">
+						<p class="text-xs uppercase tracking-wide text-gray-500 dark:text-neutral-500">
+							{{lang.translate('Media views')}}
+						</p>
+					</div>
+					<div class="mt-1 flex items-center gap-x-2">
+						<h3 class="text-xl font-medium text-gray-800 dark:text-neutral-200">
+							{{customer.limitedMedia(['audio', 'audiobook','video', 'short_video'], null).sum('views_sum_times')}}
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Card -->
+	</div>
+	<!-- End Grid -->
 </div>
 <!-- End Card Section -->
-
-
 
 
 <div class="w-full lg:flex gap gap-6  lg:p-8 p-4 py-8 text-primary">
