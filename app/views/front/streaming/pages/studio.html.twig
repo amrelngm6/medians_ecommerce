@@ -284,7 +284,7 @@
 				
 					{% for item in customer.limitedMedia('audio', 5) %}
 					
-					<div class="flex align-items-sm-center mb-7">
+					<div class="flex align-items-sm-center mb-7 max-w-96 truncate">
 						<div class="flex flex-row-fluid flex-wrap align-items-center gap-2 "><img src="{{item.picture_name}}" class="w-10 h-10 rounded-full">
 							<div class="overflow-hidden w-2/3 flex-grow-1 me-2">
 								<a href="/audio/{{item.media_id}}" target="_blank" class="truncate text-gray-600 dark:text-gray-400  fw-bold text-hover-primary fs-6">{{item.name}}</a>
@@ -323,7 +323,7 @@
 				
 					{% for item in customer.limitedMedia('video', 5) %}
 					
-					<div class="flex align-items-sm-center mb-7">
+					<div class="flex align-items-sm-center mb-7 max-w-96 truncate">
 						<div class="flex flex-row-fluid flex-wrap align-items-center gap-2"><img src="{{item.picture_name}}" class="w-10 h-10 rounded-full">
 							<div class="overflow-hidden w-2/3 flex-grow-1 me-2">
 								<a href="/video/{{item.media_id}}" target="_blank" class="truncate text-gray-600 dark:text-gray-400  fw-bold text-hover-primary fs-6">{{item.name}}</a>
@@ -360,8 +360,9 @@
 				<div class="card-body pt-8">
 					{% for item in customer.limitedMedia('audiobook', 5) %}
 					
-					<div class="flex align-items-sm-center mb-7">
-						<div class="flex flex-row-fluid flex-wrap align-items-center gap-2"><img src="{{item.picture_name}}" class="w-10 h-10 rounded-full">
+					<div class="flex align-items-sm-center mb-7 max-w-96 truncate">
+						<div class="flex flex-row-fluid flex-wrap align-items-center gap-2">
+							<img src="{{item.picture_name}}" class="w-10 h-10 rounded-full">
 							<div class="overflow-hidden w-2/3 flex-grow-1 me-2">
 								<a href="/audiobook/{{item.media_id}}" target="_blank" class="truncate text-gray-600 dark:text-gray-400  fw-bold text-hover-primary fs-6">{{item.name}}</a>
 								<div class="flex w-full gap-4">
