@@ -88,7 +88,7 @@ class Customer extends CustomModel
 
 	public function limitedMedia($type = 'audio', $limit = 4) 
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->where('type', $type)->orderBy('created_at')->limit($limit)->get();	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withCount('views')->where('type', $type)->orderBy('created_at')->limit($limit)->orderBy('views_count', 'ASC')->get();	
 	}
 
 	public function audiobooks($limit = null) 

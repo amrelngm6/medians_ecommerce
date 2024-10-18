@@ -317,47 +317,40 @@
 			<div class="card w-full card-xl-stretch mb-xl-8">
 				<div class="card-header align-items-center border-0 mt-4">
 					<h3 class="card-title align-items-start flex-column">
-						<span class="fw-bold text-gray-900">Videos
-							                    items</span>
+						<span class="fw-bold text-gray-900">Videos items</span>
 						<span class="text-muted mt-1 fw-semibold fs-7">Latest uploaded videos items</span>
 					</h3>
 
 				</div>
 				<div class="card-body pt-3">
+				
+					{% for item in customer.limitedMedia('audio', 5) %}
+					
 					<div class="d-flex align-items-sm-center mb-7">
-						<div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2"><img src="/uploads/videos/screenshots/screenshot_4_9180a5fa217eaf8379089247021e8f45.jpg" class="w-10 h-10 rounded-full">
+						<div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2"><img src="{{item.picture_name}}" class="w-10 h-10 rounded-full">
 							<div class="w-2/3 flex-grow-1 me-2">
-								<a href="/video/81" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6">Kol zanby</a>
+								<a href="/audiobook/{{item.media_id}}" target="_blank" class="text-gray-800 fw-bold text-hover-primary fs-6">{{item.name}}</a>
 								<div class="flex w-full gap-4">
-									<span class="text-muted fw-semibold flex gap-4  pt-1">
-										<i class="vue-feather vue-feather--eye w-4" data-name="eye" data-tags="view,watch" data-type="eye">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye vue-feather__content">
-												<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-												<circle cx="12" cy="12" r="3"></circle>
-											</svg>
-										</i>
-										<span></span>
+									<span class=" cursor-pointer text-sm flex gap-2 relative">
+										<span class="tooltiptext  text-xs">{{lang.translate('Likes')}}</span>
+										<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg"/>
+										<span class="pt-1" id="views-count">{{item.likescount()}}</span>
 									</span>
-									<span class="text-muted fw-semibold flex gap-4  pt-1">
-										<i class="vue-feather vue-feather--message-square w-4" data-name="message-square" data-tags="comment,chat" data-type="message-square">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-message-square vue-feather__content">
-												<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-											</svg>
-										</i>
-										<span>0</span>
+									<span class=" cursor-pointer text-sm flex gap-2 relative">
+										<span class="tooltiptext  text-xs">{{lang.translate('Views')}}</span>
+										<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'views-white' : 'views'}}.svg"/>
+										<span class="pt-1" id="views-count">{{item.viewscount()}}</span>
 									</span>
-									<span class="text-muted fw-semibold flex gap-4  pt-1">
-										<i class="vue-feather vue-feather--heart w-4" data-name="heart" data-tags="like,love,emotion" data-type="heart">
-											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-heart vue-feather__content">
-												<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-											</svg>
-										</i>
-										<span>0</span>
+									<span class=" cursor-pointer text-sm flex gap-2 relative">
+										<span class="tooltiptext  text-xs">{{lang.translate('Comments')}}</span>
+										<img class="w-5" src="/src/front_assets/svg/{{ app.is_dark ? 'comments-white' : 'comments'}}.svg"/>
+										<span class="pt-1" id="comments-">{{item.commentscount()}}</span>
 									</span>
 								</div>
 							</div>
 						</div>
 					</div>
+					{% endfor %}
 				</div>
 			</div>
 			<div class="card w-full card-xl-stretch mb-xl-8">
@@ -368,7 +361,7 @@
 					</h3>
 				</div>
 				<div class="card-body pt-3">
-					{% for item in customer.limitedMedia('audio', 5) %}
+					{% for item in customer.limitedMedia('audiobook', 5) %}
 					
 					<div class="d-flex align-items-sm-center mb-7">
 						<div class="d-flex flex-row-fluid flex-wrap align-items-center gap-2"><img src="{{item.picture_name}}" class="w-10 h-10 rounded-full">
