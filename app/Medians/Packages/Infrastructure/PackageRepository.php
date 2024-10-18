@@ -12,22 +12,11 @@ use Medians\Packages\Domain\PackageFeature;
 class PackageRepository 
 {
 
-	
-	 
-	
-
-	function __construct()
-	{
-		
-		
-	}
-
 	/**
 	* Find item by `id` 
 	*/
 	public function find($id) 
 	{
-
 		return Package::find($id);
 	}
 
@@ -120,7 +109,7 @@ class PackageRepository
 				$fields['code'] = $key;	
 				$fields['value'] = $value;
 
-				$Model = CustomField::create($fields);
+				$Model = PackageFeature::create($fields);
 			}
 	
 			return $Model;		
