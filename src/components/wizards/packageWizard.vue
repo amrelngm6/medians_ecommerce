@@ -36,6 +36,8 @@
                                     class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger"
                                     @click="activeTab = 'Cost'" v-text="translate('Next')"></a></p>
                         </div>
+
+                        
                         <div class="" v-if="activeTab == 'Cost'" :key="activeTab">
                             <div class="card-body pt-0">
                                 <div class="settings-form">
@@ -46,9 +48,9 @@
                                             <div class="d-flex flex-stack flex-grow-1 ">
                                                 <div class=" fw-semibold">
                                                     <h4 class="text-gray-900 fw-bold"
-                                                        v-text="translate('Double daily trips cost')"></h4>
+                                                        v-text="translate('Set Plan Cost')"></h4>
                                                     <div class="fs-6 text-gray-700 "
-                                                        v-text="translate('Cost for Two trips daily Morning and Afternoon')">
+                                                        v-text="translate('Set the cost of this package')">
                                                     </div>
                                                 </div>
                                             </div>
@@ -81,6 +83,62 @@
                                                 class="form-control form-control-solid"
                                                 :placeholder="translate('Double Trips cost per year')" type="number"
                                                 v-model="activeItem.double_cost_year">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-center mt-10"><a href="javascript:;"
+                                    class="uppercase px-4 py-3 mx-2 text-center text-white rounded-lg bg-danger"
+                                    @click="activeTab = 'Confirm'" v-text="translate('Next')"></a></p>
+                        </div>
+
+                        
+                        <div class="" v-if="activeTab == 'Features'" :key="activeTab">
+                            <div class="card-body pt-0">
+                                <div class="settings-form">
+                                    <div class="max-w-xl mb-6 mx-auto">
+
+                                        <div
+                                            class="notice d-flex bg-blue-100 rounded border-primary border border-dashed rounded-3 p-6">
+                                            <div class="d-flex flex-stack flex-grow-1 ">
+                                                <div class=" fw-semibold">
+                                                    <h4 class="text-gray-900 fw-bold"
+                                                        v-text="translate('Set limit of features access')"></h4>
+                                                    <div class="fs-6 text-gray-700 "
+                                                        v-text="translate('Set the access limit for all features and options related to this package')">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <hr class="opacity-10 my-4" />
+
+                                        <div class="w-full mb-6 mx-auto row">
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
+                                                v-text="translate('Audio uploads limit')"></label>
+                                            <input :required="true" autocomplete="off" name="params[audio_uploads_limit]"
+                                                class="form-control form-control-solid"
+                                                :placeholder="translate('Max available Audio count for this package subscribers')" type="number"
+                                                v-model="activeItem.audio_uploads_limit">
+                                        </div>
+
+                                        <div class="w-full mb-6 mx-auto row">
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
+                                                v-text="translate('Videos uploads limit')"></label>
+                                            <input :required="true" autocomplete="off" name="params[videos_uploads_limit]"
+                                                class="form-control form-control-solid"
+                                                :placeholder="translate('Max available Videos count for this package subscribers')" type="number"
+                                                v-model="activeItem.videos_uploads_limit">
+                                        </div>
+
+                                        <div class="w-full mb-6 mx-auto row">
+                                            <label class="col-lg-4 col-form-label required fw-semibold fs-6"
+                                                v-text="translate('Audiobooks uploads limit')"></label>
+                                            <input :required="true" autocomplete="off" name="params[audiobooks_uploads_limit]"
+                                                class="form-control form-control-solid"
+                                                :placeholder="translate('Max available Audiobooks count for this package subscribers')" type="number"
+                                                v-model="activeItem.audiobooks_uploads_limit">
                                         </div>
 
                                     </div>
