@@ -88,22 +88,22 @@ class Customer extends CustomModel
 
 	public function limitedMedia($type = 'audio', $limit = 4) 
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withCount('views')->where('type', $type)->orderBy('created_at')->limit($limit)->orderBy('views_count', 'ASC')->get();	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withSum('views', 'times')->withCount('views')->whereIn('type', $type)->orderBy('created_at')->limit($limit)->orderBy('views_count', 'ASC')->get();	
 	}
 
-	public function audiobooks($limit = null) 
+	public function audiobooks()
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audiobook')->limit($limit)->orderBy('media_id', 'DESC');	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withSum('views', 'times')->with('main_file')->where('type', 'audiobook')->orderBy('media_id', 'DESC');	
 	}
 
-	public function videos($limit = null) 
+	public function videos()
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'video')->limit($limit)->orderBy('media_id', 'DESC');	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withSum('views', 'times')->with('main_file')->where('type', 'video')->orderBy('media_id', 'DESC');	
 	}
 
-	public function audio_items($limit = null) 
+	public function audio_items()
 	{
-		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->with('main_file')->where('type', 'audio')->limit($limit)->orderBy('media_id', 'DESC');	
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withSum('views', 'times')->with('main_file')->where('type', 'audio')->orderBy('media_id', 'DESC');	
 	}
 
 
@@ -133,6 +133,15 @@ class Customer extends CustomModel
 	{
 		return $this->hasMany(Like::class, 'customer_id', 'customer_id')->with('item');	
 	}
+
+
+	public function viewscount() 
+	{
+		return $this->belongsToMany(View::class, MediaItem::class, 'author_id', 'item_id');	
+	}
+	
+
+
 
     public function receiverAsCustomer()
     {
