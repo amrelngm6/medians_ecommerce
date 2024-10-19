@@ -141,7 +141,7 @@ class PackageSubscriptionController extends CustomController
 				$invoiceParams['subtotal'] = $params['total_cost'];
 				$invoiceParams['total_amount'] = $params['total_cost'];
 				$invoiceParams['date'] = $params['start_date'];
-				$invoiceParams['status'] = $params['unpaid'];
+				$invoiceParams['status'] = 'unpaid';
 				$invoiceParams['discount_amount'] = '0';
 				$invoiceParams['notes'] = $params['notes'] ?? '';
 				$invoiceParams['currency_code'] = $params['currency_code'] ?? '$';
