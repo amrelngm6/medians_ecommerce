@@ -72,6 +72,14 @@
                         <tr class="border-t border-gray-200 dark:border-neutral-700">
                             <th class="py-5 px-4 text-sm font-normal text-gray-600 text-start whitespace-nowrap dark:text-neutral-400" scope="row">{{lang.translate(feature.code)}}</th>
                             <td class="py-5 pe-4">
+                            
+                                {% if package.feature[feature.code] > 1 %}
+                                <svg class="shrink-0 mt-0.5 size-4 text-blue-600 dark:text-blue-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                {% else %}
+                                <img src="/src/front_assets/svg/close.svg" class="h-2 px-1" />
+                                {% endif %}
                                 <!-- Minus -->
                                 <span class="font-semibold">{{package.feature[feature.code] > 1 ? package.feature[feature.code] : '--'}}</span>
                             </td>
