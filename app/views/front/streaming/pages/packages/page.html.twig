@@ -43,6 +43,20 @@
                 </li>
             {% endfor %}
             </ul>
+            
+            <div class="mt-5 sm:mt-10">
+                <p class="text-sm text-gray-500 dark:text-neutral-500">If you have any questions, please contact us at
+                    <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="mailto:{{app.SystemSetting.footer_email}}">{{app.SystemSetting.footer_email}}</a>
+                    or call at
+                    <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="tel:{{app.SystemSetting.footer_phone}}">{{app.SystemSetting.footer_phone}}</a>
+                </p>
+            </div>
+            
+            <!--begin::Hint-->
+            <div class="form-text">
+                Customers will see this shortened version of your statement descriptor
+            </div>
+
 		</div>
 
 		<!-- Modal -->
@@ -184,13 +198,6 @@
                     </div>
                     <!-- End Buttons -->
 
-                    <div class="mt-5 sm:mt-10">
-                        <p class="text-sm text-gray-500 dark:text-neutral-500">If you have any questions, please contact us at
-                            <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="mailto:{{app.SystemSetting.footer_email}}">{{app.SystemSetting.footer_email}}</a>
-                            or call at
-                            <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="tel:{{app.SystemSetting.footer_phone}}">{{app.SystemSetting.footer_phone}}</a>
-                        </p>
-                    </div>
                 </div>
                 <!-- End Body -->
             </div>
@@ -201,8 +208,4 @@
 		<div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
 	</div>
 
-    <!--begin::Hint-->
-    <div class="form-text">
-        Customers will see this shortened version of your statement descriptor
-    </div>
 </div>
