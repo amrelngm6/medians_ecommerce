@@ -137,7 +137,7 @@ class PackageSubscriptionController extends CustomController
 				$invoiceParams = [];
 				$invoiceParams['customer_id'] = $customer->customer_id;
 				$invoiceParams['subscription_id'] = 'subscription_id';
-				$invoiceParams['payment_method'] = $params['payment_method'];
+				$invoiceParams['payment_method'] = $params['payment_method'] ?? 'paypal';
 				$invoiceParams['subtotal'] = $params['total_cost'];
 				$invoiceParams['total_amount'] = $params['total_cost'];
 				$invoiceParams['date'] = $params['start_date'];
