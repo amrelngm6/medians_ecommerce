@@ -620,4 +620,9 @@ class APP
 		return array_filter($data);
 	}
 
+
+	public function getPercentageBetweenDates($to, $from)
+	{
+		return getPercentageBetweenDates($to, $from);
+	}
 }
