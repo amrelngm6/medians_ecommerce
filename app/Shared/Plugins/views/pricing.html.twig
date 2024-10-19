@@ -28,13 +28,13 @@
 
 						{% for feature in package.features %}
 							{% if loop.index < 4 %}
-								<li class="flex gap-x-2">
+								<li class="flex gap-x-2 items-center">
                                     {% if package.feature[feature.code] > 1 %}
 									<svg class="shrink-0 mt-0.5 size-4 text-blue-600 dark:text-blue-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 										<polyline points="20 6 9 17 4 12"></polyline>
 									</svg>
                                     {% else %}
-                                    <img src="/src/front_assets/svg/close.svg" class="w-4" />
+                                    <img src="/src/front_assets/svg/close.svg" class="h-2 px-1" />
                                     {% endif %}
 
 									<span class="text-gray-800 dark:text-neutral-400">{{package.feature[feature.code]}}
