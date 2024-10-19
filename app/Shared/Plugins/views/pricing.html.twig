@@ -891,10 +891,10 @@
                             <th class="py-4 ps-6 pe-6 text-sm font-medium text-gray-800 text-start" scope="col">
                                 <span class="sr-only">Feature by</span> <span class="dark:text-white">{{lang.translate('Packages')}}</span>
                             </th>
-                            {% for feature in package.feature %}
+                            {# {% for feature in package.feature %} #}
+                            {% for package in packages %}
                             <th class="w-1/4 py-4 px-6 text-lg leading-6 font-medium text-gray-800 text-center dark:text-white" scope="col">
-                                {{loop.index}}
-                                {{feature}}
+                                {{package.name}}
                             </th>
                             {% endfor %}
                         </tr>
