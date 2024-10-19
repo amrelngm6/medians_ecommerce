@@ -367,6 +367,9 @@ if(!empty($app->auth()))
     /** @return Packages */
     RouteHandler::get('/admin/packages', Medians\Packages\Application\PackageController::class.'@index');
 
+    /** @return Invoices */
+    RouteHandler::get('/admin/invoices', Medians\Invoices\Application\InvoiceController::class.'@index');
+
     /** @return Translations */
     RouteHandler::get('/admin/translations', Medians\Languages\Application\TranslationController::class.'@index');
 
