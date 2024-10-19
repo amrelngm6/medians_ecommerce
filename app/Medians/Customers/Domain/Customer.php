@@ -11,6 +11,7 @@ use Medians\Stations\Domain\Station;
 use Medians\Channels\Domain\Channel;
 use Medians\Likes\Domain\Like;
 use Medians\Views\Domain\View;
+use Medians\Packages\Domain\PackageSubscription;
 
 
 class Customer extends CustomModel
@@ -72,6 +73,16 @@ class Customer extends CustomModel
 		return $this->fillable;
 	}
 
+	public function subscriptions() 
+	{
+		return $this->hasMany(PackageSubscription::class , 'customer_id', 'customer_id');	
+	}
+
+	public function subscription() 
+	{
+		return $this->hasOne(PackageSubscription::class , 'customer_id', 'customer_id')->orderBy('end_date');	
+	}
+
 	public function followers() 
 	{
 		return $this->hasMany(Follower::class , 'customer_id', 'customer_id');	
@@ -106,8 +117,6 @@ class Customer extends CustomModel
 	{
 		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withSum('views', 'times')->with('main_file')->where('type', 'audio')->orderBy('media_id', 'DESC');	
 	}
-
-
 
 	public function playlists() 
 	{

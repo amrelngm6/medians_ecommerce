@@ -100,7 +100,6 @@ class PackageSubscriptionController extends CustomController
 			
 			$item = $this->packageRepo->find($params['package_id']);
 
-
 			$params['customer_id'] = $customer->customer_id;
 			$params['payment_status'] = $item->is_paid ? 'paid' : 'free';
 			$params['package_id'] = $item->package_id;
@@ -125,6 +124,9 @@ class PackageSubscriptionController extends CustomController
 
 			$cost = 'cost_'.$params['payment_type'];
 			$params['total_cost'] = $item->$cost;
+
+
+			$this->validate($params);
 
 			return ($this->repo->store($params))
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
@@ -228,5 +230,18 @@ class PackageSubscriptionController extends CustomController
 		return $data == true ? array('success'=>true, 'result'=>translate('Subscription canceled')) : $data;
 
 	}  
+
+
+	/**
+	 * Validate the subscription
+	 */
+	public function validate($params)
+	{
+		if ($this->app->customer)
+		{
+			
+		}
+
+	}
 
 }
