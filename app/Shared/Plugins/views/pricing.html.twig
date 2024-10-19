@@ -23,15 +23,14 @@
             <ul class="mt-7 space-y-2.5 text-sm">
 
                 {% for feature in packages[0].features %}
-                
+                {% if loop.index < 3 %}
+
                 <li class="flex gap-x-2">
                     <svg class="shrink-0 mt-0.5 size-4 text-blue-600 dark:text-blue-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span class="text-gray-800 dark:text-neutral-400">{{package.feature[feature.code]}} {{lang.translate(feature.code)}}</span>
                 </li>
+                {% endif %}
                 {% endfor %}
 
-                <li class="flex gap-x-2">
-                    <svg class="shrink-0 mt-0.5 size-4 text-blue-600 dark:text-blue-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg><span class="text-gray-800 dark:text-neutral-400">Product support&nbsp;</span>
-                </li>
             </ul>
             <p>
                 <a class="mt-5 py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" href="#">Sign up&nbsp;</a>
