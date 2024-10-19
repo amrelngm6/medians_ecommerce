@@ -126,7 +126,7 @@ class PackageSubscriptionController extends CustomController
 			$params['total_cost'] = $item->$cost;
 
 
-			$this->validate($params);
+			$this->validate($params, $item);
 
 			return ($this->repo->store($params))
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
@@ -235,7 +235,7 @@ class PackageSubscriptionController extends CustomController
 	/**
 	 * Validate the subscription
 	 */
-	public function validate($params)
+	public function validate($params, $item)
 	{
 		$customer = $this->app->customer_auth(); 
 		if (empty($customer)) {
@@ -246,6 +246,11 @@ class PackageSubscriptionController extends CustomController
 			if ($customer->subscription->is_valid && $customer->subscription->is_paid )
 			{
 				throw new \Exception(translate('Cancel your current subscription first'), 1);
+			}
+			
+			if ($customer->subscription->is_valid && !$customer->subscription->is_paid && !$item->is_paid )
+			{
+				throw new \Exception(translate('Your current package and this one are free'), 1);
 			}
 		}
 
