@@ -15,16 +15,15 @@
 				
                 {% for invoice in customer.invoices %}
                 
-
-                <!-- Invoice Item -->
                     <!-- First Invoice -->
                     <div class="p-4 bg-gray-50 rounded-lg shadow-md flex justify-between items-center">
                         <div>
-                            <p class="text-lg font-semibold text-gray-800">Subscription Plan: Basic</p>
-                            <p class="text-sm text-gray-500">Date: 2024-10-19</p>
+                            <p class="text-lg font-semibold text-gray-800">{{lang.translate('Subscription package')}}: {{invoice.subscription.package.name}}</p>
+                            <p class="text-sm text-gray-500">{{lang.translate('Date')}}: {{invoice.date|date('M d, Y')}}</p>
+                            <p class="text-sm text-gray-500">{{lang.translate('Payment method')}}: {{invoice.payment_method}}</p>
                         </div>
                         <div>
-                            <p class="text-lg font-semibold text-green-600">$20.00</p>
+                            <p class="text-lg font-semibold text-green-600">{{invoice.currency_code}}{{invoice.total_amount}}</p>
                         </div>
                     </div>
 
