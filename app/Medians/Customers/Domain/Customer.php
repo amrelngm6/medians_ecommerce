@@ -81,7 +81,7 @@ class Customer extends CustomModel
 
 	public function subscriptions() 
 	{
-		return $this->hasMany(PackageSubscription::class , 'customer_id', 'customer_id')->orderBy('created_at', 'ASC');	
+		return $this->hasMany(PackageSubscription::class , 'customer_id', 'customer_id')->orderBy('created_at', 'DESC');	
 	}
 
 	public function subscription() 
