@@ -346,8 +346,8 @@ class PackageSubscriptionController extends CustomController
 				throw new \Exception(translate('Your current package and this one are free'), 1);
 			}
 
-			print_r($customer);
-			print_r($item);
+			print_r(json_decode($customer));
+			print_r(json_decode($item));
 
 		}
 
