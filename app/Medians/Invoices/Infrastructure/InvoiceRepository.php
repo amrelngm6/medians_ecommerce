@@ -34,6 +34,14 @@ class InvoiceRepository
 	}
 
 	/**
+	* Find item by `code` 
+	*/
+	public function findByCode($code) 
+	{
+		return Invoice::with('user', 'items')->where('code', $code)->first();
+	}
+
+	/**
 	* Find items by `params` 
 	*/
 	public function get($limit = 500) 
