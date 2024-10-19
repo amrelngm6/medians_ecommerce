@@ -27,7 +27,7 @@ class TransactionRepository
 	*/
 	public function get($limit = 500) 
 	{
-		return Transaction::with('model', 'item', 'invoice','currency')
+		return Transaction::with('customer', 'item', 'invoice')
 		->limit($limit)
 		->orderBy('created_at', 'DESC')
 		->get();
@@ -40,7 +40,7 @@ class TransactionRepository
 	public function getByDate($params )
 	{
 
-	  	$check = Transaction::with('model', 'item','invoice','currency');
+	  	$check = Transaction::with('customer', 'item','invoice');
 
 	  	if (!empty($params["start_date"]))
 	  	{
