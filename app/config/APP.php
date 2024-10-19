@@ -363,6 +363,7 @@ class APP
 			array( 'title'=>translate('Packages'),  'icon'=>'package', 'link'=>'#packages', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=>'Packages.index', 'title'=>translate('Packages'),  'icon'=>'tool', 'link'=>'admin/packages', 'component'=>'packages'),
+				array('permission'=>'Invoices.index', 'title'=>translate('Invoices'),  'icon'=>'tool', 'link'=>'admin/invoices', 'component'=>'invoices'),
 			]
 			),
 			
