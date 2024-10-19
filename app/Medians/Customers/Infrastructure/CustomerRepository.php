@@ -43,7 +43,7 @@ class CustomerRepository
 
 	public function get()
 	{
-		return Customer::with('subscription')->all();
+		return Customer::all();
 	}
 
 	public function findByEmail($email)
