@@ -5,9 +5,7 @@ use \Shared\dbaser\CustomController;
 
 use Medians\Packages\Infrastructure\PackageRepository;
 use Medians\Packages\Infrastructure\PackageSubscriptionRepository;
-use Medians\Students\Infrastructure\StudentRepository;
-use Medians\Customers\Infrastructure\EmployeeRepository;
-use Medians\Customers\Infrastructure\SuperVisorRepository;
+use Medians\Customers\Infrastructure\CustomerRepository;
 
 class PackageSubscriptionController extends CustomController
 {
@@ -21,11 +19,7 @@ class PackageSubscriptionController extends CustomController
 
 	protected $packageRepo;
     
-	protected $studentRepo;
-
-	protected $supervisorRepo;
-    
-	protected $employeeRepo;
+	protected $customerRepo;
 
 
 	function __construct()
@@ -33,9 +27,7 @@ class PackageSubscriptionController extends CustomController
         $this->app = new \config\APP;   
 		$this->repo = new PackageSubscriptionRepository();
 		$this->packageRepo = new PackageRepository();
-		$this->studentRepo = new StudentRepository();
-		$this->supervisorRepo = new SuperVisorRepository();
-		$this->employeeRepo = new EmployeeRepository();
+		$this->customerRepo = new CustomerRepository();
 	}
 
 
