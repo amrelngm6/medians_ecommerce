@@ -13,7 +13,7 @@
 			<div class="box-body pt-0">
 				{% for subscription in customer.subscriptions %}
                 <div class="courses-container">
-                    <div class="course">
+                    <div class="course shadow-md bg-gray-100 dark:bg-gray-800">
                         <div class="course-preview flex-none">
                             <h6>{{lang.translate(subscription.is_paid ? 'paid' : 'free')}}</h6>
                             <h2>{{subscription.invoice.code}}</h2>
