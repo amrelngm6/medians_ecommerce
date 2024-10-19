@@ -3,8 +3,6 @@
 namespace Medians\Transactions\Application;
 use \Shared\dbaser\CustomController;
 
-use Medians\Users\Application\GetStartedController;
-
 use Medians\Transactions\Infrastructure\TransactionRepository;
 
 class TransactionController extends CustomController
@@ -16,15 +14,12 @@ class TransactionController extends CustomController
 	protected $repo;
 	protected $app;
 
-
-
 	function __construct()
 	{
         $this->app = new \config\APP;
 		
 		$user = $this->app->auth();
 		$this->repo = new TransactionRepository();
-
 	}
 
 
@@ -38,9 +33,9 @@ class TransactionController extends CustomController
 
 		return [
             [ 'value'=> "transaction_id", 'text'=> "#"],
-            [ 'value'=> "field.order_id", 'text'=> translate('Transaction code'), 'sortable'=> true ],
-            [ 'value'=> "model", 'text'=> translate('User'), 'sortable'=> false ],
+            [ 'value'=> "customer.name", 'text'=> translate('Customer'), 'sortable'=> false ],
             [ 'value'=> "amount", 'text'=> translate('Amount'), 'sortable'=> true ],
+            [ 'value'=> "currency_code", 'text'=> translate('Currency'), 'sortable'=> true ],
             [ 'value'=> "payment_method", 'text'=> translate('Gateway'), 'sortable'=> true ],
             [ 'value'=> "date", 'text'=> translate('Date'), 'sortable'=> true ],
             [ 'value'=> "invoice.code", 'text'=> translate('Invoice'), 'sortable'=> false ],
@@ -55,7 +50,7 @@ class TransactionController extends CustomController
 	 */ 
 	public function index() 
 	{
-		$params = sanitizeInput($this->app->request()->query->all());
+		$params = $this->app->request()->query->all();
 
 		return render('transactions', [
 			'load_vue'=> true,
@@ -149,7 +144,7 @@ class TransactionController extends CustomController
 	public function addTransaction()
 	{
 		
-		$params = (array) $this->app->params();
+		$params = $this->app->params();
 
 		$user = $this->app->auth();
 
@@ -177,29 +172,19 @@ class TransactionController extends CustomController
 	}
 
 
-	public function addTripTransaction()
+	public function verifyTransaction()
 	{
-		
 		$params = (array) $this->app->params();
-
-		$user = $this->app->auth();
 
 		try {
 			
 			$paymentService = new PaymentService($params['payment_method']);
 
-			$addInvoice = $paymentService->addInvoice($params); 
-
-			$saveTransaction = $paymentService->storeTripTransaction($params, $addInvoice); 
+			$verify = $paymentService->verify($params);
 			
-			$updateTrip = isset($saveTransaction['success']) ? $paymentService->updateTrip($params, $addInvoice) : null; 
-
-			$updateWallet = isset($saveTransaction['success']) ? $paymentService->updateWallet($params, $addInvoice) : null; 
-
-
-			return (isset($saveTransaction['success']))
-			? array('success'=>1, 'result'=>$saveTransaction['result'], 'reload'=>1)
-			: array('error'=>$saveTransaction['error']);
+			return ($verify )
+			? array('success'=>1, 'result'=>$verify, 'reload'=>1)
+			: array('error'=>$verify);
 
 		} catch (Exception $e) {
 			return array('error'=>$e->getMessage());
@@ -208,48 +193,4 @@ class TransactionController extends CustomController
 
 	
 
-	public function addTripCashTransaction()
-	{
-		
-		$params = (array) $this->app->params();
-
-		$user = $this->app->auth();
-
-		try {
-			
-			$paymentService = new PaymentService($params['payment_method']);
-
-			$addInvoice = $paymentService->addInvoice($params); 
-
-			$saveTransaction = $paymentService->storeTripTransaction($params, $addInvoice); 
-			
-			$updateTrip = isset($saveTransaction['success']) ? $paymentService->updateTrip($params, $addInvoice) : null; 
-
-			$updateWallet = isset($saveTransaction['success']) ? $paymentService->updateWallet($params, $addInvoice) : null; 
-
-			return (isset($saveTransaction['success']))
-			? array('success'=>1, 'result'=>$saveTransaction['result'], 'reload'=>1)
-			: array('error'=>$saveTransaction['error']);
-
-		} catch (Exception $e) {
-			return array('error'=>$e->getMessage());
-		}
-	}
-
-
-	public function createPaymentIntent()
-	{
-		// $settings = $this->app->SystemSetting(); 
-		// $amount = $this->app->request()->get('amount');
-
-		// $stripe = new \Stripe\StripeClient($settings['stripe_live_key']);
-		// $res = $stripe->paymentIntents->create([
-		//   'amount' => $amount ?? 0,
-		//   'automatic_payment_methods' => ['enabled' => true],
-		// ]);
-
-		// $return = json_encode($res);
-
-		// echo $return;
-	}
 }

@@ -13,17 +13,6 @@ class TransactionRepository
 {
 
 
-	 
-	
-
-	
-
-	function __construct()
-	{
-		
-		
-	}
-
 
 	/**
 	* Find item by `transaction_id` 
@@ -38,8 +27,7 @@ class TransactionRepository
 	*/
 	public function get($limit = 500) 
 	{
-		return Transaction::with('model', 'item', 'invoice')
-		
+		return Transaction::with('model', 'item', 'invoice','currency')
 		->limit($limit)
 		->orderBy('created_at', 'DESC')
 		->get();
@@ -52,7 +40,7 @@ class TransactionRepository
 	public function getByDate($params )
 	{
 
-	  	$check = Transaction::with('model', 'item','invoice');
+	  	$check = Transaction::with('model', 'item','invoice','currency');
 
 	  	if (!empty($params["start_date"]))
 	  	{
@@ -168,7 +156,7 @@ class TransactionRepository
 				$fields['model_type'] = Transaction::class;	
 				$fields['model_id'] = $id;	
 				$fields['code'] = $key;	
-				$fields['value'] = $value;
+				$fields['value'] = (is_array($value) || is_object($value)) ? json_encode($value) : $value;
 
 				$Model = CustomField::create($fields);
 				$Model->update($fields);

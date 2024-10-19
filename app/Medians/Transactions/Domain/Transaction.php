@@ -5,8 +5,7 @@ namespace Medians\Transactions\Domain;
 
 use Shared\dbaser\CustomModel;
 
-use Medians\Users\Domain\User;
-use Medians\Branches\Domain\Branch;
+use Medians\Customers\Domain\Customer;
 use Medians\Packages\Domain\PackageSubscription;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Invoices\Domain\Invoice;
@@ -26,18 +25,14 @@ class Transaction extends CustomModel
 	* @var Array
 	*/
 	public $fillable = [
-		'transaction_id'	
-		,'invoice_id'
-		,'model_id'	
-		,'model_type'	
-		,'item_id'	
-		,'item_type'	
+		'invoice_id'
+		,'customer_id'	
+		,'subscription_id'	
 		,'payment_method'	
 		,'amount'	
+		,'currency_code'	
 		,'date'	
 		,'status'	
-		,'notes'
-		,'created_by'
 	];
 
 	public $appends = ['field'];
@@ -57,22 +52,21 @@ class Transaction extends CustomModel
 		return $this->fillable;
 	}
 	
-    public function model()
+    public function customer()
     {
-        return $this->morphTo();
+		return $this->hasOne(Customer::class, 'customer_id', 'customer_id');
     }
 
     public function item()
     {
-        return $this->morphTo();
+		return $this->hasOne(PackageSubscription::class, 'subscription_id', 'subscription_id');
     }
-
-	
 
 	public function invoice()
 	{
 		return $this->hasOne(Invoice::class, 'invoice_id', 'invoice_id');
 	}
+
 
 
 }

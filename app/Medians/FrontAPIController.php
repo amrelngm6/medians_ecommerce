@@ -212,6 +212,10 @@ class FrontAPIController extends CustomController
 				case 'PackageSubscription.create':
 					$return = (new Packages\Application\PackageSubscriptionController)->store();
 					break;
+					
+				case 'Transaction.verify':
+					$return = (new Transactions\Application\TransactionController)->verifyTransaction();
+					break;
 	
 			}
 
