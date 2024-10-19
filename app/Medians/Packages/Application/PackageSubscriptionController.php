@@ -136,7 +136,7 @@ class PackageSubscriptionController extends CustomController
 				$InvoiceController = new \Medians\Invoices\Application\InvoiceController;
 				$invoiceParams = [];
 				$invoiceParams['customer_id'] = $customer->customer_id;
-				$invoiceParams['subscription_id'] = 'subscription_id';
+				$invoiceParams['subscription_id'] = $save->subscription_id;
 				$invoiceParams['payment_method'] = $params['payment_method'] ?? 'paypal';
 				$invoiceParams['subtotal'] = $params['total_cost'];
 				$invoiceParams['total_amount'] = $params['total_cost'];
