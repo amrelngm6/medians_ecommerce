@@ -64,7 +64,7 @@ class PackageSubscriptionController extends CustomController
 
 		return [
             [ 'key'=> "subscription_id", 'title'=> "#", 'column_type'=>'hidden'],
-			[ 'key'=> "customer.name", 'title'=> translate('name'), 'required'=>true, 'disabled'=> true, 'column_type'=>'text' ],
+			[ 'key'=> "name", 'title'=> translate('Package'), 'required'=>true, 'disabled'=> true, 'column_type'=>'text' ],
 			[ 'key'=> "start_date", 'title'=> translate('Start date'), 'required'=>true, 'fillable'=> true, 'column_type'=>'date' ],
 			[ 'key'=> "end_date", 'title'=> translate('End date'), 'required'=>true, 'fillable'=> true, 'column_type'=>'date' ],
             [ 'key'=> "total_cost", 'title'=> translate('Cost'), 'fillable'=>true, 'column_type'=>'number' ],
