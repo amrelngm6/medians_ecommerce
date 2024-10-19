@@ -38,14 +38,14 @@
                     <img src="/src/front_assets/svg/close.svg" class="h-2 px-1" />
                     {% endif %}
 
-                    <span class="text-gray-800 dark:text-neutral-400">{{item.feature[feature.code]}}
+                    <span class="text-gray-800 dark:text-gray-400">{{item.feature[feature.code]}}
                         {{lang.translate(feature.code)}}</span>
                 </li>
             {% endfor %}
             </ul>
             
             <div class="mt-5 sm:mt-10">
-                <p class="text-sm text-gray-500 dark:text-neutral-500">If you have any questions, please contact us at
+                <p class="text-sm text-gray-500 dark:text-gray-500">If you have any questions, please contact us at
                     <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="mailto:{{app.SystemSetting.footer_email}}">{{app.SystemSetting.footer_email}}</a>
                     or call at
                     <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="tel:{{app.SystemSetting.footer_phone}}">{{app.SystemSetting.footer_phone}}</a>
@@ -68,7 +68,7 @@
                     <!-- SVG Background Element -->
                     <figure class="absolute inset-x-0 bottom-0 -mb-px">
                         <svg preserveaspectratio="none" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewbox="0 0 1920 100.1">
-                            <path fill="currentColor" class="fill-white dark:fill-neutral-800" d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"></path>
+                            <path fill="currentColor" class="fill-white dark:fill-gray-800" d="M0,0c0,0,934.4,93.4,1920,0v100.1H0L0,0z"></path>
                         </svg>
                     </figure>
                     <!-- End SVG Background Element -->
@@ -77,7 +77,7 @@
                 <div
                     class="relative z-10 -mt-12">
                     <!-- Icon -->
-                    <span class="mx-auto flex justify-center items-center size-[62px] rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400">
+                    <span class="mx-auto flex justify-center items-center size-[62px] rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400">
                         <svg class="shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewbox="0 0 16 16">
                             <path d="M1.92.506a.5.5 0 0 1 .434.14L3 1.293l.646-.647a.5.5 0 0 1 .708 0L5 1.293l.646-.647a.5.5 0 0 1 .708 0L7 1.293l.646-.647a.5.5 0 0 1 .708 0L9 1.293l.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .708 0l.646.647.646-.647a.5.5 0 0 1 .801.13l.5 1A.5.5 0 0 1 15 2v12a.5.5 0 0 1-.053.224l-.5 1a.5.5 0 0 1-.8.13L13 14.707l-.646.647a.5.5 0 0 1-.708 0L11 14.707l-.646.647a.5.5 0 0 1-.708 0L9 14.707l-.646.647a.5.5 0 0 1-.708 0L7 14.707l-.646.647a.5.5 0 0 1-.708 0L5 14.707l-.646.647a.5.5 0 0 1-.708 0L3 14.707l-.646.647a.5.5 0 0 1-.801-.13l-.5-1A.5.5 0 0 1 1 14V2a.5.5 0 0 1 .053-.224l.5-1a.5.5 0 0 1 .367-.27zm.217 1.338L2 2.118v11.764l.137.274.51-.51a.5.5 0 0 1 .707 0l.646.647.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.646.646.646-.646a.5.5 0 0 1 .708 0l.509.509.137-.274V2.118l-.137-.274-.51.51a.5.5 0 0 1-.707 0L12 1.707l-.646.647a.5.5 0 0 1-.708 0L10 1.707l-.646.647a.5.5 0 0 1-.708 0L8 1.707l-.646.647a.5.5 0 0 1-.708 0L6 1.707l-.646.647a.5.5 0 0 1-.708 0L4 1.707l-.646.647a.5.5 0 0 1-.708 0l-.509-.51z"/>
                             <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm8-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1a.5.5 0 0 1-.5-.5z"/>
@@ -94,10 +94,10 @@
                     <input type="hidden" x-model="endDate" name="params[end_date]" />
                     <input type="hidden" x-model="cost" name="params[cost]" />
                     <div class="text-center">
-                        <h3 id="hs-ai-modal-label" class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
+                        <h3 id="hs-ai-modal-label" class="text-lg font-semibold text-gray-800 dark:text-gray-200">
                             {{lang.translate('Package subscription')}}
                         </h3>
-                        <p class="text-sm text-gray-500 dark:text-neutral-500">
+                        <p class="text-sm text-gray-500 dark:text-gray-500">
                             {{item.name}}
                         </p>
                     </div>
@@ -105,23 +105,23 @@
                     <!-- Grid -->
                     <div class="mt-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5">
                         <div>
-                            <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500">{{lang.translate('Total amount')}}:</span>
-                            <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200" >$<span x-text="cost"></span></span>
+                            <span class="block text-xs uppercase text-gray-500 dark:text-gray-500">{{lang.translate('Total amount')}}:</span>
+                            <span class="block text-sm font-medium text-gray-800 dark:text-gray-200" >$<span x-text="cost"></span></span>
                         </div>
                         <!-- End Col -->
 
                         <div>
-                            <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500">{{lang.translate('Estimated date')}}:</span>
-                            <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200" x-text="endDate"></span>
+                            <span class="block text-xs uppercase text-gray-500 dark:text-gray-500">{{lang.translate('Estimated date')}}:</span>
+                            <span class="block text-sm font-medium text-gray-800 dark:text-gray-200" x-text="endDate"></span>
                         </div>
                         <!-- End Col -->
 
                         <div>
-                            <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500">{{lang.translate('Payment method')}}:</span>
+                            <span class="block text-xs uppercase text-gray-500 dark:text-gray-500">{{lang.translate('Payment method')}}:</span>
                             {% if item.is_paid %}
                             <div class="flex items-center gap-x-2">
                                 <img src="/uploads/img/payment_methods/paypal.png" class="w-4" />
-                                <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200">PayPal</span>
+                                <span class="block text-sm font-medium text-gray-800 dark:text-gray-200">PayPal</span>
                             </div>
                             {% endif %}
                         </div>
@@ -131,40 +131,40 @@
 
                     <div class="sm:col-span-9 pt-10">
                         <div class="flex gap-4">
-                            <label x-on:click="cost = cost_month, endDate = endDateMonth" for="package-duration" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                <input type="radio" value="month" name="params[duration]" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="package-duration" checked>
-                                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">{{lang.translate('Month')}}</span>
+                            <label x-on:click="cost = cost_month, endDate = endDateMonth" for="package-duration" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:placeholder-gray-500 dark:focus:ring-gray-600">
+                                <input type="radio" value="month" name="params[duration]" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="package-duration" checked>
+                                <span class="text-sm text-gray-500 ms-3 dark:text-gray-400">{{lang.translate('Month')}}</span>
                             </label>
 
-                            <label x-on:click="cost = cost_quarter, endDate = endDateQuarter" for="package-duration-q" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                <input type="radio" value="quarter" name="params[duration]" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="package-duration-q">
-                                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">{{lang.translate('Quarter')}}</span>
+                            <label x-on:click="cost = cost_quarter, endDate = endDateQuarter" for="package-duration-q" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:placeholder-gray-500 dark:focus:ring-gray-600">
+                                <input type="radio" value="quarter" name="params[duration]" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="package-duration-q">
+                                <span class="text-sm text-gray-500 ms-3 dark:text-gray-400">{{lang.translate('Quarter')}}</span>
                             </label>
 
-                            <label x-on:click="cost = cost_year, endDate = endDateYear" for="package-duration-y" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
-                                <input type="radio" value="year" name="params[duration]" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="package-duration-y">
-                                <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">{{lang.translate('Year')}}</span>
+                            <label x-on:click="cost = cost_year, endDate = endDateYear" for="package-duration-y" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:placeholder-gray-500 dark:focus:ring-gray-600">
+                                <input type="radio" value="year" name="params[duration]" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="package-duration-y">
+                                <span class="text-sm text-gray-500 ms-3 dark:text-gray-400">{{lang.translate('Year')}}</span>
                             </label>
                         </div>
                     </div>
                     <!-- End Col -->
                     <div class="mt-5 sm:mt-10">
-                        <h4 class="text-xs font-semibold uppercase text-gray-800 dark:text-neutral-200">{{lang.translate('Summary')}}</h4>
+                        <h4 class="text-xs font-semibold uppercase text-gray-800 dark:text-gray-200">{{lang.translate('Summary')}}</h4>
 
                         <ul class="mt-3 flex flex-col">
-                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-neutral-700 dark:text-neutral-200">
+                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
                                 <div class="flex items-center justify-between w-full">
                                     <span>{{lang.translate('Start date')}}</span>
                                     <span>{{"now"|date('M d, Y')}}</span>
                                 </div>
                             </li>
-                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-neutral-700 dark:text-neutral-200">
+                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
                                 <div class="flex items-center justify-between w-full">
                                     <span>{{lang.translate('End date')}}</span>
                                     <span x-text="endDate"></span>
                                 </div>
                             </li>
-                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200">
+                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200">
                                 <div class="flex items-center justify-between w-full">
                                     <span>{{lang.translate('Total amount')}}</span>
                                     <span >$<span x-text="cost"></span></span>
@@ -175,7 +175,7 @@
 
                     <!-- Button -->
                     <div class="mt-5 flex justify-end gap-x-2">
-                        <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" href="#">
+                        <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:focus:bg-gray-800" href="#">
                             <img src="/src/front_assets/svg/close.svg" class="w-2" />
                             {{lang.translate('Cancel')}}
                         </a>
