@@ -370,6 +370,9 @@ if(!empty($app->auth()))
     /** @return Invoices */
     RouteHandler::get('/admin/invoices', Medians\Invoices\Application\InvoiceController::class.'@index');
 
+    /** @return Transactions */
+    RouteHandler::get('/admin/transactions', Medians\Transactions\Application\TransactionController::class.'@index');
+
     /** @return Translations */
     RouteHandler::get('/admin/translations', Medians\Languages\Application\TranslationController::class.'@index');
 
