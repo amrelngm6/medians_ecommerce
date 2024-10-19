@@ -1912,8 +1912,6 @@ Station card
     opacity: 0.6;
     letter-spacing: 1px;
     position: relative;
-    right: 120px;
-    top: -5px;
 }
 
 [dir="rtl"] .filter-arrow {
