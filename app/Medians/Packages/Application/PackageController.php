@@ -183,9 +183,6 @@ class PackageController extends CustomController
 	 */
 	public function validateCancel($params) 
 	{
-		if (empty($this->app->customer->customer_id))
-			throw new \Exception(translate('Login first'), 1);
-			
 		if (empty($params['item_id']))
 			throw new \Exception(translate('Item is required'), 1);
 			
@@ -194,9 +191,11 @@ class PackageController extends CustomController
 		if (empty($item))
 			throw new \Exception(translate('Item is invalid'), 1);
 			
+		if (empty($this->app->customer->customer_id))
+			throw new \Exception(translate('Login first'), 1);
+		
 		if (($item->customer_id != $this->app->customer->customer_id))
 			throw new \Exception(translate('Not authorized'), 1);
-			
 
 	}
 
