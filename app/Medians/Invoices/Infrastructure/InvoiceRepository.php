@@ -7,7 +7,7 @@ use Medians\Invoices\Domain\InvoiceItem;
 use Medians\CustomFields\Domain\CustomField;
 use Medians\Packages\Domain\PackageSubscription;
 use Medians\Trips\Domain\TaxiTrip;
-use Medians\Users\Domain\User;
+use Medians\Customers\Domain\Customer;
 
 
 /**
@@ -30,7 +30,7 @@ class InvoiceRepository
 	*/
 	public function find($invoice_id) 
 	{
-		return Invoice::with('user', 'items')->find($invoice_id);
+		return Invoice::with('customer', 'item')->find($invoice_id);
 	}
 
 	/**
@@ -38,15 +38,15 @@ class InvoiceRepository
 	*/
 	public function findByCode($code) 
 	{
-		return Invoice::with('user', 'items')->where('code', $code)->first();
+		return Invoice::with('customer', 'item')->where('code', $code)->first();
 	}
 
 	/**
-	* Find items by `params` 
+	* Find item by `params` 
 	*/
 	public function get($limit = 500) 
 	{
-		return Invoice::with('user', 'items', 'transaction')
+		return Invoice::with('customer', 'item', 'transaction')
 		
 		->limit($limit)
 		->orderBy('invoice_id', 'DESC')
@@ -54,13 +54,13 @@ class InvoiceRepository
 	}
 
 	/**
-	* Find items by `params` 
+	* Find item by `params` 
 	*/
-	public function getUserInvoices($userId) 
+	public function getCustomerInvoices($customerId) 
 	{
-		return Invoice::with('user', 'items', 'item' , 'transaction')
-		->where('user_id', $userId)
-		->where('user_type', User::class)
+		return Invoice::with('customer',  'item' , 'transaction')
+		->where('customer_id', $customerId)
+		->where('customer_type', Customer::class)
 		->limit(10)
 		->orderBy('invoice_id', 'DESC')
 		->get();
@@ -68,11 +68,11 @@ class InvoiceRepository
 
 
 	/**
-	* Find all items between two days By BranchId
+	* Find all item between two days By BranchId
 	*/
 	public function getByDate($params )
 	{
-	  	$check = Invoice::with('user', 'items', 'transaction')
+	  	$check = Invoice::with('customer', 'item', 'transaction')
 		;
 
 	  	if (!empty($params["start_date"]))
@@ -87,7 +87,7 @@ class InvoiceRepository
 
 
 	/**
-	* Find latest items
+	* Find latest item
 	*/
 	public function getLatest($params, $limit = 10 ) 
 	{
@@ -179,7 +179,7 @@ class InvoiceRepository
 
 
 	/**
-	* Save related items to database
+	* Save related item to database
 	*/
 	public function storeCustomFields($data, $id) 
 	{
