@@ -363,6 +363,10 @@ class FrontAPIController extends CustomController
 				case 'Channel.delete':
 					return printResponse((new Channels\Application\ChannelController())->delete());
 					break;
+			
+				case 'PackageSubscription.delete':
+					return printResponse((new Packages\Application\PackageSubscriptionController())->cancel());
+					break;
 	
 			
 			}

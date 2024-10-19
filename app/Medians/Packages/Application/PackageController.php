@@ -143,6 +143,66 @@ class PackageController extends CustomController
 	}
 
 	/**
+	 * Cancel subscription of Customer
+	 * 
+	 * @return [] 
+	*/
+	public function cancel() 
+	{
+
+		$this->app = new \config\APP;
+
+		$params = $this->app->params();
+
+		
+        try {
+			
+			$this->app->customer_auth();
+
+			$this->validateCancel($params);
+
+			$params['status'] = 'canceled';
+
+           	$returnData =  ($this->repo->update($params))
+           	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0)
+           	: array('error'=>'Not allowed');
+
+
+        } catch (Exception $e) {
+            $returnData = array('error'=>$e->getMessage());
+        }
+
+        return $returnData;
+
+	}
+
+
+	/**
+	 * Validate if customer canceling 
+	 * His valid subscription
+	 */
+	public function validateCancel($params) 
+	{
+		if (empty($this->app->customer->customer_id))
+			throw new \Exception(translate('Login first'), 1);
+			
+		if (empty($params['item_id']))
+			throw new \Exception(translate('Item is required'), 1);
+			
+		$item = $this->find($params['item_id']);
+
+		if (empty($item))
+			throw new \Exception(translate('Item is invalid'), 1);
+			
+		if (($item->customer_id != $this->app->customer->customer_id))
+			throw new \Exception(translate('Not authorized'), 1);
+			
+
+	}
+
+	
+
+	/**
 	 * Delete item from database
 	 * 
 	 * @return [] 
