@@ -341,7 +341,7 @@ class PackageSubscriptionController extends CustomController
 				throw new \Exception(translate('Cancel your current subscription first'), 1);
 			}
 			
-			if (!$customer->subscription->is_paid && !$item->is_paid )
+			if ($customer->subscription->is_valid && !$customer->subscription->is_paid && !$item->is_paid )
 			{
 				throw new \Exception(translate('Your current package and this one are free'), 1);
 			}

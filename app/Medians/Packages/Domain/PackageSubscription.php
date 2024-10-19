@@ -39,7 +39,7 @@ class PackageSubscription extends CustomModel
     
 	public function getIsValidAttribute()
 	{
-		return (strtotime(date("Y-m-d")) <= strtotime($this->end_date)) ? ($this->status == 'active') : false;
+		return (strtotime(date("Y-m-d")) <= strtotime($this->end_date)) ? ($this->payment_type == 'free' || $this->status == 'active') : false;
 	}
     
 	public function getFieldAttribute()
