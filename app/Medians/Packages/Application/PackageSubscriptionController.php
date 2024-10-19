@@ -146,7 +146,7 @@ class PackageSubscriptionController extends CustomController
 				$invoiceParams['notes'] = $params['notes'] ?? '';
 				$invoiceParams['currency_code'] = $params['currency_code'] ?? '$';
 				$addInvoice = $InvoiceController->addInvoice($invoiceParams);
-				$redirect = '/invoice/'.$addInvoice->invoice_id;
+				$redirect = '/invoice/'.$addInvoice->code;
 			}
 			
 			
