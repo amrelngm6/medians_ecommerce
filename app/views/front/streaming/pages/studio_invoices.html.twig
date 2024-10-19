@@ -23,7 +23,7 @@
                         </div>
                         
                         <div class="flex flex-col items-center">
-                            <p class="text-lg font-semibold text-green-600 pb-4">{{invoice.currency_code}}{{invoice.total_amount}}</p>
+                            <p class="text-lg font-semibold text-green-600 pb-2">{{invoice.currency_code}}{{invoice.total_amount}}</p>
                             <p class="flex gap-4 items-center">
                                 {% if invoice.payment_method == 'paypal' %}
                                 <img src="/uploads/img/payment_methods/paypal.png" class="w-4" />
