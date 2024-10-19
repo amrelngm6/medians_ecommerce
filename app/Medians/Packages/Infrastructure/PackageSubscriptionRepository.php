@@ -32,7 +32,7 @@ class PackageSubscriptionRepository
 	public function find($id) 
 	{
 
-		return PackageSubscription::with('model','package', 'applicant')->find($id);
+		return PackageSubscription::with('customer','package')->find($id);
 	}
 
 	/**
@@ -40,25 +40,7 @@ class PackageSubscriptionRepository
 	*/
 	public function get($params = null) 
 	{
-		return PackageSubscription::with('model','package','applicant')->get();
-	}
-
-	/**
-	* Find pending students subscriptions
-	* Filter all students based on Parent 
-	*/
-	public function loadPendingStudentsSubscription($parentId = null) 
-	{
-		return PackageSubscription::where('payment_status', 'unpaid')
-		->where('model_type', Student::class)
-		->whereHas('model', function($q) use  ($parentId) {
-			return $q->where('parent_id', $parentId);
-		})
-		->whereHas('applicant', function($q) use  ($parentId) {
-			return $q->where('status', 'approved');
-		})
-		->with('model','package', 'applicant')
-		->first();
+		return PackageSubscription::with('customer','package')->get();
 	}
 
 	
@@ -81,9 +63,8 @@ class PackageSubscriptionRepository
 	public function store($data) 
 	{	
 
-		$data['model_type'] = $this->handleClassType($data['usertype']);
-
 		$Model = new PackageSubscription();
+
 		foreach ($data as $key => $value) 
 		{
 			if (in_array($key, $Model->getFields()))
@@ -98,23 +79,6 @@ class PackageSubscriptionRepository
     	return $Object;
 	}
 
-
-	/**
-	 * Update Lead
-	 */
-	public function handleClassType($data)
-	{
-
-		if (strtolower($data) == 'employee')
-			return Employee::class;
-	
-		if (strtolower($data) == 'student')
-			return Student::class;
-	
-		if (strtolower($data) == 'supervisor')
-			return SuperVisor::class;
-
-	}
 	
 	/**
 	* Update item to database
@@ -159,7 +123,7 @@ class PackageSubscriptionRepository
 	{
 		try {
 			
-			$check = PackageSubscription::with('model')->find($subscriptionId);
+			$check = PackageSubscription::with('customer')->find($subscriptionId);
 
 			if (isset($check->payment_status) && $check->payment_status == 'unpaid')
 			{
