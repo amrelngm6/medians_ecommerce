@@ -113,10 +113,12 @@
 
                         <div>
                             <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500">{{lang.translate('Payment method')}}:</span>
+                            {% if item.is_paid %}
                             <div class="flex items-center gap-x-2">
                                 <img src="/uploads/img/payment_methods/paypal.png" class="w-4" />
                                 <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200">PayPal</span>
                             </div>
+                            {% endif %}
                         </div>
                         <!-- End Col -->
                     </div>
