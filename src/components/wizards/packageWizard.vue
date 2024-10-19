@@ -344,6 +344,7 @@ export default
             'setting',
             'item',
             'fields',
+            'currency'
         ],
 
     };
