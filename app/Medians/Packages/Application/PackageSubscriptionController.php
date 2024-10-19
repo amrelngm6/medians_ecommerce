@@ -250,7 +250,7 @@ class PackageSubscriptionController extends CustomController
 			$params['subscription_id'] = $params['item_id'];
 
            	$returnData =  ($this->repo->update($params))
-           	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0)
+           	? array('success'=>1, 'result'=>translate('Canceled successfully'), 'reload'=>0)
            	: array('error'=>'Not allowed');
 
         } catch (Exception $e) {
