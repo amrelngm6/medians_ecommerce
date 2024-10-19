@@ -17,7 +17,9 @@
                         <div class="course-preview flex-none">
                             <h6>{{lang.translate(subscription.is_paid ? 'paid' : 'free')}}</h6>
                             <h2>{{subscription.invoice.code}}</h2>
+                            {% if subscription.is_valid %}
                             <a href="#">{{lang.translate('Cancel Subscription')}} <i class="fas fa-chevron-right"></i></a>
+                            {% endif %}
                         </div>
                         <div class="course-info">
                             <div class="progress-container">
