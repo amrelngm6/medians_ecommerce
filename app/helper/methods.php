@@ -305,6 +305,36 @@ function translate($langkey = null)
 
 
 
+/**
+ * Get days between two dates
+ * 
+ */
+function getDaysBetweenDates($to, $from)
+{
+    $toDate = strtotime($to);
+    $fromDate = strtotime($from);
+    $datediff = $toDate - $fromDate;
+
+    return round($datediff / (60 * 60 * 24));
+}
+
+
+/**
+ * Get days between two dates
+ * 
+ */
+function getPercentageBetweenDates($to, $from)
+{
+    $toDate = strtotime($to);
+    $fromDate = now();
+    $datediff = $toDate - $fromDate;
+
+    $currentDuration = round($datediff / (60 * 60 * 24));
+
+
+    return round($currentDuration / getDaysBetweenDates($to, $from));
+}
+
 
 /**
  * Extract sections from html page

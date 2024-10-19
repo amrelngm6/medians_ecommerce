@@ -12,7 +12,7 @@
             <hr class="my-6" />
 			<div class="box-body pt-0">
 				{% for subscription in customer.subscriptions %}
-                
+                {{getPercentageBetweenDates(subscription.start_date, subscription.end_date)}}
                 <div class="courses-container">
                     <div class="course">
                         <div class="course-preview flex-none">
