@@ -269,7 +269,7 @@ class PackageSubscriptionController extends CustomController
 		if (empty($params['item_id']))
 			throw new \Exception(translate('Item is required'), 1);
 			
-		$item = $this->find($params['item_id']);
+		$item = $this->repo->find($params['item_id']);
 
 		if (empty($item))
 			throw new \Exception(translate('Item is invalid'), 1);
