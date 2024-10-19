@@ -26,17 +26,15 @@
 				<!-- Col -->
 			</div>
 			<!-- End Grid -->
-{{invoice.customer}}
 			<!-- Grid -->
 			<div class="mt-8 grid sm:grid-cols-2 gap-3">
 				<div>
 					<h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">{{lang.translate('Bill to')}}:</h3>
 					<h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">{{invoice.customer.name}}</h3>
 					<address class="mt-2 not-italic text-gray-500 dark:text-neutral-500">
-						{{invoice.customer.field.address}},<br>
 						{{invoice.customer.field.city}},<br>
 						{{invoice.customer.field.country}},<br>
-						{{invoice.customer.field.phone}},<br>
+						{{invoice.customer.mobile}}<br>
 					</address>
 				</div>
 				<!-- Col -->
@@ -60,72 +58,25 @@
 			<div class="mt-6">
 				<div class="border border-gray-200 p-4 rounded-lg space-y-4 dark:border-neutral-700">
 					<div class="hidden sm:grid sm:grid-cols-5">
-						<div class="sm:col-span-2 text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Item</div>
-						<div class="text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Qty</div>
-						<div class="text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Rate</div>
-						<div class="text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Amount</div>
+						<div class="sm:col-span-2 text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">{{lang.translate('Package')}}</div>
+						<div class="text-start text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">{{lang.translate('Duration')}}</div>
+						<div class="text-end text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">{{lang.translate('Amount')}}</div>
 					</div>
 
 					<div class="hidden sm:block border-b border-gray-200 dark:border-neutral-700"></div>
 
 					<div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
 						<div class="col-span-full sm:col-span-2">
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Item</h5>
-							<p class="font-medium text-gray-800 dark:text-neutral-200">Design UX and UI</p>
+							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">{{lang.translate('Package')}}</h5>
+							<p class="font-medium text-gray-800 dark:text-neutral-200">{{invoice.subscription.package.name}}</p>
 						</div>
 						<div>
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Qty</h5>
-							<p class="text-gray-800 dark:text-neutral-200">1</p>
+							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">{{lang.translate('Duration')}}</h5>
+							<p class="text-gray-800 dark:text-neutral-200">{{invoice.subscription.duration}}</p>
 						</div>
 						<div>
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Rate</h5>
-							<p class="text-gray-800 dark:text-neutral-200">5</p>
-						</div>
-						<div>
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Amount</h5>
-							<p class="sm:text-end text-gray-800 dark:text-neutral-200">$500</p>
-						</div>
-					</div>
-
-					<div class="sm:hidden border-b border-gray-200 dark:border-neutral-700"></div>
-
-					<div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
-						<div class="col-span-full sm:col-span-2">
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Item</h5>
-							<p class="font-medium text-gray-800 dark:text-neutral-200">Web project</p>
-						</div>
-						<div>
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Qty</h5>
-							<p class="text-gray-800 dark:text-neutral-200">1</p>
-						</div>
-						<div>
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Rate</h5>
-							<p class="text-gray-800 dark:text-neutral-200">24</p>
-						</div>
-						<div>
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Amount</h5>
-							<p class="sm:text-end text-gray-800 dark:text-neutral-200">$1250</p>
-						</div>
-					</div>
-
-					<div class="sm:hidden border-b border-gray-200 dark:border-neutral-700"></div>
-
-					<div class="grid grid-cols-3 sm:grid-cols-5 gap-2">
-						<div class="col-span-full sm:col-span-2">
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Item</h5>
-							<p class="font-medium text-gray-800 dark:text-neutral-200">SEO</p>
-						</div>
-						<div>
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Qty</h5>
-							<p class="text-gray-800 dark:text-neutral-200">1</p>
-						</div>
-						<div>
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Rate</h5>
-							<p class="text-gray-800 dark:text-neutral-200">6</p>
-						</div>
-						<div>
-							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">Amount</h5>
-							<p class="sm:text-end text-gray-800 dark:text-neutral-200">$2000</p>
+							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">{{lang.translate('Amount')}}</h5>
+							<p class="sm:text-end text-gray-800 dark:text-neutral-200">{{invoice.currency_code}}{{invoice.total_amount}}</p>
 						</div>
 					</div>
 				</div>
