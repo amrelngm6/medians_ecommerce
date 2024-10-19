@@ -1881,9 +1881,9 @@ Station card
 
 .progress-container {
     position: absolute;
-    right: 100px;
+    right: 80px;
     text-align: right;
-    width: 150px;
+    width: 175px;
 }
 
 .progress-container .progress {
