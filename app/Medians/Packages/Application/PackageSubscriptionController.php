@@ -78,9 +78,6 @@ class PackageSubscriptionController extends CustomController
 	        'title' => translate('Package Subscriptions'),
 			'columns' => $this->columns(),
 			'fillable' => $this->fillable(),
-			'students' => $this->studentRepo->get(),
-			'employees' => $this->employeeRepo->get(),
-			'supervisors' => $this->supervisorRepo->get(),
 			'packages' => $this->packageRepo->get(),
 	        'items' => $this->repo->get(),
 	    ]);
@@ -155,7 +152,6 @@ class PackageSubscriptionController extends CustomController
 
         try {
 
-			$params['payment_status'] = (isset($params['is_paid']) && $params['is_paid'] != 'false' && $params['is_paid'] != 'null' ) ? 'paid' : 'unpaid';
 
            	$returnData =  ($this->repo->update($params))
            	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>true)
@@ -196,23 +192,6 @@ class PackageSubscriptionController extends CustomController
 
 	}
 
-
-	/**
-	 * Find unpaid subscription for payment
-	 * 
-	 * @param String
-	 * 
-	 * @return JSON
-	 */
-	public function loadPendingStudentsSubscription()
-	{
-		$user = $this->app->auth();
-		
-		$data = $this->repo->loadPendingStudentsSubscription( $user->customer_id);
-
-		return $data;
-
-	}  
 
 	/**
 	 * Get subscription
