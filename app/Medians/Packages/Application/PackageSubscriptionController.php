@@ -73,7 +73,7 @@ class PackageSubscriptionController extends CustomController
 	 */ 
 	public function index() 
 	{
-		return render('package_subscriptions', [
+		return render('data_table', [
 	        'load_vue' => true,
 	        'title' => translate('Package Subscriptions'),
 			'columns' => $this->columns(),
