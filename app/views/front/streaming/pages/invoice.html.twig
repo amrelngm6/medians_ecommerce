@@ -93,7 +93,7 @@
                         <div class="gap-20 font-semibold flex">
                             <span class="w-full">{{lang.translate('Payment status')}} </span>
                             <div class="flex items-center gap-x-2">
-                                <span class="block text-lg font-medium text-{{invoice.status == 'rose' ? 'green'}}-500">{{lang.translate(invoice.status)}}</span>
+                                <span class="block text-lg font-medium text-{{invoice.status == 'paid' ? 'green' : 'rose'}}-500">{{lang.translate(invoice.status)}}</span>
                             </div>
                         </div>
                         <!-- End Grid -->
