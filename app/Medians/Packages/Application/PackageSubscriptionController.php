@@ -242,8 +242,11 @@ class PackageSubscriptionController extends CustomController
 			throw new \Exception(translate('Login first'), 1);
 		}
 		
-		if (empty($customer->subscription)) {
-			throw new \Exception(translate('Login first'), 1);
+		if (!empty($customer->subscription)) {
+			if ($customer->subscription->is_valid && $customer->subscription->is_paid )
+			{
+				throw new \Exception(translate('Cancel your current subscription first'), 1);
+			}
 		}
 
 	}

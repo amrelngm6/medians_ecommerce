@@ -31,8 +31,13 @@ class PackageSubscription extends CustomModel
         'notes',
 	];
 
-    public $appends = ['is_paid','name', 'field'];
+    public $appends = ['is_paid', 'is_valid','name', 'field'];
 
+    
+	public function getIsValidAttribute()
+	{
+		return (strtotime(date("Y-m-d")) >= strtotime($this->end_date)) ? true : false;
+	}
     
 	public function getFieldAttribute()
 	{
