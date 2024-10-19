@@ -179,4 +179,28 @@ class PackageController extends CustomController
 
 	
 
+	
+    /**
+     * Package subscription page for frontend
+     */
+    public function page($playlist_id)
+    {
+		$this->app = new \config\APP;
+		
+		$settings = $this->app->SystemSetting();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+				'item' => $this->repo->find($playlist_id),
+                'layout' => 'packages/page'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
+
 }
