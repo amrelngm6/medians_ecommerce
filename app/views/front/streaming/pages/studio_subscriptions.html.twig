@@ -18,7 +18,7 @@
                             <h6>{{lang.translate(subscription.is_paid ? 'paid' : 'free')}}</h6>
                             <h2>{{subscription.invoice.code}}</h2>
                             {% if subscription.is_valid %}
-                            <a href="#">{{lang.translate('Cancel Subscription')}} <i class="fas fa-chevron-right"></i></a>
+                            <a href="/front_api/delete?type=PackageSubscription.cancel&params[item_id]={{subscription.subscription_id}}" class="ajax-load" data-confirm="true" data-confirm-text="{{lang.translate('Are you sure you want to cancel this subscription')}}">{{lang.translate('Cancel Subscription')}} <i class="fas fa-chevron-right"></i></a>
                             {% endif %}
                         </div>
                         <div class="course-info">
