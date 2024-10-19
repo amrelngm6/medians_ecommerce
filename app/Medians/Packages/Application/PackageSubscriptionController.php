@@ -138,7 +138,7 @@ class PackageSubscriptionController extends CustomController
 			$this->validate($params, $item);
 
 			$save = $this->repo->store($params);
-			$redirect = '/studio/subscription/'.$save->subscription_id;
+			$redirect = '/studio/subscriptions';
 
 			if (isset($save->subscription_id) && $save->total_cost > 0)
 			{
