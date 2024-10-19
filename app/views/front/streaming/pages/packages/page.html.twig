@@ -45,7 +45,7 @@
             </ul>
             
             <div class="mt-5 sm:mt-10">
-                <p class="text-sm text-gray-500 dark:text-gray-500">If you have any questions, please contact us at
+                <p class="text-sm text-gray-400 dark:text-gray-400">If you have any questions, please contact us at
                     <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="mailto:{{app.SystemSetting.footer_email}}">{{app.SystemSetting.footer_email}}</a>
                     or call at
                     <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="tel:{{app.SystemSetting.footer_phone}}">{{app.SystemSetting.footer_phone}}</a>
@@ -97,7 +97,7 @@
                         <h3 id="hs-ai-modal-label" class="text-lg font-semibold text-gray-800 dark:text-gray-200">
                             {{lang.translate('Package subscription')}}
                         </h3>
-                        <p class="text-sm text-gray-500 dark:text-gray-500">
+                        <p class="text-sm text-gray-400 dark:text-gray-400">
                             {{item.name}}
                         </p>
                     </div>
@@ -105,19 +105,19 @@
                     <!-- Grid -->
                     <div class="mt-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5">
                         <div>
-                            <span class="block text-xs uppercase text-gray-500 dark:text-gray-500">{{lang.translate('Total amount')}}:</span>
+                            <span class="block text-xs uppercase text-gray-400 dark:text-gray-400">{{lang.translate('Total amount')}}:</span>
                             <span class="block text-sm font-medium text-gray-800 dark:text-gray-200" >$<span x-text="cost"></span></span>
                         </div>
                         <!-- End Col -->
 
                         <div>
-                            <span class="block text-xs uppercase text-gray-500 dark:text-gray-500">{{lang.translate('Estimated date')}}:</span>
+                            <span class="block text-xs uppercase text-gray-400 dark:text-gray-400">{{lang.translate('Estimated date')}}:</span>
                             <span class="block text-sm font-medium text-gray-800 dark:text-gray-200" x-text="endDate"></span>
                         </div>
                         <!-- End Col -->
 
                         <div>
-                            <span class="block text-xs uppercase text-gray-500 dark:text-gray-500">{{lang.translate('Payment method')}}:</span>
+                            <span class="block text-xs uppercase text-gray-400 dark:text-gray-400">{{lang.translate('Payment method')}}:</span>
                             {% if item.is_paid %}
                             <div class="flex items-center gap-x-2">
                                 <img src="/uploads/img/payment_methods/paypal.png" class="w-4" />
@@ -133,17 +133,17 @@
                         <div class="flex gap-4">
                             <label x-on:click="cost = cost_month, endDate = endDateMonth" for="package-duration" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:placeholder-gray-500 dark:focus:ring-gray-600">
                                 <input type="radio" value="month" name="params[duration]" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="package-duration" checked>
-                                <span class="text-sm text-gray-500 ms-3 dark:text-gray-400">{{lang.translate('Month')}}</span>
+                                <span class="text-sm text-gray-400 ms-3 dark:text-gray-400">{{lang.translate('Month')}}</span>
                             </label>
 
                             <label x-on:click="cost = cost_quarter, endDate = endDateQuarter" for="package-duration-q" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:placeholder-gray-500 dark:focus:ring-gray-600">
                                 <input type="radio" value="quarter" name="params[duration]" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="package-duration-q">
-                                <span class="text-sm text-gray-500 ms-3 dark:text-gray-400">{{lang.translate('Quarter')}}</span>
+                                <span class="text-sm text-gray-400 ms-3 dark:text-gray-400">{{lang.translate('Quarter')}}</span>
                             </label>
 
                             <label x-on:click="cost = cost_year, endDate = endDateYear" for="package-duration-y" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:placeholder-gray-500 dark:focus:ring-gray-600">
                                 <input type="radio" value="year" name="params[duration]" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-gray-800 dark:border-gray-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="package-duration-y">
-                                <span class="text-sm text-gray-500 ms-3 dark:text-gray-400">{{lang.translate('Year')}}</span>
+                                <span class="text-sm text-gray-400 ms-3 dark:text-gray-400">{{lang.translate('Year')}}</span>
                             </label>
                         </div>
                     </div>
