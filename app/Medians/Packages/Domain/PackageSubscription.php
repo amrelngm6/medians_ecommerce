@@ -37,7 +37,7 @@ class PackageSubscription extends CustomModel
     
 	public function getIsValidAttribute()
 	{
-		return (strtotime(date("Y-m-d")) >= strtotime($this->end_date)) ? true : false;
+		return (strtotime(date("Y-m-d")) <= strtotime($this->end_date)) ? true : false;
 	}
     
 	public function getFieldAttribute()
