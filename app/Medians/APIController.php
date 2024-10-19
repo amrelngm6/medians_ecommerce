@@ -414,6 +414,10 @@ class APIController extends CustomController
 				$controller = new Packages\Application\PackageController; 
 				break;
 			
+			case 'PackageSubscription.update':
+				$controller = new Packages\Application\PackageSubscriptionController; 
+				break;
+			
 		}
 
 		return response(isset($controller) ? json_encode($controller->update()) : []);
