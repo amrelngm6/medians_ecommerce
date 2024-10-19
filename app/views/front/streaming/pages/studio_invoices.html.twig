@@ -16,7 +16,7 @@
                 {% for invoice in customer.invoices %}
                 
                     <!-- First Invoice -->
-                    <div class="p-4 bg-gray-50 rounded-lg shadow-md flex justify-between items-center">
+                    <div class="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-md flex justify-between items-center">
                         <div>
                             <p class="text-lg  text-gray-800">{{lang.translate('Subscription package')}}: <a href="/invoice/{{invoice.code}}" class="ajax-load font-semibold">{{invoice.item.package.name}}</a> </p>
                             <p class="text-sm text-gray-500 pt-2">{{lang.translate('Date')}}: <a href="/invoice/{{invoice.code}}" class="ajax-load">{{invoice.date|date('M d, Y')}}</a></p>
