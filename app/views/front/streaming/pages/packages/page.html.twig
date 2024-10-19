@@ -88,7 +88,7 @@
 
                 <!-- Body -->
                 <form action="/front_api/create" id="subscription-form" class="ajax-form p-4 sm:p-7 overflow-y-auto">
-                    <input type="hidden" value="PackageSubscriber.create" name="type" />
+                    <input type="hidden" value="PackageSubscription.create" name="type" />
                     <input type="hidden" value="{{item.package_id}}" name="params[package_id]" />
                     <input type="hidden" value="{{"now"|date("Y-m-d")}}" name="params[start_date]" />
                     <input type="hidden" x-model="endDate" name="params[end_date]" />
