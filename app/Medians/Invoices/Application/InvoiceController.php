@@ -169,9 +169,14 @@ class InvoiceController extends CustomController
 
 		try {
 
+			$item = $this->repo->findByCode($invoice_code);
+
+			if (empty($item))
+				return Page404();
+
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
-				'invoice' => $this->repo->findByCode($invoice_code),
+				'invoice' => $item,
                 'layout' => 'invoice'
             ], 'output'));
             
