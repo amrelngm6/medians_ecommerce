@@ -16,9 +16,9 @@
                 <div class="courses-container">
                     <div class="course">
                         <div class="course-preview">
-                            <h6>Course</h6>
-                            <h2>JavaScript Fundamentals</h2>
-                            <a href="#">View all chapters <i class="fas fa-chevron-right"></i></a>
+                            <h6>{{lang.translate(subscription.is_paid ? 'paid' : 'free')}}</h6>
+                            <h2>{{subscription.package.name}}</h2>
+                            <a href="#">{{lang.translate('View invoice')}} <i class="fas fa-chevron-right"></i></a>
                         </div>
                         <div class="course-info">
                             <div class="progress-container">
