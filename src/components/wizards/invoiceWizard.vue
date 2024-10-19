@@ -113,22 +113,20 @@
                                                             <th class="min-w-70px text-end pb-2" v-text="translate('Subtotal')"></th>
                                                             <th class="min-w-70px text-end pb-2" v-text="translate('Qty')"></th>
                                                             <th class="min-w-80px text-end pb-2"  v-text="translate('Discount')"></th>
-                                                            <th class="min-w-80px text-end pb-2"  v-text="translate('Tax')"></th>
                                                             <th class="min-w-100px text-end pb-2"  v-text="translate('Total')"></th>
                                                         </tr>
                                                     </thead>
 
-                                                    <tbody v-if="activeItem.items">
-                                                        <tr class="fw-bold text-gray-700 fs-5 text-end" v-for="invoiceItem in activeItem.items">
-                                                            <td class="d-flex align-items-center pt-6 gap-2" v-if="invoiceItem" >
+                                                    <tbody v-if="activeItem.item">
+                                                        <tr class="fw-bold text-gray-700 fs-5 text-end" >
+                                                            <td class="d-flex align-items-center pt-6 gap-2"  >
                                                                 <vue-feather type="cloud-lightning" ></vue-feather>
-                                                                <a href="javascript:;" v-if="invoiceItem.item && invoiceItem.item.lang_content" v-text="invoiceItem.item.lang_content.title"></a>
+                                                                <a href="javascript:;" v-if="activeItem.item" v-text="activeItem.item.item.name"></a>
                                                             </td>
-                                                            <td class="pt-6" v-text="currency.symbol + '' + (invoiceItem.subtotal / invoiceItem.quantity)"></td>
-                                                            <td class="pt-6" v-text="invoiceItem.quantity"></td>
-                                                            <td class="pt-6" v-text="currency.symbol + '' + invoiceItem.discount_amount"></td>
-                                                            <td class="pt-6" v-text="currency.symbol + '' + invoiceItem.tax_amount"></td>
-                                                            <td class="pt-6 text-gray-900 fw-bolder" v-text="currency.symbol + '' + invoiceItem.total_amount "></td>
+                                                            <td class="pt-6" v-text="'$' + activeItem.item.subtotal"></td>
+                                                            <td class="pt-6" v-text="activeItem.item.duration"></td>
+                                                            <td class="pt-6" v-text="'$' + activeItem.item.discount_amount"></td>
+                                                            <td class="pt-6 text-gray-900 fw-bolder" v-text="'$' + activeItem.item.total_amount "></td>
                                                         </tr>
 
                                                     </tbody>
@@ -142,27 +140,27 @@
                                                 <div class="mw-300px">
                                                     <div class="d-flex flex-stack mb-3">
                                                         <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Subtotal')"></div>
-                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="currency.symbol + '' + activeItem.subtotal "></div>
+                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="'$' + activeItem.subtotal "></div>
                                                     </div>
                                                         
                                                     <div class="d-flex flex-stack mb-3">
                                                         <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Discount')"></div>
-                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="currency.symbol + '' + activeItem.discount_amount"></div>
+                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="'$' + activeItem.discount_amount"></div>
                                                     </div>
                                                         
                                                     <div class="d-flex flex-stack mb-3">
                                                         <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Tax')"></div>
-                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="currency.symbol + '' + activeItem.tax_amount"></div>
+                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="'$' + activeItem.tax_amount"></div>
                                                     </div>
                             
                                                     <div class="d-flex flex-stack mb-3">
                                                         <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Shipping')"></div>
-                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="currency.symbol + '' + activeItem.shipping_amount"></div>
+                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="'$' + activeItem.shipping_amount"></div>
                                                     </div>
                             
                                                     <div class="d-flex flex-stack mb-3">
                                                         <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Total amount')"></div>
-                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="currency.symbol + '' + activeItem.total_amount"></div>
+                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="'$' + activeItem.total_amount"></div>
                                                     </div>
                             
                                                 </div>
@@ -211,7 +209,7 @@
                                     <div class="mb-6">
                                         <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Total amount')"></div>
 
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="currency.symbol + '' + activeItem.transaction.amount"></div>
+                                        <div class="fw-bold text-gray-800 fs-6" v-text="'$' + activeItem.transaction.amount"></div>
                                     </div>
                                     
                                     <!--begin::Item-->
