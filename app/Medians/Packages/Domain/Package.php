@@ -29,7 +29,12 @@ class Package extends CustomModel
     	'created_by',
 	];
 
-    public $appends = ['feature'];
+    public $appends = ['feature', 'is_paid'];
+
+	public function getIsPaidAttribute()
+	{
+		return $this->payment_type == 'paid' ? true : null;
+	}
 
 	public function getFeatureAttribute()
 	{

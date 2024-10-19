@@ -44,58 +44,60 @@
                                     <div class="max-w-xl mb-6 mx-auto">
 
                                         <div class="mx-auto pb-10 flex gap-10">
-                                            <p>
+                                            <p class="w-full flex flex-col">
                                                 <span class="text-xl font-semibold w-full" v-text="translate('Package type')"></span>
                                                 <span class=" w-full" v-text="translate('check if it is paid Package')"></span>
                                             </p>
-                                            <label class="flex-none flex gap-2 cursor-pointer" @click="activeItem.payment_type = activeItem.payment_type == 'paid' ? 'free' : 'paid'">
-                                                <div class="py-4 flex gap gap-2 cursor-pointer"><span class="bg-red-400 mx-2 mt-1 bg-red-400 block h-4 relative rounded-full w-8" style="direction: ltr;"><a class="absolute bg-white block h-4 relative right-0 rounded-full w-4" style="left: 16px;"></a></span><!----><input type="checkbox" class="hidden" name="params[payment_type]" value=""><input type="checkbox" class="hidden" value="paid" :checked="activeItem.payment_type == 'paid'"></div>
-                                                <div class="pt-3">
-                                                    <span class="badge badge-light fw-bold me-auto px-4 py-3" v-text="!activeItem.payment_type ? 'Free' : 'Paid'"></span>
-                                                </div>
+                                            <label for="payment-type" class="flex-none flex gap-2 cursor-pointer h-25"  >
+                                                <span :class="!activeItem.is_paid ? 'bg-gray-200' : 'bg-red-400'" class="mx-2 mt-1 bg-red-400 block h-4 relative rounded-full w-8" style="direction: ltr;" ><a class="absolute bg-white block h-4 relative right-0 rounded-full w-4" :style="{left: activeItem.is_paid ? '16px' : 0}"></a></span>
+                                                <span class="badge badge-light fw-bold me-auto px-4 py-3" v-text="!activeItem.is_paid ? 'Free' : 'Paid'"></span>
+                                                <input id="payment-type" v-model="activeItem.is_paid" @change="activeItem.payment_type = !activeItem.is_paid ? 'free' : 'paid'"   type="checkbox" class="hidden"  />
                                             </label>
+
                                         </div>
 
-                                        <div v-if="activeItem.payment_type == 'paid'"
-                                            class="notice d-flex bg-blue-100 rounded border-primary border border-dashed rounded-3 p-6">
-                                            <div class="d-flex flex-stack flex-grow-1 ">
-                                                <div class=" font-semibold">
-                                                    <h4 class="text-gray-900 fw-bold"
-                                                        v-text="translate('Set Plan Cost')"></h4>
-                                                    <div class="text-xl text-gray-700 "
-                                                        v-text="translate('Set the cost of this package')">
+                                        <div v-if="activeItem.payment_type == 'paid'">
+                                            <div 
+                                                class="notice d-flex bg-blue-100 rounded border-primary border border-dashed rounded-3 p-6">
+                                                <div class="d-flex flex-stack flex-grow-1 ">
+                                                    <div class=" font-semibold">
+                                                        <h4 class="text-gray-900 fw-bold"
+                                                            v-text="translate('Set Plan Cost')"></h4>
+                                                        <div class="text-xl text-gray-700 "
+                                                            v-text="translate('Set the cost of this package')">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <hr class="opacity-10 my-4" />
+                                            <hr class="opacity-10 my-4" />
 
-                                        <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl required font-semibold"
-                                                v-text="translate('Cost per month')"></label>
-                                            <input :required="true" autocomplete="off" name="params[cost_month]"
-                                                class="form-control form-control-solid"
-                                                :placeholder="translate('Cost per month')" type="number"
-                                                v-model="activeItem.cost_month">
-                                        </div>
+                                            <div class="w-full mb-6 mx-auto row">
+                                                <label class=" text-xl required font-semibold"
+                                                    v-text="translate('Cost per month')"></label>
+                                                <input :required="true" autocomplete="off" name="params[cost_month]"
+                                                    class="form-control form-control-solid"
+                                                    :placeholder="translate('Cost per month')" type="number"
+                                                    v-model="activeItem.cost_month">
+                                            </div>
 
-                                        <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl required font-semibold "
-                                                v-text="translate('Cost per quarter')"></label>
-                                            <input :required="true" autocomplete="off" name="params[cost_quarter]"
-                                                class="form-control form-control-solid"
-                                                :placeholder="translate('Cost per month')" type="number"
-                                                v-model="activeItem.cost_quarter">
-                                        </div>
+                                            <div class="w-full mb-6 mx-auto row">
+                                                <label class=" text-xl required font-semibold "
+                                                    v-text="translate('Cost per quarter')"></label>
+                                                <input :required="true" autocomplete="off" name="params[cost_quarter]"
+                                                    class="form-control form-control-solid"
+                                                    :placeholder="translate('Cost per month')" type="number"
+                                                    v-model="activeItem.cost_quarter">
+                                            </div>
 
-                                        <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl required font-semibold "
-                                                v-text="translate('Cost per year')"></label>
-                                            <input :required="true" autocomplete="off" name="params[cost_year]"
-                                                class="form-control form-control-solid"
-                                                :placeholder="translate('Cost per month')" type="number"
-                                                v-model="activeItem.cost_year">
+                                            <div class="w-full mb-6 mx-auto row">
+                                                <label class=" text-xl required font-semibold "
+                                                    v-text="translate('Cost per year')"></label>
+                                                <input :required="true" autocomplete="off" name="params[cost_year]"
+                                                    class="form-control form-control-solid"
+                                                    :placeholder="translate('Cost per month')" type="number"
+                                                    v-model="activeItem.cost_year">
+                                            </div>
                                         </div>
 
                                     </div>
