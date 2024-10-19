@@ -94,7 +94,7 @@
                             <span class="w-full">{{lang.translate('Payment status')}} </span>
                             <div class="flex items-center gap-x-2">
                                 <img src="/uploads/img/payment_methods/paypal.png" class="w-4" />
-                                <span class="block text-lg font-medium text-gray-800 dark:text-gray-100">{{invoice.status}}</span>
+                                <span class="block text-lg font-medium text-{{invoice.status == 'rose' ? 'green'}}-500">{{lang.translate(invoice.status)}}</span>
                             </div>
                         </div>
                         <!-- End Grid -->
