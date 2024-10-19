@@ -13,9 +13,9 @@
     <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:items-center">
         {% for package in packages %}
         <div class="flex flex-col border border-gray-200 text-center rounded-xl p-8 dark:border-neutral-800">
-            <h4 class="font-medium text-lg text-gray-800 dark:text-neutral-200">{{package.name}}</h4>
+            <h4 class="font-medium text-lg text-gray-800 dark:text-neutral-200">{{lang.translate(package.payment_type)}}</h4>
             <p>
-                <span class="mt-7 font-bold text-5xl text-gray-800 dark:text-neutral-200">{{lang.translate(package.payment_type)}}</span>
+                <span class="mt-7 font-bold text-5xl text-gray-800 dark:text-neutral-200">{{package.name}}</span>
             </p>
             <p class="mt-2 text-sm text-gray-500 dark:text-neutral-500">
                 {{package.description}}
