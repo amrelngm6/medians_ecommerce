@@ -40,7 +40,7 @@ class PackageSubscriptionController extends CustomController
 	{
 		return [
             [ 'value'=> "subscription_id", 'text'=> "#"],
-            [ 'value'=> "name", 'text'=> translate('Name'), 'sortable'=> true ],
+            [ 'value'=> "customer.name", 'text'=> translate('Customer'), 'sortable'=> true ],
             [ 'value'=> "package.name", 'text'=> translate('Package'), 'sortable'=> true ],
             [ 'value'=> "total_cost", 'text'=> translate('Total cost'), 'sortable'=> true ],
             [ 'value'=> "payment_status", 'text'=> translate('Payment'), 'sortable'=> true ],
