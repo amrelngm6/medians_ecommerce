@@ -39,7 +39,7 @@ class TransactionController extends CustomController
             [ 'value'=> "payment_method", 'text'=> translate('Gateway'), 'sortable'=> true ],
             [ 'value'=> "date", 'text'=> translate('Date'), 'sortable'=> true ],
             [ 'value'=> "invoice.code", 'text'=> translate('Invoice'), 'sortable'=> false ],
-			['value'=>'delete', 'text'=>translate('Delete')],
+			// ['value'=>'delete', 'text'=>translate('Delete')],
         ];
 	}
 
