@@ -25,6 +25,7 @@ class PackageSubscription extends CustomModel
 		'customer_id',
         'start_date',
         'end_date',
+        'duration',
         'payment_type',
         'payment_status',
         'total_cost',
