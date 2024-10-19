@@ -100,10 +100,10 @@ class PackageSubscriptionController extends CustomController
 			
 			$item = $this->packageRepo->find($params['package_id']);
 
+
 			$params['customer_id'] = $customer->customer_id;
 			$params['payment_status'] = $item->is_paid ? 'paid' : 'free';
 			$params['package_id'] = $item->package_id;
-			$params['total_cost'] = $item->feature['cost_'.$params['duration']];
 			$params['start_date'] = date("Y-m-d");
 			switch ($params['duration']) 
 			{
@@ -122,6 +122,9 @@ class PackageSubscriptionController extends CustomController
 					$params['payment_type'] = 'month';
 					break;
 			}
+
+			$cost = 'cost_'.$params['payment_type'];
+			$params['total_cost'] = $item->$cost;
 
             print_r($params);
 			return;
