@@ -28,6 +28,11 @@ class PackageRepository
 		return Package::get();
 	}
 
+	public function getActive() 
+	{
+		return Package::where('status', 'on')->get();
+	}
+
 
 	
 
