@@ -360,7 +360,7 @@ class APP
 			]
 			),
 			
-			array( 'title'=>translate('Packages'),  'icon'=>'package', 'link'=>'#plugins', 'superadmin'=> true, 'sub'=>
+			array( 'title'=>translate('Packages'),  'icon'=>'package', 'link'=>'#packages', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=>'Packages.index', 'title'=>translate('Packages'),  'icon'=>'tool', 'link'=>'admin/packages', 'component'=>'packages'),
 			]
