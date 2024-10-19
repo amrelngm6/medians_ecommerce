@@ -78,7 +78,7 @@ class PackageSubscription extends CustomModel
 
     public function customer()
     {
-        return $this->hasOne(Customer::class, 'package_id', 'package_id');
+        return $this->hasOne(Customer::class, 'customer_id', 'customer_id');
     }
 
 
