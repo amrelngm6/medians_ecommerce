@@ -3960,11 +3960,6 @@ video {
   background-color: rgb(99 102 241 / 0.2);
 }
 
-.dark\:bg-neutral-700:is(.dark *) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(64 64 64 / var(--tw-bg-opacity));
-}
-
 .dark\:bg-neutral-800:is(.dark *) {
   --tw-bg-opacity: 1;
   background-color: rgb(38 38 38 / var(--tw-bg-opacity));
