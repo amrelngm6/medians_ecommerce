@@ -24,7 +24,7 @@ class PaymentService
 
 	function loadService() 
 	{
-		$this->service = new PayPalService();
+		$this->service = new PaypalService();
 	}
 
 	
