@@ -1896,7 +1896,7 @@ Station card
     width: 100%;
 }
 
-.progress-container .progress::after {
+.progress-container .progress > span {
     border-radius: 3px;
     background-color: #2A265F;
     content: '';
@@ -1904,7 +1904,6 @@ Station card
     top: 0;
     left: 0;
     height: 5px;
-    width: 66%;
 }
 
 .progress-text {
