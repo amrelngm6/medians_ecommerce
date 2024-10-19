@@ -177,12 +177,12 @@ class TransactionController extends CustomController
 			
 			$paymentService = new PaymentService($params['payment_method']);
 
-			$verify = $paymentService->verify($params);
+			$transaction = $paymentService->verify($params);
 			
-			$savedSubscription = $paymentService->updatePackageSubscription($params); 
+			$updateSubscription = $paymentService->updatePackageSubscription($params, $transaction); 
 
-			return ($verify )
-			? array('success'=>1, 'result'=>$verify, 'reload'=>1)
+			return ($transaction )
+			? array('success'=>1, 'result'=>$transaction, 'reload'=>1)
 			: array('error'=> 1);
 
 		} catch (Exception $e) {

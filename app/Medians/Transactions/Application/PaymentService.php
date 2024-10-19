@@ -42,7 +42,9 @@ class PaymentService
 
 			$transaction = $this->storeTransaction($params, $invoice, $verify);
 
-			return $invoice;
+			$subscription = $this->updatePackageSubscription($params, $invoice, $transaction);
+
+			return $transaction;
 		}
 	}
 
@@ -79,54 +81,18 @@ class PaymentService
 	}
 
 
-	public function addInvoice($params)
+    
+	
+	
+	public function updatePackageSubscription($params, $invoice, $transaction)
 	{
 		try {
 
-			$app = new \config\APP;
-			$setting = $app->SystemSetting();
-			
-			$invoiceRepo = new \Medians\Invoices\Infrastructure\InvoiceRepository();
-			$orderRepo = new \Medians\Orders\Infrastructure\OrderRepository();
-			
-			$order = $orderRepo->find($params['order_id']);
-
-			$data = array();
-			$data['code'] = $invoiceRepo->generateCode();
-			$data['user_id'] = $app->customer_auth()->customer_id;
-			$data['user_type'] = Customer::class;
-			$data['payment_method'] = $this->payment_method;
-			$data['subtotal'] = $order->subtotal;
-			$data['total_amount'] = $order->total_amount;
-			$data['shipping_amount'] = $order->shipping_amount;
-			$data['tax_amount'] = $order->tax_amount;
-			$data['currency_code'] = $setting['currency'];
-			$data['status'] = 'paid';
-			$data['order_id'] = $order->order_id;
-			$data['items'] = $order->items;
-			$data['discount_amount'] = 0;
-			$data['date'] = date('Y-m-d');
-
-			return $invoiceRepo->store($data);
-
-		} catch (\Throwable $th) {
-			error_log($th->getMessage());
-			return array('error'=>$th->getMessage());
-		}
-	}
-	
-	
-	
-	public function updateWallet($params, $invoice)
-	{
-		try {
-
-			if ($params['payment_method'] == 'cash')
+			if ($transaction->amount == $invoice->total_amount)
 			{
-				return $this->updateDriverWalletDebit($params, $invoice);
+                $this->invoice->item->update(['payment_status'=>'paid' , 'status'=>'active']);
 			}
 			
-			return $this->updateBusinessWallet($params, $invoice);
 
 		} catch (\Throwable $th) {
 			return array('error'=>$th->getMessage());
