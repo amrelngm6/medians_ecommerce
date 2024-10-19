@@ -99,6 +99,7 @@ RouteHandler::get('/studio/channels', \Medians\Channels\Application\ChannelContr
 
 /**Subscription pages */
 RouteHandler::get('/package_subscription/(:all)', \Medians\Packages\Application\PackageController::class.'@page');
+RouteHandler::get('/invoice/(:all)', \Medians\Invoices\Application\InvoiceController::class.'@page');
 
 RouteHandler::get('/discover', \Medians\Media\Application\MediaItemController::class.'@discover');
 RouteHandler::get('/genres', \Medians\Media\Application\MediaItemController::class.'@genres');
