@@ -280,4 +280,33 @@ class PackageSubscriptionController extends CustomController
 
 	}
 
+
+
+	/**
+     * Subscriptions list page for studio frontend
+     */
+    public function studio()
+    {
+		$customer = $this->app->customer_auth();
+
+		$settings = $this->app->SystemSetting();
+
+		try {
+
+            return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
+                'app' => $this->app,
+                'item' => $customer,
+                'layout' => isset($this->app->customer->customer_id) ? 'studio_subscriptions' : 'signin'
+            ], 'output'));
+            
+		} catch (\Exception $e) {
+			throw new \Exception($e->getMessage(), 1);
+		}
+    }
+
+
+
+
+
+
 }

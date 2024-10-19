@@ -75,7 +75,7 @@ class Customer extends CustomModel
 
 	public function subscriptions() 
 	{
-		return $this->hasMany(PackageSubscription::class , 'customer_id', 'customer_id');	
+		return $this->hasMany(PackageSubscription::class , 'customer_id', 'customer_id')->orderBy('end_date', 'DESC');	
 	}
 
 	public function subscription() 

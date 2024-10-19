@@ -1,5 +1,5 @@
 <div class="px-2 lg:flex ">
-
+    {% set customer = app.customer_auth %}
 	{% include 'views/front/' ~ template ~ '/includes/studio_sidemenu.html.twig' %}
 
 	<div class="dark:text-gray-300 w-full gap-6 overflow-hidden dark:bg-gray-900 bg-white   px-2 py-8 lg:p-8  rounded-lg shadow shadow-lg relative">
@@ -11,7 +11,7 @@
 			</div>
             <hr class="my-6" />
 			<div class="box-body pt-0">
-				{% for subscription in items %}
+				{% for subscription in customer.subscriptions() %}
                 
                 <div class="courses-container">
                     <div class="course">

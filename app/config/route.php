@@ -96,6 +96,8 @@ RouteHandler::get('/studio/stations', \Medians\Stations\Application\StationContr
 RouteHandler::get('/studio/profile', \Medians\Customers\Application\CustomerController::class.'@edit_profile');
 RouteHandler::get('/studio/information', \Medians\Customers\Application\CustomerController::class.'@edit_information');
 RouteHandler::get('/studio/channels', \Medians\Channels\Application\ChannelController::class.'@studio');
+RouteHandler::get('/studio/invoices', \Medians\Channels\Application\ChannelController::class.'@studio');
+RouteHandler::get('/studio/subscriptions', \Medians\Packages\Application\PackageSubscriptionController::class.'@studio');
 
 /**Subscription pages */
 RouteHandler::get('/package_subscription/(:all)', \Medians\Packages\Application\PackageController::class.'@page');
