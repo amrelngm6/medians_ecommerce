@@ -149,17 +149,11 @@ class InvoiceController extends CustomController
 		
 		try {
 			
-			$saveInvoice = $this->repo->store($params); 
-
-			return (isset($saveInvoice['success']))
-			? array('success'=>1, 'result'=>$saveInvoice['result'], 'reload'=>1)
-			: array('error'=>$saveInvoice['error']);
+			return $this->repo->store($params); 
 
 		} catch (Exception $e) {
 			return array('error'=>$e->getMessage());
 		}
-		
-		
 	}
 
 
