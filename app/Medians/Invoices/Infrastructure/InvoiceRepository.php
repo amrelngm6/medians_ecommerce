@@ -112,7 +112,7 @@ class InvoiceRepository
 
 		$Model = new Invoice();
 		
-		$Model->code = $this->generateCode();
+		$data['code'] = $this->generateCode();
 
 		foreach ($data as $key => $value) 
 		{
