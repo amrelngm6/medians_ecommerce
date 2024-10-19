@@ -91,6 +91,7 @@
                     <input type="hidden" value="PackageSubscriber.create" name="type" />
                     <input type="hidden" value="{{item.package_id}}" name="params[package_id]" />
                     <input type="hidden" value="{{"now"|date("Y-m-d")}}" name="params[start_date]" />
+                    <input type="hidden" x-model="endDate" name="params[end_date]" />
                     <input type="hidden" x-model="cost" name="params[cost]" />
                     <div class="text-center">
                         <h3 id="hs-ai-modal-label" class="text-lg font-semibold text-gray-800 dark:text-neutral-200">
