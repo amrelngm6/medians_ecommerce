@@ -326,7 +326,7 @@ function getDaysBetweenDates($to, $from)
 function getPercentageBetweenDates($to, $from)
 {
     $toDate = strtotime($to);
-    $fromDate = now();
+    $fromDate = strtotime(date("Y-m-d"));
     $datediff = $toDate - $fromDate;
 
     $currentDuration = round($datediff / (60 * 60 * 24));
