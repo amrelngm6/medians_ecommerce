@@ -210,33 +210,25 @@
                                     </div>
             
                                     
-                                    <h6 class="mb-8 fw-bolder text-gray-600 text-hover-primary" v-text="translate('Shipping method')"></h6>
-                                    <!--begin::Item-->
-                                    <div class="mb-6" v-if="activeItem.order && activeItem.order.field">
-                                        <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Shipping')"></div>
-
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.order.field.shipping_name ?? ''"></div>
-                                    </div>
-            
                                     <h6 class="mb-8 fw-bolder text-gray-600 text-hover-primary" v-text="translate('Billing info')"></h6>
 
                                     <!--begin::Item-->
                                     <div class="mb-6">
                                         <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Payer name')"></div>
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.order.field.first_name"></div>
+                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.customer.name"></div>
                                     </div>
 
                                     <!--begin::Item-->
                                     <div class="mb-6">
                                         <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Payer email')"></div>
 
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.order.field.email"></div>
+                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.customer.email"></div>
                                     </div>
                                     
                                     <div class="m-0">
-                                        <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Order id')"></div>
+                                        <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Code')"></div>
                                         
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.order.order_id"></div>
+                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.code"></div>
                                     </div>
                                     
                                     <div class="m-0">
