@@ -1,0 +1,42 @@
+<div class="px-2 lg:flex ">
+    {% set customer = app.customer_auth %}
+	{% include 'views/front/' ~ template ~ '/includes/studio_sidemenu.html.twig' %}
+
+	<div class="dark:text-gray-300 w-full gap-6 overflow-hidden dark:bg-gray-900 bg-white   px-2 py-8 lg:p-8  rounded-lg shadow shadow-lg relative">
+
+		<div class="box">
+			<div class="box-header with-border">
+				<h4 class="box-title text-2xl">{{lang.translate('Invoices')}}</h4>
+				<p class="text-fade">{{lang.translate('List of previuos Invoices')}}</p>
+			</div>
+            <hr class="my-6" />
+			<div class="box-body pt-0">
+				{% for invoice in customer.invoices %}
+                <div class="courses-container">
+                    <div class="course shadow-md bg-gray-100 dark:bg-gray-800">
+                        <div class="course-preview flex-none">
+                            <h6>{{lang.translate(invoice.status == 'paid' ? 'paid' : 'free')}}</h6>
+                            <h2>{{invoice.code}}</h2>
+                        </div>
+                        <div class="course-info">
+                            <div class="progress-container">
+                                <div class="progress overflow-hidden relative"><span style="width: {{app.getPercentageBetweenDates(subscription.end_date, subscription.start_date)}}%"></span></div>
+                                <span class="progress-text">
+                                    {{subscription.start_date}} - {{subscription.end_date}}
+                                </span>
+                                <a href="/invoice/{{subscription.invoice.code}}" class="mt-2 block relative text-gray-100  bg-gray-800 shadow-md rounded-full py-2 px-6 dark:bg-gray-900 ajax-load">{{lang.translate('View invoice')}} </a>
+                            </div>
+                            <h6>{{lang.translate('Package')}}</h6>
+                            <h2>{{subscription.package.name}}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+			</div>
+		</div>
+
+	</div>
+
+</div>
+

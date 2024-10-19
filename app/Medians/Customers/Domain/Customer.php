@@ -73,6 +73,11 @@ class Customer extends CustomModel
 		return $this->fillable;
 	}
 
+	public function invoices() 
+	{
+		return $this->hasMany(Invoice::class , 'customer_id', 'customer_id')->orderBy('date', 'DESC');	
+	}
+
 	public function subscriptions() 
 	{
 		return $this->hasMany(PackageSubscription::class , 'customer_id', 'customer_id')->orderBy('end_date', 'DESC');	
