@@ -34,10 +34,10 @@
 										<polyline points="20 6 9 17 4 12"></polyline>
 									</svg>
                                     {% else %}
-                                    --
+                                    {{lang.translate('No')}}
                                     {% endif %}
 
-									<span class="text-gray-800 dark:text-neutral-400">{{package.feature[feature.code] > 1 ? package.feature[feature.code] : '--'}}
+									<span class="text-gray-800 dark:text-neutral-400">{{package.feature[feature.code]}}
 										{{lang.translate(feature.code)}}</span>
 								</li>
 							{% endif %}
