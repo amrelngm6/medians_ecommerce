@@ -12,6 +12,7 @@ use Medians\Channels\Domain\Channel;
 use Medians\Likes\Domain\Like;
 use Medians\Views\Domain\View;
 use Medians\Packages\Domain\PackageSubscription;
+use Medians\Invoices\Domain\Invoice;
 
 
 class Customer extends CustomModel
