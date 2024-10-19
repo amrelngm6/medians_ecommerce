@@ -31,6 +31,7 @@ class PackageSubscription extends CustomModel
         'payment_status',
         'total_cost',
         'notes',
+        'status',
 	];
 
     public $appends = ['is_paid', 'is_valid','name', 'field'];
