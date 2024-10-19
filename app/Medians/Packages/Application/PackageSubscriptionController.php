@@ -123,7 +123,8 @@ class PackageSubscriptionController extends CustomController
 					break;
 			}
 
-            
+            print_r($params);
+			return;
 			return ($this->repo->store($params))
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
             : array('success'=>0, 'result'=>translate('Error'), 'error'=>1);
