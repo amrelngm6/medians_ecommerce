@@ -112,6 +112,7 @@ class PackageSubscriptionController extends CustomController
 
 			$params['customer_id'] = $customer->customer_id;
 			$params['payment_type'] = $item->is_paid ? 'paid' : 'free';
+			$params['status'] = $item->is_paid ? 'pending' : 'active';
 			$params['package_id'] = $item->package_id;
 			$params['start_date'] = date("Y-m-d");
 			switch ($params['duration']) 
