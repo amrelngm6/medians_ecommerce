@@ -889,35 +889,14 @@
                     <thead class="sticky top-0 inset-x-0 bg-white dark:bg-neutral-900">
                         <tr>
                             <th class="py-4 ps-6 pe-6 text-sm font-medium text-gray-800 text-start" scope="col">
-                                <span class="sr-only">Feature by</span> <span class="dark:text-white">Plans</span>
+                                <span class="sr-only">Feature by</span> <span class="dark:text-white">{{lang.translate('Packages')}}</span>
                             </th>
+                            {% for feature in package.feature %}
                             <th class="w-1/4 py-4 px-6 text-lg leading-6 font-medium text-gray-800 text-center dark:text-white" scope="col">
-                                Free
+                                {{loop.index}}
+                                {{feature}}
                             </th>
-                            <th class="w-1/4 py-4 px-6 text-lg leading-6 font-medium text-gray-800 text-center dark:text-white" scope="col">
-                                Startup
-                            </th>
-                            <th class="w-1/4 py-4 px-6 text-lg leading-6 font-medium text-gray-800 text-center dark:text-white" scope="col">
-                                Team
-                            </th>
-                            <th class="w-1/4 py-4 px-6 text-lg leading-6 font-medium text-gray-800 text-center dark:text-white" scope="col">
-                                Enterprise
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="py-3 ps-6 bg-gray-50 font-bold text-gray-800 text-start dark:bg-neutral-800 dark:text-white" colspan="5" scope="colgroup">
-                                Financial data
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="py-3 ps-6 bg-gray-50 font-bold text-gray-800 text-start dark:bg-neutral-800 dark:text-white" colspan="5" scope="colgroup">
-                                On-chain data
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="py-3 ps-6 bg-gray-50 font-bold text-gray-800 text-start dark:bg-neutral-800 dark:text-white" colspan="5" scope="colgroup">
-                                Social data
-                            </th>
+                            {% endfor %}
                         </tr>
                     </thead>
                     <tbody class="border-t border-gray-200 divide-y divide-gray-200 dark:border-neutral-700 dark:divide-neutral-700">
