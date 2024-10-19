@@ -135,7 +135,6 @@ class PackageSubscriptionController extends CustomController
 			$cost = 'cost_'.$params['duration'];
 			$params['total_cost'] = $item->$cost;
 
-
 			$this->validate($params, $item);
 
 			$save = $this->repo->store($params);
@@ -158,7 +157,6 @@ class PackageSubscriptionController extends CustomController
 				$addInvoice = $InvoiceController->addInvoice($invoiceParams);
 				$redirect = '/invoice/'.$addInvoice->code;
 			}
-			
 			
 			return $save
             ? array('success'=>1, 'result'=>translate('Added'), 'redirect'=> $redirect)
