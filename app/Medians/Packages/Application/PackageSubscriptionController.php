@@ -237,9 +237,13 @@ class PackageSubscriptionController extends CustomController
 	 */
 	public function validate($params)
 	{
-		if ($this->app->customer)
-		{
-			
+		$customer = $this->app->customer_auth(); 
+		if (empty($customer)) {
+			throw new \Exception(translate('Login first'), 1);
+		}
+		
+		if (empty($customer->subscription)) {
+			throw new \Exception(translate('Login first'), 1);
 		}
 
 	}

@@ -38,27 +38,27 @@ class CustomerRepository
 
 	public function find($customerId)
 	{
-		return Customer::find($customerId);
+		return Customer::with('subscription')->find($customerId);
 	}
 
 	public function get()
 	{
-		return Customer::all();
+		return Customer::with('subscription')->all();
 	}
 
 	public function findByEmail($email)
 	{
-		return Customer::where('email' , $email)->first();
+		return Customer::with('subscription')->where('email' , $email)->first();
 	}
 
 	public function getByIds($ids)
 	{
-		return Customer::whereIn('customer_id' , $ids)->get();
+		return Customer::with('subscription')->whereIn('customer_id' , $ids)->get();
 	}
 
 	public function getActive()
 	{
-		return Customer::where('status' , 'on')->get();
+		return Customer::with('subscription')->where('status' , 'on')->get();
 	}
 
 
