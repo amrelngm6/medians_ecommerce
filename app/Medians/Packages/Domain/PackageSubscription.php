@@ -22,15 +22,13 @@ class PackageSubscription extends CustomModel
 
 	protected $fillable = [
     	'package_id',
-		'model_id',
-		'model_type',
+		'customer_id',
         'start_date',
         'end_date',
         'payment_type',
         'payment_status',
         'total_cost',
         'notes',
-    	'created_by',
 	];
 
     public $appends = ['is_paid','name', 'field'];

@@ -208,6 +208,10 @@ class FrontAPIController extends CustomController
 				case 'ShortVideo.create':
 					$return = (new Media\Application\ShortVideoController)->store();
 					break;
+
+				case 'PackageSubscription.create':
+					$return = (new Packages\Application\PackageSubscriptionController)->store();
+					break;
 	
 			}
 

@@ -103,14 +103,37 @@ class PackageSubscriptionController extends CustomController
 	{	
 		$this->app = new \config\APP;
         
-        $user = $this->app->auth();
+        $customer = $this->app->customer_auth();
 
 		$params = $this->app->params();
-
+		
         try {
-        	
-			$params['payment_status'] = (isset($params['is_paid']) && $params['is_paid'] != 'false') ? 'paid' : 'unpaid';
-			$params['created_by'] = $user->id;
+			
+			$item = $this->repo->find($params['package_id']);
+
+			$params['customer_id'] = $customer->customer_id;
+			$params['payment_status'] = $item->is_paid ? 'paid' : 'free';
+			$params['package_id'] = $item->package_id;
+			$params['total_cost'] = $item->feature['cost_'.$params['duration']];
+			$params['start_date'] = date("Y-m-d");
+			switch ($params['duration']) 
+			{
+				case 'quarter':
+					$params['end_date'] = date('Y-m-d', strtotime("+3 months"));
+					$params['payment_type'] = 'quarter';
+					break;
+				
+				case 'year':
+					$params['end_date'] = date('Y-m-d', strtotime("+1 year"));
+					$params['payment_type'] = 'year';
+					break;
+				
+				default:
+					$params['end_date'] = date('Y-m-d', strtotime("+1 month"));
+					$params['payment_type'] = 'month';
+					break;
+			}
+
             
 			return ($this->repo->store($params))
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
