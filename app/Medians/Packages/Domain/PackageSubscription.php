@@ -4,8 +4,9 @@ namespace Medians\Packages\Domain;
 
 use Shared\dbaser\CustomModel;
 
-use Medians\Customers\Domain\StudentApplicant;
+use Medians\Invoices\Domain\Invoice;
 use Medians\CustomFields\Domain\CustomField;
+use Medians\Customers\Domain\Customer;
 
 /**
  * Subscription class database queries
@@ -68,6 +69,11 @@ class PackageSubscription extends CustomModel
     public function package()
     {
         return $this->hasOne(Package::class, 'package_id', 'package_id');
+    }
+
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class, 'subscription_id', 'subscription_id');
     }
 
     public function customer()
