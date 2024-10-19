@@ -608,7 +608,12 @@ class APP
 
 			array('title'=>translate('Information'),  'link'=>'/studio/information'),
 
-			array('title'=>translate('Profile'),  'link'=>'/artist/'.$this->customer_id()),
+			array('title'=>translate('Invoices'),  'link'=>'/studio/invoices/'),
+
+			array('title'=>translate('Subscriptions'),  'link'=>'/studio/subscriptions/'),
+
+			array('title'=>translate('Profile page'),  'link'=>'/artist/'.$this->customer_id()),
+
 
 		);
 
