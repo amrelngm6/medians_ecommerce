@@ -187,7 +187,7 @@
                                         <div class="w-full mb-6 mx-auto row">
                                             <label class=" text-xl flex gap-4 required font-semibold text-xl">
                                                 <vue-feather type="sliders" class="w-6" />
-                                                <span class="font-semibold text-xl" v-text="translate('Channels uploads limit')"></span>
+                                                <span class="font-semibold text-xl" v-text="translate('Playlists limit')"></span>
                                             </label>
                                             <input :required="true" autocomplete="off" name="params[feature][playlists_limit]"
                                                 class="form-control form-control-solid"
@@ -233,7 +233,15 @@
                                 </div>
                                 <div class="max-w-xl mx-auto gap-10">
 
-                                    <div class="card mb-6 mb-xl-9 bg-inverse-success">
+                                    <div class="card mb-6 mb-xl-9 bg-inverse-success" v-if="!activeItem.is_paid">
+                                        <div class="card-header border-0">
+                                            <div class="card-title">
+                                                <h2 v-text="translate('Package is free')"></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card mb-6 mb-xl-9 bg-inverse-success" v-if="activeItem.is_paid">
 
                                         <div class="card-header border-0">
                                             <div class="card-title">
