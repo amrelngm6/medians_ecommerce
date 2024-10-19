@@ -80,7 +80,7 @@ class Customer extends CustomModel
 
 	public function subscription() 
 	{
-		return $this->hasOne(PackageSubscription::class , 'customer_id', 'customer_id')->orderBy('end_date');	
+		return $this->hasOne(PackageSubscription::class , 'customer_id', 'customer_id')->orderBy('end_date', 'DESC');	
 	}
 
 	public function followers() 

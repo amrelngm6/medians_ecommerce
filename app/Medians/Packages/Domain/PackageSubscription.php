@@ -57,7 +57,7 @@ class PackageSubscription extends CustomModel
 
     public function getIsPaidAttribute()
     {
-        return $this->payment_status == 'paid' ? true : null;
+        return $this->payment_type == 'paid' ? true : null;
     }
 
     public function model()
