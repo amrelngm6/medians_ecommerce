@@ -158,7 +158,6 @@ class TransactionController extends CustomController
 
 			$saveTransaction = $paymentService->storeSubscriptionTransaction($params, $addInvoice); 
 			
-			$savedSubscription = $paymentService->updatePackageSubscription($params); 
 
 			return (isset($saveTransaction->invoice_id))
 			? array('success'=>true,  'result'=>translate('PAYMENT_MADE_SECCUESS'))
@@ -167,8 +166,6 @@ class TransactionController extends CustomController
 		} catch (Exception $e) {
 			return array('error'=>$e->getMessage());
 		}
-		
-		
 	}
 
 
@@ -182,9 +179,11 @@ class TransactionController extends CustomController
 
 			$verify = $paymentService->verify($params);
 			
+			$savedSubscription = $paymentService->updatePackageSubscription($params); 
+
 			return ($verify )
 			? array('success'=>1, 'result'=>$verify, 'reload'=>1)
-			: array('error'=>$verify);
+			: array('error'=> 1);
 
 		} catch (Exception $e) {
 			return array('error'=>$e->getMessage());
