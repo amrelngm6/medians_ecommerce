@@ -331,7 +331,8 @@ function getPercentageBetweenDates($to, $from)
 
     $currentDuration = round($datediff / (60 * 60 * 24));
 
-
+    echo $currentDuration.' ';
+    echo getDaysBetweenDates($to, $from).' ';
     return round(($currentDuration / getDaysBetweenDates($to, $from)) * 100 );
 }
 
