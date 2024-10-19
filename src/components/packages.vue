@@ -3,7 +3,7 @@
         
         <div  v-if="content " class=" w-full relative">
             
-            <package_wizard :currency="currency" @callback="showWizard=false" v-if="showWizard" :fillable="content.fillable" :key="showWizard" :item="activeItem" :setting="setting" :conf="conf" ></package_wizard>
+            <package_wizard :currency="currency" @callback="showWizard=false" v-if="showWizard" :fields="content.fillable" :key="showWizard" :item="activeItem" :setting="setting" :conf="conf" ></package_wizard>
             
             <div class=" " v-if="!showWizard && content.items && !content.items.length ">
                 <div class="card">
@@ -82,7 +82,7 @@ const form_field = defineAsyncComponent(() =>
 
 import package_wizard from '@/components/wizards/packageWizard.vue';
 import tooltip from '@/components/includes/tooltip.vue';
-import { content } from '../../tailwind.config';
+
 
 
 

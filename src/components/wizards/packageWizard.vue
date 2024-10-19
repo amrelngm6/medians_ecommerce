@@ -129,70 +129,15 @@
 
                                         <hr class="opacity-10 my-4" />
 
-                                        <div class="w-full mb-6 mx-auto row">
+                                        <div class="w-full mb-6 mx-auto row" v-for="field in fields">
                                             <label class=" text-xl flex gap-4 required font-semibold text-xl">
-                                                <vue-feather type="music" class="w-6" />
-                                                <span class="font-semibold text-xl" v-text="translate('Audio uploads limit')"></span>
+                                                <vue-feather :type="field.icon" class="w-6" />
+                                                <span class="font-semibold text-xl" v-text="field.title"></span>
                                             </label>
-                                            <input :required="true" autocomplete="off" name="params[feature][audio_uploads_limit]"
+                                            <input :required="field.required" autocomplete="off" 
                                                 class="form-control form-control-solid"
-                                                :placeholder="translate('')" type="number"
-                                                v-model="activeItem.feature.audio_uploads_limit">
-                                        </div>
-
-                                        <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl flex gap-4 required font-semibold text-xl">
-                                                <vue-feather type="camera" class="w-6" />
-                                                <span class="font-semibold text-xl" v-text="translate('Videos uploads limit')"></span>
-                                            </label>
-                                            <input :required="true" autocomplete="off" name="params[feature][videos_uploads_limit]"
-                                                class="form-control form-control-solid"
-                                                :placeholder="translate('Max available Videos count for this package subscribers')" type="number"
-                                                v-model="activeItem.feature.videos_uploads_limit">
-                                        </div>
-
-                                        <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl flex gap-4 required font-semibold text-xl">
-                                                <vue-feather type="book-open" class="w-6" />
-                                                <span class="font-semibold text-xl" v-text="translate('Audiobooks uploads limit')"></span>
-                                            </label>
-                                            <input :required="true" autocomplete="off" name="params[feature][audiobooks_uploads_limit]"
-                                                class="form-control form-control-solid"
-                                                :placeholder="translate('Max available Audiobooks count for this package subscribers')" type="number"
-                                                v-model="activeItem.feature.audiobooks_uploads_limit">
-                                        </div>
-
-                                        <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl flex gap-4 required font-semibold text-xl">
-                                                <vue-feather type="radio" class="w-6" />
-                                                <span class="font-semibold text-xl" v-text="translate('Stations uploads limit')"></span>
-                                            </label>
-                                            <input :required="true" autocomplete="off" name="params[feature][stations_uploads_limit]"
-                                                class="form-control form-control-solid"
-                                                :placeholder="translate('Max available  count for this package subscribers')" type="number"
-                                                v-model="activeItem.feature.stations_uploads_limit">
-                                        </div>
-
-                                        <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl flex gap-4 required font-semibold text-xl">
-                                                <vue-feather type="" class="w-6" />
-                                                <span class="font-semibold text-xl" v-text="translate('Channels uploads limit')"></span>
-                                            </label>
-                                            <input :required="true" autocomplete="off" name="params[feature][channels_uploads_limit]"
-                                                class="form-control form-control-solid"
-                                                :placeholder="translate('Max available  count for this package subscribers')" type="number"
-                                                v-model="activeItem.feature.channels_uploads_limit">
-                                        </div>
-
-                                        <div class="w-full mb-6 mx-auto row">
-                                            <label class=" text-xl flex gap-4 required font-semibold text-xl">
-                                                <vue-feather type="sliders" class="w-6" />
-                                                <span class="font-semibold text-xl" v-text="translate('Playlists limit')"></span>
-                                            </label>
-                                            <input :required="true" autocomplete="off" name="params[feature][playlists_limit]"
-                                                class="form-control form-control-solid"
-                                                :placeholder="translate('Max available Playlists count for this package subscribers')" type="number"
-                                                v-model="activeItem.feature.playlists_limit">
+                                                :placeholder="field.placeholder" :type="field.column_type"
+                                                v-model="activeItem.feature[field.key]">
                                         </div>
 
                                     </div>
@@ -398,9 +343,7 @@ export default
             'system_setting',
             'setting',
             'item',
-            'drivers',
-            'vehicles',
-            'currency'
+            'fields',
         ],
 
     };
