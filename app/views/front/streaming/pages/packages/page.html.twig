@@ -94,7 +94,7 @@
                     <input type="hidden" x-model="endDate" name="params[end_date]" />
                     <input type="hidden" x-model="cost" name="params[cost]" />
                     <div class="text-center">
-                        <h3 id="hs-ai-modal-label" class="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                        <h3 id="hs-ai-modal-label" class="text-lg font-semibold text-gray-800 dark:text-gray-100">
                             {{lang.translate('Package subscription')}}
                         </h3>
                         <p class="text-sm text-gray-400 dark:text-gray-400">
@@ -106,13 +106,13 @@
                     <div class="mt-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5">
                         <div>
                             <span class="block text-xs uppercase text-gray-400 dark:text-gray-400">{{lang.translate('Total amount')}}:</span>
-                            <span class="block text-sm font-medium text-gray-800 dark:text-gray-200" >$<span x-text="cost"></span></span>
+                            <span class="block text-sm font-medium text-gray-800 dark:text-gray-100" >$<span x-text="cost"></span></span>
                         </div>
                         <!-- End Col -->
 
                         <div>
                             <span class="block text-xs uppercase text-gray-400 dark:text-gray-400">{{lang.translate('Estimated date')}}:</span>
-                            <span class="block text-sm font-medium text-gray-800 dark:text-gray-200" x-text="endDate"></span>
+                            <span class="block text-sm font-medium text-gray-800 dark:text-gray-100" x-text="endDate"></span>
                         </div>
                         <!-- End Col -->
 
@@ -121,7 +121,7 @@
                             {% if item.is_paid %}
                             <div class="flex items-center gap-x-2">
                                 <img src="/uploads/img/payment_methods/paypal.png" class="w-4" />
-                                <span class="block text-sm font-medium text-gray-800 dark:text-gray-200">PayPal</span>
+                                <span class="block text-sm font-medium text-gray-800 dark:text-gray-100">PayPal</span>
                             </div>
                             {% endif %}
                         </div>
@@ -149,22 +149,22 @@
                     </div>
                     <!-- End Col -->
                     <div class="mt-5 sm:mt-10">
-                        <h4 class="text-xs font-semibold uppercase text-gray-800 dark:text-gray-200">{{lang.translate('Summary')}}</h4>
+                        <h4 class="text-xs font-semibold uppercase text-gray-800 dark:text-gray-100">{{lang.translate('Summary')}}</h4>
 
                         <ul class="mt-3 flex flex-col">
-                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
+                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-100">
                                 <div class="flex items-center justify-between w-full">
                                     <span>{{lang.translate('Start date')}}</span>
                                     <span>{{"now"|date('M d, Y')}}</span>
                                 </div>
                             </li>
-                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-200">
+                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:border-gray-700 dark:text-gray-100">
                                 <div class="flex items-center justify-between w-full">
                                     <span>{{lang.translate('End date')}}</span>
                                     <span x-text="endDate"></span>
                                 </div>
                             </li>
-                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-200">
+                            <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-gray-800 dark:border-gray-700 dark:text-gray-100">
                                 <div class="flex items-center justify-between w-full">
                                     <span>{{lang.translate('Total amount')}}</span>
                                     <span >$<span x-text="cost"></span></span>
