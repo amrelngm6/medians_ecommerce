@@ -141,7 +141,7 @@ class PackageSubscriptionController extends CustomController
 			$save = $this->repo->store($params);
 			$redirect = '/studio/subscription/'.$save->subscription_id;
 
-			if (isset($save->subscription_id))
+			if (isset($save->subscription_id) && $save->total_cost > 0)
 			{
 				$InvoiceController = new \Medians\Invoices\Application\InvoiceController;
 				$invoiceParams = [];
