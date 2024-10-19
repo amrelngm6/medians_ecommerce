@@ -201,7 +201,7 @@ function completePayPal()
                 purchase_units: [
                     {
                         reference_id: '{{invoice.code}}',
-                        description: '{{invoice.item.package.name}}',
+                        description: '{{lang.translate('Package description')}} {{invoice.item.package.name}}',
                         custom_id: '{{invoice.code}}',
                         amount: {
                             currency_code: 'USD',
