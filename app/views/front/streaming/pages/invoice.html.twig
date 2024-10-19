@@ -30,12 +30,13 @@
 			<!-- Grid -->
 			<div class="mt-8 grid sm:grid-cols-2 gap-3">
 				<div>
-					<h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">Bill to:</h3>
-					<h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">Sara Williams</h3>
+					<h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">{{lang.translate('Bill to')}}:</h3>
+					<h3 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">{{invoice.customer.name}}</h3>
 					<address class="mt-2 not-italic text-gray-500 dark:text-neutral-500">
-						280 Suzanne Throughway,<br>
-						Breannabury, OR 45801,<br>
-						United States<br>
+						{{invoice.customer.field.address}},<br>
+						{{invoice.customer.field.city}},<br>
+						{{invoice.customer.field.country}},<br>
+						{{invoice.customer.field.phone}},<br>
 					</address>
 				</div>
 				<!-- Col -->
@@ -45,12 +46,8 @@
 					<!-- Grid -->
 					<div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
 						<dl class="grid sm:grid-cols-5 gap-x-3">
-							<dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Invoice date:</dt>
-							<dd class="col-span-2 text-gray-500 dark:text-neutral-500">03/10/2018</dd>
-						</dl>
-						<dl class="grid sm:grid-cols-5 gap-x-3">
-							<dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Due date:</dt>
-							<dd class="col-span-2 text-gray-500 dark:text-neutral-500">03/11/2018</dd>
+							<dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">{{lang.translate('Invoice date')}}:</dt>
+							<dd class="col-span-2 text-gray-500 dark:text-neutral-500">{{invoice.date|date("M d, Y")}}</dd>
 						</dl>
 					</div>
 					<!-- End Grid -->
