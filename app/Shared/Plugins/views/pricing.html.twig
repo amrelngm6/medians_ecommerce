@@ -1,6 +1,6 @@
 <div class="max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto" x-data="{priceKey: 'cost_month'}">
 	<div class="max-w-2xl mx-auto text-center mb-10 lg:mb-14">
-		<h2 class="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
+		<h2 class="text-2xl font-normal md:text-4xl md:leading-tight dark:text-white">
 			Pricing
 		</h2>
 		<p class="mt-1 text-gray-600 dark:text-neutral-400">
@@ -18,8 +18,8 @@
 				<div class="flex flex-col border border-gray-200 text-center rounded-xl p-8 dark:border-gray-700 dark:bg-gray-900">
 					<h4 class="font-medium text-lg text-gray-800 dark:text-neutral-200">{{package.name}}</h4>
 					<p>
-						<span class="mt-7 font-bold text-5xl text-gray-800 dark:text-neutral-200 month">{{package.cost_month > 0 ? ('$' ~ package.cost_month ) : 'Free' }}</span>
-						<span class="mt-7 font-bold text-5xl text-gray-800 dark:text-neutral-200 hidden year">{{package.cost_year > 0 ? ('$' ~ package.cost_year) : 'Free' }}</span>
+						<span class="mt-7 font-normal text-5xl text-gray-800 dark:text-neutral-200 month">{{package.cost_month > 0 ? ('$' ~ package.cost_month ) : 'Free' }}</span>
+						<span class="mt-7 font-normal text-5xl text-gray-800 dark:text-neutral-200 hidden year">{{package.cost_year > 0 ? ('$' ~ package.cost_year) : 'Free' }}</span>
 					</p>
 					<p class="mt-2 text-sm text-gray-500 dark:text-neutral-500">
 						{{package.description}}
