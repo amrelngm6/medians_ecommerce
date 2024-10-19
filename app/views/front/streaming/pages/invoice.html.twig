@@ -76,7 +76,7 @@
 						</div>
 						<div>
 							<h5 class="sm:hidden text-xs font-medium text-gray-500 uppercase dark:text-neutral-500">{{lang.translate('Amount')}}</h5>
-							<p class="sm:text-end text-gray-800 dark:text-neutral-200">{{invoice.currency_code}}{{invoice.total_amount}}</p>
+							<p class="sm:text-end text-gray-800 dark:text-neutral-200">{{invoice.currency_code}}{{invoice.subtotal}}</p>
 						</div>
 					</div>
 				</div>
@@ -90,29 +90,21 @@
 					<!-- Grid -->
 					<div class="grid grid-cols-2 sm:grid-cols-1 gap-3 sm:gap-2">
 						<dl class="grid sm:grid-cols-5 gap-x-3">
-							<dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Subtotal:</dt>
-							<dd class="col-span-2 text-gray-500 dark:text-neutral-500">$2750.00</dd>
+							<dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">{{lang.translate('Subtotal')}}:</dt>
+							<dd class="col-span-2 text-gray-500 dark:text-neutral-500">{{invoice.currency_code}}{{invoice.subtotal}}</dd>
 						</dl>
 
 						<dl class="grid sm:grid-cols-5 gap-x-3">
-							<dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Total:</dt>
-							<dd class="col-span-2 text-gray-500 dark:text-neutral-500">$2750.00</dd>
+							<dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">{{lang.translate('Discount amount')}}:</dt>
+							<dd class="col-span-2 text-gray-500 dark:text-neutral-500">{{invoice.currency_code}}{{invoice.discount_amount}}</dd>
 						</dl>
+                        
 
 						<dl class="grid sm:grid-cols-5 gap-x-3">
-							<dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Tax:</dt>
-							<dd class="col-span-2 text-gray-500 dark:text-neutral-500">$39.00</dd>
+							<dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">{{lang.translate('Total amount')}}:</dt>
+							<dd class="col-span-2 text-gray-500 dark:text-neutral-500">{{invoice.currency_code}}{{invoice.total_amount}}</dd>
 						</dl>
 
-						<dl class="grid sm:grid-cols-5 gap-x-3">
-							<dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Amount paid:</dt>
-							<dd class="col-span-2 text-gray-500 dark:text-neutral-500">$2789.00</dd>
-						</dl>
-
-						<dl class="grid sm:grid-cols-5 gap-x-3">
-							<dt class="col-span-3 font-semibold text-gray-800 dark:text-neutral-200">Due balance:</dt>
-							<dd class="col-span-2 text-gray-500 dark:text-neutral-500">$0.00</dd>
-						</dl>
 					</div>
 					<!-- End Grid -->
 				</div>
@@ -120,15 +112,15 @@
 			<!-- End Flex -->
 
 			<div class="mt-8 sm:mt-12">
-				<h4 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">Thank you!</h4>
+				<h4 class="text-lg font-semibold text-gray-800 dark:text-neutral-200">{{lang.translate('Thank you')}}!</h4>
 				<p class="text-gray-500 dark:text-neutral-500">If you have any questions concerning this invoice, use the following contact information:</p>
 				<div class="mt-2">
-					<p class="block text-sm font-medium text-gray-800 dark:text-neutral-200">example@site.com</p>
-					<p class="block text-sm font-medium text-gray-800 dark:text-neutral-200">+1 (062) 109-9222</p>
+					<p class="block text-sm font-medium text-gray-800 dark:text-neutral-200">{{app.SystemSetting.footer_email}}</p>
+					<p class="block text-sm font-medium text-gray-800 dark:text-neutral-200">{{app.SystemSetting.footer_phone}}</p>
 				</div>
 			</div>
 
-			<p class="mt-5 text-sm text-gray-500 dark:text-neutral-500">© 2022 Preline.</p>
+			<p class="mt-5 text-sm text-gray-500 dark:text-neutral-500">© {{date("Y")}} {{app.SystemSetting.sitename}}.</p>
 		</div>
 		<!-- End Card -->
 
@@ -136,11 +128,11 @@
 		<div class="mt-6 flex justify-end gap-x-3">
 			<a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-50 dark:bg-transparent dark:border-neutral-700 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:focus:bg-neutral-800" href="#">
 				<svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-				Invoice PDF
+				{{lang.translate('Invoice PDF')}}
 			</a>
 			<a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none" href="#">
 				<svg class="shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
-				Print
+				{{lang.translate('Print')}}
 			</a>
 		</div>
 		<!-- End Buttons -->
