@@ -339,7 +339,7 @@ class PackageSubscriptionController extends CustomController
 			
 			if ($customer->subscription->is_valid && !$customer->subscription->is_paid && !$item->is_paid )
 			{
-				throw new \Exception(translate('Your current package and this one are free'), 1);
+				throw new \Exception(translate('Your already have active free package'), 1);
 			}
 		}
 
