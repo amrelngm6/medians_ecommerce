@@ -128,8 +128,30 @@ class PackageSubscriptionController extends CustomController
 
 			$this->validate($params, $item);
 
-			return ($this->repo->store($params))
-            ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
+			$save = $this->repo->store($params);
+			$redirect = '/studio/subscription/'.$save->subscription_id;
+
+			if (isset($save->subscription_id))
+			{
+				$InvoiceController = new \Medians\Invoices\Application\InvoiceController;
+				$invoiceParams = [];
+				$invoiceParams['customer_id'] = $customer->customer_id;
+				$invoiceParams['subscription_id'] = 'subscription_id';
+				$invoiceParams['payment_method'] = $params['payment_method'];
+				$invoiceParams['subtotal'] = $params['total_cost'];
+				$invoiceParams['total_amount'] = $params['total_cost'];
+				$invoiceParams['date'] = $params['start_date'];
+				$invoiceParams['status'] = $params['unpaid'];
+				$invoiceParams['discount_amount'] = '0';
+				$invoiceParams['notes'] = $params['notes'] ?? '';
+				$invoiceParams['currency_code'] = $params['currency_code'] ?? '$';
+				$addInvoice = $InvoiceController->addInvoice($invoiceParams);
+				$redirect = '/invoice/'.$addInvoice->invoice_id;
+			}
+			
+			
+			return $save
+            ? array('success'=>1, 'result'=>translate('Added'), 'redirect'=> $redirect)
             : array('success'=>0, 'result'=>translate('Error'), 'error'=>1);
 
 

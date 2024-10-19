@@ -111,6 +111,9 @@ class InvoiceRepository
 	{	
 
 		$Model = new Invoice();
+		
+		$Model->code = $this->generateCode();
+
 		foreach ($data as $key => $value) 
 		{
 			if (in_array($key, $Model->getFields()))
@@ -121,9 +124,6 @@ class InvoiceRepository
 
 		// Return the Model object with the new data
     	$Object = Invoice::firstOrCreate($dataArray);
-
-    	// Store invoice items
-    	!empty($data['items']) ? $this->storeItems((array) $data['items'], $Object) : '';
 
     	// Store Custom fields
     	!empty($data['field']) ? $this->storeCustomFields((array) $data['field'], $Object->invoice_id) : '';
@@ -195,51 +195,6 @@ class InvoiceRepository
 	}
 
 	
-	/**
-	* Save related items to database
-	*/
-	public function handleClass($value)
-	{
-		switch ($value) 
-		{
-			case 'PackageSubscription':
-				return PackageSubscription::class;
-				break;
-
-			case 'TaxiTrip':
-				return TaxiTrip::class;
-				break;
-
-		}
-	}
-
-	
-	/**
-	* Save related items to database
-	*/
-	public function storeItems($data, $invoice) 
-	{
-		if ($data)
-		{
-			foreach ($data as $key => $value)
-			{
-				$value = (object) $value;
-				$fields = array();
-				$fields['invoice_id'] = $invoice->invoice_id;
-				$fields['subtotal'] = $value->subtotal;
-				$fields['discount_amount'] = 0;
-				$fields['total_amount'] = $value->total_amount;
-				$fields['item_id'] = $value->item_id;
-				$fields['item_type'] = $this->handleClass($value->item_type);	
-				$fields['date'] = date('Y-m-d');
-				$fields['status'] = $value->status;
-				$Model = InvoiceItem::create($fields);
-			}
-	
-			return $Model;		
-		}
-	}
-
 
 	/**
 	 * Generate invoice code

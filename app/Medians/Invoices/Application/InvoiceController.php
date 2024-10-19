@@ -38,7 +38,7 @@ class InvoiceController extends CustomController
 
 		return [
             [ 'value'=> "invoice_id", 'text'=> "#"],
-            [ 'value'=> "model", 'text'=> translate('User'), 'sortable'=> false ],
+            [ 'value'=> "customer.name", 'text'=> translate('User'), 'sortable'=> false ],
             [ 'value'=> "subtotal", 'text'=> translate('Subtotal'), 'sortable'=> true ],
             [ 'value'=> "total_amount", 'text'=> translate('Total Amount'), 'sortable'=> true ],
             [ 'value'=> "payment_method", 'text'=> translate('Gateway'), 'sortable'=> true ],
@@ -80,7 +80,7 @@ class InvoiceController extends CustomController
 		$params = $this->app->params();
 
         try {
-        	
+			
             return ($this->repo->store($params))
             ? array('success'=>1, 'result'=>translate('Added'), 'reload'=>1)
             : array('error'=>translate('Err'));
@@ -144,11 +144,9 @@ class InvoiceController extends CustomController
 	}
 
 
-	public function addInvoice()
+	public function addInvoice($params)
 	{
 		
-		$params = (array) $this->app->params();
-
 		try {
 			
 			$saveInvoice = $this->repo->store($params); 

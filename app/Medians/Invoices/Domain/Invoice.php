@@ -72,10 +72,5 @@ class Invoice extends CustomModel
 		return $this->hasMany(Transaction::class, 'invoice_id', 'invoice_id');
 	}
 
-	public function transaction()
-	{
-		return $this->hasOne(Transaction::class, 'invoice_id', 'invoice_id');
-	}
-
 
 }
