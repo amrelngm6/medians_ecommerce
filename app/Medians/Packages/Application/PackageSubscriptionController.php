@@ -88,8 +88,8 @@ class PackageSubscriptionController extends CustomController
 			'fillable' => $this->fillable(),
 			'packages' => $this->packageRepo->get(),
 	        'items' => $this->repo->get(),
-	        'Model' => 'PackageSubscription',
-	        'model_id' => 'subscription_id',
+	        'object_name' => 'PackageSubscription',
+	        'object_key' => 'subscription_id',
 	    ]);
 	}
 
