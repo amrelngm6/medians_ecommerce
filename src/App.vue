@@ -76,6 +76,8 @@ const packages = defineAsyncComponent(() => import('@/components/packages.vue') 
 
 const invoices = defineAsyncComponent(() => import('@/components/invoices.vue') );
 
+const transactions = defineAsyncComponent(() => import('@/components/transactions.vue') );
+
 
 
 
@@ -83,6 +85,7 @@ const invoices = defineAsyncComponent(() => import('@/components/invoices.vue') 
 export default {
     name: 'app',
     components: {
+        transactions,
         invoices,
         packages,
         categories,

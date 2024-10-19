@@ -364,6 +364,7 @@ class APP
 			[
 				array('permission'=>'Packages.index', 'title'=>translate('Packages'),  'icon'=>'tool', 'link'=>'admin/packages', 'component'=>'packages'),
 				array('permission'=>'Invoices.index', 'title'=>translate('Invoices'),  'icon'=>'tool', 'link'=>'admin/invoices', 'component'=>'invoices'),
+				array('permission'=>'Transactions.index', 'title'=>translate('Transactions'),  'icon'=>'tool', 'link'=>'admin/transactions', 'component'=>'transactions'),
 			]
 			),
 			
