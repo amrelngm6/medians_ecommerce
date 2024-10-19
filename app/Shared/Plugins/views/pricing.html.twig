@@ -53,7 +53,7 @@
 		</div>
 		<div class="mt-20 lg:mt-32">
 			<div class="lg:text-center mb-10 lg:mb-20">
-				<h3 class="text-2xl font-semibold dark:text-white">
+				<h3 class="text-2xl font-normal dark:text-white">
 					{{lang.translate('Compare plans')}}
 				</h3>
 			</div>
@@ -72,7 +72,7 @@
                         <tr class="border-t border-gray-200 dark:border-neutral-700">
                             <th class="py-5 px-4 text-sm font-normal text-gray-600 text-start whitespace-nowrap dark:text-neutral-400" scope="row">{{lang.translate(feature.code)}}</th>
                             <td class="py-5 pe-4">
-                                <span class="font-semibold">{{package.feature[feature.code] > 0 ? package.feature[feature.code] : '<img src="/src/front_assets/svg/close.svg" class="h-4" />'}}</span>
+                                <span class="font-normal">{{package.feature[feature.code] > 0 ? package.feature[feature.code] : '<img src="/src/front_assets/svg/close.svg" class="h-4" />'}}</span>
                             </td>
                         </tr>
             			{% endfor %}
@@ -110,7 +110,7 @@
 									</th>
 									{% for package in packages %}
 										<th class="w-1/4 py-4 px-6 text-lg leading-6 font-medium text-gray-800 text-center dark:text-white" scope="col">
-                                            <span class="font-semibold">{{package.feature[feature.code] > 0 ? package.feature[feature.code] : '<img src="/src/front_assets/svg/close.svg" class="h-4 mx-auto"  />'}}</span>
+                                            <span class="font-normal">{{package.feature[feature.code] > 0 ? package.feature[feature.code] : '<img src="/src/front_assets/svg/close.svg" class="h-4 mx-auto"  />'}}</span>
 										</th>
 									{% endfor %}
 								</tr>
