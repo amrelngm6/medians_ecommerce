@@ -901,15 +901,15 @@
                     </thead>
                     <tbody class="border-t border-gray-200 divide-y divide-gray-200 dark:border-neutral-700 dark:divide-neutral-700">
 
-                        {% for feature in packages[0].feature %}
+                        {% for feature in packages[0].features %}
                         <tr>
                             <th class="w-1/4 py-4 px-6 text-lg leading-6 font-medium text-gray-800 text-center dark:text-white" scope="col">
-                                {{lang.translate(feature)}}
+                                {{lang.translate(feature.code)}}
                             </th>
                             {% set k = loop.index %}
                             {% for package in packages %}
                             <th class="w-1/4 py-4 px-6 text-lg leading-6 font-medium text-gray-800 text-center dark:text-white" scope="col">
-                                {{package.feature[k]}}
+                                {{package.feature}}
                             </th>
                             {% endfor %}
                         </tr>
