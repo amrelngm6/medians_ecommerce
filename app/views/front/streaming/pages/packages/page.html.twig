@@ -31,47 +31,25 @@
 		</label>
 		<!--end::Label-->
 
-		<!--begin::Row-->
-		<div
-			class="flex mb-2" data-kt-buttons="true" data-kt-initialized="1">
-			<!--begin::Col-->
-			<div
-				class="col w-full">
-				<!--begin::Option-->
-				<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
-					<input type="radio" class="btn-check" name="account_team_size" value="1-1">
-					<span class="font-bold fs-3">1-1</span>
-				</label>
-				<!--end::Option-->
-			</div>
-			<!--end::Col-->
+        <div class="sm:col-span-9">
+          <div class="sm:flex">
+            <label for="af-account-gender-checkbox" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+              <input type="radio" name="af-account-gender-checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="af-account-gender-checkbox" checked>
+              <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Male</span>
+            </label>
 
-			<!--begin::Col-->
-			<div
-				class="col w-full">
-				<!--begin::Option-->
-				<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4 active">
-					<input type="radio" class="btn-check" name="account_team_size" checked="" value="2-10">
-					<span class="font-bold fs-3">2-10</span>
-				</label>
-				<!--end::Option-->
-			</div>
-			<!--end::Col-->
+            <label for="af-account-gender-checkbox-female" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+              <input type="radio" name="af-account-gender-checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="af-account-gender-checkbox-female">
+              <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Female</span>
+            </label>
 
-			<!--begin::Col-->
-			<div
-				class="col w-full">
-				<!--begin::Option-->
-				<label class="btn btn-outline btn-outline-dashed btn-active-light-primary w-100 p-4">
-					<input type="radio" class="btn-check" name="account_team_size" value="10-50">
-					<span class="font-bold fs-3">10-50</span>
-				</label>
-				<!--end::Option-->
-			</div>
-			<!--end::Col-->
-
-		</div>
-		<!--end::Row-->
+            <label for="af-account-gender-checkbox-other" class="flex py-2 px-3 w-full border border-gray-200 shadow-sm -mt-px -ms-px first:rounded-t-lg last:rounded-b-lg sm:first:rounded-s-lg sm:mt-0 sm:first:ms-0 sm:first:rounded-se-none sm:last:rounded-es-none sm:last:rounded-e-lg text-sm relative focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600">
+              <input type="radio" name="af-account-gender-checkbox" class="shrink-0 mt-0.5 border-gray-300 rounded-full text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-500 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800" id="af-account-gender-checkbox-other">
+              <span class="text-sm text-gray-500 ms-3 dark:text-neutral-400">Other</span>
+            </label>
+          </div>
+        </div>
+        <!-- End Col -->
 
 		<!--begin::Hint-->
 		<div class="form-text">
