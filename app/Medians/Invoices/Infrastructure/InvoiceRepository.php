@@ -210,7 +210,7 @@ class InvoiceRepository
 	public function generateCode()
 	{
 		$count = Invoice::count();
-		$prefix = "I-";
+		$prefix = "INV-";
 		return $prefix.($count + 1);
 	}
 }
