@@ -121,7 +121,7 @@
                                                         <tr class="fw-bold text-gray-700 fs-5 text-end" >
                                                             <td class="d-flex align-items-center pt-6 gap-2"  >
                                                                 <vue-feather type="cloud-lightning" ></vue-feather>
-                                                                <a href="javascript:;" v-if="activeItem.item" v-text="activeItem.item.item.name"></a>
+                                                                <a href="javascript:;" v-if="activeItem.item" v-text="activeItem.item.name"></a>
                                                             </td>
                                                             <td class="pt-6" v-text="'$' + activeItem.item.subtotal"></td>
                                                             <td class="pt-6" v-text="activeItem.item.duration"></td>
