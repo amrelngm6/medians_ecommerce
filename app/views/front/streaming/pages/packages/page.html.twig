@@ -101,7 +101,7 @@
                     <div class="mt-5 sm:mt-10 grid grid-cols-2 sm:grid-cols-3 gap-5">
                         <div>
                             <span class="block text-xs uppercase text-gray-500 dark:text-neutral-500">{{lang.translate('Total amount')}}:</span>
-                            <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200" x-text="cost"></span>
+                            <span class="block text-sm font-medium text-gray-800 dark:text-neutral-200" >$<span x-text="cost"></span></span>
                         </div>
                         <!-- End Col -->
 
@@ -171,7 +171,7 @@
                             <li class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-semibold bg-gray-50 border text-gray-800 -mt-px first:rounded-t-lg first:mt-0 last:rounded-b-lg dark:bg-neutral-800 dark:border-neutral-700 dark:text-neutral-200">
                                 <div class="flex items-center justify-between w-full">
                                     <span>{{lang.translate('Total amount')}}</span>
-                                    <span x-text="cost"></span>
+                                    <span >$<span x-text="cost"></span></span>
                                 </div>
                             </li>
                         </ul>
