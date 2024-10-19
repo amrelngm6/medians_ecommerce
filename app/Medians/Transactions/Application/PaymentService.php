@@ -37,7 +37,7 @@ class PaymentService
 			$invoiceRepo = new InvoiceRepository();
 
 			$invoice = $invoiceRepo->find($params['invoice_id']);
-			$invoice->payment_status = 'paid';
+			$invoice->status = 'paid';
 			$invoice->save();
 
 			$transaction = $this->storeTransaction($params, $invoice, $verify);
