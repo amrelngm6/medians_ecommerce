@@ -247,6 +247,7 @@ class PackageSubscriptionController extends CustomController
 			$this->validateCancel($params);
 
 			$params['status'] = 'canceled';
+			$params['subscription_id'] = $params['item_id'];
 
            	$returnData =  ($this->repo->update($params))
            	? array('success'=>1, 'result'=>translate('Updated'), 'reload'=>0)
