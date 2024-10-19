@@ -74,6 +74,8 @@ const notifications_events = defineAsyncComponent(() => import('@/components/not
 
 const packages = defineAsyncComponent(() => import('@/components/packages.vue') );
 
+const invoices = defineAsyncComponent(() => import('@/components/invoices.vue') );
+
 
 
 
@@ -81,6 +83,7 @@ const packages = defineAsyncComponent(() => import('@/components/packages.vue') 
 export default {
     name: 'app',
     components: {
+        invoices,
         packages,
         categories,
         data_table,
