@@ -26,11 +26,11 @@
                         <div class="course-info">
                             <div class="progress-container">
                                 <div class="progress overflow-hidden relative"><span style="width: {{app.getPercentageBetweenDates(subscription.end_date, subscription.start_date)}}%"></span></div>
-                                <span class="progress-text">
+                                <span class="progress-text ">
                                     {{subscription.start_date}} - {{subscription.end_date}}
                                 </span>
                                 {% if subscription.is_paid %}
-                                <a href="/invoice/{{subscription.invoice.code}}" class="mt-2 block relative text-gray-100  bg-gray-800 shadow-md rounded-full py-2 px-6 dark:bg-gray-900 ajax-load">{{lang.translate('View invoice')}} </a>
+                                <a href="/invoice/{{subscription.invoice.code}}" class=" text-center mt-2 block relative text-gray-100  bg-gray-800 shadow-md rounded-full py-2 px-6 dark:bg-gray-900 ajax-load">{{lang.translate('View invoice')}} </a>
                                 {% endif %}
                             </div>
                             <h6>{{lang.translate('Package')}}</h6>
