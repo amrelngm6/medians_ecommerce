@@ -53,6 +53,13 @@ class PackageController extends CustomController
 	{
 
 		return [
+            [ 'key'=> "audio_uploads_limit", 'title'=> translate('Audio uploads limit'), 'placeholder'=> translate('Max available Audio count for this package subscribers'), 'icon'=> 'music', 'required'=> true, 'column_type'=>'numver' ],
+            [ 'key'=> "audiobooks_uploads_limit", 'title'=> translate('Audiobooks uploads limit'), 'placeholder'=> translate('Max available Audiobooks count for this package subscribers'), 'icon'=> 'book-open', 'required'=> true, 'column_type'=>'numver' ],
+            [ 'key'=> "videos_uploads_limit", 'title'=> translate('Videos uploads limit'), 'placeholder'=> translate('Max available Videos count for this package subscribers'), 'icon'=> 'camera', 'required'=> true, 'column_type'=>'numver' ],
+            [ 'key'=> "shortvideo_uploads_limit", 'title'=> translate('Short videos uploads limit'), 'placeholder'=> translate('Max available Short Videos count for this package subscribers'), 'icon'=> 'camera-off', 'required'=> true, 'column_type'=>'numver' ],
+            [ 'key'=> "stations_uploads_limit", 'title'=> translate('Stations uploads limit'), 'placeholder'=> translate('Max available Stations count for this package subscribers'), 'icon'=> 'radio', 'required'=> true, 'column_type'=>'numver' ],
+            [ 'key'=> "channels_uploads_limit", 'title'=> translate('Channels uploads limit'), 'placeholder'=> translate('Max available Channels count for this package subscribers'), 'icon'=> 'tv', 'required'=> true, 'column_type'=>'numver' ],
+            [ 'key'=> "playlists_uploads_limit", 'title'=> translate('Playlists limit'), 'placeholder'=> translate('Max available Playlists count for this package subscribers'), 'icon'=> 'sliders', 'required'=> true, 'column_type'=>'numver' ],
         ];
 	}
 

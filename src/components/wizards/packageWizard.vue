@@ -136,7 +136,7 @@
                                             </label>
                                             <input :required="true" autocomplete="off" name="params[feature][audio_uploads_limit]"
                                                 class="form-control form-control-solid"
-                                                :placeholder="translate('Max available Audio count for this package subscribers')" type="number"
+                                                :placeholder="translate('')" type="number"
                                                 v-model="activeItem.feature.audio_uploads_limit">
                                         </div>
 
@@ -169,18 +169,18 @@
                                             </label>
                                             <input :required="true" autocomplete="off" name="params[feature][stations_uploads_limit]"
                                                 class="form-control form-control-solid"
-                                                :placeholder="translate('Max available Stations count for this package subscribers')" type="number"
+                                                :placeholder="translate('Max available  count for this package subscribers')" type="number"
                                                 v-model="activeItem.feature.stations_uploads_limit">
                                         </div>
 
                                         <div class="w-full mb-6 mx-auto row">
                                             <label class=" text-xl flex gap-4 required font-semibold text-xl">
-                                                <vue-feather type="tv" class="w-6" />
+                                                <vue-feather type="" class="w-6" />
                                                 <span class="font-semibold text-xl" v-text="translate('Channels uploads limit')"></span>
                                             </label>
                                             <input :required="true" autocomplete="off" name="params[feature][channels_uploads_limit]"
                                                 class="form-control form-control-solid"
-                                                :placeholder="translate('Max available Channels count for this package subscribers')" type="number"
+                                                :placeholder="translate('Max available  count for this package subscribers')" type="number"
                                                 v-model="activeItem.feature.channels_uploads_limit">
                                         </div>
 
