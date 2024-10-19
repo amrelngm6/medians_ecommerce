@@ -45,16 +45,19 @@
             </ul>
             
             <div class="mt-5 sm:mt-10">
-                <p class="text-sm text-gray-400 dark:text-gray-400">If you have any questions, please contact us at
-                    <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="mailto:{{app.SystemSetting.footer_email}}">{{app.SystemSetting.footer_email}}</a>
-                    or call at
-                    <a class="inline-flex items-center gap-x-1.5 text-blue-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium dark:text-blue-500" href="tel:{{app.SystemSetting.footer_phone}}">{{app.SystemSetting.footer_phone}}</a>
-                </p>
+                <p class="text-gray-500 dark:text-gray-400">{{lang.translate('If you have any questions concerning this invoice, use the following contact information')}}:</p>
+                <div class="mt-2">
+                    <p class="block text-sm font-medium text-gray-800 dark:text-gray-100">{{app.SystemSetting.footer_email}}</p>
+                    <p class="block text-sm font-medium text-gray-800 dark:text-gray-100">{{app.SystemSetting.footer_phone}}</p>
+                </div>
             </div>
 
             <!--begin::Hint-->
             <div class="form-text py-10">
-                Customers will see this shortened version of your statement descriptor
+            
+                <p class="mt-5 text-sm text-gray-500 dark:text-gray-400">©
+                    {{"now"| date("Y")}}
+                    {{app.SystemSetting.sitename}}.</p>
             </div>
 
 		</div>
