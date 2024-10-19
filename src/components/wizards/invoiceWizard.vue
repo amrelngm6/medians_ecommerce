@@ -147,16 +147,6 @@
                                                         <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Discount')"></div>
                                                         <div class="text-end fw-bold fs-6 text-gray-800" v-text="'$' + activeItem.discount_amount"></div>
                                                     </div>
-                                                        
-                                                    <div class="d-flex flex-stack mb-3">
-                                                        <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Tax')"></div>
-                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="'$' + activeItem.tax_amount"></div>
-                                                    </div>
-                            
-                                                    <div class="d-flex flex-stack mb-3">
-                                                        <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Shipping')"></div>
-                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="'$' + activeItem.shipping_amount"></div>
-                                                    </div>
                             
                                                     <div class="d-flex flex-stack mb-3">
                                                         <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Total amount')"></div>
