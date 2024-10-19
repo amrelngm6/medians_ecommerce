@@ -11,19 +11,25 @@
 			</div>
             <hr class="my-6" />
 			<div class="box-body pt-0">
-				{% for invoice in customer.invoices %}
-                <div class="courses-container">
-                    <div class="course shadow-md bg-gray-100 dark:bg-gray-800">
-                        <div class="course-preview flex-none">
-                            <h6>{{lang.translate(invoice.status == 'paid' ? 'paid' : 'free')}}</h6>
-                            <h2>{{invoice.code}}</h2>
+                <div class="space-y-4">
+				
+                {% for invoice in customer.invoices %}
+                
+
+                <!-- Invoice Item -->
+                    <!-- First Invoice -->
+                    <div class="p-4 bg-gray-50 rounded-lg shadow-md flex justify-between items-center">
+                        <div>
+                            <p class="text-lg font-semibold text-gray-800">Subscription Plan: Basic</p>
+                            <p class="text-sm text-gray-500">Date: 2024-10-19</p>
                         </div>
-                        <div class="course-info">
+                        <div>
+                            <p class="text-lg font-semibold text-green-600">$20.00</p>
                         </div>
                     </div>
-                </div>
 
                 {% endfor %}
+                </div>
 			</div>
 		</div>
 
