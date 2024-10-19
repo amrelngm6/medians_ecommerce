@@ -98,7 +98,7 @@ class PackageSubscriptionController extends CustomController
 		
         try {
 			
-			$item = $this->repo->find($params['package_id']);
+			$item = $this->packageRepo->find($params['package_id']);
 
 			$params['customer_id'] = $customer->customer_id;
 			$params['payment_status'] = $item->is_paid ? 'paid' : 'free';
