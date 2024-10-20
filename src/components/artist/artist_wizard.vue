@@ -460,9 +460,9 @@
                         <tbody class="fs-6 fw-semibold text-gray-600" v-if="activeItem.invoices">
                             <tr v-for="invoice in activeItem.invoices">
                                 <td class="ps-9" v-text="invoice.code"></td>
-                                <td class="ps-9" v-text="invoice.transaction ? invoice.transaction.transaction_id : ''"></td>
+                                <td class="ps-9" > <span v-text="invoice.transaction ? invoice.transaction.transaction_id : ''"></span> | <span v-text="invoice.transaction && invoice.transaction.field ? invoice.transaction.field.id : ''"></span></td>
                                 <td class="" v-text="invoice.date"></td>
-                                <td class="" > <span v-text="invoice.item && invoice.item.package ? invoice.item.package.name : ''"></span></td>
+                                <td class="" > <span v-text="invoice.item && invoice.item.package ? invoice.item.package.name : ''"></span> </td>
                                 <td class="" v-text="'$'+invoice.total_amount"></td>
                                 <td :class=" invoice.status == 'paid' ? 'text-success' : 'text-danger'" v-text="translate(invoice.status)"></td>
                             </tr>                              
