@@ -176,7 +176,7 @@ class InvoiceController extends CustomController
 			if (empty($item))
 				return Page404();
 
-			if ($customer->customer_id != $item->customer_id)
+			if (!$customer || $customer->customer_id != $item->customer_id)
 				return Page404();
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
