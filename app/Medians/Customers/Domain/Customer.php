@@ -215,7 +215,7 @@ class Customer extends CustomModel
 		}
 
 		
-		if ($limit >= $count) {
+		if ($limit <= $count) {
 			return;
 		}
 
