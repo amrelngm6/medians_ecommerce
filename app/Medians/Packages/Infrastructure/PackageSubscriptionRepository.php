@@ -40,7 +40,7 @@ class PackageSubscriptionRepository
 	*/
 	public function get($params = null) 
 	{
-		return PackageSubscription::with('customer','package')->get();
+		return PackageSubscription::with('customer','package', 'invoice')->get();
 	}
 
 	
