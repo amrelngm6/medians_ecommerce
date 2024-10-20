@@ -177,6 +177,10 @@ class Customer extends CustomModel
 
 		$limit = $this->subscription->package->feature[$access.'_uploads_limit'] ?? 0;
 
+		if ($limit < 1) {
+			return;
+		}
+
 		switch ($access) {
 			case 'audio':
 				$count = $this->audio_items->count();
@@ -212,8 +216,7 @@ class Customer extends CustomModel
 			return false;
 		}
 
-
-		return  true;
+		return  'true';
 
 	}
 	
