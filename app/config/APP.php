@@ -366,7 +366,7 @@ class APP
 				array('permission'=>'Invoices.index', 'title'=>translate('Invoices'),  'icon'=>'tool', 'link'=>'admin/invoices', 'component'=>'invoices'),
 				array('permission'=>'Transactions.index', 'title'=>translate('Transactions'),  'icon'=>'tool', 'link'=>'admin/transactions', 'component'=>'transactions'),
 			]
-		),
+			),
 		
 			array( 'title'=>translate('Management'),  'icon'=>'package', 'link'=>'#management', 'superadmin'=> true, 'sub'=>
 			[
@@ -376,13 +376,6 @@ class APP
 			),
 			
 			
-			array( 'title'=>translate('Users'),  'icon'=>'tool', 'link'=>'#users', 'superadmin'=> true, 'sub'=>
-			[
-				array('permission'=>'User.index', 'title'=>translate('Users'),  'icon'=>'users', 'link'=>'admin/users', 'component'=>'users'),
-				array('permission'=> 'Roles.index', 'title'=> translate('ROLES MANAEGMENT'),  'icon'=>'tool', 'link'=>'admin/roles', 'component'=>'roles'),
-			]
-			),
-			
 			array( 'title'=>translate('Support'),  'icon'=>'help-circle', 'link'=>'#support', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=>'HelpMessage.index', 'title'=>translate('Help Messages'),  'icon'=>'help-circle', 'link'=>'admin/help_messages', 'component'=>'help_messages'),
@@ -390,12 +383,6 @@ class APP
 			]
 			),
 			
-			array( 'title'=>translate('localization'),  'icon'=>'mic', 'link'=>'#localization', 'superadmin'=> true, 'sub'=>
-			[
-				array('permission'=>'Language.index', 'title'=>translate('Languages'),  'icon'=>'tag', 'link'=>'admin/languages', 'component'=>'data_table'),
-				array('permission'=>'Translation.index', 'title'=>translate('Translations'),  'icon'=>'tag', 'link'=>'admin/translations', 'component'=>'translations'),
-			]
-			),
 			
 			array( 'title'=>translate('Settings'),  'icon'=>'tool', 'link'=>'#setting', 'superadmin'=> true, 'sub'=>
 			[
@@ -408,6 +395,20 @@ class APP
 				array('permission'=> 'ChannelsSettings.index', 'title'=> translate('Channels settings'),  'icon'=>'tool', 'link'=>'admin/channels_settings', 'component'=>'system_settings'),
 				array('permission'=> 'StationsSettings.index', 'title'=> translate('Stations settings'),  'icon'=>'tool', 'link'=>'admin/stations_settings', 'component'=>'system_settings'),
 				array('permission'=> 'PlaylistsSettings.index', 'title'=> translate('Playlists settings'),  'icon'=>'tool', 'link'=>'admin/playlists_settings', 'component'=>'system_settings'),
+			]
+			),
+
+			array( 'title'=>translate('localization'),  'icon'=>'mic', 'link'=>'#localization', 'superadmin'=> true, 'sub'=>
+			[
+				array('permission'=>'Language.index', 'title'=>translate('Languages'),  'icon'=>'tag', 'link'=>'admin/languages', 'component'=>'data_table'),
+				array('permission'=>'Translation.index', 'title'=>translate('Translations'),  'icon'=>'tag', 'link'=>'admin/translations', 'component'=>'translations'),
+			]
+			),
+			
+			array( 'title'=>translate('Users'),  'icon'=>'tool', 'link'=>'#users', 'superadmin'=> true, 'sub'=>
+			[
+				array('permission'=>'User.index', 'title'=>translate('Users'),  'icon'=>'users', 'link'=>'admin/users', 'component'=>'users'),
+				array('permission'=> 'Roles.index', 'title'=> translate('ROLES MANAEGMENT'),  'icon'=>'tool', 'link'=>'admin/roles', 'component'=>'roles'),
 			]
 			),
 			
