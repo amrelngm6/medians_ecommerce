@@ -119,6 +119,11 @@ class Customer extends CustomModel
 		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withSum('views', 'times')->with('main_file')->where('type', 'video')->orderBy('media_id', 'DESC');	
 	}
 
+	public function short_videos()
+	{
+		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withSum('views', 'times')->with('main_file')->where('type', 'short_video')->orderBy('media_id', 'DESC');	
+	}
+
 	public function audio_items()
 	{
 		return $this->hasMany(MediaItem::class , 'author_id', 'customer_id')->withSum('views', 'times')->with('main_file')->where('type', 'audio')->orderBy('media_id', 'DESC');	
@@ -163,4 +168,54 @@ class Customer extends CustomModel
 		return  $this;
     }
 	
+	
+    public function can($access)
+    {
+
+		if (empty($this->subscription->is_valid))
+			return false;
+
+		$limit = $this->subscription->package->feature[$access.'_uploads_limit'] ?? 0;
+
+		switch ($access) {
+			case 'audio':
+				$count = $this->audio_items->count();
+				break;
+
+			case 'audiobooks':
+				$count = $this->audiobooks->count();
+				break;
+
+			case 'videos':
+				$count = $this->videos->count();
+				break;
+
+			case 'shortvideo':
+				$count = $this->short_videos->count();
+				break;
+
+			case 'channels':
+				$count = $this->channels->count();
+				break;
+
+			case 'stations':
+				$count = $this->stations->count();
+				break;
+
+			case 'playlists':
+				$count = $this->playlists->count();
+				break;
+		}
+
+
+		if ($limit >= $count) {
+			return false;
+		}
+
+
+		return  true;
+
+	}
+	
+
 }
