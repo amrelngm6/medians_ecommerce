@@ -15,16 +15,6 @@ class PackageSubscriptionRepository
 {
 
 	
-	 
-	
-
-	
-
-	function __construct()
-	{
-		
-		
-	}
 
 	/**
 	* Find item by `id` 

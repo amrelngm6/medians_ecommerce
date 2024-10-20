@@ -88,21 +88,21 @@
                         </div>
                         <div class="flex w-full">
                 
-                            <div class="border border-dashed border-gray-300 w-full rounded my-3 p-4 me-6">                    
+                            <div class="border border-dashed border-gray-300 w-full rounded my-3 p-4 me-6" @mouseover="content.totalTip = true" @mouseleave="content.totalTip = false">                    
                                 <span class="fs-2x fw-bold text-gray-800 lh-1">
                                     <span data-kt-countup="true" data-kt-countup-value="6,840" data-kt-countup-prefix="$" class="counted" data-kt-initialized="1" v-text="'$'+content.total_earnings" ></span>
                                 </span>
-                                <div @mouseover="content.totalTip = true" @mouseleave="content.totalTip = false" class="w-full relative symbol symbol-35px symbol-circle" >
+                                <div class="w-full relative symbol symbol-35px symbol-circle" >
                                     <tooltip v-if="content.totalTip" :key="content.totalTip" :title="translate('Total amount of paid invoices')" ></tooltip>
                                     <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Total Earnings')"></span>
                                 </div>
                             </div>
                             
-                            <div class="border border-dashed border-gray-300 w-full rounded my-3 p-4 me-6">   
+                            <div class="border border-dashed border-gray-300 w-full rounded my-3 p-4 me-6" @mouseover="content.countTip = true" @mouseleave="content.countTip = false" >   
                                 <span class="fs-2x fw-bold text-gray-800 lh-1">
                                     <span class="counted" data-kt-countup="true" data-kt-countup-value="80" data-kt-initialized="1" v-text="content.transactions_count"></span>
                                 </span>
-                                <div @mouseover="content.countTip = true" @mouseleave="content.countTip = false" class="w-full relative symbol symbol-35px symbol-circle" >
+                                <div class="w-full relative symbol symbol-35px symbol-circle" >
                                     <tooltip v-if="content.countTip" :key="content.countTip" :title="translate('Total count of subscriptions')" ></tooltip>
                                     <span class="flex-none fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Subscriptions')"></span>
                                 </div>
@@ -110,11 +110,11 @@
                             
 
                             
-                            <div class="border border-dashed border-gray-300 w-full rounded my-3 p-4 me-6">
+                            <div class="border border-dashed border-gray-300 w-full rounded my-3 p-4 me-6" @mouseover="content.pendingTip = true" @mouseleave="content.pendingTip = false">
                                 <span class="fs-2x fw-bold text-gray-800 lh-1">
                                     <span data-kt-countup="true" data-kt-countup-value="1,240" data-kt-countup-prefix="$" class="counted" data-kt-initialized="1" v-text="content.pending_invoices_count"></span>
                                 </span>
-                                <div @mouseover="content.pendingTip = true" @mouseleave="content.pendingTip = false" class="w-full relative symbol symbol-35px symbol-circle" >
+                                <div  class="w-full relative symbol symbol-35px symbol-circle" >
                                     <tooltip v-if="content.pendingTip" :key="content.pendingTip" :title="translate('Invoices of subscriptions are not paid yet')" ></tooltip>
                                     <span class="w-full fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Pending')"></span>
                                 </div>
@@ -128,36 +128,36 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6 mb-6">
                         <div class="relative overflow-hidden">
                             <dashboard_card_white icon="/uploads/img/booking-unpaid.png" classes="bg-dark pb-30"
-                                text_class="fs-4 text-white" value_class="text-white" :title="translate('Audio')"
-                                :value="content.audio_count"></dashboard_card_white>
-                            <line_charts class="absolute bottom-0 w-full mb-8" v-if="content.audio_charts" type="bar"
-                                :key="content" :data="getChartData(content.audio_charts, 'label', 'y')" />
+                                text_class="fs-4 text-white" value_class="text-white" :title="translate('Media')"
+                                :value="content.media_count"></dashboard_card_white>
+                            <line_charts class="absolute bottom-0 w-full mb-8" v-if="content.media_charts" type="bar"
+                                :key="content" :data="getChartData(content.media_charts, 'label', 'y')" />
                         </div>
 
                         <div class="relative overflow-hidden">
                             <dashboard_card_white icon="/uploads/img/booking-paid.png" classes="bg-info pb-30"
-                                text_class="fs-4 text-white" value_class="text-white" :title="translate('Videos')"
-                                :value="content.video_count"></dashboard_card_white>
-                            <line_charts class="absolute bottom-0 w-full mb-8" v-if="content.video_charts" type="bar"
-                                :key="content" :data="getChartData(content.video_charts, 'label', 'y')" />
+                                text_class="fs-4 text-white" value_class="text-white" :title="translate('Channels')"
+                                :value="content.channels_count"></dashboard_card_white>
+                            <line_charts class="absolute bottom-0 w-full mb-8" v-if="content.channels_charts" type="bar"
+                                :key="content" :data="getChartData(content.channels_charts, 'label', 'y')" />
                         </div>
 
                         <div class="relative overflow-hidden">
                             <dashboard_card_white icon="/uploads/img/booking_income.png" classes="bg-success pb-30"
                                 text_class="fs-4 text-white" value_class="text-white"
-                                :title="translate('Newsletter Subscriber')" :value="content.subscribers_count">
+                                :title="translate('Stations')" :value="content.stations_count">
                             </dashboard_card_white>
-                            <line_charts class="absolute bottom-0 w-full mb-8" v-if="content.subscribers_charts"
+                            <line_charts class="absolute bottom-0 w-full mb-8" v-if="content.stations_charts"
                                 type="bar" :key="content"
-                                :data="getChartData(content.subscribers_charts, 'label', 'y')" />
+                                :data="getChartData(content.stations_charts, 'label', 'y')" />
                         </div>
 
                         <div class="relative overflow-hidden">
                             <dashboard_card_white icon="/uploads/img/products_icome.png" classes="bg-danger pb-30"
                                 text_class="fs-4 text-white" value_class="text-white" :title="translate('Total Visits')"
                                 :value="content.visits_count"></dashboard_card_white>
-                            <line_charts class="absolute bottom-0 w-full mb-8" v-if="content.orders_charts" type="bar"
-                                :key="content" :data="getChartData(content.visits_charts, 'date', 'y')" />
+                            <line_charts class="absolute bottom-0 w-full mb-8" v-if="content.visits_charts" type="bar"
+                                :key="content" :data="getChartData(content.visits_charts, 'label', 'y')" />
                         </div>
                     </div>
                 </div>

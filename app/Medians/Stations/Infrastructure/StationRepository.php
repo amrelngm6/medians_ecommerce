@@ -9,15 +9,7 @@ use Medians\Stations\Domain\StationMedia;
 class StationRepository 
 {
 
-	protected $app;
-
-
-
-	function __construct()
-	{
-	}
-
-
+	
 	public function find($id)
 	{
 		return Station::with('items', 'activeItem')->withCount('likes')->find($id);
@@ -53,6 +45,12 @@ class StationRepository
 		return Station::withCount('likes')->with('items','activeItem')->where('customer_id', $customer_id)->get();
 	}
 
+
+	public function eventsByDate($params)
+	{
+		$query = Station::whereBetween('created_at', [$params['start'], $params['end']]);
+		return $query;
+	}
 
 	
 	/**

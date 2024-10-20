@@ -53,8 +53,12 @@ class ChannelRepository
 		return Channel::withCount('likes')->with('items','activeItem')->where('customer_id', $customer_id)->get();
 	}
 
+	public function eventsByDate($params)
+	{
+		$query = Channel::whereBetween('created_at', [$params['start'], $params['end']]);
+		return $query;
+	}
 
-	
 	/**
 	 * Load items with filters
 	 */

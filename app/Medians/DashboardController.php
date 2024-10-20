@@ -120,6 +120,8 @@ class DashboardController extends CustomController
 		$mediaItemRepo = new Media\Infrastructure\MediaItemRepository();
 		$transactionRepo = new Transactions\Infrastructure\TransactionRepository();
 		$invoicesRepo = new Invoices\Infrastructure\InvoiceRepository();
+		$stationRepo = new Stations\Infrastructure\StationRepository();
+		$channelRepo = new Channels\Infrastructure\ChannelRepository();
 		$mediaItem = new Media\Domain\MediaItem();
 
 		$data = [];
@@ -155,6 +157,11 @@ class DashboardController extends CustomController
 		$data['visits_charts'] = View::totalViews($this->start, $this->end)->selectRaw('date as label, SUM(times) as y, item_type')->having('y', '>', 0)->groupBy('date')->limit('30')->get();
 		$data['likes_charts'] = Like::whereBetween('created_at', [$this->start, $this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y, item_type')->having('y', '>', 0)->groupBy('label')->limit('30')->get();
 		$data['comments_charts'] = Comment::whereBetween('created_at', [$this->start, $this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y, item_type')->having('y', '>', 0)->groupBy('label')->limit('30')->get();
+		
+		
+		$data['channels_charts'] = $channelRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('30')->get();
+
+		$data['stations_charts'] = $stationRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('30')->get();
 
 		// Subscribers stats
 		$data['subscribers_charts'] = $subscriberRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
