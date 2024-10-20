@@ -34,12 +34,17 @@ class PackageSubscription extends CustomModel
         'status',
 	];
 
-    public $appends = ['is_paid', 'is_valid','name', 'field'];
+    public $appends = ['is_paid', 'is_valid', 'is_expired', 'name', 'field'];
 
     
 	public function getIsValidAttribute()
 	{
 		return (strtotime(date("Y-m-d")) <= strtotime($this->end_date)) ? (($this->payment_type == 'free' && $this->status != 'canceled') || $this->status == 'active') : false;
+	}
+
+    public function getIsExpiredAttribute()
+	{
+		return (strtotime(date("Y-m-d")) > strtotime($this->end_date));
 	}
     
 	public function getFieldAttribute()
