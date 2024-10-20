@@ -73,8 +73,7 @@ class TransactionRepository
 	
 	public function allEventsByDate($params)
 	{
-		$query = Transaction::whereBetween('date', [$params['start'], $params['end']]);
-		return $query;
+		return $this->eventsByDate($params);
 	}
 
 

@@ -118,6 +118,7 @@ class DashboardController extends CustomController
 
 		$subscriberRepo = new Newsletters\Infrastructure\SubscriberRepository();
 		$mediaItemRepo = new Media\Infrastructure\MediaItemRepository();
+		$transactionRepo = new Transactions\Infrastructure\TransactionRepository();
 		$mediaItem = new Media\Domain\MediaItem();
 
 		$data = [];
@@ -157,6 +158,10 @@ class DashboardController extends CustomController
 		// Subscribers stats
 		$data['subscribers_charts'] = $subscriberRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
 		$data['subscribers_count'] = $subscriberRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
+
+		
+		$data['total_earnings'] = $transactionRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->sum('amount');
+		$data['transactions_count'] = $transactionRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
 
         return $data;
 

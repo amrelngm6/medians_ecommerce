@@ -90,18 +90,16 @@
                 
                             <div class="border border-dashed border-gray-300 w-125px rounded my-3 p-4 me-6">                    
                                 <span class="fs-2x fw-bold text-gray-800 lh-1">
-                                    <span data-kt-countup="true" data-kt-countup-value="6,840" data-kt-countup-prefix="$" class="counted" data-kt-initialized="1">$6,840</span>
+                                    <span data-kt-countup="true" data-kt-countup-value="6,840" data-kt-countup-prefix="$" class="counted" data-kt-initialized="1" v-text="'$'+content.total_earnings" ></span>
                                 </span>
-                                <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2">Net Earnings</span>
+                                <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Total Earnings')"></span>
                             </div>
-                            
-
                             
                             <div class="border border-dashed border-gray-300 w-125px rounded my-3 p-4 me-6">   
                                 <span class="fs-2x fw-bold text-gray-800 lh-1">
-                                    <span class="counted" data-kt-countup="true" data-kt-countup-value="80" data-kt-initialized="1">80</span>%
+                                    <span class="counted" data-kt-countup="true" data-kt-countup-value="80" data-kt-initialized="1" v-text="content.transactions_count"></span>
                                 </span>
-                                <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2">Change</span>
+                                <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Subscriptions count')"></span>
                             </div>
                             
 
