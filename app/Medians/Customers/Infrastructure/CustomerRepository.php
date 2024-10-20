@@ -49,6 +49,7 @@ class CustomerRepository
 		->with(['invoices'=> function($q){
 			return $q->with('item', 'transaction');
 		}])
+		->with('comments')
 		->withCount('videos' ,'audio_items' ,'audiobooks','stations' ,'channels','short_videos','playlists'  )
 		->get();
 	}

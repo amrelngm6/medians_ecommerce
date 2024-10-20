@@ -13,6 +13,7 @@ use Medians\Likes\Domain\Like;
 use Medians\Views\Domain\View;
 use Medians\Packages\Domain\PackageSubscription;
 use Medians\Invoices\Domain\Invoice;
+use Medians\Comments\Domain\Comment;
 
 
 class Customer extends CustomModel
@@ -155,6 +156,10 @@ class Customer extends CustomModel
 		return $this->hasMany(Like::class, 'customer_id', 'customer_id')->with('item');	
 	}
 
+	public function comments() 
+	{
+		return $this->hasMany(Comment::class, 'customer_id', 'customer_id');	
+	}
 
 	public function viewscount() 
 	{
