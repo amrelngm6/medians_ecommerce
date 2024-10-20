@@ -31,7 +31,7 @@
 
                                     <!--begin::Description-->
                                     <div class="d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-500 truncate"
-                                        v-text="activeItem.description"></div>
+                                        v-text="activeItem.field.about ?? ''"></div>
                                     <!--end::Description-->
                                 </div>
                                 <!--end::Details-->
@@ -97,24 +97,7 @@
                                 </div>
                                 <!--end::Stats-->
 
-                                <!--begin::Users-->
-                                <div class="symbol-group symbol-hover mb-3">
-                                    <!--begin::User-->
-                                    <div v-for="comment in activeItem.comments"  @mouseover="comment.showTip = true" @mouseleave="comment.showTip = false" class="symbol symbol-35px symbol-circle" >
-                                        <img alt="Pic" v-if="comment && comment.customer" :src="comment.customer.picture">
-                                        <span v-if="comment && activeItem.customer && !activeItem.customer.picture" v-text="activeItem.name.substring(0, 1)"
-                                            class="symbol-label bg-info text-inverse-info fw-bold"></span>
-                                        <tooltip v-if="comment.showTip && comment.customer" :title="comment.customer.name" ></tooltip>
-                                    </div>
 
-                                    <!--begin::All users-->
-                                    <a href="#" class="symbol symbol-35px symbol-circle">
-                                        <span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bold"
-                                            v-text="activeItem.comments_count > 10 ? (activeItem.comments_count - 10) : '+'"></span>
-                                    </a>
-                                    <!--end::All users-->
-                                </div>
-                                <!--end::Users-->
                             </div>
                             <!--end::Info-->
                         </div>
@@ -145,62 +128,68 @@
                         <div class="card-header cursor-pointer">
                             <!--begin::Card title-->
                             <div class="card-title m-0">
-                                <h3 class="fw-bold m-0" v-text="translate('Media info')"></h3>
+                                <h3 class="fw-bold m-0" v-text="translate('Customer info')"></h3>
                             </div>
                             <!--end::Card title-->
                         </div>
                         <div class="card-body pt-0">
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Link')"></label>
-                                <div class="col-lg-8"><a target="_blank"
-                                        :href="'/' + activeItem.type + '/' + activeItem.media_id"
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Profile')"></label>
+                                <div class="col-lg-8"><a target="_blank" :href="'/artist/' + activeItem.customer_id"
                                         class="fw-bold fs-6 text-gray-800"
-                                        v-text="conf.url + activeItem.type + '/' + activeItem.media_id"></a></div>
+                                        v-text="conf.url + '/artist/' + activeItem.customer_id"></a></div>
                             </div>
                             <!--end::Row-->
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Media Name')"></label>
+                                <label class="col-lg-4 fw-semibold text-muted"
+                                    v-text="translate('Customer Name')"></label>
                                 <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
                                         v-text="activeItem.name"></span></div>
                             </div>
                             <!--end::Row-->
 
-                            <!--begin::Input group-->
+                            <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted"
-                                    v-text="translate('Description')"></label>
-                                <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
-                                        v-text="activeItem.description"></span></div>
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Email')"></label>
+                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                        v-text="activeItem.email"></span></div>
                             </div>
-                            <!--end::Input group-->
+                            <!--end::Row-->
 
-                            <!--begin::Input group-->
+                            <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Duration')"></label>
-                                <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
-                                        v-text="activeItem.field.duration ? toHHMMSS(activeItem.field.duration) : '0'"></span>
-                                </div>
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Phone')"></label>
+                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                        v-text="activeItem.field.phone ?? ''"></span></div>
                             </div>
-                            <!--end::Input group-->
+                            <!--end::Row-->
 
-                            <!--begin::Input group-->
+                            <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Filesize')"></label>
-                                <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
-                                        v-text="activeItem.field.filesize ?? '0'"></span></div>
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('City')"></label>
+                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                        v-text="activeItem.field.city ?? ''"></span></div>
                             </div>
-                            <!--end::Input group-->
+                            <!--end::Row-->
 
-                            <!--begin::Input group-->
+                            <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Bitrate')"></label>
-                                <div class="col-lg-8 fv-row"><span class="fw-semibold text-gray-800 fs-6"
-                                        v-text="activeItem.field.bitrate ?? '0'"></span></div>
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Country')"></label>
+                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                        v-text="activeItem.field.country ?? ''"></span></div>
                             </div>
-                            <!--end::Input group-->
+                            <!--end::Row-->
+
+                            <!--begin::Row-->
+                            <div class="row mb-7">
+                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('website')"></label>
+                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                        v-text="activeItem.field.website ?? ''"></span></div>
+                            </div>
+                            <!--end::Row-->
 
                         </div>
                     </div>
@@ -238,11 +227,12 @@
                                     <div class="d-flex flex-stack flex-grow-1 ">
                                         <!--begin::Content-->
                                         <div class=" fw-semibold">
-                                            <h4 class="text-gray-900 fw-bold" v-text="translate('Delete this media')">
+                                            <h4 class="text-gray-900 fw-bold"
+                                                v-text="translate('Delete this customer')">
                                             </h4>
 
                                             <div class="fs-6 text-gray-700 "> <span
-                                                    v-text="translate('Remove this media and its related files and all related information')"></span>
+                                                    v-text="translate('Remove this customer and its related files and all related information')"></span>
                                             </div>
                                         </div>
                                         <!--end::Content-->
@@ -257,7 +247,7 @@
                                     <input name="deactivate" class="form-check-input" type="checkbox" value="" required
                                         id="deactivate">
                                     <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate"
-                                        v-text="translate('I Confirm to delete this media')"></label>
+                                        v-text="translate('I Confirm to delete this customer')"></label>
                                     <div
                                         class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                                     </div>
@@ -268,7 +258,7 @@
 
                             <!--begin::Card footer-->
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
-                                <a id="kt_account_deactivate_account_submit" @click="removeMedia"
+                                <a id="kt_account_deactivate_account_submit" @click="removeCustomer"
                                     class="btn btn-danger fw-semibold" v-text="translate('Delete')"></a>
                             </div>
                             <!--end::Card footer-->
@@ -343,18 +333,23 @@
                         <div
                             class="relative group-last:after:hidden after:absolute after:top-8 after:bottom-2 after:start-3 after:w-px after:-translate-x-[0.5px] after:bg-gray-200 dark:after:bg-neutral-700">
                             <div class="relative z-10 size-6 flex justify-center items-center">
-                                <vue-feather type="video" v-if="activeItem.type == 'video'" class="shrink-0 size-6 text-gray-600 dark:text-neutral-400" />
-                                <vue-feather type="music" v-if="activeItem.type == 'audio'" class="shrink-0 size-6 text-gray-600 dark:text-neutral-400" />
-                                <vue-feather type="headphones" v-if="activeItem.type == 'audiobook'" class="shrink-0 size-6 text-gray-600 dark:text-neutral-400" />
+                                <vue-feather type="video" v-if="activeItem.type == 'video'"
+                                    class="shrink-0 size-6 text-gray-600 dark:text-neutral-400" />
+                                <vue-feather type="music" v-if="activeItem.type == 'audio'"
+                                    class="shrink-0 size-6 text-gray-600 dark:text-neutral-400" />
+                                <vue-feather type="headphones" v-if="activeItem.type == 'audiobook'"
+                                    class="shrink-0 size-6 text-gray-600 dark:text-neutral-400" />
                             </div>
                         </div>
                         <!-- End Icon -->
 
                         <!-- Right Content -->
                         <div class="grow pb-8 text-lg group-last:pb-0">
-                            <h3 class="mb-1 text-xs text-gray-600 dark:text-neutral-400" v-text="translate(file.type)"></h3>
+                            <h3 class="mb-1 text-xs text-gray-600 dark:text-neutral-400" v-text="translate(file.type)">
+                            </h3>
 
-                            <a :href="file.path" class="font-semibold text-xl py-1 text-gray-800 dark:text-neutral-200"  v-text="file.title.length ? file.title : activeItem.name"></a>
+                            <a :href="file.path" class="font-semibold text-xl py-1 text-gray-800 dark:text-neutral-200"
+                                v-text="file.title.length ? file.title : activeItem.name"></a>
 
                             <p class="mt-1  text-gray-600 dark:text-neutral-400">
                             </p>
@@ -366,7 +361,8 @@
                                 </li>
                                 <li class="ps-1  text-gray-600 flex gap-2 dark:text-neutral-400">
                                     <span v-text="translate('File size')"></span>
-                                    <b v-text="Math.round((file.field.filesize ?? activeItem.field.filesize) / 1000000, 2) + translate('MB')"></b>
+                                    <b
+                                        v-text="Math.round((file.field.filesize ?? activeItem.field.filesize) / 1000000, 2) + translate('MB')"></b>
                                 </li>
                                 <li class="ps-1  text-gray-600 flex gap-2 dark:text-neutral-400">
                                     <span v-text="translate('Duration')"></span>
@@ -385,6 +381,71 @@
                 </div>
                 <!-- End Timeline -->
             </div>
+
+            <div class="card  mb-5 mb-xl-10" v-if="activeTab == translate('Subscription')">
+                <!--begin::Card body-->
+                <div class="card-body">
+
+                    <!--begin::Row-->
+                    <div class="row" v-if="activeItem.subscription">
+                        <!--begin::Col-->
+                        <div class="col-lg-7">
+                            <!--begin::Heading-->
+                            <h3 class="mb-2" > <span v-text="translate('Active until')"></span> <span v-text="formatCustomTime(activeItem.subscription.end_date ?? '', 'MMMM DD, Y - HH:mm a')"></span></h3>
+                            <p class="fs-6 text-gray-600 fw-semibold mb-6 mb-lg-15" v-text="translate('Estimated date for this subscription')"></p>
+                            <!--end::Heading-->
+
+                            <!--begin::Info-->
+                            <div class="fs-5 mb-2">
+                                <span class="text-gray-800 fw-bold me-1" v-text="activeItem.subscription.total_cost"></span>
+                                <span class="text-gray-600 fw-semibold" > $<span v-text="activeItem.subscription.total_cost"></span> <span v-text="translate('Per '+ activeItem.subscription.duration)"></span> </span>
+                            </div>
+                            <!--end::Info-->
+
+                            <!--begin::Notice-->
+                            <div class="fs-6 text-gray-600 fw-semibold">
+                                Extended Pro Package. Up to 100 Agents &amp; 25 Projects
+                            </div>
+                            <!--end::Notice-->
+                        </div>
+                        <!--end::Col-->
+
+                        <!--begin::Col-->
+                        <div class="col-lg-5">
+                            <!--begin::Heading-->
+                            <div class="d-flex text-muted fw-bold fs-5 mb-3">
+                                <span class="flex-grow-1 text-gray-800">Users</span>
+                                <span class="text-gray-800">86 of 100 Used</span>
+                            </div>
+                            <!--end::Heading-->
+
+                            <!--begin::Progress-->
+                            <div class="progress h-8px bg-light-primary mb-2">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 86%"
+                                    aria-valuenow="86" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <!--end::Progress-->
+
+                            <!--begin::Description-->
+                            <div class="fs-6 text-gray-600 fw-semibold mb-10">14 Users remaining until your plan
+                                requires update</div>
+                            <!--end::Description-->
+
+                            <!--begin::Action-->
+                            <div class="d-flex justify-content-end pb-0 px-0">
+                                <a href="#" class="btn btn-light btn-active-light-primary me-2"
+                                    id="kt_account_billing_cancel_subscription_btn">Cancel Subscription</a>
+                                <button class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#kt_modal_upgrade_plan">Upgrade Plan</button>
+                            </div>
+                            <!--end::Action-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Card body-->
+            </div>
         </div>
     </div>
 </template>
@@ -399,7 +460,7 @@ import 'vue3-easy-data-table/dist/style.css';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 
 import { defineAsyncComponent, ref } from 'vue';
-import { translate, getProgressWidth,  formatCustomTime, toHHMMSS, deleteByKey } from '@/utils.vue';
+import { translate, getProgressWidth, formatCustomTime, toHHMMSS, deleteByKey } from '@/utils.vue';
 
 const form_field = defineAsyncComponent(() =>
     import('@/components/includes/form_field.vue')
@@ -436,18 +497,18 @@ export default
                 fields.value = props.item.translation ?? []
             }
 
-            const tabs = ref([translate('Info'), translate('Files'), translate('Comments')]);
+            const tabs = ref([translate('Info'), translate('Files'), translate('Comments'), translate('Subscription')]);
 
             const back = () => {
                 emit('callback');
             }
 
-            const removeMedia = () => {
-                return deleteByKey('media_id', activeItem.value, 'MediaItem.delete')
+            const removeCustomer = () => {
+                return deleteByKey('customer_id', activeItem.value, 'Customer.delete')
             }
 
             const progressWidth = () => {
-                let requiredData = ['name', 'description', 'double_cost_month', 'double_cost_quarter', 'double_cost_year', 'status'];
+                let requiredData = ['name', 'email', 'status'];
 
                 return getProgressWidth(requiredData, activeItem);
             }
@@ -473,7 +534,7 @@ export default
             const showModal = ref(false);
 
             return {
-                removeMedia,
+                removeCustomer,
                 tabs,
                 fields,
                 showModal,

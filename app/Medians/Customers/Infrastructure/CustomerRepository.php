@@ -43,7 +43,10 @@ class CustomerRepository
 
 	public function get()
 	{
-		return Customer::all();
+		return Customer::with(['subscription'=> function($q){
+			return $q->with('package');
+		}])
+		->with('subscriptions','videos' ,'audio_items' ,'audiobooks','stations' ,'channels','short_videos','playlists' ,'videos' )->get();
 	}
 
 	public function findByEmail($email)

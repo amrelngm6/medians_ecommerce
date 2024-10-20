@@ -40,8 +40,9 @@ class CustomerController extends CustomController
             [ 'value'=> "brand_id", 'text'=> "#"],
             [ 'value'=> "name", 'text'=> translate('name'), 'sortable'=> true ],
             [ 'value'=> "picture", 'text'=> translate('Logo'),  ],
-            [ 'value'=> "edit", 'text'=> translate('edit')  ],
-            [ 'value'=> "delete", 'text'=> translate('delete')  ],
+            [ 'value'=> "email", 'text'=> translate('Email'),  ],
+            [ 'value'=> "info", 'text'=> translate('edit')  ],
+            // [ 'value'=> "delete", 'text'=> translate('delete')  ],
         ];
 	}
 
