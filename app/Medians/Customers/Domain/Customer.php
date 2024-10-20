@@ -171,9 +171,13 @@ class Customer extends CustomModel
 	
     public function can_do($access)
     {
+		print_r($this->subscription->package);
 
 		if (empty($this->subscription->is_valid))
 			return false;
+
+
+		print_r($this->subscription->package->feature);
 
 		$limit = $this->subscription->package->feature[$access.'_uploads_limit'] ?? 0;
 
@@ -211,7 +215,6 @@ class Customer extends CustomModel
 				break;
 		}
 
-		print_r($this->subscription->package);
 		
 		if ($limit >= $count) {
 			return false;
