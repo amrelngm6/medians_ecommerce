@@ -43,6 +43,9 @@ class VideosSettingsController extends CustomController
 			],		
 			'audoplay'=> [	
 				[ 'key'=> "autoplay_video", 'title'=> translate('Autoplay at single page'), 'help_text'=>translate('Auto play videos at video page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+			],	
+			'streaming'=> [	
+				[ 'key'=> "video_direct_streaming", 'title'=> translate('Streaming Videos directly'), 'help_text'=>translate('Allow customers to stream Video files through direct links. ( Recommended disable to prevent download media files anonymously )'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 			],		
         ];
 	}
