@@ -5,7 +5,7 @@ use \Shared\dbaser\CustomController;
 
 use Medians\Settings\Infrastructure\SystemSettingsRepository;
 
-class StationsSettingsController extends CustomController
+class PlaylistsSettingsController extends CustomController
 {
 
 	/**
@@ -36,7 +36,7 @@ class StationsSettingsController extends CustomController
 
 		return [
 			'basic'=> [	
-				[ 'key'=> "enable_stations", 'title'=> translate('Allow stations feature'), 'help_text'=>translate('You can allow / disallow stations at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "enable_playlists", 'title'=> translate('Allow playlists feature'), 'help_text'=>translate('You can allow / disallow with playlists at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
                 
 			],		
         ];
@@ -52,7 +52,7 @@ class StationsSettingsController extends CustomController
 			'load_vue' => true,
 			'setting' => (new SystemSettingsController())->getAll(),
 			'fillable' => $this->fillable(),
-			'title' => translate('Stations Settings'),
+			'title' => translate('Playlists Settings'),
 	    ]);
 	} 
 

@@ -12,9 +12,10 @@
 						</svg>
 					</div>
 
-{% if app.customer.can_do('playlists') != true %}
-{% include 'views/front/' ~ app.SystemSetting.template ~ '/popups/subscribe-popup.html.twig' %}
-{% endif %}
+					{% if app.customer.can_do('playlists') != true %}
+					{% include 'views/front/' ~ app.SystemSetting.template ~ '/popups/subscribe-popup.html.twig' %}
+					{% endif %}
+					
 					<div class="inline-block w-full">
                         <div class="text-primary  w-full  rounded-2xl ">
                             <div class="w-full ">

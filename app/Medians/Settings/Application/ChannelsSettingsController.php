@@ -36,7 +36,7 @@ class ChannelsSettingsController extends CustomController
 
 		return [
 			'basic'=> [	
-				[ 'key'=> "enable_channels", 'title'=> translate('Allow channels feature'), 'help_text'=>translate('You can allow / disallow with Short channels at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "enable_channels", 'title'=> translate('Allow channels feature'), 'help_text'=>translate('You can allow / disallow channels at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
                 
 			],		
         ];
