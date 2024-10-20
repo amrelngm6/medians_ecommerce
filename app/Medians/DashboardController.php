@@ -119,6 +119,7 @@ class DashboardController extends CustomController
 		$subscriberRepo = new Newsletters\Infrastructure\SubscriberRepository();
 		$mediaItemRepo = new Media\Infrastructure\MediaItemRepository();
 		$transactionRepo = new Transactions\Infrastructure\TransactionRepository();
+		$invoicesRepo = new Invoices\Infrastructure\InvoiceRepository();
 		$mediaItem = new Media\Domain\MediaItem();
 
 		$data = [];
@@ -162,7 +163,7 @@ class DashboardController extends CustomController
 		
 		$data['total_earnings'] = $transactionRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->sum('amount');
 		$data['transactions_count'] = $transactionRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->count();
-		$data['pending_invoices_count'] = $transactionRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->where('status', 'unpaid')->count();
+		$data['pending_invoices_count'] = $invoicesRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->where('status', 'unpaid')->count();
 
         return $data;
 
