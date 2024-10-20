@@ -262,7 +262,7 @@ function completePayPal()
                     success: function(data) {
                         console.log(data)
                         let a = JSON.parse(data);
-                        if (a.result.code)
+                        if (a.success)
                             window.reload();
 
                     },
