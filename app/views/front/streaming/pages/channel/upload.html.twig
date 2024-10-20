@@ -48,3 +48,6 @@
     </div>
 </div>
     
+{% if app.customer.can_do('channels') != true %}
+{% include 'views/front/' ~ app.SystemSetting.template ~ '/popups/subscribe-popup.html.twig' %}
+{% endif %}

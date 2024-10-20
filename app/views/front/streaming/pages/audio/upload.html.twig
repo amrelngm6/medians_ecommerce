@@ -38,3 +38,6 @@
 
                         </form>
 
+{% if app.customer.can_do('audio') != true %}
+{% include 'views/front/' ~ app.SystemSetting.template ~ '/popups/subscribe-popup.html.twig' %}
+{% endif %}

@@ -68,3 +68,8 @@
     {% include 'views/front/' ~ template ~ '/popups/station-calendar.html.twig' %}
     {% include 'views/front/' ~ template ~ '/pages/station/station-range-popup.html.twig' %}
     {% include 'views/front/' ~ template ~ '/popups/station-record.html.twig' %}
+
+
+{% if app.customer.can_do('stations') != true %}
+{% include 'views/front/' ~ app.SystemSetting.template ~ '/popups/subscribe-popup.html.twig' %}
+{% endif %}
