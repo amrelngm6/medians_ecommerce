@@ -535,6 +535,12 @@ class VideoController extends CustomController
         
         try {
                 
+			$customer = $this->app->customer_auth();
+            if (!$customer->can_do('videos'))
+            {
+                throw new \Exception(translate('You need to upgrade your subscription'), 1);
+            }
+            
             if (!empty($params['link']))
             {
                 

@@ -92,7 +92,12 @@ class PlaylistController extends CustomController
 
         try {	
 
-        	$this->app->customer_auth();
+			$customer = $this->app->customer_auth();
+            if (!$customer->can_do('videos'))
+            {
+                throw new \Exception(translate('You need to upgrade your subscription'), 1);
+            }
+
         	$this->validate($params);
 			$params['customer_id'] = $this->app->customer->customer_id;
 

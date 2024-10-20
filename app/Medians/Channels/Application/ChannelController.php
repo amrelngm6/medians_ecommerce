@@ -120,8 +120,12 @@ class ChannelController extends CustomController
 
         try {	
 
-        	$this->app->customer_auth();
-			
+			$customer = $this->app->customer_auth();
+            if (!$customer->can_do('stations'))
+            {
+                throw new \Exception(translate('You need to upgrade your subscription'), 1);
+            }
+
 			$filePath = $_SERVER['DOCUMENT_ROOT']. $params['media_path'];
 			$getID3 = new getID3;
 			if (substr($params['media_path'], 0, 4) == 'http' ) {

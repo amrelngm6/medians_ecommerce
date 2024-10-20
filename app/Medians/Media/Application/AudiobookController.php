@@ -404,6 +404,11 @@ class AudiobookController extends CustomController
 			
 			$customer = $this->app->customer_auth();
 
+            if (!$customer->can_do('audiobooks'))
+            {
+                throw new \Exception(translate('You need to upgrade your subscription'), 1);
+            }
+
 
             foreach ($this->app->request()->files as $key => $value) {
                 $file = $this->mediaRepo->upload($value);

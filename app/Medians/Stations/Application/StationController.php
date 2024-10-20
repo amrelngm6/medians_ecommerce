@@ -71,10 +71,15 @@ class StationController extends CustomController
 
 		$params = $this->app->params();
 
-        try {	
+        try 
+		{
 			$mediaRepo = new \Medians\Media\Infrastructure\MediaRepository;
 
 			$customer = $this->app->customer_auth();
+            if (!$customer->can_do('stations'))
+            {
+                throw new \Exception(translate('You need to upgrade your subscription'), 1);
+            }
 
 			$params['status'] = isset($params['status']) ? 'on' : null;
 
