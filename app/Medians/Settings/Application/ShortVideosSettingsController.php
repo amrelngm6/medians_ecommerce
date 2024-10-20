@@ -46,6 +46,9 @@ class ShortVideosSettingsController extends CustomController
 				[ 'key'=> "autoplay_short_video", 'title'=> translate('Autoplay at single page'), 'help_text'=>translate('Auto play videos at short video page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
                 
 			],		
+			'streaming'=> [	
+				[ 'key'=> "short_video_direct_streaming", 'title'=> translate('Streaming Short Videos directly'), 'help_text'=>translate('Allow customers to stream Short Video files through direct links. ( Recommended disable to prevent download media files anonymously )'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+			],		
         ];
 	}
 

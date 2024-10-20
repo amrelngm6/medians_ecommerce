@@ -39,6 +39,9 @@ class StationsSettingsController extends CustomController
 				[ 'key'=> "enable_stations", 'title'=> translate('Allow stations feature'), 'help_text'=>translate('You can allow / disallow stations at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
                 
 			],		
+			'streaming'=> [	
+				[ 'key'=> "station_direct_streaming", 'title'=> translate('Streaming Stations directly'), 'help_text'=>translate('Allow customers to stream Stations files through direct links. ( Recommended disable to prevent download media files anonymously )'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+			],		
         ];
 	}
 

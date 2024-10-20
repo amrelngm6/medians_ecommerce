@@ -125,7 +125,7 @@ class MediaController extends CustomController
 	public function stream_audio()
 	{
 
-		$this->isDirectAccess();
+		$this->isDirectAccess('audio');
 
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
@@ -163,7 +163,7 @@ class MediaController extends CustomController
 
 	public function stream_station()
 	{
-		$this->isDirectAccess();
+		$this->isDirectAccess('station');
 		
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
@@ -210,7 +210,7 @@ class MediaController extends CustomController
 
 	public function stream_channel()
 	{
-		$this->isDirectAccess();
+		$this->isDirectAccess('channel');
 		
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
@@ -330,7 +330,7 @@ class MediaController extends CustomController
 	
 	function stream_video() {
 
-		$this->isDirectAccess();
+		$this->isDirectAccess('video');
 
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
@@ -353,7 +353,7 @@ class MediaController extends CustomController
 
 	function stream_short_video() {
 
-		$this->isDirectAccess();
+		$this->isDirectAccess('short_video');
 
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
@@ -450,15 +450,16 @@ class MediaController extends CustomController
 	}
 	
 
-	function isDirectAccess() {
+	function isDirectAccess($type) {
 		
 		$this->app = new \config\APP;
 		$settings = $this->app->SystemSetting();
 
-		if (!empty($settings['direct_link_streaming']))
+		if ( !empty($settings[$type.'_direct_streaming']))
 		{
 			return;
 		}
+
 
 		// Check the user-agent
 		$range = $_SERVER['HTTP_RANGE'] ?? '';

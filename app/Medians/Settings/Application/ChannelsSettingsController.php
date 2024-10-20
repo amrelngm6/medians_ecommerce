@@ -39,6 +39,10 @@ class ChannelsSettingsController extends CustomController
 				[ 'key'=> "enable_channels", 'title'=> translate('Allow channels feature'), 'help_text'=>translate('You can allow / disallow channels at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
                 
 			],		
+			'streaming'=> [	
+				[ 'key'=> "channel_direct_streaming", 'title'=> translate('Streaming Channels directly'), 'help_text'=>translate('Allow customers to stream Channels files through direct links. ( Recommended disable to prevent download media files anonymously )'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+			],		
+
         ];
 	}
 

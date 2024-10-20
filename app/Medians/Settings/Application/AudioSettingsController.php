@@ -41,6 +41,10 @@ class AudioSettingsController extends CustomController
 				[ 'key'=> "audio_max_size", 'title'=> translate('Audio max size'), 'help_text'=>translate('Max size for uploaded audio files'), 'fillable'=> true, 'column_type'=>'number' ],
                 
 			],		
+			'streaming'=> [	
+				[ 'key'=> "audio_direct_streaming", 'title'=> translate('Streaming audio directly'), 'help_text'=>translate('Allow customers to stream audio files through direct links. ( Recommended disable to prevent download media files anonymously )'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+			],		
+
         ];
 	}
 
