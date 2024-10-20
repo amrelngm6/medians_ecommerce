@@ -397,15 +397,13 @@
 
                             <!--begin::Info-->
                             <div class="fs-5 mb-2">
-                                <span class="text-gray-800 fw-bold me-1" v-text="activeItem.subscription.total_cost"></span>
-                                <span class="text-gray-600 fw-semibold" > $<span v-text="activeItem.subscription.total_cost"></span> <span v-text="translate('Per '+ activeItem.subscription.duration)"></span> </span>
+                                <span class="text-gray-800 fw-bold me-1" > $<span v-text="activeItem.subscription.total_cost"></span></span>
+                                <span class="text-gray-600 fw-semibold" > <span v-text="translate('Per '+ activeItem.subscription.duration)"></span> </span>
                             </div>
                             <!--end::Info-->
 
                             <!--begin::Notice-->
-                            <div class="fs-6 text-gray-600 fw-semibold">
-                                Extended Pro Package. Up to 100 Agents &amp; 25 Projects
-                            </div>
+                            <div class="fs-6 text-gray-600 fw-semibold"><span  v-text="translate('This subscription payment every')"></span> <span v-text="translate(activeItem.subscription.duration)"></span> </div>
                             <!--end::Notice-->
                         </div>
                         <!--end::Col-->
