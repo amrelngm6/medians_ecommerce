@@ -2,11 +2,11 @@
 	<div class="min-h-full text-center">
 		<div class="fixed inset-0 bg-download_popup blurFilter opacity-100" id="headlessui-dialog-overlay-:r3n:" aria-hidden="true" data-headlessui-state="open"></div>
 		<span class="hidden lg:inline-block h-screen align-middle" aria-hidden="true">​</span>
+
+		{% if app.customer.can_do('playlists') != true %}
+		{% include 'views/front/' ~ app.SystemSetting.template ~ '/popups/subscribe-popup.html.twig' %}
+		{% endif %}
 		
-					{% if app.customer.can_do('playlists') != true %}
-					{% include 'views/front/' ~ app.SystemSetting.template ~ '/popups/subscribe-popup.html.twig' %}
-					{% endif %}
-					
 		<div data-testid="loginContainer" class="inline-block dark:text-white w-full max-w-[42.125rem] sm:w-auto overflow-hidden text-left align-middle transition-all transform shadow-xl h-auto md:h-[29.125rem] rounded-xl border-box opacity-100 scale-100">
 			<div class="grid grid-cols-7 md:grid-cols-12 h-full relative">
 				<div class="login_loginImage__1Djxq bg-cover hidden md:block col-span-5 w-full bg-wynk-dark-dark_popup bg-no-repeat" style="background-image: url(/uploads/img/tape.jpg)"></div>
