@@ -106,9 +106,9 @@
                             
                             <div class="border border-dashed border-gray-300 w-125px rounded my-3 p-4 me-6">
                                 <span class="fs-2x fw-bold text-gray-800 lh-1">
-                                    <span data-kt-countup="true" data-kt-countup-value="1,240" data-kt-countup-prefix="$" class="counted" data-kt-initialized="1">$1,240</span>
+                                    <span data-kt-countup="true" data-kt-countup-value="1,240" data-kt-countup-prefix="$" class="counted" data-kt-initialized="1" v-text="content.pending_invoices_count"></span>
                                 </span>
-                                <div @mouseover="content.pendingTip = true" @mouseleave="content.pendingTip = false" class="relative symbol symbol-35px symbol-circle" v-for="media in content.top_media">
+                                <div @mouseover="content.pendingTip = true" @mouseleave="content.pendingTip = false" class="relative symbol symbol-35px symbol-circle" >
                                     <tooltip v-if="content.pendingTip" :key="content.pendingTip" :title="translate('Invoices of subscriptions are not paid yet')" ></tooltip>
                                     <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Pending')"></span>
                                 </div>
