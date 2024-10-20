@@ -99,7 +99,7 @@
                                 <span class="fs-2x fw-bold text-gray-800 lh-1">
                                     <span class="counted" data-kt-countup="true" data-kt-countup-value="80" data-kt-initialized="1" v-text="content.transactions_count"></span>
                                 </span>
-                                <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Subscriptions count')"></span>
+                                <span class="flex-none fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Subscriptions')"></span>
                             </div>
                             
 
@@ -108,7 +108,11 @@
                                 <span class="fs-2x fw-bold text-gray-800 lh-1">
                                     <span data-kt-countup="true" data-kt-countup-value="1,240" data-kt-countup-prefix="$" class="counted" data-kt-initialized="1">$1,240</span>
                                 </span>
-                                <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2">Fees</span>
+                                <div @mouseover="content.pendingTip = true" @mouseleave="content.pendingTip = false" class="relative symbol symbol-35px symbol-circle" v-for="media in content.top_media">
+                                    <tooltip v-if="content.pendingTip" :key="content.pendingTip" :title="translate('Invoices of subscriptions are not paid yet')" ></tooltip>
+                                    <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Pending')"></span>
+                                </div>
+                                
                             </div>
                             
                         </div>
