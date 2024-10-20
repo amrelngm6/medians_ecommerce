@@ -93,7 +93,7 @@ class PlaylistController extends CustomController
         try {	
 
 			$customer = $this->app->customer_auth();
-            if (!$customer->can_do('videos'))
+            if (!$customer->can_do('playlists'))
             {
                 throw new \Exception(translate('You need to upgrade your subscription'), 1);
             }
