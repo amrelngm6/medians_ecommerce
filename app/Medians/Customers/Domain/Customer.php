@@ -173,9 +173,9 @@ class Customer extends CustomModel
     {
 
 		if (empty($this->subscription->is_valid))
-			return 'invalid';
+			return false;
 
-			print_r(json_decode($this->subscription));
+			print_r(json_decode($this->subscription->package));
 
 
 		$limit = $this->subscription->package->feature[$access.'_uploads_limit'] ?? 0;
