@@ -41,6 +41,26 @@ export function toHHMMSS(val) {
 	return time;
 }
 
+// Function to get days between two dates
+export function getDaysBetweenDates(to, from) {
+    const toDate = new Date(to).getTime();
+    const fromDate = new Date(from).getTime();
+    const dateDiff = toDate - fromDate;
+
+    return Math.round(dateDiff / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+}
+
+// Function to get percentage between two dates
+export function getPercentageBetweenDates(to, from) {
+    const toDate = new Date(to).getTime();
+    const fromDate = new Date().getTime(); // Current date
+    const dateDiff = toDate - fromDate;
+
+    const currentDuration = Math.round(dateDiff / (1000 * 60 * 60 * 24)); // Convert milliseconds to days
+    const totalDuration = getDaysBetweenDates(to, from);
+
+    return Math.round(((totalDuration - currentDuration) / totalDuration) * 100);
+}
 
 
 export function durationMonthsDate(date, value) {

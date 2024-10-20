@@ -381,68 +381,96 @@
                 </div>
                 <!-- End Timeline -->
             </div>
+            <div class="mb-5 mb-xl-10" v-if="activeTab == translate('Subscription')">
+                <div class="card  mb-5 mb-xl-10" >
+                    <!--begin::Card body-->
+                    <div class="card-body">
 
-            <div class="card  mb-5 mb-xl-10" v-if="activeTab == translate('Subscription')">
-                <!--begin::Card body-->
-                <div class="card-body">
+                        <!--begin::Row-->
+                        <div class="row" v-if="activeItem.subscription">
+                            <!--begin::Col-->
+                            <div class="col-lg-7">
+                                <!--begin::Heading-->
+                                <h3 class="mb-2" > <span v-text="translate('Active until')"></span> <span class="text-gray-800 fw-bold " v-text="formatCustomTime(activeItem.subscription.end_date ?? '', 'MMMM DD, Y')"></span></h3>
+                                <p class="fs-6 text-gray-600 fw-semibold mb-6 mb-lg-15" v-text="translate('Estimated date for this subscription')"></p>
+                                <!--end::Heading-->
 
-                    <!--begin::Row-->
-                    <div class="row" v-if="activeItem.subscription">
-                        <!--begin::Col-->
-                        <div class="col-lg-7">
-                            <!--begin::Heading-->
-                            <h3 class="mb-2" > <span v-text="translate('Active until')"></span> <span v-text="formatCustomTime(activeItem.subscription.end_date ?? '', 'MMMM DD, Y - HH:mm a')"></span></h3>
-                            <p class="fs-6 text-gray-600 fw-semibold mb-6 mb-lg-15" v-text="translate('Estimated date for this subscription')"></p>
-                            <!--end::Heading-->
+                                <!--begin::Info-->
+                                <div class="fs-5 mb-2">
+                                    <span class="text-gray-800 fw-bold me-1" > $<span class="text-gray-800 fw-bold " v-text="activeItem.subscription.total_cost"></span></span>
+                                    <span class="text-gray-600 fw-semibold" > <span v-text="translate('Per '+ activeItem.subscription.duration)"></span> </span>
+                                </div>
+                                <!--end::Info-->
 
-                            <!--begin::Info-->
-                            <div class="fs-5 mb-2">
-                                <span class="text-gray-800 fw-bold me-1" > $<span v-text="activeItem.subscription.total_cost"></span></span>
-                                <span class="text-gray-600 fw-semibold" > <span v-text="translate('Per '+ activeItem.subscription.duration)"></span> </span>
+                                <!--begin::Notice-->
+                                <div class="fs-6 text-gray-600 fw-semibold"><span  v-text="translate('This subscription payment every')"></span> <span class="text-gray-800 fw-bold " v-text="translate(activeItem.subscription.duration)"></span> </div>
+                                <!--end::Notice-->
                             </div>
-                            <!--end::Info-->
+                            <!--end::Col-->
 
-                            <!--begin::Notice-->
-                            <div class="fs-6 text-gray-600 fw-semibold"><span  v-text="translate('This subscription payment every')"></span> <span v-text="translate(activeItem.subscription.duration)"></span> </div>
-                            <!--end::Notice-->
+                            <!--begin::Col-->
+                            <div class="col-lg-5">
+                                <!--begin::Heading-->
+                                <div class="d-flex text-muted fw-bold fs-5 mb-3">
+                                    <span class="flex-grow-1 text-gray-800" v-text="translate('Dates')"></span>
+                                </div>
+                                <!--end::Heading-->
+
+                                <!--begin::Progress-->
+                                <div class="progress h-8px bg-light-primary mb-2">
+                                    <div class="progress-bar bg-primary" role="progressbar" :style="{width: getPercentageBetweenDates( activeItem.subscription.end_date, activeItem.subscription.start_date)+'%'}"
+                                        aria-valuenow="86" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <!--end::Progress-->
+
+                                <!--begin::Description-->
+                                <div class="fs-6 text-gray-600 fw-semibold mb-10 flex gap-4 w-full"> 
+                                    <span class="w-full" v-text="activeItem.subscription.start_date"></span>
+                                    <span class="flex-none" v-text="activeItem.subscription.end_date"></span>
+                                </div>
+                                <!--end::Description-->
+
+                            </div>
+                            <!--end::Col-->
                         </div>
-                        <!--end::Col-->
-
-                        <!--begin::Col-->
-                        <div class="col-lg-5">
-                            <!--begin::Heading-->
-                            <div class="d-flex text-muted fw-bold fs-5 mb-3">
-                                <span class="flex-grow-1 text-gray-800">Users</span>
-                                <span class="text-gray-800">86 of 100 Used</span>
-                            </div>
-                            <!--end::Heading-->
-
-                            <!--begin::Progress-->
-                            <div class="progress h-8px bg-light-primary mb-2">
-                                <div class="progress-bar bg-primary" role="progressbar" style="width: 86%"
-                                    aria-valuenow="86" aria-valuemin="0" aria-valuemax="100"></div>
-                            </div>
-                            <!--end::Progress-->
-
-                            <!--begin::Description-->
-                            <div class="fs-6 text-gray-600 fw-semibold mb-10">14 Users remaining until your plan
-                                requires update</div>
-                            <!--end::Description-->
-
-                            <!--begin::Action-->
-                            <div class="d-flex justify-content-end pb-0 px-0">
-                                <a href="#" class="btn btn-light btn-active-light-primary me-2"
-                                    id="kt_account_billing_cancel_subscription_btn">Cancel Subscription</a>
-                                <button class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#kt_modal_upgrade_plan">Upgrade Plan</button>
-                            </div>
-                            <!--end::Action-->
-                        </div>
-                        <!--end::Col-->
+                        <!--end::Row-->
                     </div>
-                    <!--end::Row-->
+                    <!--end::Card body-->
+                
+
+                    <!--begin::Card body-->
                 </div>
-                <!--end::Card body-->
+                <div class="card  mb-5 mb-xl-10" >
+                    <div class="card-body" >
+                        <table class="table align-middle table-row-bordered table-row-solid gy-4 gs-9">
+                        <!--begin::Thead-->
+                        <thead class="border-gray-200 fs-5 fw-semibold bg-lighten">
+                            <tr>
+                                <th class="min-w-125px text-center"  v-text="translate('Invoice')"></th>
+                                <th class="min-w-150px px-0" v-text="translate('Transaction')"></th>
+                                <th class="min-w-175px ps-9" v-text="translate('Date')"></th>
+                                <th class="min-w-350px"  v-text="translate('Package')"></th>
+                                <th class="min-w-125px"  v-text="translate('Amount')"></th>
+                                <th class="min-w-125px"  v-text="translate('Status')"></th>
+                            </tr>
+                        </thead>
+                        <!--end::Thead-->
+
+                        <!--begin::Tbody-->
+                        <tbody class="fs-6 fw-semibold text-gray-600" v-if="activeItem.invoices">
+                            <tr v-for="invoice in activeItem.invoices">
+                                <td class="ps-9" v-text="invoice.code"></td>
+                                <td class="ps-9" v-text="invoice.transaction ? invoice.transaction.transaction_id : ''"></td>
+                                <td class="" v-text="invoice.date"></td>
+                                <td class="" > <span v-text="invoice.item && invoice.item.package ? invoice.item.package.name : ''"></span></td>
+                                <td class="" v-text="'$'+invoice.total_amount"></td>
+                                <td :class=" invoice.status == 'paid' ? 'text-success' : 'text-danger'" v-text="translate(invoice.status)"></td>
+                            </tr>                              
+                        </tbody>
+                        <!--end::Tbody-->                                       
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -458,7 +486,7 @@ import 'vue3-easy-data-table/dist/style.css';
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 
 import { defineAsyncComponent, ref } from 'vue';
-import { translate, getProgressWidth, formatCustomTime, toHHMMSS, deleteByKey } from '@/utils.vue';
+import { translate, getProgressWidth, formatCustomTime, toHHMMSS, getPercentageBetweenDates, deleteByKey } from '@/utils.vue';
 
 const form_field = defineAsyncComponent(() =>
     import('@/components/includes/form_field.vue')
@@ -548,6 +576,7 @@ export default
                 activeTab,
                 translate,
                 formatCustomTime,
+                getPercentageBetweenDates,
                 back
             };
         },

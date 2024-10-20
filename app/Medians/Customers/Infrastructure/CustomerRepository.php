@@ -46,8 +46,11 @@ class CustomerRepository
 		return Customer::with(['subscription'=> function($q){
 			return $q->with('package');
 		}])
+		->with(['invoices'=> function($q){
+			return $q->with('item', 'transaction');
+		}])
 		->withCount('videos' ,'audio_items' ,'audiobooks','stations' ,'channels','short_videos','playlists'  )
-		->with('invoices','subscriptions' )->get();
+		->get();
 	}
 
 	public function findByEmail($email)
