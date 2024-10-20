@@ -3,7 +3,7 @@
         <div class=" w-full relative">
 
             <close_icon class="absolute top-4 right-4 z-10 cursor-pointer" @click="back" />
-            <div class="card mb-9 shadow-sm">
+            <div class="card mb-9 shadow-md">
                 <div class="card-body pt-9 pb-0">
                     <!--begin::Details-->
                     <div class="d-flex flex-wrap flex-sm-nowrap mb-6">
@@ -22,26 +22,28 @@
                                 <div class="d-flex flex-column">
                                     <!--begin::Status-->
                                     <div class="d-flex align-items-center mb-1">
-                                        <a href="#" class="text-gray-800 text-hover-primary fs-2 fw-bold me-3"
+                                        <a href="#" class="text-gray-800 text-hover-primary fs-2 font-semibold me-3"
                                             v-text="activeItem.name"></a>
                                         <span class="badge badge-light-success me-auto"
                                             v-text="translate('Artist')"></span>
                                     </div>
                                     <!--end::Status-->
-                                        
-                                    <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
-                                        <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+
+                                    <div class="d-flex flex-wrap font-semibold fs-6 mb-4 pe-2">
+                                        <a href="#"
+                                            class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                             <vue-feather class="w-5 mx-1" type="smartphone"></vue-feather>
                                             <span v-text="activeItem.field ? activeItem.field.phone : ''"></span>
                                         </a>
-                                        <a href="#" class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
+                                        <a href="#"
+                                            class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                             <vue-feather class="w-5 mx-1" type="at-sign"></vue-feather>
                                             <span v-text="activeItem.email"></span>
                                         </a>
                                     </div>
 
                                     <!--begin::Description-->
-                                    <div class="d-flex flex-wrap fw-semibold mb-4 fs-5 text-gray-500 truncate"
+                                    <div class="d-flex flex-wrap font-semibold mb-4 fs-5 text-gray-500 truncate"
                                         v-text="activeItem.field.about ?? ''"></div>
                                     <!--end::Description-->
                                 </div>
@@ -58,14 +60,15 @@
                                         class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <div class="fs-4 fw-bold" v-if="activeItem.subscription"
+                                            <div class="fs-4 font-semibold" v-if="activeItem.subscription"
                                                 v-text="formatCustomTime(activeItem.subscription.end_date, 'MMMM DD, Y')">
                                             </div>
                                         </div>
                                         <!--end::Number-->
 
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500" v-text="translate('Subscription Due Date')">
+                                        <div class="font-semibold fs-6 text-gray-500"
+                                            v-text="translate('Subscription Due Date')">
                                         </div>
                                         <!--end::Label-->
                                     </div>
@@ -76,14 +79,14 @@
                                         class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center" v-if="activeItem.subscription">
-                                            <i class="ki-duotone ki-arrow-down fs-3 text-danger "><span
-                                                    class="path1"></span><span class="path2"></span></i>
-                                            <div class="fs-4 fw-bold counted" v-text="activeItem.subscription.package ? activeItem.subscription.package.name : ''"></div>
+                                            <div class="fs-4 font-semibold counted"
+                                                v-text="activeItem.subscription.package ? activeItem.subscription.package.name : ''">
+                                            </div>
                                         </div>
                                         <!--end::Number-->
 
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500" v-text="translate('Package')"></div>
+                                        <div class="font-semibold fs-6 text-gray-500" v-text="translate('Package')"></div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
@@ -93,14 +96,14 @@
                                         class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                                         <!--begin::Number-->
                                         <div class="d-flex align-items-center">
-                                            <i class="ki-duotone ki-arrow-up fs-3 text-success"><span
-                                                    class="path1"></span><span class="path2"></span></i>
-                                            <div class="fs-4 fw-bold counted" v-text="translate(activeItem.status == 'on' ? 'Active' : 'Inactive')"></div>
+                                            <div class="fs-4 font-semibold counted"
+                                                v-text="activeItem.media_views_sum_times">
+                                            </div>
                                         </div>
                                         <!--end::Number-->
 
                                         <!--begin::Label-->
-                                        <div class="fw-semibold fs-6 text-gray-500" v-text="translate('Status')">
+                                        <div class="font-semibold fs-6 text-gray-500" v-text="translate('Media Views')">
                                         </div>
                                         <!--end::Label-->
                                     </div>
@@ -119,7 +122,7 @@
                     <div class="separator"></div>
 
                     <!--begin::Nav-->
-                    <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
+                    <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 font-semibold">
                         <!--begin::Nav item-->
                         <li class="nav-item" v-for="tab in tabs">
                             <a class="nav-link text-active-primary py-5 me-6" @click="activeTab = tab"
@@ -134,70 +137,70 @@
 
             <div v-if="activeTab == translate('Info')">
 
-                <div class=" card w-full py-10 shadow-sm">
+                <div class=" card w-full py-10 shadow-md">
                     <div class="w-full stepper stepper-links ">
                         <div class="card-header cursor-pointer">
                             <!--begin::Card title-->
                             <div class="card-title m-0">
-                                <h3 class="fw-bold m-0" v-text="translate('Customer info')"></h3>
+                                <h3 class="font-semibold m-0" v-text="translate('Customer info')"></h3>
                             </div>
                             <!--end::Card title-->
                         </div>
                         <div class="card-body pt-0">
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Profile')"></label>
+                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('Profile')"></label>
                                 <div class="col-lg-8"><a target="_blank" :href="'/artist/' + activeItem.customer_id"
-                                        class="fw-bold fs-6 text-gray-800"
+                                        class="font-semibold fs-6 text-gray-800"
                                         v-text="conf.url + '/artist/' + activeItem.customer_id"></a></div>
                             </div>
                             <!--end::Row-->
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted"
+                                <label class="col-lg-4 font-semibold text-muted"
                                     v-text="translate('Customer Name')"></label>
-                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
                                         v-text="activeItem.name"></span></div>
                             </div>
                             <!--end::Row-->
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Email')"></label>
-                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('Email')"></label>
+                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
                                         v-text="activeItem.email"></span></div>
                             </div>
                             <!--end::Row-->
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Phone')"></label>
-                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('Phone')"></label>
+                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
                                         v-text="activeItem.field.phone ?? ''"></span></div>
                             </div>
                             <!--end::Row-->
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('City')"></label>
-                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('City')"></label>
+                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
                                         v-text="activeItem.field.city ?? ''"></span></div>
                             </div>
                             <!--end::Row-->
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('Country')"></label>
-                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('Country')"></label>
+                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
                                         v-text="activeItem.field.country ?? ''"></span></div>
                             </div>
                             <!--end::Row-->
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 fw-semibold text-muted" v-text="translate('website')"></label>
-                                <div class="col-lg-8"><span class="fw-bold fs-6 text-gray-800"
+                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('website')"></label>
+                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
                                         v-text="activeItem.field.website ?? ''"></span></div>
                             </div>
                             <!--end::Row-->
@@ -206,14 +209,14 @@
                     </div>
                 </div>
 
-                <div class="card shadow-sm ">
+                <div class="card shadow-md ">
 
                     <!--begin::Card header-->
                     <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse"
                         data-bs-target="#kt_account_deactivate" aria-expanded="true"
                         aria-controls="kt_account_deactivate">
                         <div class="card-title m-0">
-                            <h3 class="fw-bold m-0" v-text="translate('Delete this item')"></h3>
+                            <h3 class="font-semibold m-0" v-text="translate('Delete this item')"></h3>
                         </div>
                     </div>
                     <!--end::Card header-->
@@ -237,13 +240,13 @@
                                     <!--begin::Wrapper-->
                                     <div class="d-flex flex-stack flex-grow-1 ">
                                         <!--begin::Content-->
-                                        <div class=" fw-semibold">
-                                            <h4 class="text-gray-900 fw-bold"
-                                                v-text="translate('Delete this customer')">
+                                        <div class=" font-semibold">
+                                            <h4 class="text-gray-900 font-semibold"
+                                                v-text="translate('Deactivate this customer')">
                                             </h4>
 
                                             <div class="fs-6 text-gray-700 "> <span
-                                                    v-text="translate('Remove this customer and its related files and all related information')"></span>
+                                                    v-text="translate('Deactivate this customer and disable its all related items')"></span>
                                             </div>
                                         </div>
                                         <!--end::Content-->
@@ -257,7 +260,7 @@
                                 <div class="form-check form-check-solid fv-row fv-plugins-icon-container">
                                     <input name="deactivate" class="form-check-input" type="checkbox" value="" required
                                         id="deactivate">
-                                    <label class="form-check-label fw-semibold ps-2 fs-6" for="deactivate"
+                                    <label class="form-check-label font-semibold ps-2 fs-6" for="deactivate"
                                         v-text="translate('I Confirm to delete this customer')"></label>
                                     <div
                                         class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
@@ -270,7 +273,7 @@
                             <!--begin::Card footer-->
                             <div class="card-footer d-flex justify-content-end py-6 px-9">
                                 <a id="kt_account_deactivate_account_submit" @click="removeCustomer"
-                                    class="btn btn-danger fw-semibold" v-text="translate('Delete')"></a>
+                                    class="btn btn-danger font-semibold" v-text="translate('Deactivate')"></a>
                             </div>
                             <!--end::Card footer-->
                         </form>
@@ -286,7 +289,7 @@
                     <div class="card-header cursor-pointer">
                         <!--begin::Card title-->
                         <div class="card-title m-0">
-                            <h3 class="fw-bold m-0" v-text="translate('Latest Comments')"></h3>
+                            <h3 class="font-semibold m-0" v-text="translate('Latest Comments')"></h3>
                         </div>
                         <!--end::Card title-->
                     </div>
@@ -298,14 +301,14 @@
                                     <div class="timeline-item" v-for="comment in activeItem.comments">
                                         <div class="timeline-line"></div>
                                         <div class="timeline-icon me-4">
-                                            <img class="w-12 h-12 rounded-full" :src="comment.customer.picture ?? ''"
+                                            <img class="w-12 h-12 rounded-full" :src="activeItem.picture ?? ''"
                                                 alt="img">
                                         </div>
                                         <div class="timeline-content mb-10 mt-n2">
                                             <!--begin::Timeline heading-->
                                             <div class="overflow-auto pe-3">
                                                 <!--begin::Title-->
-                                                <div class="fs-5 fw-semibold mb-2" v-text="comment.comment"></div>
+                                                <div class="fs-5 font-semibold mb-2" v-text="comment.comment"></div>
                                                 <!--end::Title-->
 
                                                 <!--begin::Description-->
@@ -314,8 +317,8 @@
                                                         <vue-feather class="w-5 pt-2"
                                                             type="message-square p-1"></vue-feather>
                                                     </div>
-                                                    <div class="text-muted me-2 fs-7 fw-bold"
-                                                        v-text="comment.customer.name ?? ''"></div>
+                                                    <div class="text-muted me-2 fs-7 font-semibold"
+                                                        v-text="activeItem.name ?? ''"></div>
                                                     |
                                                     <div class="text-muted me-2 fs-7"
                                                         v-text="formatCustomTime(comment.created_at, 'MMMM DD, Y - HH:mm a')">
@@ -338,56 +341,157 @@
             <div class="card w-full p-10" v-if="activeTab == translate('Stats')">
                 <!-- Timeline -->
                 <div>
+
+                    <!-- Card Section -->
+                    <div class="py-10 lg:py-14 mx-auto">
+                        <!-- Grid -->
+                        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                            <!-- Card -->
+                            <div
+                                class="flex flex-col bg-white border shadow-md rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+                                <div class="p-4 md:p-5 flex gap-x-4">
+                                    <div
+                                        class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
+                                        <vue-feather type="music" class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" />
+                                    </div>
+
+                                    <div class="grow">
+                                        <div class="flex items-center gap-x-2">
+                                            <p
+                                                class="mb-0 uppercase tracking-wide text-gray-500 dark:text-neutral-500" v-text="translate('Uploaded Audio')">
+                                            </p>
+                                        </div>
+                                        <div class="mt-1 flex items-center gap-x-2">
+                                            <h3
+                                                class="text-xl sm:text-2xl text-gray-800 dark:text-neutral-200" v-text="activeItem.audio_items_count">
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Card -->
+
+                            <!-- Card -->
+                            <div
+                                class="flex flex-col bg-white border shadow-md rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+                                <div class="p-4 md:p-5 flex gap-x-4">
+                                    <div
+                                        class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
+                                        <vue-feather type="book-open" class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" />
+                                    </div>
+
+                                    <div class="grow">
+                                        <div class="flex items-center gap-x-2">
+                                            <p
+                                                class="mb-0 uppercase tracking-wide text-gray-500 dark:text-neutral-500"  v-text="translate('Uploaded Audiobooks')">
+                                            </p>
+                                        </div>
+                                        <div class="mt-1 flex items-center gap-x-2">
+                                            <h3 class="text-xl text-gray-800 dark:text-neutral-200" v-text="activeItem.audiobooks_count">
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Card -->
+
+                            <!-- Card -->
+                            <div
+                                class="flex flex-col bg-white border shadow-md rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+                                <div class="p-4 md:p-5 flex gap-x-4">
+                                    <div
+                                        class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
+                                        <vue-feather type="video" class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" />
+                                    </div>
+
+                                    <div class="grow">
+                                        <div class="flex items-center gap-x-2">
+                                            <p
+                                                class="mb-0 uppercase tracking-wide text-gray-500 dark:text-neutral-500" v-text="translate('Uploaded Videos')">
+                                            </p>
+                                        </div>
+                                        <div class="mt-1 flex items-center gap-x-2">
+                                            <h3
+                                                class="text-xl sm:text-2xl text-gray-800 dark:text-neutral-200" v-text="activeItem.videos_count">
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Card -->
+
+                            <!-- Card -->
+                            <div
+                                class="flex flex-col bg-white border shadow-md rounded-xl dark:bg-neutral-900 dark:border-neutral-800">
+                                <div class="p-4 md:p-5 flex gap-x-4">
+                                    <div
+                                        class="shrink-0 flex justify-center items-center size-[46px] bg-gray-100 rounded-lg dark:bg-neutral-800">
+                                        <vue-feather type="video-off" class="shrink-0 size-5 text-gray-600 dark:text-neutral-400" />
+                                    </div>
+
+                                    <div class="grow">
+                                        <div class="flex items-center gap-x-2">
+                                            <p
+                                                class="mb-0 uppercase tracking-wide text-gray-500 dark:text-neutral-500" v-text="translate('Short Videos')">
+                                            </p>
+                                        </div>
+                                        <div class="mt-1 flex items-center gap-x-2">
+                                            <h3 class="text-xl text-gray-800 dark:text-neutral-200" v-text="activeItem.short_videos_count">
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Card -->
+                        </div>
+                        <!-- End Grid -->
+                    </div>
+                    <!-- End Card Section -->
+
+
                     <div class="row">
-            
-                        <div class="col">
-                            <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                                <span class="fs-4 fw-semibold text-info pb-1 px-2">Net Earnings</span>                    
-                                <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
-                                    $<span data-kt-countup="true" data-kt-countup-value="63,240.00" class="counted" data-kt-initialized="1">63,240</span>
-                                </span>
-                            </div>
-                        </div>
-                        
 
-                        
                         <div class="col">
                             <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                                <span class="fs-4 fw-semibold text-success pb-1 px-2">Balance</span>                    
-                                <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
-                                    $<span data-kt-countup="true" data-kt-countup-value="8,530.00" class="counted" data-kt-initialized="1">8,530</span>
+                                <span class="fs-4 font-semibold text-info pb-1 px-2"
+                                    v-text="translate('Created stations')"></span>
+                                <span class="fs-lg-2tx font-semibold d-flex justify-content-center">
+                                    <span data-kt-countup="true" data-kt-countup-value="63,240.00" class="counted"
+                                        data-kt-initialized="1" v-text="activeItem.stations_count"></span>
                                 </span>
                             </div>
                         </div>
-                        
 
-                        
-                        <div class="col">
-                            <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                                <span class="fs-4 fw-semibold text-danger pb-1 px-2">Avg Deal Size</span>                    
-                                <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
-                                    $<span data-kt-countup="true" data-kt-countup-value="2,600" class="counted" data-kt-initialized="1">2,600</span>
-                                </span>
-                            </div>
-                        </div>
-                        
 
-                        
+
                         <div class="col">
                             <div class="card card-dashed flex-center min-w-175px my-3 p-6">
-                                <span class="fs-4 fw-semibold text-primary pb-1 px-2">Referral Signups</span>                    
-                                <span class="fs-lg-2tx fw-bold d-flex justify-content-center">
-                                    $<span data-kt-countup="true" data-kt-countup-value="783&quot;" class="counted" data-kt-initialized="1">783</span>
+                                <span class="fs-4 font-semibold text-success pb-1 px-2"
+                                    v-text="translate('Created Channels')"></span>
+                                <span class="fs-lg-2tx font-semibold d-flex justify-content-center">
+                                    <span class="counted" v-text="activeItem.channels_count"></span>
                                 </span>
                             </div>
                         </div>
-                        
+
+
+
+                        <div class="col">
+                            <div class="card card-dashed flex-center min-w-175px my-3 p-6">
+                                <span class="fs-4 font-semibold text-danger pb-1 px-2"
+                                    v-text="translate('Created Playlists')"></span>
+                                <span class="fs-lg-2tx font-semibold d-flex justify-content-center">
+                                    <span class="counted" v-text="activeItem.playlists_count"></span>
+                                </span>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 <!-- End Timeline -->
             </div>
             <div class="mb-5 mb-xl-10" v-if="activeTab == translate('Subscription')">
-                <div class="card  mb-5 mb-xl-10" >
+                <div class="card  mb-5 mb-xl-10">
                     <!--begin::Card body-->
                     <div class="card-body">
 
@@ -396,19 +500,29 @@
                             <!--begin::Col-->
                             <div class="col-lg-7">
                                 <!--begin::Heading-->
-                                <h3 class="mb-2" > <span v-text="translate('Active until')"></span> <span class="text-gray-800 fw-bold " v-text="formatCustomTime(activeItem.subscription.end_date ?? '', 'MMMM DD, Y')"></span></h3>
-                                <p class="fs-6 text-gray-600 fw-semibold mb-6 mb-lg-15" v-text="translate('Estimated date for this subscription')"></p>
+                                <h3 class="mb-2"> <span v-text="translate('Active until')"></span> <span
+                                        class="text-gray-800 font-semibold "
+                                        v-text="formatCustomTime(activeItem.subscription.end_date ?? '', 'MMMM DD, Y')"></span>
+                                </h3>
+                                <p class="fs-6 text-gray-600 font-semibold mb-6 mb-lg-15"
+                                    v-text="translate('Estimated date for this subscription')"></p>
                                 <!--end::Heading-->
 
                                 <!--begin::Info-->
                                 <div class="fs-5 mb-2">
-                                    <span class="text-gray-800 fw-bold me-1" > $<span class="text-gray-800 fw-bold " v-text="activeItem.subscription.total_cost"></span></span>
-                                    <span class="text-gray-600 fw-semibold" > <span v-text="translate('Per '+ activeItem.subscription.duration)"></span> </span>
+                                    <span class="text-gray-800 font-semibold me-1"> $<span class="text-gray-800 font-semibold "
+                                            v-text="activeItem.subscription.total_cost"></span></span>
+                                    <span class="text-gray-600 font-semibold"> <span
+                                            v-text="translate('Per ' + activeItem.subscription.duration)"></span>
+                                    </span>
                                 </div>
                                 <!--end::Info-->
 
                                 <!--begin::Notice-->
-                                <div class="fs-6 text-gray-600 fw-semibold"><span  v-text="translate('This subscription payment every')"></span> <span class="text-gray-800 fw-bold " v-text="translate(activeItem.subscription.duration)"></span> </div>
+                                <div class="fs-6 text-gray-600 font-semibold"><span
+                                        v-text="translate('This subscription payment every')"></span> <span
+                                        class="text-gray-800 font-semibold "
+                                        v-text="translate(activeItem.subscription.duration)"></span> </div>
                                 <!--end::Notice-->
                             </div>
                             <!--end::Col-->
@@ -416,20 +530,21 @@
                             <!--begin::Col-->
                             <div class="col-lg-5">
                                 <!--begin::Heading-->
-                                <div class="d-flex text-muted fw-bold fs-5 mb-3">
+                                <div class="d-flex text-muted font-semibold fs-5 mb-3">
                                     <span class="flex-grow-1 text-gray-800" v-text="translate('Dates')"></span>
                                 </div>
                                 <!--end::Heading-->
 
                                 <!--begin::Progress-->
                                 <div class="progress h-8px bg-light-primary mb-2">
-                                    <div class="progress-bar bg-primary" role="progressbar" :style="{width: getPercentageBetweenDates( activeItem.subscription.end_date, activeItem.subscription.start_date)+'%'}"
+                                    <div class="progress-bar bg-primary" role="progressbar"
+                                        :style="{ width: getPercentageBetweenDates(activeItem.subscription.end_date, activeItem.subscription.start_date) + '%' }"
                                         aria-valuenow="86" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
                                 <!--end::Progress-->
 
                                 <!--begin::Description-->
-                                <div class="fs-6 text-gray-600 fw-semibold mb-10 flex gap-4 w-full"> 
+                                <div class="fs-6 text-gray-600 font-semibold mb-10 flex gap-4 w-full">
                                     <span class="w-full" v-text="activeItem.subscription.start_date"></span>
                                     <span class="flex-none" v-text="activeItem.subscription.end_date"></span>
                                 </div>
@@ -441,41 +556,48 @@
                         <!--end::Row-->
                     </div>
                     <!--end::Card body-->
-                
+
 
                     <!--begin::Card body-->
                 </div>
-                <div class="card  mb-5 mb-xl-10" >
-                    <div class="card-body" >
+                <div class="card  mb-5 mb-xl-10">
+                    <div class="card-body">
                         <div class="card-title p-6">
                             <h3 class="m-0 text-gray-800" v-text="translate('Latest invoices')"></h3>
                         </div>
                         <table class="table align-middle table-row-bordered table-row-solid gy-4 gs-9">
                             <!--begin::Thead-->
-                            <thead class="border-gray-200 fs-5 fw-semibold bg-lighten">
+                            <thead class="border-gray-200 fs-5 font-semibold bg-lighten">
                                 <tr>
-                                    <th class="min-w-125px px-9"  v-text="translate('Invoice')"></th>
+                                    <th class="min-w-125px px-9" v-text="translate('Invoice')"></th>
                                     <th class="min-w-150px " v-text="translate('Transaction')"></th>
                                     <th class="min-w-150px " v-text="translate('Date')"></th>
-                                    <th class="min-w-150px"  v-text="translate('Package')"></th>
-                                    <th class="min-w-125px"  v-text="translate('Amount')"></th>
-                                    <th class="min-w-125px"  v-text="translate('Status')"></th>
+                                    <th class="min-w-150px" v-text="translate('Package')"></th>
+                                    <th class="min-w-125px" v-text="translate('Amount')"></th>
+                                    <th class="min-w-125px" v-text="translate('Status')"></th>
                                 </tr>
                             </thead>
                             <!--end::Thead-->
 
                             <!--begin::Tbody-->
-                            <tbody class="fs-6 fw-semibold text-gray-600" v-if="activeItem.invoices">
+                            <tbody class="fs-6 font-semibold text-gray-600" v-if="activeItem.invoices">
                                 <tr v-for="invoice in activeItem.invoices">
                                     <td class="px-9" v-text="invoice.code"></td>
-                                    <td class="" > <span v-text="invoice.transaction ? invoice.transaction.transaction_id : ''"></span> | <span v-text="invoice.transaction && invoice.transaction.field ? invoice.transaction.field.id : ''"></span></td>
+                                    <td class=""> <span
+                                            v-text="invoice.transaction ? invoice.transaction.transaction_id : ''"></span>
+                                        | <span
+                                            v-text="invoice.transaction && invoice.transaction.field ? invoice.transaction.field.id : ''"></span>
+                                    </td>
                                     <td class="" v-text="invoice.date"></td>
-                                    <td class="" > <span v-text="invoice.item && invoice.item.package ? invoice.item.package.name : ''"></span> </td>
-                                    <td class="" v-text="'$'+invoice.total_amount"></td>
-                                    <td :class=" (invoice.total_amount < 1 || invoice.status == 'paid') ? 'text-success' : 'text-danger'" v-text="translate(( invoice.total_amount > 0 ? invoice.status : 'Free'))"></td>
-                                </tr>                              
+                                    <td class=""> <span
+                                            v-text="invoice.item && invoice.item.package ? invoice.item.package.name : ''"></span>
+                                    </td>
+                                    <td class="" v-text="'$' + invoice.total_amount"></td>
+                                    <td :class="(invoice.total_amount < 1 || invoice.status == 'paid') ? 'text-success' : 'text-danger'"
+                                        v-text="translate((invoice.total_amount > 0 ? invoice.status : 'Free'))"></td>
+                                </tr>
                             </tbody>
-                            <!--end::Tbody-->                                       
+                            <!--end::Tbody-->
                         </table>
                     </div>
                 </div>
@@ -538,7 +660,7 @@ export default
             }
 
             const removeCustomer = () => {
-                return deleteByKey('customer_id', activeItem.value, 'Customer.delete')
+                return deleteByKey('customer_id', activeItem.value, 'Customer.delete', translate('Deactivate this customer and disable its all related items'))
             }
 
             const progressWidth = () => {

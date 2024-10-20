@@ -166,6 +166,11 @@ class Customer extends CustomModel
 		return $this->morphMany(View::class , 'item')->sum('times');	
 	}
 	
+	public function media_views() 
+	{
+		return $this->hasManyThrough(View::class, MediaItem::class, 'author_id', 'item_id' );	
+	}
+	
 
 
     public function receiverAsCustomer()

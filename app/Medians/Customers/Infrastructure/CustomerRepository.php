@@ -50,6 +50,7 @@ class CustomerRepository
 			return $q->with('item', 'transaction');
 		}])
 		->with('comments')
+		->withSum( 'media_views', 'times')
 		->withCount('videos' ,'audio_items' ,'audiobooks','stations' ,'channels','short_videos','playlists'  )
 		->get();
 	}

@@ -130,10 +130,10 @@ export function customConfirm(message) {
   });
 }
 
-export function deleteByKey(itemKey, item, type) {
+export function deleteByKey(itemKey, item, type, title = 'Confirm delete') {
     
     
-    customConfirm(translate('Confirm delete'))
+    customConfirm(translate(title))
     .then((result) => {
         if (result) {
             var params = new URLSearchParams();
