@@ -74,7 +74,7 @@ class CustomerController extends CustomController
 	 */
 	public function index()
 	{
-		return render('data_table', [
+		return render('artists', [
 			'items' =>  $this->repo->get(),
 	        'title' => translate('Customers'),
 	        'load_vue' => true,
