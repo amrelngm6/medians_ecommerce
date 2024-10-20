@@ -160,8 +160,10 @@ class DashboardController extends CustomController
 		
 		
 		$data['channels_charts'] = $channelRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('30')->get();
-
+		$data['channels_count'] = $channelRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->count();
+		
 		$data['stations_charts'] = $stationRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('30')->get();
+		$data['stations_count'] = $stationRepo->eventsByDate(['start'=>$this->start, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->count();
 
 		// Subscribers stats
 		$data['subscribers_charts'] = $subscriberRepo->eventsByDate(['start'=>$this->month_beginning, 'end'=>$this->end])->selectRaw('Date(created_at) as label, COUNT(*) as y')->having('y', '>', 0)->groupBy('label')->limit('10')->get();
