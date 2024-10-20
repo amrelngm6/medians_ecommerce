@@ -179,7 +179,6 @@ class TransactionController extends CustomController
 
 			$transaction = $paymentService->verify($params);
 			
-			$updateSubscription = $paymentService->updatePackageSubscription($params, $transaction); 
 
 			return ($transaction )
 			? array('success'=>1, 'result'=>$transaction, 'reload'=>1)
