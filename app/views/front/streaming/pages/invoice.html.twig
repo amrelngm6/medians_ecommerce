@@ -263,7 +263,7 @@ function completePayPal()
                         console.log(data)
                         let a = JSON.parse(data);
                         if (a.result.code)
-                            window.location.href = '/invoice/'+a.result.code;
+                            window.reload();
 
                     },
                     error: function(xhr, status, error) {
