@@ -167,11 +167,16 @@ class InvoiceController extends CustomController
 		
 		$settings = $this->app->SystemSetting();
 
+		$customer = $this->app->customer_auth();
+
 		try {
 
 			$item = $this->repo->findByCode($invoice_code);
 
 			if (empty($item))
+				return Page404();
+
+			if ($customer->customer_id != $item->customer_id)
 				return Page404();
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
