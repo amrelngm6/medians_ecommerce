@@ -169,7 +169,7 @@ class Customer extends CustomModel
     }
 	
 	
-    public function can($access)
+    public function can_do($access)
     {
 
 		if (empty($this->subscription->is_valid))

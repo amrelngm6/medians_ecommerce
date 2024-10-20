@@ -166,6 +166,6 @@
 {% include 'views/front/' ~ template ~'/scripts/short_generator_script.html.twig' %}
 {% include 'views/front/' ~ template ~'/scripts/short_generator_styles.html.twig' %}
 
-{% if customer.can('short_video') == null %}
+{% if customer.can_do('short_video') == false %}
 {% include 'views/front/' ~ app.SystemSetting.template ~ '/popups/subscribe-popup.html.twig' %}
 {% endif %}
