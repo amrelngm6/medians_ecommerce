@@ -172,16 +172,16 @@ class Customer extends CustomModel
     public function can_do($access)
     {
 
-		if (empty($this->subscription->is_valid))
+		if (empty($this->subscription->is_valid)) {
 			return false;
+		}
 
-			print_r(json_decode($this->subscription->package));
 
-
-		$limit = $this->subscription->package->feature[$access.'_uploads_limit'] ?? 0;
+		$accessCode = $access.'_uploads_limit';
+		$limit = $this->subscription->package->feature->$accessCode ?? 0;
 
 		if ($limit < 1) {
-			return 'no access';
+			return false;
 		}
 
 		switch ($access) {
