@@ -86,31 +86,37 @@
                                 <img :src="'/uploads/img/dashboard-placeholder.svg'" />
                             </div>
                         </div>
-                        <div class="d-flex flex-wrap">
+                        <div class="flex w-full">
                 
-                            <div class="border border-dashed border-gray-300 w-125px rounded my-3 p-4 me-6">                    
+                            <div class="border border-dashed border-gray-300 w-full rounded my-3 p-4 me-6">                    
                                 <span class="fs-2x fw-bold text-gray-800 lh-1">
                                     <span data-kt-countup="true" data-kt-countup-value="6,840" data-kt-countup-prefix="$" class="counted" data-kt-initialized="1" v-text="'$'+content.total_earnings" ></span>
                                 </span>
-                                <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Total Earnings')"></span>
+                                <div @mouseover="content.totalTip = true" @mouseleave="content.totalTip = false" class="w-full relative symbol symbol-35px symbol-circle" >
+                                    <tooltip v-if="content.totalTip" :key="content.totalTip" :title="translate('Total amount of paid invoices')" ></tooltip>
+                                    <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Total Earnings')"></span>
+                                </div>
                             </div>
                             
-                            <div class="border border-dashed border-gray-300 w-125px rounded my-3 p-4 me-6">   
+                            <div class="border border-dashed border-gray-300 w-full rounded my-3 p-4 me-6">   
                                 <span class="fs-2x fw-bold text-gray-800 lh-1">
                                     <span class="counted" data-kt-countup="true" data-kt-countup-value="80" data-kt-initialized="1" v-text="content.transactions_count"></span>
                                 </span>
-                                <span class="flex-none fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Subscriptions')"></span>
+                                <div @mouseover="content.countTip = true" @mouseleave="content.countTip = false" class="w-full relative symbol symbol-35px symbol-circle" >
+                                    <tooltip v-if="content.countTip" :key="content.countTip" :title="translate('Total count of subscriptions')" ></tooltip>
+                                    <span class="flex-none fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Subscriptions')"></span>
+                                </div>
                             </div>
                             
 
                             
-                            <div class="border border-dashed border-gray-300 w-125px rounded my-3 p-4 me-6">
+                            <div class="border border-dashed border-gray-300 w-full rounded my-3 p-4 me-6">
                                 <span class="fs-2x fw-bold text-gray-800 lh-1">
                                     <span data-kt-countup="true" data-kt-countup-value="1,240" data-kt-countup-prefix="$" class="counted" data-kt-initialized="1" v-text="content.pending_invoices_count"></span>
                                 </span>
-                                <div @mouseover="content.pendingTip = true" @mouseleave="content.pendingTip = false" class="relative symbol symbol-35px symbol-circle" >
+                                <div @mouseover="content.pendingTip = true" @mouseleave="content.pendingTip = false" class="w-full relative symbol symbol-35px symbol-circle" >
                                     <tooltip v-if="content.pendingTip" :key="content.pendingTip" :title="translate('Invoices of subscriptions are not paid yet')" ></tooltip>
-                                    <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Pending')"></span>
+                                    <span class="w-full fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2" v-text="translate('Pending')"></span>
                                 </div>
                                 
                             </div>
