@@ -211,7 +211,8 @@ class Customer extends CustomModel
 				break;
 		}
 
-
+		print_r($this->subscription->package);
+		
 		if ($limit >= $count) {
 			return false;
 		}
