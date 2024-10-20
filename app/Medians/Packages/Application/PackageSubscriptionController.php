@@ -45,7 +45,7 @@ class PackageSubscriptionController extends CustomController
             [ 'value'=> "package.name", 'text'=> translate('Package'), 'sortable'=> true ],
             [ 'value'=> "total_cost", 'text'=> translate('Total cost'), 'sortable'=> true ],
             [ 'value'=> "payment_type", 'text'=> translate('Payment'), 'sortable'=> true ],
-            [ 'value'=> "duration", 'text'=> translate('Duration'), 'sortable'=> true ],
+            [ 'value'=> "payment_status", 'text'=> translate('Status'), 'sortable'=> true ],
             [ 'value'=> "invoice.code", 'text'=> translate('Invoice'), 'sortable'=> true ],
             [ 'value'=> "start_date", 'text'=> translate('start_date'), 'sortable'=> true ],
             [ 'value'=> "end_date", 'text'=> translate('end_date'), 'sortable'=> true ],
