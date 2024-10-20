@@ -62,28 +62,57 @@
 
                     </div>
 
-                    <div class="d-flex flex-column h-100 w-full">
-                        <div class="w-full flex gap-4">
-                            <div class="mb-7 w-full">
-                                <div class="d-flex flex-stack mb-6">
-                                    <div class="flex-shrink-0 me-5">
-                                        <span class="text-gray-500 fs-7 fw-bold me-2 d-block lh-1 pb-1"
-                                            v-text="translate('Welcome')"></span>
-                                        <span class="text-gray-800 fs-1 fw-bold" v-text="auth.name"></span>
-                                        <span
-                                            class="badge badge-light-primary flex-shrink-0 align-self-center py-3 px-4 fs-7"
-                                            v-text="translate('Active')"></span>
+                    <div class="h-100 w-full">
+                        <div class="d-flex flex-column h-100 w-full">
+                            <div class="w-full flex gap-4">
+                                <div class="mb-7 w-full">
+                                    <div class="d-flex flex-stack mb-6">
+                                        <div class="flex-shrink-0 me-5">
+                                            <span class="text-gray-500 fs-7 fw-bold me-2 d-block lh-1 pb-1"
+                                                v-text="translate('Welcome')"></span>
+                                            <span class="text-gray-800 fs-1 fw-bold" v-text="auth.name"></span>
+                                            <span
+                                                class="badge badge-light-primary flex-shrink-0 align-self-center py-3 px-4 fs-7"
+                                                v-text="translate('Active')"></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-center flex-wrap d-grid gap-2">
+                                        <div class="d-flex align-items-center me-5 me-xl-13">
+                                            <img :src="system_setting['logo'] ?? '/uploads/images/default_logo.png'"
+                                                class="h-20" alt="">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="d-flex align-items-center flex-wrap d-grid gap-2">
-                                    <div class="d-flex align-items-center me-5 me-xl-13">
-                                        <img :src="system_setting['logo'] ?? '/uploads/images/default_logo.png'"
-                                            class="h-20" alt="">
-                                    </div>
-                                </div>
+                                <img :src="'/uploads/img/dashboard-placeholder.svg'" />
                             </div>
-                            <img :src="'/uploads/img/dashboard-placeholder.svg'" />
+                        </div>
+                        <div class="d-flex flex-wrap">
+                
+                            <div class="border border-dashed border-gray-300 w-125px rounded my-3 p-4 me-6">                    
+                                <span class="fs-2x fw-bold text-gray-800 lh-1">
+                                    <span data-kt-countup="true" data-kt-countup-value="6,840" data-kt-countup-prefix="$" class="counted" data-kt-initialized="1">$6,840</span>
+                                </span>
+                                <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2">Net Earnings</span>
+                            </div>
+                            
 
+                            
+                            <div class="border border-dashed border-gray-300 w-125px rounded my-3 p-4 me-6">   
+                                <span class="fs-2x fw-bold text-gray-800 lh-1">
+                                    <span class="counted" data-kt-countup="true" data-kt-countup-value="80" data-kt-initialized="1">80</span>%
+                                </span>
+                                <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2">Change</span>
+                            </div>
+                            
+
+                            
+                            <div class="border border-dashed border-gray-300 w-125px rounded my-3 p-4 me-6">
+                                <span class="fs-2x fw-bold text-gray-800 lh-1">
+                                    <span data-kt-countup="true" data-kt-countup-value="1,240" data-kt-countup-prefix="$" class="counted" data-kt-initialized="1">$1,240</span>
+                                </span>
+                                <span class="fs-6 fw-semibold text-gray-500 d-block lh-1 pt-2">Fees</span>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
