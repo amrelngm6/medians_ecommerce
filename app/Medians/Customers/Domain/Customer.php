@@ -219,7 +219,7 @@ class Customer extends CustomModel
 			return 'exceeded';
 		}
 
-		return  'true';
+		return  true;
 
 	}
 	

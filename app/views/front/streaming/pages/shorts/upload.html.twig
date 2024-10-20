@@ -90,8 +90,6 @@
 
 {% include 'views/front/' ~ template ~'/scripts/short_generator_styles.html.twig' %}
 
-{{app.customer.can_do('short_video')}}
-
 {% if app.customer.can_do('short_video') != true %}
 {% include 'views/front/' ~ app.SystemSetting.template ~ '/popups/subscribe-popup.html.twig' %}
 {% endif %}
