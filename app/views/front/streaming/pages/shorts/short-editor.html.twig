@@ -165,3 +165,7 @@
 
 {% include 'views/front/' ~ template ~'/scripts/short_generator_script.html.twig' %}
 {% include 'views/front/' ~ template ~'/scripts/short_generator_styles.html.twig' %}
+
+{% if customer.can('short_video') == null %}
+{% include 'views/front/' ~ app.SystemSetting.template ~ '/popups/subscribe-popup.html.twig' %}
+{% endif %}
