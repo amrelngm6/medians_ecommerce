@@ -179,6 +179,8 @@ class Customer extends CustomModel
 
 		$accessCode = $access.'_uploads_limit';
 		$limit = $this->subscription->package->feature->$accessCode ?? 0;
+		print_r($limit);
+		print_r($access);
 		print_r(json_decode($this->subscription->package));
 
 		if ($limit < 1) {
