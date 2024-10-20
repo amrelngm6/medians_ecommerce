@@ -409,6 +409,7 @@ class APP
 				array('permission'=> 'AudiobooksSettings.index', 'title'=> translate('Audiobooks settings'),  'icon'=>'tool', 'link'=>'admin/audiobooks_settings', 'component'=>'system_settings'),
 				array('permission'=> 'ChannelsSettings.index', 'title'=> translate('Channels settings'),  'icon'=>'tool', 'link'=>'admin/channels_settings', 'component'=>'system_settings'),
 				array('permission'=> 'StationsSettings.index', 'title'=> translate('Stations settings'),  'icon'=>'tool', 'link'=>'admin/stations_settings', 'component'=>'system_settings'),
+				array('permission'=> 'PlaylistsSettings.index', 'title'=> translate('Playlists settings'),  'icon'=>'tool', 'link'=>'admin/playlists_settings', 'component'=>'system_settings'),
 			]
 			),
 			
