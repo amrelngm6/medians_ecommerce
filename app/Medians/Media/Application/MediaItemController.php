@@ -651,7 +651,6 @@ class MediaItemController extends CustomController
 	{
 		$this->app = new \config\APP;
 
-        $params = $this->app->params();
 		
         try {
 
@@ -666,6 +665,7 @@ class MediaItemController extends CustomController
                 $k += 1;
             }   
             
+            $params = $this->app->params();
             
             $item = $this->repo->find($params['media_id']);
             $params['name'] = sanitizeInput($params['name'], true);
