@@ -56,10 +56,6 @@
                 </form>
             </div>
 
-        </div>
-         
-    </div>
-</div>
 
 {% if app.customer.can_do('audiobooks') != true %}
 {% include 'views/front/' ~ app.SystemSetting.template ~ '/popups/subscribe-popup.html.twig' %}
