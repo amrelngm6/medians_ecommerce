@@ -47,20 +47,23 @@ jQuery(document).on('click', '.start-station', async function (i, el) {
 		
 	await loadStation(stationId)
 	
-	audio.src = '/stream_station?station_id='+ stationId+'&hash='+ rand;
-	audio.load();
-	audio.play();
-	audio.volume = getCookie('volume')
+	updateStationSrc(stationId, rand)
 
 	mainAudio.on('ended', function() {
+		console.log('Ended')
 		rand += 1
-		audio.src = '/stream_station?station_id='+ stationId+'&hash='+rand;
-		audio.load();
-		audio.play();
-		audio.volume = getCookie('volume')
+		updateStationSrc(stationId, rand)
 	})
 });
 
+
+function updateStationSrc(stationId, rand)
+{
+	audio.src = '/stream_station?station_id='+ stationId+'&hash='+rand;
+	audio.load();
+	audio.play();
+	audio.volume = getCookie('volume')
+}
 
 
 /**
