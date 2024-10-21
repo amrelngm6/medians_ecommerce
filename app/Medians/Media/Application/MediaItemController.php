@@ -659,17 +659,10 @@ class MediaItemController extends CustomController
                 $file = $this->mediaRepo->upload($value, 'picture', true);
             }     
             
-            $picturePath = $this->mediaRepo->_dir.$file;
-
-        } catch (\Exception $e) {
-        	throw new \Exception("Error 1:  " .$e->getMessage(), 1);
-        }
-
-        try {
 
             $params = $request->get('params');
             
-            $params['picture'] = $picturePath;
+            $params['picture']  = $this->mediaRepo->_dir.$file;
             
             $item = $this->repo->find($params['media_id']);
             $params['name'] = sanitizeInput($params['name'], true);
