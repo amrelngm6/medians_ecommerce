@@ -656,8 +656,16 @@ class MediaItemController extends CustomController
             foreach ($this->app->request()->files as $value) {
                 $file = $this->mediaRepo->upload($value, 'picture', true);
             }     
-
             
+            $picturePath = $this->mediaRepo->_dir.$file;
+
+        } catch (\Exception $e) {
+        	throw new \Exception("Error 1:  " .$e->getMessage(), 1);
+        }
+        echo $picturePath;
+        return;
+        try {
+
             $params = $this->app->params();
             $params['picture'] = $this->mediaRepo->_dir.$file;
             
