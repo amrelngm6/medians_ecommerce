@@ -274,9 +274,7 @@ class CustomerAuthService
 
 			$user = $this->repo->findByEmail($params['email']);
 
-			if (isset($user->customer_id))
-				$user->update(['picture' => $localPic]);
-			else 
+			if (empty($user->customer_id))
 				$user = $this->repo->store($params);
 
 			// Check if user saved
