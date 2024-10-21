@@ -654,17 +654,14 @@ class MediaItemController extends CustomController
         try {
             
             $request = $this->app->request();
+            $params = $request->get('params');
 
             foreach ($request->files as $value) {
                 if ($value){
                     $file = $this->mediaRepo->upload($value, 'picture', true);
+                    $params['picture']  = $this->mediaRepo->_dir.$file;
                 }
             }     
-            
-
-            $params = $request->get('params');
-            
-            $params['picture']  = $this->mediaRepo->_dir.$file;
             
             $item = $this->repo->find($params['media_id']);
             $params['name'] = sanitizeInput($params['name'], true);
