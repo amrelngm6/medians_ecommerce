@@ -157,34 +157,22 @@ class MediaRepository
 			}
 
 			$this->validate($type, $ext);
-
-		} catch (\Throwable $th) {
-			throw new \Exception("Error uploading 1" . $e->getMessage(), 1);
-		}
-
-		try {
-			
 			
 			$originalFilename = $customName ? rand(9999,999999) : pathinfo( $file->getClientOriginalName(), PATHINFO_FILENAME);
 			$safeFilename = $this->slug($originalFilename);
-			$fileName = $safeFilename.'-'.uniqid().'.'.$ext;
-			$store = MediaUpload::addItem($this->_dir.$fileName, $type);
+			$fileNewName = $safeFilename.'-'.uniqid().'.'.$ext;
+			$store = MediaUpload::addItem($this->_dir.$fileNewName, $type);
 
-		} catch (\Throwable $th) {
-			throw new \Exception("Error uploading 2 ". $e->getMessage(), 1);
-		}
+            $move = $file->move($this->dir, $fileNewName);
 
-        try {
-            $move = $file->move($this->dir, $fileName);
-
-			return $fileName;
+			return $fileNewName;
 
         } catch (FileException $e) {
 			throw new \Exception("Error uploading  3 " . $e->getMessage(), 1);
         }
 
 
-        return $fileName;
+        return $fileNewName;
     }
 
 	public function validate($type, $ext)
