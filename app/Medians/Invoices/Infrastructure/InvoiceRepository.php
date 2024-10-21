@@ -81,7 +81,7 @@ class InvoiceRepository
 
 	  	if (!empty($params["status"]))
 	  	{
-	  		$check = $check->where('status' , [$params['status'] ]);
+	  		$check = $check->where('status' , $params['status'] );
 	  	}
 
   		return $check->orderBy('created_at', 'DESC')->get();
