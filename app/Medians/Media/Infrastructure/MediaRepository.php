@@ -127,7 +127,7 @@ class MediaRepository
 				break;
 			
 			case 'video':
-				return ['mp4', 'ogg', 'wmv', 'avi', 'mov']; 
+				return ['mp4', 'ogg', 'wmv', 'avi', 'mov','webm']; 
 				break;
 			
 			default:
