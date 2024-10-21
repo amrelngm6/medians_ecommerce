@@ -661,7 +661,7 @@ class MediaItemController extends CustomController
             }     
 
         } catch (\Exception $a) {
-        	throw new \Exception("Error 1 :  " .$a->getMessage(), 1);
+        	throw new \Exception("Error :  " .$a->getMessage(), 1);
         }
         
         try {
@@ -669,22 +669,24 @@ class MediaItemController extends CustomController
             $params = $this->app->params();
           
         } catch (\Exception $b) {
-        	throw new \Exception("Error 22 :  " .$b->getMessage(), 1);
         }
         
         try {
             
             $item = $this->repo->find($params['media_id']);
             $params['name'] = sanitizeInput($params['name'], true);
-          
-            // $getID3 = new getID3;
-
-            // // Analyze file
-            // $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $item->main_file->path);
-
-            // if (isset($fileInfo['playtime_seconds'])) {
-            //     $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-            // }
+            
+            if (empty($item->field->duration))
+            {
+                $getID3 = new getID3;
+    
+                // Analyze file
+                $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $item->main_file->path);
+    
+                if (isset($fileInfo['playtime_seconds'])) {
+                    $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+                }
+            }
         
             $params['selected_genres'] = $this->app->request()->get('selected_genres');
         
@@ -696,7 +698,7 @@ class MediaItemController extends CustomController
             }
   
         } catch (\Exception $e) {
-        	throw new \Exception("Error 2 :  " .$e->getMessage(), 1);
+        	throw new \Exception("Error :  " .$e->getMessage(), 1);
         }
 	}
 
