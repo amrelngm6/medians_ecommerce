@@ -437,8 +437,6 @@ class VideoController extends CustomController
             return Page404();
 
 
-            
-        
         if (empty($item->field->duration))
         {
             $item = $this->handleFileDuration($item);
@@ -508,9 +506,11 @@ class VideoController extends CustomController
 
         if ($newPath)
         {
-            
             $item->main_file->path = str_replace( $_SERVER['DOCUMENT_ROOT'], '',  $newFile);
             $update = $item->main_file->save();
+            
+            $params = $this->handleFileInfo(['media_id' => $item->media_id], $item->main_file->path);
+            $this->repo->update($params);
             unlink($videoPath);
         }
 
