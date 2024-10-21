@@ -660,17 +660,23 @@ class MediaItemController extends CustomController
                 $k += 1;
             }     
 
-        } catch (\Exception $e) {
-        	throw new \Exception("Error 1 :  " .$e->getMessage(), 1);
+        } catch (\Exception $a) {
+        	throw new \Exception("Error 1 :  " .$a->getMessage(), 1);
         }
         
         try {
             
             $params = $this->app->params();
           
+        } catch (\Exception $b) {
+        	throw new \Exception("Error 22 :  " .$b->getMessage(), 1);
+        }
+        
+        try {
+            
             $item = $this->repo->find($params['media_id']);
             $params['name'] = sanitizeInput($params['name'], true);
-            
+          
             // $getID3 = new getID3;
 
             // // Analyze file
@@ -684,7 +690,7 @@ class MediaItemController extends CustomController
         
             if ($this->repo->update($params))
             {
-            $params['picture'] = $this->mediaRepo->_dir.$file;
+                $params['picture'] = $this->mediaRepo->_dir.$file;
 
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
             }
