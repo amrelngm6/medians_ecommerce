@@ -368,7 +368,7 @@ class APP
 			]
 			),
 		
-			array( 'title'=>translate('Management'),  'icon'=>'package', 'link'=>'#management', 'superadmin'=> true, 'sub'=>
+			array( 'title'=>translate('Subscriptions'),  'icon'=>'package', 'link'=>'#management', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=>'Packages.index', 'title'=>translate('Packages'),  'icon'=>'tool', 'link'=>'admin/packages', 'component'=>'packages'),
 				array('permission'=>'PackageSubscription.index', 'title'=>translate('Package subscriptions'),  'icon'=>'tool', 'link'=>'admin/package_subscriptions', 'component'=>'data_table'),
