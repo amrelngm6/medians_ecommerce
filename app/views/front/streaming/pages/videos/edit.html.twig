@@ -39,7 +39,7 @@
                     <div class=" text-primary"><h4 class="text-xl dark:text-gray-300">{{lang.translate('Video cover')}}</h4></div>
                     <hr class="opacity-30 my-4" />
                     
-                    <div class="w-full relative overflow-x-auto">
+                    <div class="w-full relative overflow-x-auto mb-10">
                         <div class="overflow-x-auto flex gap-8 py-6" style="width: max-content"  id="screenshots-container">
                             {% for screenshot in list %}
                             <label  onclick="(function () { return  jQuery('#item-screenshot-{{loop.index}}').prop('checked', true); })(); return false;  "  class="cursor-pointer relative  dark:bg-gray-800  bg-gray-200 rounded-3xl w-56 border border-1 border-dashed	border-rose-600">
