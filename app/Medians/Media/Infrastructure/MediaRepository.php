@@ -225,7 +225,7 @@ class MediaRepository
 		$settings = $app->SystemSetting();
 
 		$run = shell_exec($settings['ffmpeg_path']." -i $filepath $output");
-		echo $settings['ffmpeg_path']." -i $filepath $output";
+
 		return file_exists($output) ? $output : null;
 	}
 

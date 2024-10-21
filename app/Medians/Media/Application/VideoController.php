@@ -504,13 +504,11 @@ class VideoController extends CustomController
         
         $ext = explode('.', $videoPath);
         $newFile = str_replace(end($ext), 'mp4', $videoPath);
-        echo $newFile;
-        echo $videoPath;
-        $newPath = $this->mediaRepo->convertMediaWithFfmpeg($_SERVER['DOCUMENT_ROOT']. $videoPath, $_SERVER['DOCUMENT_ROOT']. $newFile);
+        $newPath = $this->mediaRepo->convertMediaWithFfmpeg($videoPath, $newFile);
 
         if ($newPath)
         {
-            $item->main_file->path = $newFile;
+            $item->main_file->path = str_replace( $_SERVER['DOCUMENT_ROOT'], '',  $newFile);
             $update = $item->main_file->save();
         }
 
