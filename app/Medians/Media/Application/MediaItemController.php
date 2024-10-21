@@ -653,7 +653,9 @@ class MediaItemController extends CustomController
 
         try {
             
-            foreach ($this->app->request()->files as $value) {
+            $request = $this->app->request();
+
+            foreach ($request->files as $value) {
                 $file = $this->mediaRepo->upload($value, 'picture', true);
             }     
             
@@ -665,8 +667,8 @@ class MediaItemController extends CustomController
         echo $picturePath;
         return;
         try {
+            $params = $request->get('params');
 
-            $params = $this->app->params();
             $params['picture'] = $this->mediaRepo->_dir.$file;
             
             $item = $this->repo->find($params['media_id']);
