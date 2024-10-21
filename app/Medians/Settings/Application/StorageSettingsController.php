@@ -43,8 +43,8 @@ class StorageSettingsController extends CustomController
 		return [
             
 			'basic'=> [	
+				[ 'key'=> "pictures_allowed_ext", 'title'=> translate('Allowed Pictures Extensions'), 'help_text'=>translate('Allow extnsions of Pictures files to upload. Separate by (,) without spaces )'), 'fillable'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "ffmpeg_path", 'title'=> translate('FFMPEG Path'), 'help_text'=>translate('Use (ffmpeg) if already installed or add Full path ex: ').$_SERVER['DOCUMENT_ROOT'].'/ffmpeg', 'fillable'=> true, 'column_type'=>'text' ],
-                
 				[ 'key'=> "default_storage", 'title'=> translate('Default Storage'), 'help_text'=> translate('The default storage location for media files'),
                     'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 'column_key' => 'default_storage',
                     'data' => [['default_storage'=>'google','title'=>translate('Google Storage')], ['default_storage'=>'local','title'=>translate('Local Server')]]  
