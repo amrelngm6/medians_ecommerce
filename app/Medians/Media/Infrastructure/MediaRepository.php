@@ -132,11 +132,11 @@ class MediaRepository
 				break;
 			
 			case 'video':
-				return explode(',', $settings['video_allowed_ext'] ?? 'mp4,wmv,mkv,ogg,mov,webm,avi'); 
+				return explode(',', $settings['video_allowed_ext'] ?? 'mp4,webm'); 
 				break;
 			
 			default:
-				return explode(',', $settings['audio_allowed_ext'] ?? 'png,jpg,webp,jpeg,bmp,svg')  ; 
+				return explode(',', $settings['pictures_allowed_ext'] ?? 'png,jpg,webp,jpeg,bmp,svg')  ; 
 				break;
 		}
 	}
