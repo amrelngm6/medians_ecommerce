@@ -57,6 +57,12 @@ $(function(){
         });
         jQuery('#video-pictures-{{media_item.media_id}}').html(fragment);
         appended_{{media_item.media_id}} = true
+    });
+    jQuery(document).on('mouseleave', '#video-pictures-{{media_item.media_id}}', function(){
+        
+        appended_{{media_item.media_id}} = false;
+
+        jQuery('#video-pictures-{{media_item.media_id}}').html('');
     })
 })
 </script>
