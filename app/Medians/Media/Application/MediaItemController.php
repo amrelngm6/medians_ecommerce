@@ -664,12 +664,13 @@ class MediaItemController extends CustomController
         } catch (\Exception $e) {
         	throw new \Exception("Error 1:  " .$e->getMessage(), 1);
         }
+
+        try {
+
         echo $picturePath;
         $params = $request->get('params');
         print_r($params);
         return;
-        try {
-
             $params['picture'] = $this->mediaRepo->_dir.$file;
             
             $item = $this->repo->find($params['media_id']);
@@ -687,7 +688,7 @@ class MediaItemController extends CustomController
                 }
             }
         
-            $params['selected_genres'] = $this->app->request()->get('selected_genres');
+            $params['selected_genres'] = $request->get('selected_genres');
         
             if ($this->repo->update($params))
             {
