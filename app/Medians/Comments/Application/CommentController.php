@@ -74,6 +74,7 @@ class CommentController extends CustomController
 	        'items' => $this->repo->get(100),
 	        'columns' => $this->columns(),
 	        'fillable' => $this->fillable(),
+			'no_create'=> true,
 			'object_name'=> 'Comment',
 			'object_key'=> 'comment_id',
 	    ]);
