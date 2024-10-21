@@ -37,12 +37,11 @@ class CustomerController extends CustomController
 	public function columns( ) 
 	{
 		return [
-            [ 'value'=> "customer_id", 'text'=> "#"],
+            [ 'value'=> "picture", 'text'=> translate('Picture'),  ],
             [ 'value'=> "name", 'text'=> translate('name'), 'sortable'=> true ],
             [ 'value'=> "email", 'text'=> translate('Email'),  ],
             [ 'value'=> "field.phone", 'text'=> translate('Phone'),  ],
             [ 'value'=> "subscription.package.name", 'text'=> translate('package'),  ],
-            [ 'value'=> "picture", 'text'=> translate('Picture'),  ],
             [ 'value'=> "info", 'text'=> translate('info')  ],
             // [ 'value'=> "delete", 'text'=> translate('delete')  ],
         ];
