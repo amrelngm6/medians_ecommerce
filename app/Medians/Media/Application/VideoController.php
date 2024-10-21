@@ -441,6 +441,12 @@ class VideoController extends CustomController
         $outputDir = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->videos_dir. 'screenshots/';
         $list = $this->generateScreenshots($videoPath, $outputDir, $settings);
 
+        
+        if (empty($item->field->duration))
+        {
+            $this->handleFileDuration($item);
+        }
+
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
@@ -482,6 +488,27 @@ class VideoController extends CustomController
 		} catch (\Exception $e) {
 			throw new \Exception($e->getMessage(), 1);
 		}
+    }
+
+    /**
+     * Handle file duration 
+     * Convert file into MP4
+     * 
+     */
+    public function handleFileDuration($item)
+    {
+        
+        $videoPath = $_SERVER['DOCUMENT_ROOT'].$item->main_file->path;
+        
+        $ext = explode('.', $videoPath);
+        $newFile = str_replace(end($ext), 'mp4', $filePath);
+        $newPath = $this->mediaRepo->convertMediaWithFfmpeg($_SERVER['DOCUMENT_ROOT']. $videoPath, $_SERVER['DOCUMENT_ROOT']. $newFile);
+
+        if ($newPath)
+        {
+
+        }
+
     }
 
 
@@ -557,7 +584,7 @@ class VideoController extends CustomController
             } else {
                     
                 foreach ($this->app->request()->files as $key => $value) {
-                    if ($value) {
+                    if ($value && !$key) {
 
                         $file = $this->mediaRepo->upload($value, 'video', true);
                         
@@ -579,32 +606,34 @@ class VideoController extends CustomController
 
 
 
+    public function handleFileInfo($params, $filePath)
+    {
+
+        $getID3 = new getID3;
+        // Analyze file
+        $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
+        
+        $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+        $params['field']['bitrate'] = $fileInfo['bitrate'] ?? 0;
+        $params['field']['filesize'] = $fileInfo['filesize'] ?? 0;
+        $params['field']['bpm'] = $fileInfo['id3v2']['comments']['bpm'][0] ?? 0;
+
+        if (isset($fileInfo['tags']['id3v2']))
+        {
+            $params['name'] = $fileInfo['tags']['id3v2']['title'][0] ?? ($params['name'] ?? 'Unknown Title');
+            $params['description'] = $fileInfo['tags']['id3v2']['comment'][0] ?? ($params['name'] ?? 'No Description');
+        }
+        
+        return $params;
+	}
+
+
+
     public function store($params, $filePath, $settings)
     {
         try {
             
-            $getID3 = new getID3;
-            // Analyze file
-            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
-            
-            if (empty($fileInfo['playtime_seconds']))
-            {
-                $ext = explode('.', $filePath);
-                $newFile = str_replace(end($ext), 'mp4', $filePath);
-                $newPath = $this->mediaRepo->convertMediaWithFfmpeg($_SERVER['DOCUMENT_ROOT']. $filePath, $_SERVER['DOCUMENT_ROOT']. $newFile);
-                $fileInfo = $getID3->analyze($newPath);
-            }
-
-            $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-            $params['field']['bitrate'] = $fileInfo['bitrate'] ?? 0;
-            $params['field']['filesize'] = $fileInfo['filesize'] ?? 0;
-            $params['field']['bpm'] = $fileInfo['id3v2']['comments']['bpm'][0] ?? 0;
-
-            if (isset($fileInfo['tags']['id3v2']))
-            {
-                $params['name'] = $fileInfo['tags']['id3v2']['title'][0] ?? ($params['name'] ?? 'Unknown Title');
-                $params['description'] = $fileInfo['tags']['id3v2']['comment'][0] ?? ($params['name'] ?? 'No Description');
-            }
+            $params = $this->handleFileInfo($params, $filePath);
 
             $params['files'] = [ ['type'=> 'video', 'title' => $params['name'] ?? '', 'storage'=> $settings['default_storage'] ?? 'local', 'path'=> $filePath] ];
             $params['author_id'] = $this->app->customer_id() ?? 0;
