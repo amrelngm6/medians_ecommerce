@@ -2126,6 +2126,7 @@ div[data-count="3"] .package {
     align-items: top;
     justify-content: right;
     background-size: cover;
+    background-position: center;
 }
 
 
