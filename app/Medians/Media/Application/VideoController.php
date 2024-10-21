@@ -511,7 +511,7 @@ class VideoController extends CustomController
             
             $params = $this->handleFileInfo(['media_id' => $item->media_id], $item->main_file->path);
             $this->repo->update($params);
-            unlink($videoPath);
+            // unlink($videoPath);
         }
 
         return $item;
