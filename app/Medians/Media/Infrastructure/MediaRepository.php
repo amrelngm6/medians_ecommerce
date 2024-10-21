@@ -173,7 +173,7 @@ class MediaRepository
 	{
 		if (!in_array($ext, $this->getTypes($type)))
 		{
-			throw new \Exception("This file is not allowed", 1);
+			throw new \Exception("This file ext $ext is not allowed $type", 1);
 		}	
 	}
 
