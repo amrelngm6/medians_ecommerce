@@ -41,6 +41,7 @@ class ChannelsSettingsController extends CustomController
                 
 			],		
 			'streaming'=> [	
+				[ 'key'=> "autoplay_channel", 'title'=> translate('Autoplay at channel page'), 'help_text'=>translate('Auto play channel at single channel page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "channel_direct_streaming", 'title'=> translate('Streaming Channels directly'), 'help_text'=>translate('Allow customers to stream Channels files through direct links. ( Recommended disable to prevent download media files anonymously )'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 			],		
 

@@ -42,10 +42,8 @@ class VideosSettingsController extends CustomController
 				[ 'key'=> "video_allowed_ext", 'title'=> translate('Allowed Videos Extensions'), 'help_text'=>translate('Allow extnsions of Video files to upload. Separate by (,) without spaces )'), 'fillable'=> true, 'column_type'=>'text' ],
 										
 			],		
-			'audoplay'=> [	
-				[ 'key'=> "autoplay_video", 'title'=> translate('Autoplay at single page'), 'help_text'=>translate('Auto play videos at video page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
-			],	
 			'streaming'=> [	
+				[ 'key'=> "autoplay_video", 'title'=> translate('Autoplay at single page'), 'help_text'=>translate('Auto play videos at video page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "video_direct_streaming", 'title'=> translate('Streaming Videos directly'), 'help_text'=>translate('Allow customers to stream Video files through direct links. ( Recommended disable to prevent download media files anonymously )'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 			],		
         ];
