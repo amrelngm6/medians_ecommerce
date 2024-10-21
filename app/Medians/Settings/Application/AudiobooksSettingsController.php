@@ -37,6 +37,7 @@ class AudiobooksSettingsController extends CustomController
 		return [
 			'basic'=> [	
 				[ 'key'=> "enable_audiobooks", 'title'=> translate('Allow audiobooks feature'), 'help_text'=>translate('You can allow / disallow with Audiobooks at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "view_audiobooks_limit", 'title'=> translate('Loading Audiobooks limit'), 'help_text'=>translate('Show x Audiobooks as first load at frontend pages'), 'fillable'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "audiobook_max_size", 'title'=> translate('Audiobook max size'), 'help_text'=>translate('Max size for uploaded Audiobooks'), 'fillable'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "audiobook_max_chapters", 'title'=> translate('Audio max chapters'), 'help_text'=>translate('Max chapters count for uploaded audiobooks'), 'fillable'=> true, 'column_type'=>'number' ],
 			],		
