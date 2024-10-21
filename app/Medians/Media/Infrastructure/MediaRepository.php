@@ -159,13 +159,20 @@ class MediaRepository
 			$this->validate($type, $ext);
 
 		} catch (\Throwable $th) {
-			throw new \Exception("Error uploading", 1);
+			throw new \Exception("Error uploading 1" . $e->getMessage(), 1);
 		}
 
-        $originalFilename = $customName ? rand(9999,999999) : pathinfo( $file->getClientOriginalName(), PATHINFO_FILENAME);
-        $safeFilename = $this->slug($originalFilename);
-        $fileName = $safeFilename.'-'.uniqid().'.'.$ext;
-		$store = MediaUpload::addItem($this->_dir.$fileName, $type);
+		try {
+			
+			
+			$originalFilename = $customName ? rand(9999,999999) : pathinfo( $file->getClientOriginalName(), PATHINFO_FILENAME);
+			$safeFilename = $this->slug($originalFilename);
+			$fileName = $safeFilename.'-'.uniqid().'.'.$ext;
+			$store = MediaUpload::addItem($this->_dir.$fileName, $type);
+
+		} catch (\Throwable $th) {
+			throw new \Exception("Error uploading 2 ". $e->getMessage(), 1);
+		}
 
         try {
             $move = $file->move($this->dir, $fileName);
@@ -173,7 +180,7 @@ class MediaRepository
 			return $fileName;
 
         } catch (FileException $e) {
-        	return $e->getMessage();
+			throw new \Exception("Error uploading  3 " . $e->getMessage(), 1);
         }
 
 
