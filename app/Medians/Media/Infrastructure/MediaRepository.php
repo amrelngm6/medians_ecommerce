@@ -171,8 +171,6 @@ class MediaRepository
 			throw new \Exception("Error uploading  3 " . $e->getMessage(), 1);
         }
 
-
-        return $fileNewName;
     }
 
 	public function validate($type, $ext)
