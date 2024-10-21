@@ -19,6 +19,7 @@
                                     </ul>
                                 </div>
                             </div>
+				            {% set view_items_limit = app.SystemSetting.view_stations_limit %}
                             {% include 'views/front/' ~ template ~ '/includes/pagination.html.twig' %}
 
                         </div>
