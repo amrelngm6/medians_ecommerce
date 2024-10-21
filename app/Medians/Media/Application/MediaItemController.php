@@ -652,8 +652,6 @@ class MediaItemController extends CustomController
 		
         try {
 
-            $params = $this->app->params();
-
             $k = 0;
             foreach ($this->app->request()->files as $file) {
                 if ($file && $k < 1) {
@@ -661,7 +659,13 @@ class MediaItemController extends CustomController
                 }
                 $k += 1;
             }     
-		    
+
+        } catch (\Exception $e) {
+        	throw new \Exception("Error 1 :  " .$e->getMessage(), 1);
+        }
+        
+        try {
+            $params = $this->app->params();
             $params['picture'] = $this->mediaRepo->_dir.$picture;
           
             $item = $this->repo->find($params['media_id']);
@@ -684,7 +688,7 @@ class MediaItemController extends CustomController
             }
   
         } catch (\Exception $e) {
-        	throw new \Exception("Error:  " .$e->getMessage(), 1);
+        	throw new \Exception("Error 2 :  " .$e->getMessage(), 1);
         }
 	}
 
