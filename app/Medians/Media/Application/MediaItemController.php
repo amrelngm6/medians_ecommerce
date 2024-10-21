@@ -667,6 +667,7 @@ class MediaItemController extends CustomController
         try {
             
             $params = $this->app->params();
+            $params['picture'] = $this->mediaRepo->_dir.$file;
           
         } catch (\Exception $b) {
         }
@@ -692,7 +693,6 @@ class MediaItemController extends CustomController
         
             if ($this->repo->update($params))
             {
-                $params['picture'] = $this->mediaRepo->_dir.$file;
 
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
             }
