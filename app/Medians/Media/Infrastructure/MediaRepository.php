@@ -217,7 +217,7 @@ class MediaRepository
     }
 
 
-	public function convertAudioWithFfmpeg($filepath, $output)
+	public function convertMediaWithFfmpeg($filepath, $output)
 	{
 		
 		$app = new \config\APP;

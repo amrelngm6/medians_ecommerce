@@ -587,13 +587,18 @@ class VideoController extends CustomController
             // Analyze file
             $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $filePath);
             
-            if (isset($fileInfo['playtime_seconds']))
+            if (empty($fileInfo['playtime_seconds']))
             {
-                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-                $params['field']['bitrate'] = $fileInfo['bitrate'] ?? 0;
-                $params['field']['filesize'] = $fileInfo['filesize'] ?? 0;
-                $params['field']['bpm'] = $fileInfo['id3v2']['comments']['bpm'][0] ?? 0;
+                $ext = explode('.', $filePath);
+                $newFile = str_replace(end($ext), 'mp4', $filePath);
+                $newPath = $this->mediaRepo->convertMediaWithFfmpeg($_SERVER['DOCUMENT_ROOT']. $filePath, $_SERVER['DOCUMENT_ROOT']. $newFile);
+                $fileInfo = $getID3->analyze($newPath);
             }
+
+            $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+            $params['field']['bitrate'] = $fileInfo['bitrate'] ?? 0;
+            $params['field']['filesize'] = $fileInfo['filesize'] ?? 0;
+            $params['field']['bpm'] = $fileInfo['id3v2']['comments']['bpm'][0] ?? 0;
 
             if (isset($fileInfo['tags']['id3v2']))
             {
