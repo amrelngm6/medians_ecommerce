@@ -649,7 +649,6 @@ class MediaItemController extends CustomController
 
 	public function update()
 	{
-        $this->app = new \config\APP;
 		
         try {
 
