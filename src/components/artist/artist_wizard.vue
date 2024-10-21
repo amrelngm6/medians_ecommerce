@@ -29,7 +29,7 @@
                                     </div>
                                     <!--end::Status-->
 
-                                    <div class="d-flex flex-wrap font-semibold fs-6 mb-4 pe-2">
+                                    <div class="d-flex flex-wrap font-semibold fs-3 mb-4 pe-2">
                                         <a href="#"
                                             class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                             <vue-feather class="w-5 mx-1" type="smartphone"></vue-feather>
@@ -67,7 +67,7 @@
                                         <!--end::Number-->
 
                                         <!--begin::Label-->
-                                        <div class="font-semibold fs-6 text-gray-500"
+                                        <div class="font-semibold fs-3 text-gray-500"
                                             v-text="translate('Subscription Due Date')">
                                         </div>
                                         <!--end::Label-->
@@ -86,7 +86,7 @@
                                         <!--end::Number-->
 
                                         <!--begin::Label-->
-                                        <div class="font-semibold fs-6 text-gray-500" v-text="translate('Package')"></div>
+                                        <div class="font-semibold fs-3 text-gray-500" v-text="translate('Package')"></div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
@@ -103,7 +103,7 @@
                                         <!--end::Number-->
 
                                         <!--begin::Label-->
-                                        <div class="font-semibold fs-6 text-gray-500" v-text="translate('Media Views')">
+                                        <div class="font-semibold fs-3 text-gray-500" v-text="translate('Media Views')">
                                         </div>
                                         <!--end::Label-->
                                     </div>
@@ -151,7 +151,7 @@
                             <div class="row mb-7">
                                 <label class="col-lg-4 font-semibold text-muted" v-text="translate('Profile')"></label>
                                 <div class="col-lg-8"><a target="_blank" :href="'/artist/' + activeItem.customer_id"
-                                        class="font-semibold fs-6 text-gray-800"
+                                        class="font-semibold fs-3 text-gray-800"
                                         v-text="conf.url + '/artist/' + activeItem.customer_id"></a></div>
                             </div>
                             <!--end::Row-->
@@ -160,7 +160,7 @@
                             <div class="row mb-7">
                                 <label class="col-lg-4 font-semibold text-muted"
                                     v-text="translate('Customer Name')"></label>
-                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
+                                <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.name"></span></div>
                             </div>
                             <!--end::Row-->
@@ -168,7 +168,7 @@
                             <!--begin::Row-->
                             <div class="row mb-7">
                                 <label class="col-lg-4 font-semibold text-muted" v-text="translate('Email')"></label>
-                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
+                                <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.email"></span></div>
                             </div>
                             <!--end::Row-->
@@ -176,7 +176,7 @@
                             <!--begin::Row-->
                             <div class="row mb-7">
                                 <label class="col-lg-4 font-semibold text-muted" v-text="translate('Phone')"></label>
-                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
+                                <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.field.phone ?? ''"></span></div>
                             </div>
                             <!--end::Row-->
@@ -184,7 +184,7 @@
                             <!--begin::Row-->
                             <div class="row mb-7">
                                 <label class="col-lg-4 font-semibold text-muted" v-text="translate('City')"></label>
-                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
+                                <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.field.city ?? ''"></span></div>
                             </div>
                             <!--end::Row-->
@@ -192,7 +192,7 @@
                             <!--begin::Row-->
                             <div class="row mb-7">
                                 <label class="col-lg-4 font-semibold text-muted" v-text="translate('Country')"></label>
-                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
+                                <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.field.country ?? ''"></span></div>
                             </div>
                             <!--end::Row-->
@@ -200,7 +200,7 @@
                             <!--begin::Row-->
                             <div class="row mb-7">
                                 <label class="col-lg-4 font-semibold text-muted" v-text="translate('website')"></label>
-                                <div class="col-lg-8"><span class="font-semibold fs-6 text-gray-800"
+                                <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.field.website ?? ''"></span></div>
                             </div>
                             <!--end::Row-->
@@ -245,7 +245,7 @@
                                                 v-text="translate('Deactivate this customer')">
                                             </h4>
 
-                                            <div class="fs-6 text-gray-700 "> <span
+                                            <div class="fs-3 text-gray-700 "> <span
                                                     v-text="translate('Deactivate this customer and disable its all related items')"></span>
                                             </div>
                                         </div>
@@ -260,7 +260,7 @@
                                 <div class="form-check form-check-solid fv-row fv-plugins-icon-container">
                                     <input name="deactivate" class="form-check-input" type="checkbox" value="" required
                                         id="deactivate">
-                                    <label class="form-check-label font-semibold ps-2 fs-6" for="deactivate"
+                                    <label class="form-check-label font-semibold ps-2 fs-3" for="deactivate"
                                         v-text="translate('I Confirm to delete this customer')"></label>
                                     <div
                                         class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
@@ -312,7 +312,7 @@
                                                 <!--end::Title-->
 
                                                 <!--begin::Description-->
-                                                <div class="d-flex align-items-center mt-1 fs-6 gap-2 ">
+                                                <div class="d-flex align-items-center mt-1 fs-3 gap-2 ">
                                                     <div class="symbol symbol-circle symbol-25px">
                                                         <vue-feather class="w-5 pt-2"
                                                             type="message-square p-1"></vue-feather>
@@ -504,7 +504,7 @@
                                         class="text-gray-800 font-semibold "
                                         v-text="formatCustomTime(activeItem.subscription.end_date ?? '', 'MMMM DD, Y')"></span>
                                 </h3>
-                                <p class="fs-6 text-gray-600 font-semibold mb-6 mb-lg-15"
+                                <p class="fs-3 text-gray-600 font-semibold mb-6 mb-lg-15"
                                     v-text="translate('Estimated date for this subscription')"></p>
                                 <!--end::Heading-->
 
@@ -519,7 +519,7 @@
                                 <!--end::Info-->
 
                                 <!--begin::Notice-->
-                                <div class="fs-6 text-gray-600 font-semibold"><span
+                                <div class="fs-3 text-gray-600 font-semibold"><span
                                         v-text="translate('This subscription payment every')"></span> <span
                                         class="text-gray-800 font-semibold "
                                         v-text="translate(activeItem.subscription.duration)"></span> </div>
@@ -544,7 +544,7 @@
                                 <!--end::Progress-->
 
                                 <!--begin::Description-->
-                                <div class="fs-6 text-gray-600 font-semibold mb-10 flex gap-4 w-full">
+                                <div class="fs-3 text-gray-600 font-semibold mb-10 flex gap-4 w-full">
                                     <span class="w-full" v-text="activeItem.subscription.start_date"></span>
                                     <span class="flex-none" v-text="activeItem.subscription.end_date"></span>
                                 </div>
@@ -580,7 +580,7 @@
                             <!--end::Thead-->
 
                             <!--begin::Tbody-->
-                            <tbody class="fs-6 font-semibold text-gray-600" v-if="activeItem.invoices">
+                            <tbody class="fs-3 font-semibold text-gray-600" v-if="activeItem.invoices">
                                 <tr v-for="invoice in activeItem.invoices">
                                     <td class="px-9" v-text="invoice.code"></td>
                                     <td class=""> <span
