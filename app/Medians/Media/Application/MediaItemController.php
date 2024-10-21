@@ -652,7 +652,6 @@ class MediaItemController extends CustomController
 		$this->app = new \config\APP;
 
         $params = $this->app->params();
-        $item = $this->repo->find($params['media_id']);
 		
         try {
 
@@ -671,14 +670,14 @@ class MediaItemController extends CustomController
             $item = $this->repo->find($params['media_id']);
             $params['name'] = sanitizeInput($params['name'], true);
             
-            $getID3 = new getID3;
+            // $getID3 = new getID3;
 
-            // Analyze file
-            $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $item->main_file->path);
+            // // Analyze file
+            // $fileInfo = $getID3->analyze($_SERVER['DOCUMENT_ROOT']. $item->main_file->path);
 
-            if (isset($fileInfo['playtime_seconds'])) {
-                $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
-            }
+            // if (isset($fileInfo['playtime_seconds'])) {
+            //     $params['field'] = [ 'duration'=> round($fileInfo['playtime_seconds'], 0) ];
+            // }
         
             $params['selected_genres'] = $this->app->request()->get('selected_genres');
         
