@@ -437,15 +437,17 @@ class VideoController extends CustomController
             return Page404();
 
 
+            
+        
+        if (empty($item->field->duration))
+        {
+            $item = $this->handleFileDuration($item);
+        }
+
         $videoPath = $_SERVER['DOCUMENT_ROOT'].$item->main_file->path;
         $outputDir = $_SERVER['DOCUMENT_ROOT']. $this->mediaRepo->videos_dir. 'screenshots/';
         $list = $this->generateScreenshots($videoPath, $outputDir, $settings);
 
-        
-        if (empty($item->field->duration))
-        {
-            $this->handleFileDuration($item);
-        }
 
 		try {
 
@@ -506,9 +508,11 @@ class VideoController extends CustomController
 
         if ($newPath)
         {
-
+            $item->main_file->path = $newFile;
+            $update = $item->main_file->save();
         }
 
+        return $item;
     }
 
 
@@ -598,7 +602,7 @@ class VideoController extends CustomController
                 }
             }
             
-            // return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"/video/edit/$save->media_id");
+            return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"/video/edit/$save->media_id");
 
         } catch (\Throwable $th) {
         	throw new \Exception("Error Processing Request ".$th->getMessage(), 1);
