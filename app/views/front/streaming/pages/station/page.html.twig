@@ -79,7 +79,6 @@ $(function() {
         if (activeStationMedia) {
             jQuery('.station-stream-name').text(activeStationMedia.title)
         }
-        loadStationJson({{station.station_id}})
 	}, stationIntervalAmount > 1  ? (stationIntervalAmount * 1000) : 30000);
 });
 
