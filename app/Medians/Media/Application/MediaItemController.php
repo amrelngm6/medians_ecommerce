@@ -653,6 +653,8 @@ class MediaItemController extends CustomController
 		
         try {
 
+            $params = $this->app->params();
+
             $k = 0;
             foreach ($this->app->request()->files as $key => $value) {
                 if ($value && $k < 1) {
@@ -663,7 +665,6 @@ class MediaItemController extends CustomController
             }     
 		    
             
-            $params = $this->app->params();
             
             $item = $this->repo->find($params['media_id']);
             $params['name'] = sanitizeInput($params['name'], true);

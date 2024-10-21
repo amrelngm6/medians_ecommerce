@@ -145,16 +145,22 @@ class MediaRepository
 	public function upload(UploadedFile $file, $type = 'media', $customName = null)
     {
 
-		$this->setDir($type);
+		try {
+			
+			$this->setDir($type);
 
-		$ext = $file->guessExtension();
+			$ext = $file->guessExtension();
 
-		$mimeType = $file->getMimeType();
-		if ($ext === 'bin' && $mimeType === 'application/octet-stream' ) {
-			$ext = 'mp3'; // Force extension to 'mp3'
+			$mimeType = $file->getMimeType();
+			if ($ext === 'bin' && $mimeType === 'application/octet-stream' ) {
+				$ext = 'mp3'; // Force extension to 'mp3'
+			}
+
+			$this->validate($type, $ext);
+
+		} catch (\Throwable $th) {
+			throw new \Exception("Error uploading", 1);
 		}
-
-		$this->validate($type, $ext);
 
         $originalFilename = $customName ? rand(9999,999999) : pathinfo( $file->getClientOriginalName(), PATHINFO_FILENAME);
         $safeFilename = $this->slug($originalFilename);
