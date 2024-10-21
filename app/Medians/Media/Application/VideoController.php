@@ -508,8 +508,10 @@ class VideoController extends CustomController
 
         if ($newPath)
         {
+            
             $item->main_file->path = str_replace( $_SERVER['DOCUMENT_ROOT'], '',  $newFile);
             $update = $item->main_file->save();
+            unlink($videoPath);
         }
 
         return $item;
