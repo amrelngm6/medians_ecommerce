@@ -37,6 +37,7 @@ class StationsSettingsController extends CustomController
 		return [
 			'basic'=> [	
 				[ 'key'=> "enable_stations", 'title'=> translate('Allow stations feature'), 'help_text'=>translate('You can allow / disallow stations at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "view_stations_limit", 'title'=> translate('Loading stations limit'), 'help_text'=>translate('Show x stations as first load at stations page'), 'fillable'=> true, 'column_type'=>'number' ],
                 
 			],		
 			'streaming'=> [	
