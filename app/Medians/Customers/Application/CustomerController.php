@@ -39,8 +39,9 @@ class CustomerController extends CustomController
 		return [
             [ 'value'=> "customer_id", 'text'=> "#"],
             [ 'value'=> "name", 'text'=> translate('name'), 'sortable'=> true ],
-            [ 'value'=> "picture", 'text'=> translate('Logo'),  ],
             [ 'value'=> "email", 'text'=> translate('Email'),  ],
+            [ 'value'=> "field.phone", 'text'=> translate('Phone'),  ],
+            [ 'value'=> "picture", 'text'=> translate('Picture'),  ],
             [ 'value'=> "subscription.package.name", 'text'=> translate('package'),  ],
             [ 'value'=> "info", 'text'=> translate('edit')  ],
             // [ 'value'=> "delete", 'text'=> translate('delete')  ],
