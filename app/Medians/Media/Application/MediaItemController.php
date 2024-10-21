@@ -667,10 +667,6 @@ class MediaItemController extends CustomController
 
         try {
 
-        echo $picturePath;
-        $params = $request->get('params');
-        print_r($params);
-        return;
             $params['picture'] = $this->mediaRepo->_dir.$file;
             
             $item = $this->repo->find($params['media_id']);
