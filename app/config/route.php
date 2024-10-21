@@ -392,6 +392,9 @@ if(!empty($app->auth()))
     /** @return Email templates */
     RouteHandler::get('/admin/email_templates', \Medians\Templates\Application\EmailTemplateController::class.'@index');
 
+    /** @return Comments */
+    RouteHandler::get('/admin/comments', Medians\Comments\Application\CommentController::class.'@index');
+
     /** @return Templates */
     RouteHandler::get('/admin/templates', Medians\Templates\Application\WebTemplateController::class.'@index');
 
