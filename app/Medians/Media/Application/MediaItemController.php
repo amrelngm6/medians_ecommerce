@@ -667,7 +667,7 @@ class MediaItemController extends CustomController
         } catch (\Exception $e) {
         	throw new \Exception("Error:  " .$e->getMessage(), 1);
         }
-            
+            return ;
             $item = $this->repo->find($params['media_id']);
             $params['name'] = sanitizeInput($params['name'], true);
             
