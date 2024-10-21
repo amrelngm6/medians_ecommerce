@@ -59,6 +59,8 @@ class InvoiceController extends CustomController
 	{
 		$params = sanitizeInput($this->app->request()->query->all());
 
+		print_r($params);
+
 		return render('invoices', [
 			'load_vue'=> true,
 	        'title' => translate('Invoices list'),
