@@ -656,7 +656,9 @@ class MediaItemController extends CustomController
             $request = $this->app->request();
 
             foreach ($request->files as $value) {
-                $file = $this->mediaRepo->upload($value, 'picture', true);
+                if ($value){
+                    $file = $this->mediaRepo->upload($value, 'picture', true);
+                }
             }     
             
 
