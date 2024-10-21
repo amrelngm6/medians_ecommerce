@@ -39,7 +39,7 @@ class VideosSettingsController extends CustomController
 				[ 'key'=> "enable_videos", 'title'=> translate('Allow videos feature'), 'help_text'=>translate('You can allow / disallow with Videos at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "view_videos_limit", 'title'=> translate('Loading videos limit'), 'help_text'=>translate('Show x videos as first load at videos page'), 'fillable'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "video_max_size", 'title'=> translate('Video max size'), 'help_text'=>translate('Max size for uploaded Videos'), 'fillable'=> true, 'column_type'=>'number' ],
-				[ 'key'=> "video_allowed_ext", 'title'=> translate('Allowed Videos Extensions'), 'help_text'=>translate('Allow extnsions of Video files to upload. Separate by (,) without spaces )'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "video_allowed_ext", 'title'=> translate('Allowed Videos Extensions'), 'help_text'=>translate('Allow extnsions of Video files to upload. Separate by (,) without spaces )'), 'fillable'=> true, 'column_type'=>'text' ],
 										
 			],		
 			'audoplay'=> [	
