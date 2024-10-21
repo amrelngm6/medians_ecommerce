@@ -68,7 +68,7 @@ function updateStationSrc(stationId, rand)
 	audio.load();
 	audio.play();
 	audio.volume = getCookie('volume')
-	loadStationJson(stationId)
+	loadStation(stationId)
 }
 
 
@@ -165,10 +165,13 @@ async function handleStationPlayer(stationId, play = true)
 	
 	if (activeStationMedia)
 	{
-		jQuery('#station-album-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name : activeStationMedia.title)
-		jQuery('.station-stream-name').html((activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name  : activeStationMedia.title)
-		jQuery('.station-streaming-picture'+activeStation.station_id).attr((activeStationMedia.media) ? activeStationMedia.media.picture  : activeStation.picture)
-		jQuery('#station-track-name').html(activeStation.name ?? 'UNKNOWN')
+		let mediaTitle = (activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name : activeStationMedia.title;
+		let stationTitle = activeStation.name ?? 'UNKNOWN';
+		let mediaPic = (activeStationMedia.media) ? activeStationMedia.media.picture  : activeStation.picture;
+		jQuery('#station-album-name').html(mediaTitle)
+		jQuery('.station-stream-name').html(mediaTitle)
+		jQuery('.station-streaming-picture'+activeStation.station_id).attr(mediaPic)
+		jQuery('#station-track-name').html(stationTitle )
 		
 	} else {
 		
@@ -179,8 +182,8 @@ async function handleStationPlayer(stationId, play = true)
 			audio.pause()
 		}
 	}
-	jQuery('.station-streaming-picture'+activeStation.station_id).attr( 'src', (activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.picture : activeStation.picture);
-	jQuery('#station-track-poster').attr( 'src', (activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.picture : activeStation.picture);
+	jQuery('.station-streaming-picture'+activeStation.station_id).attr( 'src', mediaPic);
+	jQuery('#station-track-poster').attr( 'src', mediaPic);
 
 }
 
