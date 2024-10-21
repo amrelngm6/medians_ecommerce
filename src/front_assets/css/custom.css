@@ -2125,6 +2125,7 @@ div[data-count="3"] .package {
     display: flex;
     align-items: top;
     justify-content: right;
+    background-size: cover;
 }
 
 
