@@ -22,7 +22,8 @@ jQuery('#player-audio').on('change', function(event) {
  * Set Station audio player volume when active media 
  * is being changed
  */
-jQuery('#station-player-audio').on('change', function(event) {
+jQuery(document).on('change', '#station-player-audio', function(event) {
+	console.log(event)
 	audio.volume = event.target.value;
 	setCookie('volume', event.target.value, 7); // Set a cookie named 'username' with value 'john_doe' that expires in 7 days
 }) ;	
