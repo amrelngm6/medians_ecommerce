@@ -116,6 +116,10 @@ class MediaRepository
 
 	public static function getTypes($type)
 	{
+		$app = new \config\APP;
+
+		$settings = $app->SystemSetting();
+
 		switch ($type) 
 		{
 			case 'files':
@@ -123,15 +127,16 @@ class MediaRepository
 				break;
 
 			case 'audio':
+				return explode(',', $settings['audio_allowed_ext'] ?? 'mp3,wav,ogg')  ; 
 				return ['mp3', 'wav', 'oog']; 
 				break;
 			
 			case 'video':
-				return ['mp4', 'ogg', 'wmv', 'avi', 'mov','webm']; 
+				return explode(',', $settings['video_allowed_ext'] ?? 'mp4,wmv,mkv,ogg,mov,webm,avi'); 
 				break;
 			
 			default:
-				return ['png','webp', 'jpg', 'jpeg', 'bmp', 'svg']; 
+				return explode(',', $settings['audio_allowed_ext'] ?? 'png,jpg,webp,jpeg,bmp,svg')  ; 
 				break;
 		}
 	}
