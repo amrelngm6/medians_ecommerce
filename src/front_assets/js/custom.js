@@ -50,7 +50,6 @@ jQuery(document).on('click', '.start-station', async function (i, el) {
 	updateStationSrc(stationId, rand)
 
 	mainAudio.on('ended', function() {
-		console.log('Ended')
 		rand += 1
 		updateStationSrc(stationId, rand)
 	})
@@ -152,10 +151,7 @@ async function handleStationPlayer(stationId, play = true)
 
 	if (streamingStatus == 'new' && play)
 	{
-		audio.src = '/stream_station?station_id='+ stationId+'&hash='+ rand;
-		audio.load();
-		audio.play();
-		audio.volume = getCookie('volume')
+		updateStationSrc(stationId, rand)
 	}
 	
 	if (activeStationMedia)
