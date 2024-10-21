@@ -13,7 +13,7 @@
                         {% endfor %}
                     </div>
                 </div>
-
+				{% set view_items_limit = app.SystemSetting.view_channels_limit %}
                 {% include 'views/front/' ~ template ~ '/includes/pagination.html.twig' %}
 
                 <div class="h-10"></div>
