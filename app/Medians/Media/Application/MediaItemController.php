@@ -655,14 +655,14 @@ class MediaItemController extends CustomController
             $params = $this->app->params();
 
             $k = 0;
-            foreach ($this->app->request()->files as $key => $value) {
-                if ($value && $k < 1) {
-                    $picture = $this->mediaRepo->upload($value);
-                    $params['picture'] = $this->mediaRepo->_dir.$picture;
+            foreach ($this->app->request()->files as $file) {
+                if ($file && $k < 1) {
+                    $picture = $this->mediaRepo->upload($file);
                 }
                 $k += 1;
             }     
 		    
+            $params['picture'] = $this->mediaRepo->_dir.$picture;
             
         } catch (\Exception $e) {
         	throw new \Exception("Error:  " .$e->getMessage(), 1);
