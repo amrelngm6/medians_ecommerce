@@ -28,11 +28,11 @@
                                         <div class="row g-5 mb-11">
                                             <div class="col-sm-6">
                                                 
-                                                <div class="fw-semibold fs-6 text-gray-600 mb-1" v-text="translate('Issue Date')"></div>
+                                                <div class="fw-semibold ps-3 text-gray-600 mb-1" v-text="translate('Issue Date')"></div>
                                                 
 
                                                 <!--end::Col-->
-                                                <div class="fw-bold fs-6 text-gray-800" v-text="activeItem.date"></div>
+                                                <div class="fw-bold ps-3 text-gray-800" v-text="activeItem.date"></div>
                                                 <!--end::Col-->
                                             </div>
                                             <!--end::Col-->
@@ -40,11 +40,11 @@
                                             <!--end::Col-->
                                             <div class="col-sm-6">
                                                 
-                                                <div class="fw-semibold fs-6 text-gray-600 mb-1" v-text="translate('Due Date')"></div>
+                                                <div class="fw-semibold ps-3 text-gray-600 mb-1" v-text="translate('Due Date')"></div>
                                                 
 
                                                 <!--end::Info-->
-                                                <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center flex-wrap">
+                                                <div class="fw-bold ps-3 text-gray-800 d-flex align-items-center flex-wrap">
                                                     <span class="pe-2" v-text="activeItem.date"></span>
                                                 </div>
                                                 <!--end::Info-->
@@ -58,12 +58,12 @@
                                             <!--end::Col-->
                                             <div class="col-sm-6" v-if="activeItem.user">
                                                 
-                                                <div class="fw-semibold fs-6 text-gray-600 mb-1" v-text="translate('Issue For')"></div>
+                                                <div class="fw-semibold ps-3 text-gray-600 mb-1" v-text="translate('Issue For')"></div>
                                                 
                                                 <!--end::Text-->
                                                 <div class="flex gap-2" >
                                                     <img :src="activeItem.user.picture" class="w-10 h-10" />
-                                                    <div class="fw-bold fs-6 text-gray-800">
+                                                    <div class="fw-bold ps-3 text-gray-800">
                                                         <div class="text-gray-800" v-text="activeItem.user.name"></div>
                                                         <div class="text-gray-800 fs-normal" v-text="activeItem.user.mobile"></div>
                                                     </div>
@@ -71,7 +71,7 @@
                                                 <!--end::Text-->
 
                                                 <!--end::Description-->
-                                                <div class="fw-semibold fs-6 text-gray-600" >
+                                                <div class="fw-semibold ps-3 text-gray-600" >
                                                     <span v-text="activeItem.user.field.address"></span>
                                                     <span v-text="activeItem.user.field.country"></span>
                                                 </div>
@@ -82,19 +82,19 @@
                                             <!--end::Col-->
                                             <div class="col-sm-6">
                                                 
-                                                <div class="fw-semibold fs-6 text-gray-600 mb-1" v-text="translate('Issued By')"></div>
+                                                <div class="fw-semibold ps-3 text-gray-600 mb-1" v-text="translate('Issued By')"></div>
                                                 
 
                                                 <!--end::Text-->
                                                 <div class="flex gap-2" v-if="system_setting ">
                                                     <img :src="system_setting.logo" class="w-10 h-10" />
-                                                    <div class="fw-bold fs-6 text-gray-800">
+                                                    <div class="fw-bold ps-3 text-gray-800">
                                                         <div class="text-gray-800" v-text="system_setting.sitename"></div>
                                                     </div>
                                                 </div>
 
                                                 <!--end::Description-->
-                                                <div class="fw-semibold fs-6 text-gray-600"  v-if="system_setting" v-text="system_setting.address"></div>
+                                                <div class="fw-semibold ps-3 text-gray-600"  v-if="system_setting" v-text="system_setting.address"></div>
                                                 <!--end::Description-->
                                             </div>
                                             <!--end::Col-->
@@ -108,7 +108,7 @@
                                             <div class="table-responsive border-bottom mb-9">
                                                 <table class="table mb-3">
                                                     <thead>
-                                                        <tr class="border-bottom fs-6 fw-bold text-muted">
+                                                        <tr class="border-bottom ps-3 fw-bold text-muted">
                                                             <th class="min-w-175px pb-2" v-text="translate('Description')"></th>
                                                             <th class="min-w-70px text-end pb-2" v-text="translate('Subtotal')"></th>
                                                             <th class="min-w-70px text-end pb-2" v-text="translate('Qty')"></th>
@@ -139,18 +139,18 @@
                                                 <!--begin::Section-->
                                                 <div class="mw-300px">
                                                     <div class="d-flex flex-stack mb-3">
-                                                        <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Subtotal')"></div>
-                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="'$' + activeItem.subtotal "></div>
+                                                        <div class="fw-semibold pe-10 text-gray-600 ps-3" v-text="translate('Subtotal')"></div>
+                                                        <div class="text-end fw-bold ps-3 text-gray-800" v-text="'$' + activeItem.subtotal "></div>
                                                     </div>
                                                         
                                                     <div class="d-flex flex-stack mb-3">
-                                                        <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Discount')"></div>
-                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="'$' + activeItem.discount_amount"></div>
+                                                        <div class="fw-semibold pe-10 text-gray-600 ps-3" v-text="translate('Discount')"></div>
+                                                        <div class="text-end fw-bold ps-3 text-gray-800" v-text="'$' + activeItem.discount_amount"></div>
                                                     </div>
                             
                                                     <div class="d-flex flex-stack mb-3">
-                                                        <div class="fw-semibold pe-10 text-gray-600 fs-6" v-text="translate('Total amount')"></div>
-                                                        <div class="text-end fw-bold fs-6 text-gray-800" v-text="'$' + activeItem.total_amount"></div>
+                                                        <div class="fw-semibold pe-10 text-gray-600 ps-3" v-text="translate('Total amount')"></div>
+                                                        <div class="text-end fw-bold ps-3 text-gray-800" v-text="'$' + activeItem.total_amount"></div>
                                                     </div>
                             
                                                 </div>
@@ -183,30 +183,30 @@
 
                                     <!--begin::Item-->
                                     <div class="mb-6">
-                                        <div class="fw-semibold text-gray-600 fs-6" v-text="translate('payment method')"></div>
+                                        <div class="fw-semibold text-gray-600 ps-3" v-text="translate('payment method')"></div>
 
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.transaction.payment_method"></div>
+                                        <div class="fw-bold text-gray-800 ps-3" v-text="activeItem.transaction.payment_method"></div>
                                     </div>
             
                                     <!--begin::Item-->
                                     <div class="mb-6">
-                                        <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Transaction number')"></div>
+                                        <div class="fw-semibold text-gray-600 ps-3" v-text="translate('Transaction number')"></div>
 
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.transaction.transaction_id"></div>
+                                        <div class="fw-bold text-gray-800 ps-3" v-text="activeItem.transaction.transaction_id"></div>
                                     </div>
             
                                     <!--begin::Item-->
                                     <div class="mb-6">
-                                        <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Total amount')"></div>
+                                        <div class="fw-semibold text-gray-600 ps-3" v-text="translate('Total amount')"></div>
 
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="'$' + activeItem.transaction.amount"></div>
+                                        <div class="fw-bold text-gray-800 ps-3" v-text="'$' + activeItem.transaction.amount"></div>
                                     </div>
                                     
                                     <!--begin::Item-->
                                     <div class="mb-6">
-                                        <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Status')"></div>
+                                        <div class="fw-semibold text-gray-600 ps-3" v-text="translate('Status')"></div>
 
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.transaction.status"></div>
+                                        <div class="fw-bold text-gray-800 ps-3" v-text="activeItem.transaction.status"></div>
                                     </div>
             
                                     
@@ -214,27 +214,27 @@
 
                                     <!--begin::Item-->
                                     <div class="mb-6">
-                                        <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Payer name')"></div>
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.customer.name"></div>
+                                        <div class="fw-semibold text-gray-600 ps-3" v-text="translate('Payer name')"></div>
+                                        <div class="fw-bold text-gray-800 ps-3" v-text="activeItem.customer.name"></div>
                                     </div>
 
                                     <!--begin::Item-->
                                     <div class="mb-6">
-                                        <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Payer email')"></div>
+                                        <div class="fw-semibold text-gray-600 ps-3" v-text="translate('Payer email')"></div>
 
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.customer.email"></div>
+                                        <div class="fw-bold text-gray-800 ps-3" v-text="activeItem.customer.email"></div>
                                     </div>
                                     
                                     <div class="m-0">
-                                        <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Code')"></div>
+                                        <div class="fw-semibold text-gray-600 ps-3" v-text="translate('Code')"></div>
                                         
-                                        <div class="fw-bold text-gray-800 fs-6" v-text="activeItem.code"></div>
+                                        <div class="fw-bold text-gray-800 ps-3" v-text="activeItem.code"></div>
                                     </div>
                                     
                                     <div class="m-0">
-                                        <div class="fw-semibold text-gray-600 fs-6" v-text="translate('Date')"></div>
+                                        <div class="fw-semibold text-gray-600 ps-3" v-text="translate('Date')"></div>
 
-                                        <div class="fw-bold fs-6 text-gray-800 d-flex align-items-center" v-text="activeItem.date"> 
+                                        <div class="fw-bold ps-3 text-gray-800 d-flex align-items-center" v-text="activeItem.date"> 
                                         </div>
                                     </div>
             

@@ -336,15 +336,6 @@ class APP
 			
 			array('permission'=>'Blog.index', 'title'=>translate('Blog'),  'icon'=>'edit-3', 'link'=>'admin/blog', 'component'=>'blog'),
 
-			array('title'=>translate('Marketing'),  'icon'=>'send', 'link'=>'#newsletters', 'sub'=>
-			[
-				array('permission'=>'Newsletters.index', 'title'=>translate('newsletters'),  'icon'=>'truck', 'link'=>'admin/newsletters', 'component'=>'data_table'),
-				array('permission'=>'Subscribers.index', 'title'=>translate('Subscribers'),  'icon'=>'truck', 'link'=>'admin/newsletter_subscribers', 'component'=>'data_table'),
-				array('permission'=>'EmailTemplate.index', 'title'=>translate('Email Templates'),  'icon'=>'tag', 'link'=>'admin/email_templates', 'component'=>'data_table'),
-				array('permission'=>'NotificationEvent.index', 'title'=>translate('notifications_events'),  'icon'=>'bell', 'link'=>'admin/notifications_events', 'component'=>'notifications_events'),
-			]
-			),
-			
 			array( 'title'=>translate('Frontend'),  'icon'=>'airplay', 'link'=>'#frontend', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=>'Pages.index', 'title'=>translate('Front Pages'),  'icon'=>'tool', 'link'=>'admin/pages', 'component'=>'pages'),
@@ -374,6 +365,15 @@ class APP
 			[
 				array('permission'=>'Packages.index', 'title'=>translate('Packages'),  'icon'=>'tool', 'link'=>'admin/packages', 'component'=>'packages'),
 				array('permission'=>'PackageSubscription.index', 'title'=>translate('Package subscriptions'),  'icon'=>'tool', 'link'=>'admin/package_subscriptions', 'component'=>'data_table'),
+			]
+			),
+			
+			array('title'=>translate('Marketing'),  'icon'=>'send', 'link'=>'#newsletters', 'sub'=>
+			[
+				array('permission'=>'Newsletters.index', 'title'=>translate('newsletters'),  'icon'=>'truck', 'link'=>'admin/newsletters', 'component'=>'data_table'),
+				array('permission'=>'Subscribers.index', 'title'=>translate('Subscribers'),  'icon'=>'truck', 'link'=>'admin/newsletter_subscribers', 'component'=>'data_table'),
+				array('permission'=>'EmailTemplate.index', 'title'=>translate('Email Templates'),  'icon'=>'tag', 'link'=>'admin/email_templates', 'component'=>'data_table'),
+				array('permission'=>'NotificationEvent.index', 'title'=>translate('notifications_events'),  'icon'=>'bell', 'link'=>'admin/notifications_events', 'component'=>'notifications_events'),
 			]
 			),
 			
