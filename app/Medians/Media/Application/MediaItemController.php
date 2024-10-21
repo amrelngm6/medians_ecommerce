@@ -665,9 +665,10 @@ class MediaItemController extends CustomController
         	throw new \Exception("Error 1:  " .$e->getMessage(), 1);
         }
         echo $picturePath;
+        $params = $request->get('params');
+        print_r($params);
         return;
         try {
-            $params = $request->get('params');
 
             $params['picture'] = $this->mediaRepo->_dir.$file;
             
