@@ -68,6 +68,7 @@ function updateStationSrc(stationId, rand)
 	audio.load();
 	audio.play();
 	audio.volume = getCookie('volume')
+	loadStationJson(stationId)
 }
 
 
@@ -111,6 +112,8 @@ async function loadStationJson(stationId)
 	const response  = await $.get('/station_json/'+stationId);
 
 	activeStation = JSON.parse(response)
+
+	activeStationMedia = activeStation.active_item ?? null;
 
 	return activeStation;
 }
