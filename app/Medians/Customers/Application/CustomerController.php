@@ -43,7 +43,7 @@ class CustomerController extends CustomController
             [ 'value'=> "field.phone", 'text'=> translate('Phone'),  ],
             [ 'value'=> "picture", 'text'=> translate('Picture'),  ],
             [ 'value'=> "subscription.package.name", 'text'=> translate('package'),  ],
-            [ 'value'=> "info", 'text'=> translate('edit')  ],
+            [ 'value'=> "info", 'text'=> translate('info')  ],
             // [ 'value'=> "delete", 'text'=> translate('delete')  ],
         ];
 	}
