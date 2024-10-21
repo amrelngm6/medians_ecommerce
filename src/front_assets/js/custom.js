@@ -52,6 +52,12 @@ jQuery(document).on('click', '.start-station', async function (i, el) {
 	mainAudio.on('ended', function() {
 		rand += 1
 		updateStationSrc(stationId, rand)
+		setTimeout(function () {
+			if (audio.paused)
+			{
+				loadStation(stationId)
+			}
+		}, 5000)
 	})
 });
 
