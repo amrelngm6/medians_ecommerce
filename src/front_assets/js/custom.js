@@ -163,11 +163,11 @@ async function handleStationPlayer(stationId, play = true)
 		updateStationSrc(stationId, rand)
 	}
 	
+	let mediaTitle = (activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name : activeStationMedia.title;
+	let stationTitle = activeStation.name ?? 'UNKNOWN';
+	let mediaPic = (activeStationMedia.media) ? activeStationMedia.media.picture  : activeStation.picture;
 	if (activeStationMedia)
 	{
-		let mediaTitle = (activeStationMedia && activeStationMedia.media) ? activeStationMedia.media.name : activeStationMedia.title;
-		let stationTitle = activeStation.name ?? 'UNKNOWN';
-		let mediaPic = (activeStationMedia.media) ? activeStationMedia.media.picture  : activeStation.picture;
 		jQuery('#station-album-name').html(mediaTitle)
 		jQuery('.station-stream-name').html(mediaTitle)
 		jQuery('.station-streaming-picture'+activeStation.station_id).attr(mediaPic)
