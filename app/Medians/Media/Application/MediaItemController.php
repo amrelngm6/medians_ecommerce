@@ -661,7 +661,6 @@ class MediaItemController extends CustomController
             }     
 
         } catch (\Exception $a) {
-        	throw new \Exception("Error :  " .$a->getMessage(), 1);
         }
         
         try {
@@ -693,12 +692,11 @@ class MediaItemController extends CustomController
         
             if ($this->repo->update($params))
             {
-
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
             }
   
         } catch (\Exception $e) {
-        	throw new \Exception("Error :  " .$e->getMessage(), 1);
+        	throw new \Exception("Error 1:  " .$e->getMessage(), 1);
         }
 	}
 
