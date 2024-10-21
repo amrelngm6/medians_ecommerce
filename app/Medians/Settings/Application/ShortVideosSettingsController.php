@@ -62,7 +62,7 @@ class ShortVideosSettingsController extends CustomController
 			'load_vue' => true,
 			'setting' => (new SystemSettingsController())->getAll(),
 			'fillable' => $this->fillable(),
-			'title' => translate('Video Settings'),
+			'title' => translate('Short Videos Settings'),
 	    ]);
 	} 
 
