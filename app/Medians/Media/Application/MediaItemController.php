@@ -549,8 +549,9 @@ class MediaItemController extends CustomController
 
             } else {
                     
+                $k = 0;
                 foreach ($this->app->request()->files as $key => $value) {
-                    if ($value) {
+                    if ($value && $k < 1) {
 
                         $file = $this->mediaRepo->upload($value, 'audio', true);
                         
@@ -559,6 +560,7 @@ class MediaItemController extends CustomController
                         
                         $save = $this->store($params, $this->mediaRepo->_dir.$file, $settings);
                     }
+                    $k += 1;
                 }
             }
             
