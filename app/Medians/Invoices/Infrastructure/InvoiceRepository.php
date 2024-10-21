@@ -72,12 +72,16 @@ class InvoiceRepository
 	*/
 	public function getByDate($params )
 	{
-	  	$check = Invoice::with('customer', 'item', 'transaction')
-		;
+	  	$check = Invoice::with('customer', 'item', 'transaction');
 
 	  	if (!empty($params["start_date"]))
 	  	{
 	  		$check = $check->whereBetween('date' , [$params['start_date'] , $params['end_date']]);
+	  	}
+
+	  	if (!empty($params["status"]))
+	  	{
+	  		$check = $check->where('status' , [$params['status'] ]);
 	  	}
 
   		return $check->orderBy('created_at', 'DESC')->get();
