@@ -658,6 +658,7 @@ class MediaItemController extends CustomController
             $k = 0;
             foreach ($this->app->request()->files as $key => $value) {
                 if ($value && $k < 1) {
+                    print_r($value);
                     $picture = $this->mediaRepo->upload($value);
                     $params['picture'] = $this->mediaRepo->_dir.$picture;
                 }
