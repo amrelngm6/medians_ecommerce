@@ -582,9 +582,10 @@ class VideoController extends CustomController
                 }
 
             } else {
-                    
+                
+                $k = 0;
                 foreach ($this->app->request()->files as $key => $value) {
-                    if ($value && !$key) {
+                    if ($value && $k < 1) {
 
                         $file = $this->mediaRepo->upload($value, 'video', true);
                         
@@ -593,10 +594,11 @@ class VideoController extends CustomController
                         
                         $save = $this->store($params, $this->mediaRepo->_dir.$file, $settings);
                     }
+                    $k += 1;
                 }
             }
             
-            return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"/video/edit/$save->media_id");
+            // return array('success'=>1, 'result'=>translate('Uploaded'), 'redirect'=>"/video/edit/$save->media_id");
 
         } catch (\Throwable $th) {
         	throw new \Exception("Error Processing Request ".$th->getMessage(), 1);
