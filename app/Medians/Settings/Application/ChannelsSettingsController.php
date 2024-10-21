@@ -37,6 +37,7 @@ class ChannelsSettingsController extends CustomController
 		return [
 			'basic'=> [	
 				[ 'key'=> "enable_channels", 'title'=> translate('Allow channels feature'), 'help_text'=>translate('You can allow / disallow channels at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "view_channels_limit", 'title'=> translate('Loading channels limit'), 'help_text'=>translate('Show x channels as first load at channels page'), 'fillable'=> true, 'column_type'=>'number' ],
                 
 			],		
 			'streaming'=> [	

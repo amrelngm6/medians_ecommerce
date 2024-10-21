@@ -356,7 +356,7 @@ class ChannelController extends CustomController
         
         // $this->checkSession($customer);
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_channels_limit'] ?? null;
         $params['customer_id'] = $customer->customer_id ?? 0;
         $list = $this->repo->getWithFilter($params);
 
@@ -410,7 +410,7 @@ class ChannelController extends CustomController
 		$settings = $this->app->SystemSetting();
         $params = $this->app->params();
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_channels_limit'] ?? null;
         $list = $this->repo->getWithFilter($params);
 
 		try {
@@ -442,7 +442,7 @@ class ChannelController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_channels_limit'] ?? null;
         $list = $this->repo->getWithFilter($params);
 
 		try 
