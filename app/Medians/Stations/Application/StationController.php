@@ -353,7 +353,7 @@ class StationController extends CustomController
         
         // $this->checkSession($customer);
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_stations_limit'] ?? null;
         $params['customer_id'] = $customer->customer_id ?? 0;
         $list = $this->repo->getWithFilter($params);
 
@@ -403,7 +403,7 @@ class StationController extends CustomController
 		$settings = $this->app->SystemSetting();
         $params = $this->app->params();
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_stations_limit'] ?? null;
         $list = $this->repo->getWithFilter($params);
 
 		try {
@@ -435,7 +435,7 @@ class StationController extends CustomController
 
         $params = $this->app->params();
 
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_stations_limit'] ?? null;
         $list = $this->repo->getWithFilter($params);
 
 		try 
