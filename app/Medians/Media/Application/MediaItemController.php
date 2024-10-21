@@ -663,11 +663,7 @@ class MediaItemController extends CustomController
             }     
 		    
             $params['picture'] = $this->mediaRepo->_dir.$picture;
-            
-        } catch (\Exception $e) {
-        	throw new \Exception("Error:  " .$e->getMessage(), 1);
-        }
-            return ;
+          
             $item = $this->repo->find($params['media_id']);
             $params['name'] = sanitizeInput($params['name'], true);
             
@@ -686,7 +682,10 @@ class MediaItemController extends CustomController
             {
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
             }
-
+  
+        } catch (\Exception $e) {
+        	throw new \Exception("Error:  " .$e->getMessage(), 1);
+        }
 	}
 
 
