@@ -665,6 +665,9 @@ class MediaItemController extends CustomController
             }     
 		    
             
+        } catch (\Exception $e) {
+        	throw new \Exception("Error:  " .$e->getMessage(), 1);
+        }
             
             $item = $this->repo->find($params['media_id']);
             $params['name'] = sanitizeInput($params['name'], true);
@@ -685,9 +688,6 @@ class MediaItemController extends CustomController
                 return array('success'=>1, 'result'=>translate('Updated'), 'reload'=>1);
             }
 
-        } catch (\Exception $e) {
-        	throw new \Exception("Error:  " .$e->getMessage(), 1);
-        }
 	}
 
 
