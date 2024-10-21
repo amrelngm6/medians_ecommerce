@@ -36,7 +36,7 @@ class CommentController extends CustomController
             [ 'value'=> "comment_id", 'text'=> "#"],
             [ 'value'=> "customer.name", 'text'=> translate('name'), 'sortable'=> true ],
             [ 'value'=> "item.name", 'text'=> translate('Item'),  ],
-            [ 'value'=> "comment", 'text'=> translate('Rating'),  ],
+            [ 'value'=> "comment", 'text'=> translate('comment'),  ],
             [ 'value'=> "edit", 'text'=> translate('edit')  ],
             [ 'value'=> "delete", 'text'=> translate('delete')  ],
         ];

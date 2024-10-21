@@ -25,7 +25,7 @@ class CommentRepository
 
 	public function get($limit = 1000)
 	{
-		return Comment::with('item')->limit($limit)->get();
+		return Comment::with('item', 'customer')->limit($limit)->get();
 	}
 
 	public function getByItem($itemId, $itemType, $limit = 100)
