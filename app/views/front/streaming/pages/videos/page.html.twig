@@ -87,7 +87,7 @@
 
 		<span class="block pt-10 text-sm text-gray-500">{{lang.translate('About')}}</span>
 		<div class="text-primary overflow-auto" style="max-height: 400px;">
-			<div class="dark:text-gray-300 py-4">{{item.field.about|raw| nl2br  }}</div>
+			<div class="dark:text-gray-300 py-4">{{item.description|raw| nl2br  }}</div>
 		</div>
 
 		{% set relatedVideo = item.related(10, 'video') %}
