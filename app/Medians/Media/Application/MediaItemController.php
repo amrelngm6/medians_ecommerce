@@ -649,21 +649,19 @@ class MediaItemController extends CustomController
 
 	public function update()
 	{
-		$this->app = new \config\APP;
-
+        $this->app = new \config\APP;
 		
         try {
 
-            $files = $this->app->request()->files;
-
             $k = 0;
-            foreach ($files as $key => $value) {
+            foreach ($this->app->request()->files as $key => $value) {
                 if ($value && $k < 1) {
                     $picture = $this->mediaRepo->upload($value);
                     $params['picture'] = $this->mediaRepo->_dir.$picture;
                 }
                 $k += 1;
-            }   
+            }     
+		    
             
             $params = $this->app->params();
             
