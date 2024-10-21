@@ -29,7 +29,7 @@
                                     </div>
                                     <!--end::Status-->
 
-                                    <div class="d-flex flex-wrap font-semibold fs-3 mb-4 pe-2">
+                                    <div class="d-flex flex-wrap font-semibold fs-4 mb-4 pe-2">
                                         <a href="#"
                                             class="d-flex align-items-center text-gray-500 text-hover-primary me-5 mb-2">
                                             <vue-feather class="w-5 mx-1" type="smartphone"></vue-feather>
@@ -67,7 +67,7 @@
                                         <!--end::Number-->
 
                                         <!--begin::Label-->
-                                        <div class="font-semibold fs-3 text-gray-500"
+                                        <div class="font-semibold fs-4 text-gray-500"
                                             v-text="translate('Subscription Due Date')">
                                         </div>
                                         <!--end::Label-->
@@ -86,7 +86,7 @@
                                         <!--end::Number-->
 
                                         <!--begin::Label-->
-                                        <div class="font-semibold fs-3 text-gray-500" v-text="translate('Package')"></div>
+                                        <div class="font-semibold fs-4 text-gray-500" v-text="translate('Package')"></div>
                                         <!--end::Label-->
                                     </div>
                                     <!--end::Stat-->
@@ -103,7 +103,7 @@
                                         <!--end::Number-->
 
                                         <!--begin::Label-->
-                                        <div class="font-semibold fs-3 text-gray-500" v-text="translate('Media Views')">
+                                        <div class="font-semibold fs-4 text-gray-500" v-text="translate('Media Views')">
                                         </div>
                                         <!--end::Label-->
                                     </div>
@@ -149,7 +149,7 @@
                         <div class="card-body pt-0">
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('Profile')"></label>
+                                <label class="col-lg-4 fs-4  font-semibold text-muted" v-text="translate('Profile')"></label>
                                 <div class="col-lg-8"><a target="_blank" :href="'/artist/' + activeItem.customer_id"
                                         class="font-semibold fs-3 text-gray-800"
                                         v-text="conf.url + '/artist/' + activeItem.customer_id"></a></div>
@@ -158,7 +158,7 @@
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 font-semibold text-muted"
+                                <label class="col-lg-4 fs-4  font-semibold text-muted"
                                     v-text="translate('Customer Name')"></label>
                                 <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.name"></span></div>
@@ -167,7 +167,7 @@
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('Email')"></label>
+                                <label class="col-lg-4 fs-4  font-semibold text-muted" v-text="translate('Email')"></label>
                                 <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.email"></span></div>
                             </div>
@@ -175,7 +175,7 @@
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('Phone')"></label>
+                                <label class="col-lg-4 fs-4  font-semibold text-muted" v-text="translate('Phone')"></label>
                                 <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.field.phone ?? ''"></span></div>
                             </div>
@@ -183,7 +183,7 @@
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('City')"></label>
+                                <label class="col-lg-4 fs-4  font-semibold text-muted" v-text="translate('City')"></label>
                                 <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.field.city ?? ''"></span></div>
                             </div>
@@ -191,7 +191,7 @@
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('Country')"></label>
+                                <label class="col-lg-4 fs-4  font-semibold text-muted" v-text="translate('Country')"></label>
                                 <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.field.country ?? ''"></span></div>
                             </div>
@@ -199,7 +199,7 @@
 
                             <!--begin::Row-->
                             <div class="row mb-7">
-                                <label class="col-lg-4 font-semibold text-muted" v-text="translate('website')"></label>
+                                <label class="col-lg-4 fs-4  font-semibold text-muted" v-text="translate('website')"></label>
                                 <div class="col-lg-8"><span class="font-semibold fs-3 text-gray-800"
                                         v-text="activeItem.field.website ?? ''"></span></div>
                             </div>
