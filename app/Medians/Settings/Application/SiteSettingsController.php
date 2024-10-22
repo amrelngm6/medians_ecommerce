@@ -101,7 +101,8 @@ class SiteSettingsController extends CustomController
 			
 			'layout_options'=> [	
 
-				[ 'key'=> "view_items_limit", 'title'=> translate('Loading items limit'), 'help_text'=>translate('Show x items as first load at frontend pages'), 'fillable'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "view_artists_limit", 'title'=> translate('Loading artists limit'), 'help_text'=>translate('Show x items as first load at Artists page'), 'fillable'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "view_articles_limit", 'title'=> translate('Loading articles limit'), 'help_text'=>translate('Show x articles as first load at Blog page'), 'fillable'=> true, 'column_type'=>'number' ],
 			],
 					
         ];

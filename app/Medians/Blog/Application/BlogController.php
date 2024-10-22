@@ -223,10 +223,9 @@ class BlogController extends CustomController
 
 			$settings = $this->app->SystemSetting();
 			
-	        $params['limit'] = $settings['view_items_limit'] ?? 10;
+	        $params['limit'] = $settings['view_articles_limit'] ?? 10;
 			$list = $this->repo->getWithFilter($params);
 
-		    // return  render('login', [
 			return render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'item'=> ['name'=> translate('Top Articles'),  'description'=> translate('List of our latest articles')], 
 		        'list' => $list,
@@ -240,38 +239,5 @@ class BlogController extends CustomController
 		}
 	} 
 
-
-	/**
-	 * Category items-list page 
-	 * @var Int
-	 */
-	public function category($category)
-	{
-		$request =  $this->app->request();
-		$currentPage = $request->get('page') ? $request->get('page') : 1;
-		$offset = $currentPage > 1 ? $currentPage * 10 : 0;
-		$category_items = $this->repo->paginateByCategory($category->item_id, 10, $offset);
-		$pages = (Int) ($this->repo->countByCategory($category->item_id) / 10);
-		try {
-			$settings = $this->app->SystemSetting();
-
-		    // return  render('login', [
-			return render('views/front/'.($settings['template'] ?? 'default').'/category.html.twig', [
-		        'first_item' => $this->repo->getFeatured(1),
-		        'search_items' => $request->get('search') ?  $this->repo->search($request, 10) : [],
-		        'search_text' => $request->get('search'),
-		        'item' => $category,
-		        'items' => $category_items,
-				'offset' => $offset,
-				'pages' => array_fill(0,$pages,[]),
-				'current_page' => $currentPage,
-
-		    ]);
-
-		} catch (\Exception $e) {
-			throw new \Exception($e->getMessage(), 1);
-			
-		}
-	} 
 
 }
