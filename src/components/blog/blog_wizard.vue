@@ -81,9 +81,8 @@
                                                     </div>
                                                     <div>
                                                         <label class="form-label gap-6 flex"><span v-text="translate('Content')"></span><strong class="px-4" v-text="translate(language.language_code)"></strong> </label>
-                                                        <ckeditor
-                                                            v-model="activeItem.content_langs[language.language_code].content"
-                                                            :editor="editor" :config="editorConfig" />
+                                                        
+                                                        <form_field :column="{column_type: 'editor', key: 'content'}" :item="activeItem.content_langs[language.language_code]" :conf="conf"></form_field>
                                                         
                                                         <div class="text-muted fs-7"
                                                             v-text="translate('Set a description to the item for better visibility')">
