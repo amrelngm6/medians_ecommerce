@@ -389,7 +389,7 @@ class APP
 			array( 'title'=>translate('Settings'),  'icon'=>'tool', 'link'=>'#setting', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=> 'SystemSettings.index', 'title'=> translate('System Settings'),  'icon'=>'tool', 'link'=>'admin/system_settings', 'component'=>'system_settings'),
-				array('permission'=> 'StorageSettings.index', 'title'=> translate('Storage settings'),  'icon'=>'tool', 'link'=>'admin/storage_settings', 'component'=>'system_settings'),
+				array('permission'=> 'StreamingSettings.index', 'title'=> translate('Streaming settings'),  'icon'=>'tool', 'link'=>'admin/streaming_settings', 'component'=>'system_settings'),
 				array('permission'=> 'VideosSettings.index', 'title'=> translate('Videos settings'),  'icon'=>'tool', 'link'=>'admin/videos_settings', 'component'=>'system_settings'),
 				array('permission'=> 'ShortVideosSettings.index', 'title'=> translate('Short Videos settings'),  'icon'=>'tool', 'link'=>'admin/short_videos_settings', 'component'=>'system_settings'),
 				array('permission'=> 'AudioSettings.index', 'title'=> translate('Audio settings'),  'icon'=>'tool', 'link'=>'admin/audio_settings', 'component'=>'system_settings'),
