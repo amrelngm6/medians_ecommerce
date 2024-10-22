@@ -96,9 +96,6 @@ class NotificationEvent extends CustomModel
 	 */ 
 	public function handleEventUpdate($model, $action, $updatedFields = null)
 	{
-		print_r($model);
-		print_r($updatedFields);
-		print_r($action);
 
 		$events = json_decode(NotificationEvent::whereIn('action_field', $updatedFields)
 		->where('action',$action)
@@ -106,7 +103,6 @@ class NotificationEvent extends CustomModel
 		->orWhere('action',$action)
 		->where('model',get_class($model))
 		->get());
-		print_r($events);
 
     	foreach ($events as $event) 
     	{
@@ -159,7 +155,6 @@ class NotificationEvent extends CustomModel
 	{
 		try {
 			
-			print_r($model);
 			$receivers = $this->filterReceivers($event, $model);
 
 
