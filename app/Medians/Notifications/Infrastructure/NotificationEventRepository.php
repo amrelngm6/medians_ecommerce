@@ -106,6 +106,9 @@ class NotificationEventRepository
 			'Customer' => \Medians\Customers\Domain\Customer::class,
 			'User' => \Medians\Users\Domain\User::class,
 			'Comment' => \Medians\Comments\Domain\Comment::class,
+			'Package' => \Medians\Packages\Domain\PackageSubscription::class,
+			'Invoice' => \Medians\Invoices\Domain\Invoice::class,
+			'Transaction' => \Medians\Transactions\Domain\Transaction::class,
 			'Media' => \Medians\Media\Domain\MediaItem::class,
 		];
 	}   
