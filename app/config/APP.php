@@ -314,7 +314,7 @@ class APP
 				array('permission'=>'Audio.index', 'title'=>translate('Music'),  'icon'=>'truck', 'link'=>'admin/audio', 'component'=>'media'),
 				array('permission'=>'Audiobooks.index', 'title'=>translate('Audiobooks'),  'icon'=>'tag', 'link'=>'admin/audiobooks', 'component'=>'media'),
 				array('permission'=>'Videos.index', 'title'=>translate('Videos'),  'icon'=>'truck', 'link'=>'admin/videos', 'component'=>'media'),
-				array('permission'=>'Sorts.index', 'title'=>translate('Short Videos'),  'icon'=>'tag', 'link'=>'admin/shorts', 'component'=>'media'),
+				array('permission'=>'ShortVideos.index', 'title'=>translate('Short Videos'),  'icon'=>'tag', 'link'=>'admin/shorts', 'component'=>'media'),
 			]
 			),
 			
@@ -328,9 +328,9 @@ class APP
 						
 			array('title'=>translate('Categories'),  'icon'=>'list', 'link'=>'#genres', 'sub'=>
 			[
-				array('permission'=>'MediaGenres.index', 'title'=>translate('Genres'),  'icon'=>'truck', 'link'=>'admin/genres', 'component'=>'categories'),
-				array('permission'=>'BookGenres.index', 'title'=>translate('Book Genres'),  'icon'=>'truck', 'link'=>'admin/book_genres', 'component'=>'categories'),
-				array('permission'=>'VideoGenres.index', 'title'=>translate('Video Genres'),  'icon'=>'truck', 'link'=>'admin/video_genres', 'component'=>'categories'),
+				array('permission'=>'Genres.index', 'title'=>translate('Genres'),  'icon'=>'truck', 'link'=>'admin/genres', 'component'=>'categories'),
+				array('permission'=>'Genres.index', 'title'=>translate('Book Genres'),  'icon'=>'truck', 'link'=>'admin/book_genres', 'component'=>'categories'),
+				array('permission'=>'Genres.index', 'title'=>translate('Video Genres'),  'icon'=>'truck', 'link'=>'admin/video_genres', 'component'=>'categories'),
 			]
 			),
 			
@@ -387,17 +387,17 @@ class APP
 			
 			array( 'title'=>translate('Settings'),  'icon'=>'tool', 'link'=>'#setting', 'superadmin'=> true, 'sub'=>
 			[
-				array('permission'=> 'SiteSettings.index', 'title'=>translate('Frontend settings'),  'icon'=>'tool', 'link'=>'admin/site_settings', 'component'=>'system_settings'),
-				array('permission'=> 'PaymentSettings.index', 'title'=>translate('Payment settings'),  'icon'=>'tool', 'link'=>'admin/payment_settings', 'component'=>'system_settings'),
-				array('permission'=> 'SystemSettings.index', 'title'=> translate('System Settings'),  'icon'=>'tool', 'link'=>'admin/system_settings', 'component'=>'system_settings'),
-				array('permission'=> 'StreamingSettings.index', 'title'=> translate('Streaming settings'),  'icon'=>'tool', 'link'=>'admin/streaming_settings', 'component'=>'system_settings'),
-				array('permission'=> 'VideosSettings.index', 'title'=> translate('Videos settings'),  'icon'=>'tool', 'link'=>'admin/videos_settings', 'component'=>'system_settings'),
-				array('permission'=> 'ShortVideosSettings.index', 'title'=> translate('Short Videos settings'),  'icon'=>'tool', 'link'=>'admin/short_videos_settings', 'component'=>'system_settings'),
-				array('permission'=> 'AudioSettings.index', 'title'=> translate('Audio settings'),  'icon'=>'tool', 'link'=>'admin/audio_settings', 'component'=>'system_settings'),
-				array('permission'=> 'AudiobooksSettings.index', 'title'=> translate('Audiobooks settings'),  'icon'=>'tool', 'link'=>'admin/audiobooks_settings', 'component'=>'system_settings'),
-				array('permission'=> 'ChannelsSettings.index', 'title'=> translate('Channels settings'),  'icon'=>'tool', 'link'=>'admin/channels_settings', 'component'=>'system_settings'),
-				array('permission'=> 'StationsSettings.index', 'title'=> translate('Stations settings'),  'icon'=>'tool', 'link'=>'admin/stations_settings', 'component'=>'system_settings'),
-				array('permission'=> 'PlaylistsSettings.index', 'title'=> translate('Playlists settings'),  'icon'=>'tool', 'link'=>'admin/playlists_settings', 'component'=>'system_settings'),
+				array('permission'=> 'Settings.index', 'title'=>translate('Frontend settings'),  'icon'=>'tool', 'link'=>'admin/site_settings', 'component'=>'system_settings'),
+				array('permission'=> 'Settings.index', 'title'=>translate('Payment settings'),  'icon'=>'tool', 'link'=>'admin/payment_settings', 'component'=>'system_settings'),
+				array('permission'=> 'Settings.index', 'title'=> translate('System Settings'),  'icon'=>'tool', 'link'=>'admin/system_settings', 'component'=>'system_settings'),
+				array('permission'=> 'Settings.index', 'title'=> translate('Streaming settings'),  'icon'=>'tool', 'link'=>'admin/streaming_settings', 'component'=>'system_settings'),
+				array('permission'=> 'Settings.index', 'title'=> translate('Videos settings'),  'icon'=>'tool', 'link'=>'admin/videos_settings', 'component'=>'system_settings'),
+				array('permission'=> 'Settings.index', 'title'=> translate('Short Videos settings'),  'icon'=>'tool', 'link'=>'admin/short_videos_settings', 'component'=>'system_settings'),
+				array('permission'=> 'Settings.index', 'title'=> translate('Audio settings'),  'icon'=>'tool', 'link'=>'admin/audio_settings', 'component'=>'system_settings'),
+				array('permission'=> 'Settings.index', 'title'=> translate('Audiobooks settings'),  'icon'=>'tool', 'link'=>'admin/audiobooks_settings', 'component'=>'system_settings'),
+				array('permission'=> 'Settings.index', 'title'=> translate('Channels settings'),  'icon'=>'tool', 'link'=>'admin/channels_settings', 'component'=>'system_settings'),
+				array('permission'=> 'Settings.index', 'title'=> translate('Stations settings'),  'icon'=>'tool', 'link'=>'admin/stations_settings', 'component'=>'system_settings'),
+				array('permission'=> 'Settings.index', 'title'=> translate('Playlists settings'),  'icon'=>'tool', 'link'=>'admin/playlists_settings', 'component'=>'system_settings'),
 			]
 			),
 
