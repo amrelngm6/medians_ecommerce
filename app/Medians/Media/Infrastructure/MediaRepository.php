@@ -186,10 +186,14 @@ class MediaRepository
 
     	$filepath = $_SERVER['DOCUMENT_ROOT'].$file;
 
+		$delete = MediaUpload::where('path', $file)->delete();
+
     	if (is_file($filepath))
     	{
-    		return (MediaUpload::where('path', $file)->delete() && unlink($filepath));
+    		return ($delete && unlink($filepath));
     	}
+
+		return $delete;
     }
 
     public function resize($file, $w=null, $h='-1')
