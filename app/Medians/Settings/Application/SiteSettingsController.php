@@ -55,10 +55,29 @@ class SiteSettingsController extends CustomController
 					'data' => $this->templateRepo->get()  
 				],	
 			],			
-			'pictures'=> [	
+			'Logo'=> [	
 				[ 'key'=> "logo", 'title'=> translate('logo'), 'fillable'=>true, 'column_type'=>'file' ],
 	            [ 'key'=> "dark_logo", 'title'=> translate('Dark logo'), 'fillable'=>true, 'column_type'=>'file' ],
-			],			
+			],		
+			
+			'layout_options'=> [	
+
+				[ 'key'=> "view_artists_limit", 'title'=> translate('Loading artists limit'), 'help_text'=>translate('Show x items as first load at Artists page'), 'fillable'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "view_articles_limit", 'title'=> translate('Loading articles limit'), 'help_text'=>translate('Show x articles as first load at Blog page'), 'fillable'=> true, 'column_type'=>'number' ],
+			],	
+			
+			'site_info'=> [	
+				[ 'key'=> "footer_email", 'title'=> translate('Email'), 'help_text'=>translate('This email used for view at your frontend footer'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "footer_address", 'title'=> translate('Footer address'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "footer_phone", 'title'=> translate('Footer phone'), 'fillable'=> true, 'column_type'=>'phone' ],
+			],
+			
+			'social_media'=> [	
+				[ 'key'=> "facebook_link", 'title'=> translate('Facebook link'), 'help_text'=>translate('This links used for view at your frontend footer'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "twitter_link", 'title'=> translate('Twitter link'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "youtube_link", 'title'=> translate('YouTube link'), 'fillable'=> true, 'column_type'=>'text' ],
+				[ 'key'=> "instagram_link", 'title'=> translate('Instagram link'), 'fillable'=> true, 'column_type'=>'text' ],
+			],
 			'cookies'=> [	
 				[ 'key'=> "show_cookie_box", 'title'=> translate('Show Cookies Box'), 'help_text'=>translate('Show cookies box at the bottom of the page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "cookie_text", 'title'=> translate('Cookies text'), 'help_text'=> translate('Text of the cookies box'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
@@ -85,24 +104,6 @@ class SiteSettingsController extends CustomController
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title' ,'column_key'=>'title', 
 					'data' => $this->loadFonts()  
 				],
-			],
-			'site_info'=> [	
-				[ 'key'=> "footer_email", 'title'=> translate('Email'), 'help_text'=>translate('This email used for view at your frontend footer'), 'fillable'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "footer_address", 'title'=> translate('Footer address'), 'fillable'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "footer_phone", 'title'=> translate('Footer phone'), 'fillable'=> true, 'column_type'=>'phone' ],
-			],
-			
-			'social_media'=> [	
-				[ 'key'=> "facebook_link", 'title'=> translate('Facebook link'), 'help_text'=>translate('This links used for view at your frontend footer'), 'fillable'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "twitter_link", 'title'=> translate('Twitter link'), 'fillable'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "youtube_link", 'title'=> translate('YouTube link'), 'fillable'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "instagram_link", 'title'=> translate('Instagram link'), 'fillable'=> true, 'column_type'=>'text' ],
-			],
-			
-			'layout_options'=> [	
-
-				[ 'key'=> "view_artists_limit", 'title'=> translate('Loading artists limit'), 'help_text'=>translate('Show x items as first load at Artists page'), 'fillable'=> true, 'column_type'=>'number' ],
-				[ 'key'=> "view_articles_limit", 'title'=> translate('Loading articles limit'), 'help_text'=>translate('Show x articles as first load at Blog page'), 'fillable'=> true, 'column_type'=>'number' ],
 			],
 					
         ];
