@@ -8,7 +8,7 @@
 		<h2 class="text-xl lg:hidden flex gap-4 cursor-pointer py-2" onclick="(function(){ return  jQuery('#main-side').toggleClass('hidden'); })()">
 			<img src="/src/front_assets/svg/menu.svg" class="w-8"/>
 		</h2>
-		<a href="/" class="lg:hidden ajax-load"><img src="{{app.SystemSetting.logo}}" class="lg:w-24 w-20 py-2 mt-1"/></a>
+		<a href="/" class="lg:hidden ajax-load"><img src="{{app.is_dark ? app.SystemSetting.dark_logo : app.SystemSetting.logo }}" class="lg:w-24 w-20 py-2 mt-1"/></a>
 	</div>
 	<a href="/search/audio" class="ajax-load py-6 min-w-8">
 		<img src="/src/front_assets/svg/search.svg" class="w-6 h-6 lg:w-5 lg:h-5"/>
