@@ -26,7 +26,7 @@
 			<div class="relative z-10 w-full   h-full">
 
 				<figure id="videoContainer" class="w-full  shadow-xl relative top-0 left-0 ">
-                    <video id="my-video" class="w-full lg:h-screen" data-container="videoContainer"  poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous" >
+                    <video id="my-video" class="w-full lg:h-screen" data-container="videoContainer" autoplay="true" poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous" >
                         <source src="/stream_video?video={{item.main_file.filename}}" type="video/mp4"/>
                     </video>
 
