@@ -58,6 +58,7 @@ class SiteSettingsController extends CustomController
 			'Logo'=> [	
 				[ 'key'=> "logo", 'title'=> translate('logo'), 'fillable'=>true, 'column_type'=>'file' ],
 	            [ 'key'=> "dark_logo", 'title'=> translate('Dark logo'), 'fillable'=>true, 'column_type'=>'file' ],
+	            [ 'key'=> "backend_logo", 'title'=> translate('Dashboard Logo'), 'fillable'=>true, 'column_type'=>'file' ],
 			],		
 			
 			'layout_options'=> [	

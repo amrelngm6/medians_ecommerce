@@ -47,7 +47,6 @@ class SystemSettingsController extends CustomController
 		return [
             
 			'basic'=> [	
-	            [ 'key'=> "backend_logo", 'title'=> translate('Dashboard Logo'), 'fillable'=>true, 'column_type'=>'file' ],
 				
 				[ 'key'=> "default_dashboard_start_date", 'title'=> translate('Default dashboard date'), 'help_text'=> translate('The default start date for loading dashboard stats and charts'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 
