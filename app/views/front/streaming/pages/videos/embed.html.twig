@@ -26,7 +26,7 @@
 			<div class="relative z-10 w-full   h-full">
 
 				<figure id="videoContainer" class="w-full  shadow-xl relative top-0 left-0 ">
-                    <video id="my-video" class="w-full lg:h-screen" data-container="videoContainer" autoplay="true" poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous" >
+                    <video id="my-video" class="w-full lg:h-screen" data-container="videoContainer" poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous" >
                         <source src="/stream_video?video={{item.main_file.filename}}" type="video/mp4"/>
                     </video>
 
@@ -60,5 +60,17 @@
         <script src="/src/front_assets/js/slide.js"></script>
         <script src="/src/front_assets/js/custom.js"></script>
         <style> #wave-{{item.media_id}} {max-height:10rem} </style>
+        <script>
+        
+$(function(){
+	
+	let video = document.getElementById('my-video')
+	
+	addEventListener('load', e => {
+		
+		playVideo(video, true)
+	})
+})
+</script>
 	</body>
 </html>
