@@ -103,49 +103,44 @@ class FacebookService
             // Validate that the token belongs to the correct app
             $tokenMetadata->validateAppId($this->cliendId);  // This should match your actual App ID
             $tokenMetadata->validateExpiration(); // Validate that the token has not expired
-                
-
-
 
             if (!$accessToken->isLongLived()) {
                 // Exchange short-lived token for long-lived token if necessary
                 try {
-                  $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
+                    $accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
                 } catch (\Facebook\Exceptions\FacebookSDKException $e) {
-                  echo 'Error getting long-lived access token: ' . $e->getMessage();
-                  exit;
+                    echo 'Error getting long-lived access token: ' . $e->getMessage();
+                    exit;
                 }
-              }
+            }
               
-              // Set the access token in the session
-              $_SESSION['fb_access_token'] = (string) $accessToken;
-              
-              // Now you can make API requests for user data
-              try {
+            // Set the access token in the session
+            $_SESSION['fb_access_token'] = (string) $accessToken;
+
+            // Now you can make API requests for user data
+            try {
                 $response = $fb->get('/me?fields=id,name,email,picture.type(large)', $accessToken);
                 $user_info = $response->getGraphUser();
-              } catch(\Facebook\Exceptions\FacebookResponseException $e) {
+            } catch(\Facebook\Exceptions\FacebookResponseException $e) {
                 echo 'Graph returned an error 2: ' . $e->getMessage();
                 exit;
-              } catch(\Facebook\Exceptions\FacebookSDKException $e) {
+            } catch(\Facebook\Exceptions\FacebookSDKException $e) {
                 echo 'Facebook SDK returned an error 2: ' . $e->getMessage();
                 exit;
-              }
+            }
               
               
-              $localPic = isset($user['picture']['url']) ?  $this->saveImageFromUrl($user['picture']['url'], '/uploads/images/'.md5($user_info['picture']['url']).'.jpg') : '';
+            $localPic = isset($user['picture']['url']) ?  $this->saveImageFromUrl($user['picture']['url'], '/uploads/images/'.md5($user_info['picture']['url']).'.jpg') : '';
               
-              // Prepare user data to store
-              $params['email'] = $user_info['email'];
-              $params['name'] = $user_info['name'];
-              $params['picture'] = $localPic;
-              $params['status'] = 'on';
-              
-              $user = $this->repo->findByEmail($params['email']);
-              
-            if (isset($user->customer_id)) {
-                $user->update(['picture' => $localPic]);
-            }   else  {
+            // Prepare user data to store
+            $params['email'] = $user_info['email'];
+            $params['name'] = $user_info['name'];
+            $params['picture'] = $localPic;
+            $params['status'] = 'on';
+
+            $user = $this->repo->findByEmail($params['email']);
+
+            if (empty($user->customer_id)) {
                 $user = $this->repo->store($params);
                 $value = md5(strtotime(date('YmdHis')).$user->customer_id);
                 $this->repo->setCustomCode((object) $user, 'activation_token', $value);
@@ -164,7 +159,6 @@ class FacebookService
 		} catch (Exception $e) {
 			return array('error'=>$e->getMessage());
 		}
-
 
 	}
 
