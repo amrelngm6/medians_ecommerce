@@ -478,9 +478,9 @@ class MediaController extends CustomController
 		}
 	
 		// Check if there's a HTTP_RANGE header parameter
-		// if (empty($range)) {
-		// 	exit; // Assume direct access
-		// }
+		if (empty($range)) {
+			exit; // Assume direct access
+		}
 	
 		return false; // Assume embedded access
 	}
