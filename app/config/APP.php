@@ -388,6 +388,7 @@ class APP
 			array( 'title'=>translate('Settings'),  'icon'=>'tool', 'link'=>'#setting', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=> 'SystemSettings.index', 'title'=> translate('System Settings'),  'icon'=>'tool', 'link'=>'admin/system_settings', 'component'=>'system_settings'),
+				array('permission'=> 'PaymentSettings.index', 'title'=>translate('Payment settings'),  'icon'=>'tool', 'link'=>'admin/payment_settings', 'component'=>'system_settings'),
 				array('permission'=> 'SiteSettings.index', 'title'=>translate('Frontend settings'),  'icon'=>'tool', 'link'=>'admin/site_settings', 'component'=>'system_settings'),
 				array('permission'=> 'StreamingSettings.index', 'title'=> translate('Streaming settings'),  'icon'=>'tool', 'link'=>'admin/streaming_settings', 'component'=>'system_settings'),
 				array('permission'=> 'VideosSettings.index', 'title'=> translate('Videos settings'),  'icon'=>'tool', 'link'=>'admin/videos_settings', 'component'=>'system_settings'),
