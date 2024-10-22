@@ -95,7 +95,6 @@ class SiteSettingsController extends CustomController
 					'data' => $this->loadFonts()  
 				],
 
-				
 				[ 'key'=> "arabic_headers_font", 'title'=> translate('Arabic Headers font'),  'help_text' => translate('Choose the font style for Headlines H1, H2,... elements for Arabic sessions'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title' ,'column_key'=>'title', 
 					'data' => $this->loadFonts()  

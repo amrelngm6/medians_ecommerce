@@ -48,13 +48,7 @@ class SystemSettingsController extends CustomController
             
 			'basic'=> [	
 	            [ 'key'=> "backend_logo", 'title'=> translate('Dashboard Logo'), 'fillable'=>true, 'column_type'=>'file' ],
-				[ 'key'=> "sitename", 'title'=> translate('sitename'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "lang", 'title'=> translate('Languange'), 'help_text'=> translate('The default language for new sessions'),
-					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'name', 'column_key'=>'language_code',
-					'data' => $this->languageRepo->getActive()  
-				],	
-			],			
-			'data'=> [	
+				
 				[ 'key'=> "default_dashboard_start_date", 'title'=> translate('Default dashboard date'), 'help_text'=> translate('The default start date for loading dashboard stats and charts'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 
 					'data' => [
@@ -77,11 +71,6 @@ class SystemSettingsController extends CustomController
 				],
 			],
 			
-			'one_signal'=> [	
-				[ 'key'=> "onesignal_app_id", 'title'=> translate('OneSingal APP ID'), 'fillable'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "onesignal_app_key_token", 'title'=> translate('OneSingal API Key Token'), 'fillable'=> true, 'column_type'=>'text' ],
-			],
-			
 			'google'=> [	
 				[ 'key'=> "allow_google_login", 'title'=> translate('Login with Google'), 'help_text'=>translate('Allow users to signup with Gmail'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "google_client_id", 'title'=> translate('Google Client ID'), 'fillable'=> true, 'column_type'=>'text' ],
@@ -95,12 +84,12 @@ class SystemSettingsController extends CustomController
 				[ 'key'=> "facebook_client_secret", 'title'=> translate('Facebook Client secret'), 'fillable'=> true, 'column_type'=>'text' ],
 			],
 			
-			'twitter'=> [	
-				[ 'key'=> "allow_twitter_login", 'title'=> translate('Login with Twitter'), 'help_text'=>translate('Allow users to signup with Twitter ( X ) account'), 'fillable'=> true, 'column_type'=>'checkbox' ],
-				[ 'key'=> "twitter_api_key", 'title'=> translate('Twitter API Key'), 'fillable'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "twitter_client_secret", 'title'=> translate('Twitter Client secret'), 'fillable'=> true, 'column_type'=>'text' ],
-				[ 'key'=> "twitter_redirect_link", 'title'=> translate('Twitter Redirect callback'), 'help_text'=> translate('Redirect should be scheme like (mediansparents://callback)'), 'fillable'=> true, 'column_type'=>'text' ],
-			],
+			// 'twitter'=> [	
+			// 	[ 'key'=> "allow_twitter_login", 'title'=> translate('Login with Twitter'), 'help_text'=>translate('Allow users to signup with Twitter ( X ) account'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+			// 	[ 'key'=> "twitter_api_key", 'title'=> translate('Twitter API Key'), 'fillable'=> true, 'column_type'=>'text' ],
+			// 	[ 'key'=> "twitter_client_secret", 'title'=> translate('Twitter Client secret'), 'fillable'=> true, 'column_type'=>'text' ],
+			// 	[ 'key'=> "twitter_redirect_link", 'title'=> translate('Twitter Redirect callback'), 'help_text'=> translate('Redirect should be scheme like (mediansparents://callback)'), 'fillable'=> true, 'column_type'=>'text' ],
+			// ],
 			
 			// 'stripe'=> [	
 			// 	[ 'key'=> "stripe_publish_key", 'title'=> translate('Stripe publishable key'), 'fillable'=> true, 'column_type'=>'text' ],
