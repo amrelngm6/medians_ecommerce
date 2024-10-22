@@ -46,8 +46,9 @@ class SiteSettingsController extends CustomController
 				[ 'key'=> "is_dark", 'title'=> translate('Dark mode'), 'help_text'=>translate('Allow dark mode'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "sitename", 'title'=> translate('sitename'), 'fillable'=> true, 'required'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "lang", 'title'=> translate('Languange'), 'help_text'=> translate('The default language for new sessions'),
-				'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 
-				'data' => [['lang'=>'arabic','title'=>translate('Arabic')], ['lang'=>'english','title'=>translate('English')]]  
+					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 
+					'data' => [['lang'=>'arabic','title'=>translate('Arabic')], ['lang'=>'english','title'=>translate('English')]
+				]  
 			],	
 			[ 'key'=> "template", 'title'=> translate('Template'), 'help_text'=> translate('The default template for frontend'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title', 'column_key'=>'folder_name',
@@ -101,7 +102,6 @@ class SiteSettingsController extends CustomController
 			'layout_options'=> [	
 
 				[ 'key'=> "view_items_limit", 'title'=> translate('Loading items limit'), 'help_text'=>translate('Show x items as first load at frontend pages'), 'fillable'=> true, 'column_type'=>'number' ],
-				// [ 'key'=> "show_newsletter_form", 'title'=> translate('Show newsletter at footer'), 'help_text'=>translate('Show newsletter form at footer to allow users to subscribe'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 			],
 					
         ];

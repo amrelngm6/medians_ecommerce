@@ -39,6 +39,7 @@ class ShortVideosSettingsController extends CustomController
 				[ 'key'=> "enable_short_videos", 'title'=> translate('Allow short videos feature'), 'help_text'=>translate('You can allow / disallow with Short short videos at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "shortvideo_default_duration", 'title'=> translate('Short Video default duration'), 'help_text'=>translate('Default duration to generate Short Videos in seconds 1 min : 60'), 'fillable'=> true, 'column_type'=>'number' ],
 				[ 'key'=> "shortvideo_max_duration", 'title'=> translate('Short Video max duration'), 'help_text'=>translate('Max duration to generate Short Videos in seconds 5 min : 300'), 'fillable'=> true, 'column_type'=>'number' ],
+				[ 'key'=> "view_short_videos_limit", 'title'=> translate('Loading short videos limit'), 'help_text'=>translate('Show x short videos as first load at videos page'), 'fillable'=> true, 'column_type'=>'number' ],
                 
 			],		
 			'audoplay'=> [	

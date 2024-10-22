@@ -37,6 +37,7 @@ class PlaylistsSettingsController extends CustomController
 		return [
 			'basic'=> [	
 				[ 'key'=> "enable_playlists", 'title'=> translate('Allow playlists feature'), 'help_text'=>translate('You can allow / disallow with playlists at Frontend'), 'fillable'=> true, 'column_type'=>'checkbox' ],
+				[ 'key'=> "view_playlists_limit", 'title'=> translate('Loading playlists limit'), 'help_text'=>translate('Show x playlists as first load at playlists page'), 'fillable'=> true, 'column_type'=>'number' ],
                 
 			],		
         ];
