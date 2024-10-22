@@ -8,7 +8,7 @@
 
                     <div id="channel-list"  class="w-full  " >
                         {% set customer = app.customer_auth() %}
-                        {% for item in channels  %}
+                        {% for item in list.items  %}
                         {% include 'views/front/' ~ template ~ '/includes/artist-block.html.twig' %}
                         {% endfor %}
 
