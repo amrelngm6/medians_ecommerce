@@ -339,7 +339,6 @@ class APP
 			array( 'title'=>translate('Frontend'),  'icon'=>'airplay', 'link'=>'#frontend', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=>'Pages.index', 'title'=>translate('Front Pages'),  'icon'=>'tool', 'link'=>'admin/pages', 'component'=>'pages'),
-				array('permission'=>'SiteSettings.index', 'title'=>translate('Frontend settings'),  'icon'=>'tool', 'link'=>'admin/site_settings', 'component'=>'system_settings'),
 				array('permission'=>'Menus.index', 'title'=>translate('Menus'),  'icon'=>'tool', 'link'=>'admin/menus', 'component'=>'menus'),
 				array('permission'=>'Gallery.index', 'title'=>translate('Gallery'),  'icon'=>'tool', 'link'=>'admin/gallery', 'component'=>'gallery'),
 			]
@@ -389,6 +388,7 @@ class APP
 			array( 'title'=>translate('Settings'),  'icon'=>'tool', 'link'=>'#setting', 'superadmin'=> true, 'sub'=>
 			[
 				array('permission'=> 'SystemSettings.index', 'title'=> translate('System Settings'),  'icon'=>'tool', 'link'=>'admin/system_settings', 'component'=>'system_settings'),
+				array('permission'=> 'SiteSettings.index', 'title'=>translate('Frontend settings'),  'icon'=>'tool', 'link'=>'admin/site_settings', 'component'=>'system_settings'),
 				array('permission'=> 'StreamingSettings.index', 'title'=> translate('Streaming settings'),  'icon'=>'tool', 'link'=>'admin/streaming_settings', 'component'=>'system_settings'),
 				array('permission'=> 'VideosSettings.index', 'title'=> translate('Videos settings'),  'icon'=>'tool', 'link'=>'admin/videos_settings', 'component'=>'system_settings'),
 				array('permission'=> 'ShortVideosSettings.index', 'title'=> translate('Short Videos settings'),  'icon'=>'tool', 'link'=>'admin/short_videos_settings', 'component'=>'system_settings'),
