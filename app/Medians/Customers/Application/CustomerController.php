@@ -202,7 +202,7 @@ class CustomerController extends CustomController
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item'=> ['name'=> translate('Top Artists'),  'description'=> translate('Follow our top Artists')], 
-                'channels' => $this->repo->get(),
+                'channels' => $this->repo->get($settings['view_artists_limit'] ?? 10),
                 'layout' => 'artist/artists'
             ], 'output'));
             
@@ -222,7 +222,7 @@ class CustomerController extends CustomController
 		$settings = $this->app->SystemSetting();
 
         $params = $this->app->params();
-        $params['limit'] = $settings['view_items_limit'] ?? null;
+        $params['limit'] = $settings['view_artists_limit'] ?? null;
         $list = $this->repo->getWithFilter($params);
 
 		try {
