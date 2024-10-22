@@ -406,7 +406,6 @@ function sanitizeInput($input, $ignore = null) {
     } else if (gettype($input) =='string' && in_array(substr($input,0,1), ['{', '['])   ) {
         return sanitizeInput(json_decode($input));
     } else {
-        // return (!$ignore && isset($app->auth()->id)) ? $input : 
         return str_replace(["&lt;", "&quot", "&gt;", "&#039;", "&amp;apos;", "&apos;", "'", '"'], "`",  htmlspecialchars($input, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
     }
 }
