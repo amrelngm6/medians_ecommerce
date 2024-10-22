@@ -41,7 +41,7 @@ class CustomerRepository
 		return Customer::with('subscription')->find($customerId);
 	}
 
-	public function get()
+	public function get($limit = null)
 	{
 		return Customer::with(['subscription'=> function($q){
 			return $q->with('package');
@@ -52,6 +52,7 @@ class CustomerRepository
 		->with('comments')
 		->withSum( 'media_views', 'times')
 		->withCount('videos' ,'audio_items' ,'audiobooks','stations' ,'channels','short_videos','playlists'  )
+		->limit($limit)
 		->get();
 	}
 
