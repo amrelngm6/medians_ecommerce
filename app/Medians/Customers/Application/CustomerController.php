@@ -197,12 +197,16 @@ class CustomerController extends CustomController
 
 		$settings = $this->app->SystemSetting();
 
+        $params = $this->app->params();
+        $params['limit'] = $settings['view_artists_limit'] ?? null;
+        $list = $this->repo->getWithFilter($params);
+
 		try {
 
             return printResponse(render('views/front/'.($settings['template'] ?? 'default').'/layout.html.twig', [
                 'app' => $this->app,
                 'item'=> ['name'=> translate('Top Artists'),  'description'=> translate('Follow our top Artists')], 
-                'channels' => $this->repo->get($settings['view_artists_limit'] ?? 10),
+                'list' => $list,
                 'layout' => 'artist/artists'
             ], 'output'));
             
