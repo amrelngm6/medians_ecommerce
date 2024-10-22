@@ -66,11 +66,21 @@ class SiteSettingsController extends CustomController
 			],
 			'fonts'=> [	
 				
-				[ 'key'=> "head_font", 'title'=> translate('Headers font Arabic'),  'help_text' => translate('Choose the font style for Arabic Headlines elements for English sessions'),
+				[ 'key'=> "english_headers_font", 'title'=> translate('Headers font English'),  'help_text' => translate('Choose the font style for  Headlines H1, H2,... elements in English sessions'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title' ,'column_key'=>'title', 
 					'data' => $this->loadFonts()  
 				],
-				[ 'key'=> "text_font", 'title'=> translate('Headers font English'),  'help_text' => translate('Choose the font style for Headlines elements for English sessions'),
+				[ 'key'=> "english_text_font", 'title'=> translate('Headers font English'),  'help_text' => translate('Choose the font style for  Headlines H1, H2,... elements in English sessions'),
+					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title' ,'column_key'=>'title', 
+					'data' => $this->loadFonts()  
+				],
+
+				
+				[ 'key'=> "arabic_headers_font", 'title'=> translate('Headers font Arabic'),  'help_text' => translate('Choose the font style for Headlines H1, H2,... elements for Arabic sessions'),
+					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title' ,'column_key'=>'title', 
+					'data' => $this->loadFonts()  
+				],
+				[ 'key'=> "arabic_text_font", 'title'=> translate('Headers font Arabic'),  'help_text' => translate('Choose the font style for Headlines H1, H2,... elements for Arabic sessions'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title' ,'column_key'=>'title', 
 					'data' => $this->loadFonts()  
 				],
