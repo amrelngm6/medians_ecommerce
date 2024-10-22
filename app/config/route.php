@@ -352,6 +352,7 @@ if(!empty($app->auth()))
     RouteHandler::get('/admin/stations_settings', \Medians\Settings\Application\StationsSettingsController::class.'@index');
     RouteHandler::get('/admin/channels_settings', \Medians\Settings\Application\ChannelsSettingsController::class.'@index');
     RouteHandler::get('/admin/playlists_settings', \Medians\Settings\Application\PlaylistsSettingsController::class.'@index');
+    RouteHandler::get('/admin/payment_settings', \Medians\Settings\Application\PaymentSettingsController::class.'@index');
 
     /**
     * @return Notifications events 
