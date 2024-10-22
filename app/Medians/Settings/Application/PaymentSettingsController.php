@@ -37,7 +37,7 @@ class PaymentSettingsController extends CustomController
 
 		return [
             		
-			'paypal'=> [	
+			'basic'=> [	
 				[ 'key'=> "paypal_payment", 'title'=> translate('Allow Paymment  with PayPal'), 'help_text'=>translate('Allow users to pay with PayPal for orders'), 'fillable'=> true, 'column_type'=>'checkbox' ],
 				[ 'key'=> "paypal_api_key", 'title'=> translate('PayPal API Key'), 'fillable'=> true, 'column_type'=>'text' ],
 				[ 'key'=> "paypal_api_secret", 'title'=> translate('PayPal API Secret'), 'fillable'=> true, 'column_type'=>'text' ],
