@@ -155,7 +155,9 @@ class NotificationEvent extends CustomModel
 	{
 		try {
 			
+			print_r($model);
 			$receivers = $this->filterReceivers($event, $model);
+			print_r($receivers);
 
 
 			if (!$receivers) {
