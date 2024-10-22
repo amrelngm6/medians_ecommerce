@@ -473,6 +473,7 @@ class MediaController extends CustomController
 
 		// // Check if there's a referrer (usually means it's embedded in an HTML page)
 		if ($srcFetchSite != 'same-origin') {
+			header("Location: /");
 			exit; // Assume direct access
 		}
 	
