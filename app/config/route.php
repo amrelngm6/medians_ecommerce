@@ -436,6 +436,7 @@ RouteHandler::get('/switch-mode/(:all)', function ($mode)
 {
     $set = setcookie('is_dark', ($mode == 'dark'), time() + (10 * 365 * 24 * 60 * 60), "/");
     $_SESSION['is_dark'] = ($mode == 'dark');
+    header("Location: /");
     return $_SESSION['is_dark'];
 });
 

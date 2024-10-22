@@ -175,9 +175,9 @@ function Page404()
 {
     $app = new \config\APP;
     $settings = $app->SystemSetting();
-    echo $app->template()->render('views/front/error.html.twig', [
+    echo $app->template()->render('views/front/'.$settings['template'].'/error.html.twig', [
         'title' => 'Page not found',
-        'template'  => $setting['template'] ?? 'default',
+        'template'  => $settings['template'] ?? 'default',
         'app' => $app
     ]);
 }
@@ -191,10 +191,10 @@ function errorPage($data)
 {
     $app = new \config\APP;
     $settings = $app->SystemSetting();
-    echo $app->template()->render('views/front/error.html.twig', [
+    echo $app->template()->render('views/front/'.$settings['template'].'/error.html.twig', [
         'title' => 'Error',
         'msg' => $data,
-        'template'  => $setting['template'] ?? 'default',
+        'template'  => $settings['template'] ?? 'default',
         'app' => $app
     ]);
 }
@@ -211,7 +211,7 @@ function Page403()
     $settings = $app->SystemSetting();
     echo $app->template()->render('views/front/'.$settings['template'].'/error.html.twig', [
         'title' => 'Not authorized to acces this Page.',
-        'template'  => $setting['template'] ?? 'default',
+        'template'  => $settings['template'] ?? 'default',
         'app' => '',
     ]);
 }
