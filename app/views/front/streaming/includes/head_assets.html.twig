@@ -17,7 +17,7 @@
     [lang="ar"] span:not(.material-symbols-outlined)
     { font-family: "{{app.SystemSetting.headers_font ?? 'Rubik' }}"}
 
-
+{# 
     [lang="en"] body, 
     [lang="en"] h1,[lang="en"] h2,[lang="en"] h3,[lang="en"] h4,[lang="en"] h5,[lang="en"] h6,[lang="en"] .main_font
     { font-family: "{{app.SystemSetting.english_headers_font ?? 'balooregular' }}"}
@@ -25,7 +25,7 @@
     [lang="en"] p, 
     [lang="en"] div, 
     [lang="en"] span:not(.material-symbols-outlined)
-    { font-family: "{{app.SystemSetting.english_headers_font ?? 'Poppins' }}"}
+    { font-family: "{{app.SystemSetting.english_headers_font ?? 'Poppins' }}"} #}
 
     </style>
     <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp|{{ app.SystemSetting.english_headers_font}}|{{ app.SystemSetting.english_text_font ?? 'Poppins' }}|{{ app.SystemSetting.arabic_headers_font ?? 'Tajawal' }}|{{ app.SystemSetting.arabic_text_font ?? 'Amaranth' }}:wght@300;400;500;600">
