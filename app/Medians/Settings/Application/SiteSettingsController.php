@@ -134,6 +134,8 @@ class SiteSettingsController extends CustomController
 
 		return [
 			['title'=>'balooregular'],
+			['title'=>'Amaranth'],
+			['title'=>'Montserrat'],
 			['title'=>'Tajawal'],
 			['title'=>'Rubik'],
 			['title'=>'Cairo'],
