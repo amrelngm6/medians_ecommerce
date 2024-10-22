@@ -25,10 +25,10 @@
 
 			<div class="relative z-10 w-full   h-full">
 
-				<figure id="videoContainer" class="w-full  shadow-xl relative top-0 left-0 ">
-                    <video id="my-video" class="w-full lg:h-screen" data-container="videoContainer" poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous" >
+                    <video id="my-video" controls class="w-full lg:h-screen" data-container="videoContainer" poster="/stream?thumbnail=1000&dir=videos/screenshots&image={{item.picture_name}}" crossorigin="anonymous" >
                         <source src="/stream_video?video={{item.main_file.filename}}" type="video/mp4"/>
                     </video>
+				{# <figure id="videoContainer" class="w-full  shadow-xl relative top-0 left-0 ">
 
                     <div id="video-controls" class="flex px-6 gap-4 text-gray-400 absolute bottom-0 left-0 w-full gradient-top-overlay pt-10" data-state="hidden">
                         <button class="play-video brightness-200" data-player="my-video" id="play" type="button" data-state="play"><img src="/src/front_assets/svg/video-play.svg" class="w-4 brightness-200"/></button>
@@ -46,7 +46,7 @@
                         </div>
                         <button id="fs" class="fullscreen " data-container="videoContainer" data-player="my-video" id="pause" type="button" data-state="go-fullscreen"><img src="/src/front_assets/svg/fullscreen.svg" class="w-4 brightness-200"/></button>
                     </div>
-                </figure>
+                </figure> #}
 
 			</div>
 
