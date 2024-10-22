@@ -75,9 +75,9 @@ export default
         const activeItem = ref({});
         const activeLinks = ref({});
         const menus = ref([
-            {type: 'header', name:'Header menu'}, 
+            // {type: 'header', name:'Header menu'}, 
             {type: 'footer1', name:'Footer menu 1'}, 
-            {type: 'footer2', name:'Footer menu 2'}, 
+            // {type: 'footer2', name:'Footer menu 2'}, 
         ]);
 
         const content =  ref({
