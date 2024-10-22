@@ -57,7 +57,6 @@ class SiteSettingsController extends CustomController
 			'pictures'=> [	
 				[ 'key'=> "logo", 'title'=> translate('logo'), 'fillable'=>true, 'column_type'=>'file' ],
 	            [ 'key'=> "dark_logo", 'title'=> translate('Dark logo'), 'fillable'=>true, 'column_type'=>'file' ],
-				[ 'key'=> "menu_picture", 'title'=> translate('Menu picture'), 'help_text'=> translate('The image for the menu popup side background'), 'fillable'=> true, 'required'=> true, 'column_type'=>'picture' ],
 			],			
 			'cookies'=> [	
 				[ 'key'=> "show_cookie_box", 'title'=> translate('Show Cookies Box'), 'help_text'=>translate('Show cookies box at the bottom of the page'), 'fillable'=> true, 'column_type'=>'checkbox' ],
@@ -67,11 +66,11 @@ class SiteSettingsController extends CustomController
 			],
 			'fonts'=> [	
 				
-				[ 'key'=> "head_font", 'title'=> translate('Headers font'),  'help_text' => translate('Choose the font style for Headlines elements'),
+				[ 'key'=> "head_font", 'title'=> translate('Headers font Arabic'),  'help_text' => translate('Choose the font style for Arabic Headlines elements for English sessions'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title' ,'column_key'=>'title', 
 					'data' => $this->loadFonts()  
 				],
-				[ 'key'=> "text_font", 'title'=> translate('Headers font'),  'help_text' => translate('Choose the font style for Headlines elements'),
+				[ 'key'=> "text_font", 'title'=> translate('Headers font English'),  'help_text' => translate('Choose the font style for Headlines elements for English sessions'),
 					'sortable'=> true, 'fillable'=> true, 'column_type'=>'select','text_key'=>'title' ,'column_key'=>'title', 
 					'data' => $this->loadFonts()  
 				],
@@ -124,7 +123,9 @@ class SiteSettingsController extends CustomController
 	{	
 
 		return [
+			['title'=>'balooregular'],
 			['title'=>'Tajawal'],
+			['title'=>'Rubik'],
 			['title'=>'Cairo'],
 			['title'=>'Roboto'],
 		];

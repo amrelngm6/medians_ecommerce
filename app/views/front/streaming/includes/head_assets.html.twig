@@ -8,14 +8,24 @@
 
     
     <style>
+    [lang="ar"] body, 
+    [lang="ar"] h1,[lang="ar"] h2,[lang="ar"] h3,[lang="ar"] h4,[lang="ar"] h5,[lang="ar"] h6,[lang="ar"] .main_font
+    { font-family: "{{app.SystemSetting.headers_font ?? 'Tajawal' }}"}
+    
+    [lang="ar"] p, 
+    [lang="ar"] div, 
+    [lang="ar"] span:not(.material-symbols-outlined)
+    { font-family: "{{app.SystemSetting.headers_font ?? 'Rubik' }}"}
+
+
     [lang="en"] body, 
     [lang="en"] h1,[lang="en"] h2,[lang="en"] h3,[lang="en"] h4,[lang="en"] h5,[lang="en"] h6,[lang="en"] .main_font
-    { font-family: "{{app.SystemSetting.headers_font ?? 'Tajawal' }}"}
+    { font-family: "{{app.SystemSetting.headers_font ?? 'balooregular' }}"}
     
     [lang="en"] p, 
     [lang="en"] div, 
     [lang="en"] span:not(.material-symbols-outlined)
-    { font-family: "{{app.SystemSetting.headers_font ?? 'Rubik' }}"}
+    { font-family: "{{app.SystemSetting.headers_font ?? 'Poppins' }}"}
 
     </style>
     <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp|{{ app.SystemSetting.headers_font ?? 'Tajawal' }}|Rubik|Concert+One|Jura|Fjord+One|Amaranth|Montserrat:wght@300;400;500;600">
